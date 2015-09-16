@@ -1,0 +1,169 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.postgresqlya.com.ar/temarios/descripcion.php?inicio=0&cod=171&punto=13 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:17:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de PostgreSQL - Campo entero serial (autoincremento) </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+	  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>13 - Campo entero serial (autoincremento)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+	  	  
+
+<p>
+<p>Los valores de un campo serial, se inician en 1 y se incrementan en 1 automáticamente.</p>
+<p>Se utiliza generalmente en campos correspondientes a códigos de identificación para generar valores únicos para cada nuevo registro que se inserta.</p>
+<p>Normalmente se define luego este campo como clave primaria.</p> 
+
+<p>Para establecer que un campo autoincremente sus valores automáticamente, éste debe ser de tipo serial:</p>
+<pre>
+ create table libros(
+  codigo serial,
+  titulo varchar(20),
+  autor varchar(30),
+  editorial varchar(15),
+  primary key (codigo)
+ );
+</pre>
+<p>Para definir un campo autoincrementable lo hacemos con la palabra clave serial.<p>
+
+<p>Hasta ahora, al ingresar registros, colocamos el nombre de todos los campos antes de los valores; es posible ingresar valores para algunos de los campos de la tabla, pero recuerde que al ingresar los valores debemos tener en cuenta los campos que detallamos y el orden en que lo hacemos.</p>
+<p>Cuando un campo es de tipo serial no es necesario ingresar valor para él, porque se inserta automáticamente tomando el último valor como referencia, o 1 si es el primero.</p>
+
+<p>Para ingresar registros omitimos el campo definido como serial, por ejemplo:</p>
+<pre>
+ insert into libros (titulo,autor,editorial)
+  values('El aleph','Borges','Planeta');
+</pre>
+<p>Este primer registro ingresado guardará el valor 1 en el campo correspondiente al código.
+</p>
+<p>Si continuamos ingresando registros, el código (dato que no ingresamos) se cargará automáticamente siguiendo la secuencia de autoincremento.</p>
+<p>Más adelante cuando veamos el concepto de secuencias veremos que los campos serial son el realidad un campo int que tienen asociado una "secuencia".</p>
+<p>Un campo serial podemos indicar el valor en el insert, pero en la siguiente inserción que hagamos la secuencia continúa en el último valor generado automáticamente. Puede tener sentido utilizar esta característica para reutilizar un código de un campo borrado, por ejemplo si en la tabla libros borramos el libro con el código 1, luego podemos insertar otro libro con dicho código:</p>
+<pre>
+ delete from libros where codigo=1;
+ 
+ insert into libros (codigo,titulo,autor,editorial)
+  values(1,'Aprender Python', 'Rodriguez Luis', 'Paidos');
+</pre></p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-24");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+
+
+<!-- Mirrored from www.postgresqlya.com.ar/temarios/descripcion.php?inicio=0&cod=171&punto=13 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:17:37 GMT -->
+</html>

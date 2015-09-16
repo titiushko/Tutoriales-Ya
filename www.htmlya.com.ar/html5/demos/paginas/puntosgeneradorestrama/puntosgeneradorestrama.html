@@ -1,0 +1,513 @@
+<html>
+<!DOCTYPE HTML>
+
+<!-- Mirrored from www.htmlya.com.ar/html5/demos/paginas/puntosgeneradorestrama/puntosgeneradorestrama.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:32:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<script src="../../../../../ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+//objeto papel **********************************************
+var papel= {
+   retornarPapel: function(x) {
+    this.x=x;
+    var canvas = document.getElementById(x);
+    if (canvas.getContext) {
+      this.lienzo = canvas.getContext("2d");
+      this.ancho=canvas.width;
+      this.alto=canvas.height;
+  
+      var viewportWidth = window.innerWidth;
+      var viewportHeight = window.innerHeight;
+			
+      var canvasWidth = viewportWidth * 0.95;
+      var canvasHeight = (viewportHeight-110) * 0.98;
+	
+      this.ancho = canvasWidth;
+      this.alto = canvasHeight;
+    
+      return this.lienzo;
+	} else
+      return false;
+  },
+  redimensionar:function() {
+    var viewportWidth = window.innerWidth;
+    var viewportHeight = window.innerHeight;
+    var canvasWidth = viewportWidth * 0.95;
+    var canvasHeight = (viewportHeight-110) * 0.98;
+    this.ancho = canvasWidth;
+    this.alto = canvasHeight; 
+    var canvas = document.getElementById(this.x);
+    canvas.width=this.ancho;
+	canvas.height=this.alto;
+  },
+  linea: function(x1,y1,x2,y2) {
+    this.lienzo.beginPath();
+    this.lienzo.moveTo(x1,y1);
+	this.lienzo.lineTo(x2,y2);
+    this.lienzo.stroke();
+  },
+  rectangulo: function(x,y,ancho,alto) {
+    this.lienzo.beginPath(); 
+    this.lienzo.rect(x,y,ancho,alto);
+    this.lienzo.stroke();	
+  },
+    rectanguloRelleno: function(x,y,ancho,alto) {
+    this.lienzo.fillRect(x,y,ancho,alto);
+  },
+  elipseRelleno: function(x,y,radio) {
+    this.lienzo.beginPath();
+	this.lienzo.arc(x,y,radio,0,Math.PI+(Math.PI),true);
+	this.lienzo.fill();
+  },
+    borrar: function(x,y,ancho,alto) {
+    this.lienzo.clearRect(x,y,ancho,alto);
+  },  
+  fijarColor: function(rojo,verde,azul) {
+    this.lienzo.fillStyle="rgb("+rojo+","+verde+","+azul+")";
+  },
+  fijarColorLinea: function(rojo,verde,azul) {
+    this.lienzo.strokeStyle="rgb("+rojo+","+verde+","+azul+")";
+  },
+  fijarTexto: function(x,y,texto) {
+  	this.lienzo.font = "18pt Arial";
+    this.lienzo.fillText(texto,x,y);
+  },
+  retornarAncho: function() {
+    return this.ancho;
+  },
+  retornarAlto: function() {
+    return this.alto;
+  },
+  fijarCentrado: function(centrado) {
+    this.lienzo.textAlign=centrado;  
+  },
+  borrar: function(x,y,ancho,alto) {
+    this.lienzo.clearRect(x,y,ancho,alto);
+  },
+  dibujarImagen: function(img,x,y) {
+    this.lienzo.drawImage(img,x,y);
+  },
+  dibujarParteImagen: function(img,sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight) {
+    this.lienzo.drawImage(img,sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+  },
+  triangulo: function(x1,y1,x2,y2,x3,y3) {
+    this.lienzo.beginPath();
+    this.lienzo.moveTo(x1,y1);
+	this.lienzo.lineTo(x2,y2);
+	this.lienzo.lineTo(x3,y3);	
+    this.lienzo.fill();
+  },
+  poligono: function(vx,vy) {
+    this.lienzo.beginPath();
+	this.lienzo.moveTo(vx[0],vy[0]);
+	for(var z=1;z<vx.length;z++) {
+	  this.lienzo.lineTo(vx[z],vy[z]);
+	}
+	this.lienzo.lineTo(vx[0],vy[0]);
+	this.lienzo.fill();
+  },
+  cuadrilatero: function(x1,y1,x2,y2,x3,y3,x4,y4) {
+    this.lienzo.beginPath();
+    this.lienzo.moveTo(x1,y1);
+	this.lienzo.lineTo(x2,y2);
+	this.lienzo.lineTo(x3,y3);
+	this.lienzo.lineTo(x4,y4);		
+    this.lienzo.fill();
+  }
+  
+};
+//************************************************************
+
+
+function Color() {
+  this.rojo=parseInt($("#rojodes").val());
+  this.verde=parseInt($("#verdedes").val());
+  this.azul=parseInt($("#azuldes").val());
+  this.rojodire=true;
+  this.verdedire=true;
+  this.azuldire=true;
+}
+
+Color.prototype.proximo=function() {
+  var rojolim=parseInt($("#rojohas").val());
+  var verdelim=parseInt($("#verdehas").val());
+  var azullim=parseInt($("#azulhas").val());
+  var rojoincre=parseInt($("#rojoincre").val());
+  var verdeincre=parseInt($("#verdeincre").val());
+  var azulincre=parseInt($("#azulincre").val());
+  if (this.rojodire) {
+    if (this.rojo+rojoincre<=rojolim)
+	  this.rojo=this.rojo+rojoincre;
+	else {
+      this.rojodire=false;
+      this.rojo=this.rojo+rojoincre;	  
+	}  
+  } else {
+    if (this.rojo-rojoincre>=0)
+	  this.rojo=this.rojo-rojoincre;
+	else {
+	  this.rojodire=true;
+	  this.rojo=this.rojo+rojoincre;
+    }	
+  }
+  if (this.verdedire) {
+    if (this.verde+verdeincre<=verdelim)
+	  this.verde=this.verde+verdeincre;
+	else {
+      this.verdedire=false;
+      this.verde=this.verde+verdeincre;	  
+	}  
+  } else {
+    if (this.verde-verdeincre>=0)
+	  this.verde=this.verde-verdeincre;
+	else {
+	  this.verdedire=true;
+	  this.verde=this.verde+verdeincre;
+    }	
+  }
+  if (this.azuldire) {
+    if (this.azul+azulincre<=azullim)
+	  this.azul=this.azul+azulincre;
+	else {
+      this.azuldire=false;
+      this.azul=this.azul+azulincre;	  
+	}  
+  } else {
+    if (this.azul-azulincre>=0)
+	  this.azul=this.azul-azulincre;
+	else {
+	  this.azuldire=true;
+	  this.azul=this.azul+azulincre;
+    }	
+  }  
+}
+
+
+
+function Punto(x,y) {
+  this.x=x;
+  this.y=y;
+  this.origenx=x;
+  this.origeny=y;
+  papel.fijarColor(255,255,0);	 
+  papel.elipseRelleno(x-3,y-3,6);
+  this.x1=x;
+  this.y1=y;
+  this.x2=x;
+  this.y2=y;  
+  
+  Punto.prototype.reiniciar=function() {
+    this.x=this.origenx;
+	this.y=this.origeny;
+    this.x1=this.origenx;
+    this.y1=this.origeny;
+    this.x2=this.origenx;
+    this.y2=this.origeny;  
+	
+  }
+}
+
+//************************************************************
+function graficar() {
+  var atraccion=$("#atraccion").val();
+  if (puntos.length==0) return;
+  papel.fijarColorLinea(255,255,255);
+  var primerox=puntos[0].x;
+  var primeroy=puntos[0].y;
+  var espaciox=(papel.retornarAncho()/30);
+  var espacioy=(papel.retornarAlto()/30);
+  for(var fil=0;fil<30;fil++) {
+    for(var col=0;col<30;col++) {
+		  color.proximo();
+		  var x1=col*espaciox;
+		  var y1=fil*espacioy;	  
+		  var vx=[];
+		  var vy=[];
+		  vx.push(x1);
+		  vy.push(y1);
+ 
+		  for(var i=0;i<puntos.length;i++) {
+			var x2=puntos[i].x;
+			var y2=puntos[i].y;
+			var lado1=y1-y2;
+			var lado2=x2-x1;
+			var hipo=Math.sqrt((lado1*lado1)+(lado2*lado2)); 	
+			var seno=lado1/hipo;
+			var coseno=lado2/hipo;
+			var avancex=coseno*atraccion;
+			var avancey=seno*atraccion;
+			var nx=x1+avancex;
+			var ny=y1-avancey;
+			vx.push(nx);
+			vy.push(ny);
+			x1=nx;
+			y1=ny;
+		  }
+		  papel.fijarColor(color.rojo,color.verde,color.azul);
+		  papel.poligono(vx,vy);
+	}
+  }		
+  if (verSiFinaliza())
+  clearInterval(ini);
+}
+
+
+
+
+function verSiFinaliza() {
+  var rechazo=parseInt($("#rechazo").val())+parseInt($("#atraccion").val()*2);  
+  for(var i=0;i<puntos.length-1;i++) {
+     var difx=Math.abs(puntos[i].x-puntos[i+1].x);  
+     var dify=Math.abs(puntos[i].y-puntos[i+1].y);
+     if (difx>rechazo || dify>rechazo)
+        return false;	 
+  } 
+  return true;
+}
+
+
+var puntos=Array();
+
+var mouse = {
+  inicioMouse: function() {
+    $("#lienzo1").mousedown(this.presionMouse);
+	$("#lienzo1").mouseup(this.soltarMouse);
+	$("#lienzo1").mousemove(this.moverMouse);
+	$(window).resize(this.cambiarTamano);
+    this.canvasMinX = $("#lienzo1").offset().left;
+
+    this.canvasMaxX = this.canvasMinX + papel.retornarAncho();
+    this.canvasMinY= $("#lienzo1").position().top;
+    this.canvasMaxY = this.canvasMinY + papel.retornarAlto();
+
+  },
+  redimensionarClic: function() {
+    this.canvasMinX = $("#lienzo1").offset().left;
+    this.canvasMaxX = this.canvasMinX + papel.retornarAncho();
+    this.canvasMinY= $("#lienzo1").position().top;
+    this.canvasMaxY = this.canvasMinY + papel.retornarAlto();
+    papel.fijarColor(0,0,0);
+    papel.rectanguloRelleno(0,0,papel.retornarAncho(),papel.retornarAlto()); 	 	
+  },
+  cambiarTamano: function(evt) {
+     papel.redimensionar();    
+	 mouse.redimensionarClic();
+  },
+  presionMouse: function (evt) {
+  mouse.canvasMinX = $("#lienzo1").offset().left;
+  mouse.canvasMaxX = mouse.canvasMinX + papel.retornarAncho();
+  mouse.canvasMinY= $("#lienzo1").position().top;
+  mouse.canvasMaxY = mouse.canvasMinY + papel.retornarAlto();
+  if (evt.pageX > mouse.canvasMinX && evt.pageX < mouse.canvasMaxX &&
+      evt.pageY > mouse.canvasMinY && evt.pageY < mouse.canvasMaxY) {
+     x = evt.pageX - mouse.canvasMinX;  
+     y = evt.pageY - mouse.canvasMinY;
+     var p=new Punto(x,y);
+	 puntos.push(p);
+	 if (ini!=0) 
+       clearInterval(ini);
+   }
+  },
+  moverMouse: function (evt) {
+  if (evt.pageX > mouse.canvasMinX && evt.pageX < mouse.canvasMaxX &&
+      evt.pageY > mouse.canvasMinY && evt.pageY < mouse.canvasMaxY) {
+     x = evt.pageX - mouse.canvasMinX;  
+     y = evt.pageY - mouse.canvasMinY;  
+	 
+   }
+  },  
+  soltarMouse: function(evt) {
+     x = evt.pageX - mouse.canvasMinX;  
+     y = evt.pageY - mouse.canvasMinY;
+  },
+};
+
+
+function inicio() {
+  var li=papel.retornarPapel("lienzo1");
+  if (li) {
+	 mouse.inicioMouse();
+  }
+ 
+}
+
+var x=$(document).ready(inicializarEventos);
+var canvas;
+function inicializarEventos() {
+  var x=$("#boton1");
+  x.click(presionGraficar);
+  x=$("#boton2");
+  x.click(presionBorrar);
+
+  llenarFormulario();
+  
+  var canvas = document.getElementById("lienzo1");
+  var viewportWidth = window.innerWidth;
+  var viewportHeight = window.innerHeight;
+			
+  var canvasWidth = viewportWidth * 0.95;
+  var canvasHeight = (viewportHeight-110) * 0.98;
+
+  inicio();
+  canvas.width = papel.retornarAncho();
+  canvas.height = papel.retornarAlto();
+  papel.fijarColor(0,0,0);
+  papel.rectanguloRelleno(0,0,canvas.width,canvas.height);
+}
+
+var ini=0;
+var color;
+function presionGraficar()
+{
+  if (puntos.length==0)
+    alert('Debe disponer puntos dentro del recuadro negro y luego presionar graficar');
+  if (ini!=0) 
+    clearInterval(ini);
+  color=new Color();
+  
+ // graficar();graficar();return;
+  
+  for(var i=0;i<puntos.length;i++) {
+    puntos[i].reiniciar();
+  }  
+  papel.fijarColor(0,0,0);
+  papel.rectanguloRelleno(0,0,papel.retornarAncho(),papel.retornarAlto()); 	 
+  ini=setInterval(graficar,1);
+}
+
+
+function presionGraficar2()
+{
+  if (puntos.length==0)
+    alert('Debe disponer puntos dentro del recuadro negro y luego presionar graficar');
+  if (ini!=0) 
+    clearInterval(ini);
+  color=new Color();
+  
+ // graficar();graficar();return;
+  
+  for(var i=0;i<puntos.length;i++) {
+    puntos[i].reiniciar();
+  }  
+  papel.fijarColor(0,0,0);
+  papel.rectanguloRelleno(0,0,papel.retornarAncho(),papel.retornarAlto()); 	 
+  ini=setInterval(graficar2,1);
+}
+
+function presionGraficar3()
+{
+  if (puntos.length==0)
+    alert('Debe disponer puntos dentro del recuadro negro y luego presionar graficar');
+  if (ini!=0) 
+    clearInterval(ini);
+  color=new Color();
+  
+ // graficar();graficar();return;
+  
+  for(var i=0;i<puntos.length;i++) {
+    puntos[i].reiniciar();
+  }  
+  papel.fijarColor(0,0,0);
+  papel.rectanguloRelleno(0,0,papel.retornarAncho(),papel.retornarAlto()); 	 
+  ini=setInterval(graficar3,1);
+}
+
+
+function presionBorrar(){
+  if (ini!=0) 
+    clearInterval(ini);
+  papel.fijarColor(0,0,0);
+  papel.rectanguloRelleno(0,0,papel.retornarAncho(),papel.retornarAlto()); 	 
+  puntos=[];  
+}
+
+
+function llenarFormulario() {
+  var x=$("#atraccion");
+  for(var i=1;i<100;i++)
+    x.append('<option>'+i+'</option>');
+  x.val(20);
+  x=$("#rojodes");
+  for(var i=0;i<=255;i++)
+    x.append('<option>'+i+'</option>');
+  x.val(1);
+  x=$("#verdedes");
+  for(var i=0;i<=255;i++)
+    x.append('<option>'+i+'</option>');
+  x.val(1);
+  x=$("#azuldes");
+  for(var i=0;i<=255;i++)
+    x.append('<option>'+i+'</option>');
+  x.val(1);
+  x=$("#rojohas");
+  for(var i=0;i<=255;i++)
+    x.append('<option>'+i+'</option>');
+  x.val(255);
+  x=$("#verdehas");
+  for(var i=0;i<=255;i++)
+    x.append('<option>'+i+'</option>');
+  x.val(255);
+  x=$("#azulhas");
+  for(var i=0;i<=255;i++)
+    x.append('<option>'+i+'</option>');
+  x.val(255);
+  x=$("#rojoincre");
+  for(var i=0;i<=50;i++)
+    x.append('<option>'+i+'</option>');
+  x.val(17);
+  x=$("#verdeincre");
+  for(var i=0;i<=50;i++)
+    x.append('<option>'+i+'</option>');
+  x.val(17);
+  x=$("#azulincre");
+  for(var i=0;i<=50;i++)
+    x.append('<option>'+i+'</option>');
+  x.val(17);
+  
+  
+}
+
+
+</script>
+</head>
+<body style="background:#2c4762">
+<div style="font-size:40px;color:#fa0;text-align:center">Puntos generadores sobre trama.</div>
+<div style="margin:0 auto 0 auto;text-align:center">
+<canvas id="lienzo1">
+Su navegador no permite utilizar canvas.
+</canvas></div>
+<br>
+<div style="color:#ff0">
+<input type="button" id="boton1" value="Grafico">
+<input type="button" id="boton2" value="Borrar">
+Atracción:<select id="atraccion"></select>
+<br>
+<table border="0" style="color:white">
+<tr>
+<td></td><td>Desde</td><td>Hasta</td><td>Incremento</td>
+</tr>
+<tr>
+<td>Rojo</td><td><select id="rojodes"></select></td><td><select id="rojohas"></select></td><td><select id="rojoincre"></select></td>
+</tr>
+<tr>
+<td>Verde</td><td><select id="verdedes"></select></td><td><select id="verdehas"></select></td><td><select id="verdeincre"></select></td>
+</tr>
+<tr>
+<td>Azul</td><td><select id="azuldes"></select></td><td><select id="azulhas"></select></td><td><select id="azulincre"></select></td>
+</tr>
+</table>
+</div>
+<br>
+<div style="border:2px;background:#f0f4f8;font-size:20px;color:#3c4142;padding:5px">
+<p>Con el mouse disponemos una serie de puntos dentro del recuadro negro. Luego presionamos el botón graficar.<br>
+El funcionamiento del principio generativo es el siguiente: Hay una cuadrícula de 30 por 30 puntos. Luego cada punto de la cuadrícula sigue al primer punto, luego al
+segundo punto y así sucesivamente. Al final cerramos todos los segmentos de avance con el punto inicial. Para entender el principio generativo disponga cuatro puntos que indiquen los
+vértices de un rectángulo.
+<br><a href="../../index-2.html" style="font-size:1.5em">Retornar</a>
+</p></div>
+
+</body>
+
+<!-- Mirrored from www.htmlya.com.ar/html5/demos/paginas/puntosgeneradorestrama/puntosgeneradorestrama.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:32:02 GMT -->
+</html>

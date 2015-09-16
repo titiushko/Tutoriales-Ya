@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=2&codigo=129&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Creación de un proyecto en C++</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>2 - Creación de un proyecto en C++</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<h3>Descarga del entorno para programar con C++.</h3>
+<p>Existen muchos compiladores de C++, tanto para Windows, Mac, Linux etc, nosotros utilizaremos  el Visual C++ de Microsoft que lo podemos descargar de <a href="https://www.visualstudio.com/" target="_blank">aquí.</a>. El Visual Studio Community es gratuito y tiene entre otras herramientas el C++.</p>
+<img src="imagentema/foto003.jpg" border="0" alt="entorno del visual C++"><br>
+
+<h3>Codificación del problema con el lenguaje C++.</h3>
+<p>No debemos perder de vista que el fin último es realizar un programa de computación que permita automatizar una actividad para que muchos procesos sean desarrollados por la computadora.<br>
+El diagrama de flujo es un paso intermedio para facilitarnos la resolución del problema.<br>
+El paso siguiente es la codificación del diagrama de flujo en un lenguaje de computación, en nuestro caso emplearemos el lenguaje C++.</p>
+
+<p>Lenguaje de computación: Conjunto de instrucciones que son interpretadas por una computadora para realizar operaciones, mostrar datos por pantalla, sacar listados por impresora, entrar datos por teclado, etc.</p>
+
+<h3>Conceptos básicos para codificar un programa.</h3>
+<p>Variable: Es un depósito donde hay un valor.
+Consta de un nombre y pertenece a un tipo.
+</p>
+<p>Para el ejemplo planteado la variable horasTrabajadas almacena la cantidad de horas trabajadas por el operario. La variable valorHora almacena el precio de una hora de trabajo. La variable sueldo almacena el sueldo a abonar al operario.<br>
+En el ejemplo tenemos tres variables.</p>
+
+<p>Tipos de variable:<br>
+
+Una variable puede almacenar:<br>
+- Valores Enteros (100, 260, etc.)<br>
+- Valores Reales (1.24, 2.90, 5.00, etc.)<br>
+- Cadenas de caracteres ("Juan", "Compras", "Listado", etc.)
+</p>
+<p>Elección del nombre de una variable:<br>
+Debemos elegir nombres de variables representativas. En el ejemplo el nombre horasTrabajadas es lo suficientemente claro para darnos una idea acabada sobre su contenido. Podemos darle otros buenos nombres. Otros no son tan representativos, por ejemplo hTr. Posiblemente cuando estemos resolviendo un problema dicho nombre nos recuerde que almacenamos las horas trabajadas por el operario pero cuando pase el tiempo y leamos el diagrama probablemente no recordemos ni entendamos qué significa hTr.</p>
+
+<h3>Consideraciones a tener en cuenta en cada proyecto.</h3>
+<p>Hay que tener en cuenta que el entorno de programación "Visual Studio Community" no han sido desarrollados pensando en un principiante de la programación. Lo mismo ocurre con el propio lenguaje C++, es decir su origen no tiene como objetivo el aprendizaje de la programación. Debido a estos dos puntos veremos que a medida que avanzamos con el tutorial muchos conceptos que iremos dejando pendientes se irán aclarando.</p>
+<p>Veremos los pasos para la creación de un proyecto en C++.</p>
+<h3>Pasos.</h3>
+<p>1 - Ingresemos al "Microsoft Studio Community".<br>
+<img src="imagentema/foto004.jpg" border="0" alt="Visual Studio Community"><br>
+</p>
+<p>2 - Creación del proyecto. Para esto seleccionamos desde el menú la opción "File" -> "New" -> "Project" (En castellano "Archivo" -> "Nuevo proyecto...")<br>
+<img src="imagentema/foto005.jpg" border="0" alt="Visual Studio Community - Nuevo Proyecto"><br>
+Aparece un diálogo donde debemos indicar el nombre del proyecto y seleccionar el tipo de proyecto (elegiremos "Proyecto vacío" y le daremos como nombre al proyecto "Proyecto1"), también indicamos el directorio donde se almacenará el proyecto y seleccionamos que trabajaremos con el Visual C++:<br>
+<img src="imagentema/foto006.jpg" border="0" alt="Visual Studio Community - Nuevo Proyecto"><br>
+<p>Como hemos creado un proyecto vacío debemos crear un archivo donde codificaremos nuestro programa, para esto tipeamos el botón derecho del mouse sobre el nombre del proyecto ("Proyecto1") en la ventana del "Explorador de soluciones" y seleccionamos la opción "Add"->"New Item..." (en castellano "Agregar" -> "Nuevo elemento"):</p>
+<img src="imagentema/foto007.jpg" border="0" alt="Visual Studio Community - nuevo elemento"><br>
+<p>Aparece un diálogo donde debemos seleccionar la opción de "Archivo C++" y definir el nombre del archivo a crear (lo llamaremos archivo1):</p>
+<img src="imagentema/foto008.jpg" border="0" alt="Visual Studio Community - crear archivo"><br>
+
+<p>En este momento tenemos todo listo para comenzar a codificar nuestro primer programa:<br>
+<img src="imagentema/foto009.jpg" border="0" alt="Visual Studio Community - editor de texto">
+</p>
+<h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=2&codigo=129&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:33 GMT -->
+</html>

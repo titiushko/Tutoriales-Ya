@@ -1,0 +1,390 @@
+﻿<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.phpya.com.ar/temarios/descripcion.php?punto=10&cod=31&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:58:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de PHP - Temario</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="keywords" content="php, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de php.">
+<meta name="author" content="Diego Moisset">
+
+<style>
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Verdana,arial,sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.1em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;
+}
+
+#recuadrooculto {
+  display: none;
+}
+
+
+.recuadroborde {
+  //  max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+	clear:left;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  document.getElementById('recuadrooculto').style.display='block';
+}
+
+</script>
+
+</head>
+
+<body>
+
+
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em;margin-right:1em"><a href="../index2904.html?inicio=0">Temario del Tutorial</a></span>10 - FORMULARIO (control radio)</h1></div>
+
+<br>
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+
+<p>El control HTML radio generalmente se utiliza en conjunto con otros controles radio. Cuando agrupamos un conjunto de controles radio solo uno de ellos puede estar seleccionado y si seleccionamos otro se desmarca el actual.</p>
+<p>Para analizar este control dispondremos un ejemplo:</p>
+<p>Implementar un formulario que solicite la carga de dos enteros, uno en cada text.<br> 
+Disponer dos controles de tipo radio que nos permitan seleccionar si queremos sumar o restar los dos valores ingresados:</p>
+<pre class="recuadroborde">
+  &lt;html&gt;
+  &lt;head&gt;
+  &lt;title&gt;Problema&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;form action=&quot;pagina2.php&quot; method=&quot;post&quot;&gt;
+  Ingrese primer valor:
+  &lt;input type=&quot;text&quot; name=&quot;valor1&quot;&gt;
+  &lt;br&gt;
+  Ingrese segundo valor:
+  &lt;input type=&quot;text&quot; name=&quot;valor2&quot;&gt;
+  &lt;br&gt;
+  &lt;input type=&quot;radio&quot; name=&quot;radio1&quot; value=&quot;suma&quot;&gt;sumar
+  &lt;br&gt;
+  &lt;input type=&quot;radio&quot; name=&quot;radio1&quot; value=&quot;resta&quot;&gt;restar
+  &lt;br&gt;
+  &lt;input type=&quot;submit&quot; name=&quot;operar&quot;&gt;
+  &lt;/form&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
+</pre>
+
+<p>Es importante notar que se trata nuevamente de un archivo HTML puro, que no tiene c&oacute;digo PHP.<br>
+La entrada de los dos n&uacute;meros se efectúa en dos controles <p>
+<pre>
+&lt;input type=&quot;text&quot; name=&quot;valor1&quot;&gt;
+&lt;input type=&quot;text&quot; name=&quot;valor2&quot;&gt;
+</pre>
+<p>Es importante notar que cada text tiene un name DIFERENTE.</p>
+<p>Para seleccionar el tipo de operaci&oacute;n a efectuar disponemos dos controles de tipo radio:</p>
+<pre>
+&lt;input type=&quot;radio&quot; name=&quot;radio1&quot; value=&quot;suma&quot;&gt;sumar&lt;br&gt;
+&lt;input type=&quot;radio&quot; name=&quot;radio1&quot; value=&quot;resta&quot;&gt;restar
+</pre>
+<p>Ahora vemos que los dos controles de tipo radio tienen el MISMO nombre. Esto es necesario para que el navegador sepa que los dos controles est&aacute;n relacionados (recordar que cuando uno selecciona un radio se debe deseleccionar el otro)</p>
+<p>Desde la otra p&aacute;gina accederemos al value del control seleccionado.</p>
+<p>Por &uacute;ltimo disponemos un control de tipo submit para el envío de los datos del formulario.</p>
+
+<p>El c&oacute;digo de la p&aacute;gina que procesa el formulario, llamada:&quot;pagina2.php&quot; 
+(la que indicamos en el elemento FORM del formulario) es:</p>
+<pre class="recuadroborde">
+  &lt;html&gt;
+  &lt;head&gt;
+  &lt;title&gt;Problema&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;?php
+  if ($_REQUEST['radio1']==&quot;suma&quot;)
+  {
+    $suma=$_REQUEST['valor1'] + $_REQUEST['valor2'];
+    echo &quot;La suma es:&quot;.$suma;
+  }
+  else
+  {
+    if ($_REQUEST['radio1']==&quot;resta&quot;)
+    {
+      $resta=$_REQUEST['valor1'] - $_REQUEST['valor2'];
+      echo &quot;La resta es:&quot;.$resta;
+    }
+  }
+  ?&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
+</pre>
+<p>El vector asociativo $_REQUEST tiene tres componentes:</p>
+<pre>
+  $_REQUEST['radio1']
+  $_REQUEST['valor1']
+  $_REQUEST['valor2']
+</pre>
+<p>En la componente $_REQUEST['radio1'] almacena la cadena &quot;suma&quot; o &quot;resta&quot; seg&uacute;n cual se seleccion&oacute; en el formulario.</p>
+<p>Con dos if verificamos cual operaci&oacute;n est&aacute; seleccionada y procedemos a efectuarla:</p>
+<pre>
+  if ($_REQUEST['radio1']==&quot;suma&quot;)
+  {
+    $suma=$_REQUEST['valor1'] + $_REQUEST['valor2'];
+    echo &quot;La suma es:&quot;.$suma;
+    .
+    .
+</pre>
+
+
+<br>
+<br>
+
+<h2>Problema resuelto.</h2>
+<p>Copiar el contenido de este cuadro de texto al NotePad++ y grabarlo en la carpeta c:\wamp\www con un nombre con extensión php (si hay varios cuadros
+de texto grabar cada uno en un archivo distinto).<br>
+  luego abrir el navegador (Chrome, FireFox, IExplorer etc.) y en la barra de direcciones tipear: http://localhost/pagina1.php (o el nombre del
+archivo que le dió)  </p>
+<form name="formulario" action="#" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+    pagina1.php<br><textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off" readonly>
+<html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+
+<form action="http://www.phpya.com.ar/temarios/pagina2.php" method="post">
+Ingrese primer valor:
+<input type="text" name="valor1">
+<br>
+Ingrese segundo valor:
+<input type="text" name="valor2">
+<br>
+<input type="radio" name="radio1" value="suma">sumar
+<br>
+<input type="radio" name="radio1" value="resta">restar
+<br>
+<input type="submit" name="operar">
+</form>
+
+</body>
+
+<!-- Mirrored from www.phpya.com.ar/temarios/descripcion.php?punto=10&cod=31&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:58:14 GMT -->
+</html>
+</textarea>
+    <br>
+	 <a href="http://www.scratchya.com.ar/problemas/phpya/resu/31/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a> 
+<!--    <a href="http://localhost:8080/problemas/phpya/resu/31/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>-->
+
+    <br>
+<table width="650px">
+<tr>
+<td align="left">	
+
+</td>
+</tr>
+</table>
+
+	
+    <br>pagina2.php<br><textarea class="programafuente" name="programa2" rows=15 cols=110 wrap="off" readonly><html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+
+<?php
+if ($_REQUEST['radio1']=="suma")
+{
+  $suma=$_REQUEST['valor1'] + $_REQUEST['valor2'];
+  echo "La suma es:".$suma;
+}
+else
+{
+  if ($_REQUEST['radio1']=="resta")
+  {
+    $resta=$_REQUEST['valor1'] - $_REQUEST['valor2'];
+    echo "La resta es:".$resta;
+  }
+}
+
+?>
+
+</body>
+</html>
+</textarea><br>
+</form>
+
+
+
+
+
+
+	
+
+<h2>Problema propuesto.</h2>
+<p>Solicitar que se ingrese por teclado el nombre de una persona y disponer tres controles de tipo radio que nos permitan seleccionar si la persona: 1-no tiene estudios, 2-estudios primarios y 3-estudios secundarios.<br>
+En la página que procesa el formulario mostrar el nombre de la persona y un mensaje indicando el tipo de estudios que posee.</p><form name="formulario" action="#" target="ventanaForm" 
+onsubmit="abrirVentana()" method="post" >
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<div id="recuadrooculto">
+pagina1.php<br>
+<textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off" readonly>
+<html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+
+<form action="http://www.phpya.com.ar/temarios/pagina2.php" method="post">
+Ingrese Nombre:
+<input type="text" name="nombre">
+<br>
+Estudios:
+<br>
+<input type="radio" name="radio1" value="sin">Sin estudios
+<br>
+<input type="radio" name="radio1" value="primario">Estudios primarios
+<br>
+<input type="radio" name="radio1" value="secundario">Estudios secundarios
+<br>
+<input type="submit" value="Confirmar">
+</form>
+
+</body>
+</html></textarea>
+ <br>
+<!-- <a href="http://localhost:8080/problemas/phpya/propu/31/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>-->
+
+
+  <a href="http://www.scratchya.com.ar/problemas/phpya/propu/31/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a> 
+	<br>	
+pagina2.php<br><textarea class="programafuente" name="programa2" rows=15 cols=110 wrap="off" readonly><html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+
+<?php
+  echo $_REQUEST['nombre'];
+  echo "<br>";
+  if ($_REQUEST['radio1']=="sin")
+  {
+    echo "Sin estudios.";
+  }
+  if ($_REQUEST['radio1']=="primario")
+  {
+      echo "Estudios primarios.";
+  }
+  if ($_REQUEST['radio1']=="secundario")
+  {
+    echo "Estudios secundarios.";	
+  }
+  
+?>
+
+</body>
+</html></textarea>
+</div>
+
+</form>
+
+
+
+  
+
+<br>
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>
+
+
+<form name="form1" method="post" action="#">
+  <div>
+   <h2><a href="../index2904-2.html?inicio=0">Retornar</a></h2>   
+  </div>
+
+  
+</form>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-4";
+urchinTracker();
+</script>
+
+</body>
+
+</html>

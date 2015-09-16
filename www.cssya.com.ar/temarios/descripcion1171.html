@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=20&cod=30&punto=26 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:07:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de CSS - Temarios</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<style>
+
+
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>26 - Pseudoclases
+</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Las pseudoclases son unas clases especiales, que se refieren a algunos estados del elemento HTML, las que se utilizan fundamentalmente son las que se aplican al elemento &lt;a&gt;  (enlace).</p>
+<p>La sintaxis varía con respecto al concepto de clase visto anteriormente ya que se tratan de pseudoclases predefinidas:</p>
+<pre>
+a:pseudoclase {
+  propiedad: valor;
+}
+</pre>
+<p>Es decir separamos el nombre del elemento HTML con dos puntos.</p>
+<p>Para el elemento HTML &lt;a&gt;  tenemos 4 pseudoclases fundamentales:</p>
+<pre>
+link - Enlace sin ingresar
+visited - Enlace presionado
+hover - Enlace que tiene la flecha del mouse encima
+active - Es la que tiene foco en ese momento (pruebe de tocar la tecla tab)
+</pre>
+<p>Es importante hacer notar que el orden en que definimos las pseudoclases es fundamental para su funcionamiento (debe respetarse el orden: link-visited-hover-active)</p>
+<p>Este ejemplo es muy sencillo para ver el paso en los distintos estados que puede tener un enlace:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;link rel=&quot;StyleSheet&quot; href=&quot;estilos.css&quot; type=&quot;text/css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;a href=&quot;http://www.google.com&quot;&gt;Google&lt;/a&gt;
+&lt;a href=&quot;http://www.yahoo.com&quot;&gt;Yahoo&lt;/a&gt;
+&lt;a href=&quot;http://www.bing.com&quot;&gt;Bing&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>La hoja de estilo es:</p>
+<pre pre="recuadro">
+a:link{
+  background-color:#00ff00;
+  color:#ff0000;
+}
+a:visited{
+  background-color:#000000;
+  color:#ffffff;
+}
+a:hover{
+  background-color:#ff00ff;
+  color:#fffff;
+}
+a:active{
+  background-color:#ff0000;
+  color:#ffff00;
+}
+</pre>
+<p>Apenas ejecute la página los tres enlaces deben aparecer de color rojo con fondo verde:</p>
+<pre>
+a:link{
+  background-color:#00ff00;
+  color:#ff0000;
+}
+</pre>
+<p>Si presionamos la tecla tab podremos ver que el enlace que tiene foco aparece de color amarillo con fondo rojo:</p>
+<pre>
+a:active{
+  background-color:#ff0000;
+  color:#ffff00;
+}
+</pre>
+<p>Si pasamos la flecha del mouse sobre algún enlace veremos que aparece de color blanco con fondo lila:</p>
+<pre>
+a:hover{
+  background-color:#ff00ff;
+  color:#fffff;
+}
+</pre>
+<p>Por último todos los enlaces que hayamos hecho clic deberán aparecer de color blanco con fondo negro:</p>
+<pre>
+a:visited{
+  background-color:#000000;
+  color:#ffffff;
+}
+</pre>
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../index28fa.html?inicio=20">Retornar</a></h2>   
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=20&cod=30&punto=26 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:07:22 GMT -->
+</html>

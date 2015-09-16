@@ -1,0 +1,413 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=97&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:41 GMT -->
+<head>
+<title>Matrices y vectores paralelos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Matrices y vectores paralelos</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>Dependiendo de la complejidad del problema podemos necesitar el empleo de vectores y matrices paralelos.</p>
+<h3>Problema 1:</h3>
+<p>
+ Se tiene la siguiente información:<br>
+· Nombres de 4 empleados.<br>
+· Ingresos en concepto de sueldo, cobrado por cada empleado, en los últimos 3 meses.<br>
+Confeccionar el programa para:</p>
+<p>
+a) Realizar la carga de la información mencionada. <br>
+b) Generar un vector que contenga el ingreso acumulado en sueldos en los últimos 3 meses para cada empleado.<br>
+c) Mostrar por pantalla el total pagado en sueldos a todos los empleados en los últimos 3 meses <br>
+d) Obtener el nombre del empleado que tuvo el mayor ingreso acumulado
+</p>
+<p>
+<img src="imagentema/foto065.jpg" border="0" alt="vectores y matrices paralelos">
+</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.util.Scanner;
+public class Matriz9 {
+    private Scanner teclado;
+    private String[] empleados;
+    private int[][] sueldos;
+    private int[] sueldostot;
+    
+    public void cargar() {
+        teclado=new Scanner(System.in);
+        empleados=new String[4];
+        sueldos=new int[4][3];
+        for(int f=0;f&lt;empleados.length;f++){
+            System.out.print("Ingrese el nombre del empleado:");
+            empleados[f]=teclado.next();
+            for(int c=0;c&lt;sueldos[f].length;c++) {
+                System.out.print("Ingrese sueldo:");
+                sueldos[f][c]=teclado.nextInt();
+            }
+        }
+    }
+    
+    public void calcularSumaSueldos() {
+    	sueldostot=new int[4];
+        for(int f=0;f&lt;sueldos.length;f++) {
+          int suma=0;
+          for(int c=0;c&lt;sueldos[f].length;c++) {
+              suma=suma+sueldos[f][c];
+          }
+          sueldostot[f]=suma;
+        }
+    }
+    
+    public void imprimirTotalPagado() {
+    	System.out.println("Total de sueldos pagados por empleado.");
+        for(int f=0;f&lt;sueldostot.length;f++) {
+            System.out.println(empleados[f]+" - "+sueldostot[f]);
+        }
+    }
+    
+    public void empleadoMayorSueldo() {
+        int may=sueldostot[0];
+        String nom=empleados[0];
+        for(int f=0;f&lt;sueldostot.length;f++) {
+            if (sueldostot[f]&gt;may) {
+                may=sueldostot[f];
+                nom=empleados[f];
+            }
+        }
+        System.out.println("El empleado con mayor sueldo es "+ nom + " que tiene un sueldo de "+may);
+    }
+    
+    public static void main(String[] ar){
+        Matriz9 ma=new Matriz9();
+        ma.cargar();
+        ma.calcularSumaSueldos();
+        ma.imprimirTotalPagado();
+        ma.empleadoMayorSueldo();
+    }
+}
+</pre>
+<p>Para resolver este problema lo primero que hacemos es definir una matriz donde se almacenarán los sueldos mensuales de cada empleado, un vector de tipo String donde almacenaremos los nombre de cada empleado y finalmente definimos un vector paralelo a la matriz donde almacenaremos la suma de cada fila de la matriz:</p>
+<pre>
+    private String[] empleados;
+    private int[][] sueldos;
+    private int[] sueldostot;
+</pre>
+<p>En el método de cargar inicializamos el vector con los nombres de los empleados y la matriz paralela donde se almacenan los últimos tres sueldos (previo a cargar procedemos a crear el vector y la matriz):</p>
+<pre>
+        empleados=new String[4];
+        sueldos=new int[4][3];
+        for(int f=0;f&lt;empleados.length;f++){
+            System.out.print("Ingrese el nombre del empleado:");
+            empleados[f]=teclado.next();
+            for(int c=0;c&lt;sueldos[f].length;c++) {
+                System.out.print("Ingrese sueldo:");
+                sueldos[f][c]=teclado.nextInt();
+            }
+        }
+</pre>
+<p>El método sumar sueldos crea el vector donde se almacenará la suma de cada fila de la matriz. Mediante dos for recorremos toda la matriz y sumamos cada fila:</p>
+<pre>
+    	sueldostot=new int[4];
+        for(int f=0;f&lt;sueldos.length;f++) {
+          int suma=0;
+          for(int c=0;c&lt;sueldos[f].length;c++) {
+              suma=suma+sueldos[f][c];
+          }
+          sueldostot[f]=suma;
+        }
+</pre>
+<p>El método imprimirTotalPagado tiene por objetivo mostrar los dos vectores (el de nombre de los empleados y el que almacena la suma de cada fila de la matriz):</p>
+<pre>
+        for(int f=0;f&lt;sueldostot.length;f++) {
+            System.out.println(empleados[f]+" - "+sueldostot[f]);
+        }
+</pre>
+<p>Por último para obtener el nombre del empleado con mayor sueldo acumulado debemos inicializar dos variables auxiliares con el primer elemento del vector de empleados y en otra auxiliar guardamos la primer componente del vector sueldostot:</p>
+<pre>
+        int may=sueldostot[0];
+        String nom=empleados[0];
+        for(int f=0;f&lt;sueldostot.length;f++) {
+            if (sueldostot[f]&gt;may) {
+                may=sueldostot[f];
+                nom=empleados[f];
+            }
+        }
+        System.out.println("El empleado con mayor sueldo es "+ nom + " que tiene un sueldo de "+may);
+</pre>
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Se desea saber la temperatura media trimestral de cuatro paises. Para ello se tiene como dato las temperaturas medias mensuales de dichos paises.<br>
+Se debe ingresar el nombre del país y seguidamente las tres temperaturas medias mensuales.<br>
+Seleccionar las estructuras de datos adecuadas para el almacenamiento de los datos  en  memoria.<br>
+   a - Cargar por teclado los nombres de los paises y las temperaturas medias mensuales.<br>
+   b - Imprimir los nombres de las paises y las temperaturas medias mensuales de las mismas.<br>
+   c - Calcular la temperatura media trimestral de cada país.<br>
+   c - Imprimr los nombres de las provincias y las temperaturas medias trimestrales.<br>
+   b - Imprimir el nombre de la provincia con la temperatura media trimestral mayor.
+</li>
+
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+import java.util.Scanner;
+public class Matriz10 {
+    private Scanner teclado;
+    private String[] paises;
+    private int[][] tempmen;
+    private int[] temptri;
+    
+    public void cargar() {
+        teclado=new Scanner(System.in);
+        paises=new String[4];
+        tempmen=new int[4][3];
+        for(int f=0;f&lt;paises.length;f++){
+            System.out.print("Ingrese el nombre del país:");
+            paises[f]=teclado.next();
+            for(int c=0;c&lt;tempmen[f].length;c++) {
+                System.out.print("Ingrese temperatura mensual:");
+                tempmen[f][c]=teclado.nextInt();
+            }
+        }
+    }
+    
+    public void imprimirTempMensuales() {
+        for(int f=0;f&lt;paises.length;f++){
+        	System.out.print("Pais:" + paises[f]+":");
+            for(int c=0;c&lt;tempmen[f].length;c++) {
+                System.out.print(tempmen[f][c]+" ");
+            }
+            System.out.println();
+        }    
+    }
+    
+    public void calcularTemperaturaTri() {
+        temptri=new int[4];	
+        for(int f=0;f&lt;tempmen.length;f++) {
+            int suma=0;
+            for(int c=0;c&lt;tempmen[f].length;c++) {
+                suma=suma+tempmen[f][c];
+            }
+            temptri[f]=suma/3;
+        }
+    }
+    
+    public void imprimirTempTrimestrales() {
+        System.out.println("Temperaturas trimestrales.");
+        for(int f=0;f&lt;paises.length;f++) {
+            System.out.println(paises[f]+" "+temptri[f]);
+        }
+    }
+    
+    public void paisMayorTemperaturaTri() {
+       int may=temptri[0];
+       String nom=paises[0];
+       for(int f=0;f&lt;paises.length;f++) {
+           if (temptri[f]&gt;may) {
+               may=temptri[f];
+               nom=paises[f];
+           }
+       }
+       System.out.println("Pais con temperatura trimestral mayor es "+ nom + " que tiene una temperatura de "+may);        
+    }
+        
+    public static void main(String[] ar){
+        Matriz10 ma=new Matriz10();
+        ma.cargar();
+        ma.imprimirTempMensuales();
+        ma.calcularTemperaturaTri();
+        ma.imprimirTempTrimestrales();
+        ma.paisMayorTemperaturaTri();
+    }
+}
+</pre></div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=97&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:42 GMT -->
+</html>

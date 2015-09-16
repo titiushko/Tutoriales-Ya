@@ -1,0 +1,201 @@
+<!doctype html>
+<html>
+
+<!-- Mirrored from www.cssya.com.ar/css3ya/detalleconcepto.php?cod=102 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:07:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+    <title>CSS3 Ya</title>
+    <link href="estilos.css" rel="stylesheet">
+    <link href='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css' rel='stylesheet'>     
+    <script src='../../ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script> 
+    <script src='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>     
+    <script src="funciones.js"></script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-31']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>	
+</head>
+<body>
+
+
+
+
+
+
+<div id="pesta">
+	<ul>
+		<li><a href="#p1">Concepto</a></li>    
+		<li><a href="#p2">Ejemplo</a></li>
+		<li><a href="#p3">Vista Previa</a></li>
+	</ul>
+	<div id="p1" style="background:#fafafa;padding:20px; max-height: 700px;overflow: auto;font-size:13pt">
+	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* css3 detalle arriba */
+google_ad_slot = "3101973371";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+	
+	
+    <h2>Imágenes de fondo (background-image)</h2><p>La propiedad brackground-image permite insertar un conjunto de imágenes dentro de un elemento. Para ello debemos especificar sus nombres:</p>
+<pre>
+Elemento { 
+     background-image: url("imagen1", url("imagen2", ...); 
+}
+</pre>
+
+<p>La primera imagen que se dibuja es la que indicamos al final de la lista.</p>
+
+<p>Por ejemplo vamos a mostrar una imagen de fondo con formato jpg y sobre esta una de tipo png, la primera:</p>
+<img src="foto1.jpg" width="700" height="450"> 
+<p>y la imagen png es:</p>
+<img src="logo1.png" width="150" height="150"> 
+
+<p>Luego la página que muestra superpuestas las dos imágenes en un recuadro es:</p>
+
+<pre>
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+&lt;head&gt; 
+&lt;title&gt;Prueba&lt;/title&gt; 
+
+&lt;style type="text/css"&gt; 
+
+#recuadro1{
+   background-image:  url("logo1.png"), url("foto1.jpg");
+   background-repeat: no-repeat;
+   width:700px;
+   height:450px;
+}
+
+body {
+  background:white;
+  margin:50px;
+}
+
+&lt;/style&gt; 
+
+&lt;/head&gt; 
+&lt;body&gt; 
+
+&lt;div id="recuadro1"&gt; 
+&lt;/div&gt; 
+
+&lt;/body&gt; 
+&lt;/html&gt;
+</pre>
+<p>El resultado es:</p>
+
+<img src="imagentema/foto040.jpg" border="0" alt="background-image"><br>
+<p>Para esto definimos:</p>
+<pre>
+#recuadro1{
+   background-image:  url("logo1.png"), url("foto1.jpg");
+   background-repeat: no-repeat;
+   width:700px;
+   height:450px;
+}
+</pre>
+<p>El recuadro coincide con el tamaño de la imagen "foto1.jpg" (700*450) Luego la imagen "logo1.png" es de 150*150 píxeles.</p>
+<p>Como vemos primero se dibuja la imagen "foto1.jpg" (que es la última) y luego sobre esta la imagen "logo1.png". Otro cosa importante es inicializar la propiedad background-repeat con el valor no-repeat. En caso de no inicializar dicha propiedad tendremos a la imagen logo1.png repetida dentro del recuadro:</p>
+<img src="imagentema/foto041.jpg" border="0" alt="background-image background-repeat"><br>	
+<table border="0">
+<tr>
+<td>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* css3 cuadrado */
+google_ad_slot = "9333811690";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+ <td>
+ <script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* css3 cuadrado */
+google_ad_slot = "9333811690";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ </td>
+</tr></table> 	
+	
+	</div>    
+	<div id="p2">
+    <textarea name="editor" id="editor" rows="28" style="width:890px;height:700px;font-size:16px;font-family:courier"><!DOCTYPE html> 
+<html> 
+<head> 
+<title>Prueba</title> 
+
+<style type="text/css"> 
+
+#recuadro1{
+   background-image:  url("logo1.png"), url("foto1.jpg");
+   background-repeat: no-repeat;
+   width:700px;
+   height:450px;
+}
+
+body {
+  background:white;
+  margin:50px;
+}
+
+</style> 
+
+</head> 
+<body> 
+
+<div id="recuadro1"> 
+</div> 
+
+</body> 
+
+<!-- Mirrored from www.cssya.com.ar/css3ya/detalleconcepto.php?cod=102 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:07:09 GMT -->
+</html></textarea>
+	</div>
+	<div id="p3">
+<iframe width="900" height="700" id="documentodinamico" name="documentodinamico" src="vacio.html">
+No tiene disponible el navegador la capacidad de iframe
+</iframe>
+	</div>
+</div>
+<br>
+   <h2><a href="index-2.html">Retornar</a></h2>   
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-31', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

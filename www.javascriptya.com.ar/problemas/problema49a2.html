@@ -1,0 +1,451 @@
+<!doctype html>
+<html>
+
+<!-- Mirrored from www.javascriptya.com.ar/problemas/problema.php?cod=12&inicio=10 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+    <title>JavaScript Ya</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="estilos.css" rel="stylesheet">
+    <link href='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css' rel='stylesheet'>     
+    <script src='../../ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script> 
+    <script src='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>     
+    
+<script type="text/javascript">	
+$(document).ready(function(){
+  var opciones = {
+                   select:tabSeleccionado
+                 };                 
+  $("#pesta").tabs(opciones);
+});
+
+function tabSeleccionado(event,tab) {
+  if (tab.index==2) {
+    var d = parent.documentodinamico.document; 	
+    d.open();
+	d.write(String.fromCharCode(60)+"script ");
+	d.write(' src="debug.js">');
+	d.write(String.fromCharCode(60)+"/script"+String.fromCharCode(62));
+	d.write($('#editor').val());
+    d.close();	
+  }	
+}
+
+
+</script>
+	
+<style type="text/css">	
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>	
+	
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>	
+	
+</head>
+<body>
+
+
+
+
+<h1>Concepto de acumulador.</h1>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* javascriptya-superior */
+google_ad_slot = "5739365568";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+
+<div id="pesta">
+	<ul>
+		<li><a href="#p1">Problemas</a></li>    	
+		<li><a href="#p2">Codificar problema</a></li>
+		<li><a href="#p3">Ejecución problema</a></li>
+	</ul>
+	<div id="p1" style="background:#fafafa;padding:30px; max-height: 700px; min-height: 700px;;overflow: auto;font-size:13pt">
+		
+	<b>PROBLEMAS</b><br><br>
+Ha llegado la parte fundamental, que es el momento donde uno desarrolla individualmente un algoritmo para la resolución de problemas.<br>
+El tiempo a dedicar a esta sección EJERCICIOS PROPUESTOS debe ser mucho mayor que el empleado al ver EJERCICIOS RESUELTOS.<br>
+La experiencia dice que debemos dedicar el 80 % del tiempo a la resolución individual de problemas y el otro 20 % al análisis y codificación de problemas ya resueltos por otras personas.<br>
+Es de vital importancia para llegar a ser un buen PROGRAMADOR poder resolver problemas en forma individual.<br>
+<br>
+<ol>
+<li>
+Escribir un programa que lea 10 notas de alumnos y nos informe cuántos tienen notas mayores o iguales a 7 y cuántos menores.
+</li>
+<li>
+Se ingresan un conjunto de 5 alturas de personas por teclado. Mostrar la altura promedio de las personas.
+</li>
+<li>
+En una empresa trabajan 5 empleados cuyos sueldos oscilan entre $100 y $500, realizar un programa que lea los sueldos que cobra cada empleado e informe cuántos empleados cobran entre $100 y $300 y cuántos cobran más de $300. Además el programa deberá informar el importe que gasta la empresa en sueldos al personal.
+</li>
+<li>
+Realizar un programa que imprima 20 términos de la serie 5 - 10 - 15 - 20, etc. (No se ingresan valores por teclado)
+</li>
+<li>
+Mostrar los múltiplos de 10 hasta el valor 1500.<br>
+Debe aparecer en pantalla 10 - 20 -30 etc.
+</li>
+<li>
+Realizar un programa que permita cargar dos listas de 3 valores cada una. Informar con un mensaje cual de las dos listas tiene un valor acumulado mayor (mensajes 'Lista 1 mayor', 'Lista 2 mayor', 'Listas iguales')<br>
+Tener en cuenta que puede haber dos o más estructuras repetitivas en un algoritmo.
+</li>
+<li>
+Desarrollar un programa que permita cargar 5 números enteros y luego nos informe cuántos valores fueron pares y cuántos impares.<br>
+Emplear el operador "%" en la condición de la estructura condicional.
+<pre>
+	if (valor%2==0)
+</pre>
+El operador "%" retorna el resto de la división valor / 2. Por ejemplo: 12 % 2, retorna 0; 13 % 2, retorna 1, porque el resto de dividir 13 en 2 es 1.
+</li>
+</ol>
+
+<div style="margin-top:20px">
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+</div>
+<pre class="recuadrooculto">
+Problema 1.
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var x=0;
+  var cant1=0;
+  var cant2=0;
+  while (x&lt;10)
+  {
+    var nota;
+    nota=prompt('Ingrese nota','');
+    if (nota&gt;=7)
+    {
+      cant1=cant1+1;
+    }
+    else
+    {
+      cant2=cant2+1;
+    }
+    x=x+1;
+  }
+  document.write('Cantidad de alumnos con notas mayores o iguales a 7:'+cant1);
+  document.write('&lt;br&gt;');
+  document.write('Cantidad de alumnos con notas menores a 7:'+cant2);
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+     
+
+
+Problema 2.
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var x=0;
+  var suma=0;
+  while (x&lt;5)
+  {
+    var altura;
+    altura=prompt('Ingrese la altura en centímetros(Ej. 175)','');
+    altura=parseInt(altura);
+    suma=suma+altura;
+    x=x+1;
+  }
+  var promedio=suma/5;
+  document.write('La altura promedio de las cinco personas es:'+promedio);
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+     
+
+
+Problema 3.
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var cont1=0;
+  var cont2=0;
+  var total=0;
+  var sueldo;
+  var x=0;
+  while (x&lt;5)
+  {
+    sueldo=prompt('Ingrese el sueldo','');
+    sueldo=parseInt(sueldo);
+    if (sueldo&lt;=300)
+    {
+      cont1=cont1+1;
+    }
+    else
+    {
+      cont2=cont2+1;
+    }
+    total=total+sueldo;
+    x=x+1;
+  }
+  document.write('Cantidad de empleados que cobran 300 o menos:'+cont1);
+  document.write('&lt;br&gt;');
+  document.write('Cantidad de empleados que cobran más de 300:'+cont2);
+  document.write('&lt;br&gt;');
+  document.write('Gastos en sueldos en la empresa:'+total);
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+     
+
+Problema 4.
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var serie=5;
+  var x=0;
+  while (x&lt;20)
+  {
+    document.write(serie+' ');
+    x=x+1;
+    serie=serie+5;
+  }
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+
+Problema 5.
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  document.write('Múltiplos de 10 hasta el 1500&lt;br&gt;');
+  var multiplo=10;
+  while (multiplo&lt;=1500)
+  {
+    document.write(multiplo+' ');
+    multiplo=multiplo+10;
+  }
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+     
+
+
+Problema 6.     
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var total1=0;
+  var x=0;
+  var nro;
+  while(x&lt;3)
+  {
+    nro=prompt('Ingrese valor de la primer lista:','');
+    nro=parseInt(nro);
+    total1=total1+nro;
+    x=x+1;
+  }
+  var total2=0;
+  x=0;
+  while(x&lt;3)
+  {
+    nro=prompt('Ingrese valor de la segunda lista:','');
+    nro=parseInt(nro);
+    total2=total2+nro;
+    x=x+1;
+  }
+  if (total1&gt;total1)
+  {
+    document.write('Tiene mayor valor la lista1');
+  }
+  else
+  {
+    if (total1&lt;total2)
+    {
+      document.write('Tiene mayor valor la lista2');
+    }
+    else
+    {
+      document.write('Tienen el mismo valor acumulado las dos listas');
+    }
+  }
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+
+Problema 7.
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var cantpares=0;
+  var cantimpares=0;
+  var x=0;
+  var valor;
+  while (x&lt;5)
+  {
+    valor=prompt('Ingrese un valor','');
+    valor=parseInt(valor);
+    if (valor%2==0)
+    {
+      cantpares=cantpares+1;
+    }
+    else
+    {
+      cantimpares=cantimpares+1;
+    }
+    x=x+1;
+  }
+  document.write('Cantidad de valores pares ingresados:'+cantpares);
+  document.write('&lt;br&gt;');
+  document.write('Cantidad de valores impares ingresados:'+cantimpares);
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+     
+</pre>	</div>    	
+	<div id="p2">
+    <textarea name="editor" id="editor" rows="28" style="width:890px;height:700px;font-size:16px;font-family:courier">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+     
+</textarea>
+	</div>
+	<div id="p3">
+<iframe width="900" height="700" id="documentodinamico" name="documentodinamico" src="vacio.html">
+No tiene disponible el navegador la capacidad de iframe
+</iframe>
+	</div>
+</div>
+<br>
+<table width="700px">
+<tr>
+<td align="left">	
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* javascriptya-inferior */
+google_ad_slot = "8692831966";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* javascriptya-inferior */
+google_ad_slot = "8692831966";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../index4231.html?inicio=10">Retornar al menu</a></h2>   
+<br>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+<!-- Mirrored from www.javascriptya.com.ar/problemas/problema.php?cod=12&inicio=10 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:20 GMT -->
+</html>

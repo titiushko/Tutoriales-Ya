@@ -1,0 +1,345 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/problemas/problema.php?inicio=50&cod=213&punto=55 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios propuestos : Combinar más de 2 tablas(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+pre {
+  text-align:left;
+  font-family:verdana,sans-serif;
+}
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+</style>
+
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;	
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=no,status=yes,toolbar=yes,location=yes');  	
+}
+
+function VentanaTeorico(codigo)
+{
+  alto=400;
+  window.open('../temarios/descripcion2ade4.html?cod='+codigo+'&origen=problema', '', 'top=0,left=0,width=800,height='+alto+',resizable=yes,scrollbars=yes,menubar=no');  	
+}
+
+function cambiar(nro)
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   if (nro==1)
+   {
+     if (lista[f].id=='solu1')
+       lista[f].style.display='block';
+   }
+   else
+     if (nro==2)
+     {
+       if (lista[f].id=='solu2')
+         lista[f].style.display='block';
+     }
+	   
+  }
+  if (nro==1)
+    document.getElementById('solucion1').style.display='none';
+  if (nro==2)
+    document.getElementById('solucion2').style.display='none';
+}
+
+</script>
+
+</head>
+
+<body>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>55 - Combinar más de 2 tablas</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+	  <table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<b>Primer problema: </b><br><p>Un club dicta clases de distintos deportes. En una tabla llamada "socios" guarda los datos de los socios, en una tabla llamada "deportes" la información referente a los diferentes deportes que se dictan y en una tabla denominada "inscriptos", las inscripciones de los socios a los distintos deportes.</p>
+<p>Un socio puede inscribirse en varios deportes el mismo año. Un socio no puede inscribirse en el mismo deporte el mismo año. Distintos socios se inscriben en un mismo deporte en el mismo año.
+</p>
+<p>1- Elimine las tablas:</p>
+<pre>
+ drop table socios;
+ drop table deportes;
+ drop table inscriptos;
+</pre>
+<p>2- Cree las tablas con las siguientes estructuras:</p>
+<pre>
+ create table socios(
+  documento char(8) not null, 
+  nombre varchar2(30),
+  domicilio varchar2(30),
+  primary key(documento)
+ );
+ create table deportes(
+  codigo number(2),
+  nombre varchar2(20),
+  profesor varchar2(15),
+  primary key(codigo)
+ );
+ create table inscriptos(
+  documento char(8) not null, 
+  codigodeporte number(2) not null,
+  año char(4),
+  matricula char(1),--'s'=paga, 'n'=impaga
+  primary key(documento,codigodeporte,año)
+ );
+</pre>
+<p>3- Ingrese algunos registros en "socios":</p>
+<pre>
+ insert into socios values('22222222','Ana Acosta','Avellaneda 111');
+ insert into socios values('23333333','Betina Bustos','Bulnes 222');
+ insert into socios values('24444444','Carlos Castro','Caseros 333');
+ insert into socios values('25555555','Daniel Duarte','Dinamarca 44');
+</pre>
+<p>4- Ingrese algunos registros en "deportes":</p>
+<pre>
+ insert into deportes values(1,'basquet','Juan Juarez');
+ insert into deportes values(2,'futbol','Pedro Perez');
+ insert into deportes values(3,'natacion','Marina Morales');
+ insert into deportes values(4,'tenis','Marina Morales');
+</pre>
+<p>5- Inscriba a varios socios en el mismo deporte en el mismo año:</p>
+<pre>
+ insert into inscriptos values ('22222222',3,'2006','s');
+ insert into inscriptos values ('23333333',3,'2006','s');
+ insert into inscriptos values ('24444444',3,'2006','n');
+</pre>
+<p>6- Inscriba a un mismo socio en el mismo deporte en distintos años:</p>
+<pre>
+ insert into inscriptos values ('22222222',3,'2005','s');
+ insert into inscriptos values ('22222222',3,'2007','n');
+</pre>
+<p>7- Inscriba a un mismo socio en distintos deportes el mismo año:</p>
+<pre>
+ insert into inscriptos values ('24444444',1,'2006','s');
+ insert into inscriptos values ('24444444',2,'2006','s');
+</pre>
+<p>8- Ingrese una inscripción con un código de deporte inexistente y un documento de socio que no exista en "socios":</p>
+<pre>
+ insert into inscriptos values ('26666666',0,'2006','s');
+</pre>
+<p>9- Muestre el nombre del socio, el nombre del deporte en que se inscribió y el año empleando diferentes tipos de join (8 filas):</p>
+<p>10- Muestre todos los datos de las inscripciones (excepto los códigos) incluyendo aquellas inscripciones cuyo código de deporte no existe en "deportes" y cuyo documento de socio no se encuentra en "socios" (10 filas)</p>
+<p>11- Muestre todas las inscripciones del socio con documento "22222222" (3 filas)</p>
+<a href="javascript:cambiar(1)" id="solucion1">Ver solución</a>
+<br><br>
+<pre id="solu1" class="recuadrooculto">
+ drop table socios;
+ drop table deportes;
+ drop table inscriptos;
+
+ create table socios(
+  documento char(8) not null, 
+  nombre varchar2(30),
+  domicilio varchar2(30),
+  primary key(documento)
+ );
+ create table deportes(
+  codigo number(2),
+  nombre varchar2(20),
+  profesor varchar2(15),
+  primary key(codigo)
+ );
+ create table inscriptos(
+  documento char(8) not null, 
+  codigodeporte number(2) not null,
+  a&ntilde;o char(4),
+  matricula char(1),--'s'=paga, 'n'=impaga
+  primary key(documento,codigodeporte,a&ntilde;o)
+ );
+
+ insert into socios values('22222222','Ana Acosta','Avellaneda 111');
+ insert into socios values('23333333','Betina Bustos','Bulnes 222');
+ insert into socios values('24444444','Carlos Castro','Caseros 333');
+ insert into socios values('25555555','Daniel Duarte','Dinamarca 44');
+
+ insert into deportes values(1,'basquet','Juan Juarez');
+ insert into deportes values(2,'futbol','Pedro Perez');
+ insert into deportes values(3,'natacion','Marina Morales');
+ insert into deportes values(4,'tenis','Marina Morales');
+
+ insert into inscriptos values ('22222222',3,'2006','s');
+ insert into inscriptos values ('23333333',3,'2006','s');
+ insert into inscriptos values ('24444444',3,'2006','n');
+
+ insert into inscriptos values ('22222222',3,'2005','s');
+ insert into inscriptos values ('22222222',3,'2007','n');
+
+ insert into inscriptos values ('24444444',1,'2006','s');
+ insert into inscriptos values ('24444444',2,'2006','s');
+
+ insert into inscriptos values ('26666666',0,'2006','s');
+
+ select s.nombre,d.nombre,a&ntilde;o
+  from deportes d
+  right join inscriptos i
+  on codigodeporte=d.codigo
+  left join socios s
+  on i.documento=s.documento;
+
+ select s.nombre,d.nombre,a&ntilde;o,matricula
+  from deportes d
+  full join inscriptos i
+  on codigodeporte=d.codigo
+  full join socios s
+  on s.documento=i.documento;
+
+ select s.nombre,d.nombre,a&ntilde;o,matricula
+  from deportes d
+  join inscriptos i
+  on codigodeporte=d.codigo
+  join socios s
+  on s.documento=i.documento
+  where s.documento='22222222';
+</pre>
+        <p>&nbsp;</p>
+  
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+	
+	
+
+
+		
+<br>
+   <h2><a href="../indexefd7.html?inicio=50">Retornar</a></h2>   
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/problemas/problema.php?inicio=50&cod=213&punto=55 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:36 GMT -->
+</html>

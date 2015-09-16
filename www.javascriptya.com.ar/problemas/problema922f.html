@@ -1,0 +1,403 @@
+<!doctype html>
+<html>
+
+<!-- Mirrored from www.javascriptya.com.ar/problemas/problema.php?cod=26&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+    <title>JavaScript Ya</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="estilos.css" rel="stylesheet">
+    <link href='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css' rel='stylesheet'>     
+    <script src='../../ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script> 
+    <script src='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>     
+    
+<script type="text/javascript">	
+$(document).ready(function(){
+  var opciones = {
+                   select:tabSeleccionado
+                 };                 
+  $("#pesta").tabs(opciones);
+});
+
+function tabSeleccionado(event,tab) {
+  if (tab.index==2) {
+    var d = parent.documentodinamico.document; 	
+    d.open();
+	d.write(String.fromCharCode(60)+"script ");
+	d.write(' src="debug.js">');
+	d.write(String.fromCharCode(60)+"/script"+String.fromCharCode(62));
+	d.write($('#editor').val());
+    d.close();	
+  }	
+}
+
+
+</script>
+	
+<style type="text/css">	
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>	
+	
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>	
+	
+</head>
+<body>
+
+
+
+
+<h1>Control SELECT</h1>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* javascriptya-superior */
+google_ad_slot = "5739365568";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+
+<div id="pesta">
+	<ul>
+		<li><a href="#p1">Problemas</a></li>    	
+		<li><a href="#p2">Codificar problema</a></li>
+		<li><a href="#p3">Ejecución problema</a></li>
+	</ul>
+	<div id="p1" style="background:#fafafa;padding:30px; max-height: 700px; min-height: 700px;;overflow: auto;font-size:13pt">
+		
+	<b>PROBLEMAS</b>
+<br><br>
+<ol>
+<li>
+Confeccionar una página que muestre un objeto SELECT con distintos tipos de pizzas (Jamón y Queso, Muzzarella, Morrones). Al seleccionar una, mostrar en un objeto de tipo TEXT el precio de la misma.
+</li>
+<li>
+Generar un presupuesto de un equipo de computación a partir de tres objetos de tipo SELECT que nos permiten seleccionar:<br>
+Procesador (Intel I3 - $400, Intel I5 $600, Intel I7 $800).<br>
+Monitor (Samsung 20' - $250, Samsung 22' - $350, Samsung 26' - $550)<br>
+Disco Duro(500 Gb - $300, 1 Tb - $440, 3 Tb - $500)<br>
+Para cada característica indicamos string a mostrar (Ej. Intel I3) y el valor asociado a dicho string (Ej. 400).<br>
+Al presionar un botón "Calcular" mostrar el presupuesto en un objeto de tipo TEXT.
+</li>
+<li>
+Confeccionar una página que permita seleccionar una pizza y la cantidad de unidades. Luego al presionar un botón calcular el importe a pagar.<br>
+Utilizar un objeto de la clase SELECT para la selección de la pizza, pudiendo ser:<br>
+Queso: $ 4.<br>
+Jamón y queso: $ 6.<br>
+Especial: $ 10.<br>
+A la cantidad de pizzas cargarla en un objeto de la clase TEXT y en otro objeto de la clase TEXT mostrar el importe total a abonar.
+</li>
+<li>
+Confeccionar una página que permita tomar un examen múltiple choice. Se debe mostrar una pregunta y seguidamente un objeto SELECT con las respuestas posibles. Al presionar un botón mostrar la cantidad de respuestas correctas e incorrectas (Disponer 4 preguntas y sus respectivos controles SELECT)
+</li>
+</ol>
+
+<div style="margin-top:20px">
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+</div>
+<pre class="recuadrooculto">
+Problema 1.
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  function mostrarSeleccionPizza()
+  {
+    document.getElementById('mensaje').value=document.getElementById('pizza').options[document.getElementById('pizza').selectedIndex].text;
+  }
+&lt;/script&gt;
+
+&lt;form&gt;
+Pizzas:
+&lt;select id="pizza" onChange="mostrarSeleccionPizza()"&gt;
+  &lt;option&gt;Jamon y Queso&lt;/option&gt;
+  &lt;option&gt;Muzzarella&lt;/option&gt;
+  &lt;option&gt;Morrones&lt;/option&gt;
+&lt;/select&gt;
+&lt;br&gt;
+&lt;input type="text" id="mensaje"&gt;
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+     
+
+
+Problema 2.
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  function calcularPresupuesto()
+  {
+    var ele1=document.getElementById('procesador')
+    var precio1=ele1.options[ele1.selectedIndex].value;
+    var ele2=document.getElementById('monitor')
+    var precio2=ele2.options[ele2.selectedIndex].value;
+    var ele3=document.getElementById('discoduro')
+    var precio3=ele3.options[ele3.selectedIndex].value;
+    precio1=parseInt(precio1);
+    precio2=parseInt(precio2);
+    precio3=parseInt(precio3);
+    var suma=precio1+precio2+precio3;
+    document.getElementById('resultado').value=suma;
+  }
+&lt;/script&gt;
+
+&lt;form&gt;
+Procesador:
+  &lt;select id="procesador"&gt;
+    &lt;option value="400"&gt;Intel I3&lt;/option&gt;
+    &lt;option value="600"&gt;Intel I5&lt;/option&gt;
+    &lt;option value="800"&gt;Intel I7&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;br&gt;
+Procesador:
+  &lt;select id="monitor"&gt;
+    &lt;option value="250"&gt;Monitor Samsung 20'&lt;/option&gt;
+    &lt;option value="350"&gt;Monitor Samsung 22'&lt;/option&gt;
+    &lt;option value="550"&gt;Monitor Samsung 26'&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;br&gt;
+Disco duro:
+  &lt;select id="discoduro"&gt;
+    &lt;option value="300"&gt;Disco Duro 500 Gb&lt;/option&gt;
+    &lt;option value="440"&gt;Disco Duro 1 Tb&lt;/option&gt;
+    &lt;option value="500"&gt;Disco Duro 3 Tb&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;br&gt;
+&lt;input type="button" value="Calcular Presupuesto" onClick="calcularPresupuesto()"&gt;
+&lt;br&gt;
+&lt;input type="text" id="resultado"&gt;
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+
+Problema 3.
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  function calcularPresupuesto()
+  {
+    var precio=document.getElementById('pizza').value;
+    precio=parseInt(precio);
+    var cantidad=document.getElementById('cantidad').value;
+    cantidad=parseInt(cantidad);
+    var total=precio*cantidad;
+    document.getElementById('resultado').value=total;
+  }
+&lt;/script&gt;
+
+&lt;form&gt;
+Seleccione la pizza:
+&lt;select id="pizza"&gt;
+  &lt;option value="4"&gt;Queso&lt;/option&gt;
+  &lt;option value="6"&gt;Jamon y Queso&lt;/option&gt;
+  &lt;option value="10"&gt;Especial&lt;/option&gt;
+&lt;/select&gt;
+&lt;br&gt;
+Cantidad de pizzas:
+&lt;input type="text" id="cantidad"&gt;
+&lt;br&gt;
+&lt;input type="button" value="Calcular costo" onClick="calcularPresupuesto()"&gt;
+&lt;br&gt;
+&lt;input type="text" id="resultado"&gt;
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+
+Problema 4.
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  function verificar()
+  {
+    var correctas=0;
+    var ele1=document.getElementById('pregunta1');
+    var ele2=document.getElementById('pregunta2');
+    var ele3=document.getElementById('pregunta3');
+    var ele4=document.getElementById('pregunta4');
+    if (ele1.options[ele1.selectedIndex].value==3)
+    {
+      correctas++;
+    }
+    if (ele2.options[ele2.selectedIndex].value==1)
+    {
+      correctas++;
+    }
+    if (ele3.options[ele3.selectedIndex].value==2)
+    {
+      correctas++;
+    }
+    if (ele4.options[ele4.selectedIndex].value==2)
+    {
+      correctas++;
+    }
+    alert('Cantidad de respuestas correctas:'+correctas);
+  }
+&lt;/script&gt;
+
+&lt;form&gt;
+Como se dice rojo en ingles:&lt;br&gt;
+  &lt;select id="pregunta1"&gt;
+    &lt;option value="1"&gt;blue&lt;/option&gt;
+    &lt;option value="2"&gt;green&lt;/option&gt;
+    &lt;option value="3"&gt;red&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;br&gt;
+Como se dice ventana en ingles:&lt;br&gt;
+  &lt;select id="pregunta2"&gt;
+    &lt;option value="1"&gt;window&lt;/option&gt;
+    &lt;option value="2"&gt;door&lt;/option&gt;
+    &lt;option value="3"&gt;bedroom&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;br&gt;
+Como se dice gato en ingles:&lt;br&gt;
+  &lt;select id="pregunta3"&gt;
+    &lt;option value="1"&gt;dog&lt;/option&gt;
+    &lt;option value="2"&gt;cat&lt;/option&gt;
+    &lt;option value="3"&gt;lion&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;br&gt;
+Como se dice hombre en ingles:&lt;br&gt;
+  &lt;select id="pregunta4"&gt;
+    &lt;option value="1"&gt;women&lt;/option&gt;
+    &lt;option value="2"&gt;man&lt;/option&gt;
+    &lt;option value="3"&gt;child&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;br&gt;
+  &lt;input type="button" value="Controlar" onClick="verificar()"&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;     
+</pre>	</div>    	
+	<div id="p2">
+    <textarea name="editor" id="editor" rows="28" style="width:890px;height:700px;font-size:16px;font-family:courier">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+     
+</textarea>
+	</div>
+	<div id="p3">
+<iframe width="900" height="700" id="documentodinamico" name="documentodinamico" src="vacio.html">
+No tiene disponible el navegador la capacidad de iframe
+</iframe>
+	</div>
+</div>
+<br>
+<table width="700px">
+<tr>
+<td align="left">	
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* javascriptya-inferior */
+google_ad_slot = "8692831966";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* javascriptya-inferior */
+google_ad_slot = "8692831966";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../index28fa.html?inicio=20">Retornar al menu</a></h2>   
+<br>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+<!-- Mirrored from www.javascriptya.com.ar/problemas/problema.php?cod=26&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:20 GMT -->
+</html>

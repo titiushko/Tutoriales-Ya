@@ -1,0 +1,131 @@
+
+<!DOCTYPE html> 
+<html lang="es"> 
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=168&punto=35&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>FORM (novalidate)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="html5, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de HTML 5. Es objetivo prioritario respetar 
+los estándares del W3C">
+<meta name="author" content="Diego Moisset">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+</style>
+
+</head>
+
+<body>
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em"><a href="../../html5.html">Temario del Tutorial</a></span>->35 - FORM (novalidate)</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Hemos visto hasta ahora que html5 facilita la validación de datos sin tener en muchos casos la necesidad de utilizar Javascript mediante controles específicos o propiedades especiales como validate, pattern etc.</p>
+<p>Lo que hay que tener en cuenta también que normalmente implementamos formularios para que el usuario realice la carga de datos y sean recibidos posteriormente por un servidor web. Es sabido que el programa en el servidor (PHP, ASPNet etc.) debe validar nuevamente los datos enviados desde el navegador. En esta circunstancia es muy útil desactivar todas las validaciones que hemos implementado en el cliente y para no tener que modificar cada uno de los controles contenidos en un formulario existe una propiedad que desactiva todos los controles al mismo tiempo.</p>
+<p>Para desactivar las validaciones en el cliente solo tenemos que agregar la propiedad novalidate a la marca form.</p>
+<p>Seguramente no encontraremos ningún sitio que tenga esta propiedad activa en un sitio en producción ya que solo tiene como objetivo permitir la depuración de datos en el servidor cuando recibe datos no validados.</p>
+
+<h3>Problema</h3>
+<p>Confeccionar una página que solicite la carga del nombre de usuario y una clave. No permitir enviar los datos al servidor si alguno de los controles está vacío, emplear para esto la propiedad required. Agregar la propiedad novalidate y comprobar que la información se envía al servidor independientemente que carguemos o no datos en los controles input.</p>
+
+<pre class="recuadro">
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Prueba&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;form action="#" novalidate&gt;
+      Usuario:
+      &lt;input type="text" id="usuario" required&gt;
+      &lt;br&gt;
+      Clave:
+      &lt;input type="password" id="clave" required&gt;
+      &lt;br&gt;
+      &lt;br&gt;
+      &lt;input type="submit"&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Lo único que hacemos es agregar la propiedad novalidate a la marca form:</p>
+<pre>
+  &lt;form action="#" novalidate&gt;
+</pre>
+<p>Con esto todas las validaciones que hemos especificado dentro del formulario el navegador las saltea. Recordemos borrar la propiedad novalidate luego. Esto nos es útil para ver que hace nuestro programa en el servidor cuando por ejemplo dejamos vacía la clave.</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../index28fa.html?inicio=20">Retornar</a></h2>   
+
+</div>
+
+</body>
+
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=168&punto=35&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:02 GMT -->
+</html>

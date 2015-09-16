@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=4&codigo=131&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Errores sintácticos y lógicos</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>4 - Errores sintácticos y lógicos</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Confeccionaremos un problema y agregaremos  adrede una serie de errores tipográficos.  Este tipo de errores siempre son detectados por el COMPILADOR, antes de ejecutar el programa.<br> 
+A los errores tipográficos, como por ejemplo la falta de puntos y comas, nombres de variables incorrectas, falta de paréntesis, palabras claves mal escritas, etc. los llamamos errores SINTACTICOS.<br>
+Un programa no se puede ejecutar sin corregir absolutamente todos los errores sintácticos.</p>
+
+<p>Existe otro tipo de errores llamados ERRORES LOGICOS. Este tipo de errores en programas grandes (miles de líneas) son más difíciles de localizar. Por ejemplo un programa que permite hacer la facturación pero la salida de datos por impresora es incorrecta.</p>
+<h3>Problema:</h3>
+<p>Hallar la superficie de un cuadrado conociendo el valor de un lado.</p>
+<h4>Diagrama de flujo:</h4>
+<p><img src="imagentema/foto013.jpg" border="0" alt="diagrama flujo superficie cuadrado"><br>
+</p>
+<h4>Proyecto:</h4>
+<p>Creemos un proyecto llamado SuperficieCuadrado.<br>
+Luego recordemos que tenemos que crear un archivo donde disponer nuestro programa (presionamos el botón derecho del mouse en la ventana del "Explorador de Soluciones"(Solution Explorer) y seleccionamos la opción: Agregar -&gt; Nuevo elemento (Add -&gt; New Item...), en la ventana de dialogo seleccionamos "Archivo c++" (c++ File) y finalmente disponemos como nombre: archivo1, la extensión cpp la agrega automáticamente el Visual Studio)</p>
+<p>Codificamos el algoritmo en C++ e introducimos dos errores sintáctico:<br>
+1 - Disponemos el nombre del objeto cout con mayúsculas.<br>
+2 - Tratamos de imprimir el nombre de la variable superficie con el primer caracter en mayúsculas.</p>
+<p><img src="imagentema/foto014.jpg" border="0" alt="programa c++ con error sintáctico"><br>
+Como podemos observar aparece subrayado la línea donde disponemos Cout con mayúsculas como en la línea que imprimimos la variable superficie con mayúsculas. Si modificamos y corregimos los dos errores sintácticos podremos ejecutar nuestro programa.</p>
+</p>
+<h4>Programa correctamente codificado:</h4>
+<p>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int lado;
+    int superficie;
+    cout &lt;&lt;"Ingrese el valor del lado del cuadrado:";
+    cin &gt;&gt;lado;
+    superficie = lado * lado;
+    cout &lt;&lt;"La superficie del cuadrado es:";
+    cout &lt;&lt;superficie;
+    cin.get();
+    cin.get();
+}
+</pre>
+
+
+</p>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/SuperficieCuadrado.zip">SuperficieCuadrado</a></p>
+
+<h4>Programa con un error lógico:</h4>
+<p>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int lado;
+    int superficie;
+    cout &lt;&lt;"Ingrese el valor del lado del cuadrado:";
+    cin &gt;&gt;lado;
+    superficie = lado * lado * lado;
+    cout &lt;&lt;"La superficie del cuadrado es:";
+    cout &lt;&lt;superficie;
+    cin.get();
+    cin.get();
+}
+</pre>
+
+
+Como podemos observar si ejecutamos el programa no presenta ningún error de compilación. Pero luego de ingresar el valor del lado del cuadrado (por ejemplo el valor 10) obtenemos como resultado un valor incorrecto (imprime el 1000), esto debido que definimos incorrectamente la fórmula para calcular la superficie del cuadrado:
+<pre>
+            superficie = lado * lado * lado;
+</pre>
+<h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=4&codigo=131&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:35 GMT -->
+</html>

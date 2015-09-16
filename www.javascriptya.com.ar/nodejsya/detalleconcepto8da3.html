@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=6&codigo=6&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:49:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Modulo http:datos que envía el navegador.</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++, programación, tutorial, nodejs">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de NodeJS.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>6 - Modulo http:datos que envía el navegador.</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Hemos visto que en Node.js debemos crear en nuestra aplicación un servidor web y mediante una función asincrónica capturar las peticiones que envie el navegador.</p>
+<p>Recordemos el programa del concepto anterior: ejercicio7.js</p>
+<pre class="recuadro">
+var http=require('http');
+
+var servidor=http.createServer(function(pedido,respuesta){
+    respuesta.writeHead(200, {'Content-Type': 'text/html'});
+    respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;'+
+                    '&lt;body&gt;&lt;h1&gt;Sitio en desarrollo&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;');
+    respuesta.end();
+});
+
+servidor.listen(8888);
+
+console.log('Servidor web iniciado');
+</pre>
+
+<p>Cada vez que sucede una petición de recurso (puede ser una página, una imagen, un archivo de sonido etc.) se ejecuta la función anónima que le pasamos a createServer.</p>
+<p>No vimos ni hablamos nada del primer parámetro de la función: el cual lo llamamos "pedido"</p>
+<p>Este objeto tiene muchos datos que llegan al servidor. Analizaremos la propiedad url de este objeto.</p>
+<p>Se trata de un string con la ubicación exacta del recurso que pide el navegador al servidor, por ejemplo:</p>
+<pre>
+ http://localhost:8888/carpeta1/pagina1.html?parametro1=10&parametro2=20
+</pre>
+<p>Estamos solicitando al servidor localhost el archvio pagina1.html que se encuentra en la carpeta 'carpeta1' del servidor y tiene dos parámetros.</p>
+
+<p>Veamos como podemos recuperar estos datos en la función anónima que debe responder la petición.</p>
+<p>Codifiquemos el archivo ejercicio8.js:</p>
+<pre class="recuadro">
+var http=require('http');
+var url=require('url');
+
+var servidor=http.createServer(function(pedido,respuesta){
+    var objetourl = url.parse(pedido.url);
+    console.log('camino completo del recurso y parametros:'+objetourl.path);
+    console.log('solo el camino y nombre del recurso     :'+objetourl.pathname)
+    console.log('parametros del recurso                  :'+objetourl.query)
+    respuesta.writeHead(200, {'Content-Type': 'text/html'});
+    respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;Hola mundo&lt;/body&gt;&lt;/html&gt;');
+    respuesta.end();
+});
+
+servidor.listen(8888);
+
+console.log('Servidor web iniciado');
+</pre>
+
+<p>Requerimos otro módulo llamado 'url' (este módulo nos facilita el análisis de las distintas partes de una url) además del módulo 'http' que ya conocemos:</p>
+<pre>
+var http=require('http');
+var url=require('url');
+</pre>
+
+<p>En la función anónima llamamos al método parse del objeto 'url' y le pasamos como parámetro la propiedad url del objeto pedido que llega a la función:</p>
+<pre>
+    var objetourl = url.parse(pedido.url);
+</pre>
+<p>Esta actividad lo que hace es parsear (procesar el string que contiene pedido.url) y descomponernos las distintas partes de una url en un objeto literal para facilitar analizar su contenido.</p>
+
+<p>Ejecutemos este programa (ejercicio8.js) y dispongamos desde el navegador la url:  http://localhost:8888/carpeta1/pagina1.html?parametro1=10&parametro2=20</p>
+<p>Luego de solicitar la página desde el navegador (recordar que no hace falta que existe la carpeta 'carpeta1' ni el archivo 'pagina1.html) veamos que nos muestra la consola:</p>
+
+
+<p><img src="imagentema/foto019.jpg" border="0" alt="modulo http url nodejs"></p>
+<p>El objeto literal objetourl tiene tres propiedades fundamentales para recuperar los datos en forma parcial y agrupada de la petición HTTP que hizo el navegador:</p>
+<pre>
+    console.log('camino completo del recurso y parametros:'+objetourl.path);
+    console.log('solo el camino y nombre del recurso     :'+objetourl.pathname)
+    console.log('parametros del recurso                  :'+objetourl.query)
+</pre>
+<p>Con estos datos mediante if podemos redirigir el pedido al recurso respectivo (tengamos en cuenta que por el momento siempre nuestro sitio devuelve el 'Hola mundo'):</p>
+<p><img src="imagentema/foto020.jpg" border="0" alt="modulo http url nodejs"></p>
+<p>Hay otra cosa que debemos nombrar: los navegadores la primera vez que acceden a un sitio piden un recurso (el archivo favicon.ico) y es eso por lo que se ejecuta dos veces la función anónima, una para solicitar el archivo 'archivo1' y otra para solicitar el archivo 'favicon.ico' (más adelante veremos como retornar dicho archivo y otros que se soliciten)</p>
+
+
+
+<h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-35', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=6&codigo=6&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:50:00 GMT -->
+</html>

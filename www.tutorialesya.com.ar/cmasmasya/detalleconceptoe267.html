@@ -1,0 +1,385 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=24&codigo=155&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:10 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Parte private y public de una clase en C++</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>24 - Parte private y public de una clase en C++</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Uno de los principios fundamentales de la programación orientada a objetos es el encapsulamiento, esto se logra agrupando una serie de métodos (funciones) y atributos (variables) dentro de una clase.</p>
+<p>Hemos visto que una clase tiene dos secciones: una pública y otra privada. Por principios de la programación orientada a objetos los atributos (variables) deben definirse en la parte privada y los métodos dependiendo si queremos que se los pueda llamar desde la main los definiremos de tipo público y si queremos que queden ocultos y solo puedan ser llamados dentro de la clase los definimos en la parte privada.</p>
+
+<h3>Problema 1:</h3>
+<p>Plantear una clase llamada Dado. Definir un atributo valor y tres métodos uno privado que dibuje una línea de asteríscos y otro dos públicos, uno que genere un número aleatorio entre 1 y 6 y otro que lo imprima llamando en este último al que dibuja la línea de asteríscos.<br>
+</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+#include&lt;cstdlib&gt;
+#include&lt;ctime&gt;
+
+using namespace std;
+
+class Dado {
+private:
+    int valor;
+    void separador();
+public:
+    void tirar();
+    void imprimir();
+};
+
+void Dado::separador()
+{
+    cout&lt;&lt;"********************";
+    cout&lt;&lt;"\n";
+}
+
+void Dado::tirar()
+{
+    srand (time(NULL));
+    valor = rand() % 6 + 1;
+}
+
+void Dado::imprimir()
+{
+    separador();
+    cout&lt;&lt;valor;
+    cout&lt;&lt;"\n";
+    separador();
+}
+
+void main()
+{
+    Dado d;
+    d.tirar();
+    d.imprimir();
+    cin.get();
+}
+</pre>
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/PartePublicPrivate1.zip">PartePublicPrivate1.zip</a></p>
+
+<p>Analicemos como definimos las zonas privadas y públicas de una clase:</p>
+
+<pre>
+class Dado {
+private:
+    int valor;
+    void separador();
+public:
+    void tirar();
+    void imprimir();
+};
+</pre>
+<p>El atributo valor y el método separador() como están antecedidas por la palabra clave private: significa que desde la main no se podrán acceder, es decir que si escribimos en la main lo siguiente se genera un error sintáctico:</p>
+<pre>
+void main()
+{
+    Dado d;
+    d.separador(); //error
+    d.valor=9; //error
+    cin.get();
+}
+</pre>
+
+<p>La ventaja de definir los atributos en la zona privada de la clase es que en el caso de haber un error lógico en nuestro programa el mismo queda encapsulado en una clase y es más fácil identificarlo. Por ejemplo pensemos que desarrollamos la clase Dado y cuando imprimimos su valor aparece el 9. Si hemos definido el atributo valor como private luego sólo los métodos de la clase pueden haberlo inicializado y por lo tanto el error está circunscrito a la clase Dado.</p>
+
+<p>Desde la main cuando llamamos a los métodos públicos le antecediemos el nombre del objeto:</p>
+<pre>
+void main()
+{
+    Dado d;
+    d.tirar(); //llamada al método tirar del objeto d
+    d.imprimir(); //llamada al método imprimir del objeto d
+    cin.get();
+}
+</pre>
+<p>Dentro de la clase para llamar a otro método de la misma clase lo hacemos indicando solo el nombre del otro método (dentro del método imprimir llamamos al método separador por su nombre):</p>
+<pre>
+void Dado::imprimir()
+{
+    separador();
+    cout&lt;&lt;valor;
+    cout&lt;&lt;"\n";
+    separador();
+}
+</pre>
+
+<h3>Importante</h3>
+<p>Una forma muy común de escribir la declaración de una clase es obviar la palabra clave private:</p>
+<pre>
+class Dado {
+    int valor;
+    void separador();
+public:
+    void tirar();
+    void imprimir();
+};
+</pre>
+
+<p>El compilador identifica todos los atributos y métodos que no se les antecede un modificador como private. Es muy común agrupar todos los atributos y métodos privados en la primer parte de la declaración de la clase y luego especificar los métodos públicos luego de la palabra clave public.</p>
+<p>El lenguaje C++ inclusive nos permite especificar varias secciones privadas y públicas:<p>
+<pre>
+class Dado {
+public:
+    void tirar();
+private:
+    int valor;
+    void separador();
+public:
+    void imprimir();
+};
+</pre>
+<p>De todos modos esta forma de declarar la clase puede no ser muy ordenada.</p>
+
+<p>En este problema tenemos que generar un valor aleatorio entre 1 y 6, utilizamos las funciones srand y rand que se encuentran en las librerías:</p>
+<pre>
+#include&lt;cstdlib&gt;
+#include&lt;ctime&gt;
+</pre>
+
+<p>La función srand define una semilla inicial para la generación de números aleatorios y le pasamos como parámetro la hora y fecha actual (que la retorna la función time):</p>
+<pre>
+    srand (time(NULL));
+</pre>
+<p>Luego la función rand() retorna un valor entero entre 0 y RAND_MAX y luego mediante el operador matemático % (resto de una división) podemos acotar los valores enteros a obtener. Le sumamos 1 ya que queremos valores comprendidos entre 1 y 6:</p>
+<pre>
+    valor = rand() % 6 + 1;
+</pre>
+
+
+<h2>Problema propuesto</h2>
+<ol>
+<li>
+Desarrollar un programa que defina un vector de 5 enteros y muestre el mayor y menor elemento. En el constructor cargarlo con valores aleatorios entre 0 y 10.<br>
+La clase debe utilizar solo la palabra clave public en la declaración de la clase.
+</li>
+
+</ol>
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+#include&lt;iostream&gt;
+#include&lt;cstdlib&gt;
+#include&lt;ctime&gt;
+
+using namespace std;
+
+class Vector {
+    int vec[5];
+public:
+    Vector();
+    void mayor();
+    void menor();
+    void imprimir();
+};
+
+Vector::Vector()
+{
+    srand(time(NULL));
+    for(int f=0;f&lt;5;f++)
+    {
+        vec[f]=rand()%11;
+    }
+}
+
+void Vector::mayor()
+{
+    int mayor=vec[0];
+    for(int f=1;f&lt;5;f++)
+    {
+        if (vec[f]&gt;mayor)
+        {
+            mayor=vec[f];
+        }
+    }
+    cout&lt;&lt;"Mayor elemento:";
+    cout&lt;&lt;mayor;
+    cout&lt;&lt;"\n";
+}
+
+void Vector::menor()
+{
+    int menor=vec[0];
+    for(int f=1;f&lt;5;f++)
+    {
+        if (vec[f]&lt;menor)
+        {
+            menor=vec[f];
+        }
+    }
+    cout&lt;&lt;"Menor elemento:";
+    cout&lt;&lt;menor;
+    cout&lt;&lt;"\n";
+}
+
+void Vector::imprimir()
+{
+    for(int f=0;f&lt;5;f++)
+    {
+        cout &lt;&lt;vec[f]&lt;&lt;"-";
+    }
+    cout&lt;&lt;"\n";
+}
+
+void main()
+{
+    Vector vector1;
+    vector1.imprimir();
+    vector1.mayor();
+    vector1.menor();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/PartePublicPrivate2.zip">PartePublicPrivate2.zip</a></p>
+
+
+</pre>
+
+
+<h2><a href="index9187.html?inicio=15">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=24&codigo=155&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:10 GMT -->
+</html>

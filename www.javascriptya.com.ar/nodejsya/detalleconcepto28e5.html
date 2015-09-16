@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=7&codigo=7&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:50:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Servidor web con Node.js que sirve páginas estáticas HTML</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++, programación, tutorial, nodejs">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de NodeJS.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>7 - Servidor web con Node.js que sirve páginas estáticas HTML</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Hasta ahora hemos visto como podemos recuperar los datos de la petición HTML. También hemos visto como podemos leer un archivo con el módulo 'fs'.</p>
+<p>En este concepto nos concentraremos en como dada una petición de una página HTML proceder a verificar si existe dicha página, leerla y retornarla al navegador que la solicitó.</p>
+<p>Vamos a crear un subdirectorio llamado 'static' (puede tener cualquier nombre) en la carpeta donde crearemos nuestra aplicación Node.js y almacenaremos tres páginas HTML: index.html, pagina1.html y pagina2.html</p>
+<p>El contenido de estos tres archivos será:</p>
+<pre>index.html</pre>
+<pre class="recuadro"> 
+&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Principal&lt;/h1&gt;
+  &lt;p&gt;Pagina 1:&lt;a href="pagina1.html"&gt;Entrar&lt;/a&gt;&lt;/p&gt;
+  &lt;p&gt;Pagina 2:&lt;a href="pagina2.html"&gt;Entrar&lt;/a&gt;&lt;/p&gt;  
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<pre>pagina1.html</pre>
+<pre class="recuadro"> 
+&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Pagina 1&lt;/h1&gt;
+  &lt;p&gt;&lt;a href="index.html"&gt;Retornar&lt;/a&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<pre>pagina2.html</pre>
+<pre class="recuadro"> 
+&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Pagina 2&lt;/h1&gt;
+  &lt;p&gt;&lt;a href="index.html"&gt;Retornar&lt;/a&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Tener bien en cuenta de grabar estos tres archivos HTML en una subcarpeta llamada static.</p>
+<p>Ahora creemos nuestro programa en Node.js que se encargará de responder a peticiones de páginas HTML.</p>
+<p>Creemos el archivo:</p>
+<pre>ejercicio9.js</pre>
+<pre class="recuadro">
+var http=require('http');
+var url=require('url');
+var fs=require('fs');
+
+var servidor=http.createServer(function(pedido,respuesta){
+    var objetourl = url.parse(pedido.url);
+    var camino='static'+objetourl.pathname;
+    if (camino=='static/')
+        camino='static/index.html';
+    fs.exists(camino,function(existe){
+        if (existe) {
+            fs.readFile(camino,function(error,contenido){
+                if (error) {
+                    respuesta.writeHead(500, {'Content-Type': 'text/plain'});
+                    respuesta.write('Error interno');
+                    respuesta.end();                    
+                } else {
+                    respuesta.writeHead(200, {'Content-Type': 'text/html'});
+                    respuesta.write(contenido);
+                    respuesta.end();
+                }
+            });
+        } else {
+            respuesta.writeHead(404, {'Content-Type': 'text/html'});
+            respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;Recurso inexistente&lt;/body&gt;&lt;/html&gt;');        
+            respuesta.end();
+        }
+    });
+});
+
+servidor.listen(8888);
+
+console.log('Servidor web iniciado');
+</pre>
+
+<p>Lo primero que hacemos es requerir los módulos 'http', 'url' y 'fs' que hemos analizado en conceptos anteriores:</p>
+<pre>
+var http=require('http');
+var url=require('url');
+var fs=require('fs');
+</pre>
+
+<p>Procedemos a crear un servidor de peticiones HTTP, tema ya visto:</p>
+<pre>
+var servidor=http.createServer(function(pedido,respuesta){
+    ....
+});
+</pre>
+<p>
+En la función anónima llamamos al método parse del objeto 'url' y le pasamos como parámetro la propiedad url del objeto pedido que llega a la función:</p>
+<pre>
+    var objetourl = url.parse(pedido.url);
+</pre>
+
+<p>Obtenemos las distintas partes de la url en un objeto literal para facilitar extraer solo el camino y nombre del archivo HTML.</p>
+<p>Inicializamos una variable con el nombre de la subcarpeta que contiene los archivos HTML y le concatenamos el camino y nombre del archivo HTML solicitado:</p>
+<pre>
+    var camino='static'+objetourl.pathname;
+</pre>
+<p>Por ejemplo podrían ser:</p>
+<pre>
+  static/
+  static/index.html
+  static/pagina1.html
+  static/pagina2.html
+</pre>
+<p>También podrían ser peticiones de páginas que no existen, por ejemplo:</p>
+<pre>
+  static/pagina5.html
+  static/carpeta1/pagina1.html
+  etc.
+</pre>
+
+<p>El primer control que hacemos es verificar si en la url no viene ninguna página, en dicho caso retornamos el archivo index.html que es el principal del sitio, para verificar hacemos un if:</p>
+<pre>
+    if (camino=='static/')
+        camino='static/index.html';
+</pre>
+<p>Por ejemplo si disponemos:</p>
+<pre>
+http://localhost:8888/
+o
+http://localhost:8888
+</pre>
+<p>Estaríamos para este caso retornando el archivo index.html.</p>
+
+
+<p>Mediante el objeto fs procedemos a verificar si existe el archivo HTML, el método exists tiene como primer parámetro el nombre del archivo que debemos indicarlo con todo el camino y el segundo parámetro es una función anónima que llega como parámetro si existe o no el archivo: 
+<pre>
+    fs.exists(camino,function(existe){
+        if (existe) {
+           ....
+        } else {
+           ....
+        }
+    });
+</pre>
+<p>Veamos primero si no existe el archivo, en dicho caso se ejecuta el else del if y procedemos a devolver al navegador un mensaje y el código 404 de recurso inexistente:</p>
+<pre>
+    fs.exists(camino,function(existe){
+        if (existe) {
+            ....
+        } else {
+            respuesta.writeHead(404, {'Content-Type': 'text/html'});
+            respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;Recurso inexistente&lt;/body&gt;&lt;/html&gt;');        
+            respuesta.end();
+        }
+    });
+</pre>
+<p>Veamos que sucede si el if se verifica verdadero, es decir si existe el archivo HTML:</p>
+<pre>
+    fs.exists(camino,function(existe){
+        if (existe) {
+            fs.readFile(camino,function(error,contenido){
+                if (error) {
+                    respuesta.writeHead(500, {'Content-Type': 'text/plain'});
+                    respuesta.write('Error interno');
+                    respuesta.end();                    
+                } else {
+                    respuesta.writeHead(200, {'Content-Type': 'text/html'});
+                    respuesta.write(contenido);
+                    respuesta.end();
+                }
+            });
+        } else {
+            ....
+        }
+    });
+</pre>
+<p>Si existe el archivo procedemos a llamar al método readFile para leer su contenido. El método readFile tiene dos parámetros, el primero es el nombre del archivo HTML a leer (que debemos indicar siempre todo el path) y el segundo parámetro es una función anónima que tiene dos parámetros que son si hubo error y el contenido del archivo:</p>
+<pre>
+            fs.readFile(camino,function(error,contenido){
+                ....
+            });
+</pre>
+
+<p>Cuando se ejecuta la función anónima que ocurre luego de traer a memoria el contenido del archivo verificamos si no hubo un error en la lectura y en caso negativo procedemos mediante el objeto 'respueta' a devolver al navegador el contenido completo del archivo indicando que se trata de un archivo HTML:</p>
+<pre>
+            fs.readFile(camino,function(error,contenido){
+                if (error) {
+                    ....
+                } else {
+                    respuesta.writeHead(200, {'Content-Type': 'text/html'});
+                    respuesta.write(contenido);
+                    respuesta.end();
+                }
+            });
+</pre>
+<p>Si hubo error interno en el servidos cuando se lee el archivo HTML procedemos a retornar el código 500 para que el navegador conozca tal situación (tengamos en cuenta que el archivo existe pero por algún motivo luego de verificar que existía no se ha podido leer):</p>
+<pre>
+            fs.readFile(camino,function(error,contenido){
+                if (error) {
+                    respuesta.writeHead(500, {'Content-Type': 'text/plain'});
+                    respuesta.write('Error interno');
+                    respuesta.end();                    
+                } else {
+                    .... 
+                }
+            });
+</pre><h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-35', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=7&codigo=7&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:50:00 GMT -->
+</html>

@@ -1,0 +1,437 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=21&codigo=148&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Matrices y vectores paralelos</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>21 - Matrices y vectores paralelos</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Dependiendo de la complejidad del problema podemos necesitar el empleo de vectores y matrices paralelos.</p>
+<h3>Problema 1:</h3>
+<p>
+ Se tiene la siguiente información:<br>
+· Nombres de 4 empleados.<br>
+· Ingresos en concepto de sueldo, cobrado por cada empleado, en los últimos 3 meses.<br>
+Confeccionar el programa para:</p>
+<p>
+a) Realizar la carga de la información mencionada. <br>
+b) Generar un vector que contenga el ingreso acumulado en sueldos en los últimos 3 meses para cada empleado.<br>
+c) Mostrar por pantalla el total pagado en sueldos a todos los empleados en los últimos 3 meses <br>
+d) Obtener el nombre del empleado que tuvo el mayor ingreso acumulado
+</p>
+<p>
+<img src="imagentema/foto050.jpg" border="0" alt="vectores y matrices paralelos">
+</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class SueldoEmpleados {
+private:
+    char empleados[4][40];
+    int sueldos[4][3];
+    int sueldostot[4];
+public:
+    void cargar();
+    void calcularSumaSueldos();
+    void imprimirTotalPagado();
+    void empleadoMayorSueldo();
+};
+
+
+void SueldoEmpleados::cargar()
+{
+    for(int f = 0; f &lt; 4; f++)
+    {
+        cout &lt;&lt;"Ingrese el nombre del empleado:";
+        cin.get(empleados[f],40);
+        for(int c = 0; c &lt; 3; c++) 
+        {
+            cout &lt;&lt;"Ingrese sueldo:";
+            cin &gt;&gt;sueldos[f][c];
+            cin.get();
+        }
+    }
+}
+
+void SueldoEmpleados::calcularSumaSueldos()
+{
+    for (int f = 0; f &lt; 4; f++)
+    {
+        int suma = 0;
+        for (int c = 0; c &lt; 3; c++)
+        {
+            suma = suma + sueldos[f][c];
+        }
+        sueldostot[f] = suma;
+    }
+}
+
+void SueldoEmpleados::imprimirTotalPagado() 
+{
+    cout &lt;&lt;"Total de sueldos pagados por empleado." &lt;&lt;"\n";
+    for(int f = 0; f &lt; 4; f++) 
+    {
+        cout &lt;&lt;empleados[f] &lt;&lt;" - " &lt;&lt;sueldostot[f] &lt;&lt;"\n";
+    }
+}
+
+void SueldoEmpleados::empleadoMayorSueldo() 
+{
+    int may=sueldostot[0];
+    char nom[40];
+    strcpy_s(nom,40,empleados[0]);
+    for(int f = 0; f &lt; 4; f++) 
+    {
+        if (sueldostot[f] &gt; may) 
+        {
+            may=sueldostot[f];
+            strcpy_s(nom,40,empleados[f]);
+        }
+    }
+    cout &lt;&lt;"El empleado con mayor sueldo es " &lt;&lt;nom  &lt;&lt;" que tiene un sueldo acumulado de " &lt;&lt;may;
+    cin.get();
+}
+
+void main()
+{
+    SueldoEmpleados se;
+    se.cargar();
+    se.calcularSumaSueldos();
+    se.imprimirTotalPagado();
+    se.empleadoMayorSueldo();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/MatrizSueldoEmpleados.zip">MatrizSueldoEmpleados.zip</a></p>
+
+<p>Para resolver este problema lo primero que hacemos es definir una matriz donde se almacenarán los sueldos mensuales de cada empleado, un vector de tipo cadena de caracteres donde almacenaremos los nombre de cada empleado (técnicamente es una matriz de caracteres) y finalmente definimos un vector paralelo a la matriz donde almacenaremos la suma de cada fila de la matriz:</p>
+<pre>
+    char empleados[4][40];
+    int sueldos[4][3];
+    int sueldostot[4];
+</pre>
+<p>En el método de cargar inicializamos el vector con los nombres de los empleados y la matriz paralela donde se almacenan los últimos tres sueldos:</p>
+<pre>
+void SueldoEmpleados::cargar()
+{
+    for(int f = 0; f &lt; 4; f++)
+    {
+        cout &lt;&lt;"Ingrese el nombre del empleado:";
+        cin.get(empleados[f],40);
+        for(int c = 0; c &lt; 3; c++) 
+        {
+            cout &lt;&lt;"Ingrese sueldo:";
+            cin &gt;&gt;sueldos[f][c];
+            cin.get();
+        }
+    }
+}
+</pre>
+<p>El método sumar sueldos mediante dos for recorremos toda la matriz y sumamos cada fila:</p>
+<pre>
+void SueldoEmpleados::calcularSumaSueldos()
+{
+    for (int f = 0; f &lt; 4; f++)
+    {
+        int suma = 0;
+        for (int c = 0; c &lt; 3; c++)
+        {
+            suma = suma + sueldos[f][c];
+        }
+        sueldostot[f] = suma;
+    }
+}
+</pre>
+<p>El método imprimirTotalPagado tiene por objetivo mostrar los dos vectores (el de nombre de los empleados y el que almacena la suma de cada fila de la matriz):</p>
+<pre>
+void SueldoEmpleados::imprimirTotalPagado() 
+{
+    cout &lt;&lt;"Total de sueldos pagados por empleado." &lt;&lt;"\n";
+    for(int f = 0; f &lt; 4; f++) 
+    {
+        cout &lt;&lt;empleados[f] &lt;&lt;" - " &lt;&lt;sueldostot[f] &lt;&lt;"\n";
+    }
+}
+</pre>
+<p>Por último para obtener el nombre del empleado con mayor sueldo acumulado debemos inicializar dos variables auxiliares con el primer elemento del vector de empleados y en otra auxiliar guardamos la primer componente del vector sueldostot:</p>
+<pre>
+void SueldoEmpleados::empleadoMayorSueldo() 
+{
+    int may=sueldostot[0];
+    char nom[40];
+    strcpy_s(nom,40,empleados[0]);
+    for(int f = 0; f &lt; 4; f++) 
+    {
+        if (sueldostot[f] &gt; may) 
+        {
+            may=sueldostot[f];
+            strcpy_s(nom,40,empleados[f]);
+        }
+    }
+    cout &lt;&lt;"El empleado con mayor sueldo es " &lt;&lt;nom  &lt;&lt;" que tiene un sueldo acumulado de " &lt;&lt;may;
+    cin.get();
+}
+</pre>
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Se desea saber la temperatura media trimestral de cuatro paises. Para ello se tiene como dato las temperaturas medias mensuales de dichos paises.<br>
+Se debe ingresar el nombre del país y seguidamente las tres temperaturas medias mensuales.<br>
+Seleccionar las estructuras de datos adecuadas para el almacenamiento de los datos  en  memoria.<br>
+   a - Cargar por teclado los nombres de los paises y las temperaturas medias mensuales.<br>
+   b - Imprimir los nombres de las paises y las temperaturas medias mensuales de las mismas.<br>
+   c - Calcular la temperatura media trimestral de cada país.<br>
+   c - Imprimr los nombres de las provincias y las temperaturas medias trimestrales.<br>
+   b - Imprimir el nombre de la provincia con la temperatura media trimestral mayor.
+</li>
+
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+#include &lt;iostream&gt;
+
+using namespace std;
+
+class TemperaturaPaises {
+private:
+    int tempmen[4][3];
+    char paises[4][40];
+    int temptri[4];
+public:
+    void cargar();
+    void imrimirTempMensuales();
+    void calcularTemperaturaTri();
+    void imprimirTempTrimestrales();
+    void paisMayorTemperaturaTri(); 
+};
+
+
+
+void TemperaturaPaises::cargar() 
+{
+    for(int f = 0; f &lt; 4; f++)
+    {
+        cout &lt;&lt;"Ingrese el nombre del pais:";
+        cin.getline(paises[f],40);
+        for(int c = 0; c &lt; 3; c++) 
+        {
+            cout &lt;&lt;"Ingrese temperatura mensual:";
+            cin &gt;&gt;tempmen[f][c];
+            cin.get();
+        }
+    }
+}
+
+void TemperaturaPaises::imrimirTempMensuales() 
+{
+    for(int f = 0; f &lt; 4; f++)
+    {
+        cout &lt;&lt;"Pais:" &lt;&lt;paises[f] &lt;&lt;":" &lt;&lt;"\n";
+        for(int c = 0; c&lt; 3; c++)
+        {
+            cout &lt;&lt;tempmen[f][c] &lt;&lt;" "&lt;&lt;"\n";
+        }
+        cout &lt;&lt;"\n";
+    }    
+}
+
+void TemperaturaPaises::calcularTemperaturaTri()
+{
+    for (int f = 0; f &lt; 4; f++)
+    {
+        int suma = 0;
+        for (int c = 0; c &lt; 3; c++)
+        {
+            suma = suma + tempmen[f][c];
+        }
+        temptri[f] = suma / 3;
+    }
+}
+
+ void TemperaturaPaises::imprimirTempTrimestrales()
+{
+    cout &lt;&lt;"Temperaturas trimestrales." &lt;&lt;"\n";
+    for(int f = 0; f &lt; 4; f++)
+    {
+        cout &lt;&lt;paises[f] &lt;&lt;" " &lt;&lt;temptri[f] &lt;&lt;"\n";
+    }
+}
+
+void TemperaturaPaises::paisMayorTemperaturaTri() 
+{
+    int may=temptri[0];
+    char nom[40];
+    strcpy_s(nom,40,paises[0]);
+    for(int f = 0; f &lt; 4; f++)
+    {
+        if (temptri[f] &gt; may) 
+        {
+            may=temptri[f];
+            strcpy_s(nom,40,paises[f]);
+        }
+    }
+    cout &lt;&lt;"Pais con temperatura trimestral mayor es " &lt;&lt;nom  &lt;&lt;" que tiene una temperatura de " &lt;&lt;may;        
+ }
+
+void main()
+{
+     TemperaturaPaises tp;
+     tp.cargar();
+     tp.imrimirTempMensuales();
+     tp.calcularTemperaturaTri();
+     tp.paisMayorTemperaturaTri();
+     cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/MatrizTemperaturas.zip">MatrizTemperaturas.zip</a></p>
+
+</pre><h2><a href="index9187.html?inicio=15">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=21&codigo=148&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:06 GMT -->
+</html>

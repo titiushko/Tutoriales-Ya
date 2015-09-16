@@ -1,0 +1,242 @@
+        
+
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=75&cod=244&punto=86 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios resueltos : Vistas (with read only)(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+<body bgcolor="#CCFFCC">
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>86 - Vistas (with read only)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Una empresa almacena la información de sus empleados en una tabla llamada "empleados".</p>
+<p>Eliminamos la tabla:</p>
+<pre>
+ drop table empleados;
+</pre>
+<p>Creamos las tablas:</p>
+<pre>
+ create table empleados(
+  documento char(8),
+  sexo char(1)
+   constraint CK_empleados_sexo check (sexo in ('f','m')),
+  apellido varchar2(20),
+  nombre varchar2(20),
+  domicilio varchar2(30),
+  seccion varchar2(30),
+  cantidadhijos number(2),
+  constraint CK_empleados_hijos check (cantidadhijos>=0),
+  estadocivil char(10)
+   constraint CK_empleados_estadocivil check (estadocivil in ('casado','divorciado','soltero','viudo')),
+  fechaingreso date
+);
+</pre>
+<p>Ingresamos algunos registros:</p>
+<pre>
+ insert into empleados values('22222222','f','Lopez','Ana','Colon 123','Administracion',2,'casado','10/10/1990');
+ insert into empleados values('23333333','m','Lopez','Luis','Sucre 235','Administracion',0,'soltero','02/10/1990');
+ insert into empleados values('24444444','m','Garcia','Marcos','Sarmiento 1234','Contaduria',3,'divorciado','07/12/1998');
+ insert into empleados values('25555555','m','Gomez','Pablo','Bulnes 321','Contaduria',2,'casado','10/09/1998');
+ insert into empleados values('26666666','f','Perez','Laura','Peru 1254','Sistemas',3,'casado','05/09/2000');
+</pre>
+<p>Eliminamos las vistas "vista_empleados" y "vista_empleados2":</p>
+<pre>
+ drop view vista_empleados;
+ drop view vista_empleados2;
+</pre> 
+<p>Creamos la vista "vista_empleados", que muestra solamente algunos campos de "empleados":</p>
+<pre>
+ create view vista_empleados
+ as
+  select apellido, nombre, sexo, seccion
+  from empleados;
+</pre>
+<p>Creamos la vista "vista_empleados2", igual que "vista_empleados", pero ahora colocamos "with read only" para impedir que puedan ejecutarse "insert", "update" y "delete" sobre esta vista:</p>
+<pre>
+ create view vista_empleados2
+ as
+  select apellido, nombre, sexo, seccion
+  from empleados
+  with read only;
+</pre>
+<p>Actualizamos el nombre de un empleado a través de la vista "vista_empleados":</p>
+<pre>
+ update vista_empleados set nombre='Beatriz' where nombre='Ana';
+</pre>
+<p>Veamos si la modificación se realizó en la tabla:</p>
+<pre>
+ select *from empleados;
+</pre>
+<p>Intentamos actualizar el nombre de un empleado a través de la vista "vista_empleados2":</p>
+<pre>
+ update vista_empleados2 set nombre='Pedro' where nombre='Marcos';
+</pre>
+<p>No lo permite.</p>
+
+<p>Ingresamos un registro en la tabla "empleados" a través de la vista "vista_empleados":</p>
+<pre>
+ insert into vista_empleados values('Juarez','Juan','m','Sistemas');
+</pre>
+<p>Oracle acepta la inserción. Verificamos que la inserción se realizó en la tabla:</p>
+<pre>
+ select *from empleados;
+</pre>
+<p>Intentamos ingresar un registro a través de la vista "vista_empleados2":</p>
+<pre>
+ insert into vista_empleados2 values('Gimenez','Julieta','f','Sistemas');
+</pre>
+<p>Oracle no lo permite porque la vista fue definida con "with read only".</p>
+
+<p>Eliminamos un registro en la tabla "empleados" a través de la vista "vista_empleados":</p>
+<pre>
+ delete from vista_empleados where apellido='Juarez';
+</pre>
+<p>Oracle acepta la eliminación. Verificamos que la eliminación se realizó en la tabla:</p>
+<pre>
+ select *from empleados;
+</pre>
+<p>Intentamos eliminar registros a través de la vista "vista_empleados2":</p>
+<pre>
+ delete from vista_empleados2 where apellido='Lopez';
+</pre>
+<p>Oracle no lo permite porque la vista fue definida con "with read only".</p>
+
+        <form name="formulario" action="http://www.sqlserverya.com.ar/aspx/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+        <br>
+   <h2><a href="../indexa021.html?inicio=75">Retornar</a></h2>   
+        
+	<br>
+   
+
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=75&cod=244&punto=86 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+</html>
+

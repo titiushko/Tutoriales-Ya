@@ -1,0 +1,318 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.sqlserverya.com.ar/problemas/problema.php?inicio=125&cod=152&punto=146 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de SQL Server : Problemas Resueltos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+pre {
+  text-align:left;
+  font-family:verdana,sans-serif;
+}
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+</style>
+
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;	
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=no,status=yes,toolbar=yes,location=yes');  	
+}
+
+function VentanaTeorico(codigo)
+{
+  alto=400;
+  window.open('../temarios/descripcion2ade4.html?cod='+codigo+'&origen=problema', '', 'top=0,left=0,width=800,height='+alto+',resizable=yes,scrollbars=yes,menubar=no');  	
+}
+
+function cambiar(nro)
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   if (nro==1)
+   {
+     if (lista[f].id=='solu1')
+       lista[f].style.display='block';
+   }
+   else
+     if (nro==2)
+     {
+       if (lista[f].id=='solu2')
+         lista[f].style.display='block';
+     }
+	   
+  }
+  if (nro==1)
+    document.getElementById('solucion1').style.display='none';
+  if (nro==2)
+    document.getElementById('solucion2').style.display='none';
+}
+
+</script>
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>146 - Disparador (Instead Off y after)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<b>Primer problema: </b><br><pre>
+Un club almacena los datos de sus socios en una tabla denominada "socios", los distintos cursos que 
+dictan en "cursos" y las inscripciones de los distintos socios en los distintos cursos en 
+"inscriptos".
+1- Elimine las tablas si existen:
+ if object_id('inscriptos') is not null
+  drop table inscriptos;
+ if object_id('socios') is not null
+  drop table socios;
+ if object_id('cursos') is not null
+  drop table cursos;
+
+2- Cree las tablas, con las siguientes estructuras:
+ create table socios(
+  documento char(8) not null,
+  nombre varchar(30),
+  domicilio varchar(30),
+  constraint PK_socios primary key(documento)
+ );
+ create table cursos(
+  numero tinyint identity,
+  deporte char(20),
+  cantidadmaxima tinyint,
+  constraint PK_cursos primary key(numero)
+ );
+
+ create table inscriptos(
+  documento char(8) not null,
+  numerocurso tinyint,
+  fecha datetime,
+  constraint PK_inscriptos primary key(documento,numerocurso),
+  constraint FK_inscriptos_documento
+   foreign key (documento)
+   references socios(documento),
+  constraint FK_inscriptos_curso
+   foreign key (numerocurso)
+   references cursos(numero)
+ );
+
+Los cursos tiene un número que los identifica, y según el deporte, hay un límite de inscriptos (por 
+ejemplo, en tenis, no pueden inscribirse más de 4 socios; en natación, solamente se aceptan 6 
+alumnos como máximo). Cuando un curso está completo, es decir, hay tantos inscriptos como valor 
+tiene el campo "cantidadmaxima"), el socio  queda inscripto en forma condicional. El club guarda esa 
+información en una tabla denominada "condicionales" que luego analiza, porque si se inscriben muchos 
+para un deporte determinado, se abrirá otro curso.
+
+2- Elimine la tabla "condicionales" si existe:
+ if object_id('condicionales') is not null
+  drop table condicionales;
+
+3- Cree la tabla, con la siguiente estructura:
+ create table condicionales(
+  documento char(8) not null,
+  codigocurso tinyint not null,
+  fecha datetime
+ );
+
+4- Ingrese algunos registros en las tablas "socios", "cursos" e "inscriptos":
+ insert into socios values('22222222','Ana Acosta','Avellaneda 800');
+ insert into socios values('23333333','Bernardo Bustos','Bulnes 345');
+ insert into socios values('24444444','Carlos Caseros','Colon 382');
+ insert into socios values('25555555','Mariana Morales','Maipu 234');
+ insert into socios values('26666666','Patricia Palacios','Paru 587');
+
+ insert into cursos values('tenis',4);
+ insert into cursos values('natacion',6);
+ insert into cursos values('basquet',20);
+ insert into cursos values('futbol',20);
+
+ insert into inscriptos values('22222222',1,getdate());
+ insert into inscriptos values('22222222',2,getdate());
+ insert into inscriptos values('23333333',1,getdate());
+ insert into inscriptos values('23333333',3,getdate());
+ insert into inscriptos values('24444444',1,getdate());
+ insert into inscriptos values('24444444',4,getdate());
+ insert into inscriptos values('25555555',1,getdate());
+
+5- Cree un trigger "instead of" para el evento de inserción para que, al intentar ingresar un 
+registro en "inscriptos" controle que el curso no esté completo (tantos inscriptos a tal curso como 
+su "cantidadmaxima"); si lo estuviese, debe ingresarse la inscripción en la tabla "condicionales" y 
+mostrar un mensaje indicando tal situación. Si la "cantidadmaxima" no se alcanzó, se ingresa la 
+inscripción en "inscriptos".
+
+6- Inscriba un socio en un curso que no esté completo.
+Verifique que el trigger realizó la acción esperada consultando las tablas:
+ select *from inscriptos;
+ select *from condicionales;
+
+7- Inscriba un socio en un curso que esté completo.
+Verifique que el trigger realizó la acción esperada consultando las tablas:
+ select *from inscriptos;
+ select *from condicionales;
+</pre>
+<a href="javascript:cambiar(1)" id="solucion1">Ver solución</a>
+<br><br>
+<pre id="solu1" class="recuadrooculto">
+</pre>
+<form name="formulario" action="http://scratchya.com.ar/procesador.aspx" target="ventanaForm" 
+onsubmit="abrirVentana()" method="post" >
+           
+          <textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off"></textarea>
+    <br>
+ <input type="submit"  value="Ejecutar  los comandos SQL">
+
+    <input type="button" onClick="javascript:formulario.programa.value=''" value="Borrar comando.">
+
+
+    <br>
+	<br>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+</form>
+        <p>&nbsp;</p>
+  
+<table width="650px">
+<tr>
+<td align="center">	
+
+
+
+</td>
+</tr>
+</table>		
+	
+	
+
+
+
+   <h2><a href="../index28e1.html?inicio=125">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-11";
+urchinTracker();
+</script>
+
+</body>
+
+<!-- Mirrored from www.sqlserverya.com.ar/problemas/problema.php?inicio=125&cod=152&punto=146 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:34 GMT -->
+</html>

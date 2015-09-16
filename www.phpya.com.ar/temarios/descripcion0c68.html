@@ -1,0 +1,342 @@
+﻿<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.phpya.com.ar/temarios/descripcion.php?punto=50&cod=72&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:09:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de PHP - Temario</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="keywords" content="php, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de php.">
+<meta name="author" content="Diego Moisset">
+
+<style>
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Verdana,arial,sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.1em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;
+}
+
+#recuadrooculto {
+  display: none;
+}
+
+
+.recuadroborde {
+  //  max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+	clear:left;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  document.getElementById('recuadrooculto').style.display='block';
+}
+
+</script>
+
+</head>
+
+<body>
+
+
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em;margin-right:1em"><a href="../index1e61-2.html?inicio=40">Temario del Tutorial</a></span>50 - mysqli (POO) - consulta tabla rubros</h1></div>
+
+<br>
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+
+<p>Para consultar registros de una tabla debemos utilizar el comando SQL select para recuperar los datos y mediante la cláusula where definir el o los registros que cumplen una determinada condición.</p>
+<p>Procederemos a implementar la consulta de la tabla rubros por su código, ingresaremos por teclado el código de rubro y mediante un select con un where verificaremos si hay algún registro con dicho código, en caso afirmativo mostramos la descripción del rubro y en caso contrario mostraremos un mensaje de rubro inexistente.</p>
+<p>Lo primero que implementaremos es un formulario que solicite el ingreso del código de rubro a consultar:</p>
+<pre class="recuadroborde">
+&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Consulta de rubros&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;form method="post"  action="pagina2.php"&gt;
+    Ingrese el código de rubro a consultar:
+    &lt;input type="text" name="codigo" size="10" required&gt;
+    &lt;br&gt;
+    &lt;input type="submit" value="Consultar"&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;  
+</pre>
+
+<p>La página que procesa el dato ingresado por teclado es:</p>
+<pre class="recuadroborde">
+&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Consulta&lt;/title&gt;
+&lt;/head&gt;  
+&lt;body&gt;
+  
+  &lt;?php
+    $mysql=new mysqli("localhost","root","","base1");
+    if ($mysql-&gt;connect_error)
+      die("Problemas con la conexión a la base de datos");
+
+    $registros=$mysql-&gt;query("select descripcion from rubros where codigo=$_REQUEST[codigo]") or
+      die($mysql-&gt;error);
+	 
+    if ($reg=$registros-&gt;fetch_array())
+      echo 'La descripción del rubro es:'.$reg['descripcion'];	  
+    else
+      echo 'No existe un rubro con dicho código';
+	
+    $mysql-&gt;close();
+
+  ?&gt;  
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>A diferencia del listado procedemos a llamar al método fetch_array() en un if. Esto debido a que solo puede haber un rubro con el código ingresado por teclado. Si el if se verifica verdadero procede a mostrar la descripción del rubro, en caso contrario se ejecuta el else del if:</p>
+<pre>
+    if ($reg=$registros-&gt;fetch_array())
+      echo 'La descripción del rubro es:'.$reg['descripcion'];	  
+    else
+      echo 'No existe un rubro con dicho código';
+</pre>
+
+<br>
+<br>
+
+<h2>Problema resuelto.</h2>
+<p>Copiar el contenido de este cuadro de texto al NotePad++ y grabarlo en la carpeta c:\wamp\www con un nombre con extensión php (si hay varios cuadros
+de texto grabar cada uno en un archivo distinto).<br>
+  luego abrir el navegador (Chrome, FireFox, IExplorer etc.) y en la barra de direcciones tipear: http://localhost/pagina1.php (o el nombre del
+archivo que le dió)  </p>
+<form name="formulario" action="#" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+    pagina1.php<br><textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off" readonly>
+<!doctype html>
+<html>
+<head>
+  <title>Consulta de rubros</title>
+</head>
+<body>
+  <form method="post"  action="http://www.phpya.com.ar/temarios/pagina2.php">
+    Ingrese el código de rubro a consultar:
+    <input type="text" name="codigo" size="10" required>
+    <br>
+    <input type="submit" value="Consultar">
+  </form>
+</body>
+
+<!-- Mirrored from www.phpya.com.ar/temarios/descripcion.php?punto=50&cod=72&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:09:16 GMT -->
+</html>  </textarea>
+    <br>
+	 <a href="http://www.scratchya.com.ar/problemas/phpya/resu/72/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a> 
+<!--    <a href="http://localhost:8080/problemas/phpya/resu/72/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>-->
+
+    <br>
+<table width="650px">
+<tr>
+<td align="left">	
+
+</td>
+</tr>
+</table>
+
+	
+    <br>pagina2.php<br><textarea class="programafuente" name="programa2" rows=15 cols=110 wrap="off" readonly><!doctype html>
+<html>
+<head>
+  <title>Consulta</title>
+</head>  
+<body>
+  
+  <?php
+	$mysql=new mysqli("localhost","root","","base1");
+	if ($mysql->connect_error)
+	  die("Problemas con la conexión a la base de datos");
+
+    $registros=$mysql->query("select descripcion from rubros where codigo=$_REQUEST[codigo]") or
+	  die($mysql->error);
+	 
+    if ($reg=$registros->fetch_array())
+      echo 'La descripción del rubro es:'.$reg['descripcion'];	  
+    else
+	  echo 'No existe un rubro con dicho código';
+	
+    $mysql->close();
+
+  ?>  
+</body>
+</html></textarea><br>
+</form>
+
+
+
+
+
+
+	
+
+<h2>Problema propuesto.</h2>
+<p>Implementar nuevamente el alta de la tabla rubros, pero validar que la descripción ingresada no exista en la tabla (para esto hacer una consulta previa a efectuar el insert)</p>
+<form name="formulario" action="#" target="ventanaForm" 
+onsubmit="abrirVentana()" method="post" >
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<div id="recuadrooculto">
+pagina1.php<br>
+<textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off" readonly>
+<!doctype html>
+<html>
+<head>
+  <title>Alta de rubros</title>
+</head>
+<body>
+  <form method="post"  action="http://www.phpya.com.ar/temarios/pagina2.php">
+    Ingrese la descripción del rubro:
+    <input type="text" name="descripcion" size="50" required>
+    <br>
+    <input type="submit" value="confirmar">
+  </form>
+</body>
+</html>  </textarea>
+ <br>
+<!-- <a href="http://localhost:8080/problemas/phpya/propu/72/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>-->
+
+
+  <a href="http://www.scratchya.com.ar/problemas/phpya/propu/72/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a> 
+	<br>	
+pagina2.php<br><textarea class="programafuente" name="programa2" rows=15 cols=110 wrap="off" readonly><!doctype html>
+<html>
+<head>
+  <title>Alta</title>
+</head>  
+<body>
+  <?php
+    $mysql=new mysqli("localhost","root","","base1");
+    if ($mysql->connect_error)
+      die("Problemas con la conexión a la base de datos");
+  
+    $registro=$mysql->query("select codigo from rubros where descripcion='$_REQUEST[descripcion]'") or
+      die($mysql->error);
+	  
+    if ($registro->fetch_array())
+      echo 'Ya existe un rubro con la descripción ingresada';
+    else
+    {	
+      $mysql->query("insert into rubros(descripcion) values ('$_REQUEST[descripcion]')") or
+        die($mysql->error);
+      echo 'El nuevo rubro se almacenó';	
+    }  
+	
+    $mysql->close();
+  ?>  
+</body>
+</html></textarea>
+</div>
+
+</form>
+
+
+
+  
+
+<br>
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>
+
+
+<form name="form1" method="post" action="#">
+  <div>
+   <h2><a href="../index1e61.html?inicio=40">Retornar</a></h2>   
+  </div>
+
+  
+</form>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-4";
+urchinTracker();
+</script>
+
+</body>
+
+</html>

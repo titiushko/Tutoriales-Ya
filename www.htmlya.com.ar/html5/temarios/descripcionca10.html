@@ -1,0 +1,164 @@
+
+<!DOCTYPE html> 
+<html lang="es"> 
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=154&punto=22&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:32:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>CANVAS (translate)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="html5, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de HTML 5. Es objetivo prioritario respetar 
+los estándares del W3C">
+<meta name="author" content="Diego Moisset">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+</style>
+
+</head>
+
+<body>
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em"><a href="../../html5.html">Temario del Tutorial</a></span>->22 - CANVAS (translate)</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Para mover el sistema de coordenadas disponemos del método:</p>
+<pre>
+translate(x,y)
+</pre>
+<p>Luego de llamar a este método la coordenada (0,0) corresponderá al par de valores indicados en los parámetros.</p>
+<p>El uso de esta transformación nos facilita la creación de figuras.</p>
+<p>Confeccionaremos un programa que implemente una función que dibuje un triángulo, la función recibe la coordenada donde debe dibujarla y la base y altura del triángulo:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+
+&lt;script type="text/javascript"&gt;
+function retornarLienzo(x) {
+  var canvas = document.getElementById(x);
+  if (canvas.getContext) {
+    var lienzo = canvas.getContext("2d");   
+    return lienzo;
+  } else
+    return false;
+}
+
+function dibujarTriangulo(lienzo,x,y,base,altura) {
+  lienzo.save();
+  lienzo.translate(x,y);
+  lienzo.fillStyle="rgb(255,0,0)";
+  lienzo.beginPath();
+  lienzo.moveTo(base/2,0);
+  lienzo.lineTo(0,altura);
+  lienzo.lineTo(base,altura);
+  lienzo.lineTo(base/2,0);
+  lienzo.fill();
+  lienzo.restore();
+}
+
+function dibujar() {
+  var lienzo=retornarLienzo("lienzo1");
+  if (lienzo) {
+    for(var col=0;col&lt;550;col+=30)
+      dibujarTriangulo(lienzo,col,10,30,130);
+  }
+}
+
+&lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body onLoad="dibujar()"&gt;
+&lt;canvas id="lienzo1" width="600" height="600"&gt;
+Su navegador no permite utilizar canvas.
+&lt;/canvas&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Lo más importante que debemos entender está en la función dibujarTriangulo. Lo primero que hacemos es grabar el estado (save()) esto hace que quede almacenado los valores actuales del punto de origen. Movemos el punto de origen llamando a translate. Ahora podemos dibujar el triángulo considerando que la coordenada (0,0) coincide con los parámetros (x,y). Luego de dibujar recuperamos el estado actual llamando a restore():</p>
+<pre>
+function dibujarTriangulo(lienzo,x,y,base,altura) {
+  lienzo.save();
+  lienzo.translate(x,y);
+  lienzo.fillStyle="rgb(255,0,0)";
+  lienzo.beginPath();
+  lienzo.moveTo(base/2,0);
+  lienzo.lineTo(0,altura);
+  lienzo.lineTo(base,altura);
+  lienzo.lineTo(base/2,0);
+  lienzo.fill();
+  lienzo.restore();
+}
+</pre>
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../index28fa.html?inicio=20">Retornar</a></h2>   
+
+</div>
+
+</body>
+
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=154&punto=22&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:32:40 GMT -->
+</html>

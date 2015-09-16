@@ -1,0 +1,525 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=18&codigo=145&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Vectores (ordenamiento)</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>18 - Vectores (ordenamiento)</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>El ordenamiento de un vector se logra intercambiando las componentes de manera que:<br>
+vec[0] <= vec[1] <= vec[2]  etc.</p>
+
+<p>El contenido de la componente vec[0] sea menor o igual al contenido de la componente vec[1] y así sucesivamente.<br>
+Si se cumple lo dicho anteriormente decimos que el vector está ordenado de menor a mayor. Igualmente podemos ordenar un vector de mayor a menor.</p>
+
+<p>Se puede ordenar tanto vectores con componentes de tipo int, float como cadena de caracteres. En este último caso el ordenamiento es alfabético.</p>
+
+<h3>Problema 1:</h3>
+<p>Se debe crear un vector donde almacenar 5 sueldos. Ordenar el vector sueldos de menor a mayor.</p>
+<img src="imagentema/foto047.jpg" border="0" alt="ordenamiento de un vector"><br>
+
+<p>Esta primera aproximación tiene por objetivo analizar los intercambios de elementos dentro del vector.</p>
+
+<p>El algoritmo consiste en comparar si la primera componente es mayor a la segunda, en caso que la condición sea verdadera, intercambiamos los contenidos de las componentes.</p>
+<p>Vamos a suponer que se ingresan los siguientes valores por teclado:</p>
+<pre>
+1200
+750
+820
+550
+490
+</pre>
+
+<p>En este ejemplo: ¿es 1200 mayor a 750? La respuesta es verdadera, por lo tanto intercambiamos el contenido de la componente 0 con el de la componente 1.<br>
+Luego comparamos el contenido de la componente 1 con el de la componente 2: ¿Es 1200 mayor a 820?<br> La respuesta es verdadera entonces intercambiamos.<br>
+Si hay 5 componentes hay que hacer 4 comparaciones, por eso el for se repite 4 veces.<br> Generalizando: si el vector tiene N componentes hay que hacer N-1 comparaciones.<br>
+<pre>
+Cuando		f = 0		f = 1		f  = 2		f = 3
+		
+		750		750		750		750
+		1200		820		820		820
+		820		1200		550		550
+		550		550		1200		490
+		490		490		490		1200
+</pre>
+
+<p>Podemos ver cómo el valor más grande del vector desciende a la última componente. Empleamos una variable auxiliar (aux) para el proceso de intercambio:</p>
+<pre>
+aux=sueldos[f];
+sueldos[f]=sueldos[f+1];
+sueldos[f+1]=aux;
+</pre>
+
+<p>Al salir del for en este ejemplo el contenido del vector es el siguiente:</p>
+<pre>
+750
+820
+550
+490
+1200
+</pre>
+<p>Analizando el algoritmo podemos comprobar que el elemento mayor del vector se ubica ahora en el último lugar.<br>
+Podemos definir otros vectores con distintos valores y comprobar que siempre el elemento mayor queda al final.</p>
+
+<p>Pero todavía con este algoritmo no se ordena un vector. Solamente está ordenado el último elemento del vector.</p>
+
+<p>Ahora bien, con los 4 elementos que nos quedan podemos hacer el mismo proceso visto anteriormente, con lo cual quedará ordenado otro elemento del vector. Este proceso lo repetiremos hasta que quede ordenado por completo el vector.</p>
+
+<p>Como debemos repetir el mismo algoritmo podemos englobar todo el bloque en otra estructura repetitiva.</p>
+<img src="imagentema/foto048.jpg" border="0" alt="ordenamiento de un vector"><br>
+<p>Realicemos una prueba del siguiente algoritmo:</p>
+<pre>
+Cuando k = 0
+		f = 0		f = 1		f = 2		f = 3
+		750		750		750		750
+		1200		820		820		820
+		820		1200		550		550
+		550		550		1200		490
+		490		490		490		1200
+		
+Cuando k = 1
+		f = 0		f = 1		f  = 2		f = 3
+		750		750		750		750	
+		820		550		550		550
+		550		820		490		490
+		490		490		820		820
+		1200		1200		1200		1200
+
+Cuando k = 2
+		f = 0		f = 1		f  = 2		f = 3
+		550		550		550		550
+		750		490		490		490
+		490		750		750		750
+		820		820		820		820
+		1200		1200		1200		1200
+
+
+Cuando k = 3
+		f = 0		f = 1		f  = 2		f = 3
+		490		490		490		490
+		550		550		550		550
+		750		750		750		750
+		820		820		820		820
+		1200		1200		1200		1200
+</pre>
+<p>
+¿Porque repetimos 4 veces el for externo?<br>
+Como sabemos cada vez que se repite en forma completa el for interno queda ordenada una componente del vector. A primera vista diríamos que deberíamos repetir el for externo la cantidad de componentes del vector, en este ejemplo el vector sueldos tiene 5 componentes.</p>
+
+<p>Si observamos, cuando quedan dos elementos por ordenar, al ordenar uno de ellos queda el otro automáticamente ordenado (podemos imaginar que si tenemos un vector con 2 elementos no se requiere el for externo, porque este debería repetirse una única vez)</p>
+
+<p>Una última consideración a este ALGORITMO de ordenamiento es que los elementos que se van ordenando continuamos comparándolos.</p>
+
+<p>Ejemplo: En la primera ejecución del for interno el valor 1200 queda ubicado en la posición 4 del vector. En la segunda ejecución comparamos si el 820 es mayor a 1200, lo cual seguramente será falso.<br>
+Podemos concluir que la primera vez debemos hacer para este ejemplo 4 comparaciones, en la segunda ejecución del for interno debemos hacer 3 comparaciones y en general debemos ir reduciendo en uno la cantidad de comparaciones.<br>
+
+Si bien el algoritmo planteado funciona, un algoritmo más eficiente, que se deriva del anterior es el plantear un for interno con la siguiente estructura: (f=0 ; f&lt;4-k; f++)<br>
+Es decir restarle el valor del contador del for externo.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class OrdenamientoSueldos {
+private:
+    int sueldos[5];
+public:
+    void cargar();
+    void ordenar();
+    void imprimir();
+};
+
+void OrdenamientoSueldos::cargar()
+{
+    for(int f=0;f &lt; 5;f++) 
+    {
+        cout &lt;&lt;"Ingrese el sueldo:";
+        cin &gt;&gt;sueldos[f];
+    }
+}
+
+void OrdenamientoSueldos::ordenar()
+{
+    for (int k = 0; k &lt; 4; k++)
+    {
+        for (int f = 0; f &lt; 4 - k; f++)
+        {
+            if (sueldos[f] &gt; sueldos[f + 1])
+            {
+                int aux;
+                aux = sueldos[f];
+                sueldos[f] = sueldos[f + 1];
+                sueldos[f + 1] = aux;
+            }
+        }
+    }
+}
+
+void OrdenamientoSueldos::imprimir()
+{
+    cout &lt;&lt;"Sueldos ordenados de menor a mayor.";
+    cout &lt;&lt;"\n";
+    for(int f=0;f &lt; 5;f++) 
+    {
+        cout &lt;&lt;sueldos[f];
+        cout &lt;&lt;"\n";
+    }
+    cin.get();
+    cin.get();
+}
+
+void main()
+{
+    OrdenamientoSueldos os;
+    os.cargar();
+    os.ordenar();
+    os.imprimir();
+}</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/VectorOrdenamiento1.zip">VectorOrdenamiento1.zip</a></p>
+
+<p>También podemos ordenar vectores cuyas componentes sean cadenas de caracteres. Para esto no podemos utilizar el operador &gt; sino debemos utilizar la función strcmp:</p>
+<pre>
+char cad1[40]="juan";
+char cad2[40]="analia";
+if (strcmp(cad1,cad2)&gt;0)
+{
+    cout &lt;&lt;cad1;
+    cout &lt;&lt;" es mayor alfabéticamente que ";
+    cout &lt;&lt;cad2;
+}
+</pre>
+<p>La función strcmp retorna un valor mayor a cero si cad1 es mayor alfabéticamente. En este ejemplo cad1 tiene un valor alfabéticamente mayor a cad2, luego strcmp retorna un valor mayor a cero.<br>
+<p>Si las dos cadenas son exactamente iguales la función retorna un cero, y finalmente si cad1 es menor alfabéticamente retorna un valor menor a cero.</p>
+
+<h3>Problema 2:</h3>
+<p>Definir un vector donde almacenar los nombres de 5 paises. Confeccionar el algoritmo de ordenamiento alfabético.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class OrdenamientoPaises{
+private:
+    char paises[5][40];
+public:
+    void cargar();
+    void ordenar();
+    void imprimir();
+};
+
+void OrdenamientoPaises::cargar()
+{
+    for(int f=0;f &lt; 5;f++) 
+    {
+        cout &lt;&lt;"Ingrese el nombre del pais:";
+        cin.getline(paises[f],40);;
+    }
+}
+
+void OrdenamientoPaises::ordenar()
+{
+    for (int k = 0; k &lt; 4; k++)
+    {
+        for (int f = 0; f &lt; 4 - k; f++)
+        {
+            if (strcmp(paises[f],paises[f + 1])&gt;0)
+            {
+                strcpy_s(aux, 40, paises[f]);
+                strcpy_s(paises[f],40, paises[f + 1]);
+                strcpy_s(paises[f + 1],40, aux);char aux[40];                
+            }
+        }
+    }
+}
+
+void OrdenamientoPaises::imprimir()
+{
+    cout &lt;&lt;"Paises ordenados en forma alfabética:";
+    cout &lt;&lt;"\n";
+    for(int f=0;f &lt; 5;f++) 
+    {
+        cout &lt;&lt;paises[f];
+        cout &lt;&lt;"\n";
+    }
+    cin.get();
+}
+
+void main()
+{
+    OrdenamientoPaises op;
+    op.cargar();
+    op.ordenar();
+    op.imprimir();
+}</pre>
+<p>Definimos el vector para almacenar los 5 países de hasta 39 caracteres:</p>
+<pre>
+private:
+    char paises[5][40];
+</pre>
+<p>Procedemos a cargar el vector:</p>
+<pre>
+void OrdenamientoPaises::cargar()
+{
+    for(int f=0;f &lt; 5;f++) 
+    {
+        cout &lt;&lt;"Ingrese el nombre del pais:";
+        cin.getline(paises[f],40);;
+    }
+}
+</pre>
+<p>Para el ordenamiento utilizamos la función strcmp para verificar si tenemos que intercambiar las componentes:</p>
+<pre>
+            if (strcmp(paises[f],paises[f + 1])&gt;0)
+</pre>
+<p>En el caso que si tenemos que intercambiarla utilizamos un auxiliar y mediante la función strcpy_s procedemos a copiar las cadenas de una variable a otra (no se puede utilizar el operador =), el segundo parámetro indicamos la cantidad de caracteres a copiar de una cadena a otra:</p>
+<pre>
+                strcpy_s(aux, 40, paises[f]);
+                strcpy_s(paises[f],40, paises[f + 1]);
+                strcpy_s(paises[f + 1],40, aux);char aux[40];                
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/VectorOrdenamiento2.zip">VectorOrdenamiento2</a></p>
+
+
+
+<h2>Problema propuesto</h2>
+<ol>
+<li>
+Cargar un vector de 5 elementos enteros. Ordenarlo de mayor a menor y mostrarlo por pantalla, luego ordenar de menor a mayor e imprimir nuevamente.</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class OrdenamientoVector {
+private:
+    int vec[5];
+public:
+    void cargar();
+    void ordenarMayorMenor();
+    void ordenarMenorMayor();
+    void imprimir();
+};
+
+void OrdenamientoVector::cargar()
+{
+    for (int f = 0; f &lt; 5; f++)
+    {
+        cout &lt;&lt; "Ingrese valor:";
+        cin &gt;&gt; vec[f];
+    }
+}
+
+void OrdenamientoVector::ordenarMayorMenor()
+{
+    for (int k = 0; k &lt; 4; k++)
+    {
+        for (int f = 0; f &lt; 4 - k; f++)
+        {
+            if (vec[f] &lt; vec[f + 1])
+            {
+                int aux;
+                aux = vec[f];
+                vec[f] = vec[f + 1];
+                vec[f + 1] = aux;
+            }
+        }
+    }
+}
+
+void OrdenamientoVector::ordenarMenorMayor()
+{
+    for (int k = 0; k &lt; 4; k++)
+    {
+        for (int f = 0; f &lt; 4 - k; f++)
+        {
+            if (vec[f] &gt; vec[f + 1])
+            {
+                int aux;
+                aux = vec[f];
+                vec[f] = vec[f + 1];
+                vec[f + 1] = aux;
+            }
+        }
+    }
+}
+
+void OrdenamientoVector::imprimir()
+{
+    for (int f = 0; f &lt; 5; f++)
+    {
+        cout &lt;&lt; vec[f];
+        cout &lt;&lt; "-";
+    }
+    cout &lt;&lt; "\n";
+}
+
+void main()
+{
+    OrdenamientoVector ov1;
+    ov1.cargar();
+    ov1.ordenarMenorMayor();
+    ov1.imprimir();
+    ov1.ordenarMayorMenor();
+    ov1.imprimir();
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/OrdenamientoVector.zip">OrdenamientoVector</a></p>
+
+</pre>
+<h2><a href="index9187.html?inicio=15">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=18&codigo=145&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:02 GMT -->
+</html>

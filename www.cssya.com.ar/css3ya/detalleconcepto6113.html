@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+
+<!-- Mirrored from www.cssya.com.ar/css3ya/detalleconcepto.php?cod=98 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:06:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+    <title>CSS3 Ya</title>
+    <link href="estilos.css" rel="stylesheet">
+    <link href='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css' rel='stylesheet'>     
+    <script src='../../ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script> 
+    <script src='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>     
+    <script src="funciones.js"></script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-31']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>	
+</head>
+<body>
+
+
+
+
+
+
+<div id="pesta">
+	<ul>
+		<li><a href="#p1">Concepto</a></li>    
+		<li><a href="#p2">Ejemplo</a></li>
+		<li><a href="#p3">Vista Previa</a></li>
+	</ul>
+	<div id="p1" style="background:#fafafa;padding:20px; max-height: 700px;overflow: auto;font-size:13pt">
+	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* css3 detalle arriba */
+google_ad_slot = "3101973371";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+	
+	
+    <h2>Múltiples columnas dinámicas (column-width)</h2><p>Con la propiedad column-width también generamos múltiples columnas. Tiene sentido emplearla cuando nuestro diseño es flexible, es decir que si modificamos el tamaño de la ventana del navegador su contenido se relocaliza.</p>
+<p>Con la propiedad column-width especificamos el ancho de la columna en píxeles, porcentaje etc. y luego se generan tantas columnas como entren en el contenedor.</p>
+<p>La sintaxis es la siguiente:</p>
+<pre>
+Elemento { 
+     column-width: ancho; 
+}
+</pre>
+<p>Si queremos crear un recuadro con texto y que cada columna ocupe 150 píxeles luego codificamos:</p>
+<pre>
+#recuadro1{
+  -moz-column-width:200px;
+  -webkit-column-width:200px;
+  column-width:200px;
+  border-radius: 20px;  
+  background-color:#ddd;
+  padding:10px;
+}
+</pre>
+<p>El resultado puede variar dependiendo las dimensiones de la ventana del navegador (siempre y cuando hayamos creado una página web fluida, es decir sin un ancho fijo):</p>
+<img src="imagentema/foto031.jpg" border="0" alt="column-width"><br><br>
+<img src="imagentema/foto032.jpg" border="0" alt="column-width"><br>
+
+<p>Una mejora a la disposición del texto dentro de las columnas es inicializar la propiedad text-indent y margin:</p>
+<pre>
+#recuadro2 p {
+  text-indent: 1em;
+  margin: 0;
+  text-align: justify;
+}
+</pre>
+<p>Luego el resultado gráfico queda:</p>
+<img src="imagentema/foto033.jpg" border="0" alt="column-width"><br>	
+<table border="0">
+<tr>
+<td>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* css3 cuadrado */
+google_ad_slot = "9333811690";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+ <td>
+ <script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* css3 cuadrado */
+google_ad_slot = "9333811690";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ </td>
+</tr></table> 	
+	
+	</div>    
+	<div id="p2">
+    <textarea name="editor" id="editor" rows="28" style="width:890px;height:700px;font-size:16px;font-family:courier"><!DOCTYPE html> 
+<html> 
+<head> 
+<title>Prueba</title> 
+
+<style type="text/css"> 
+
+#recuadro1{
+  -moz-column-width:200px;
+  -webkit-column-width:200px;
+  column-width:200px;
+  border-radius: 20px;  
+  background-color:#ddd;
+  padding:10px;
+}
+
+#recuadro2{
+  -moz-column-width:200px;
+  -webkit-column-width:200px;
+  column-width:200px;
+  border-radius: 20px;  
+  background-color:#ddd;
+  padding:10px;
+  margin-top:10px;
+}
+
+#recuadro2 p {
+  margin: 0;
+  text-indent: 1em;
+  text-align: justify;
+}
+
+
+body {
+  background:white;
+  margin:50px;
+}
+
+</style> 
+
+</head> 
+<body> 
+
+<div id="recuadro1"> 
+<h3>Recuadro 1</h3>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, </p>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, </p>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, </p>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, </p>
+</div> 
+
+<div id="recuadro2"> 
+<h3>Recuadro 2</h3>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, </p>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, </p>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, </p>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, </p>
+</div> 
+
+
+</body> 
+
+<!-- Mirrored from www.cssya.com.ar/css3ya/detalleconcepto.php?cod=98 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:06:39 GMT -->
+</html> </textarea>
+	</div>
+	<div id="p3">
+<iframe width="900" height="700" id="documentodinamico" name="documentodinamico" src="vacio.html">
+No tiene disponible el navegador la capacidad de iframe
+</iframe>
+	</div>
+</div>
+<br>
+   <h2><a href="index-2.html">Retornar</a></h2>   
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-31', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

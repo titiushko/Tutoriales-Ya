@@ -1,0 +1,210 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.mysqlya.com.ar/temarios/descripcion.php?inicio=21&cod=76&punto=26 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Temario:Funciones matemáticas.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>26 - Funciones matemáticas.</h1></td>
+<td align="right">
+<!--<a href="http://www.mysqlya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<p>
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 		  
+
+<p>Los operadores aritméticos son "+","-","*" y "/". Todas las operaciones matemáticas retornan "null" en caso de error. Ejemplo:</p>
+<pre>
+ select 5/0;
+</pre>
+<p>MySQL tiene algunas funciones para trabajar con números. Aquí presentamos algunas.</p>
+<p>RECUERDE que NO debe haber espacios entre un nombre de función y los paréntesis porque MySQL puede confundir una llamada a una función con una referencia a una tabla o campo que tenga el mismo nombre de una función.</p>
+
+<p>-abs(x): retorna el valor absoluto del argumento "x". Ejemplo:</p>
+<pre>
+ select abs(-20);
+</pre>
+<p>retorna 20.</p>
+
+<p>-ceiling(x): redondea hacia arriba el argumento "x". Ejemplo:</p>
+<pre>
+ select ceiling(12.34),
+</pre>
+<p>retorna 13.</p>
+
+<p>-floor(x): redondea hacia abajo el argumento "x". Ejemplo:</p>
+<pre>
+ select floor(12.34);
+</pre>
+<p>retorna 12.</p>
+
+<p>-greatest(x,y,..): retorna el argumento de máximo valor.</p>
+
+<p>-least(x,y,...): con dos o más argumentos, retorna el argumento más pequeño.</p>
+
+<p>-mod(n,m): significa "módulo aritmético"; retorna el resto de "n" dividido en "m". Ejemplos:</p>
+<pre>
+ select mod(10,3);
+</pre>
+<p>retorna 1.</p>
+<pre>
+ select mod(10,2);
+</pre>
+<p>retorna 0.</p>
+
+<p>- %: <dividendo>%<divisor>: devuelve el resto de una división. Ejemplos:</p>
+<pre>
+ select 10%3;
+</pre>
+<p>retorna 1.</p>
+<pre>
+ select 10%2;
+</pre>
+<p>retorna 0.</p>
+
+<p>-power(x,y): retorna el valor de "x" elevado a la "y" potencia. Ejemplo:</p>
+<pre>
+ select power(2,3);
+</pre>
+<p>retorna 8.</p>
+
+<p>-rand(): retorna un valor de coma flotante aleatorio dentro del rango 0 a 1.0.</p>
+
+<p>-round(x): retorna el argumento "x" redondeado al entero más cercano. Ejemplos:</p>
+<pre>
+ select round(12.34);
+</pre>
+<p>retorna 12.</p>
+<pre>
+ select round(12.64);
+</pre>
+<p>retorna 13.</p>
+
+<p>-srqt(): devuelve la raiz cuadrada del valor enviado como argumento.</p>
+
+<p>-truncate(x,d): retorna el número "x", truncado a "d" decimales. Si "d" es 0, el resultado no tendrá parte fraccionaria. Ejemplos:</p>
+<pre>
+ select truncate(123.4567,2);
+</pre>
+<p>retorna 123.45;</p>
+<pre>
+ select truncate (123.4567,0);
+</pre>
+<p>retorna 123.<p>
+
+<p>Todas retornan null en caso de error.</p>
+
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   <h2><a href="../index10fd.html?inicio=21">Retornar</a></h2>   
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-5";
+urchinTracker();
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from www.mysqlya.com.ar/temarios/descripcion.php?inicio=21&cod=76&punto=26 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:28 GMT -->
+</html>

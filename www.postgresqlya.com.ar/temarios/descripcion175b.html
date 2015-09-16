@@ -1,0 +1,162 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.postgresqlya.com.ar/temarios/descripcion.php?inicio=50&cod=216&punto=58 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de PostgreSQL - Subconsultas </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+	  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>58 - Subconsultas</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+	  	  
+
+<p>
+<p>Una subconsulta (subquery) es una sentencia "select" anidada en otra sentencia "select", "insert", "update" o "delete" (o en otra subconsulta).</p>
+
+<p>Las subconsultas se emplean cuando una consulta es muy compleja, entonces se la divide en varios pasos lógicos y se obtiene el resultado con una única instrucción y cuando la consulta depende de los resultados de otra consulta.</p>
+
+<p>Generalmente, una subconsulta se puede reemplazar por combinaciones y estas últimas son más eficientes.</p>
+<p>Las subconsultas se DEBEN incluir entre paréntesis.</p>
+<p>Puede haber subconsultas dentro de subconsultas.</p>
+
+<p>Se pueden emplear subconsultas:</p>
+<p>- en lugar de una expresión, siempre que devuelvan un solo valor o una lista de valores.</p>
+<p>- que retornen un conjunto de registros de varios campos en lugar de una tabla o para obtener el mismo resultado que una combinación (join).</p>
+
+<p>Hay tres tipos básicos de subconsultas:</p>
+<ol>
+<li>las que retornan un solo valor escalar que se utiliza con un operador de comparación o en lugar de una expresión.</li>
+<li> las que retornan una lista de valores, se combinan con "in", o los operadores "any", "some" y "all".</li>
+<li> los que testean la existencia con "exists".</li>
+</ol>
+
+<p>Reglas a tener en cuenta al emplear subconsultas:</p>
+
+<p>- la lista de selección de una subconsulta que va luego de un operador de comparación puede incluir sólo una expresión o campo (excepto si se emplea "exists" y "in").</p>
+<p>- si el "where" de la consulta exterior incluye un campo, este debe ser compatible con el campo en la lista de selección de la subconsulta.</p>
+<p>- las subconsultas luego de un operador de comparación (que no es seguido por "any" o "all") no pueden incluir cláusulas "group by" ni "having".</p>
+<p>- "distinct" no puede usarse con subconsultas que incluyan "group by".</p>
+<p>- una subconsulta puede estar anidada dentro del "where" o "having" de una consulta externa o dentro de otra subconsulta.</p>
+<p>- si una tabla se nombra solamente en un subconsulta y no en la consulta externa, los campos no serán incluidos en la salida (en la lista de selección de la consulta externa).</p>
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../indexefd7.html?inicio=50">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-24");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+
+
+<!-- Mirrored from www.postgresqlya.com.ar/temarios/descripcion.php?inicio=50&cod=216&punto=58 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:41 GMT -->
+</html>

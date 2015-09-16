@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=0&cod=11&punto=7 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:56:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de CSS - Temarios</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<style>
+
+
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>7 - Propiedades relacionadas al texto (color, text-align, text-decoration)</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>A una de estas propiedades ya la vimos cuando comenzamos con los primeros conceptos: color, nos permite definir el color del texto, lo podemos indicar por medio de tres valores hexadecimales que indican la mezcla de rojo, verde y azul. Por ejemplo si queremos rojo puro debemos indicar:</p>
+<pre>
+color:#ff0000;
+</pre>
+<p>Si queremos verde puro:</p>
+<pre>
+color:#00ff00
+</pre>
+<p>Si queremos azul puro:</p>
+<pre>
+color:#0000ff
+</pre>
+<p>Luego si queremos amarillo debemos mezclar el rojo y el verde:</p>
+<pre>
+color:#ffff00
+</pre>
+<p>Hay muchos programas que nos permiten seleccionar un color y nos descomponen dicho valor en las proporciones de rojo, verde y azul.</p>
+<p>Otra forma de indicar el color, si tenemos los valores en decimal, es por medio de la siguiente sintaxis:</p>
+<pre>
+color:rgb(255,0,0);
+</pre>
+<p>Es decir, por medio de la función rgb(red,green,blue), indicamos la cantidad de rojo, verde y azul en formato decimal.</p>
+<br>
+<p>La segunda propiedad relacionada al texto es text-align, que puede tomar alguno de estos cuatro valores:</p>
+<pre>
+left 
+right 
+center
+justify  
+</pre>
+<p>Si especificamos:</p>
+<pre>
+text-align:center;
+</pre>
+<p>El texto aparecerá centrado. Si queremos justificar a derecha, emplearemos el valor right y si queremos a la izquierda, el valor será left.</p>
+
+<p>La tercera propiedad relacionada al texto que podemos emplear es text-decoration que nos permite entre otras cosas que aparezca subrayado el texto, tachado o una línea en la parte superior, los valores posibles de esta propiedad son:</p>
+<pre>
+none 
+underline 
+overline 
+line-through 
+</pre>
+<p>Como ejemplo, definiremos estilos relacionados al texto para los elementos de cabecera h1, h2 y h3:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;style&gt;
+h1 {
+  color:#ff0000;
+  text-align:left;
+  text-decoration:underline;
+}
+h2 {
+  color:#dd0000;
+  text-align:center;
+  text-decoration:underline;
+}
+h3 {
+  color:#aa0000;
+  text-align:right;
+  text-decoration:underline;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;T&iacute;tulo de nivel 1.&lt;h1&gt;
+&lt;h2&gt;T&iacute;tulo de nivel 2.&lt;h2&gt;
+&lt;h3&gt;T&iacute;tulo de nivel 3.&lt;h3&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Es decir, para los títulos de nivel 1 tenemos la regla:</p>
+<pre>
+h1 {
+  color:#ff0000;
+  text-align:left;
+  text-decoration:underline;
+}
+</pre>
+<p>Color de texto rojo intenso, el texto debe aparecer de izquierda a derecha y subrayado.</p>
+<p>Luego para el elemento h2 tenemos:</p>
+<pre>
+h2 {
+  color:#dd0000;
+  text-align:center;
+  text-decoration:underline;
+}
+</pre>
+<p>El color sigue siendo rojo pero un poco más oscuro, el texto debe aparecer centrado y subrayado.</p>
+<p>Y por último:</p>
+<pre>
+h3 {
+  color:#aa0000;
+  text-align:right;
+  text-decoration:underline;
+}
+</pre>
+<p>Para los títulos de nivel tres, el texto es rojo más oscuro, alineado a derecha y subrayado.</p>
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=0&cod=11&punto=7 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:56:25 GMT -->
+</html>

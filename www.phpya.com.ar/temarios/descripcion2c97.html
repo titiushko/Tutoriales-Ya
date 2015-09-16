@@ -1,0 +1,362 @@
+﻿<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.phpya.com.ar/temarios/descripcion.php?punto=35&cod=56&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:09:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de PHP - Temario</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="keywords" content="php, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de php.">
+<meta name="author" content="Diego Moisset">
+
+<style>
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Verdana,arial,sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.1em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;
+}
+
+#recuadrooculto {
+  display: none;
+}
+
+
+.recuadroborde {
+  //  max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+	clear:left;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  document.getElementById('recuadrooculto').style.display='block';
+}
+
+</script>
+
+</head>
+
+<body>
+
+
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em;margin-right:1em"><a href="../index7732-2.html?inicio=30">Temario del Tutorial</a></span>35 - Borrado de una cookie</h1></div>
+
+<br>
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+
+<p>Para borrar una cookie se debe llamar a la función setcookie con una fecha anterior a la actual.</p>
+<p>También tengamos en cuenta que una cookie tiene una fecha de expiración por lo que si un visitante reingresa a nuestro sitio y la cookie expiró el navegador no la enviará.</p>
+<p>Haremos un algoritmo muy común a muchos sitios que administran webmail. Recordaremos en una cookie el mail ingresado por el operador, el código fuente de la primera página es la siguiente:</p>
+<pre class="recuadroborde">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form action=&quot;pagina2.php&quot; method=&quot;post&quot;&gt;
+Ingrese su mail:
+&lt;input type=&quot;text&quot; name=&quot;mailusuario&quot;
+value=&quot;&lt;?php if (isset($_COOKIE['mail'])) echo $_COOKIE['mail'];?&gt;&quot;&gt;
+&lt;br&gt;
+&lt;input type=&quot;radio&quot; name=&quot;opcion&quot; value=&quot;recordar&quot;&gt;
+Recordar en esta computadora el mail ingresado.
+&lt;br&gt;
+&lt;input type=&quot;radio&quot; name=&quot;opcion&quot; value=&quot;norecordar&quot;&gt;
+No recordar.
+&lt;br&gt;
+&lt;input type=&quot;submit&quot; value=&quot;confirmar&quot;&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Es decir, disponemos un control text y como valor de la misma verificamos si el cliente tiene ya una cookie guardada en su máquina, en caso afirmativo la mostramos dentro del text modificando la propiedad value.</p>
+<p>Mediante dos controles de tipo radio daremos la posibilidad al cliente que el navegador recuerde o no el mail ingresado.</p>
+<p>Como es sabido, la primera vez que accedamos a la página no existe la cookie llamada mail.</p>
+
+<p>La segunda página:</p>
+<pre class="recuadroborde">
+&lt;?php
+if ($_REQUEST['opcion']==&quot;recordar&quot;)
+  setcookie(&quot;mail&quot;,$_REQUEST['mailusuario'],time()+(60*60*24*365),&quot;/&quot;);
+elseif ($_REQUEST['opcion']==&quot;norecordar&quot;)
+  setcookie(&quot;mail&quot;,&quot;&quot;,time()-1000,&quot;/&quot;);
+?&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+if ($_REQUEST['opcion']==&quot;recordar&quot;)
+  echo &quot;cookie creada&quot;;
+elseif ($_REQUEST['opcion']==&quot;norecordar&quot;)
+  echo &quot;cookie eliminada&quot;;
+?&gt;
+&lt;br&gt;
+&lt;a href=&quot;pagina1.php&quot;&gt;Ir a la otra p&aacute;gina&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>En esta página verificamos cuál control radio está seleccionado, si es el primero, creamos la cookie mail con una vida de 1 año:</p>
+<pre>
+  setcookie(&quot;mail&quot;,$_REQUEST['mailusuario'],time()+(60*60*24*365),&quot;/&quot;);
+</pre>
+<p>En caso que esté seleccionado el segundo radio, creamos la misma cookie pero con una fecha de caducidad inferior a la actual (con esto estamos virtualmente eliminando la cookie):</p>
+<pre>
+  setcookie(&quot;mail&quot;,&quot;&quot;,time()-1000,&quot;/&quot;);
+</pre>
+
+<br>
+<br>
+
+<h2>Problema resuelto.</h2>
+<p>Copiar el contenido de este cuadro de texto al NotePad++ y grabarlo en la carpeta c:\wamp\www con un nombre con extensión php (si hay varios cuadros
+de texto grabar cada uno en un archivo distinto).<br>
+  luego abrir el navegador (Chrome, FireFox, IExplorer etc.) y en la barra de direcciones tipear: http://localhost/pagina1.php (o el nombre del
+archivo que le dió)  </p>
+<form name="formulario" action="#" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+    pagina1.php<br><textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off" readonly>
+<html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+<form action="http://www.phpya.com.ar/temarios/pagina2.php" method="post">
+Ingrese su mail:
+<input type="text" name="mailusuario"
+value="<?php if (isset($_COOKIE['mail'])) echo $_COOKIE['mail'];?>">
+<br>
+<input type="radio" name="opcion" value="recordar">
+Recordar en esta computadora el mail ingresado.
+<br>
+<input type="radio" name="opcion" value="norecordar">
+No recordar.
+<br>
+<input type="submit" value="confirmar">
+</form>
+</body>
+
+<!-- Mirrored from www.phpya.com.ar/temarios/descripcion.php?punto=35&cod=56&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:09:04 GMT -->
+</html>
+</textarea>
+    <br>
+	 <a href="http://www.scratchya.com.ar/problemas/phpya/resu/56/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a> 
+<!--    <a href="http://localhost:8080/problemas/phpya/resu/56/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>-->
+
+    <br>
+<table width="650px">
+<tr>
+<td align="left">	
+
+</td>
+</tr>
+</table>
+
+	
+    <br>pagina2.php<br><textarea class="programafuente" name="programa2" rows=15 cols=110 wrap="off" readonly><?php
+if ($_REQUEST['opcion']=="recordar")
+  setcookie("mail",$_REQUEST['mailusuario'],time()+(60*60*24*365),"/");
+elseif ($_REQUEST['opcion']=="norecordar")
+  setcookie("mail","",time()-1000,"/");
+?>
+<html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+<?php
+if ($_REQUEST['opcion']=="recordar")
+  echo "cookie creada";
+elseif ($_REQUEST['opcion']=="norecordar")
+  echo "cookie eliminada";
+?>
+<br>
+<a href="pagina1.html">Ir a la otra página</a>
+</body>
+</html>
+</textarea><br>
+</form>
+
+
+
+
+
+
+	
+
+<h2>Problema propuesto.</h2>
+<p>Confeccionar una página que simule ser la de un periódico. La misma debe permitir configurar qué tipo de titular deseamos que aparezca al visitarla, pudiendo ser:</p>
+<pre>
+Noticia política, Noticia económica o Noticia deportiva.
+</pre>
+<p>Mediante tres objetos de tipo radio, permitir seleccionar qué titular debe mostrar el periódico. Almacenar en una cookie el tipo de titular que desea ver el cliente. La primera vez que visita el sitio deben aparecer los tres titulares.</p>
+<p>Disponer un hipervínculo a una tercer página que borre la cookie creada.</p><form name="formulario" action="#" target="ventanaForm" 
+onsubmit="abrirVentana()" method="post" >
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<div id="recuadrooculto">
+pagina1.php<br>
+<textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off" readonly>
+<html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+
+<?php
+  if (isset($_COOKIE['noticias']))
+    echo $_COOKIE['noticias']."<br>";
+  else
+  {  
+?>
+<form method="post" action="http://www.phpya.com.ar/temarios/pagina2.php">
+Configuracion del titular del sitio:<br>
+<input type="radio" name="radio1" value="Noticias Politicas">Noticias Políticas.<br>
+<input type="radio" name="radio1" value="Noticias Economicas">Noticias Económicas.<br>
+<input type="radio" name="radio1" value="Noticias Deportivas">Noticias Deportivas.<br>
+<input type="submit" value="Confirmar">
+</form>
+<?php
+  }
+?> 
+<a href="pagina3.html">Borrar cookies</a> 
+</body>
+</html></textarea>
+ <br>
+<!-- <a href="http://localhost:8080/problemas/phpya/propu/56/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>-->
+
+
+  <a href="http://www.scratchya.com.ar/problemas/phpya/propu/56/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a> 
+	<br>	
+pagina2.php<br><textarea class="programafuente" name="programa2" rows=15 cols=110 wrap="off" readonly><?php
+  setcookie("noticias",$_REQUEST['radio1'],time()+(60*60*24*365),"/");
+?>
+<html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+<h2>Se configuró correctamente</h2>
+<a href="pagina1.html">Ir a la otra página</a>
+</body>
+</html></textarea><br>pagina3.php<br><textarea class="programafuente" name="programa3" rows=15 cols=110 wrap="off" readonly><?php
+  setcookie("noticias","",time()-100,"/");
+?>
+<html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+<h2>Se borró correctamente</h2>
+<a href="pagina1.html">Ir a la otra página</a>
+</body>
+</html></textarea>
+</div>
+
+</form>
+
+
+
+  
+
+<br>
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>
+
+
+<form name="form1" method="post" action="#">
+  <div>
+   <h2><a href="../index7732.html?inicio=30">Retornar</a></h2>   
+  </div>
+
+  
+</form>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-4";
+urchinTracker();
+</script>
+
+</body>
+
+</html>

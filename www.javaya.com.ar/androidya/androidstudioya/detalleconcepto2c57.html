@@ -1,0 +1,298 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=30&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:50:27 GMT -->
+<head>
+<title>Dibujar: graficar un píxel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>30 - Dibujar: graficar un píxel</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+ <div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+<h3>Problema:</h3>
+<p>Graficar un píxel de color negro en medio de la pantalla del dispositivo.</p>
+<p>Para poder hacer esta simple tarea debemos seguir una serie de pasos:</p>
+
+<p>1 - Creamos un proyecto llamado: Proyecto033<br>
+<p>Borramos el TextView que agrega automáticamente el plug-in del Android Studio y procedemos a definir un id para el RelativeLayout (le asignamos como id el valor @layout1):</p>
+
+<img src="imagentema/foto133.jpg" border="0" alt="Canvas Android"><br>
+
+
+
+
+<p>Ahora codificamos la clase donde se encuentra toda la lógica para encender el píxel:</p>
+<pre class="recuadro">
+package ar.com.tutorialesya.proyecto033;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
+
+
+public class MainActivity extends ActionBarActivity {
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        RelativeLayout layout1 = (RelativeLayout) findViewById(R.id.layout1);
+        Lienzo fondo = new Lienzo(this);
+        layout1.addView(fondo);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    class Lienzo extends View {
+
+        public Lienzo(Context context) {
+            super(context);
+        }
+
+        protected void onDraw(Canvas canvas) {
+            int ancho = canvas.getWidth();
+            int alto = canvas.getHeight();
+            Paint pincel1 = new Paint();
+            pincel1.setARGB(255, 0, 0, 0);
+            canvas.drawPoint(ancho / 2, alto / 2, pincel1);
+        }
+    }
+}
+
+</pre>
+
+<p>Debemos crear una clase que herede de la clase View (todos los controles visuales en Android heredan de esta clase) y sobreescribir el método onDraw. El método onDraw se ejecuta cuando tiene que graficarse. Para acceder a las primitivas gráficas hay una clase llamada Canvas que encapsula todo lo relacionado a pintar píxeles, líneas, rectángules etc.:</p>
+<pre>
+        protected void onDraw(Canvas canvas) {
+            int ancho=canvas.getWidth();
+            int alto=canvas.getHeight();
+            Paint pincel1=new Paint();
+            pincel1.setARGB(255,0,0,0);
+            canvas.drawPoint(ancho/2, alto/2, pincel1);            
+        }
+</pre>
+<p>Lo primero que hacemos en el método onDraw es obtener el ancho y alto en píxeles del dispositivo mediante los métodos getWidth() y getHeight() que nos provee la clase Canvas. Seguidamente creamos un objeto de la clase Paint. Llamamos al método setARGB para definir el color del pincel (el primer parámetro indica el valor de transparencia con 255 indicamos que no hay transparencia, luego indicamos la cantidad de rojo, verde y azul.</p>
+<p>Por último debemos llamar al método drawPoint que dibuja el píxel en la columna, fila y pincel que le pasamos como parámetros.</p>
+<p>Como podemos observar la clase Lienzo hereda de View e implementa el constructor donde llegará la referencia del Activity donde se inserta:</p>
+<pre>
+    class Lienzo extends View {
+
+        public Lienzo(Context context) {
+            super(context);
+        }
+        
+        protected void onDraw(Canvas canvas) {
+            int ancho=canvas.getWidth();
+            int alto=canvas.getHeight();
+            Paint pincel1=new Paint();
+            pincel1.setARGB(255,0,0,0);
+            canvas.drawPoint(ancho/2, alto/2, pincel1);            
+        }
+    }    
+</pre>
+<p>Por último en el método onCreate del Activity obtenemos la referencia del RelativeLayout que tiene el Activity. Creamos un objeto de la clase Lienzo (llamado fondo) y agregamos el objeto fondo al RelativeLayout llamando al método addView:</p>
+<pre>
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        RelativeLayout layout1 = (RelativeLayout) findViewById(R.id.layout1);
+        Lienzo fondo = new Lienzo(this);
+        layout1.addView(fondo);
+    }
+</pre>
+<p>Cuando ejecutemos el programa veremos un píxel en medio de la pantalla de color negro.</p>
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/Proyecto033.zip">proyecto033.zip</a>
+
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+<br>
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-34', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=30&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:52:12 GMT -->
+</html>

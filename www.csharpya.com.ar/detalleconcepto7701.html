@@ -1,0 +1,650 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=150&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:58:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - Colaboración de clases</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>26 - Colaboración de clases</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p>Normalmente un problema resuelto con la metodología de programación orientada a objetos no interviene una sola clase, sino que hay muchas clases que interactúan y se comunican.</p>
+<p>Plantearemos un problema separando las actividades en dos clases.</p>
+
+<h3>Problema 1:</h3>
+<p>Un banco tiene 3 clientes que pueden hacer depósitos y extracciones. También el banco requiere que al final del día calcule la cantidad de dinero que hay depositada.</p>
+<p>Lo primero que hacemos es identificar las clases:</p>
+<p>
+Podemos identificar la clase Cliente y la clase Banco.
+</p>
+
+<p>Luego debemos definir los atributos y los métodos de cada clase:</p>
+<pre>
+Cliente		
+    atributos
+        nombre
+        monto
+    métodos
+        constructor
+        Depositar
+        Extraer
+        RetornarMonto
+
+Banco
+    atributos
+        3 Cliente (3 objetos de la clase Cliente)
+    métodos
+        constructor
+        Operar
+        DepositosTotales
+</pre>
+<p>Creamos un proyecto llamado: Colaboracion1 y dentro del proyecto creamos dos clases llamadas: Cliente y Banco.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Colaboracion1
+{
+    class Cliente
+    {
+        private string nombre;
+        private int monto;
+
+        public Cliente(string nom)
+        {
+            nombre = nom;
+            monto = 0;
+        }
+
+        public void Depositar(int m)
+        {
+            monto = monto + m;
+        }
+
+        public void Extraer(int m)
+        {
+            monto = monto - m;
+        }
+
+        public int RetornarMonto()
+        {
+            return monto;
+        }
+
+        public void Imprimir()
+        {
+            Console.WriteLine(nombre+" tiene depositado la suma de "+monto);
+        }
+    }
+
+    class Banco
+    {
+        private Cliente cliente1, cliente2, cliente3;
+
+        public Banco() 
+        {
+            cliente1=new Cliente("Juan");
+            cliente2=new Cliente("Ana");
+            cliente3=new Cliente("Pedro"); 
+        }
+
+        public void Operar()
+        {
+            cliente1.Depositar(100);
+            cliente2.Depositar(150);
+            cliente3.Depositar(200);
+            cliente3.Extraer(150);
+        }
+
+        public void DepositosTotales()
+        {
+            int t = cliente1.RetornarMonto () + 
+                    cliente2.RetornarMonto () + 
+                    cliente3.RetornarMonto ();
+            Console.WriteLine ("El total de dinero en el banco es:" + t);
+            cliente1.Imprimir();
+            cliente2.Imprimir();
+            cliente3.Imprimir();
+        }
+
+        static void Main(string[] args)
+        {
+            Banco banco1 = new Banco();
+            banco1.Operar();
+            banco1.DepositosTotales();
+            Console.ReadKey();
+        }
+    }
+}
+</pre>
+
+<p>Analicemos la implementación del problema.<br>
+
+<p>Los atributos de una clase normalmente son privados para que no se tenga acceso directamente desde otra clase, los atributos son modificados por los métodos de la misma clase:</p>
+<pre>
+        private string nombre;
+        private int monto;
+</pre>
+
+<p>El constructor recibe como parámetro el nombre del cliente y lo almacena en el atributo respectivo e inicializa el atributo monto en cero:</p>
+<pre>
+        public Cliente(string nom)
+        {
+            nombre = nom;
+            monto = 0;
+        }
+</pre>
+
+<p>Los métodos Depositar y Extraer actualizan el atributo monto con el dinero que llega como parámetro (para simplificar el problema no hemos validado que cuando se extrae dinero el atributo monto quede con un valor negativo):</p>
+<pre>
+        public void Depositar(int m)
+        {
+            monto = monto + m;
+        }
+
+        public void Extraer(int m)
+        {
+            monto = monto - m;
+        }
+</pre>
+
+<p>El método RetornarMonto tiene por objetivo comunicar al Banco la cantidad de dinero que tiene el cliente (recordemos que como el atributo monto es privado de la clase, debemos tener un método que lo retorne):
+<pre>
+        public int RetornarMonto()
+        {
+            return monto;
+        }
+</pre>
+
+<p>Por último el método imprimir muestra nombre y el monto de dinero del cliente:</p>
+<pre>
+        public void Imprimir()
+        {
+            Console.WriteLine(nombre+" tiene depositado la suma de "+monto);
+        }
+</pre>
+
+
+<p>Como podemos observar la clase Cliente no tiene función Main. Entonces donde definimos objetos de la clase Cliente?<br>
+La respuesta a esta pregunta es que en la clase Banco definimos tres objetos de la clase Cliente.</p>
+
+<p>Veamos ahora la clase Banco que requiere la colaboración de la clase Cliente.<br>
+Primero definimos tres atributos de tipo Cliente:</p>
+<pre>
+    class Banco
+    {
+        private Cliente cliente1, cliente2, cliente3;
+</pre>
+
+<p>En le constructor creamos los tres objetos (cada vez que creamos un objeto de la clase Cliente debemos pasar a su constructor el nombre del cliente, recordemos que su monto de depósito se inicializa con cero):</p>
+<pre>
+        public Banco() 
+        {
+            cliente1=new Cliente("Juan");
+            cliente2=new Cliente("Ana");
+            cliente3=new Cliente("Pedro"); 
+        }
+</pre>
+
+
+<p>El método operar del banco (llamamos a los métodos Depositar y Extraer de los clientes):</p>
+<pre>
+        public void Operar()
+        {
+            cliente1.Depositar(100);
+            cliente2.Depositar(150);
+            cliente3.Depositar(200);
+            cliente3.Extraer(150);
+        }
+</pre>
+
+
+<p>El método DepositosTotales obtiene el monto depositado de cada uno de los tres clientes, procede a mostrarlos y llama al método imprimir de cada cliente para poder mostrar el nombre y depósito: </p>
+<pre>
+        public void DepositosTotales()
+        {
+            int t = cliente1.RetornarMonto () + 
+                    cliente2.RetornarMonto () + 
+                    cliente3.RetornarMonto ();
+            Console.WriteLine ("El total de dinero en el banco es:" + t);
+            cliente1.Imprimir();
+            cliente2.Imprimir();
+            cliente3.Imprimir();
+        }
+</pre>
+
+<p>Por último en la Main definimos un objeto de la clase Banco (la clase Banco es la clase principal en nuestro problema):</p>
+<pre>
+        static void Main(string[] args)
+        {
+            Banco banco1 = new Banco();
+            banco1.Operar();
+            banco1.DepositosTotales();
+            Console.ReadKey();
+        }
+</pre>
+
+
+<h3>Problema 2:</h3>
+<p>Plantear un programa que permita jugar a los dados. Las reglas de juego son: se tiran tres dados si los tres salen con el mismo valor mostrar un mensaje que "gano", sino "perdió".</p>
+<p>Lo primero que hacemos es identificar las clases:</p>
+<p>
+Podemos identificar la clase Dado y la clase JuegoDeDados.
+</p>
+
+<p>Luego los atributos y los métodos de cada clase:</p>
+<pre>
+Dado		
+    atributos
+        valor
+    métodos
+        constructor
+        Tirar
+        Imprimir
+        RetornarValor
+
+JuegoDeDados
+    atributos
+        3 Dado (3 objetos de la clase Dado)
+    métodos
+        constructor
+        Jugar
+</pre>
+<p>Creamos un proyecto llamado: Colaboracion2 y dentro del proyecto creamos dos clases llamadas: Dado y JuegoDeDados.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Colaboracion2
+{
+    class Dado
+    {
+        private int valor;
+        private static Random aleatorio;
+
+        public Dado()
+        {
+            aleatorio = new Random();
+        }
+
+        public void Tirar()
+        {
+            valor = aleatorio.Next(1, 7);
+        }
+
+        public void Imprimir() 
+        {
+            Console.WriteLine("El valor del dado es:"+valor);
+        }
+
+        public int RetornarValor()
+        {
+            return valor;
+        }
+    }
+
+    class JuegoDeDados
+    {
+        private Dado dado1,dado2,dado3;
+    
+        public JuegoDeDados() 
+        {
+            dado1=new Dado();
+            dado2=new Dado();
+            dado3=new Dado();        	
+        }
+    
+        public void Jugar() 
+        {
+            dado1.Tirar();
+            dado1.Imprimir();
+            dado2.Tirar();
+            dado2.Imprimir();
+            dado3.Tirar();
+            dado3.Imprimir();
+            if (dado1.RetornarValor()==dado2.RetornarValor() && 
+                dado1.RetornarValor()==dado3.RetornarValor()) 
+            {
+                Console.WriteLine("Ganó");
+            }
+            else
+            {
+                Console.WriteLine("Perdió");
+            }
+            Console.ReadKey();
+        }
+    
+        static void Main(string[] args)
+        {
+            JuegoDeDados j = new JuegoDeDados();
+            j.Jugar();
+        }
+    }
+}
+</pre>
+<p>La clase Dado define el atributo "valor" donde almacenamos un valor aleatorio que representa el número que sale al tirarlo.<br>
+Definimos otro atributo de la clase Random. Esta clase nos facilita la generación de un número aleatorio que nos indicará el valor del dato. Como luego se crearán tres objetos de la clase dado y nosotros solo requerimos un objeto de la clase Random luego definimos el atributo de tipo static, con esto todos los objetos de la clase Dado acceden al mismo objeto de la clase Random:<br>
+<pre>
+        private int valor;
+        private static Random aleatorio;
+</pre>
+<p>En el constructor creamos el objeto de la clase Random:</p>
+<pre>
+        public Dado()
+        {
+            aleatorio = new Random();
+        }
+</pre>
+<p>El método Tirar almacena el valor aleatorio (para generar un valor aleatorio utilizamos el método Next de la clase Random, el mismo genera un valor entero comprendido entre los dos parámetros que le pasamos (nunca genera la cota superior):
+<pre>
+        public void Tirar()
+        {
+            valor = aleatorio.Next(1, 7);
+        }
+</pre>
+<p>El método Imprimir de la clase Dado muestra por pantalla el valor del dado:</p>
+<pre>
+        public void Imprimir() 
+        {
+            Console.WriteLine("El valor del dado es:"+valor);
+        }
+</pre>
+<p>Por último el método que retorna el valor del dado (se utiliza en la otra clase para ver si los tres dados generaron el mismo valor):</p>
+<pre>
+        public int RetornarValor()
+        {
+            return valor;
+        }
+</pre>
+<p>La clase JuegoDeDatos define tres atributos de la clase Dado (con esto decimos que la clase Dado colabora con la clase JuegoDeDados):</p>
+<pre>
+    class JuegoDeDados
+    {
+        private Dado dado1,dado2,dado3;
+</pre>
+<p>En el constructor procedemos a crear los tres objetos de la clase Dado:</p>
+<pre>
+        public JuegoDeDados() 
+        {
+            dado1=new Dado();
+            dado2=new Dado();
+            dado3=new Dado();        	
+        }
+</pre>
+<p>En el método Jugar llamamos al método Tirar de cada dado, pedimos que se imprima el valor generado y finalmente procedemos a verificar si se ganó o no:</p>
+<pre>
+        public void Jugar() 
+        {
+            dado1.Tirar();
+            dado1.Imprimir();
+            dado2.Tirar();
+            dado2.Imprimir();
+            dado3.Tirar();
+            dado3.Imprimir();
+            if (dado1.RetornarValor()==dado2.RetornarValor() && 
+                dado1.RetornarValor()==dado3.RetornarValor()) 
+            {
+                Console.WriteLine("Ganó");
+            }
+            else
+            {
+                Console.WriteLine("Perdió");
+            }
+            Console.ReadKey();
+        }
+</pre>
+<p>En la Main creamos solo un objeto de la clase principal (en este caso la clase principal es el JuegoDeDados):</p>
+<pre>
+        static void Main(string[] args)
+        {
+            JuegoDeDados j = new JuegoDeDados();
+            j.Jugar();
+        }
+</pre>
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Plantear una clase Club y otra clase Socio.<br>
+La clase Socio debe tener los siguientes atributos privados: nombre y la antigüedad en el club (en años). En el constructor pedir la carga del nombre y su antigüedad. La clase Club debe tener como atributos 3 objetos de la clase Socio. Definir una responsabilidad para imprimir el nombre del socio con mayor antigüedad en el club.
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Colaboracion3
+{
+    class Socio
+    {
+        private string nombre;
+        private int antiguedad;
+
+        public Socio()
+        {
+            Console.Write("Ingrese el nombre del socio:");
+            nombre = Console.ReadLine(); ;
+            Console.Write("Ingrese la antiguedad:");
+            string linea = Console.ReadLine();
+            antiguedad=int.Parse(linea);
+        }
+
+        public void Imprimir() 
+        {
+            Console.WriteLine(nombre+" tiene una antiguedad de "+antiguedad);
+        }
+
+        public int RetornarAntiguedad()
+        {
+            return antiguedad;
+        }
+    }
+
+
+    class Club
+    {
+        private Socio socio1, socio2, socio3;
+
+        public Club() 
+        {
+            socio1=new Socio();
+            socio2=new Socio();
+            socio3=new Socio();
+        }
+
+        public void MayorAntiguedad()
+        {
+            Console.Write("Socio con mayor antiguedad:");
+            if (socio1.RetornarAntiguedad() > socio2.RetornarAntiguedad() &&
+                socio1.RetornarAntiguedad() > socio3.RetornarAntiguedad())
+            {
+                socio1.Imprimir();
+            }
+            else
+            {
+                if (socio2.RetornarAntiguedad() > socio3.RetornarAntiguedad())
+                {
+                    socio2.Imprimir();
+                }
+                else
+                {
+                    socio3.Imprimir();
+                }
+            }
+
+        }
+
+        static void Main(string[] args)
+        {
+            Club club1 = new Club();
+            club1.MayorAntiguedad();
+            Console.ReadKey();
+        }
+    }
+}
+</pre>
+</div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=150&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:58:36 GMT -->
+</html>

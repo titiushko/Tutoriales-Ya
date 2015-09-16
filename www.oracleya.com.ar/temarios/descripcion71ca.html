@@ -1,0 +1,171 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=75&cod=253&punto=95 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Descripción : Procedimientos almacenados (variables) (Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>95 - Procedimientos almacenados (variables)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>Los procedimientos almacenados pueden contener en su definición, variables locales, que existen durante el procedimiento.</p>
+
+<p>La sintaxis para declarar variables dentro de un procedimiento almacenado es la siguiente:</p>
+<pre>
+ create or replace procedure NOMBREPROCEDIMIENTO (PARAMETRO in TIPODEDATO)
+  as
+   NOMBREVARIABLE TIPO;
+  begin
+   INSTRUCCIONES; 
+  end;
+</pre>
+<p>Las variables se definen antes del bloque de sentencias; pueden declararse varias.</p>
+
+<p>Creamos un procedimiento que recibe el nombre de un libro, en una variable guardamos el nombre del autor de tal libro, luego buscamos todos los libros de ese autor y los almacenamos en una tabla:</p>
+<pre>
+ create or replace procedure pa_autorlibro(atitulo in varchar2)
+ as
+   vautor varchar2;
+ begin
+  vautor= select autor from libros where titulo=atitulo;
+  drop table tabla1;
+  create table tabla1( 
+   titulo varchar2(40),
+   precio number(6,2)
+  );
+  insert into tabla1
+   select titulo,precio
+   from libros
+   where autor=vautor;
+ end;
+</pre>
+<p>Ejecutamos el procedimiento: execute pa_autorlibro('Ilusiones');</p>
+
+<p>Luego de definir un parámetro y su tipo, opcionalmente, se puede especificar un valor por defecto; tal valor es el que asume el procedimiento al ser ejecutado si no recibe parámetros. Si no se coloca valor por defecto, un procedimiento definido con parámetros no puede ejecutarse sin valores para ellos.</p></p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../indexa021.html?inicio=75">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=75&cod=253&punto=95 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+</html>

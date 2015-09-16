@@ -1,0 +1,475 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=158&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:08:14 GMT -->
+<head>
+<title>Captura de audio mediante la clase MediaRecorder</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+.descarga2 a {
+color:#4B4B4B;
+text-decoration:none;
+border-bottom:1px dotted #444;
+}
+.descarga2 {
+background: #F7FABE;
+text-align: left;
+padding: 5px 20px 5px 45px;
+border-top: 2px solid #DFE786;
+border-bottom: 2px solid #DFE786;
+color:#000000;
+margin-left:1.2em;
+margin-right:1.2em;
+border-radius:4px;
+font-size:1em;
+
+}  
+
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-30']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>28 - Captura de audio mediante la clase MediaRecorder</h1> <p class="descarga2">Ya se encuentra disponible el nuevo tutorial para aprender android con el nuevo entorno <a href="androidstudioya/index.html" target="_blank">Android Studio propuesto por Google y
+que remplaza a Eclipse</a>.
+</td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>Otra forma de grabar audio en Android es el empleo de la clase MediaRecorder. Esta clase nos da más libertades a la hora de construir una aplicación que requiere grabar audio.</p>
+
+<h3>Problema:</h3>
+<p>Disponer tres objetos de la clase Button con las etiquetas "Grabar", "Detener Grabación" y "Reproducir Grabación". Disponer además un TextView para informar del estado actual.<br>
+<p>Cuando se presione el botón "Grabar" permitir registrar todos los sonidos hasta que se presione el botón "Detener Grabación". Cuando se presione el botón "Reproducir Grabación" emitir el archivo de audio previamente generado.</p>
+<p>La interfaz visual a implementar es la siguiente:</p>
+<img src="imagentema/foto102.jpg" border="0" alt="grabar audio android MediaRecorder"><br>
+<p>Tener en cuenta de no olvidar definir los tres métodos para los tres botones: grabar, detener y reproducir.</p>
+
+<p>También debemos modificar el archivo AndroidManifest.xml donde debemos indicar que nuestra aplicación accederá a la grabadora de sonido y a la tarjeta SD donde se almacenará el archivo de sonido.</p>
+<p>Esto lo hacemos seleccionando el archivo AndroidManifest.xml y en la pestaña Permissions registramos los dos permisos:</p>
+<img src="imagentema/foto103.jpg" border="0" alt="grabar audio android MediaRecorder"><br>
+
+<p>El código fuente es:</p>
+<pre class="recuadro">
+
+package com.androidya.proyecto026;
+
+import java.io.File;
+import java.io.IOException;
+
+import android.app.Activity;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
+import android.media.MediaRecorder;
+import android.os.Bundle;
+import android.os.Environment;
+import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+public class MainActivity extends Activity implements OnCompletionListener {
+    TextView tv1;
+    MediaRecorder recorder;
+    MediaPlayer player;
+    File archivo;
+    Button b1, b2, b3;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        tv1 = (TextView) this.findViewById(R.id.textView1);
+        b1 = (Button) findViewById(R.id.button1);
+        b2 = (Button) findViewById(R.id.button2);
+        b3 = (Button) findViewById(R.id.button3);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return true;
+    }
+
+    public void grabar(View v) {
+        recorder = new MediaRecorder();
+        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        File path = new File(Environment.getExternalStorageDirectory()
+                .getPath());
+        try {
+            archivo = File.createTempFile("temporal", ".3gp", path);
+        } catch (IOException e) {
+        }
+        recorder.setOutputFile(archivo.getAbsolutePath());
+        try {
+            recorder.prepare();
+        } catch (IOException e) {
+        }
+        recorder.start();
+        tv1.setText("Grabando");
+        b1.setEnabled(false);
+        b2.setEnabled(true);
+    }
+
+    public void detener(View v) {
+        recorder.stop();
+        recorder.release();
+        player = new MediaPlayer();
+        player.setOnCompletionListener(this);
+        try {
+            player.setDataSource(archivo.getAbsolutePath());
+        } catch (IOException e) {
+        }
+        try {
+            player.prepare();
+        } catch (IOException e) {
+        }
+        b1.setEnabled(true);
+        b2.setEnabled(false);
+        b3.setEnabled(true);
+        tv1.setText("Listo para reproducir");
+    }
+
+    public void reproducir(View v) {
+        player.start();
+        b1.setEnabled(false);
+        b2.setEnabled(false);
+        b3.setEnabled(false);
+        tv1.setText("Reproduciendo");
+    }
+
+    public void onCompletion(MediaPlayer mp) {
+        b1.setEnabled(true);
+        b2.setEnabled(true);
+        b3.setEnabled(true);
+        tv1.setText("Listo");
+    }
+}
+
+</pre>
+
+<p>Declaramos un objeto de la clase MediaRecorder para grabar audio:</p>
+<pre>
+    MediaRecorder recorder;
+</pre>
+<p>Declaramos un objeto de la clase MediaPlayer para reproducir el archivo de sonido generado:</p>
+<pre>
+    MediaPlayer player;
+</pre>
+<p>Declaramos un objeto de la clase File que hace referencia al archivo que se creará:</p>
+<pre>
+    File archivo;
+</pre>
+
+<p>Declaramos las variables que harán referencia a los tres botones y al TextView:</p>
+<pre>
+    TextView tv1;
+    Button b1,b2,b3;
+</pre>
+<p>En el método onCreate obtenemos la referencia de los cuatro objetos creados en el archivo XML:</p>
+<pre>
+        tv1 = (TextView) this.findViewById(R.id.tv1);
+        b1=(Button)findViewById(R.id.button1);
+        b2=(Button)findViewById(R.id.button2);        
+        b3=(Button)findViewById(R.id.button3);
+</pre>
+
+<p>El método más importante de este concepto es el grabar:</p>
+<pre>
+
+    public void grabar(View v) {
+        recorder = new MediaRecorder();
+        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        File path = new File(Environment.getExternalStorageDirectory().getPath());
+        try {
+            archivo = File.createTempFile("temporal", ".3gp", path);
+        } catch (IOException e) {
+        }
+        recorder.setOutputFile(archivo.getAbsolutePath());
+        try {
+            recorder.prepare();
+        } catch (IOException e) {
+        }
+        recorder.start();
+        tv1.setText("Grabando");
+        b1.setEnabled(false);        
+        b2.setEnabled(true);    
+    }
+</pre>
+<p>Creamos un objeto de la clase MediaRecorder:</p>
+<pre>
+        recorder = new MediaRecorder();
+</pre>
+<p>Seguidamente definimos el micrófono como fuente de audio:</p>
+<pre>
+        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+</pre>
+<p>Luego llamamos al método setOutputFormat especificando que el archivo será almacenado con la especificación 3GPP y con extensión .3gp</p>
+<pre>
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+</pre>
+<p>Especificamos el codec a emplear llamando al método setAudioEncoder:</p>
+<pre>
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+</pre>
+<p>Obtenemos el path de la tarjeta SD y creamos un archivo temporal con extensión 3gp:</p>
+<pre>
+        File path = new File(Environment.getExternalStorageDirectory().getPath());
+        try {
+            archivo = File.createTempFile("temporal", ".3gp", path);
+        } catch (IOException e) {
+        }
+</pre>
+<p>Con el método setOutputFile de la clase MediaRecorder le indicamos el archivo donde debe almacenarse la grabación:</p>
+<pre>
+        recorder.setOutputFile(archivo.getAbsolutePath());
+</pre>
+<p>Llamamos al método prepare y finalmente al método start para comenzar la grabación:</p>
+<pre>
+        try {
+            recorder.prepare();
+        } catch (IOException e) {
+        }
+        recorder.start();
+</pre>
+
+<p>El método detener:</p>
+<pre>
+
+    public void detener(View v) {
+        recorder.stop();
+        recorder.release();    
+        player = new MediaPlayer();
+        player.setOnCompletionListener(this);
+        try {
+            player.setDataSource(archivo.getAbsolutePath());
+        } catch (IOException e) {
+        }
+        try {
+            player.prepare();
+        } catch (IOException e) {
+        }            
+        b1.setEnabled(true);        
+        b2.setEnabled(false);
+        b3.setEnabled(true);
+        tv1.setText("Listo para reproducir");        
+    }
+</pre>
+<p>Llamamos primero al método stop de la clase MediaRecorder y liberamos los recursos consumidos llamando a release:</p>
+<pre>
+        recorder.stop();
+        recorder.release();    
+</pre>
+
+<p>Creamos un objeto de la clase MediaPlayer para poder reproducir el archivo de audio que acabamos de grabar. Indicamos mediante el método setOnCompletionListener la referencia de la clase que será informada cuando el audio finalice:</p>
+<pre>
+        player = new MediaPlayer();
+        player.setOnCompletionListener(this);
+</pre>
+<p>Referenciamos el archivo a que debe reproducir:</p>
+<pre>
+        try {
+            player.setDataSource(archivo.getAbsolutePath());
+        } catch (IOException e) {
+        }
+</pre>
+<p>Finalmente llamamos al método prepare de la clase MediaPlayer:</p>
+<pre>
+        try {
+            player.prepare();
+        } catch (IOException e) {
+        }            
+</pre>
+<p>El método reproducir simplemente llama al método start de la clase MediaPlayer para iniciar la reproducción del archivo previamente grabado:</p>
+<pre>
+    public void reproducir(View v) {
+        player.start();
+        b1.setEnabled(false);
+        b2.setEnabled(false);        
+        b3.setEnabled(false);
+        tv1.setText("Reproduciendo");        
+    }
+</pre>
+
+<p>El método onCompletion se ejecuta cuando termina de reproducirse el archivo de audio:</p>
+<pre>
+    public void onCompletion(MediaPlayer mp) {
+        b1.setEnabled(true);        
+        b2.setEnabled(true);
+        b3.setEnabled(true);
+        tv1.setText("Listo");
+    }
+</pre>
+
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/proyecto026.zip">proyecto026.zip</a><br>
+</div>
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+
+  </div>
+  
+  
+  
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=158&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:08:34 GMT -->
+</html>

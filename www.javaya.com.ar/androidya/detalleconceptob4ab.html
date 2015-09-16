@@ -1,0 +1,214 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=179&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:22:07 GMT -->
+<head>
+<title>Internacionalización y archivo strings.xml</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+.descarga2 a {
+color:#4B4B4B;
+text-decoration:none;
+border-bottom:1px dotted #444;
+}
+.descarga2 {
+background: #F7FABE;
+text-align: left;
+padding: 5px 20px 5px 45px;
+border-top: 2px solid #DFE786;
+border-bottom: 2px solid #DFE786;
+color:#000000;
+margin-left:1.2em;
+margin-right:1.2em;
+border-radius:4px;
+font-size:1em;
+
+}  
+
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-30']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>48 - Internacionalización y archivo strings.xml</h1> <p class="descarga2">Ya se encuentra disponible el nuevo tutorial para aprender android con el nuevo entorno <a href="androidstudioya/index.html" target="_blank">Android Studio propuesto por Google y
+que remplaza a Eclipse</a>.
+</td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>La internacionalización de un programa en Android se resuelve implementando varios archivos strings.xml (uno por cada idioma que necesitemos implementar)</p>
+
+<h3>Problema:</h3>
+<p>Modificar el proyecto025 de tal manera que muestre su interfaz en castellano o ingles según la configuración del idioma seleccionado en el dispositivo.</p>
+<p>Crearemos primero una nueva carpeta llamada values-en (las abreviaturas para los distintos lenguajes los podemos ver en la página <a href="http://www.loc.gov/standards/iso639-2/php/code_list.php" target="_blank">ISO 639-1 Code</a> (segunda columna)</p>
+<p>Es decir creamos otra carpeta con el mismo nombre (values) más un guión y la extensión del lenguaje a implementar:</p>
+<img src="imagentema/foto160.jpg" border="0" alt="strings.xml"><br>
+<p>Seleccionamos el archivo strings.xml de la carpeta values presionamos el botón derecho y elegimos copiar, ahora nos vamos a la otra carpeta (values-en) y elegimos copiar. Procedemos a traducir los valores almacenados en cada string:</p>
+<img src="imagentema/foto161.jpg" border="0" alt="strings.xml"><br>
+
+<p>Solamente con esto ya tenemos nuestra aplicación funcionando en dos idiomas. Para probar debemos acceder al emulador de Android y configurarlo en inglés (tecla home -> tecla menu -> configuración > Idioma y teclado > Seleccionar idioma -> "English (United Stated)</p>
+<p>Luego de esto lanzamos la aplicación y deberemos ver la interfaz con los string que configuramos en el archivo strings.xml de la carpeta values-en:</p>
+<img src="imagentema/foto162.jpg" border="0" alt="strings.xml"><br>
+</div>
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   <h2><a href="index1e61.html?inicio=40">Retornar</a></h2>   
+
+  </div>
+  
+  
+  
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=179&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:22:11 GMT -->
+</html>

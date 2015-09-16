@@ -1,0 +1,962 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=171&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - Estructuras dinámicas: Listas genéricas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>47 - Estructuras dinámicas: Listas genéricas</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p>Continuando con el tema de listas trabajaremos con las listas genéricas. Una lista se comporta como genérica cuando las inserciones y extracciones se realizan en cualquier parte de la lista.<br>
+Codificaremos una serie de métodos para administrar listas genéricas.</p>
+
+<p><strong>Métodos a desarrollar:</strong></p>
+<p>
+Inserta un nodo en la posición (pos) y con la información que hay en el parámetro x.</p>
+<pre>
+    void Insertar(int pos, int x)
+</pre>
+<p>Extrae la información del nodo de la posición indicada (pos). Se debe eliminar el nodo.</p>
+<pre>
+    int Extraer(int pos)
+</pre>
+<p>Borra el nodo de la posición (pos).</p>
+<pre>
+    void Borrar(int pos)
+</pre>
+<p>Intercambia las informaciones de los nodos de las posiciones pos1 y pos2.</p>
+<pre>   
+    void Intercambiar(int pos1,int pos2)
+</pre>
+<p>Retorna el valor del nodo con mayor información.</p>
+<pre>
+    int Mayor()
+</pre>
+<p>Retorna la posición del nodo con mayor información.
+</p>
+<pre>
+    int PosMayor()
+</pre>
+<p>Retorna la cantidad de nodos de la lista.</p>
+<pre>
+    int Cantidad()
+</pre>
+<p>Debe retornar true si la lista está ordenada de menor a mayor, false en caso contrario.</p>
+<pre>
+    bool Ordenada()
+</pre>
+<p>Debe retornar true si existe la información que llega en el parámetro, false en caso contrario.
+</p>
+<pre>
+    bool Existe(int info)
+</pre>
+<p>El método vacía debe retornar true si está vacía y false si no lo está.</p>
+<pre>
+    bool Vacia()
+</pre>
+
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ListaGenerica1
+{
+    class ListaGenerica
+    {
+        class Nodo
+        {
+            public int info;
+            public Nodo sig;
+        }
+
+        private Nodo raiz;
+
+        public ListaGenerica()
+        {
+            raiz = null;
+        }
+
+        void Insertar(int pos, int x)
+        {
+            if (pos <= Cantidad() + 1)
+            {
+                Nodo nuevo = new Nodo();
+                nuevo.info = x;
+                if (pos == 1)
+                {
+                    nuevo.sig = raiz;
+                    raiz = nuevo;
+                }
+                else
+                    if (pos == Cantidad() + 1)
+                    {
+                        Nodo reco = raiz;
+                        while (reco.sig != null)
+                        {
+                            reco = reco.sig;
+                        }
+                        reco.sig = nuevo;
+                        nuevo.sig = null;
+                    }
+                    else
+                    {
+                        Nodo reco = raiz;
+                        for (int f = 1; f <= pos - 2; f++)
+                            reco = reco.sig;
+                        Nodo siguiente = reco.sig;
+                        reco.sig = nuevo;
+                        nuevo.sig = siguiente;
+                    }
+            }
+        }
+
+        public int Extraer(int pos)
+        {
+            if (pos <= Cantidad())
+            {
+                int informacion;
+                if (pos == 1)
+                {
+                    informacion = raiz.info;
+                    raiz = raiz.sig;
+                }
+                else
+                {
+                    Nodo reco;
+                    reco = raiz;
+                    for (int f = 1; f <= pos - 2; f++)
+                        reco = reco.sig;
+                    Nodo prox = reco.sig;
+                    reco.sig = prox.sig;
+                    informacion = prox.info;
+                }
+                return informacion;
+            }
+            else
+                return int.MaxValue;
+        }
+
+        public void Borrar(int pos)
+        {
+            if (pos <= Cantidad())
+            {
+                if (pos == 1)
+                {
+                    raiz = raiz.sig;
+                }
+                else
+                {
+                    Nodo reco;
+                    reco = raiz;
+                    for (int f = 1; f <= pos - 2; f++)
+                        reco = reco.sig;
+                    Nodo prox = reco.sig;
+                    reco.sig = prox.sig;
+                }
+            }
+        }
+
+        public void Intercambiar(int pos1, int pos2)
+        {
+            if (pos1 <= Cantidad() && pos2 <= Cantidad())
+            {
+                Nodo reco1 = raiz;
+                for (int f = 1; f < pos1; f++)
+                    reco1 = reco1.sig;
+                Nodo reco2 = raiz;
+                for (int f = 1; f < pos2; f++)
+                    reco2 = reco2.sig;
+                int aux = reco1.info;
+                reco1.info = reco2.info;
+                reco2.info = aux;
+            }
+        }
+
+        public int Mayor()
+        {
+            if (!Vacia())
+            {
+                int may = raiz.info;
+                Nodo reco = raiz.sig;
+                while (reco != null)
+                {
+                    if (reco.info > may)
+                        may = reco.info;
+                    reco = reco.sig;
+                }
+                return may;
+            }
+            else
+                return int.MaxValue;
+        }
+
+        public int PosMayor()
+        {
+            if (!Vacia())
+            {
+                int may = raiz.info;
+                int x = 1;
+                int pos = x;
+                Nodo reco = raiz.sig;
+                while (reco != null)
+                {
+                    if (reco.info > may)
+                    {
+                        may = reco.info;
+                        pos = x;
+                    }
+                    reco = reco.sig;
+                    x++;
+                }
+                return pos;
+            }
+            else
+                return int.MaxValue;
+        }
+
+        public int Cantidad()
+        {
+            int cant = 0;
+            Nodo reco = raiz;
+            while (reco != null)
+            {
+                reco = reco.sig;
+                cant++;
+            }
+            return cant;
+        }
+
+        public bool Ordenada()
+        {
+            if (Cantidad() > 1)
+            {
+                Nodo reco1 = raiz;
+                Nodo reco2 = raiz.sig;
+                while (reco2 != null)
+                {
+                    if (reco2.info < reco1.info)
+                    {
+                        return false;
+                    }
+                    reco2 = reco2.sig;
+                    reco1 = reco1.sig;
+                }
+            }
+            return true;
+        }
+
+        public bool Existe(int x)
+        {
+            Nodo reco = raiz;
+            while (reco != null)
+            {
+                if (reco.info == x)
+                    return true;
+                reco = reco.sig;
+            }
+            return false;
+        }
+
+        public bool Vacia()
+        {
+            if (raiz == null)
+                return true;
+            else
+                return false;
+        }
+
+        public void Imprimir()
+        {
+            Nodo reco = raiz;
+            while (reco != null) {
+                Console.Write (reco.info + "-");
+                reco = reco.sig;
+            }
+            Console.WriteLine();
+        }
+
+        static void Main(string[] args)
+        {
+            ListaGenerica lg=new ListaGenerica();
+            lg.Insertar (1, 10);
+            lg.Insertar (2, 20);
+            lg.Insertar (3, 30);
+            lg.Insertar (2, 15);
+            lg.Insertar (1, 115);
+            lg.Imprimir ();
+            Console.WriteLine ("Luego de Borrar el primero");
+            lg.Borrar (1);
+            lg.Imprimir ();
+            Console.WriteLine ("Luego de Extraer el segundo");
+            lg.Extraer (2);
+            lg.Imprimir ();
+            Console.WriteLine ("Luego de Intercambiar el primero con el tercero");
+            lg.Intercambiar (1, 3);
+            lg.Imprimir ();
+            if (lg.Existe(10)) 
+                Console.WriteLine("Se encuentra el 20 en la lista");
+            else
+                Console.WriteLine("No se encuentra el 20 en la lista");
+            Console.WriteLine("La posición del mayor es:"+lg.PosMayor());
+            if (lg.Ordenada())
+                Console.WriteLine("La lista está ordenada de menor a mayor");
+            else
+                Console.WriteLine("La lista no está ordenada de menor a mayor");
+            Console.ReadKey();
+        }
+    }
+}
+
+</pre>
+<p>Para insertar en una determinada posición dentro de la lista:</p>
+<pre>
+ <strong>   void Insertar (int pos, int x)</strong>
+</pre>
+<p>Primero con un if verificamos que exista esa posición en la lista (por ejemplo si la lista tiene 4 nodos podemos insertar hasta la posición 5, es decir uno más allá del último):</p>
+<pre>
+        if (pos &lt;= Cantidad () + 1)    {
+</pre>
+<p>Si ingresa al if ya podemos crear el nodo:</p>
+<pre>
+            Nodo nuevo = new Nodo ();
+            nuevo.info = x;
+</pre>
+<p>Ahora debemos analizar si la inserción es al principio de la lista, al final o en medio ya que los enlaces varían según donde se lo inserta. <br>
+<p>Para saber si se inserta al principio de la lista preguntamos si en pos llega un 1:</p>
+<pre>
+            if (pos == 1)
+</pre>
+<p>Si llega un 1 luego enlazamos el puntero sig del nodo que creamos con la dirección del primer nodo de la lista (raiz apunta siempre al primer nodo de la lista) y luego desplazamos raiz al nodo que acabamos de crear:</p>
+<pre>
+                nuevo.sig = raiz;
+                raiz = nuevo;
+</pre>
+<p>Si no se inserta al principio de la lista preguntamos si se inserta al final:</p>
+<pre>
+                if (pos == Cantidad () + 1)    
+</pre>
+<p>En caso de insertarse al final recorremos la lista hasta el último nodo:</p>
+<pre>
+                    Nodo reco = raiz;
+                    while (reco.sig != null) 
+                    {
+                        reco = reco.sig;
+                    }
+</pre>
+<p>y enlazamos el puntero sig del último nodo de la lista con la dirección del nodo que acabamos de crear (disponemos en sig del nodo creado el valor null ya que no hay otro nodo más adelante)</p>
+<pre>
+                    reco.sig = nuevo;
+                    nuevo.sig = null;
+</pre>
+<p>Si no se inserta al principio o al final significa que tenemos que insertar en medio de la lista.<br>
+Disponemos un for donde avanzamos un puntero auxiliar y nos detenemos una posición antes a donde tenemos que insertarlo:</p>
+<pre>
+
+                    for (int f = 1 ; f &lt;= pos - 2 ; f++)
+                        reco = reco.sig;
+</pre>
+<p>Disponemos otro puntero auxiliar que apunte al nodo próximo a donde está apuntando reco. Ahora enlazamos el puntero sig del nodo apuntado por reco con la dirección del nodo creado y el puntero sig del nodo creado con la dirección del nodo siguiente:</p>
+<pre>
+                    Nodo siguiente = reco.sig;
+                    reco.sig = nuevo;
+                    nuevo.sig = siguiente;
+</pre>
+<br>
+<br>
+<p>El método extraer recibe como parámetro la posición del nodo a extraer:</p>
+<pre>
+<strong>    public int Extraer (int pos) </strong>
+</pre>
+<p>Primero verificamos que la posición exista en la lista:</p>
+<pre>
+        if (pos &lt;= Cantidad ())    
+</pre>
+<p>En caso que exista verificamos si el nodo a extraer es el primero de la lista (este análisis debe hacerse ya que si es el primero de la lista se modifica el puntero raiz):</p>
+<pre>
+            if (pos == 1) 
+</pre>
+<p>Si es el primero guardamos en una variable auxiliar la información del nodo y avanzamos el puntero raiz:</p>
+<pre>
+                informacion = raiz.info;
+                raiz = raiz.sig;
+</pre>
+<p>Si el nodo a extraer no está al principio de la lista avanzamos con una estructura repetitiva hasta el nodo anterior a extraer:</p>
+<pre>
+                for (int f = 1 ; f &lt;= pos - 2 ; f++)
+                    reco = reco.sig;
+</pre>
+<p>Luego definimos otro puntero auxiliar y lo disponemos en el siguiente nodo a donde está apuntando reco:</p>
+<pre>
+                Nodo prox = reco.sig;
+</pre>
+<p>Ahora enlazamos el puntero sig del nodo apuntado por reco al nodo siguiente del nodo apuntado por prox (es decir el nodo apuntado por prox queda fuera de la lista):</>
+<pre>
+                reco.sig = prox.sig;
+</pre>
+<br><br>
+<p>El método borrar es muy similar al método extraer con la diferencia de que no retorna valor:</p>
+<pre>
+    <strong>public void Borrar (int pos)</strong>
+    {
+        if (pos &lt;= Cantidad ())    
+        {
+            if (pos == 1) 
+            {
+                raiz = raiz.sig;
+            } else 
+            {
+                Nodo reco;
+                reco = raiz;
+                for (int f = 1 ; f &lt;= pos - 2 ; f++)
+                    reco = reco.sig;
+                Nodo prox = reco.sig;
+                reco.sig = prox.sig;
+            }
+        }
+    }
+</pre>
+<br>
+<br>
+<p>El método intercambiar recibe dos enteros que representan las posiciones de los nodos que queremos intercambiar sus informaciones:</p>
+<pre>
+<strong>    public void Intercambiar (int pos1, int pos2) </strong>
+</pre>
+<p>Mediante un if verificamos que las dos posiciones existan en la lista:</p>
+<pre>
+        if (pos1 &lt;= Cantidad () && pos2 &lt;= Cantidad ())    
+</pre>
+<p>Definimos un puntero auxiliar llamado reco1, lo inicializamos con la dirección del primer nodo y mediante un for avanzamos hasta la posición almacenada en pos1:</p>
+<pre>
+            Nodo reco1 = raiz;
+            for (int f = 1 ; f &lt; pos1 ; f++)
+                reco1 = reco1.sig;
+</pre>
+<p>De forma similar con un segundo puntero auxiliar avanzamos hasta la posición indicada por pos2:</p>
+<pre>
+            Nodo reco2 = raiz;
+            for (int f = 1 ; f &lt; pos2 ; f++)
+                reco2 = reco2.sig;
+</pre>
+<p>Por último intercambiamos las informaciones que almacenan cada nodo:</p>
+<pre>
+            int aux = reco1.info;
+            reco1.info = reco2.info;
+            reco2.info = aux;
+</pre>
+<p>El método que retorna el mayor de la lista:</p>      
+<pre>
+    <strong>public int Mayor () </strong>
+</pre>
+<p>Verificamos que la lista no esté vacía:</p>
+<pre>
+        if (!Vacia ())    
+</pre>
+<p>Suponemos que el mayor es el primero de la lista e inicializamos un puntero auxiliar con la dirección del segundo nodo de la lista:</p>
+<pre>
+            int may = raiz.info;
+            Nodo reco = raiz.sig;
+</pre>
+<p>Mediante una estructura repetitiva recorremos toda la lista:</p>
+<pre>
+            while (reco != null) 
+</pre>
+<p>Cada vez que encontramos un nodo con información mayor que la variable may la actualizamos con este nuevo valor y avanzamos el puntero reco para visitar el siguiente nodo:</p>
+<pre>
+                if (reco.info &gt; may)
+                    may = reco.info;
+                reco = reco.sig;
+</pre>
+<p>Fuera de la estructura repetitiva retornamos el mayor:</p>
+<pre>
+            return may;
+</pre>
+
+<p>El método que retorna la posición del mayor es similar al anterior con la salvedad que debemos almacenar en otro auxiliar la posición donde se almacena el mayor:</p>
+<pre>
+    <strong>public int PosMayor() </strong>
+    {
+        if (!Vacia ())    
+        {
+            int may = raiz.info;
+            int x=1;
+            int pos=x;
+            Nodo reco = raiz.sig;
+            while (reco != null)
+            {
+                if (reco.info &gt; may) 
+                {
+                    may = reco.info;
+                    pos=x;
+                }
+                reco = reco.sig;
+                x++;
+            }
+            return pos;
+        }
+        else
+            return int.MaxValue;
+    }
+</pre>
+
+<p>El método que debe retornar si está ordenada la lista de menor a mayor es:</p>
+<pre>
+    <strong>public bool Ordenada() </strong>
+</pre>
+<p>Lo primero que verificamos si la lista tiene más de un nodo significa que debemos controlarla:</p>
+<pre>
+        if (Cantidad()&gt;1) 
+</pre>
+<p>Disponemos dos punteros auxiliares con las direcciones del primer y segundo nodo de la lista:</p>
+<pre>
+            Nodo reco1=raiz;
+            Nodo reco2=raiz.sig;
+</pre>
+<p>Mediante un while mientras no se finaliza la lista:</p>
+<pre>
+            while (reco2!=null) 
+           {
+</pre>
+<p>controlamos si la información del segundo nodo es menor al nodo anterior significa que la lista no está ordenada y podemos parar el análisis retornando un false</p>
+<pre>
+                if (reco2.info&lt;reco1.info) 
+                {
+                    return false;
+</pre>
+<p>Dentro del while avanzamos los dos punteros a sus nodos siguientes respectivamente.</p>
+<pre>
+                reco2=reco2.sig;
+                reco1=reco1.sig;
+</pre>
+
+<p>Fuera del while retornamos true indicando que la lista está ordenada de menor a mayor</p>
+<pre>
+        return true;
+</pre>
+<br>
+<br>
+<p>El método existe:</p>
+<pre>
+<strong>
+    public bool Existe(int x) 
+</strong>
+</pre>
+<p>Mediante un while recorremos la la lista:</p>
+<pre>
+        Nodo reco=raiz;
+        while (reco!=null) 
+        {
+</pre>
+<p>y en cada nodo que visitamos controlamos si el parámetro x es igual a la información del nodo, en caso afirmativo salimos del método retornando true:</p>
+<pre>
+            if (reco.info==x)
+                return true;
+            reco=reco.sig;
+</pre>
+<p>Fuera del while retornamos false indicando que ningún nodo coincide con el parámetro x:</p>
+<pre>
+        return false;
+</pre>
+<br><br>
+
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+<p>Plantear una clase para administrar una lista genérica implementando los siguientes métodos:<br>
+a) Insertar un nodo al principio de la lista.<br>
+b) Insertar un nodo al final de la lista.<br>
+c) Insertar un nodo en la segunda posición. Si la lista está vacía no se inserta el nodo.<br>
+d) Insertar un nodo en la ante última posición.<br>
+e) Borrar el primer nodo.<br>
+f) Borrar el segundo nodo.<br>
+g) Borrar el último nodo.<br>
+h) Borrar el nodo con información mayor.
+</p>
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ListaGenerica2
+{
+    class ListaGenerica
+    {
+        class Nodo
+        {
+            public int info;
+            public Nodo sig;
+        }
+
+        private Nodo raiz;
+
+        public ListaGenerica()
+        {
+            raiz = null;
+        }
+
+        void InsertarPrimero(int x)
+        {
+            Nodo nuevo = new Nodo();
+            nuevo.info = x;
+            nuevo.sig = raiz;
+            raiz = nuevo;
+        }
+
+        public void InsertarUtlimo(int x)
+        {
+            Nodo nuevo = new Nodo();
+            nuevo.info = x;
+            if (raiz == null)
+                raiz = nuevo;
+            else
+            {
+                Nodo reco = raiz;
+                while (reco.sig != null)
+                {
+                    reco = reco.sig;
+                }
+                reco.sig = nuevo;
+            }
+        }
+
+        public void InsertarSegundo(int x)
+        {
+            if (raiz != null)
+            {
+                Nodo nuevo = new Nodo();
+                nuevo.info = x;
+                if (raiz.sig == null)
+                {
+                    //Hay un solo nodo.
+                    raiz.sig = nuevo;
+                }
+                else
+                {
+                    nuevo.sig = raiz.sig;
+                    raiz.sig = nuevo;
+                }
+            }
+        }
+
+        public void InsertarAnteUltimo(int x)
+        {
+            if (raiz != null)
+            {
+                Nodo nuevo = new Nodo();
+                nuevo.info = x;
+                if (raiz.sig == null)
+                {
+                    //Hay un solo nodo.
+                    nuevo.sig = raiz;
+                    raiz = nuevo;
+                }
+                else
+                {
+                    Nodo atras = raiz;
+                    Nodo reco = raiz.sig;
+                    while (reco.sig != null)
+                    {
+                        atras = reco;
+                        reco = reco.sig;
+                    }
+                    nuevo.sig = atras.sig;
+                    atras.sig = nuevo;
+                }
+            }
+        }
+
+        public void BorrarPrimero()
+        {
+            if (raiz != null)
+            {
+                raiz = raiz.sig;
+            }
+        }
+
+        public void BorrarSegundo()
+        {
+            if (raiz != null)
+            {
+                if (raiz.sig != null)
+                {
+                    Nodo tercero = raiz.sig;
+                    tercero = tercero.sig;
+                    raiz.sig = tercero;
+                }
+            }
+        }
+
+        public void BorrarUltimo()
+        {
+            if (raiz != null)
+            {
+                if (raiz.sig == null)
+                {
+                    raiz = null;
+                }
+                else
+                {
+                    Nodo reco = raiz.sig;
+                    Nodo atras = reco;
+                    while (reco.sig != null)
+                    {
+                        atras = reco;
+                        reco = reco.sig;
+                    }
+                    atras.sig = null;
+                }
+            }
+
+        }
+        public void Imprimir() 
+        {
+            Nodo reco = raiz;
+            while (reco != null)
+            {
+                Console.Write (reco.info + "-");
+                reco = reco.sig;
+            }
+            Console.WriteLine();
+        }
+
+        public void BorrarMayor()
+        {
+            if (raiz != null)
+            {
+                Nodo reco = raiz;
+                int may = raiz.info;
+                while (reco != null)
+                {
+                    if (reco.info > may)
+                    {
+                        may = reco.info;
+                    }
+                    reco = reco.sig;
+                }
+                reco = raiz;
+                Nodo atras = raiz;
+                while (reco != null)
+                {
+                    if (reco.info == may)
+                    {
+                        if (reco == raiz)
+                        {
+                            raiz = raiz.sig;
+                            atras = raiz;
+                            reco = raiz;
+                        }
+                        else
+                        {
+                            atras.sig = reco.sig;
+                            reco = reco.sig;
+                        }
+                    }
+                    else
+                    {
+                        atras = reco;
+                        reco = reco.sig;
+                    }
+                }
+            }
+        }
+
+
+        static void Main(string[] args)
+        {
+            ListaGenerica lg=new ListaGenerica();
+            lg.InsertarPrimero (10);
+            lg.InsertarPrimero(45);
+            lg.InsertarPrimero(23);
+            lg.InsertarPrimero(89);
+            lg.Imprimir();
+            Console.WriteLine("Insertamos un nodo al final:");
+            lg.InsertarUtlimo(160);
+            lg.Imprimir();
+            Console.WriteLine("Insertamos un nodo en la segunda posición:");
+            lg.InsertarSegundo(13);
+            lg.Imprimir();
+            Console.WriteLine("Insertamos un nodo en la anteultima posición:");
+            lg.InsertarAnteUltimo(600);
+            lg.Imprimir();
+            Console.WriteLine("Borramos el primer nodo de la lista:");
+            lg.BorrarPrimero();
+            lg.Imprimir();        
+            Console.WriteLine("Borramos el segundo nodo de la lista:");
+            lg.BorrarSegundo();
+            lg.Imprimir();
+            Console.WriteLine("Borramos el ultimo nodo de la lista:");
+            lg.BorrarUltimo();
+            lg.Imprimir();                
+            Console.WriteLine("Borramos el mayor de la lista:");
+            lg.BorrarMayor();
+            lg.Imprimir();
+            Console.ReadKey();        
+        }
+    }
+}
+
+</pre></div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="index1e61.html?inicio=40">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=171&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:31 GMT -->
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/temarios/descripcion.php?cod=68&punto=8&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:09:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Conceptos de JQuery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="jQuery, programación, webmaster, tutorial, JavaScript">
+<meta name="description" content="El objetivo de este tutorial es presentar los conceptos de la libreria JavaScript JQUERY.">
+<meta name="author" content="Diego Moisset">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" type="text/JavaScript">
+
+</script>
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>8 - Métodos attr(nombre de propiedad), attr(nombre de propiedad,valor) y removeAttr(nombre de propiedad)</h1></td>
+<td align="right">
+<a href="../../publicidad/index.html"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.html"></a>	
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<p>
+<div style="font-size:1.3em;font-family:arial;">
+<p>Estos métodos nos permiten agregar propiedades a un elemento HTML y recuperar el valor de una propiedad.<p>
+<p>Para recuperar el valor de una propiedad (si hay muchos elementos que recupera la función $, solo retorna la propiedad del primero):</p>
+<pre>
+$(elemento).attr(nombre de propiedad)
+</pre>
+<p>Para fijar el valor de una propiedad (si hay muchos elementos que recupera la función $, se inicializan para todos):</p>
+<pre>
+$(elemento).attr(nombre de propiedad,valor)
+</pre>
+<p>Para eliminar una propiedad de un elemento o conjunto de elementos tenemos:</p>
+<pre>
+$(elemento).removeAttr(nombre de la propiedad)
+</pre>
+<p><strong>Problema:</strong>Definir una tabla sin el atributo border. Al presionar un botón añadirle la propiedad border con el valor 1. Si se presiona otro botón recuperar y mostrar el valor del atributo border y por último si se presiona otro botón eliminar la propiedad border.</p>
+<p>pagina1.html</p>
+<pre class="border">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;../jquery.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;funciones.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;input type=&quot;button&quot; id=&quot;boton1&quot; value=&quot;A&ntilde;adir 
+propiedad border&quot;&gt;&lt;br&gt;
+&lt;input type=&quot;button&quot; id=&quot;boton2&quot; value=&quot;Recuperar 
+valor de la propiedad border&quot;&gt;&lt;br&gt;
+&lt;input type=&quot;button&quot; id=&quot;boton3&quot; value=&quot;Eliminar la 
+propiedad border&quot;&gt;
+&lt;table id=&quot;tabla1&quot;&gt;
+&lt;tr&gt;
+&lt;td&gt;1111111111&lt;/td&gt;&lt;td&gt;1111111111&lt;/td&gt;&lt;td&gt;1111111111&lt;/td&gt;&lt;td&gt;1111111111&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2222222222&lt;/td&gt;&lt;td&gt;2222222222&lt;/td&gt;&lt;td&gt;2222222222&lt;/td&gt;&lt;td&gt;2222222222&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3333333333&lt;/td&gt;&lt;td&gt;3333333333&lt;/td&gt;&lt;td&gt;3333333333&lt;/td&gt;&lt;td&gt;3333333333&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>funciones.js</p>
+<pre class="recuadro">
+var x;
+x=$(document);
+x.ready(inicializarEventos);
+
+function inicializarEventos()
+{
+  var x=$("#boton1");
+  x.click(agregarPropiedadBorder);
+  x=$("#boton2");
+  x.click(recuperarPropiedadBorder);
+  x=$("#boton3");
+  x.click(eliminarPropiedadBorder);
+}
+
+function agregarPropiedadBorder()
+{
+  var x=$("#tabla1");
+  x.attr("border","1");
+}
+
+function recuperarPropiedadBorder()
+{
+  var x=$("#tabla1");
+  if (x.attr("border")!=undefined)
+    alert(x.attr("border"));
+  else
+    alert("No está definida la propiedad border en la tabla");
+}
+
+function eliminarPropiedadBorder()
+{
+  var x=$("#tabla1");
+  x.removeAttr("border");
+}
+</pre>
+<p>Cuando se presiona el primer botón:</p>
+<pre>
+function agregarPropiedadBorder()
+{
+  var x=$("#tabla1");
+  x.attr("border","1");
+}
+</pre>
+<p>Obtenemos la referencia de la tabla mediante su id y llamamos al método attr pasando como primer parámetro el nombre de la propiedad a agregar y como segundo parámetro el valor de la propiedad.</p>
+<p>Cuando se presiona el segundo botón:</p>
+<pre>
+function recuperarPropiedadBorder()
+{
+  var x=$("#tabla1");
+  if (x.attr("border")!=undefined)
+    alert(x.attr("border"));
+  else
+    alert("No está definida la propiedad border en la tabla");
+}
+</pre>
+<p>Llamamos al método attr enviándole como parámetro el nombre de la propiedad que queremos rescatar. Si retorna el valor undefined significa que no tiene dicha propiedad el elemento HTML, en caso contrario retorna su valor y procedemos a mostrarlo mediante un alert.</p>
+<p>Cuando se presiona el tercer botón:</p>
+<pre>
+function eliminarPropiedadBorder()
+{
+  var x=$("#tabla1");
+  x.removeAttr("border");
+}
+</pre>
+<p>Obtenemos la referencia a la tabla mediante su id y llamamos al método removeAttr con el nombre de la propiedad a eliminar.</p></div>
+</p>
+
+<table width="650px">
+<tr>
+<td align="center">	
+
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-14', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/temarios/descripcion.php?cod=68&punto=8&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:09:37 GMT -->
+</html>

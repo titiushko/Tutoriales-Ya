@@ -1,0 +1,164 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.mysqlya.com.ar/temarios/descripcion.php?inicio=42&cod=78&punto=59 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Temario:Tipos de datos blob y text.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>59 - Tipos de datos blob y text.</h1></td>
+<td align="right">
+<!--<a href="http://www.mysqlya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<p>
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 		  
+
+<p>Los tipos "blob" o "text" son bloques de datos. Tienen una longitud de 65535 caracteres.</p>
+<p>Un "blob" (Binary Large Object) puede almacenar un volumen variable de datos. La diferencia entre "blob" y "text" es que "text" diferencia mayúsculas y minúsculas y "blob" no; esto es porque "text" almacena cadenas de caracteres no binarias (caracteres), en cambio "blob" contiene cadenas de caracteres binarias (de bytes).</p>
+<p>No permiten valores "default".</p>
+
+<p>Existen subtipos:</p>
+<p>- tinyblob o tinytext: longitud máxima de 255 caracteres.</p>
+<p>- mediumblob o mediumtext: longitud de 16777215 caracteres.</p>
+<p>- longblob o longtext: longitud para 4294967295 caracteres.</p>
+
+<p>Se utiliza este tipo de datos cuando se necesita almacenar imágenes, sonidos o textos muy largos.</p>
+
+<p>Un video club almacena la información de sus películas en alquiler en una tabla denominada "peliculas". Además del título, actor y duración de cada película incluye un campo en el cual guarda la sinopsis de cada una de ellas.</p>
+<p>La tabla contiene un campo de tipo "text" llamado "sinopsis":</p>
+<pre>
+- codigo: int unsigned auto_increment, clave primaria,
+- nombre: varchar(40),
+- actor: varchar(30),
+- duracion: tinyint unsigned,
+- sinopsis: text,
+</pre>
+<p>Se ingresan los datos en un campo "text" o "blob" como si fuera de tipo cadena de caracteres, es decir, entre comillas:</p>
+<pre>
+ insert into peliculas values(1,'Mentes que brillan','Jodie Foster',120,
+ 'El no entiende al mundo ni el  mundo lo entiende a él; es un niño superdotado. La escuela 
+especial a la que asiste tampoco resuelve los problemas del niño. Su madre hará todo lo que esté a 
+su alcance para ayudarlo. Drama');
+</pre>
+<p>Para buscar un texto en un campo de este tipo usamos "like": </p>
+<pre>
+ select * from peliculas
+  where sinopsis like '%Drama%';
+</pre>
+<p>No se pueden establecer valores por defecto a los campos de tipo "blob" o "text", es decir, no aceptan la cláusula "default" en la definición del campo.</p>
+
+
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   <h2><a href="../indexd9fe.html?inicio=42">Retornar</a></h2>   
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-5";
+urchinTracker();
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from www.mysqlya.com.ar/temarios/descripcion.php?inicio=42&cod=78&punto=59 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:29 GMT -->
+</html>

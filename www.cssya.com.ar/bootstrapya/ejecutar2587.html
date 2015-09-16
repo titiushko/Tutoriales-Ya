@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/ejecutar.php?cod=141 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 17:33:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+    <title>CSS3 Ya</title>
+
+    <link href='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css' rel='stylesheet'>     
+    <script src='../../ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script> 
+    <script src='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>     
+
+<style>
+body {
+  background:#5fcbae;
+  margin:0 auto;
+  width:100%;
+}
+
+
+#pesta {
+  margin-top:10px;
+  background:#d6d9de;
+  height:100%;
+-webkit-box-shadow: 8px 8px 5px #444;
+-moz-box-shadow: 8px 8px 5px #444;
+box-shadow: 8px 8px 5px #444;  
+  
+}
+
+</style>    
+   
+<script type="text/javascript">
+
+addEventListener('load',inicio,false);
+
+function inicio()
+{
+  document.getElementById('p2').style.height=(window.innerHeight-150)+'px';
+  document.getElementById('p3').style.height=(window.innerHeight-150)+'px';
+}
+
+$(document).ready(function(){
+  var opciones = {
+                   select:tabSeleccionado
+                 };                 
+  $("#pesta").tabs(opciones);
+});
+
+function tabSeleccionado(event,tab) {
+  var d = parent.documentodinamico.document; 
+  d.open();
+  d.write($('#editor').val());
+  d.close();
+  
+}
+
+
+</script>
+   
+</head>
+<body>
+
+
+
+
+<div id="pesta" style="width:98%;margin-left:0.5%">
+	<ul>
+		<li><a href="#p2">Ejemplo</a></li>
+		<li><a href="#p3">Vista Previa</a></li>
+	</ul>
+	    
+	<div id="p2">
+    <textarea name="editor" id="editor" style="width:100%;height:100%;font-size:16px;font-family:courier"><!DOCTYPE html> 
+<html> 
+  <head> 
+    <title>Prueba de Bootstrap</title> 
+    <link href="css/bootstrap.min.css" rel="stylesheet"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head> 
+<body> 
+  <div class="container">
+    <p class="text-muted">Mostramos un texto apagado.</p>
+    <p class="text-primary">Mostramos un texto importante.</p>
+    <p class="text-success">Mostramos un texto indicando éxito.</p>
+    <p class="text-info">Mostramos un texto de información.</p>
+    <p class="text-warning">Mostramos un texto que representa una advertencia.</p>
+    <p class="text-danger">Mostramos un texto que representa peligro.</p>
+    <hr> 
+    <p class="bg-primary">Mostramos un texto importante con el fondo coloreado.</p>
+    <p class="bg-success">Mostramos un texto indicando éxito con el fondo coloreado.</p>
+    <p class="bg-info">Mostramos un texto de información con el fondo coloreado.</p>
+    <p class="bg-warning">Mostramos un texto que representa una advertencia con el fondo coloreado.</p>
+    <p class="bg-danger">Mostramos un texto que representa peligro con el fondo coloreado.</p>
+    <hr>
+    <a class="text-primary" href="#">Enlace con un texto importante.</a><br>
+    <a class="text-success" href="#">Enlace un texto indicando éxito.</a><br>
+    <a class="text-info" href="#">Enlace un texto de información.</a><br>
+    <a class="text-warning" href="#">Enlace un texto que representa una advertencia.</a><br>
+    <a class="text-danger" href="#">Enlace un texto que representa peligro.</a>
+    <hr> 
+    <a class="bg-primary" href="#">Enlace con un texto importante con el fondo coloreado.</a><br>
+    <a class="bg-success" href="#">Enlace con un texto indicando éxito con el fondo coloreado.</a><br>
+    <a class="bg-info" href="#">Enlace con un texto de información con el fondo coloreado.</a><br>
+    <a class="bg-warning" href="#">Enlace con un texto que representa una advertencia con el fondo coloreado.</a><br>
+    <a class="bg-danger" href="#">Enlace con un texto que representa peligro con el fondo coloreado.</a>
+
+  </div>
+</body> 
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/ejecutar.php?cod=141 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 17:33:46 GMT -->
+</html> 
+</textarea>
+	</div>
+	<div id="p3">
+<iframe width="100%" height="100%" id="documentodinamico" name="documentodinamico" src="vacio.html">
+No tiene disponible el navegador la capacidad de iframe
+</iframe>
+	</div>
+</div>
+
+</body>
+</html>

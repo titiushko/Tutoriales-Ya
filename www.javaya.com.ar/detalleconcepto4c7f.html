@@ -1,0 +1,652 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=87&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:52:31 GMT -->
+<head>
+<title>Declaración de una clase y definición de objetos.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Declaración de una clase y definición de objetos.</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>La programación orientada a objetos se basa en la programación de clases; a diferencia de la programación estructurada, que está centrada en las funciones.</p>
+<p>Una clase es un molde del que luego se pueden crear múltiples objetos, con similares características.</p>
+<p>Una clase es una plantilla (molde), que define atributos (variables) y métodos (funciones)</p>
+
+<p>La clase define los atributos y métodos comunes a los objetos de ese tipo, pero luego, cada objeto tendrá sus propios valores y compartirán las mismas funciones.</p>
+
+<p>Debemos crear una clase antes de poder crear objetos (instancias) de esa clase. Al crear un objeto de una clase, se dice que se crea una instancia de la clase o un objeto propiamente dicho.</p>
+<p>La estructura de una clase es:</p>
+<pre>
+class [nombre de la clase] {
+  [atributos o variables de la clase]
+  [métodos o funciones de la clase]
+  [main]
+}
+</pre>
+<h3>Problema 1:</h3>
+<p>Confeccionar una clase que permita carga el nombre y la edad de una persona. Mostrar los datos cargados. Imprimir un mensaje si es mayor de edad (edad&gt;=18)</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.util.Scanner;
+public class Persona {
+    private Scanner teclado;
+    private String nombre;
+    private int edad;
+    
+    public void inicializar() {
+        teclado=new Scanner(System.in);
+        System.out.print("Ingrese nombre:");
+        nombre=teclado.next();
+        System.out.print("Ingrese edad:");
+        edad=teclado.nextInt();
+    }
+    
+    public void imprimir() {
+        System.out.println("Nombre:"+nombre);
+        System.out.println("Edad:"+edad);
+    }
+    
+    public void esMayorEdad() {
+        if (edad>=18) {
+            System.out.print(nombre+" es mayor de edad.");
+        } else {
+            System.out.print(nombre+" no es mayor de edad.");
+        }
+    }
+    
+    public static void main(String[] ar) {
+        Persona persona1;
+        persona1=new Persona();
+        persona1.inicializar();
+        persona1.imprimir();
+        persona1.esMayorEdad();
+    }
+}
+</pre>
+<p>El nombre de la clase debe hacer referencia al concepto (en este caso la hemos llamado Persona):</p>
+<pre>
+public class Persona {
+</pre>
+<p>Los atributos los definimos dentro de la clase pero fuera de la main:</p>
+<pre>
+    private Scanner teclado;
+    private String nombre;
+    private int edad;
+</pre>
+<p>Veremos más adelante que un atributo es normalmente definido con la cláusula private (con esto no permitimos el acceso al atributo desde otras clases)<br>
+<p>A los atributos se tiene acceso desde cualquier función o método de la clase (salvo la main)</p>
+<p>Luego de definir los atributos de la clase debemos declarar los métodos o funciones de la clase. La sintaxis es parecida a la main (sin la cláusula static):</p>
+<pre>
+    public void inicializar() {
+        teclado=new Scanner(System.in);
+        System.out.print("Ingrese nombre:");
+        nombre=teclado.next();
+        System.out.print("Ingrese edad:");
+        edad=teclado.nextInt();
+    }
+</pre>
+<p>En el método inicializar (que será el primero que deberemos llamar desde la main) creamos el objeto de la clase Scanner y cargamos por teclado los atributos nombre y edad. Como podemos ver el método inicializar puede hacer acceso a los tres atributos de la clase Persona.<br>
+El segundo método tiene por objetivo imprimir el contenido de los atributos nombre y edad (los datos de los atributos se cargaron al ejecutarse previamente el método inicializar:</p>
+<pre>
+    public void imprimir() {
+        System.out.println("Nombre:"+nombre);
+        System.out.println("Edad:"+edad);
+    }
+</pre>
+<p>El tercer método tiene por objetivo mostrar un mensaje si la persona es mayor o no de edad:</p>
+<pre>
+    public void esMayorEdad() {
+        if (edad>=18) {
+            System.out.print(nombre+" es mayor de edad.");
+        } else {
+            System.out.print(nombre+" no es mayor de edad.");
+        }
+    }
+</pre>
+<p>Por último en la main declaramos un objeto de la clase Persona y llamamos a los métodos en un orden adecuado:</p>
+<pre>
+    public static void main(String[] ar) {
+        Persona persona1;
+        persona1=new Persona();
+        persona1.inicializar();
+        persona1.imprimir();
+        persona1.esMayorEdad();
+    }
+</pre>
+<p>Persona persona1; //Declaración del objeto<br>
+persona1=new Persona(); //Creación del objeto<br>
+persona1.inicializar(); //Llamada de un método</p>
+
+
+<h3>Problema 2:</h3>
+<p>Desarrollar un programa que cargue los lados de un triángulo e implemente los siguientes métodos: inicializar los atributos, imprimir el valor del lado mayor y otro método que muestre si es equilátero o no.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.util.Scanner;
+public class Triangulo {
+    private Scanner teclado;
+    private int lado1,lado2,lado3;
+    
+    public void inicializar() {
+        teclado=new Scanner(System.in);
+        System.out.print("Medida lado 1:");
+        lado1=teclado.nextInt();
+        System.out.print("Medida lado 2:");
+        lado2=teclado.nextInt();
+        System.out.print("Medida lado 3:");
+        lado3=teclado.nextInt();       
+    }
+    
+    public void ladoMayor() {
+    	System.out.print("Lado mayor:");
+        if (lado1>lado2 && lado1>lado3) {
+            System.out.println(lado1);
+        } else {
+            if (lado2>lado3) {
+                System.out.println(lado2);
+            } else {
+                System.out.println(lado3);
+            }
+        }
+    }
+    
+    public void esEquilatero() {
+        if (lado1==lado2 && lado1==lado3) {
+            System.out.print("Es un triángulo equilátero");
+        } else {
+            System.out.print("No es un triángulo equilátero");            
+        }
+    }
+
+    public static void main(String []ar) {
+        Triangulo triangulo1=new Triangulo();
+        triangulo1.inicializar();
+        triangulo1.ladoMayor();
+        triangulo1.esEquilatero();
+    }
+}
+</pre>
+<p>Todos los problemas que requieran la entrada de datos por teclado debemos definir un atributo de la clase Scanner:</p>
+<pre>
+    private Scanner teclado;
+</pre>
+<p>Este problema requiere definir tres atributos de tipo entero donde almacenamos los valores de los lados del triángulo:</p>
+<pre>
+    private int lado1,lado2,lado3;
+</pre>
+<p>El primer método que deberá llamarse desde la main es el inicializar donde creamos el objeto de la clase Scanner y cargamos los tres atributos por teclado:</p>
+<pre>
+    public void inicializar() {
+        teclado=new Scanner(System.in);
+        System.out.print("Medida lado 1:");
+        lado1=teclado.nextInt();
+        System.out.print("Medida lado 2:");
+        lado2=teclado.nextInt();
+        System.out.print("Medida lado 3:");
+        lado3=teclado.nextInt();       
+    }
+</pre>
+<p>El método ladoMayor muestra el valor mayor de los tres enteros ingresados:</p>
+<pre>
+    public void ladoMayor() {
+    	System.out.print("Lado mayor:");
+        if (lado1>lado2 && lado1>lado3) {
+            System.out.println(lado1);
+        } else {
+            if (lado2>lado3) {
+                System.out.println(lado2);
+            } else {
+                System.out.println(lado3);
+            }
+        }
+    }
+</pre>
+<p>Como podemos observar cuando un problema se vuelve más complejo es más fácil y ordenado separar los distintos algoritmos en varios métodos y no codificar todo en la main.</p>
+<p>El último método de esta clase verifica si los tres enteros ingresados son iguales:</p>
+<pre>
+    public void esEquilatero() {
+        if (lado1==lado2 && lado1==lado3) {
+            System.out.print("Es un triángulo equilátero");
+        } else {
+            System.out.print("No es un triángulo equilátero");            
+        }
+    }
+</pre>
+<p>En la main creamos un objeto de la clase Triangulo y llamamos los métodos respectivos:</p>
+<pre>
+    public static void main(String []ar) {
+        Triangulo triangulo1=new Triangulo();
+        triangulo1.inicializar();
+        triangulo1.ladoMayor();
+        triangulo1.esEquilatero();
+    }
+</pre>
+
+<h3>Problema 3:</h3>
+<p>Desarrollar una clase que represente un punto en el plano y tenga los siguientes métodos: cargar los valores de x e y, imprimir en que cuadrante se encuentra dicho punto (concepto matemático, primer cuadrante si x e y son positivas, si x<0 e y>0 segundo cuadrante, etc.)</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.util.Scanner;
+public class Punto {
+    private Scanner teclado;
+    int x,y;
+    
+    public void inicializar() {
+        teclado=new Scanner(System.in);
+        System.out.print("Ingrese coordenada x :");
+        x=teclado.nextInt();
+        System.out.print("Ingrese coordenada y :");
+        y=teclado.nextInt();
+    }
+    
+    void imprimirCuadrante() {
+        if (x>0 && y>0) {
+            System.out.print("Se encuentra en el primer cuadrante.");
+        } else {
+            if (x<0 && y>0) {
+                System.out.print("Se encuentra en el segundo cuadrante.");
+            } else {
+                if (x<0 && y<0) {
+                    System.out.print("Se encuentra en el tercer cuadrante.");
+                } else {
+                    if (x>0 && y<0) {
+                        System.out.print("Se encuentra en el cuarto cuadrante.");
+                    } else {
+                        System.out.print("El punto no está en un cuadrante.");
+                    }
+                }
+            }
+        }
+    }
+    
+    public static void main(String[] ar) {
+        Punto punto1;
+        punto1=new Punto();
+        punto1.inicializar();
+        punto1.imprimirCuadrante();
+    }
+}
+</pre>
+<p>Definimos tres atributos (el objeto de la clase Scanner y los dos enteros donde almacenamos la coordenada x e y del punto:</p>
+<pre>
+    private Scanner teclado;
+    int x,y;
+</pre>
+<p>El método inicializar crea el objeto de la clase Scanner y pide cargar las coordenadas x e y:</p>
+<pre>
+    public void inicializar() {
+        teclado=new Scanner(System.in);
+        System.out.print("Ingrese coordenada x :");
+        x=teclado.nextInt();
+        System.out.print("Ingrese coordenada y :");
+        y=teclado.nextInt();
+    }
+</pre>
+<p>El segundo método mediante un conjunto de if verificamos en que cuadrante se encuentra el punto ingresado:</p>
+<pre>
+    void imprimirCuadrante() {
+        if (x>0 && y>0) {
+            System.out.print("Se encuentra en el primer cuadrante.");
+        } else {
+            if (x<0 && y>0) {
+                System.out.print("Se encuentra en el segundo cuadrante.");
+            } else {
+                if (x<0 && y<0) {
+                    System.out.print("Se encuentra en el tercer cuadrante.");
+                } else {
+                    if (x>0 && y<0) {
+                        System.out.print("Se encuentra en el cuarto cuadrante.");
+                    } else {
+                        System.out.print("El punto no está en un cuadrante.");
+                    }
+                }
+            }
+        }
+    }
+</pre>
+<p>La main no tiene grandes diferencias con los problemas realizados anteriormente, declaramos un objeto de la clase Punto, creamos el objeto mediante el operador new y seguidamente llamamos a los métodos inicializar e imprimirCuadrante en ese orden:</p>
+<pre>
+    public static void main(String[] ar) {
+        Punto punto1;
+        punto1=new Punto();
+        punto1.inicializar();
+        punto1.imprimirCuadrante();
+    }
+</pre>
+
+<h3>Problema 4:</h3>
+<p>Desarrollar una clase que represente un Cuadrado y tenga los siguientes métodos: cargar el valor de su lado, imprimir su perímetro y su superficie.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.util.Scanner;
+public class Cuadrado {
+    private Scanner teclado;
+    int lado;
+    
+    public void inicializar() {
+        teclado=new Scanner(System.in);
+        System.out.print("Ingrese valor del lado :");
+        lado=teclado.nextInt();
+    }
+    
+    public void imprimirPerimetro() {
+        int perimetro;
+        perimetro=lado*4;
+        System.out.println("El perímetro es:"+perimetro);
+    }
+    
+    public void imprimirSuperficie() {
+        int superficie;
+        superficie=lado*lado;
+        System.out.println("La superficie es:"+superficie);
+    }
+    
+    public static void main(String[] ar) {
+        Cuadrado cuadrado1;
+        cuadrado1=new Cuadrado();
+        cuadrado1.inicializar();
+        cuadrado1.imprimirPerimetro();
+        cuadrado1.imprimirSuperficie();
+    }
+}
+</pre>
+<p>En este problema es interesante ver como no definimos dos atributos donde se almacenan la superficie y el perímetro del cuadrado, esto debido a que solo estos datos se los requiere en el método donde se imprimen:</p>
+<pre>
+    public void imprimirPerimetro() {
+        int perimetro;
+        perimetro=lado*4;
+        System.out.println("El perímetro es:"+perimetro);
+    }
+</pre>
+<p>Esto significa que la variable perimetro es una variable local al método imprimirPerimetro. Esta variable es local a dicho método y solo se la puede acceder dentro del método. La diferencia fundamental entre una variable local y un atributo de la clase es que al atributo se lo puede acceder desde cualquier método de la clase y la variable local solo existe mientras se está ejecutando el método.</p>
+
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Confeccionar una clase que represente un empleado. Definir como atributos su nombre y su sueldo. Confeccionar los métodos para la carga, otro para imprimir sus datos y por último uno que imprima un mensaje si debe pagar impuestos (si el sueldo supera a 3000)
+</li>
+
+<li>
+Implementar la clase operaciones. Se deben cargar dos valores enteros, calcular su suma, resta, multiplicación y división, cada una en un método, imprimir dichos resultados.
+</li>
+
+
+</ol>
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+import java.util.Scanner;
+public class Empleado {
+    private Scanner teclado;
+    String nombre;
+    float sueldo;
+    
+    public void inicializar() {
+        teclado=new Scanner(System.in);
+        System.out.print("Ingrese el nombre del empleado:");
+        nombre=teclado.next();
+        System.out.print("Ingrese su sueldo:");
+        sueldo=teclado.nextFloat();
+    }
+    
+    public void pagaImpuestos() {
+        if (sueldo>3000) {
+            System.out.print("Debe abonar impuestos");
+        } else {
+            System.out.print("No paga impuestos");
+        }
+    }
+    
+    public static void main(String[] ar) {
+        Empleado empleado1;
+        empleado1=new Empleado();
+        empleado1.inicializar();
+        empleado1.pagaImpuestos();
+    }
+}
+
+
+
+
+import java.util.Scanner;
+public class Operaciones {
+    private Scanner teclado;
+    int valor1,valor2;
+    
+    public void inicializar() {
+        teclado=new Scanner(System.in);
+        System.out.print("Ingrese primer valor:");
+        valor1=teclado.nextInt();
+        System.out.print("Ingrese segundo valor:");
+        valor2=teclado.nextInt();
+    }
+    
+    public void sumar() {
+        int suma;
+        suma=valor1+valor2;
+        System.out.println("La suma es:"+suma);
+    }
+    
+    public void restar() {
+        int resta;
+        resta=valor1-valor2;
+        System.out.println("La resta es:"+resta);
+    }
+    
+    public void multiplicar() {
+        int multiplicacion;
+        multiplicacion=valor1*valor2;
+        System.out.println("La multiplicación es:"+multiplicacion);
+    }
+    
+    public void dividir() {
+        int division;
+        division=valor1/valor2;
+        System.out.println("La división es:"+division);
+    }
+    
+    public static void main(String[] ar) {
+        Operaciones opera;
+        opera=new Operaciones();
+        opera.inicializar();
+        opera.sumar();
+        opera.restar();
+        opera.multiplicar();
+        opera.dividir();
+    }
+}
+</pre></div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index2904.html?inicio=0">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=87&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:52:31 GMT -->
+</html>

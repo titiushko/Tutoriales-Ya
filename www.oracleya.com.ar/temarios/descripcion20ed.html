@@ -1,0 +1,182 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=100&cod=271&punto=113 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Descripción : Disparador condiciones (when) (Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>113 - Disparador condiciones (when)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>En los triggers a nivel de fila, se puede incluir una restricción adicional, agregando la clausula "when" con una condición que se evalúa para cada fila que afecte el disparador; si resulta cierta, se ejecutan las sentencias del trigger para ese registro; si resulta falsa, el trigger no se dispara para ese registro.</p>
+<p>Limitaciones de "when":</p>
+<p>- no puede contener subconsultas, funciones agregadas ni funciones definidas por el usuario;</p>
+<p>- sólo se puede hacer referencia a los parámetros del evento;</p>
+<p>- no se puede especificar en los trigers "instead of" ni en trigger a nivel de sentencia.</p>
+
+<p>Creamos el siguiente disparador:</p>
+<pre>
+create or replace trigger tr_precio_libros
+ before insert or update of precio
+ on libros
+ for each row when(new.precio>50)
+ begin
+  :new.precio := round(:new.precio);
+ end tr_precio_libros;
+</pre>
+<p>El disparador anterior se dispara ANTES (before) que se ejecute un "insert" sobre "libros" o un "update" sobre "precio" de "libros". Se ejecuta una vez por cada fila afectada (for each row) y solamente si cumple con la condición del "when", es decir, si el nuevo precio que se ingresa o modifica es superior a 50. Si el precio es menor o igual a 50, el trigger no se dispara. Si el precio es mayor a 50, se modifica el valor ingresado redondeándolo a entero.</p>
+<p>Note que cuando hacemos referencia a "new" (igualmente con "old") en la condición "when", no se colocan los dos puntos precediéndolo; pero en el cuerpo del trigger si.</p>
+
+<p>Si ingresamos un registro con el valor 30.80 para "precio", el trigger no se dispara.</p>
+<p>Si ingresamos un registro con el valor "55.6" para "precio", el trigger se dispara modificando tal valor a "56".</p>
+<p>Si actualizamos el precio de un libro a "40.30", el trigger no se activa.</p>
+<p>Si actualizamos el precio de un libro a "50.30", el trigger se activa y modifica el valor a "50".</p>
+<p>Si actualizamos el precio de 2 registros a valores que superen los "50", el trigger se activa 2 veces redondeando los valores a entero.</p>
+<p>Si actualizamos en una sola sentencia el precio de 2 registros y solamente uno de ellos supera los "50", el trigger se activa 1 sola vez.</p>
+
+<p>El trigger anterior podría haberse creado de la siguiente manera:</p>
+<pre>
+create or replace trigger tr_precio_libros
+ before insert or update of precio
+ on libros
+ for each row
+ begin
+  if :new.precio>50 then
+   :new.precio := round(:new.precio);
+  end if;
+ end tr_precio_libros;
+</pre>
+<p>En este caso, la condición se chequea en un "if" dentro del cuerpo del trigger. La diferencia con el primer trigger que contiene "when" es que la condición establecida en el "when" se testea antes que el trigger se dispare y si resulta verdadera, se dispara el trigger, sino no. En cambio, si la condición está dentro del cuerpo del disparador, el trigger se dispara y luego se controla el precio, si cumple la condición, se modifica el precio, sino no.</p>
+<p>Por ejemplo, la siguiente sentencia:</p>
+<pre>
+ update libros set precio=40 where...;
+</pre>
+<p>no dispara el primer trigger, ya que no cumple con la condición del "when"; pero si dispara el segundo trigger, que no realiza ninguna acción ya que al evaluarse la condición del "if", resulta falsa.</p>
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../indexf6ce.html?inicio=100">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=100&cod=271&punto=113 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+</html>

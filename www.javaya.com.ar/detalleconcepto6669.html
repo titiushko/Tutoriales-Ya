@@ -1,0 +1,239 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=114&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:54:00 GMT -->
+<head>
+<title>Estructuras dinámicas: Listas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Estructuras dinámicas: Listas</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>Una lista es un conjunto de nodos, cada uno de los cuales tiene dos campos: uno de información y un apuntador al siguiente nodo de la lista. Además un apuntador externo señala el primer nodo de la lista.</p>
+
+<p>Representación gráfica de un nodo:</p>
+<img src="imagentema/foto082.jpg" border="0" alt="Nodo">
+
+<p>La información puede ser cualquier tipo de dato simple, estructura de datos o inclusive uno o más objetos.<br>
+La dirección al siguiente nodo es un puntero.</p>
+
+<p>Representación gráfica de una lista:</p>
+<img src="imagentema/foto083.jpg" border="0" alt="lista">
+
+<p>Como decíamos, una lista es una secuencia de nodos (en este caso cuatro nodos). La información de los nodos en este caso es un entero y siempre contiene un puntero que guarda la dirección del siguiente nodo.<br>
+raiz es otro puntero externo a la lista que contiene la dirección del primer nodo.</p>
+
+<p>El estado de una lista varía durante la ejecución del programa:</p>
+<img src="imagentema/foto084.jpg" border="0" alt="lista vacia"><br>
+<p>De esta forma representamos gráficamente una lista vacía. </p>
+<p>Si insertamos un nodo en la lista quedaría luego:</p>
+<img src="imagentema/foto085.jpg" border="0" alt="lista con un nodo"><br>
+
+<p>Si insertamos otro nodo al principio con el valor 9 tenemos:</p>
+<img src="imagentema/foto086.jpg" border="0" alt="lista con dos nodos"><br>
+
+<p>Lo mismo podemos borrar nodos de cualquier parte de la lista.<br>
+Esto nos trae a la mente el primer problema planteado: el desarrollo del procesador de texto. Podríamos utilizar una lista que inicialmente estuviera vacía e introdujéramos un nuevo nodo con cada línea que tipea el operador. Con esta estructura haremos un uso muy eficiente de la memoria.</p>
+<h3>Tipos de listas.</h3>
+<p>Según el mecanismo de inserción y extracción de nodos en la lista tenemos los siguientes tipos:</p>
+<ul>
+<li>Listas tipo pila.</li>
+<li>Listas tipo cola.</li>
+<li>Listas genéricas.</li>
+</ul>
+
+<p>Una lista se comporta como una pila si las inserciones y extracciones las hacemos por un mismo lado de la lista. También se las llama listas LIFO (Last In First Out - último en entrar primero en salir)</p>
+
+<p>Una lista se comporta como una cola si las inserciones las hacemos al final y las extracciones las hacemos por el frente de la lista. También se las llama listas FIFO (First In First Out - primero en entrar primero en salir)</p>
+
+<p>Una lista se comporta como genérica cuando las inserciones y extracciones se realizan en cualquier parte de la lista.<br>
+Podemos en algún momento insertar un nodo en medio de la lista, en otro momento al final, borrar uno del frente, borrar uno del fondo o uno interior, etc.</p>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index1e61.html?inicio=40">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=114&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:54:04 GMT -->
+</html>

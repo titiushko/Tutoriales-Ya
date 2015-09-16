@@ -1,0 +1,231 @@
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/simulador/simulador.php?inicio=18&cod=88&punto=32&inicio=18 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+  <title>Ejercicios resueltos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="jQuery, programación, webmaster, tutorial, JavaScript">
+<meta name="description" content="El objetivo de este tutorial es presentar los conceptos de la libreria JavaScript JQUERY.">
+<meta name="author" content="Diego Moisset">
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.editor {
+ /* background-image:url("numeros.png");
+ background-repeat: no-repeat;
+       background-position: 0px 0px;
+       background-attachment: scroll;*/}
+</style>
+
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;		
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=yes,status=yes,toolbar=yes,location=yes');  	
+}
+</script>
+</head>
+
+<body bgcolor="#CCFFCC">
+        
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>32 - Mostrar un tooltip con datos recuperados del servidor en forma asincrónica</h1></td>
+<td align="right">
+<!--<a href="http://www.javascriptya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+	<table width="650px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+
+</tr>
+</table>		  
+	  
+	  
+                <b>Simulador <em>(Cuando presiona el bot&oacute;n &quot;ejecutar el programa&quot; 
+        se graban todos los cuadros de texto y se ejecuta el primero de la lista 
+        mostrando en una página el resultado.</em></b>) 
+<form name="formulario" action="http://www.scratchya.com.ar/ejecutajquerya.php" target="ventanaForm" method="post" onsubmit=  "abrirVentana()">
+
+<div style="font-size:1.3em;font-family:arial;"><br><p>Implementar un Tooltip con jQuery  recuperando la información a mostrar del servidor en forma asincrónica.<br>
+Agregar una imagen al tooltip. En el servidor ya hay cuatro imagenes llamadas imagen1.jpg, imagen2.jpg etc. y se encuentran en el directorio inmediatamente superior a donde se almacenan las páginas que codifica ( &lt;img src=&quot;../imagen1.jpg&quot;&gt; )</p></div><br><b>pagina1.html</b><input type="hidden" name="archivo1" value="pagina1.html"><br><textarea class="editor" wrap="off" rows="15" cols="110" name="programa1">&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;link rel=&quot;StyleSheet&quot; href=&quot;estilos.css&quot; type=&quot;text/css&quot;&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;../jquery.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;funciones.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;Entre con el mouse al recuadro.&lt;/p&gt;
+&lt;div class=&quot;cuadradito&quot; id=&quot;c1&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;cuadradito&quot; id=&quot;c2&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;cuadradito&quot; id=&quot;c3&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;cuadradito&quot; id=&quot;c4&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea><br><br><input type="submit"  value="Ejecutar el programa.">
+<table width="650px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 26/02/09 graficotot */
+google_ad_slot = "5205806820";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 11/11/08 grafico */
+google_ad_slot = "1392361504";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>
+
+
+
+<br><div style="font-size:1.3em;font-family:arial;"><br></div><br><b>estilos.css</b><input type="hidden" name="archivo2" value="estilos.html"><br><textarea class="editor" wrap="off" rows="15" cols="110" name="programa2">.cuadradito{
+  background-color: #f00;
+  height: 50px; 
+  width: 50px;
+  margin:3px;
+  z-index: -1;
+}
+
+#divmensaje {
+  background-color: yellow;
+   position: absolute; 
+   padding: 5px;
+   width:250px;
+   left:120px;
+   top:100px;
+  z-index: 100;
+}</textarea><br><br><div style="font-size:1.3em;font-family:arial;"><br></div><br><b>funciones.js</b><input type="hidden" name="archivo3" value="funciones.html"><br><textarea class="editor" wrap="off" rows="15" cols="110" name="programa3">$(document).ready(function () {
+  $(&quot;body&quot;).append('&lt;div id=&quot;divmensaje&quot;&gt;hhhh&lt;/div&gt;');
+  $(&quot;#divmensaje&quot;).hide();
+  $(&quot;.cuadradito&quot;).hover(function (e) {
+    $(&quot;#divmensaje&quot;).show();
+    $(&quot;#divmensaje&quot;).css(&quot;left&quot;,e.clientX+document.body.scrollLeft+5);
+    $(&quot;#divmensaje&quot;).css(&quot;top&quot;,e.clientY+document.body.scrollTop+5);
+    $(&quot;#divmensaje&quot;).load(&quot;pagina1.php?cod=&quot;+$(this).attr('id'));
+  },
+  function () {
+    $(&quot;#divmensaje&quot;).hide();
+  })
+  $(&quot;.cuadradito&quot;).mousemove(function (e){
+    $(&quot;#divmensaje&quot;).css(&quot;left&quot;,e.clientX+document.body.scrollLeft+5);
+    $(&quot;#divmensaje&quot;).css(&quot;top&quot;,e.clientY+document.body.scrollTop+5); 
+  })
+})
+</textarea><br><br><div style="font-size:1.3em;font-family:arial;"><br></div><br><b>pagina1.php</b><input type="hidden" name="archivo4" value="pagina1-2.html"><br><textarea class="editor" wrap="off" rows="15" cols="110" name="programa4">&lt;?php
+  if ($_REQUEST['cod']=='c1')
+  {
+    echo &quot;&lt;img src=\&quot;../imagen1.jpg\&quot;&gt;&quot;;
+    echo &quot;&lt;p&gt;Primer tooltip.&lt;/p&gt;&quot;;
+    echo &quot;&lt;p&gt;aaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaa aaaaaa aaaaaaaaaa&quot;;
+    echo &quot;aaaaaaaaaaaaaaaaaaa aaaaaaaaa aaaaaaaaaaaaa aaaaaaaaaaaaaaaa&quot;;
+    echo &quot;aaaaaaaaaaaaaaaaaaa aaaaaaaa aaaaaaaaaaaaaa aaaaaaaaa aaaaaaa&quot;;
+    echo &quot;aaaaaaaaaaaaaa aaaaa aaaaaaaaaaaaaaaaaaaaaa aaaaaa aaaaaaaaaa&quot;;
+    echo &quot;aaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaa aaaaaaa aaaaaaaaaaaaaaaa&lt;/p&gt;&quot;;
+  }
+  if ($_REQUEST['cod']=='c2')
+  {    
+    echo &quot;&lt;img src=\&quot;../imagen2.jpg\&quot;&gt;&quot;;
+    echo &quot;&lt;p&gt;Segundo tooltip.&lt;/p&gt;&quot;;
+    echo &quot;&lt;p&gt;bbbbbbbb bbbbbbbbbbb bbbbbbbb bbbbbbbbbbbbbb bbbbbbbbbbb bb&quot;;
+    echo &quot;bbbbbbbb bbbbbbbbbb bbbbbbbbbbbb bbbbbbbbbb bbbbbbbbbbb bbb&lt;/p&gt;&quot;;
+  }
+  if ($_REQUEST['cod']=='c3')
+  {
+    echo &quot;&lt;img src=\&quot;../imagen3.jpg\&quot;&gt;&quot;;
+    echo &quot;&lt;p&gt;Tercer tooltip.&lt;/p&gt;&quot;;
+  }
+  if ($_REQUEST['cod']=='c4')
+  {
+    echo &quot;&lt;img src=\&quot;../imagen4.jpg\&quot;&gt;&quot;;
+    echo &quot;&lt;p&gt;Cuarto tooltip.&lt;/p&gt;&quot;;
+  }
+
+?&gt;</textarea><br><br>
+   <h2><a href="../index111c.html?inicio=18">Retornar</a></h2>   
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-14', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/simulador/simulador.php?inicio=18&cod=88&punto=32&inicio=18 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:23 GMT -->
+</html>
+

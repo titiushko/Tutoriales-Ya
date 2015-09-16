@@ -1,0 +1,247 @@
+
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/detalleconcepto.php?punto=27&codigo=142&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tipografía : listas</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="bootstrap,css, html, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de bootstrap.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>27 - Tipografía : listas</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Bootstrap define estilos para trabajar con listas ordenadas, listas no ordenadas y listas de definición.</p>
+<p>Veamos cual es la sintaxis para definir una lista ordenada:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+  &lt;head&gt; 
+    &lt;title&gt;Prueba de Bootstrap&lt;/title&gt; 
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt; 
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+  &lt;div class="container"&gt;
+    &lt;p&gt;Ejemplo de lista ordenada&lt;/p&gt;
+      &lt;ol&gt; 
+        &lt;li&gt;Primer elemento&lt;/li&gt;
+        &lt;li&gt;Segundo elemento&lt;/li&gt;
+        &lt;li&gt;Tercer elemento&lt;/li&gt;
+        &lt;li&gt;Cuarto elemento&lt;/li&gt;
+      &lt;/ol&gt;
+  &lt;/div&gt;
+&lt;/body&gt; 
+&lt;/html&gt; 
+</pre>
+<p>Como vemos no hace falta especificar ninguna clase para que le asigne un estilo a una lista ordenada de HTML, ya que el Bootstrap define estilos para los elementos HTML ol y li.</p>
+<img src="imagentema/foto037.jpg" border="0" alt="ol bootstrap"><br> 
+<p>Un ejemplo de una lista no ordenada:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+  &lt;head&gt; 
+    &lt;title&gt;Prueba de Bootstrap&lt;/title&gt; 
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt; 
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+  &lt;div class="container"&gt;
+    &lt;p&gt;Ejemplo de lista no ordenada&lt;/p&gt;
+      &lt;ul&gt; 
+        &lt;li&gt;Primer elemento&lt;/li&gt;
+        &lt;li&gt;Segundo elemento&lt;/li&gt;
+        &lt;li&gt;Tercer elemento&lt;/li&gt;
+        &lt;li&gt;Cuarto elemento&lt;/li&gt;
+      &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/body&gt; 
+&lt;/html&gt;
+</pre>
+<p>Empleamos la marca HTML &lt;ul&gt; con sus respectivos &lt;li&gt;, luego obtenemos como resultado una salida en el navegador similar a:</p>
+<img src="imagentema/foto038.jpg" border="0" alt="ul bootstrap"><br> 
+<p>A las listas &lt;ul&gt; podemos asignarle alguna de estas dos clases:</p>
+<pre>
+  .list-unstyled  
+  Muestra los elementos de la lista sin viñetas y sin margen izquierdo.
+  .list-inline
+  Muestra los elementos en una misma línea.
+</pre>
+<p>Un ejemplo utilizando estas dos clases:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+  &lt;head&gt; 
+    &lt;title&gt;Prueba de Bootstrap&lt;/title&gt; 
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt; 
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+  &lt;div class="container"&gt;
+    &lt;p&gt;Ejemplo de lista no ordenada sin estilo&lt;/p&gt;
+      &lt;ul class="list-unstyled"&gt; 
+        &lt;li&gt;Primer elemento&lt;/li&gt;
+        &lt;li&gt;Segundo elemento&lt;/li&gt;
+        &lt;li&gt;Tercer elemento&lt;/li&gt;
+        &lt;li&gt;Cuarto elemento&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;p&gt;Ejemplo de lista no ordenada en línea&lt;/p&gt;
+      &lt;ul class="list-inline"&gt; 
+        &lt;li&gt;Primer elemento&lt;/li&gt;
+        &lt;li&gt;Segundo elemento&lt;/li&gt;
+        &lt;li&gt;Tercer elemento&lt;/li&gt;
+        &lt;li&gt;Cuarto elemento&lt;/li&gt;
+      &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/body&gt; 
+&lt;/html&gt;
+</pre>
+<p>En el navegador tenemos:</p>
+<img src="imagentema/foto039.jpg" border="0" alt="ul bootstrap"><br> 
+
+<p>Bootstrap también define estilos para las listas de definición que nos provee HTML. Define tanto un estilo por defecto para esta marca como también una clase llamada .dl-horizontal que muestra la definición en una misma línea. Veamos un ejemplo:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+  &lt;head&gt; 
+    &lt;title&gt;Prueba de Bootstrap&lt;/title&gt; 
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt; 
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+  &lt;div class="container"&gt;
+    &lt;p&gt;Ejemplo de lista de definición&lt;/p&gt;
+      &lt;dl&gt; 
+        &lt;dt&gt;Palabra 1&lt;/dt&gt;
+        &lt;dd&gt;Definición de la palabra 1&lt;/dd&gt;
+        &lt;dt&gt;Palabra 2&lt;/dt&gt;
+        &lt;dd&gt;Definición de la palabra 2&lt;/dd&gt;
+        &lt;dt&gt;Palabra 3&lt;/dt&gt;
+        &lt;dd&gt;Definición de la palabra 3&lt;/dd&gt;
+      &lt;/dl&gt;
+    &lt;p&gt;Ejemplo de lista de definición horizontal&lt;/p&gt;
+      &lt;dl class="dl-horizontal"&gt; 
+        &lt;dt&gt;Palabra 1&lt;/dt&gt;
+        &lt;dd&gt;Definición de la palabra 1&lt;/dd&gt;
+        &lt;dt&gt;Palabra 2&lt;/dt&gt;
+        &lt;dd&gt;Definición de la palabra 2&lt;/dd&gt;
+        &lt;dt&gt;Palabra 3&lt;/dt&gt;
+        &lt;dd&gt;Definición de la palabra 3&lt;/dd&gt;
+      &lt;/dl&gt;
+  &lt;/div&gt;
+&lt;/body&gt; 
+&lt;/html&gt;
+</pre>
+<p>Como resultado de esta página visualizamos en el navegador:</p>
+<img src="imagentema/foto040.jpg" border="0" alt="dl bootstrap"><br> 
+<h2><a target="_blank" href="ejecutare722.html?cod=142">Ejecutar Ejemplo</a></h2><h2><a href="index28fa.html?inicio=20">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-32', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/detalleconcepto.php?punto=27&codigo=142&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:38 GMT -->
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=189&inicio=60 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - Sobrecarga de métodos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>67 - Sobrecarga de métodos</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p>La sobrecarga de métodos permite definir dos o más métodos con el mismo nombre, pero que difieren en cantidad o tipo de parámetros.</p>
+<p>Esta característica del lenguaje nos facilita la implementación de algoritmos que cumplen la misma función pero que difieren en los parámetros.</p>
+
+<h3>Problema 1:</h3>
+<p>Implementar dos métodos que sumen dos enteros en el primer caso y que concatenen dos string en el segundo.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace SobrecargaParametros1
+{
+    class Program
+    {
+        public int Sumar(int x1, int x2)
+        {
+            int s = x1 + x2;
+            return s;
+        }
+
+        public string Sumar(string s1, string s2)
+        {
+            string s = s1 + s2;
+            return s;
+        }
+
+        static void Main(string[] args)
+        {
+            Program p = new Program();
+            Console.WriteLine("La suma de 5+10 es:" + p.Sumar(5, 10));
+            Console.WriteLine("La concatenacion de \"Juan\" y \" Carlos\" es "+p.Sumar("Juan"," Carlos"));
+            Console.ReadKey();
+        }
+    }
+}
+</pre>
+<p>Como podemos ver definimos dos métodos llamados Sumar con dos parámetros cada uno (el primero con parámetros de tipo int y el segundo con parámetros de tipo string):</p>
+<pre>
+
+        public int Sumar(int x1, int x2)
+        {
+            int s = x1 + x2;
+            return s;
+        }
+
+        public string Sumar(string s1, string s2)
+        {
+            string s = s1 + s2;
+            return s;
+        }
+</pre>
+<p>Cuando llamamos a los métodos el compilador sabe con cual enlazarlos según el tipo de datos enviados.</p>
+<p>Si le enviamos dos enteros se llama el primer método:</p>
+<pre>
+            Console.WriteLine("La suma de 5+10 es:" + p.Sumar(5, 10));
+</pre>
+<p>Si le enviamos dos string se llama el segundo método:</p>
+<pre>
+            Console.WriteLine("La concatenacion de \"Juan\" y \" Carlos\" es "+p.Sumar("Juan"," Carlos"));
+</pre>
+
+<h3>Problema 2:</h3>
+<p>Plantear una clase llamada Ventana que defina cuatro métodos sobrecargados que muestren un mensaje en la consola.<br>
+El primero lo muestrar donde se encuentra actualmente el cursor.<br>
+El segundo lo muestra en una determinada columna y fila.<br>
+El tercero lo muestra en una determinada columna,fila y con un color de letra.<br>
+Y por último similar al anterior más un color de fondo.
+</p>
+
+<h4>Programa:</h4>
+
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace SobrecargaParametros2
+{
+    class Ventana
+    {
+        public void Mostrar(string mensaje)
+        {
+            Console.Write(mensaje);
+        }
+
+        public void Mostrar(string mensaje, int columna,int fila)
+        {
+            Console.SetCursorPosition(columna, fila);
+            Console.Write(mensaje);
+        }
+
+        public void Mostrar(string mensaje, int columna, int fila,ConsoleColor colorletra)
+        {
+            Console.ForegroundColor = colorletra;
+            Mostrar(mensaje, columna, fila);
+        }
+
+        public void Mostrar(string mensaje, int columna, int fila, ConsoleColor colorletra,ConsoleColor colorfondo)
+        {
+            Console.BackgroundColor = colorfondo;
+            Mostrar(mensaje, columna, fila, colorletra);            
+        }
+
+        static void Main(string[] args)
+        {
+            Ventana v = new Ventana();
+            v.Mostrar("Hola Mundo");
+            v.Mostrar("Hola Mundo", 30, 10);
+            v.Mostrar("Hola Mundo", 30, 12, ConsoleColor.Red);
+            v.Mostrar("Hola Mundo", 30, 14, ConsoleColor.Red, ConsoleColor.Blue);
+            Console.ReadKey();
+        }
+    }
+}
+</pre>
+<p>Como podemos observar hemos definido cuatro métodos llamados Mostrar que difieren en la cantidad de parámetros.<br>
+El primero recibe un string y lo muestra en la consola:</p>
+<pre>
+        public void Mostrar(string mensaje)
+        {
+            Console.Write(mensaje);
+        }
+</pre>
+<p>El segundo recibe tres parámetros con el mensaje, la columna y fila donde mostrarlo:</p>
+<pre>
+        public void Mostrar(string mensaje, int columna,int fila)
+        {
+            Console.SetCursorPosition(columna, fila);
+            Console.Write(mensaje);
+        }
+</pre>
+<p>Como podemos observar la clase Console tiene un método llamado SetCursorPosition que le pasamos la columna y fila donde queremos que se posicione el cursor previo a la salida de datos llamando al método Write.</p>
+<p>El tercer método recibe cuatro parámetros y como podemos ver desde dentro de este método llamamos al método Mostrar que recibe tres parámetros:</p>
+<pre>
+        public void Mostrar(string mensaje, int columna, int fila,ConsoleColor colorletra)
+        {
+            Console.ForegroundColor = colorletra;
+            Mostrar(mensaje, columna, fila);
+        }
+</pre>
+<p>Para cambiar el color de la letra de la Console debemos inicializar la propiedad ForegroundColor.</p>
+<p>El último método es similar al tercero pero con un quinto parámetro:</p>
+<pre>
+
+        public void Mostrar(string mensaje, int columna, int fila, ConsoleColor colorletra,ConsoleColor colorfondo)
+        {
+            Console.BackgroundColor = colorfondo;
+            Mostrar(mensaje, columna, fila, colorletra);
+            
+        }
+</pre>
+<h2>Problema propuesto</h2>
+<ol>
+<li>
+Plantear una clase que sobrecargue un método que permita cargar por referencia (out) distintos tipos de datos primitivos por teclado.
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace SobrecargaParametros3
+{
+    class EntradaTeclado
+    {
+        public void Leer(out int valor)
+        {
+            valor = int.Parse(Console.ReadLine());
+        }
+
+        public void Leer(out float valor)
+        {
+            valor = float.Parse(Console.ReadLine());
+        }
+
+        public void Leer(out char valor)
+        {
+            valor = char.Parse(Console.ReadLine());
+        }
+
+        public void Leer(out bool valor)
+        {
+            valor = bool.Parse(Console.ReadLine());
+        }
+
+        static void Main(string[] args)
+        {
+            EntradaTeclado et = new EntradaTeclado();
+            int x;
+            Console.Write("Ingrese un entero:");
+            et.Leer(out x);
+            Console.WriteLine("El valor ingresado es:" + x);
+            float f;
+            Console.Write("Ingrese un valor real:");
+            et.Leer(out f);
+            Console.WriteLine("El valor ingresado es:" + f);
+            char car;
+            Console.Write("Ingrese un valor caracter:");
+            et.Leer(out car);
+            Console.WriteLine("El valor ingresado es:" + car);
+            bool l;
+            Console.Write("Ingrese un valor logico:");
+            et.Leer(out l);
+            Console.WriteLine("El valor ingresado es:" + l);
+            Console.ReadKey();
+        }
+    }
+}
+</pre></div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="indexd6cc.html?inicio=60">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=189&inicio=60 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:43 GMT -->
+</html>

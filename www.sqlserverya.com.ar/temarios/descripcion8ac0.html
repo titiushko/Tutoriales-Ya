@@ -1,0 +1,190 @@
+<html>
+
+
+<!-- Mirrored from www.sqlserverya.com.ar/temarios/descripcion.php?inicio=25&cod=44&punto=38 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de SQL Server </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+	  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>38 - Seleccionar grupos (having)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>Así como la cláusula "where" permite seleccionar (o rechazar) registros individuales; la cláusula "having" permite seleccionar (o rechazar) un grupo de registros.</p>
+
+<p>Si queremos saber la cantidad de libros agrupados por editorial usamos la siguiente instrucción ya aprendida:</p>
+<pre>
+ select editorial, count(*)
+  from libros
+  group by editorial;
+</pre>
+<p>Si queremos saber la cantidad de libros agrupados por editorial pero considerando sólo algunos grupos, por ejemplo, los que devuelvan un valor mayor a 2, usamos la siguiente instrucción:</p>
+<pre>
+ select editorial, count(*) from libros
+  group by editorial
+  having count(*)>2;
+</pre>
+<p>Se utiliza "having", seguido de la condición de búsqueda, para seleccionar ciertas filas retornadas por la cláusula "group by".</p>
+
+<p>Veamos otros ejemplos. Queremos el promedio de los precios de los libros agrupados por editorial, pero solamente de aquellos grupos cuyo promedio supere los 25 pesos:</p>
+<pre>
+ select editorial, avg(precio) from libros
+  group by editorial
+  having avg(precio)>25;
+</pre>
+<p>En algunos casos es posible confundir las cláusulas "where" y "having". Queremos contar los registros agrupados por editorial sin tener en cuenta a la editorial "Planeta".<br>
+Analicemos las siguientes sentencias:</p>
+<pre>
+ select editorial, count(*) from libros
+  where editorial<>'Planeta'
+  group by editorial;
+ select editorial, count(*) from libros
+  group by editorial
+  having editorial<>'Planeta';
+</pre>
+<p>Ambas devuelven el mismo resultado, pero son diferentes. La primera, selecciona todos los registros rechazando los de editorial "Planeta" y luego los agrupa para contarlos. La segunda, selecciona todos los registros, los agrupa para contarlos y finalmente rechaza fila con la cuenta correspondiente a la editorial "Planeta".</p>
+
+<p>No debemos confundir la cláusula "where" con la cláusula "having"; la primera establece condiciones para la selección de registros de un "select"; la segunda establece condiciones para la selección de registros de una salida "group by".</p>
+
+<p>Veamos otros ejemplos combinando "where" y "having". Queremos la cantidad de libros, sin considerar los que tienen precio nulo, agrupados por editorial, sin considerar la editorial "Planeta":</p>
+<pre>
+ select editorial, count(*) from libros
+  where precio is not null
+  group by editorial
+  having editorial<>'Planeta';
+</pre>
+<p>Aquí, selecciona los registros rechazando los que no cumplan con la condición dada en "where", luego los agrupa por "editorial" y finalmente rechaza los grupos que no cumplan con la condición dada en el "having".</p>
+
+<p>Se emplea la cláusula "having" con funciones de agrupamiento, esto no puede hacerlo la cláusula "where". Por ejemplo queremos el promedio de los precios agrupados por editorial, de aquellas editoriales que tienen más de 2 libros:</p>
+<pre>
+ select editorial, avg(precio) from libros
+  group by editorial
+  having count(*) > 2; 
+</pre>
+<p>En una cláusula "having" puede haber hasta 128 condiciones. Cuando utilice varias condiciones, tiene que combinarlas con operadores lógicos (and, or, not).</p>
+
+<p>Podemos encontrar el mayor valor de los libros agrupados y ordenados por editorial y seleccionar las filas que tengan un valor menor a 100 y mayor a 30:</p>
+<pre>
+ select editorial, max(precio) as 'mayor'
+  from libros
+  group by editorial
+  having min(precio)<100 and
+  min(precio)>30
+  order by editorial; 
+ </pre>
+<p>Entonces, usamos la claúsula "having" para restringir las filas que devuelve una salida "group by". Va siempre después de la cláusula "group by" y antes de la cláusula "order by" si la hubiere.</p>
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+<br>
+   <h2><a href="../indexfc77.html?inicio=25">Retornar</a></h2>   
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-11";
+urchinTracker();
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from www.sqlserverya.com.ar/temarios/descripcion.php?inicio=25&cod=44&punto=38 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:31 GMT -->
+</html>

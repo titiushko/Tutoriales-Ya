@@ -1,0 +1,331 @@
+        
+
+<html>
+
+
+<!-- Mirrored from www.mysqlya.com.ar/simulador/simulador.php?inicio=21&cod=35&punto=36 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Problemas resueltos:Selección de un grupo de registros (having)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;		
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=no,status=yes,toolbar=yes,location=yes');  	
+}
+</script>  
+</head>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>36 - Selección de un grupo de registros (having)</h1></td>
+<td align="right">
+<!--<a href="http://www.mysqlya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<body bgcolor="#CCFFCC">
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Trabajamos con la tabla "libros" que registra los datos de una librería.</p>
+<p>Eliminamos la tabla, si existe:</p>
+<pre>
+ drop table if exists libros;
+</pre>
+<p>Creamos la tabla:</p>
+<pre>
+ create table libros(
+  codigo int unsigned auto_increment,
+  titulo varchar(20) not null,
+  autor varchar(30),
+  editorial varchar(15),
+  precio decimal(5,2) unsigned,
+  primary key (codigo)
+ );
+</pre>
+<p>Agregamos algunos registros:</p>
+<pre>
+ insert into libros (titulo,autor,editorial,precio)
+  values('El aleph','Borges','Planeta',15);
+ insert into libros (titulo,autor,editorial,precio)
+  values('Martin Fierro','Jose Hernandez','Emece',22.20);
+ insert into libros (titulo,autor,editorial,precio)
+  values('Antologia poetica','Borges','Planeta',40);
+ insert into libros (titulo,autor,editorial,precio)
+  values('Aprenda PHP','Mario Molina','Emece',18.20);
+ insert into libros (titulo,autor,editorial,precio)
+  values('Cervantes y el quijote','Borges','Paidos',36.40);
+ insert into libros (titulo,autor,editorial,precio)
+  values('Manual de PHP', 'J.C. Paez', 'Paidos',30.80);
+ insert into libros (titulo,autor,editorial,precio)
+  values('Harry Potter y la piedra filosofal','J.K. Rowling','Paidos',45.00);
+ insert into libros (titulo,autor,editorial,precio)
+  values('Harry Potter y la camara secreta','J.K. Rowling','Paidos',46.00);
+ insert into libros (titulo,autor,editorial,precio)
+  values('Alicia en el pais de las maravillas','Lewis Carroll','Paidos',null);
+</pre>
+<p>Queremos averiguar la cantidad de libros agrupados por editorial:</p>
+<pre>
+ select editorial, count(*) from libros
+  group by editorial;
+</pre>
+<p>Queremos conocer la cantidad de libros agrupados por editorial pero considerando sólo los que devuelvan un valor mayor a 2, tipeamos:</p>
+<pre>
+ select editorial, count(*) from libros
+  group by editorial
+  having count(*)>2;
+</pre>
+<p>Necesitamos el promedio de los precios de los libros agrupados por editorial:</p>
+<pre>
+ select editorial, avg(precio)
+  from libros
+  group by editorial;
+</pre>
+<p>Ahora, sólo queremos aquellos cuyo promedio supere los 25 pesos:</p>
+<pre>
+ select editorial, avg(precio)
+  from libros
+  group by editorial
+  having avg(precio)>25;
+</pre>
+<p>Queremos contar los registros agrupados por editorial sin tener en cuenta a la editorial "Planeta". Tipeamos y analicemos las siguientes sentencias:</p>
+<pre>
+ select editorial, count(*) from libros
+  where editorial<>'Planeta'
+  group by editorial;
+ select editorial, count(*) from libros
+  group by editorial
+  having editorial<>'Planeta';
+</pre>
+<p>Note que ambas retornan la misma salida. La primera, selecciona los registros sin considerar los de la editorial "Planeta" y luego los agrupa para contarlos. La segunda, selecciona todos los registros, los agrupa para contarlos y finalmente rechaza la cuenta correspondiente a la editorial "Planeta". Recuerde no confundir las cláusulas "where" y "having"; la primera establece condiciones para la selección de registros individuales, la segunda establece condiciones para la selección de filas de una salida "group by".</p>
+
+<p>Probamos combinar condiciones "where" y "having". Queremos la cantidad de libros, sin tener en cuenta los que tienen precio nulo, agrupados por editorial, rechazando los de editorial "Planeta":</p>
+<pre>
+ select editorial, count(*) from libros
+  where precio is not null
+  group by editorial
+  having editorial<>'Planeta';
+</pre>
+<p>Para obtener el promedio de los precios agrupados por editorial, de aquellas editoriales que tienen más de 2 libros tipeamos:</p>
+<pre>
+ select editorial, avg(precio) from libros
+  group by editorial
+  having count(*) > 2; 
+</pre>
+<p>Para encontrar el mayor valor de los libros agrupados por editorial y luego seleccionar las filas que tengan un valor mayor o igual a 30 usamos:</p>
+<pre>
+ select editorial, max(precio)
+  from libros
+  group by editorial
+  having max(precio)>=30; 
+</pre> 
+<p>Para esta misma sentencia podemos utilizar un "alias" para hacer referencia a la columna de la expresión:</p>
+<pre>
+ select editorial, max(precio) as 'mayor'
+  from libros
+  group by editorial
+  having mayor>=30; 
+</pre>         <form name="formulario" action="http://www.mysqlya.com.ar/simulador/ejecuta.php" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+          <textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off">
+drop table if exists libros;
+
+create table libros(
+  codigo int unsigned auto_increment,
+  titulo varchar(20) not null,
+  autor varchar(30),
+  editorial varchar(15),
+  precio decimal(5,2) unsigned,
+  primary key (codigo)
+ );
+
+insert into libros (titulo,autor,editorial,precio)
+  values('El aleph','Borges','Planeta',15);
+insert into libros (titulo,autor,editorial,precio)
+  values('Martin Fierro','Jose Hernandez','Emece',22.20);
+insert into libros (titulo,autor,editorial,precio)
+  values('Antologia poetica','Borges','Planeta',40);
+insert into libros (titulo,autor,editorial,precio)
+  values('Aprenda PHP','Mario Molina','Emece',18.20);
+insert into libros (titulo,autor,editorial,precio)
+  values('Cervantes y el quijote','Borges','Paidos',36.40);
+insert into libros (titulo,autor,editorial,precio)
+  values('Manual de PHP', 'J.C. Paez', 'Paidos',30.80);
+insert into libros (titulo,autor,editorial,precio)
+  values('Harry Potter y la piedra filosofal','J.K. Rowling','Paidos',45.00);
+insert into libros (titulo,autor,editorial,precio)
+  values('Harry Potter y la camara secreta','J.K. Rowling','Paidos',46.00);
+insert into libros (titulo,autor,editorial,precio)
+  values('Alicia en el pais de las maravillas','Lewis Carroll','Paidos',null);
+
+select editorial, count(*) from libros
+  group by editorial;
+
+select editorial, count(*) from libros
+  group by editorial
+  having count(*)>2;
+
+select editorial, avg(precio)
+  from libros
+  group by editorial;
+
+select editorial, avg(precio)
+  from libros
+  group by editorial
+  having avg(precio)>25;
+
+select editorial, count(*) from libros
+  where editorial<>'Planeta'
+  group by editorial;
+
+select editorial, count(*) from libros
+  group by editorial
+  having editorial<>'Planeta';
+
+select editorial, count(*) from libros
+  where precio is not null
+  group by editorial
+  having editorial<>'Planeta';
+
+select editorial, avg(precio) from libros
+  group by editorial
+  having count(*) > 2; 
+
+select editorial, max(precio)
+  from libros
+  group by editorial
+  having max(precio)>=30; 
+
+select editorial, max(precio) as 'mayor'
+  from libros
+  group by editorial
+  having mayor>=30; 
+
+</textarea>
+    <br>
+    <input type="submit"  value="Ejecutar  los comandos SQL">
+    <input type="button" onClick="javascript:formulario.programa.value=''" value="Borrar comando.">
+        <br>
+	<br>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   
+<input type="hidden" name="extension1" value="problema1.php">
+
+</form>
+
+   <h2><a href="../index10fd.html?inicio=21">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-5";
+urchinTracker();
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from www.mysqlya.com.ar/simulador/simulador.php?inicio=21&cod=35&punto=36 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:28 GMT -->
+</html>
+

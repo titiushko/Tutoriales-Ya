@@ -1,0 +1,221 @@
+        
+
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=0&cod=182&punto=24 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios resueltos : Ordenar registros (order by)(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+<body bgcolor="#CCFFCC">
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>24 - Ordenar registros (order by)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Trabajamos con la tabla "libros" de una librería.</p>
+<p>Eliminamos la tabla y la creamos con la siguiente estructura:</p>
+<pre>
+ drop table libros;
+
+ create table libros(
+  titulo varchar2(40) not null,
+  autor varchar2(20) default 'Desconocido',
+  editorial varchar2(20),
+  edicion date,
+  precio number(6,2)
+ );
+</pre>
+<p>Ingresamos algunos registros:</p>
+<pre>
+ insert into libros values('El aleph','Borges','Emece','10/10/1980',25.33);
+ insert into libros values('Java en 10 minutos','Mario Molina','Siglo XXI','05/12/2005',50.65);
+ insert into libros values('Alicia en el pais de las maravillas','Lewis Carroll','Emece','29/11/2000',19.95);
+ insert into libros values('Alicia en el pais de las maravillas','Lewis Carroll','Planeta','27/11/2004',15);
+</pre>
+<p>Recuperamos los registros ordenados por el título:</p>
+<pre>
+ select *from libros
+  order by titulo;
+</pre>
+<p>Ordenamos los registros por el campo "precio", referenciando el campo por su posición en la lista de selección:</p>
+<pre>
+ select titulo,autor,precio
+  from libros order by 3;
+</pre>
+<p>Los ordenamos por "editorial", de mayor a menor empleando "desc":</p>
+<pre>
+ select *from libros
+  order by editorial desc;
+</pre>
+<p>Ordenamos por dos campos:</p>
+<pre>
+ select *from libros
+  order by titulo,editorial;
+</pre>
+<p>Ordenamos en distintos sentidos:</p>
+<pre>
+ select *from libros
+  order by titulo asc, editorial desc;
+</pre>
+<p>Podemos ordenar por un campo que no se lista en la selección:</p>
+<pre>
+ select titulo, autor
+  from libros
+  order by precio;
+</pre>
+<p>Está permitido ordenar por valores calculados, lo hacemos:</p>
+<pre>
+ select titulo, editorial,
+ precio+(precio*0.1) as "precio con descuento"
+ from libros
+ order by 3;
+</pre>
+<p>Ordenamos los libros por la fecha de edición:</p>
+<pre>
+ select titulo, editorial, edicion
+  from libros
+  order	by edicion;
+</pre>
+<p>Mostramos el título y año de edición de todos los libros, ordenados por año de edición:</p>
+<pre>
+  select titulo, extract (year from edicion) as edicion
+   from libros
+   order by 2;
+</pre>
+
+        <form name="formulario" action="http://www.sqlserverya.com.ar/aspx/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+        <br>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+        
+	<br>
+   
+
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=0&cod=182&punto=24 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:25 GMT -->
+</html>
+

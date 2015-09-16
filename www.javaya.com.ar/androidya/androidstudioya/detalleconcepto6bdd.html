@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=42&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 17:15:27 GMT -->
+<head>
+<title>Internacionalización y archivo strings.xml</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>42 - Internacionalización y archivo strings.xml</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+ <div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+<p>La internacionalización de un programa en Android se resuelve implementando varios archivos strings.xml (uno por cada idioma que necesitemos implementar)</p>
+
+<h3>Problema:</h3>
+<p>Crear un nuevo proyecto llamado Proyecto045 y confeccionar el mismo problema del concepto anterior (Proyecto044) donde estudiamos el archivo strings.xml.<br>
+
+Ahora haremos  que muestre su interfaz en castellano o ingles según la configuración del idioma seleccionado en el dispositivo.</p>
+
+<p>Presionamos el botón derecho del mouse sobre la carpeta "values" y seleccionamos "Values Resource File":</p>
+<img src="imagentema/foto160.jpg" border="0" alt="strings.xml"><br>
+<p>Aparece un diálogo donde debemos indicar que se creará un archivo llamado "strings" seleccionamos "Languaje" presionamos el botón ">>":</p>
+<img src="imagentema/foto160a.jpg" border="0" alt="strings.xml"><br>
+<p>Luego seleccionamos en:English:</p>
+<img src="imagentema/foto160b.jpg" border="0" alt="strings.xml"><br>
+<p>Ya tenemos el archivo strings.xml donde debemos disponer las traducciones del archivo strings.xml original:</p>
+<img src="imagentema/foto160c.jpg" border="0" alt="strings.xml"><br>
+<p>Procedemos a insertar el siguiente texto:</p>
+<pre class="recuadro">
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;resources&gt;
+
+    &lt;string name="app_name"&gt;Proyecto045&lt;/string&gt;
+    &lt;string name="hello_world"&gt;Hello world!&lt;/string&gt;
+    &lt;string name="action_settings"&gt;Settings&lt;/string&gt;
+    &lt;string name="radiosuma"&gt;add&lt;/string&gt;
+    &lt;string name="radioresta"&gt;subtract&lt;/string&gt;
+    &lt;string name="botonoperacion"&gt;resolve&lt;/string&gt;
+
+&lt;/resources&gt;
+
+</pre>
+
+<p>Solamente con esto ya tenemos nuestra aplicación funcionando en dos idiomas. Para probar debemos acceder al emulador de Android y configurarlo en inglés (tecla home -> tecla menu -> configuración > Idioma y teclado > Seleccionar idioma -> "English (United Stated)</p>
+<p>Luego de esto lanzamos la aplicación y deberemos ver:</p>
+<img src="imagentema/foto162.jpg" border="0" alt="strings.xml"><br>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/Proyecto045.zip">proyecto045.zip</a>
+
+
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+<br>
+   <h2><a href="index1e61.html?inicio=40">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-34', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=42&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 17:17:11 GMT -->
+</html>

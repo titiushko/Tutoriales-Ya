@@ -1,0 +1,177 @@
+﻿<html>
+
+
+<!-- Mirrored from www.phpya.com.ar/poo/problemas/resolverproblema.php?cod=52&punto=18&inicio=12 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+  <title>Problemas propuestos</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="PHP,POO, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de POO.">
+<meta name="author" content="Diego Moisset">
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+
+</style>
+
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;		
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=yes,status=yes,toolbar=yes,location=yes');  	
+}
+
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+</head>
+
+<body bgcolor="#CCFFCC">
+        
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>18 - Referencia y clonación de objetos.</h1></td>
+<td align="right">
+<!--<a href="http://www.phpya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+	  <table width="650px">
+<tr>
+
+<table>
+<tr>
+<td align="left">
+
+<!--publi-->
+
+</td>
+</tr>
+</table>		  
+	  
+	  
+                
+		
+		<br><br><h3>Problema:</h3>
+<pre class="recuadrooculto">&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Pruebas&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+
+class Cuadrado {
+  private $lado;
+  public function cargarLado($la)
+  {
+    $this-&gt;lado=$la;
+  }
+  public function retornarPerimetro()
+  {
+    $p=$this-&gt;lado*4;
+    return $p;
+  }
+  public function retornarSuperficie()
+  {
+    $s=$this-&gt;lado*$this-&gt;lado;
+    return $s;
+  }
+}
+
+$cuadrado1=new Cuadrado();
+$cuadrado1-&gt;cargarLado(5);
+$x=$cuadrado1;
+echo 'La superficie del cuadrado de lado 5 es:'.$x-&gt;retornarSuperficie().'&lt;br&gt;';
+echo 'El per&iacute;metro del cuadrado de lado 5 es:'.$x-&gt;retornarPerimetro().'&lt;br&gt;';
+
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre><pre class="recuadrooculto">
+  <a href="http://www.scratchya.com.ar/problemas/phpyapoo/propu/52/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>	
+</pre>
+<form name="formulario" action="#" target="ventanaForm" method="post" onsubmit=  "abrirVentana()">
+<div style="font-size:1.3em;font-family:arial;"><p>Confeccionar una clase Cuadrado. Definir como atributo su lado. Implementar un método que lo cargue el lado, otro que retorne su perímetro y otro que retorne su superficie.</p>
+<p>Crear un objeto de la clase Cuadrado e inicializar el lado. Definir una segunda variable y asignarle la referencia del objeto de la clase Cuadrado. Imprimir la superficie y perímetro mediante esta segunda variable.</p></div><br><a href="javascript:cambiar()" id="solucion">Ver solución</a><br><br><b>pagina1.php</b><input type="hidden" name="archivo1" value="pagina1.html"><br><textarea rows="15" cols="110" name="programa1" wrap="off"></textarea><br><br><br><TABLE>
+  <TBODY>
+  <TR>
+    <TD align=left>
+
+	<!--publi-->
+	
+    </TD>
+	</TR></TBODY></TABLE>	
+
+
+
+</form>
+  <div>
+
+   <h2><a href="../index754a.html?inicio=12">Retornar</a></h2>   
+
+  </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+
+<!-- Mirrored from www.phpya.com.ar/poo/problemas/resolverproblema.php?cod=52&punto=18&inicio=12 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:21 GMT -->
+</html>
+

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.htmlya.com.ar/temarios/descripcion.php?inicio=0&cod=88&punto=13 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:55:10 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Conceptos de HTML</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="html, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de HTML. Es objetivo prioritario respetar 
+los estándares del W3C">
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+</style>
+</head>
+
+<body>
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em"><a href="../index.html">Temario del Tutorial</a></span>->13 - Anclas llamadas desde la misma página.</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div> 
+
+<p>Otra posibilidad que nos brinda el HTML es disponer una referencia dentro de la página para poder posteriormente disponer un hipervínculo a dicha marca.</p>
+<p>Es una práctica común cuanda queremos desplazarnos dentro de una página de gran tamaño. Se disponen hipervínculos a diferentes anclas.</p>
+<p>La sintaxis para definir un ancla es:</p>
+<pre>
+&lt;a name=&quot;nombreancla&quot;&gt;&lt;/a&gt; 
+</pre>
+<p>No debemos confundir un ancla con un hipervínculo, más alla que se utiliza el mismo elemento a. Para un ancla inicializamos la propiedad name con el nombre del ancla.</p>
+<p>Un ancla se la define en una parte de la página que queremos que el operador llegue a partir de un hipervínculo.</p>
+<p>Ahora la sintaxis para ir a un ancla desde un hipervínculo es la siguiente:</p>
+<pre>
+&lt;a href=&quot;#nombreancla&quot;&gt;Introducci&oacute;n&lt;/a&gt;&lt;br&gt;
+</pre>
+<p>Vemos que en la propiedad href indicamos el nombre del ancla.</p>
+<p>Haremos un ejemplo, donde dispondremos una lista de hipervínculos que llaman a una serie de anclas dispuestas en la misma página:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Título de la página&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Tutorial de MySQL&lt;/h1&gt;
+&lt;a href="#introduccion"&gt;Introducción&lt;/a&gt;&lt;br&gt;
+&lt;a href="#mostrarbasedatos"&gt;show databases&lt;/a&gt;&lt;br&gt;
+&lt;a href="#creaciontabla"&gt;Creación de una tabla y mostrar sus campos&lt;/a&gt;&lt;br&gt;
+&lt;a href="#cargarregistros"&gt;Carga de registros a una tabla y su recuperación&lt;/a&gt;&lt;br&gt;
+&lt;a name="#introduccion"&gt;&lt;/a&gt;
+&lt;h2&gt;Introducción&lt;/h2&gt;
+&lt;p&gt;
+SQL, Structure Query Language (Lenguaje de Consulta Estructurado) es un lenguaje de programacion para
+ trabajar con base de datos relacionales como MySQL, Oracle, etc.&lt;br&gt;
+MySQL es un interpretador de SQL, es un servidor de base de datos.&lt;br&gt;
+MySQL permite crear base de datos y tablas, insertar datos, modificarlos, eliminarlos, ordenarlos,
+ hacer consultas y realizar muchas operaciones, etc., resumiendo: administrar bases de datos.&lt;br&gt;
+Ingresando instrucciones en la linea de comandos o embebidas en un lenguaje como PHP nos comunicamos
+ con el servidor. Cada sentencia debe acabar con punto y coma (;).&lt;br&gt;
+La sensibilidad a mayúsculas y minúsculas, es decir, si hace diferencia entre ellas, depende del
+ sistema operativo, Windows no es sensible, pero Linux si. Por ejemplo Windows interpreta igualmente
+ las siguientes sentencias:&lt;br&gt;
+	create database administracion;&lt;br&gt;
+	Create DataBase administracion;&lt;br&gt;
+Pero Linux interpretará como un error la segunda.&lt;br&gt;
+Se recomienda usar siempre minúsculas. Es más el sitio mysqlya.com.ar está instalado sobre un servidor
+ Linux por lo que todos los ejercicios deberán respetarse mayúsculas y minúsculas.
+&lt;/p&gt;
+&lt;a name="mostrarbasedatos"&gt;&lt;/a&gt;
+&lt;h2&gt;show databases&lt;/h2&gt;
+&lt;p&gt;
+Una base de datos es un conjunto de tablas.&lt;br&gt;
+Una base de datos tiene un nombre con el cual accederemos a ella.&lt;br&gt;
+Vamos a trabajar en una base de datos ya creada en el sitio, llamada "administracion".&lt;br&gt;
+Para que el servidor nos muestre las bases de datos existentes, se lo solicitamos enviando la instrucción:&lt;br&gt;
+show databases;&lt;br&gt;
+Nos mostrará los nombres de las bases de datos, debe aparecer en este sitio "administracion".&lt;br&gt;
+&lt;/p&gt;
+&lt;a name="creaciontabla"&gt;&lt;/a&gt;
+&lt;h2&gt;Creación de una tabla y mostrar sus campos&lt;/h2&gt;
+&lt;p&gt;
+Una base de datos almacena sus datos en tablas.&lt;br&gt;
+Una tabla es una estructura de datos que organiza los datos en columnas y filas; cada columna es un campo
+ (o atributo) y cada fila, un registro. La intersección de una columna con una fila, contiene un dato
+ específico, un solo valor.&lt;br&gt;
+Cada registro contiene un dato por cada columna de la tabla.&lt;br&gt;
+Cada campo (columna) debe tener un nombre. El nombre del campo hace referencia a la información que
+ almacenará.&lt;br&gt;
+Cada campo (columna) también debe definir el tipo de dato que almacenará.&lt;br&gt;
+&lt;/p&gt;
+&lt;a name="cargarregistros"&gt;&lt;/a&gt;
+&lt;h2&gt;Carga de registros a una tabla y su recuperación&lt;/h2&gt;
+&lt;p&gt;
+Usamos "insert into". Especificamos los nombres de los campos entre paréntesis y separados por comas
+ y luego los valores para cada campo, también entre paréntesis y separados por comas.&lt;br&gt;
+Es importante ingresar los valores en el mismo orden en que se nombran los campos, si ingresamos
+ los datos en otro orden, no aparece un mensaje de error y los datos se guardan de modo 
+incorrecto.&lt;br&gt;
+Note que los datos ingresados, como corresponden a campos de cadenas de caracteres se colocan
+ entre comillas simples. Las comillas simples son OBLIGATORIAS.
+&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Cada hipervínculo hace referencia a un ancla que se encuentra en la misma página:</p>
+<pre>
+&lt;a href=&quot;#introduccion&quot;&gt;Introducci&oacute;n&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;#mostrarbasedatos&quot;&gt;show databases&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;#creaciontabla&quot;&gt;Creaci&oacute;n de una tabla y mostrar sus campos&lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;#cargarregistros&quot;&gt;Carga de registros a una tabla y su recuperaci&oacute;n&lt;/a&gt;&lt;br&gt;
+</pre>
+<p>Luego la definición de las anclas son:</p>
+<pre>
+&lt;a name=&quot;introduccion&quot;&gt;&lt;/a&gt;
+&lt;h2&gt;Introducci&oacute;n&lt;/h2&gt;
+</pre>
+<p>Como podemos observar la definción del ancla se hace inmediatamente anterior al título donde queremos que el navegador se sitúe.</p>
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../index2904.php?inicio=0">Retornar</a></h2>   
+
+</div>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-7";
+urchinTracker();
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.htmlya.com.ar/temarios/descripcion.php?inicio=0&cod=88&punto=13 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:55:10 GMT -->
+</html>

@@ -1,0 +1,247 @@
+        
+
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=50&cod=228&punto=70 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios resueltos : Eliminar campos (alter table- drop)(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+<body bgcolor="#CCFFCC">
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>70 - Eliminar campos (alter table- drop)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Trabajamos con la tablas "libros" y "editoriales" de una librería.<br>
+Eliminamos las tablas:</p>
+<pre>
+ drop table libros;
+ drop table editoriales;
+</pre>
+<p>Creamos las tablas:</p>
+<pre>
+ create table editoriales(
+  codigo number(3),
+  nombre varchar2(30),
+  primary key(codigo)
+ );
+
+ create table libros(
+  titulo varchar2(30),
+  editorial number(3),
+  autor varchar2(30),
+  precio number(6,2),
+  constraint FK_libros_editorial
+   foreign key(editorial)
+   references editoriales(codigo)
+ );
+</pre>
+
+<p>Eliminamos un campo de la tabla "libros":</p>
+<pre>
+ alter table libros
+  drop column precio;
+</pre>
+<p>Vemos la estructura de la tabla "libros":</p>
+<pre>
+ describe libros;
+</pre>
+<p>El campo "precio" ya no existe.</p>
+
+<p>Recuerde que no pueden eliminarse los campos referenciados por una "foreign key". Intentamos eliminar el campo "codigo" de "editoriales":</p>
+<pre>
+ alter table editoriales
+  drop column codigo;
+</pre>
+<p>Un mensaje indica que la sentencia no fue ejecutada.</p>
+
+<p>Eliminamos el campo "editorial" de "libros":</p>
+<pre>
+ alter table libros
+  drop column editorial;
+</pre>
+<p>Verificamos que el campo no existe:</p>
+<pre>
+ describe libros;
+</pre>
+<p>El campo se ha eliminado y junto con él la restricción "foreign key":</p>
+<pre>
+ select *from user_constraints
+  where table_name='LIBROS';
+</pre>
+<p>Ahora si podemos eliminar el campo "codigo" de "editoriales", pues la restricción "foreign key" que hacía referencia a ella ya no existe:</p>
+<pre>
+ alter table editoriales
+  drop column codigo;
+</pre>
+<p>El campo "codigo" de "editoriales" se ha eliminado y junto con él la restricción "primary key":</p>
+<pre>
+ select *from user_constraints
+  where table_name='EDITORIALES';
+</pre>
+<p>Agregamos un índice compuesto sobre "titulo" y "autor" de "libros":</p>
+<pre>
+ create unique index I_libros_titulo
+  on libros(titulo,autor);
+</pre>
+<p>Veamos si existe tal índice:</p>
+<pre>
+ select index_name,column_name,column_position
+  from user_ind_columns
+  where table_name='LIBROS';
+</pre>
+<p>Recuerde que si elimina un campo indizado, su índice también se elimina. Eliminamos el campo "autor" de "libros":</p>
+<pre>
+ alter table libros
+  drop column autor;
+</pre>
+<p>Veamos si existe el índice compuesto creado anteriormente sobre los campos "titulo" y "autor" de "libros":</p>
+<pre>
+ select index_name,column_name,column_position
+  from user_ind_columns
+  where table_name='LIBROS';
+</pre>
+<p>Ya no existe.</p>
+
+<p>La tabla ahora solamente consta de un campo, por lo tanto, no puede eliminarse, pues la tabla no puede quedar vacía de campos:</p>
+<pre>
+ alter table libros
+  drop column titulo;
+</pre>
+<p>Mensaje de error.</p>
+        <form name="formulario" action="http://www.sqlserverya.com.ar/aspx/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+        <br>
+   <h2><a href="../indexefd7.html?inicio=50">Retornar</a></h2>   
+        
+	<br>
+   
+
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=50&cod=228&punto=70 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:36 GMT -->
+</html>
+

@@ -1,0 +1,183 @@
+<html>
+
+
+<!-- Mirrored from www.sqlserverya.com.ar/temarios/descripcion.php?inicio=125&cod=154&punto=148 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de SQL Server </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+	  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>148 - Disparador (información)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>Los triggers (disparadores) son objetos, así que para obtener información de ellos pueden usarse los siguientes procedimientos almacenados del sistema y las siguientes tablas:</p>
+
+<p>- "sp_help": sin parámetros nos muestra todos los objetos de la base de datos seleccionada, incluidos los triggers. En la columna "Object_type" aparece "trigger" si es un disparador.</p>
+<p>Si le enviamos como argumento el nombre de un disparador, obtenemos el propietario, el tipo de objeto y la fecha de creación.</p>
+
+<p>- "sp_helptext": seguido del nombre de un disparador nos muestra el texto que define el trigger, excepto si ha sido encriptado.</p>
+
+<p>- "sp_depends": retorna 2 resultados:</p>
+<p> 1) el nombre, tipo, campos, etc. de los objetos de los cuales depende el objeto enviado (referenciados por el objeto) y</p>
+<p> 2) nombre y tipo de los objetos que dependen del objeto nombrado (que lo referencian).</p>
+
+<p>Por ejemplo, ejecutamos "sp_depends" seguido del nombre de un disparador:</p>
+<pre>
+ sp_depends dis_inscriptos_insertar;
+</pre>
+<p>Aparece una tabla similar a la siguiente:</p>
+<pre>
+name			type		updated	column
+-----------------------------------------------------------------
+dbo.condicionales	user table	yes	codigocurso
+dbo.condicionales	user table	yes	fecha
+dbo.inscriptos		user table	yes	numerocurso
+dbo.inscriptos		user table	yes	fecha
+dbo.condicionales	user table	yes	documento
+dbo.cursos		user table	no	numero
+dbo.cursos		user table	no	cantidadmaxima
+dbo.inscriptos		user table	yes	documento
+</pre>
+<p>En la columna "name" nos muestra las tablas (y demás objetos si hubiese) de las cuales depende el trigger, es decir, las tablas referenciadas en el mismo; el tipo de objeto en la columna "type" (en este caso, todas tablas); la columna "update" indica si el objeto es actualizado o no (note que la tabla "cursos" no se actualiza, solamente se consulta); la columna "column" muestra el nombre del campo que se referencia.</p>
+<p>No aparecen objetos que dependen del trigger porque no existe ningún objeto que lo referencie.</p>
+
+<p>También podemos ejecutar el mismo procedimiento seguido del nombre de una tabla:</p>
+<pre>
+ sp_depends inscriptos;
+</pre>
+<p>aparecen los objetos que dependen de ella (que la referencian). En este ejemplo: 1 solo objeto, su nombre y tipo (trigger). No aparecen objetos de los cuales depende porque la tabla no los tiene.
+</p>
+<p>- Para conocer los disparadores que hay en una tabla específica y sus acciones respectivas, podemos ejecutar el procedimiento del sistema "sp_helptrigger" seguido del nombre de la tabla o vista. Por ejemplo:</p>
+<pre>
+ sp_helptrigger inscriptos;
+</pre>
+<p>Nos muestra la siguiente información:</p>
+<pre>
+trigger_name		trigger_owner	isupdate	isdelete	isinsert	isafter	isinsteadof
+------------------------------------------------------------------------------------------------------------
+dis_inscriptos_insertar	dbo		0		0		1		0	1
+</pre>
+<p>El nombre del trigger, su propietario; en las 3 columnas siguientes indica para qué evento se ha definido (un valor 1 indica que está definido para tal evento); las 2 últimas columnas indican el momento de disparo (un valor 1 se interpreta como verdadero y un 0 como falso). En el ejemplo, el disparador "dis_inscriptos_insertar" está definido para el evento de inserción  (valor 1 en "isinsert") y es "instead of" (valor 1 en "isinsteadof").</p>
+
+<p>- La tabla del sistema "sysobjects": muestra nombre y varios datos de todos los objetos de la base de datos actual. La columna "xtype" indica el tipo de objeto. Si es un trigger muestra "TR". </p>
+<p>Si queremos ver el nombre, tipo y fecha de creación de todos los disparadores, podemos tipear:</p>
+<pre>
+ select name,xtype as tipo,crdate as fecha
+  from sysobjects
+  where xtype = 'TR';
+</pre>
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+<br>
+   <h2><a href="../index28e1.html?inicio=125">Retornar</a></h2>   
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-11";
+urchinTracker();
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from www.sqlserverya.com.ar/temarios/descripcion.php?inicio=125&cod=154&punto=148 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:34 GMT -->
+</html>

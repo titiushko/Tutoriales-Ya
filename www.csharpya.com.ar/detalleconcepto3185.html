@@ -1,0 +1,238 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=177&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - Estructuras dinámicas: Conceptos de árboles</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>53 - Estructuras dinámicas: Conceptos de árboles</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p>Igual que la lista, el árbol es una estructura de datos.
+Son muy eficientes para la búsqueda de información.
+Los árboles soportan estructuras no lineales.</p>
+<img src="imagentema/foto127.jpg" border="0" alt="arbol"><br>
+<p>Algunos conceptos de la estructura de datos tipo árbol:</p>
+
+
+<p><strong>Nodo hoja</strong>: Es un nodo sin descendientes (Nodo terminal)<br>
+Ej. Nodos E ? F ? C y D.
+</p>
+<p><strong>Nodo interior</strong>: Es un nodo que no es hoja.<br>
+Ej. Nodos A y B.
+</p>
+
+<p><strong>Nivel de un árbol</strong>: El nodo A está en el nivel 1 sus descendientes directos están en el nivel 2 y así sucesivamente.<br>
+El nivel del árbol está dado por el nodo de máximo nivel.<br>
+Ej. Este árbol es de nivel 3.
+</p>
+<p><strong>Grado de un nodo</strong>: es el número de nodos hijos que tiene dicho nodo (solo se tiene en cuenta los nodos interiores)<br>
+Ej. El nodo A tiene grado 3.<br>
+El nodo B tiene grado 2.<br>
+Los otros nodos no tienen grado porque no tienen descendientes.
+</p>
+<p><strong>Grado de un árbol</strong>: Es  el máximo de los grados de todos los nodos de un árbol.<br>
+Ej. El grado del árbol es 3.
+</p>
+<p><strong>Longitud de camino del nodo x</strong>: Al número de arcos que deben ser recorridos para llegar a un nodo x, partiendo de la raiz.<br>
+La raiz tiene longitud de camino 1, sus descendientes directos tienen longitud de camino 2, etc. En forma general un nodo en el nivel i tiene longitud de camino i.</p>
+<p><strong>Árbol binario</strong>: Un árbol es binario si cada nodo tiene como máximo 2 descendientes.</p>
+<img src="imagentema/foto128.jpg" border="0" alt="arbol"><br>
+
+<p>Para cada nodo está definido el subárbol izquierdo y el derecho.<br>
+Para el nodo A el subárbol izquierdo está constituido por los nodos B, D y E. Y el subárbol derecho está formado por los nodos C y F.<br>
+Lo mismo para el nodo B tiene el subárbol izquierdo con un nodo (D) y un nodo en el subárbol derecho (E).<br>
+El nodo D tiene ambos subárboles vacíos.<br>
+El nodo C tiene el subárbol izquierdo vacío y el subárbol derecho con un nodo (F).
+</p>
+
+<p><strong>Árbol binario perfectamente equilibrado</strong>: Si para cada nodo el número de nodos en el subárbol izquierdo y el número de nodos en el subárbol derecho, difiere como mucho en una unidad.<br>
+Hay que tener en cuenta todos los nodos del árbol.</p>
+
+<p>El árbol de más arriba es perfectamente equilibrado.</p>
+
+<p>Ej. árbol que no es perfectamente equilibrado:<br>
+El nodo A tiene 3 nodos en el subárbol izquierdo y solo uno en el subárbol derecho, por lo que no es perfectamente equilibrado.</p>
+<img src="imagentema/foto129.jpg" border="0" alt="arbol"><br>
+
+<p><strong>Árbol binario completo</strong>: Es un árbol binario con hojas como máximo en los niveles n-1 y n (Siendo n el nivel del árbol)<br>
+
+Los dos árboles graficados son completos porque son árboles de nivel 3 y hay nodos hoja en el nivel 3 en el primer caso, y hay nodos hoja en los niveles 3 y 2 en el segundo caso.<br>
+
+Ej. Árbol binario no completo:</p>
+<img src="imagentema/foto130.jpg" border="0" alt="arbol"><br>
+
+<p>Hay nodos hoja en los niveles 4, 3 y 2. No debería haber nodos hojas en el nivel 2.</p>
+
+<p><strong>Árbol binario ordenado</strong>: Si para cada nodo del árbol, los nodos ubicados a la izquierda son inferiores al que consideramos raíz para ese momento y los nodos ubicados a la derecha son mayores que la raíz.</p>
+
+<img src="imagentema/foto131.jpg" border="0" alt="arbol"><br>
+
+<p>Ej. Analicemos si se trata de un árbol binario ordenado:<br>
+Para el nodo que tiene el 50:<br>
+Los nodos del subárbol izquierdo son todos menores a 50? 8, 25, 30 Si<br>
+Los nodos del subárbol derecho son todos mayores a 50? 70 Si.<br>
+Para el nodo que tiene el 25:<br>
+Los nodos del subárbol izquierdo son todos menores a 25? 8 Si<br>
+Los nodos del subárbol derecho son todos mayores a 25? 30 Si.</p>
+
+<p>No hace falta analizar los nodos hoja.
+Si todas las respuestas son afirmativas podemos luego decir que se trata de un árbol binario ordenado.</p>
+
+
+</div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="index1e61.html?inicio=40">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=177&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:39 GMT -->
+</html>

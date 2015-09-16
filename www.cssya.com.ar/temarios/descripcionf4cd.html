@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=40&cod=54&punto=50 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:07:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de CSS - Temarios</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<style>
+
+
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>50 - Selector de hermano adyacente y hermano general</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>El <strong>"selector de hermano adyacente"</strong> permite seleccionar un elemento HTML que viene inmediatamente después de otro elemento HTML. Los dos elementos deben tener el mismo elemento padre. Por ejemplo:</p>
+<pre>
+&lt;body&gt;
+&lt;h1&gt;Titulo 1&lt;/h1&gt;
+&lt;p&gt;Esto es el primer párrafo.&lt;/p&gt;
+&lt;p&gt;Esto es el segundo párrafo.&lt;/p&gt;
+&lt;p&gt;Esto es el tercer párrafo.&lt;/p&gt;
+&lt;/body&gt;
+</pre>
+<p>Mediante la regla de estilo:</p>
+<pre>
+h1+p{
+  color:#f00;
+}
+</pre>
+<p>Seleccionamos el primer párrafo que le sigue al elemento h1. Luego el primer párrafo se pinta de rojo.</p>
+<p>Si aplicamos este otro estilo al mismo bloque HTML:</p>
+<pre>
+p+p{
+  color:#f00;
+}
+</pre>
+<p>Se pintan de rojo el segundo y tercer párrafo ya que a cada uno de estos párrafos le antecede otro párrafo (no se pinta el primer párrafo porque no le antecede un párrafo sino un "h1")</p>
+
+<p>Ahora el <strong>"selector de hermano general"</strong> permite seleccionar todos los hermanos a diferencia del selector de hermano adyacente que selecciona el primero.</p>
+<p>Si tenemos el siguiente fragmento:</p>
+<pre>
+&lt;body&gt;
+&lt;h1&gt;Titulo 1&lt;/h1&gt;
+&lt;p&gt;Esto es el primer párrafo.&lt;/p&gt;
+&lt;p&gt;Esto es el segundo párrafo.&lt;/p&gt;
+&lt;p&gt;Esto es el tercer párrafo.&lt;/p&gt;
+&lt;/body&gt;
+</pre>
+<p>Y le aplicamos la regla:</p>
+<pre>
+h1~p{
+  color:#f00;
+}
+</pre>
+<p>Como resultado se aplica el color rojo a todos los párrafos adyacentes que tienen como hermano el elemento "h1".</p>
+
+<p>Una página completa que muestra el empleo de estos dos selectores:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;link rel="StyleSheet" href="estilos.css" type="text/css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Titulo 1&lt;/h1&gt;
+&lt;p&gt;Esto es el primer párrafo.&lt;/p&gt;
+&lt;p&gt;Esto es el segundo párrafo.&lt;/p&gt;
+&lt;p&gt;Esto es el tercer párrafo.&lt;/p&gt;
+
+&lt;h2&gt;Titulo 2&lt;/h2&gt;
+&lt;p&gt;Esto es el primer párrafo.&lt;/p&gt;
+&lt;p&gt;Esto es el segundo párrafo.&lt;/p&gt;
+&lt;p&gt;Esto es el tercer párrafo.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>estilos.css</p>
+<pre class="recuadro">
+h1+p{
+  color:#f00;
+}
+
+h2~p{
+  color:#f00;
+}
+</pre>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../index1e61.html?inicio=40">Retornar</a></h2>   
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=40&cod=54&punto=50 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:07:44 GMT -->
+</html>

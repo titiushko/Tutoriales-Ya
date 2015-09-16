@@ -1,0 +1,217 @@
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=20&cod=27 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de JavaScript : Conceptos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+div#contentdetalle{clear:left;
+                   max-width:900px;
+				   border-top:0px solid #999;
+				   padding-top:15px;
+				   background-color: #aed7a8;
+				   text-align:left;
+				   font-size:1.3em;
+				   font-weight:normal;
+				   font-family:arial;
+				   padding:20px}
+				   
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;  
+}				   
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td>
+<h1>Control CHECKBOX</h1></td>
+<td align="right">
+<!--<a href="http://www.javascriptya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div id="contentdetalle">
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 	  
+
+El control CHECKBOX es el cuadradito que puede tener dos estados (seleccionado o no seleccionado).<br>
+Para conocer su funcionamiento y ver como podemos acceder a su estado desde Javascript haremos un pequeña página.<br>
+Ejemplo: Confeccionar una página que muestre 4 lenguajes de programación que el usuario puede seleccionar si los conoce. Luego mostrar un mensaje indicando la cantidad de lenguajes que ha seleccionado el operador.
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt; 
+function contarSeleccionados()
+{
+  var cant=0;
+  if (document.getElementById('checkbox1').checked)
+  {
+    cant++;
+  }
+  if (document.getElementById('checkbox2').checked)
+  {
+    cant++;
+  }
+  if (document.getElementById('checkbox3').checked)
+  {
+    cant++;
+  }
+  if (document.getElementById('checkbox4').checked)
+  {
+    cant++;
+  }
+  alert('Conoce ' + cant + ' lenguajes');
+}
+&lt;/script&gt;
+
+&lt;form&gt;
+&lt;input type="checkbox" id="checkbox1"&gt;JavaScript
+&lt;br&gt;
+&lt;input type="checkbox" id="checkbox2"&gt;PHP
+&lt;br&gt;
+&lt;input type="checkbox" id="checkbox3"&gt;JSP
+&lt;br&gt;
+&lt;input type="checkbox" id="checkbox4"&gt;VB.Net
+&lt;br&gt;
+&lt;input type="button" value="Mostrar" onClick="contarSeleccionados()"&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+Cuando se presiona el botón se llama a la función Javascript contarSeleccionados(). En la misma verificamos uno a uno cada control checkbox accediendo a la propiedad checked del elemento que almacena true o false según esté o no seleccionado el control:<br>
+Disponemos un 'if' para cada checkbox:
+<pre>
+  if (document.getElementById('checkbox1').checked)
+  {
+    cant++;
+  }
+</pre>
+Como la propiedad checked almacena un true o false podemos utilizar dicho valor directamente como valor de la condición en lugar de codificar:
+<pre>
+  if (document.getElementById('checkbox1').checked==true)
+  {
+    cant++;
+  }
+</pre>
+Al contador 'cant' lo definimos e inicializamos en cero previo a los cuatro if. Mostramos finalmente el resultado final.</p>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../index28fa.html?inicio=20">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=20&cod=27 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:20 GMT -->
+</html>

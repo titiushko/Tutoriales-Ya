@@ -1,0 +1,370 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=49&codigo=180&inicio=45 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:31:05 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Métodos inline</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>49 - Métodos inline</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Los métodos inline tienen por objetivo hacer partes de nuestro programas más eficientes en tiempo de ejecución.</p>
+<p>Cuando definimos un método inline el código de la misma hace que se copie en el lugar donde se la llama a dicha función. Hay que tener en cuenta que cuando llamamos a un método hay una pérdida de tiempo en la llamada en si mismo.</p>
+<p>Es conveniente utilizar métodos inline solo para algoritmos pequeñas ya que si bien hacen el código más eficiente por otro lado generan un código compilado más grande.</p>
+
+
+<h3>Problema:</h3>
+<p>Crear una clase llamada Temperatura que permita cargar la temperatura mínima, máxima y actual. Definir un método inline para retornar el rango de variación (diferencia entre la máxima y la mínima)</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Temperatura {
+    int minima;
+    int maxima;
+    int actual;
+public:
+    Temperatura(int min, int max, int act);
+    int rango()
+    {
+        int valor = maxima - minima;
+        return valor;
+    }
+    void imprimir();
+};
+
+Temperatura::Temperatura(int min, int max, int act)
+{
+    minima = min;
+    maxima = max;
+    actual = act;
+}
+
+void Temperatura::imprimir()
+{
+    cout &lt;&lt; "Minima:" &lt;&lt; minima &lt;&lt; "\n";
+    cout &lt;&lt; "Maxima:" &lt;&lt; maxima &lt;&lt; "\n";
+    cout &lt;&lt; "Actual:" &lt;&lt; actual &lt;&lt; "\n";
+}
+
+
+void main()
+{
+    Temperatura temperatura1(5,25,17);
+    cout &lt;&lt; "Rango de variacion de temperaturas:" &lt;&lt; temperatura1.rango()&lt;&lt;"\n\n";
+    temperatura1.imprimir();
+    cin.get();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/Metodosinline1.zip">Metodosinline1.zip</a></p>
+
+
+<p>En C++ un método es inline solo con implementarlo en la declaración de la clase:</p>
+<pre>
+class Temperatura {
+    int minima;
+    int maxima;
+    int actual;
+public:
+    Temperatura(int min, int max, int act);
+    int rango()
+    {
+        int valor = maxima - minima;
+        return valor;
+    }
+    void imprimir();
+};
+</pre>
+<p>
+<p>Si bien podemos agregar la palabra clave inline normalmente los programadores no lo hacen:</p>
+<pre>
+class Temperatura {
+    int minima;
+    int maxima;
+    int actual;
+public:
+    Temperatura(int min, int max, int act);
+    inline int rango()
+    {
+        int valor = maxima - minima;
+        return valor;
+    }
+    void imprimir();
+};
+</pre>
+
+<p>Tanto constructores como destructores pueden implementarse inline, en el problema anterior si implementamos el constructor inline el código queda como sigue:</p>
+<pre>
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Temperatura {
+    int minima;
+    int maxima;
+    int actual;
+public:
+    Temperatura(int min, int max, int act)
+    {
+        minima = min;
+        maxima = max;
+        actual = act;
+    }
+    int rango()
+    {
+        int valor = maxima - minima;
+        return valor;
+    }
+    void imprimir();
+};
+
+void Temperatura::imprimir()
+{
+    cout &lt;&lt; "Minima:" &lt;&lt; minima &lt;&lt; "\n";
+    cout &lt;&lt; "Maxima:" &lt;&lt; maxima &lt;&lt; "\n";
+    cout &lt;&lt; "Actual:" &lt;&lt; actual &lt;&lt; "\n";
+}
+
+
+void main()
+{
+    Temperatura temperatura1(5,25,17);
+    cout &lt;&lt; "Rango de variacion de temperaturas:" &lt;&lt; temperatura1.rango()&lt;&lt;"\n\n";
+    temperatura1.imprimir();
+    cin.get();
+}
+</pre>
+
+<p>Otra cosa que podemos notar en programas escritos en C++ es que cuando se declaran métodos inline se codifiquen en una sola línea, tener en cuenta que el resultado del algoritmo no cambia en absoluto, sino es solo una forma de organizar el código fuente de la declaración de la clase. En nuestro ejemplo tendríamos:</p>
+
+<pre>
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Temperatura {
+    int minima;
+    int maxima;
+    int actual;
+public:
+    Temperatura(int min, int max, int act)    { minima = min; maxima = max; actual = act;    }
+    int rango()    { int valor = maxima - minima; return valor; }
+    void imprimir();
+};
+
+void Temperatura::imprimir()
+{
+    cout &lt;&lt; "Minima:" &lt;&lt; minima &lt;&lt; "\n";
+    cout &lt;&lt; "Maxima:" &lt;&lt; maxima &lt;&lt; "\n";
+    cout &lt;&lt; "Actual:" &lt;&lt; actual &lt;&lt; "\n";
+}
+
+
+void main()
+{
+    Temperatura temperatura1(5,25,17);
+    cout &lt;&lt; "Rango de variacion de temperaturas:" &lt;&lt; temperatura1.rango()&lt;&lt;"\n\n";
+    temperatura1.imprimir();
+    cin.get();
+}
+</pre>
+
+
+<h2>Problema propuesto</h2>
+<ol>
+<li>
+Plantear una clase que administre un vector de 5 enteros. Cargar los elementos por teclado, imprimirlos y retornar la suma de la primera y última componente (este último método implementarlo inline)
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Vector {
+    int vec[5];
+public:
+    void cargar();
+    void imprimir();
+    int sumaPrimeroUltimo() { return vec[0] + vec[4]; }
+};
+
+void Vector::cargar()
+{
+    for (int f = 0; f &lt; 5; f++)
+    {
+        cout &lt;&lt; "Ingrese elemento:";
+        cin &gt;&gt; vec[f];
+    }
+}
+
+void Vector::imprimir()
+{
+    for (int f = 0; f &lt; 5; f++)
+    {
+        cout &lt;&lt; vec[f] &lt;&lt; "-";
+    }
+    cout &lt;&lt; "\n";
+}
+
+
+void main()
+{
+    Vector vec1;
+    vec1.cargar();
+    vec1.imprimir();
+    cout &lt;&lt;"Suma de la primer y última componente:"&lt;&lt;vec1.sumaPrimeroUltimo();
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/Metodosinline2.zip">Metodosinline2.zip</a></p>
+
+</pre><h2><a href="indexb634.html?inicio=45">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=49&codigo=180&inicio=45 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:31:05 GMT -->
+</html>

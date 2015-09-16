@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=50&cod=56&punto=52 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:07:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de CSS - Temarios</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<style>
+
+
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>52 - Pseudo-clases: first-child y last-child</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>En los próximos conceptos veremos otras formas de seleccionar elementos HTML de una página para aplicarle estilos.</p>
+<p>La pseudoclase fist-child nos permite seleccionar el primer elemento hijo de otro elemento padre y de manera similar la pseudoclase last-child selecciona el último elemento hijo.</p>
+<h3>Problema</h3>
+<p>Disponer una lista ordenada de 4 elementos, fijar con color verde el primer elemento y color rojo el último elemento de la lista.</p>
+<p>pagina.html</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;link rel="StyleSheet" href="estilos.css" type="text/css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;ol&gt;
+    &lt;li&gt;Primer opción.&lt;/li&gt;
+    &lt;li&gt;Segunda opción.&lt;/li&gt;
+    &lt;li&gt;Tercer opción.&lt;/li&gt;
+    &lt;li&gt;Cuarta opción.&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>estilos.css</p>
+<pre class="recuadro">
+ol li:first-child {
+  color:green;
+}
+
+ol li:last-child {
+  color:red;
+}
+</pre>
+
+<p>Recordemos que a las pseudoclases se les antecede el caracter : y en forma seguida indicamos el nombre de la pseudoclase previo a los dos puntos indicamos el nombre del elemento a seleccionar:</p>
+<pre>
+ol li:first-child {
+  color:green;
+}
+</pre>
+<p>Podemos también expresarlo sin anteceder el elemento ol, es decir sin indicar "selector descendiente":</p>
+<pre>
+li:first-child {
+  color:green;
+}
+</pre>
+<p>De forma similar para aplicar un estilo al último item de la lista ordenada utilizamos la pseudoclase last-child:</p>
+<pre>
+ol li:last-child {
+  color:red;
+}
+</pre>
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../indexefd7.html?inicio=50">Retornar</a></h2>   
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=50&cod=56&punto=52 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:07:44 GMT -->
+</html>

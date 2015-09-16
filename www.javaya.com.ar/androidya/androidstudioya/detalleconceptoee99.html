@@ -1,0 +1,325 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=9&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:21:41 GMT -->
+<head>
+<title>Notificaciones sencillas mediante la clase Toast</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>9 - Notificaciones sencillas mediante la clase Toast</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+ <div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+<p>Android permite mostrar una ventana emergente temporal que informa al usuario mediante un mensaje que aparece en la pantalla por un lapso pequeño de tiempo (luego de pasado un tiempo la ventana desaparece).</p>
+<p>Esta ventana que se superpone a la interfaz que se está mostrando en ese momento se administra mediante una clase llamada Toast.</p>
+
+<h3>Problema:</h3>
+<p>Generar un número aleatorio entre 1 y 100000. Mostrar mediante una ventana emergente dicho número por un lapso de tiempo. Luego mediante un control EditText ("Number") pedir al operador que ingrese el número que vio en la pantalla. Cuando se presione un botón controlar el número generado aleatoriamente con el que ingresó el usuario y mediante otro Toast informar si acertó o no.</p>
+
+<p>Lo primero que hacemos es crear la interfaz siguiente:</p>
+
+<img src="imagentema/foto035b.jpg" border="0" alt="Clase Toast"><br>
+<p>Es decir que disponemos un TextView ("Medium Text"), EditText ("Number") y un Button. Dejamos por defecto los nombres asignados a las id de cada uno de estos objetos: textView, editText y button.</p>
+<p>Luego seleccionamos el botón de la interfaz visual e inicializamos la propiedad onClick con el nombre del método que se ejecutará al ser presionado, dicho nombre debe ser: "controlar"  (recordemos que los nombre de métodos en Java por convención empiezan en minúsculas)</p>
+
+<h4>Código fuente:</h4>
+<pre class="recuadro">
+package ar.com.tutorialesya.proyecto008;
+
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+
+public class MainActivity extends ActionBarActivity {
+
+    private EditText et1;
+    private int num;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        et1=(EditText)findViewById(R.id.editText);
+        num=(int)(Math.random()*100001);
+        String cadena=String.valueOf(num);
+        Toast notificacion=Toast.makeText(this,cadena,Toast.LENGTH_LONG);
+        notificacion.show();
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void controlar(View v) {
+        String valorIngresado=et1.getText().toString();
+        int valor=Integer.parseInt(valorIngresado);
+        if (valor==num) {
+            Toast notificacion=Toast.makeText(this,"Muy bien recordaste el número mostrado.",Toast.LENGTH_LONG);
+            notificacion.show();
+        }
+        else {
+            Toast notificacion=Toast.makeText(this,"Lo siento pero no es el número que mostré.",Toast.LENGTH_LONG);
+            notificacion.show();
+        }
+    }
+}
+
+</pre>
+
+<p>Analicemos el código fuente de la aplicación, lo primero es definir un objeto de la clase EditText y una variable entera donde almacenaremos el valor aleatorio que generamos y mostramos en un principio:</p>
+<pre>
+    private EditText et1;
+    private int num;
+</pre>
+
+<p>En el método onCreate que es el primero que se ejecuta al inicializar la aplicación es donde inicializamos la referencia del EditText:</p>
+<pre>
+        et1=(EditText)findViewById(R.id.editText);
+</pre>
+<p>Generamos un valor aleatorio comprendido entre 0 y 100000 y lo almacenamos en la variable num:</p>
+<pre>
+        num=(int)(Math.random()*100001);
+</pre>
+<p>Convertimos el valor entero a String ya que la clase Toast siempre hay que pasarte un String para mostrar:</p>
+<pre>
+        String cadena=String.valueOf(num);
+</pre>
+<p>Veamos ahora lo nuevo que es la clase Toast, tenemos que crear un objeto de la clase Toast, para ello definimos una variable que la llamamos notificacion y mediante el método estático makeText de la clase Toast creamos el objeto.</p>
+<p>El método makeText tiene tres parámetros: el primero hace referencia a la ventana o Activity donde aparece (this), el segundo el la variable de tipo String que se mostrará en pantalla y por último es una constante que indica que la notificación se mostrará por un tiempo largo o corto:</p>
+<pre>
+        Toast notificacion=Toast.makeText(this,cadena,Toast.LENGTH_LONG);
+</pre>
+<p>Finalmente cuando queremos que se muestre la notificación en pantalla procedemos a llamar al método show de la clase Toast:</p>
+<pre>
+        notificacion.show();
+</pre>
+<p>Esto hace que inmediatamente arranquemos la aplicación se mostrará la notificación con el número que deberá memorizar el usuario:</p>
+<img src="imagentema/foto035c.jpg" border="0" alt="Clase Toast"><br>
+<p>Luego de unos segundo desaparece la notificación de pantalla (es decir en nuestro programa desaparece de pantalla el número aleatorio)</p>
+<p>Cuando el operador termina de cargar el número y procede a ejecutar el botón "controlar" se procede a ejecutar el código que dispusimos en el método "controlar":</p>
+<pre>
+    public void controlar(View v) {
+        String valorIngresado=et1.getText().toString();
+        int valor=Integer.parseInt(valorIngresado);
+        if (valor==num) {
+            Toast notificacion=Toast.makeText(this,"Muy bien recordaste el número mostrado.",Toast.LENGTH_LONG);
+            notificacion.show();
+        }
+        else {
+            Toast notificacion=Toast.makeText(this,"Lo siento pero no es el número que mostré.",Toast.LENGTH_LONG);
+            notificacion.show();
+        }
+    }
+</pre>
+<p>En este método extraemos del control EditText el número que ingreso el usuario:</p>
+<pre>
+        String valorIngresado=et1.getText().toString();
+</pre>
+<p>Lo convertimos a entero:</p>
+<pre>
+        int valor=Integer.parseInt(valorIngresado);
+</pre>
+<p>Y mediante un if verificamos si coincide con el número aleatorio ingresado por el operador, si coincide inmediatamente creamos una nueva notificación y procedemos a mostrar que acertó:</p>
+<pre>
+        if (valor==num) {
+            Toast notificacion=Toast.makeText(this,"Muy bien recordaste el número mostrado.",Toast.LENGTH_LONG);
+            notificacion.show();
+        }
+</pre>
+<p>Por el falso mediante otra notificación mostramos que no ingresó correctamente el número:</p>
+<pre>
+        else {
+            Toast notificacion=Toast.makeText(this,"Lo siento pero no es el número que mostré.",Toast.LENGTH_LONG);
+            notificacion.show();
+        }
+</pre>
+
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/Proyecto008.zip">proyecto008.zip</a>
+</p>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+<br>
+   <h2><a href="index2904.html?inicio=0">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-34', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=9&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:25:42 GMT -->
+</html>

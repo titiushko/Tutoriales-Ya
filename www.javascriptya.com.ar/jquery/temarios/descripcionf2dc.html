@@ -1,0 +1,230 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/temarios/descripcion.php?cod=85&punto=29&inicio=18 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Conceptos de JQuery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="jQuery, programación, webmaster, tutorial, JavaScript">
+<meta name="description" content="El objetivo de este tutorial es presentar los conceptos de la libreria JavaScript JQUERY.">
+<meta name="author" content="Diego Moisset">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" type="text/JavaScript">
+
+</script>
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>29 - $.ajax</h1></td>
+<td align="right">
+<a href="../../publicidad/index.html"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.html"></a>	
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<p>
+<div style="font-size:1.3em;font-family:arial;">
+<p>Hasta ahora hemos visto que jQuery nos provee varias formas de recuperar y enviar datos al servidor utilizando ajax:</p>
+<ol>
+<li>Método load</li>
+<li>Funciones $.get y $.post</li>
+<li>$.getJSON</li>
+</ol>
+<p>Existe otra función llamada $.ajax que es la más completa de todas, pero como desventaja es más compleja su empleo.</p>
+<p>La sintaxis de la función $.ajax es:</p>
+<pre>
+ajax([objeto literal])
+</pre>
+<p>Retorna un objeto XMLHttpRequest que podemos eventualmente utilizarlo.</p>
+<p>Con un ejemplo veremos las propiedades principales que podemos configurar en el parámetro a enviar.</p>
+<p><strong>Problema:</strong>Implementar una aplicación que calcule el cuadrado de un número que ingresamos por teclado. La operación se realiza en el servidor, le enviamos los datos mediante la función de jQuery $.ajax</p>
+<p>pagina1.html</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;../jquery.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;funciones.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form action=&quot;pagina1.php&quot; method=&quot;post&quot; id=&quot;formulario&quot;&gt;
+Ingrese nro:&lt;input type=&quot;text&quot; name=&quot;nro&quot; id=&quot;nro&quot; 
+size=&quot;10&quot;&gt;&lt;br&gt;
+&lt;input type=&quot;submit&quot; value=&quot;Calcular el cuadrado&quot; id=&quot;enviar&quot;&gt;
+&lt;div id=&quot;resultados&quot;&gt;&lt;/div&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>funciones.js</p>
+<pre class="recuadro">
+var x;
+x=$(document);
+x.ready(inicializarEventos);
+
+function inicializarEventos()
+{
+  var x;
+  x=$("#enviar");
+  x.click(presionSubmit);
+}
+
+function presionSubmit()
+{
+  var v=$("#nro").attr("value");
+  $.ajax({
+           async:true,
+           type: "POST",
+           dataType: "html",
+           contentType: "application/x-www-form-urlencoded",
+           url:"pagina1.php",
+           data:"numero="+v,
+           beforeSend:inicioEnvio,
+           success:llegadaDatos,
+           timeout:4000,
+           error:problemas
+         }); 
+  return false;
+}
+
+function inicioEnvio()
+{
+  var x=$("#resultados");
+  x.html('&lt;img src=&quot;../cargando.gif&quot;&gt;');
+}
+
+function llegadaDatos(datos)
+{
+  $("#resultados").text(datos);
+}
+
+function problemas()
+{
+  $("#resultados").text('Problemas en el servidor.');
+}
+</pre>
+<p>pagina1.php</p>
+<pre class="recuadro">
+&lt;?php
+$cuadrado=$_REQUEST['numero']*$_REQUEST['numero'];
+echo $cuadrado;
+?&gt;
+</pre>
+<p>Veamos que datos podemos enviarle a la función $.ajax:</p>
+<pre>
+function presionSubmit()
+{
+  var v=$("#nro").attr("value");
+  $.ajax({
+           async:true,
+           type: "POST",
+           dataType: "html",
+           contentType: "application/x-www-form-urlencoded",
+           url:"pagina1.php",
+           data:"numero="+v,
+           beforeSend:inicioEnvio,
+           success:llegadaDatos,
+           timeout:4000,
+           error:problemas
+         }); 
+  return false;
+}
+</pre>
+<p>Hemos inicializado las siguientes propiedades:</p>
+<ul>
+<li>async : Indica si la comunicación será asincrónica (true) o sincrónica (false) </li>
+<li>type : Indica el método que se envían los datos (pudiendo ser GET o POST)</li>
+<li>dataType : Indica el tipo de datos que se va a recuperar (pudiendo ser "html","xml","json","script")</li>
+<li>contentType : Indicamos como se empaquetan los datos para enviarlos al servidor (normalmente "application/x-www-form-urlencoded")</li>
+<li>url : Indicamos el nombre de la página que procesará la petición de datos.</li>
+<li>data : Indicamos los datos a enviar al servidor.</li>
+<li>beforeSend : Indicamos el nombre de la función que se ejecutará previo al envío de datos (en nuestro ejemplo mostramos el gif animado que indica que se inició el pedido de datos al servidor)</li>
+<li>success : Indicamos la función que se ejecuta cuando finalizó el envío de datos del servidor y además ocurrió todo en forma correcta (en nuestro ejemplo recuperamos el dato devuelto y lo mostramos en la página)</li>
+<li>timeout : El tiempo máximo a esperar por la petición de datos.</li>
+<li>error : El nombre de la función que se ejecuta si los datos no llegan del servidor.</li>
+</ul>
+ </div>
+</p>
+
+<table width="650px">
+<tr>
+<td align="center">	
+
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../index111c.html?inicio=18">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-14', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/temarios/descripcion.php?cod=85&punto=29&inicio=18 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:23 GMT -->
+</html>

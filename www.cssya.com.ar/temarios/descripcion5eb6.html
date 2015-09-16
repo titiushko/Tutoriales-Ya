@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=20&cod=34&punto=29 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:07:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de CSS - Temarios</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<style>
+
+
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>29 - Creación de un menú horizontal con una lista.</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Otro estilo de menú muy común es donde las opciones se encuentran una al lado de otra.</p>
+<p>Utilizaremos una lista no ordenada con una serie de item que contienen los enlaces.</p>
+<p>Como elementos de una lista se muestran uno debajo de otro debemos inicializar la propiedad float con el valor left para que los item se ubiquen uno al lado de otro.</p>
+
+<p>Veamos el código para la implementación de un menú horizontal:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;link rel=&quot;StyleSheet&quot; href=&quot;estilos.css&quot; type=&quot;text/css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;ul id=&quot;menuhorizontal&quot;&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.google.com&quot;&gt;Google&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.yahoo.com&quot;&gt;Yahoo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.bing.com&quot;&gt;Bing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.altavista.com&quot;&gt;Altavista&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>El archivo de estilos es:</p>
+<pre class="recuadro">
+#menuhorizontal {
+  margin:0;
+  padding:0;
+  list-style-type:none;
+}
+#menuhorizontal a {
+  width:100px;
+  text-decoration:none;
+  text-align:center;
+  color:#ff0000;
+  background-color:#f7f8e8;
+  padding:3px 5px;
+  border-right:1px solid blue;
+  display:block;
+}
+
+#menuhorizontal li {
+  float:left;
+}
+
+#menuhorizontal a:hover {
+  background-color:#336699;
+}
+</pre>
+
+<p>Inicializamos el margin y padding con cero y el estilo de la lista con none para que no aparezcan los circulitos de cada item:</p>
+<pre>
+#menuhorizontal {
+  margin:0;
+  padding:0;
+  list-style-type:none;
+}
+</pre>
+
+<p>En los enlaces del menú inicializamos la propiedad display con el valor block para que el enlace tenga efecto en todo el rectángulo:</p>
+<pre>
+#menuhorizontal a {
+  width:100px;
+  text-decoration:none;
+  text-align:center;
+  color:#ff0000;
+  background-color:#f7f8e8;
+  padding:3px 5px;
+  border-right:1px solid blue;
+  display:block;
+}
+</pre>
+
+<p>Para que los enlaces aparezcan uno al lado de otro inicializamos la propiedad float con el valor left:</p>
+<pre>
+#menuhorizontal li {
+  float:left;
+}
+</pre>
+<p>Finalmente la pseudoclase para indicar el color de fondo del enlace cuando la flecha del mouse pasa por encima es:</p>
+<pre>
+#menuhorizontal a:hover {
+  background-color:#336699;
+}
+</pre>
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../index28fa.html?inicio=20">Retornar</a></h2>   
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=20&cod=34&punto=29 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:07:22 GMT -->
+</html>

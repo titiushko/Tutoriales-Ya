@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=30&cod=39&punto=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:07:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de CSS - Temarios</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<style>
+
+
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>40 - Disposición de 2 columnas (position: absolute)</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Empezaremos a ver como componer una página sin utilizar las tablas HTML (un medio muy utilizado hasta hace muy poco, ya que es ampliamente soportado por navegadores antiguos).</p>
+<p>Una solución para crear una página con dos columnas es utilizar el posicionamiento absoluto:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;link rel="StyleSheet" href="estilos.css" type="text/css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id="columna1"&gt;
+Aca va el contenido de la columna 1.Aca va el contenido 
+de la columna 1.Aca va el contenido de la columna 1.
+Aca va el contenido de la columna 1.Aca va el contenido de
+ la columna 1.
+Aca va el contenido de la columna 1.Aca va el contenido 
+de la columna 1.Aca va el contenido de la columna 1.
+Aca va el contenido de la columna 1.Aca va el contenido de
+ la columna 1.Aca va el contenido de la columna 1.Aca va el contenido 
+de la columna 1.Aca va el contenido de la columna 1.
+Aca va el contenido de la columna 1.Aca va el contenido de
+ la columna 1.Aca va el contenido de la columna 1.Aca va el contenido 
+de la columna 1.Aca va el contenido de la columna 1.
+Aca va el contenido de la columna 1.Aca va el contenido de
+ la columna 1.Aca va el contenido de la columna 1.Aca va el contenido 
+de la columna 1.Aca va el contenido de la columna 1.
+Aca va el contenido de la columna 1.Aca va el contenido de
+ la columna 1.Aca va el contenido de la columna 1.Aca va el contenido 
+de la columna 1.Aca va el contenido de la columna 1.
+Aca va el contenido de la columna 1.Aca va el contenido de
+ la columna 1.Aca va el contenido de la columna 1.Aca va el contenido 
+de la columna 1.Aca va el contenido de la columna 1.
+Aca va el contenido de la columna 1.Aca va el contenido de
+ la columna 1.Aca va el contenido de la columna 1.Aca va el contenido 
+de la columna 1.Aca va el contenido de la columna 1.
+Aca va el contenido de la columna 1.Aca va el contenido de
+ la columna 1.
+&lt;/div&gt;
+&lt;div id="columna2"&gt;
+Aca va el contenido de la columna 2. Aca va el contenido de la columna 2.
+Aca va el contenido de la columna 2.Aca va el contenido de la columna 2.
+Aca va el contenido de la columna 2. Aca va el contenido de la columna 2.
+Aca va el contenido de la columna 2.Aca va el contenido de la columna 2.
+Aca va el contenido de la columna 2. Aca va el contenido de la columna 2.
+Aca va el contenido de la columna 2.Aca va el contenido de la columna 2.
+Aca va el contenido de la columna 2. Aca va el contenido de la columna 2.
+Aca va el contenido de la columna 2.Aca va el contenido de la columna 2.
+Aca va el contenido de la columna 2. Aca va el contenido de la columna 2.
+Aca va el contenido de la columna 2.Aca va el contenido de la columna 2.
+Aca va el contenido de la columna 2. Aca va el contenido de la columna 2.
+Aca va el contenido de la columna 2.Aca va el contenido de la columna 2.
+Aca va el contenido de la columna 2. Aca va el contenido de la columna 2.
+Aca va el contenido de la columna 2.Aca va el contenido de la columna 2.
+Aca va el contenido de la columna 2. Aca va el contenido de la columna 2.
+Aca va el contenido de la columna 2.Aca va el contenido de la columna 2.
+Aca va el contenido de la columna 2. Aca va el contenido de la columna 2.
+Aca va el contenido de la columna 2.Aca va el contenido de la columna 2.
+Aca va el contenido de la columna 2. Aca va el contenido de la columna 2.
+Aca va el contenido de la columna 2.Aca va el contenido de la columna 2.
+
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>La hoja de estilo para esta página es:</p>
+<pre class="recuadro">
+* {
+  margin:0;
+  padding:0;
+}
+#columna1 {
+  position:absolute;
+  top:0px;
+  left:0px;
+  width:200px;
+  margin-top:10px;
+  background-color:#ffff55;
+}
+#columna2 { 
+  margin-left:220px;
+  margin-right:20px;
+  margin-top:10px;  
+  background-color:#ffffbb;
+}
+</pre>
+<p>La primera regla de disponer el selector universal, es decir afecta a todos los elementos HTML, es sacar el margen y padding (generalmente dispondremos esta regla):</p>
+<pre>
+* {
+  margin:0;
+  padding:0;
+}
+</pre>
+<p>Cuando es cero no hace falta indicar la unidad (píxeles, em etc.)</p>
+<p>Ahora la regla definida para la primer columna es:</p>
+<pre>
+#columna1 {
+  position:absolute;
+  top:0px;
+  left:0px;
+  width:200px;
+  margin-top:10px;
+  background-color:#ffff55;
+}
+</pre>
+<p>Es decir, inicializamos la propiedad position con el valor absolute, con lo que debemos indicar la posición del div en la página por medio de las propiedades top y left, en esta caso lo posicionamos en la columna 0 y fila 0 y además inicializamos la propiedad width, con lo cual le estamos indicando que esta columna tendrá siempre 200 píxeles de ancho.</p>
+<p>Además inicializamos la propiedad margin-top con 10 píxeles, recordemos que todos los elementos tienen margin y padding cero.</p> 
+<p>Ahora veamos cómo inicializamos la segunda columna:</p>
+<pre>
+#columna2 { 
+  margin-left:220px;
+  margin-right:20px;
+  margin-top:10px;  
+  background-color:#ffffbb;
+}
+</pre>
+<p>Esta regla no inicializa la propiedad position, por lo que el div ocupa la posición que le corresponde por defecto, es decir, empieza en la coordenada 0,0 de la página. El truco está en inicializar la propiedad margin-left con un valor mayor a 200, que es el ancho de la columna1.</p>
+<p>El resto de propiedades que inicializamos son el margin-top, para que sea igual que la primera columna y el margin-right, para que no quede el texto pegado a la derecha.</p>
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../index7732.html?inicio=30">Retornar</a></h2>   
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=30&cod=39&punto=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:07:22 GMT -->
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=41&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 17:12:28 GMT -->
+<head>
+<title>Archivo strings.xml</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>41 - Archivo strings.xml</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+ <div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+<p>El archivo strings.xml se utiliza para almacenar todas las constantes de cadenas de caracteres que se necesitan en un programa (por ejemplo las etiquetas de los objetos Button, los textos de los controles TextView y todos los controles que muestran un texto en el dispositivo)</p>
+<p>La idea fundamental es tener todos los mensajes que muestra nuestra aplicación en un archivo (strings.xml) no lo hemos hecho hasta este momento ya que nos torno un grado más complejo el desarrollo de ejercicios que tienen por objetivo el aprendizaje de programación java en Android. Cuando hagamos una aplicación más importante es necesario aplicar este estilo de organizar los mensajes de nuestra aplicación.</p>
+<p>Ya veremos en el próximo concepto que uno de las ventajas que presenta esta agrupación de string es la posibilidad de facilitar la implementación de aplicaciones en múltiples idiomas.</p>
+
+<h3>Problema:</h3>
+<p>Crear un proyecto que solicite la carga de dos valores. Mediante dos RadioButton permitir seleccionar si queremos sumar o restar. Cuando se presione un botón mostrar en un TextView el resultado de la operación.</p>
+
+<p>1 - Creamos un proyecto llamado: Proyecto044</p>
+<p>El Android Studio nos crea automáticamente el archivo strings.xml en la carpeta values que se encuentra en la carpeta res:</p>
+
+<img src="imagentema/foto149.jpg" border="0" alt="strings.xml"><br>
+<p>Si vemos en su interior podemos ver que ya define tres string llamados app_name, hello_world y action_settings:</p>
+<img src="imagentema/foto150.jpg" border="0" alt="strings.xml"><br>
+
+
+<p>Lo que se encuentra entre las marcas string es lo que se visualizará, por ejemplo en la constante hello_world se almacena el valor "Hello world!". En este archivo crearemos todas las constantes a incluir en nuestro programa.</p>
+
+<p>Estas tres constantes que crea por defecto el Android Studio se están utilizando en distintas partes del programa.<br>
+La constante hello_wold por ejemplo la utiliza en el TextView que dispone dentro del ActionBarActivity:</p>
+<img src="imagentema/foto150a.jpg" border="0" alt="strings.xml"><br>
+<p>Como podemos ver para indicar una constante definida en el archivo string.xml debemos utilizar la sintaxis:</p>
+<pre>
+  @string/hello_world
+</pre>
+<p>Es decir disponemos @string/ y seguidamente el nombre de la constante definida en el archivo string.xml.</p>
+
+
+
+<p>Hay varias formas de crear estas constantes:</p>
+<ol>
+<li>
+<p>La escribimos directamente en el editor de texto del archivo string.xml:</p>
+<img src="imagentema/foto150b.jpg" border="0" alt="strings.xml"><br>
+<p>Es decir estamos creando una constante llamada "programador". Para hacer referencia en nuestro programa indicaremos @string/programador y el dato que se mostrará será: "Desarrollador:Pablo Rodriguez".</p>
+<p>Probar de cambiar la propiedad text del EditText por defecto que agregó el Android Studio por la constante "programador", el resultado debe ser el siguiente:</p>
+<img src="imagentema/foto150c.jpg" border="0" alt="strings.xml"><br>
+</li>
+<li>
+<p>La segundo forma es utilizar un editor visual que nos escriba el xml, esto se accede presionando la opción "Open editor":</p>
+<img src="imagentema/foto150d.jpg" border="0" alt="strings.xml"><br>
+<p>En esta pantalla tenemos dos columnas con todas las constantes en la primer columna y los valores de las mismas en la segunda. Podemos con el mouse seleccionar cualquiera de ellas y editarlas en la parte inferior:</p>
+<img src="imagentema/foto150e.jpg" border="0" alt="strings.xml"><br>
+<p>También podemos añadir nuevas constantes presionando el botón con el ícono "más" de la parte superior izquierda, creemos nuestra segunda constante llamada "version_aplicacion" con el valor 2:</p>
+<img src="imagentema/foto150f.jpg" border="0" alt="strings.xml"><br>
+<p>En principio con este editor de constantes nos evitamos de escribir y cometer algún error sintáctico en nuestro archivo strings.xml</p>
+</li>
+<li>
+<p>La tercer forma es crear la constante en el momento que disponemos un control en la interfaz visual, por ejemplo dispongamos un botón en la parte inferior que muestre el mensaje "Finalizar Programa" localizando este texto en el archivo strings.xml:</p>
+<img src="imagentema/foto150g.jpg" border="0" alt="strings.xml"><br>
+<p>Presionamos el botón que aparece al lado de donde ingresamos el texto y en este diálogo procedemos a elegir la opción de "New String Value":</p>
+<img src="imagentema/foto150h.jpg" border="0" alt="strings.xml"><br>
+<p>Finalmente es este diálogo procedemos a especificar el nombre de la constante, el valor y en "File Name" elegimos el archivo strings.xml:</p>
+<img src="imagentema/foto150i.jpg" border="0" alt="strings.xml"><br>
+
+</li>
+
+</ol>
+
+
+<p>Crearemos ahora la interfaz visual propuesta por el problema planteado al principio de este concepto. Disponiendo dos controles de tipo EditText, un RadioGroup con dos RadioButton, un Button y un TextView donde se muestra el resultado de la operación:</p>
+<img src="imagentema/foto152.jpg" border="0" alt="strings.xml"><br>
+
+
+<p>Ahora si crearemos los mensajes que mostrarán los dos RadioButton y el Button. Para esto seleccionamos el archivo strings y procedemos a crear las tres constantes (de la primera o segunda forma creamos las tres constantes):</p>
+<img src="imagentema/foto153.jpg" border="0" alt="strings.xml"><br>
+
+
+
+<p>Ahora debemos asociar estas constantes a los controles visuales. Seleccionamos el archivo activity_main.xml y seleccionamos primero el primer RadioButton y buscamos la propiedad text, presionamos el botón que aparece a la derecha:</p>
+<img src="imagentema/foto154.jpg" border="0" alt="strings.xml"><br>
+<p>En este diálogo seleccionamos la constante de string que acabamos de crear ("radiosuma")</p>
+<p>Lo mismo hacemos para asociar las constantes para el segundo RadioButton y el Button de operar. Es decir las propiedades text del radio1 debe quedar con el valor "@string/radioresta" y el valor de la propiedad text del objeto button debe ser "@string/botonoperacion"</p>
+<p>Como vemos cuando asociamos las propiedades text de los controles con las constantes automáticamente vemos en pantalla que los textos de los controles se actualizan con los valores almacenados en dichas constantes.</p>
+
+<p>Para que funcione nuestro programa inicializamos la propiedad onClick del Button con el método que sumará o restará (llamado operar):</p>
+
+<p>El código fuente del programa será:</p>
+<pre class="recuadro">
+package ar.com.tutorialesya.proyecto044;
+
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.TextView;
+
+
+public class MainActivity extends ActionBarActivity {
+    EditText et1, et2;
+    RadioButton rb1, rb2;
+    TextView tv1;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        et1 = (EditText) findViewById(R.id.editText);
+        et2 = (EditText) findViewById(R.id.editText2);
+        rb1 = (RadioButton) findViewById(R.id.radioButton);
+        rb2 = (RadioButton) findViewById(R.id.radioButton2);
+        tv1 = (TextView) findViewById(R.id.textView);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void operar(View v) {
+        int v1 = Integer.parseInt(et1.getText().toString());
+        int v2 = Integer.parseInt(et2.getText().toString());
+        if (rb1.isChecked()) {
+            int suma = v1 + v2;
+            tv1.setText(String.valueOf(suma));
+        } else if (rb2.isChecked()) {
+            int resta = v1 - v2;
+            tv1.setText(String.valueOf(resta));
+        }
+    }
+}
+</pre>
+<p>El resultado final del programa en el dispositivo es:</p>
+<img src="imagentema/foto159.jpg" border="0" alt="strings.xml"><br>
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/Proyecto044.zip">proyecto044.zip</a>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+<br>
+   <h2><a href="index1e61.html?inicio=40">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-34', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=41&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 17:15:27 GMT -->
+</html>

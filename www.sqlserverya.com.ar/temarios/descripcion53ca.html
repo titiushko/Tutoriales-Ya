@@ -1,0 +1,171 @@
+<html>
+
+
+<!-- Mirrored from www.sqlserverya.com.ar/temarios/descripcion.php?inicio=125&cod=143&punto=137 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de SQL Server </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+	  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>137 - Funciones con valores de tabla en línea</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>Una función con valores de tabla en línea retorna una tabla que es el resultado de una única instrucción "select".</p>
+<p>Es similar a una vista, pero más flexible en el empleo de parámetros. En una vista no se puede incluir un parámetro, lo que hacemos es agregar una cláusula "where" al ejecutar la vista. Las funciones con valores de tabla en línea funcionan como una vista con parámetros.</p>
+
+<p>Sintaxis:</p>
+<pre>
+ create function NOMBREFUNCION
+ (@PARAMETRO TIPO=VALORPORDEFECTO)
+ returns table
+ as
+ return (
+  select CAMPOS
+  from TABLA
+  where CONDICION
+ );
+</pre>
+<p>Como todas las funciones definidas por el usuario, se crea con "create function" seguido del nombre que le damos a la función; luego declaramos los parámetros de entrada con su tipo de dato entre paréntesis. El valor por defecto es opcional.</p>
+<p>"returns" especifica "table" como el tipo de datos a retornar. No se define el formato de la tabla a retornar porque queda establecido en el "select".</p>
+<p>El cuerpo de la función no contiene un bloque "begin...end" como las otras funciones.</p>
+<p>La cláusula "return" contiene una sola instrucción "select" entre paréntesis. El resultado del "select" es la tabla que se retorna. El "select" está sujeto a las mismas reglas que los "select" de las vistas.</p>
+
+<p>Creamos una función con valores de tabla en línea que recibe un valor de autor como parámetro:</p>
+<pre>
+ create function f_libros
+ (@autor varchar(30)='Borges')
+ returns table
+ as
+ return (
+  select titulo,editorial
+  from libros
+  where autor like '%'+@autor+'%'
+ );
+</pre>
+
+<p>Estas funciones retornan una tabla y se hace referencia a ellas en la cláusula "from", como una vista:</p>
+<pre>
+ select *from f_libros('Bach');
+</pre>
+<p>Recuerde a que todas las funciones que tienen definidos parámetros se les DEBE suministrar valores para ellos al invocarse.</p>
+<p>Recuerde que para que el parámetro tome el valor por defecto (si lo tiene) DEBE enviarse "default" al llamar a la función; si no le enviamos parámetros, SQL Server muestra un mensaje de error.</p>
+<pre>
+--incorrecto: select *from f_libros();
+ select *from f_libros(default);--correcto
+</pre>
+
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+<br>
+   <h2><a href="../index28e1.html?inicio=125">Retornar</a></h2>   
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-11";
+urchinTracker();
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from www.sqlserverya.com.ar/temarios/descripcion.php?inicio=125&cod=143&punto=137 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:34 GMT -->
+</html>

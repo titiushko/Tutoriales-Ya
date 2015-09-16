@@ -1,0 +1,214 @@
+        
+
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=0&cod=174&punto=16 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios resueltos : Tipos de datos numéricos(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+<body bgcolor="#CCFFCC">
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>16 - Tipos de datos numéricos</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Trabajamos con la tabla "libros" de una librería.</p>
+<p>Eliminamos la tabla:</p>
+<pre>
+  drop table libros;
+</pre>
+<p>Creamos la tabla con la siguiente estructura:</p>
+<pre>
+ create table libros(
+  codigo number(5) not null,
+  titulo varchar2(40) not null,
+  autor varchar2(30),
+  editorial varchar2(15),
+  precio number(6,2),
+  cantidad number(4)
+ );
+</pre>
+<p>Note que definimos el campo "codigo" de tipo "number(5)", esto es porque estimamos que no tendremos más de 99999 libros, y no colocamos decimales porque necesitamos números enteros.<br>
+Como en el campo "precio" no almacenaremos valores mayores a 9999.99, definimos el campo de tipo "number(6,2)".
+<p>El tipo "float" no es adecuado para representar precios porque no es exacto.</p>
+<p>Como los valores para el campo "cantidad" no superarán los 9999, definimos el campo de tipo "number(4)", no colocamos decimales porque necesitamos valores enteros.</p>
+
+<p>Analicemos la inserción de datos numéricos.</p>
+<p>Intentemos ingresar un valor para "cantidad" fuera del rango definido:</p>
+<pre>
+ insert into libros (codigo,titulo,autor,editorial,precio,cantidad)
+  values(1,'El aleph','Borges','Emece',25.60,50000);
+</pre>
+<p>aparece un mensaje de error y la inserción no se ejecuta.</p>
+
+<p>Ingresamos un valor para "cantidad" con decimales:</p>
+<pre>
+ insert into libros (codigo,titulo,autor,editorial,precio,cantidad)
+  values(1,'El aleph','Borges','Emece',25.60,100.2);
+</pre>
+<p>Lo acepta, veamos qué se almacenó:</p>
+<pre>
+ select *from libros;
+</pre>
+<p>Truncó el valor.</p>
+
+<p>Ingresamos un precio con 3 decimales:</p>
+<pre>
+ insert into libros (codigo,titulo,autor,editorial,precio,cantidad)
+  values(2,'Don quijote','Cervantes','Emece',25.123,100);
+</pre>
+<p>Lo acepta, veamos qué se almacenó:</p>
+<pre>
+ select *from libros;
+</pre>
+<p>Truncó el valor.</p>
+
+<p>Intentamos ingresar un código con comillas (una cadena):</p>
+<pre>
+ insert into libros (codigo,titulo,autor,editorial,precio,cantidad)
+  values(4,'Uno','Richard Bach','Planeta','50',100);
+</pre>
+<p>Oracle lo convierte a número.</p>
+
+<p>Intentamos ingresar una cadena que Oracle no pueda convertir a valor numérico en el campo "precio":</p>
+<pre>
+ insert into libros (codigo,titulo,autor,editorial,precio,cantidad)
+  values(5,'Alicia en el pais...','Lewis Carroll','Planeta','50.30',200);
+</pre>
+<p>Error.</p>
+        <form name="formulario" action="http://www.sqlserverya.com.ar/aspx/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+        <br>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+        
+	<br>
+   
+
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=0&cod=174&punto=16 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:25 GMT -->
+</html>
+

@@ -1,0 +1,145 @@
+<html>
+
+
+<!-- Mirrored from www.sqlserverya.com.ar/temarios/descripcion.php?inicio=75&cod=94&punto=88 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de SQL Server </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+	  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>88 - Tipo de dato definido por el usuario (asociación de reglas)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>Se puede asociar una regla a un tipo de datos definido por el usuario. Luego de crear la regla se establece la asociación; la sintaxis es la siguiente:</p>
+<pre>
+ exec sp_bindrule NOMBREREGLA, 'TIPODEDATODEFINIDOPORELUSUARIO', 'futureonly';
+</pre>
+<p>El parámetro "futureonly" es opcional, especifica que si existen campos (de cualquier tabla) con este tipo de dato, no se asocien a la regla; si creamos una nueva tabla con este tipo de dato, si deberán cumplir la regla. Si no se especifica este parámetro, todos los campos de este tipo de dato, existentes o que se creen posteriormente (de cualquier tabla), quedan asociados a la regla.</p>
+<p>Recuerde que SQL Server NO controla los datos existentes para confirmar que cumplen con la regla, si no los cumple, la regla se asocia igualmente; pero al ejecutar una instrucción "insert" o "update" muestra un mensaje de error.</p>
+
+<p>Si asocia una regla a un tipo de dato definido por el usuario que tiene otra regla asociada, esta última la reemplaza.</p>
+
+<p>Para quitar la asociación, empleamos el mismo procedimiento almacenado que aprendimos cuando quitamos asociaciones a campos, ejecutamos el procedimiento almacenado "sp_unbindrule" seguido del nombre del tipo de dato al que está asociada la regla:</p>
+<pre>
+ exec sp_unbindrule 'TIPODEDATODEFINIDOPORELUSUARIO';
+</pre>
+<p>Si asocia una regla a un campo cuyo tipo de dato definido por el usuario ya tiene una regla asociada, la nueva regla se aplica al campo, pero el tipo de dato continúa asociado a la regla. La regla asociada al campo prevalece sobre la asociada al tipo de dato. Por ejemplo, tenemos un campo "precio" de un tipo de dato definido por el usuario "tipo_precio", este tipo de dato tiene asociada una regla "RG_precio0a99" (precio entre 0 y 99), luego asociamos al campo "precio" la regla "RG_precio100a500" (precio entre 100 y 500); al ejecutar una instrucción "insert" admitirá valores entre 100 y 500, es decir, tendrá en cuenta la regla asociada al campo, aunque vaya contra la regla asociada al tipo de dato.</p>
+
+<p>Un tipo de dato definido por el usuario puede tener una sola regla asociada.</p>
+
+<p>Cuando obtenemos información del tipo da dato definido por el usuario ejecutando "sp_help", en la columna "rule_name" se muestra el nombre de la regla asociada a dicho tipo de dato; muestran "none" cuando no tiene regla asociada.</p>
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+<br>
+   <h2><a href="../indexa021.html?inicio=75">Retornar</a></h2>   
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-11";
+urchinTracker();
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from www.sqlserverya.com.ar/temarios/descripcion.php?inicio=75&cod=94&punto=88 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:33 GMT -->
+</html>

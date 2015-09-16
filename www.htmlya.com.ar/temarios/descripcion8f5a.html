@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.htmlya.com.ar/temarios/descripcion.php?inicio=16&cod=92&punto=27 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:05:09 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Conceptos de HTML</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="html, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de HTML. Es objetivo prioritario respetar 
+los estándares del W3C">
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+</style>
+</head>
+
+<body>
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em"><a href="../index.html">Temario del Tutorial</a></span>->27 - Formulario - &lt;form&gt;</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div> 
+
+<p>Un formulario permite que el visitante al sitio cargue datos y sean enviados al servidor.</p>
+<p>Es el medio ideal para registrar comentarios del visitante sobre el sitio, solicitar productos, sacar turnos etc.</p>
+<p>De todos modos veremos que el lenguaje HTML solo tiene el objetivo de crear el formulario. El HTML no tiene la responsabilidad de registrar los datos en el servidor, esta actividad está delegada a un lenguaje que se ejecute en el servidor (PHP, ASP, ASP.Net, JSP,NodeJS etc.)</p>
+<p>Como este curso nos concentramos solamente en el lenguaje HTML no veremos como registrar los datos en el servidor. Si está impaciente puede visitar y ver como capturar los datos en el servidor mediante PHP en <a href="../../www.phpya.com.ar/index.html"  target="_blank">PHP Ya</a></p>
+<p>Si recien comienza en el mundo del desarrollo de páginas web es recomendable primero aprender y conocer todos los elementos para la creación de formularios en HTML y en un paso posterior estudiar la registración en el servidor</p>
+<p>Veamos la sintaxis básica para crear un formulario donde ingresemos nuestro nombre.<br>
+<p>Para crear un formulario debemos utilizar el elemento form, que tiene marca de comienzo y fin. Dentro de la marca form veremos otros elementos para crear botones, editores de línea, cuadros de chequeo, radios de selección etc.</p>
+<p>Confeccionaremos un formulario para el ingreso de nuestro nombre y un botón para el envío del dato ingresado al servidor:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Prueba de formulario&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form action=&quot;registrardatos.php&quot; method=&quot;post&quot;&gt;
+Ingrese su nombre:
+&lt;input type=&quot;text&quot; name=&quot;nombre&quot; size=&quot;20&quot;&gt;
+&lt;br&gt;
+&lt;input type=&quot;submit&quot; value=&quot;enviar&quot;&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Veamos detenidamente la estructura de un formulario elemental, lo primero la apertura de la marca form donde debemos definir dos propiedades (action y method):</p>
+<pre>
+&lt;form action=&quot;registrardatos.php&quot; method=&quot;post&quot;&gt;
+</pre>
+<p>La propiedad action se inicializa con el nombre de la página que contiene el programa que procesará los datos en el servidor. Como no conocemos la sintaxis de un lenguaje de servidor almacené en este sitio una página codificada en PHP que recibe los datos del formulario y los imprime en una nueva página (recordar que en este curso no se ve como programar en el servidor)</p>
+<p>Todo los formularios que implemento y los que usted implementará como ejercicios deben llamar a esta página: &quot;/registrardatos.php&quot; más adelante cuando conozca un lenguaje de servidor podrá almacenarlos en una base de datos, consultar otros datos, modificar datos existentes etc.</p>
+<p>La segunda propiedad que debemos inicializar es method. Esta propiedad puede almacenar únicamente dos valores (post o get)</p>
+<p>Normalmente un formulario se envía mediante post (los datos se envían con el cuerpo del formulario) En caso de utilizar get los datos se envían en la cabecera de la petición de la página, utilizando el método get estamos limitados en la cantidad de datos a enviar, no asi con el método post.</p>
+<p>Ahora veamos el cuadro de texto donde se ingresa el nombre:</p>
+<pre>
+Ingrese su nombre:
+&lt;input type=&quot;text&quot; name=&quot;nombre&quot; size=&quot;20&quot;&gt;
+&lt;br&gt;
+</pre>
+<p>El mensaje "Ingrese su nombre:" es un texto fijo.</p>
+<p>El elemento input permite definir un cuadro de texto (editor de línea) si asignamos a la propiedad type el valor "text".</p>
+<p>Todo cuadro de texto debe inicializar la propiedad name con un nombre para el cuadro de texto. Este es un dato fundamental para poder recuperar el dato ingresado en el servidor (por ejemplo mediante PHP)</p>
+<p>Por último inicializamos la propiedad size con el valor 20, esto significa que el cuadro de texto se dimensiona para permitir mostrar 20 caracteres (no se limita la cantidad de caracteres a ingresar por parte del visitante sino la cantidad de caracteres que se pueden visualizar)</p>
+<p>Seguidamente:</p>
+<pre>
+&lt;input type=&quot;submit&quot; value=&quot;enviar&quot;&gt;
+</pre>
+<p>También mediante el elemento input definimos un botón para el envío de datos al servidor. Debemos inicializar la propiedad type con el valor submit, con esto ya tenemos un botón para el envío de datos.</p>
+<p>La propiedad value almacena la etiqueta que debe mostrar el botón.</p>
+<p>Finalmente cerramos el formulario:</p>
+<pre>
+&lt;/form&gt;
+</pre>
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../indexb6fb.html?inicio=16">Retornar</a></h2>   
+
+</div>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-7";
+urchinTracker();
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.htmlya.com.ar/temarios/descripcion.php?inicio=16&cod=92&punto=27 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:05:09 GMT -->
+</html>

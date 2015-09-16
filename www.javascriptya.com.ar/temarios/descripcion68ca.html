@@ -1,0 +1,257 @@
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=80&cod=82 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de JavaScript : Conceptos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+div#contentdetalle{clear:left;
+                   max-width:900px;
+				   border-top:0px solid #999;
+				   padding-top:15px;
+				   background-color: #aed7a8;
+				   text-align:left;
+				   font-size:1.3em;
+				   font-weight:normal;
+				   font-family:arial;
+				   padding:20px}
+				   
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;  
+}				   
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td>
+<h1>Expresiones regulares: metacaracteres de cuantificadores alternativos * ? +</h1></td>
+<td align="right">
+<!--<a href="http://www.javascriptya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div id="contentdetalle">
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 	  
+
+<p>La sintaxis de las expresiones regulares define tres metacaracteres que pueden utilizarse en lugar de la sintaxis vista en el concepto anterior.</p>
+<p>Caracteres:</p>
+<pre>
+?    busca cero o una ocurrencia en el string
+     remplaza a    {0,1}
+*    busca cero o más ocurrencias en el string
+     remplaza a    {0,}
++    busca una o más ocurrencias en el string
+     remplaza a    {1,}
+</pre>
+
+<br>
+<strong>Problema</strong>
+<p>Ingresar una palabra por teclado y validar que tenga al menos una vocal.</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var palabra=prompt('Ingrese una palabra con al menos una vocal:','');
+  var patron=/[aeiou]+/;
+  if (patron.test(palabra))
+    document.write('La palabra ingresada tiene al menos una vocal');
+  else
+    document.write('La palabra ingresada no tiene vocales');
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>La expresión regular planteada utiliza el metacaracter + :</p>
+<pre>
+  var patron=/[aeiou]+/;
+</pre>
+<p>Con esto se analiza cada letra del string y si al menos uno tiene una vocal luego el método test de la expresión regular se verifica verdadera.</p>
+<p>Utilizando la otra sintaxis la expresión sería:</p>
+<pre>
+  var patron=/[aeiou]{1,}/;
+</pre>
+
+<strong>Problema</strong>
+<p>Ingresar un valor numérico entero que podemos opcionalmente antecederle alguno de los caracteres: + o -.</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var valor=prompt('Ingrese un valor numérico entero, puede anteceder el +/-:','');
+  var patron=/^[\+\-]?[0-9]+$/;
+  if (patron.test(valor))
+    document.write('Tiene un formato correcto');
+  else
+    document.write('Formato incorrecto');
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>El patrón queda definido con la siguiente sintaxis:</p>
+<pre>
+  var patron=/^[\+\-]?[0-9]+$/;
+</pre>
+<p>Es decir con la sintaxis ^[\+\-]? estamos indicando que el primer carácter debe ser un + o - y como fuera de los corchetes indicamos el carácter ? que indica que busca cero o una ocurrencia (es decir es opcional disponer el + o -)<br>
+Luego indicamos con la sintaxis [0-9]+$ que se debe ingresar uno o más dígitos (con es +) y debe finalizar con un dígito.</p>
+<p>Es test se verifica correcto si ingresamos:</p>
+<pre>
+1200
++300
+-55
+</pre>
+<p>e incorrecto si ingresamos:</p>
+<pre>
+10z55
++34aa2
++-20
++++34
+</pre>
+
+<strong>Problema</strong>
+<p>Ingresar un valor numérico entero o real, se debe validar que se ingrese al menos un número previo al operador punto que es opcional y finalizar con un número obligatoriamente.</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var valor=prompt('Ingrese un valor numérico entero o real:','');
+  var patron=/^[0-9]+\.?[0-9]+$/;
+  if (patron.test(valor))
+    document.write('Tiene un formato correcto');
+  else
+    document.write('Formato incorrecto');
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>La expresión comienza con ^[0-9]+ lo que significa que se debe ingresar en la primer posición un dígito. Luego es opcional el carácter . ya que empleamos el metacaracter de interrogación \.? y finalmente debe terminar con un dígito obligatoriamente [0-9]+$</p></p>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../index20ff.html?inicio=80">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=80&cod=82 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:25 GMT -->
+</html>

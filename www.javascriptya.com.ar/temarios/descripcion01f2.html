@@ -1,0 +1,216 @@
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=70&cod=77 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de JavaScript : Conceptos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+div#contentdetalle{clear:left;
+                   max-width:900px;
+				   border-top:0px solid #999;
+				   padding-top:15px;
+				   background-color: #aed7a8;
+				   text-align:left;
+				   font-size:1.3em;
+				   font-weight:normal;
+				   font-family:arial;
+				   padding:20px}
+				   
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;  
+}				   
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td>
+<h1>Operador condicional ?:</h1></td>
+<td align="right">
+<!--<a href="http://www.javascriptya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div id="contentdetalle">
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 	  
+
+<p>El operador condicional ?: remplaza en algunos casos a estructuras if/else sencillas con el objetivo de escribir un código más compacto o corto.</p>
+<p>Veamos primero un ejemplo resuelto con el if y luego modificado para emplear el operador condicional ?:</p>
+<strong>Problema</strong>
+<p>Cargar dos valores por teclado, luego almacenar en una variable el mayor de los dos valores ingresados.</p>
+<br>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+
+  var v1=prompt('Ingrese primer valor:','');
+  var v2=prompt('Ingrese segundo valor:','');
+  v1=parseInt(v1);
+  v2=parseInt(v2);
+  var mayor;
+  if (v1&gt;v2)
+    mayor=v1;
+  else
+    mayor=v2;
+  document.write('El mayor de los dos valores es:'+mayor);
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Ahora el mismo problema pero empleando el operador codicional ?:</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+
+  var v1=prompt('Ingrese primer valor:','');
+  var v2=prompt('Ingrese segundo valor:','');
+  v1=parseInt(v1);
+  v2=parseInt(v2);
+  var mayor;
+  v1&gt;v2 ? mayor=v1 : mayor=v2;
+  document.write('El mayor de los dos valores es:'+mayor);
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>El operador ternario en el ejemplo lo podemos identificar en la siguiente línea:</p>
+<pre>
+  v1&gt;v2 ? mayor=v1 : mayor=v2;
+</pre>
+<p>El operador ternario tiene la siguiente sintaxis:</p>
+<pre>
+  condición <strong>?</strong> instrucción 1 <strong>:</strong> instrucción 2;
+</pre>
+<p>La condición es lo primero que indicamos a la izquierda del carácter "?". La condición siempre debe generar un resultado de tipo boolean (true/false)</p>
+<p>Si la condición se verifica verdadera se ejecuta la instrucción 1, que es la que se encuentra a la izquierda del carácter ":", en cambio si la condición se verifica false se ejecuta la instrucción 2.</p>
+</p>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../indexe193.html?inicio=70">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=70&cod=77 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:24 GMT -->
+</html>

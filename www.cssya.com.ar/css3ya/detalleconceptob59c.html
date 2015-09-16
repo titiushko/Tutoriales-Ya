@@ -1,0 +1,250 @@
+<!doctype html>
+<html>
+
+<!-- Mirrored from www.cssya.com.ar/css3ya/detalleconcepto.php?cod=101 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:06:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+    <title>CSS3 Ya</title>
+    <link href="estilos.css" rel="stylesheet">
+    <link href='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css' rel='stylesheet'>     
+    <script src='../../ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script> 
+    <script src='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>     
+    <script src="funciones.js"></script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-31']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>	
+</head>
+<body>
+
+
+
+
+
+
+<div id="pesta">
+	<ul>
+		<li><a href="#p1">Concepto</a></li>    
+		<li><a href="#p2">Ejemplo</a></li>
+		<li><a href="#p3">Vista Previa</a></li>
+	</ul>
+	<div id="p1" style="background:#fafafa;padding:20px; max-height: 700px;overflow: auto;font-size:13pt">
+	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* css3 detalle arriba */
+google_ad_slot = "3101973371";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+	
+	
+    <h2>Importar una fuente no disponible en el navegador (@font-face)</h2><p>En CSS3 se especifica una nueva sintaxis para importar fuentes no disponibles en el navegador y que se descargan de un servidor web.</p>
+<p>El problema actual es que hay varios formatos de fuentes que son apoyados por distintos navegadores. El IE8 e inferiores solo admite el formato EOT que es propietario. El formato True Type es ampliamente soportado por navegadores modernos. Otros formatos son el OpenType, SVG y WOFF.</p>
+<p>Esta diversidad de formatos de fuente hace necesario que indiquemos la mayor cantidad de formatos de fuentes posibles para nuestro sitio.</p>
+<p>Para importar una fuente que será utilizada por una página web tenemos que utilizar la regla @font-face, en la misma indicamos el nombre de la fuente a importar y la dirección web de donde la debe descargar el navegador, la sintaxis es:</p>
+<pre>
+@font-face {
+  font-family: [nombre de la fuente];
+  src: local(""),
+  url("nombrearchivo.woff") format("woff"),
+  url("nombrearchivo.otf") format("opentype"),
+  url("nombrearchivo.svg#nombre de la fuente") format("svg");
+}
+</pre>
+
+<p>Podemos descargar una fuente del sitio <a href="http://www.fontsquirrel.com/fonts/list/mostdownloaded">www.fontsquirrel.com</a><p> para probar la importación de fuentes (hay una sección donde podemos descargar varios formatos para la misma fuente)</p>
+<p>Veamos un ejemplo de utilizar una fuente descargada del sitio mencionado anteriormente:</p>
+<pre>
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+&lt;head&gt; 
+&lt;title&gt;Prueba&lt;/title&gt; 
+
+&lt;style type="text/css"&gt; 
+
+
+@font-face {
+    font-family: "Ubuntu";
+    src: url("Ubuntu-Title-webfont.eot") format("eot"),
+         url("Ubuntu-Title-webfont.woff") format("woff"),
+         url("Ubuntu-Title-webfont.ttf") format("truetype"),
+         url("Ubuntu-Title-webfont.svg#UbuntuTitle") format("svg");
+}
+
+#recuadro1{
+  border-radius: 20px;  
+  background-color:#ddd;
+  width:200px;
+  padding:10px;
+}
+
+#recuadro1 p {
+  font-family:Ubuntu;
+  color:#ff0000;
+  font-size:20px;
+}
+
+
+body {
+  background:white;
+  margin:50px;
+}
+
+&lt;/style&gt; 
+
+&lt;/head&gt; 
+&lt;body&gt; 
+
+&lt;div id="recuadro1"&gt; 
+&lt;h3&gt;Recuadro 1&lt;/h3&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+ Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+ Donec quam felis, ultricies nec, &lt;/p&gt;
+&lt;/div&gt; 
+
+
+&lt;/body&gt; 
+&lt;/html&gt;
+</pre>
+
+<p>El resultado tipográfico de importar esta fuente es:</p>
+<img src="imagentema/foto039.jpg" border="0" alt="@font-face"><br>
+
+<p>En la regla @font-face hacemos referencia a cuatro fuentes con distintos formatos y definimos su nombre en la propiedad font-family:</p>
+<pre>
+@font-face {
+    font-family: "Ubuntu";
+    src: url("Ubuntu-Title-webfont.eot") format("eot"),
+         url("Ubuntu-Title-webfont.woff") format("woff"),
+         url("Ubuntu-Title-webfont.ttf") format("truetype"),
+         url("Ubuntu-Title-webfont.svg#UbuntuTitle") format("svg");
+}
+</pre>
+<p>Ahora podemos utilizar la fuente "Ubuntu" que acabamos de crear:</p>
+<pre>
+#recuadro1 p {
+  font-family:Ubuntu;
+  color:#ff0000;
+  font-size:20px;
+}
+</pre>
+<p>Con lo anterior indicamos que los párrafos contenidos en #recuadro1 deben utilizar la fuente Ubuntu.</p>
+	
+<table border="0">
+<tr>
+<td>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* css3 cuadrado */
+google_ad_slot = "9333811690";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+ <td>
+ <script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* css3 cuadrado */
+google_ad_slot = "9333811690";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ </td>
+</tr></table> 	
+	
+	</div>    
+	<div id="p2">
+    <textarea name="editor" id="editor" rows="28" style="width:890px;height:700px;font-size:16px;font-family:courier"><!DOCTYPE html> 
+<html> 
+<head> 
+<title>Prueba</title> 
+
+<style type="text/css"> 
+
+
+@font-face {
+    font-family: "Ubuntu";
+    src: url("Ubuntu-Title-webfont.eot") format("eot"),
+         url("Ubuntu-Title-webfont.woff") format("woff"),
+         url("Ubuntu-Title-webfont.ttf") format("truetype"),
+         url("Ubuntu-Title-webfont.svg#UbuntuTitle") format("svg");
+}
+
+#recuadro1{
+  border-radius: 20px;  
+  background-color:#ddd;
+  width:200px;
+  padding:10px;
+}
+
+#recuadro1 p {
+  font-family:Ubuntu;
+  color:#ff0000;
+  font-size:20px;
+}
+
+
+body {
+  background:white;
+  margin:50px;
+}
+
+</style> 
+
+</head> 
+<body> 
+
+<div id="recuadro1"> 
+<h3>Recuadro 1</h3>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, </p>
+</div> 
+
+
+</body> 
+
+<!-- Mirrored from www.cssya.com.ar/css3ya/detalleconcepto.php?cod=101 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:07:08 GMT -->
+</html></textarea>
+	</div>
+	<div id="p3">
+<iframe width="900" height="700" id="documentodinamico" name="documentodinamico" src="vacio.html">
+No tiene disponible el navegador la capacidad de iframe
+</iframe>
+	</div>
+</div>
+<br>
+   <h2><a href="index-2.html">Retornar</a></h2>   
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-31', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

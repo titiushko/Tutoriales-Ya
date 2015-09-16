@@ -1,0 +1,304 @@
+<!doctype html>
+<html>
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/ejecutar.php?cod=147 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 17:33:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+    <title>CSS3 Ya</title>
+
+    <link href='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css' rel='stylesheet'>     
+    <script src='../../ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script> 
+    <script src='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>     
+
+<style>
+body {
+  background:#5fcbae;
+  margin:0 auto;
+  width:100%;
+}
+
+
+#pesta {
+  margin-top:10px;
+  background:#d6d9de;
+  height:100%;
+-webkit-box-shadow: 8px 8px 5px #444;
+-moz-box-shadow: 8px 8px 5px #444;
+box-shadow: 8px 8px 5px #444;  
+  
+}
+
+</style>    
+   
+<script type="text/javascript">
+
+addEventListener('load',inicio,false);
+
+function inicio()
+{
+  document.getElementById('p2').style.height=(window.innerHeight-150)+'px';
+  document.getElementById('p3').style.height=(window.innerHeight-150)+'px';
+}
+
+$(document).ready(function(){
+  var opciones = {
+                   select:tabSeleccionado
+                 };                 
+  $("#pesta").tabs(opciones);
+});
+
+function tabSeleccionado(event,tab) {
+  var d = parent.documentodinamico.document; 
+  d.open();
+  d.write($('#editor').val());
+  d.close();
+  
+}
+
+
+</script>
+   
+</head>
+<body>
+
+
+
+
+<div id="pesta" style="width:98%;margin-left:0.5%">
+	<ul>
+		<li><a href="#p2">Ejemplo</a></li>
+		<li><a href="#p3">Vista Previa</a></li>
+	</ul>
+	    
+	<div id="p2">
+    <textarea name="editor" id="editor" style="width:100%;height:100%;font-size:16px;font-family:courier"><!DOCTYPE html> 
+<html> 
+  <head> 
+    <title>Prueba de Bootstrap</title> 
+    <link href="css/bootstrap.min.css" rel="stylesheet"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head> 
+<body> 
+  <div class="container">
+    <div class="btn-group btn-group-lg">
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-asterisk"> glyphicon-asterisk</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"> glyphicon-plus</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-eur"> glyphicon-eur</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-euro"> glyphicon-euro</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-minus"> glyphicon-minus</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-cloud"> glyphicon-cloud</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-envelope"> glyphicon-envelope</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-pencil"> glyphicon-pencil</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-glass"> glyphicon-glass</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-music"> glyphicon-music</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search"> glyphicon-search</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-heart"> glyphicon-heart</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-star"> glyphicon-star</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-star-empty"> glyphicon-star-empty</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-user"> glyphicon-user</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-film"> glyphicon-film</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-th-large"> glyphicon-th-large</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-th"> glyphicon-th</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-th-list"> glyphicon-th-list</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-ok"> glyphicon-ok</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove"> glyphicon-remove</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove"> glyphicon-remove</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-zoom-in"> glyphicon-zoom-in</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-zoom-out"> glyphicon-zoom-out</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-off"> glyphicon-off</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-signal"> glyphicon-signal</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-cog"> glyphicon-cog</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-trash"> glyphicon-trash</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-home"> glyphicon-home</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-file"> glyphicon-file</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-time"> glyphicon-time</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-road"> glyphicon-road</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-download-alt"> glyphicon-download-alt</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-download"> glyphicon-download</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-upload"> glyphicon-upload</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-inbox"> glyphicon-inbox</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-play-circle"> glyphicon-play-circle</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-repeat"> glyphicon-repeat</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-refresh"> glyphicon-refresh</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-list-alt"> glyphicon-list-alt</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-lock"> glyphicon-lock</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-flag"> glyphicon-flag</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-headphones"> glyphicon-headphones</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-volume-off"> glyphicon-volume-off</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-volume-down"> glyphicon-volume-down</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-volume-up"> glyphicon-volume-up</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-qrcode"> glyphicon-qrcode</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-barcode"> glyphicon-barcode</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-tag"> glyphicon-tag</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-tags"> glyphicon-tags</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-book:before"> glyphicon-book:before</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-bookmark"> glyphicon-bookmark</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-print"> glyphicon-print</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-camera"> glyphicon-camera</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-font"> glyphicon-font</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-bold"> glyphicon-bold</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-italic"> glyphicon-italic</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-text-height"> glyphicon-text-height</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-text-width"> glyphicon-text-width</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-align-left"> glyphicon-align-left</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-align-center"> glyphicon-align-center</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-align-right"> glyphicon-align-right</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-align-justify"> glyphicon-align-justify</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-list"> glyphicon-list</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-indent-left"> glyphicon-indent-left</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-indent-right"> glyphicon-indent-right</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-facetime-video"> glyphicon-facetime-video</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-picture"> glyphicon-picture</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-map-marker"> glyphicon-map-marker</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-adjust"> glyphicon-adjust</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-tint"> glyphicon-tint</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-edit"> glyphicon-edit</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-share"> glyphicon-share</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-check"> glyphicon-check</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-move"> glyphicon-move</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-step-backward"> glyphicon-step-backward</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-step-backward"> glyphicon-step-backward</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-fast-backward"> glyphicon-fast-backward</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-backward"> glyphicon-backward</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-play"> glyphicon-play</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-pause"> glyphicon-pause</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-stop"> glyphicon-stop</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-forward"> glyphicon-forward</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-fast-forward"> glyphicon-fast-forward</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-step-forward"> glyphicon-step-forward</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-eject"> glyphicon-eject</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"> glyphicon-chevron-left</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right"> glyphicon-chevron-right</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus-sign"> glyphicon-plus-sign</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-minus-sign"> glyphicon-minus-sign</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove-sign"> glyphicon-remove-sign</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-ok-sign"> glyphicon-ok-sign</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-question-sign"> glyphicon-question-sign</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-info-sign"> glyphicon-info-sign</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-screenshot"> glyphicon-screenshot</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-remove-circle"> glyphicon-remove-circle</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-ok-circle"> glyphicon-ok-circle</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-ban-circle"> glyphicon-ban-circle</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"> glyphicon-arrow-left</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-right"> glyphicon-arrow-right</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-up"> glyphicon-arrow-up</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-down"> glyphicon-arrow-down</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-share-alt"> glyphicon-share-alt</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-resize-full"> glyphicon-resize-full</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-resize-small"> glyphicon-resize-small</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-resize-small"> glyphicon-resize-small</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-exclamation-sign"> glyphicon-exclamation-sign</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-gift"> glyphicon-gift</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-leaf"> glyphicon-leaf</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-fire"> glyphicon-fire</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-eye-open"> glyphicon-eye-open</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-eye-close"> glyphicon-eye-close</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-warning-sign"> glyphicon-warning-sign</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-plane"> glyphicon-plane</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-calendar"> glyphicon-calendar</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-random"> glyphicon-random</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-comment"> glyphicon-comment</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-magnet"> glyphicon-magnet</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"> glyphicon-chevron-up</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"> glyphicon-chevron-down</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-retweet"> glyphicon-retweet</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-shopping-cart"> glyphicon-shopping-cart</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-folder-close"> glyphicon-folder-close</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-folder-open"> glyphicon-folder-open</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-resize-vertical"> glyphicon-resize-vertical</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-resize-horizontal"> glyphicon-resize-horizontal</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-hdd"> glyphicon-hdd</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-bullhorn"> glyphicon-bullhorn</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-bell"> glyphicon-bell</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-certificate"> glyphicon-certificate</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-up"> glyphicon-thumbs-up</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-thumbs-down"> glyphicon-thumbs-down</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-hand-right"> glyphicon-hand-right</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-hand-left"> glyphicon-hand-left</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-hand-up"> glyphicon-hand-up</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-hand-down"> glyphicon-hand-down</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-circle-arrow-right"> glyphicon-circle-arrow-right</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-circle-arrow-left"> glyphicon-circle-arrow-left</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-circle-arrow-up"> glyphicon-circle-arrow-up</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-circle-arrow-down"> glyphicon-circle-arrow-down</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-globe"> glyphicon-globe</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-wrench"> glyphicon-wrench</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-tasks"> glyphicon-tasks</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-filter"> glyphicon-filter</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-briefcase"> glyphicon-briefcase</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-fullscreen"> glyphicon-fullscreen</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-dashboard"> glyphicon-dashboard</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-paperclip"> glyphicon-paperclip</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-heart-empty"> glyphicon-heart-empty</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-link"> glyphicon-link</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-phone"> glyphicon-phone</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-pushpin"> glyphicon-pushpin</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-pushpin"> glyphicon-pushpin</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-usd"> glyphicon-usd</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-gbp"> glyphicon-gbp</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-sort"> glyphicon-sort</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-sort-by-alphabet"> glyphicon-sort-by-alphabet</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-sort-by-alphabet-alt"> glyphicon-sort-by-alphabet-alt</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-sort-by-order"> glyphicon-sort-by-order</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-sort-by-order-alt"> glyphicon-sort-by-order-alt</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-sort-by-attributes"> glyphicon-sort-by-attributes</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-sort-by-attributes-alt"> glyphicon-sort-by-attributes-alt</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-unchecked"> glyphicon-unchecked</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-expand"> glyphicon-expand</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-collapse-down"> glyphicon-collapse-down</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-collapse-up"> glyphicon-collapse-up</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-log-in"> glyphicon-log-in</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-flash"> glyphicon-flash</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-log-out"> glyphicon-log-out</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-new-window"> glyphicon-new-window</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-record"> glyphicon-record</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-save"> glyphicon-save</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-open"> glyphicon-open</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-saved"> glyphicon-saved</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-import"> glyphicon-import</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-export"> glyphicon-export</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-send"> glyphicon-send</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-floppy-disk"> glyphicon-floppy-disk</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-floppy-saved"> glyphicon-floppy-saved</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-floppy-remove"> glyphicon-floppy-remove</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-floppy-save"> glyphicon-floppy-save</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-floppy-open"> glyphicon-floppy-open</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-credit-card"> glyphicon-credit-card</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-transfer"> glyphicon-transfer</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-cutlery"> glyphicon-cutlery</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-header"> glyphicon-header</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-compressed"> glyphicon-compressed</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-earphone"> glyphicon-earphone</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-phone-alt"> glyphicon-phone-alt</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-tower"> glyphicon-tower</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-stats"> glyphicon-stats</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-sd-video"> glyphicon-sd-video</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-hd-video"> glyphicon-hd-video</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-subtitles"> glyphicon-subtitles</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-sound-stereo"> glyphicon-sound-stereo</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-sound-dolby"> glyphicon-sound-dolby</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-sound-5-1"> glyphicon-sound-5-1</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-sound-6-1"> glyphicon-sound-6-1</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-sound-7-1"> glyphicon-sound-7-1</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-copyright-mark"> glyphicon-copyright-mark</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-registration-mark"> glyphicon-registration-mark</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-cloud-download"> glyphicon-cloud-download</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-cloud-upload"> glyphicon-cloud-upload</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-tree-conifer"> glyphicon-tree-conifer</span></button>
+      <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-tree-deciduous"> glyphicon-tree-deciduous</span></button>
+    </div>   
+  </div>
+</body> 
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/ejecutar.php?cod=147 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 17:33:46 GMT -->
+</html> </textarea>
+	</div>
+	<div id="p3">
+<iframe width="100%" height="100%" id="documentodinamico" name="documentodinamico" src="vacio.html">
+No tiene disponible el navegador la capacidad de iframe
+</iframe>
+	</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=0&cod=177&punto=19 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Descripción : Operadores aritméticos y de concatenación (columnas calculadas) (Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>19 - Operadores aritméticos y de concatenación (columnas calculadas)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>Aprendimos que los operadores son símbolos que permiten realizar distintos tipos de operaciones.<br> Dijimos que Oracle tiene 4 tipos de operadores: 1) relacionales o de comparación (los vimos), 2) aritméticos, 3) de concatenación y 4) lógicos (lo veremos más adelante).</p>
+
+<p>Los operadores aritméticos permiten realizar cálculos con valores numéricos.</p>
+<p>Son: multiplicación (*), división (/), suma (+) y resta (-).</p>
+
+<p>Es posible obtener salidas en las cuales una columna sea el resultado de un cálculo y no un campo de una tabla.</p>
+
+<p>Si queremos ver los títulos, precio y cantidad de cada libro escribimos la siguiente sentencia:</p>
+<pre>
+ select titulo,precio,cantidad
+  from libros;
+</pre>
+<p>Si queremos saber el monto total en dinero de un título podemos multiplicar el precio por la cantidad por cada título, pero también podemos hacer que Oracle realice el cálculo y lo incluya en una columna extra en la salida: </p>
+<pre>
+ select titulo, precio,cantidad,
+  precio*cantidad
+  from libros;
+</pre>
+<p>Si queremos saber el precio de cada libro con un 10% de descuento podemos incluir en la sentencia los siguientes cálculos:</p>
+<pre>
+ select titulo,precio,
+  precio-(precio*0.1)
+  from libros;
+</pre>
+<p>También podemos actualizar los datos empleando operadores aritméticos:</p>
+<pre>
+ update libros set precio=precio-(precio*0.1);
+</pre>
+<p>Para concatenar cadenas de caracteres existe el operador de concatenación ||.</p>
+
+<p>Para concatenar el título y el autor de cada libro usamos el operador de concatenación ("||"):
+</p> 
+<pre>
+select titulo||'-'||autor
+  from libros;
+</pre>
+<p>Note que concatenamos además un guión para separar los campos.</p>
+
+<p>Oracle puede convertir automáticamente valores numéricos a cadenas para una concatenación; por ejemplo, en el siguiente ejemplo mostramos el título y precio de cada libro concatenado con el operador "||":</p>
+<pre>
+ select titulo||' $'||precio
+  from libros;
+</pre></p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=0&cod=177&punto=19 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:25 GMT -->
+</html>

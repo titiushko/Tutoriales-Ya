@@ -1,0 +1,170 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.mysqlya.com.ar/temarios/descripcion.php?inicio=42&cod=48&punto=51 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Temario:Modificar campos de una tabla (alter table - modify)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>51 - Modificar campos de una tabla (alter table - modify)</h1></td>
+<td align="right">
+<!--<a href="http://www.mysqlya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<p>
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 		  
+
+<p>Con "alter table" podemos modificar el tipo de algún campo incluidos sus atributos.</p>
+<p>Continuamos con nuestra tabla "libros", definida con la siguiente estructura:<p>
+<pre>
+ - código, int unsigned,
+ - titulo, varchar(30) not null,
+ - autor, varchar(30),
+ - editorial, varchar (20),
+ - precio, decimal(5,2) unsigned,
+ - cantidad int unsigned.
+</pre>
+<p>Queremos modificar el tipo del campo "cantidad", como guardaremos valores que no superarán los 50000 usaremos smallint unsigned, tipeamos:</p>
+<pre>
+ alter table libros
+  modify cantidad smallint unsigned;
+</pre>
+<p>Usamos "alter table" seguido del nombre de la tabla y "modify" seguido del nombre del nuevo campo con su tipo y los modificadores.</p>
+
+<p>Queremos modificar el tipo del campo "titulo" para poder almacenar una longitud de 40 caracteres y que no permita valores nulos, tipeamos:</p>
+<pre>
+ alter table libros
+  modify titulo varchar(40) not null;
+</pre>
+<p>Hay que tener cuidado al alterar los tipos de los campos de una tabla que ya tiene registros cargados. Si tenemos un campo de texto de longitud 50 y lo cambiamos a 30 de longitud, los registros cargados en ese campo que superen los 30 caracteres, se cortarán.</p>
+<p>Igualmente, si un campo fue definido permitiendo valores nulos, se cargaron registros con valores nulos y luego se lo define "not null", todos los registros con valor nulo para ese campo cambiarán al valor por defecto según el tipo (cadena vacía para tipo texto y 0 para numéricos), ya que "null" se convierte en un valor inválido.</p>
+<p>Si definimos un campo de tipo decimal(5,2) y tenemos un registro con el valor "900.00" y luego modificamos el campo a "decimal(4,2)", el valor "900.00" se convierte en un valor inválido para el tipo, entonces guarda en su lugar, el valor límite más cercano, "99.99".</p>
+
+<p>Si intentamos definir "auto_increment" un campo que no es clave primaria, aparece un mensaje de error indicando que el campo debe ser clave primaria. Por ejemplo:</p>
+<pre>
+ alter table libros
+  modify codigo int unsigned auto_increment;
+</pre>
+
+<p>"alter table" combinado con "modify" permite agregar y quitar campos y atributos de campos. Para modificar el valor por defecto ("default") de un campo podemos usar también "modify" pero debemos colocar el tipo y sus modificadores, entonces resulta muy extenso, podemos setear sólo el valor por defecto con la siguienmte sintaxis:</p>
+<pre>
+ alter table libros
+ alter autor set default 'Varios';
+</pre>
+<p>Para eliminar el valor por defecto podemos emplear:</p>
+<pre>
+ alter table libros
+ alter autor drop default;
+</pre></p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   <h2><a href="../indexd9fe.html?inicio=42">Retornar</a></h2>   
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-5";
+urchinTracker();
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from www.mysqlya.com.ar/temarios/descripcion.php?inicio=42&cod=48&punto=51 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:29 GMT -->
+</html>

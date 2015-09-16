@@ -1,0 +1,629 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=15&codigo=15&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:52:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Comunicación con el gestor de base de datos MySQL empleando el módulo 'mysql'</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++, programación, tutorial, nodejs">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de NodeJS.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>15 - Comunicación con el gestor de base de datos MySQL empleando el módulo 'mysql'</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Una actividad muy común de una aplicación web es el acceso a un gestor de base de datos. Veremos en este concepto como podemos comunicarnos desde nuestra aplicación Node.js con el servidor de base de datos MySQL.</p>
+<p>Lo primero que debemos tener en cuenta es que tenemos que instalar el gestor de base de datos MySQL. Instalaremos el WampServer y los pasos para dicha actividad los puede leer <a href="../../www.phpya.com.ar/temarios/descripcion4311.html?punto=2&amp;cod=68&amp;inicio=0" target="_blanck">aquí.</a></p>
+<p>El segundo paso será crear la base de datos que la llamaremos 'base1' y los pasos puede leerlos <a href="../../www.phpya.com.ar/temarios/descripcion31c5.html?punto=19&amp;cod=40&amp;inicio=10" target="_blanck">aquí.</a> No crear tablas ya que nuestra aplicación se encargará de eso.</p>
+
+<h3>Problema</h3>
+<p>Desarrollar una aplicación web que permita administrar una tabla llamada 'articulos' en la base de datos 'base1'. Debemos poder crear la tabla, cargar registros, consultarlos y listarlos.</p>
+<p>Como primer paso crearemos una carpeta donde localizaremos nuestro proyecto. Crear una carpeta llamada: ejercicio17. Dentro de esta carpeta crear un archivo 'ejercicio17.js' donde codificaremos la aplicación en Node.js. Por otro lado crear una subcarpeta llamada 'public' y en dicha carpeta guardaremos todas las páginas estáticas de nuestra aplicación.</p>
+<p>Como dijimos Node.js deja liberada a la comunidad para implementar módulos para comunicarse con otras aplicaciones. Para comunicarnos con MySQL existe un módulo llamado 'mysql'.</p>
+<p>Desde la consola de comando nos posicionamos en la carpeta 'ejercicio17' y procedemos a instalar el módulo 'mysql' mediante 'npm':</p>
+<p><img src="imagentema/foto048.jpg" border="0" alt="modulo mysql de node.js"></p>
+<p>Ahora tenemos creada una subcarpeta 'node_modules' con una subcarpeta 'mysql' con el módulo propiamente dicho que nos facilitará la comunicación con MySQL.</p>
+
+<p>En la carpeta public localizar los tres archivos HTML estáticos:</p>
+<p><img src="imagentema/foto049.jpg" border="0" alt="modulo mysql de node.js"></p>
+<pre>index.html</pre>
+<pre class="recuadro">
+&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Prueba&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;a href="creartabla"&gt;Creacion de una tabla 'articulos' con MySQL&lt;/a&gt;&lt;/p&gt;
+   &lt;a href="alta.html"&gt;alta de articulos&lt;/a&gt;&lt;/p&gt;
+   &lt;a href="listado"&gt;Listado completo de articulos&lt;/a&gt;&lt;/p&gt;   
+   &lt;a href="consulta.html"&gt;Consulta de un articulo por codigo&lt;/a&gt;&lt;/p&gt;      
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<pre>alta.html</pre>
+<pre class="recuadro">
+&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;form method="post" action="alta"&gt;
+  Ingrese descripcion del articulo:
+  &lt;input type="descripcion" name="descripcion" size="50"&gt;
+  &lt;br&gt;
+  Ingrese el precio del articulo:
+  &lt;input type="text" name="precio" size="10"&gt;
+  &lt;br&gt;
+  &lt;input type="submit" value="Agregar"&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;  
+</pre>
+<pre>consulta.html</pre>
+<pre class="recuadro">  
+&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;form method="post" action="consultaporcodigo"&gt;
+  Ingrese el codigo del articulo a consultar:
+  &lt;input type="text" name="codigo" size="7"&gt;
+  &lt;br&gt;
+  &lt;input type="submit" value="Consultar"&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;  
+</pre>  
+
+<p>En la carpeta ejercicio17 localizamos el programa en Node.js propiamente dicho:</p>
+<p><img src="imagentema/foto050.jpg" border="0" alt="modulo mysql de node.js"></p>
+
+
+<p>El código fuente en Node.js para crear la tabla, efectuar el alta, listado y consultas es:</p>
+<pre>ejercicio17.js</pre>
+<pre class="recuadro">
+var http=require('http');
+var url=require('url');
+var fs=require('fs');
+var querystring = require('querystring');
+
+var mysql=require('mysql');
+
+var conexion=mysql.createConnection({
+    host:'localhost',
+    user:'root',
+    password:'',
+    database:'base1'
+});
+
+conexion.connect(function (error){
+    if (error)
+        console.log('Problemas de conexion con mysql');
+});
+
+
+var mime = {
+   'html' : 'text/html',
+   'css'  : 'text/css',
+   'jpg'  : 'image/jpg',
+   'ico'  : 'image/x-icon',
+   'mp3'  : 'audio/mpeg3',
+   'mp4'  : 'video/mp4'
+};
+
+var servidor=http.createServer(function(pedido,respuesta){
+    var objetourl = url.parse(pedido.url);
+    var camino='public'+objetourl.pathname;
+    if (camino=='public/')
+        camino='public/index.html';
+    encaminar(pedido,respuesta,camino);
+});
+
+servidor.listen(8888);
+
+
+function encaminar (pedido,respuesta,camino) {
+    
+    switch (camino) {
+        case 'public/creartabla': {
+            crear(respuesta);
+            break;
+        }    
+        case 'public/alta': {
+            alta(pedido,respuesta);
+            break;
+        }            
+        case 'public/listado': {
+            listado(respuesta);
+            break;
+        }
+        case 'public/consultaporcodigo': {
+            consulta(pedido,respuesta);
+            break;
+        }                            
+        default : {  
+            fs.exists(camino,function(existe){
+                if (existe) {
+                    fs.readFile(camino,function(error,contenido){
+                        if (error) {
+                            respuesta.writeHead(500, {'Content-Type': 'text/plain'});
+                            respuesta.write('Error interno');
+                            respuesta.end();                    
+                        } else {
+                            var vec = camino.split('.');
+                            var extension=vec[vec.length-1];
+                            var mimearchivo=mime[extension];
+                            respuesta.writeHead(200, {'Content-Type': mimearchivo});
+                            respuesta.write(contenido);
+                            respuesta.end();
+                        }
+                    });
+                } else {
+                    respuesta.writeHead(404, {'Content-Type': 'text/html'});
+                    respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;Recurso inexistente&lt;/body&gt;&lt;/html&gt;');        
+                    respuesta.end();
+                }
+            });    
+        }
+    }    
+}
+
+
+function crear(respuesta) {
+    conexion.query('drop table if exists articulos',function (error,resultado){
+        if (error) {
+          console.log(error);                
+          return;
+        }
+    });    
+    conexion.query('create table articulos ('+
+                       'codigo int primary key auto_increment,'+
+                       'descripcion varchar(50),'+
+                       'precio float'+
+                    ')', function (error,resultado){
+        if (error)
+          console.log(error);                
+    });
+    respuesta.writeHead(200, {'Content-Type': 'text/html'});
+    respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;'+
+                    'Se creo la tabla&lt;br&gt;&lt;a href="index.html"&gt;Retornar&lt;/a&gt;&lt;/body&gt;&lt;/html&gt;');        
+    respuesta.end();    
+}
+
+
+function alta(pedido,respuesta) {
+    var info='';
+    pedido.on('data', function(datosparciales){
+         info += datosparciales;
+    });
+    pedido.on('end', function(){
+        var formulario = querystring.parse(info);
+      var registro={
+          descripcion:formulario['descripcion'],
+          precio:formulario['precio']
+        };
+      conexion.query('insert into articulos set ?',registro, function (error,resultado){
+          if (error){
+              console.log(error);
+              return;
+          }
+      });        
+      respuesta.writeHead(200, {'Content-Type': 'text/html'});
+      respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;'+
+                    'Se cargo el articulo&lt;br&gt;&lt;a href="index.html"&gt;Retornar&lt;/a&gt;&lt;/body&gt;&lt;/html&gt;');        
+      respuesta.end();
+    });      
+}
+
+
+function listado(respuesta) {
+    conexion.query('select codigo,descripcion,precio from articulos', function(error,filas){
+        if (error) {            
+            console.log('error en el listado');
+            return;
+        }
+        respuesta.writeHead(200, {'Content-Type': 'text/html'});
+        var datos='';
+        for(var f=0;f&lt;filas.length;f++){
+            datos+='Codigo:'+filas[f].codigo+'&lt;br&gt;';
+            datos+='Descripcion:'+filas[f].descripcion+'&lt;br&gt;';
+            datos+='Precio:'+filas[f].precio+'&lt;hr&gt;';
+        }
+        respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;');
+        respuesta.write(datos);    
+        respuesta.write('&lt;a href="index.html"&gt;Retornar&lt;/a&gt;');
+        respuesta.write('&lt;/body&gt;&lt;/html&gt;');
+        respuesta.end();        
+    });
+}
+
+
+function consulta(pedido,respuesta) {
+    var info='';
+    pedido.on('data', function(datosparciales){
+         info += datosparciales;
+    });
+    pedido.on('end', function(){
+        var formulario = querystring.parse(info);
+        var dato=[formulario['codigo']];
+        conexion.query('select descripcion,precio from articulos where codigo=?',dato, function(error,filas){
+            if (error) {            
+                console.log('error en la consulta');
+                return;
+            }
+            respuesta.writeHead(200, {'Content-Type': 'text/html'});
+            var datos='';
+            if (filas.length&gt;0) {
+                datos+='Descripcion:'+filas[0].descripcion+'&lt;br&gt;';
+                datos+='Precio:'+filas[0].precio+'&lt;hr&gt;';
+            } else {
+                datos='No existe un artículo con dicho codigo.';
+            }    
+            respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;');
+            respuesta.write(datos);    
+            respuesta.write('&lt;a href="index.html"&gt;Retornar&lt;/a&gt;');            
+            respuesta.write('&lt;/body&gt;&lt;/html&gt;');
+            respuesta.end();        
+        });
+      
+    });      
+    
+}
+
+console.log('Servidor web iniciado');
+</pre>
+
+
+
+<p>Iremos viendo por partes las distintas funcionalidades que tiene el programa para manipular una base de datos de MySQL.</p>
+
+<p>Lo primero que hacemos es requerir el módulo 'mysql' mediante la función require:</p>
+<pre>
+var mysql=require('mysql');
+</pre>
+
+<p>Mediante la variable mysql llamamos a la función createConnection y le pasamos un objeto literal inicializando las propiedades 'host','user','password' y 'database'. Como dijimos ya creamos desde el PhpMyAdmin la base de datos 'base1':</p>
+<pre>
+var conexion=mysql.createConnection({
+    host:'localhost',
+    user:'root',
+    password:'',
+    database:'base1'
+});
+</pre>
+<p>Con la referencia a la conexión procedemos a llamar a connect para abrir la conexión con el servidor de base de datos (si hay algún error la función anónima traerá una referencia de dicho error):</p>
+<pre>
+conexion.connect(function (error){
+    if (error)
+        console.log('Problemas de conexion con mysql');
+});
+</pre>
+
+
+<p>Arranquemos nuestro programa desde la consola y desde el munú de opciones en el navegador elijamos la primer opción:</p>
+<pre>c:\ejerciciosnodejs\ejercicio17\node ejercicio17</pre>
+<p><img src="imagentema/foto051.jpg" border="0" alt="modulo mysql de node.js"></p>
+<p>Tenemos en el hipervínculo que la propiedad href tiene el valor 'creartabla':</p>
+<pre>
+   &lt;a href="creartabla"&gt;Creacion de una tabla 'articulos' con MySQL&lt;/a&gt;&lt;/p&gt;
+</pre>
+
+<p>Desde Node.js capturamos la ruta indicada en el hipervínculo:</p>
+<pre>
+        case 'public/creartabla': {
+            crear(respuesta);
+            break;
+        }    
+</pre>
+<p>En la función crear llamamos a la función query del objeto conexion que creamos previamente:</p>
+<pre>
+function crear(respuesta) {
+    conexion.query('drop table if exists articulos',function (error,resultado){
+        if (error){
+            console.log(error);                
+            return;
+        }
+    });    
+    conexion.query('create table articulos ('+
+                       'codigo int primary key auto_increment,'+
+                       'descripcion varchar(50),'+
+                       'precio float'+
+                    ')', function (error,resultado){
+        if (error)
+          console.log(error);                
+    });
+    respuesta.writeHead(200, {'Content-Type': 'text/html'});
+    respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;'+
+                    'Se creo la tabla&lt;br&gt;&lt;a href="index.html"&gt;Retornar&lt;/a&gt;&lt;/body&gt;&lt;/html&gt;');        
+    respuesta.end();    
+}
+</pre>
+<p>En la primer llamada de la función query le pasamos el comando SQL 'drop table if exists articulos' para que si ya existía la tabla proceda a borrarla.</p>
+<p>En la segunda llamada a query le pasamos el comando SQL 'create table articulos ...' para que se cree la tabla.</p>
+<p>Siempre que llamamos a query debemos pasarle además del string con el comando SQL un segundo parámetro que se trata de una función anónima que nos retorna un eventual error y los resultados que genera el comando SQL ejecutado.</p>
+
+<p>Una vez que ejecutamos la primer opción ya tenemos creada la tabla. Pasemos a ver como funciona el alta en la tabla articulos. Cuando seleccionamos la segunda opción de la página index.html se solicita la página estática alta.html:</p>
+<pre>
+   &lt;a href="alta.html"&gt;alta de articulos&lt;/a&gt;&lt;/p&gt;
+</pre>
+<p>El servidor implementado con Node.js devuelve dicha página al navegador que la solicita, donde el operador procede a cargar datos:</p>
+<p><img src="imagentema/foto052.jpg" border="0" alt="modulo mysql de node.js"></p>
+<p>Cuando se presiona el botón 'Agregar' vemos que la propiedad action del formulario tiene el valor 'alta':</p>
+<pre>
+  &lt;form method="post" action="alta"&gt;
+</pre>
+<p>Este valor lo capturamos desde nuestro programa de Node.js:</p>
+<pre>
+        case 'public/alta': {
+            alta(pedido,respuesta);
+            break;
+        }            
+</pre>
+<p>La función alta:</p>
+<pre>
+
+
+function alta(pedido,respuesta) {
+    var info='';
+    pedido.on('data', function(datosparciales){
+         info += datosparciales;
+    });
+    pedido.on('end', function(){
+        var formulario = querystring.parse(info);
+      var registro={
+          descripcion:formulario['descripcion'],
+          precio:formulario['precio']
+        };
+      conexion.query('insert into articulos set ?',registro, function (error,resultado){
+          if (error){
+              console.log(error);
+              return;
+          }
+      });        
+      respuesta.writeHead(200, {'Content-Type': 'text/html'});
+      respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;'+
+                    'Se cargo el articulo&lt;br&gt;&lt;a href="index.html"&gt;Retornar&lt;/a&gt;&lt;/body&gt;&lt;/html&gt;');        
+      respuesta.end();
+    });      
+}
+</pre>
+<p>Procede a rescatar todos los datos del formulario y a llamar a la función query de la variable conexion pasando el string con el comando SQL. El segundo parámetro de la función es un objeto literal donde inicializamos todos los campos de la tabla (menos el código de artículo ya que se genera automáticamente).</p>
+<p>Si bien en SQL no existe la palabra clave set tengamos en cuenta que la función query procederá a generar un comando insert válido.</p>
+<p>Nuevamente vemos que el tercer parámetro es la función anónima que se dispara luego que se ejecutó el comando SQL.</p>
+<p>Finalmente respondemos al navegador con una página que generamos en forma dinámica.</p>
+
+
+<p>El listado completo lo llamamos desde la página index.html:</p>
+<pre>
+   &lt;a href="listado"&gt;Listado completo de articulos&lt;/a&gt;&lt;/p&gt; 
+</pre>
+<p>Desde Node.js capturamos la url que llega con el valor 'listado':</p>
+<pre>
+        case 'public/listado': {
+            listado(respuesta);
+            break;
+        }
+</pre>
+<p>En la función listado procedemos a mostrar todos los datos de la tabla 'articulos':</p>
+<pre>
+function listado(respuesta) {
+    conexion.query('select codigo,descripcion,precio from articulos', function(error,filas){
+        if (error) {            
+            console.log('error en el listado');
+            return;
+        }
+        respuesta.writeHead(200, {'Content-Type': 'text/html'});
+        var datos='';
+        for(var f=0;f&lt;filas.length;f++){
+            datos+='Codigo:'+filas[f].codigo+'&lt;br&gt;';
+            datos+='Descripcion:'+filas[f].descripcion+'&lt;br&gt;';
+            datos+='Precio:'+filas[f].precio+'&lt;hr&gt;';
+        }
+        respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;');
+        respuesta.write(datos);    
+        respuesta.write('&lt;a href="index.html"&gt;Retornar&lt;/a&gt;');
+        respuesta.write('&lt;/body&gt;&lt;/html&gt;');
+        respuesta.end();        
+    });
+}
+</pre>
+<p>En este algoritmos es muy importante lo que hacemos en la función anónima donde procedemos a mostrar todos los datos en la página HTML que generamos en forma dinámica:</p>
+<p><img src="imagentema/foto053.jpg" border="0" alt="modulo mysql de node.js"></p>
+
+
+<p>Lo único que nos queda es la consulta por el código. Desde la página index.html procedemos a solicitar la página estática consulta.html:</p>
+<pre>
+   &lt;a href="consulta.html"&gt;Consulta de un articulo por codigo&lt;/a&gt;&lt;/p&gt;      
+</pre>
+<p>Esta página estática solicita que se ingrese el código de artículo y procede a enviarlo al servidor indicando en la propiedad action del elemento 'form' el valor 'consultaporcodigo':</p>
+
+<pre>
+  &lt;form method="post" action="consultaporcodigo"&gt;
+</pre>
+
+<p>En Node.js capturamos este valor:</p>
+<pre>
+        case 'public/consultaporcodigo': {
+            consulta(pedido,respuesta);
+            break;
+        }                            
+</pre>
+<p>Y llamamos a la función consulta donde rescatamos los valores del formulario y procedemos a llamar al comando SQL select con la clausula where indicando el código que cargó el operador en el formulario HTML:</p>
+
+<pre>
+function consulta(pedido,respuesta) {
+    var info='';
+    pedido.on('data', function(datosparciales){
+         info += datosparciales;
+    });
+    pedido.on('end', function(){
+        var formulario = querystring.parse(info);
+        var dato=[formulario['codigo']];
+        conexion.query('select descripcion,precio from articulos where codigo=?',dato, function(error,filas){
+            if (error) {            
+                console.log('error en la consulta');
+                return;
+            }
+            respuesta.writeHead(200, {'Content-Type': 'text/html'});
+            var datos='';
+            if (filas.length&gt;0) {
+                datos+='Descripcion:'+filas[0].descripcion+'&lt;br&gt;';
+                datos+='Precio:'+filas[0].precio+'&lt;hr&gt;';
+            } else {
+                datos='No existe un artículo con dicho codigo.';
+            }    
+            respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;');
+            respuesta.write(datos);    
+            respuesta.write('&lt;a href="index.html"&gt;Retornar&lt;/a&gt;');            
+            respuesta.write('&lt;/body&gt;&lt;/html&gt;');
+            respuesta.end();        
+        });
+      
+    });         
+}
+</pre>
+
+
+<p>Este proyecto lo puede descargar en un zip con todos los archivos desde este enlace :
+<a href="proyectos/ejercicio17.zip">ejercicio17</a></p>
+
+<p>Es importante conocer y visitar el sitio oficial de cada módulo que implementan los desarrolladores donde podemos enterarnos de las mejoras que le añaden. El sitio oficial de la extensión 'mysql' lo puede visitar <a href="https://github.com/felixge/node-mysql/" target="_blank">aquí</a></p>
+<h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-35', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=15&codigo=15&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:17 GMT -->
+</html>

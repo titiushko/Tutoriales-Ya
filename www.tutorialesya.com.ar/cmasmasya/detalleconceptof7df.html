@@ -1,0 +1,927 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=36&codigo=167&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Estructuras dinámicas en C++: Listas tipo Pila</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>36 - Estructuras dinámicas en C++: Listas tipo Pila</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Una lista se comporta como una pila si las inserciones y extracciones las hacemos por un mismo lado de la lista. También se las llama listas LIFO (Last In First Out - último en entrar primero en salir)</p>
+
+<p><strong>Importante</strong>: Una pila al ser una lista puede almacenar en el campo de información cualquier tipo de valor (int, char, float, vector de caracteres, un objeto, etc.)</p>
+
+<p>Para estudiar el mecanismo de utilización de una pila supondremos que en el campo de información almacena un entero (para una fácil interpretación y codificación)</p>
+
+<p>Inicialmente la PILA está vacía y decimos que el puntero raiz apunta a NULL (Si apunta a NULL decimos que no tiene una dirección de memoria, en realidad este valor NULL es el valor cero):</p>
+<img src="imagentema/foto057.jpg" border="0" alt="pila vacía"><br>
+
+<p>Insertamos un valor entero en la pila: insertar(10)</p>
+<img src="imagentema/foto058.jpg" border="0" alt="pila"><br>
+
+<p>Luego de realizar la inserción la lista tipo pila queda de esta manera: un nodo con el valor 10 y raiz apunta a dicho nodo. El puntero del nodo apunta a NULL ya que no hay otro nodo después de este.</p>
+
+
+<p>Insertamos luego el valor 4: insertar(4)</p>
+<img src="imagentema/foto059.jpg" border="0" alt="pila"><br>
+
+<p>Ahora el primer nodo de la pila es el que almacena el valor cuatro. raiz apunta a dicho nodo. Recordemos que raiz es el puntero externo a la lista que almacena la dirección del primer nodo.<br>
+El nodo que acabamos de insertar en el campo puntero guarda la dirección del nodo que almacena el valor 10.</p>
+
+
+<p>Ahora qué sucede si extraemos un nodo de la pila. ¿Cuál se extrae? Como sabemos en una pila se extrae el último en entrar.</p>
+
+<p>Al extraer de la pila tenemos: extraer()</p>
+<img src="imagentema/foto060.jpg" border="0" alt="pila"><br>
+
+<p>La pila ha quedado con un nodo.<br>
+
+Hay que tener cuidado que si se extrae un nuevo nodo la pila quedará vacía y no se podrá extraer otros valores (avisar que la pila está vacía)</p>
+
+
+<h3>Problema 1:</h3>
+<p>Confeccionar una clase que administre una lista tipo pila (se debe poder insertar, extraer e imprimir los datos de la pila)</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include &lt;iostream&gt;
+
+using namespace std;
+
+class Pila {
+private:
+    class Nodo {
+    public:
+        int info;
+        Nodo *sig;
+    };
+
+    Nodo *raiz;
+public:
+    Pila();
+    ~Pila();
+    void insertar(int x);
+    int extraer();
+    void imprimir();
+};
+
+Pila::Pila()
+{
+    raiz = NULL;
+}
+
+void Pila::insertar(int x)
+{
+    Nodo *nuevo;
+    nuevo = new Nodo();
+    nuevo-&gt;info = x;
+    if (raiz == NULL)
+    {
+        raiz = nuevo;
+        nuevo-&gt;sig = NULL;
+    }
+    else
+    {
+        nuevo-&gt;sig = raiz;
+        raiz = nuevo;
+    }
+}
+
+void Pila::imprimir()
+{
+    Nodo *reco = raiz;
+    cout &lt;&lt; "Listado de todos los elementos de la pila.\n";
+    while (reco != NULL)
+    {
+        cout &lt;&lt; reco-&gt;info &lt;&lt; "-";
+        reco = reco-&gt;sig;
+    }
+    cout &lt;&lt; "\n";
+}
+
+int Pila::extraer()
+{
+    if (raiz != NULL)
+    {
+        int informacion = raiz-&gt;info;
+        Nodo *bor = raiz;
+        raiz = raiz-&gt;sig;
+        delete bor;
+        return informacion;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+Pila::~Pila()
+{
+    Nodo *reco = raiz;
+    Nodo *bor;
+    while (reco != NULL)
+    {
+        bor = reco;
+        reco = reco-&gt;sig;
+        delete bor;
+    }
+}
+
+void main()
+{
+    Pila *pila1;
+    pila1= new Pila();
+    pila1-&gt;insertar(10);
+    pila1-&gt;insertar(40);
+    pila1-&gt;insertar(3);
+    pila1-&gt;imprimir();
+    cout&lt;&lt;"Extraemos de la pila:" &lt;&lt;pila1-&gt;extraer()&lt;&lt;"\n";
+    pila1-&gt;imprimir();
+    cout&lt;&lt;"Retornamos primero de la pila:" &lt;&lt;pila1-&gt;retornar()&lt;&lt;"\n";
+    pila1-&gt;imprimir();
+    delete pila1;
+    cin.get();
+}
+
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/Pila1.zip">Pila1.zip</a></p>
+
+
+<p>Analicemos las distintas partes de este programa:</p>
+<p>Lo nuevo que vemos en el lenguaje C++ es la posibilidad de declarar clases dentro de otra clase. Esto hace que podamos encapsular una clase para que solo tenga acceso la clase que la contiene:</p>
+<pre>
+class Pila {
+private:
+    class Nodo {
+    public:
+        int info;
+        Nodo *sig;
+    };
+
+    Nodo *raiz;
+public:
+    Pila();
+    ~Pila();
+    void insertar(int x);
+    int extraer();
+    int retornar();
+    void imprimir();
+};
+</pre>
+
+<p>La clase Nodo es interna a la clase Pila. Como podemos observar hemos declarado dentro de la clase Nodo dos atributos y los hemos definido de tipo public (lo hacemos public para accederlos directamente y no por medio de un método para que el código generado sea más eficiente y para respetar el encapsulamiento de datos propuesto por la programación orientada a objetos planteamos una clase interna)</p>
+
+
+<p>Para declarar un nodo dijimos que utilizamos una clase. En este caso la información del nodo (info) es un entero y siempre el nodo tendrá una referencia o puntero de tipo Nodo, que le llamamos sig.<br>
+El puntero sig apunta al siguiente nodo o a NULL en caso que no exista otro nodo. Este puntero es interno a la clase Nodo.<br>
+También definimos un puntero de tipo Nodo llamado raiz. Este puntero tiene la dirección del primer nodo de la lista. En caso de estar vacía la lista, raiz apunta a NULL (es decir no tiene dirección)</p>
+<p>raiz es un puntero externo a la pila y por eso lo definimos fuera de la clase Nodo pero dentro de la clase Pila.</p>
+
+<p>El puntero raiz es fundamental porque al tener la dirección del primer nodo de la lista nos permite acceder a los demás nodos.</p>
+<pre>
+Pila::Pila()
+{
+    raiz = NULL;
+}
+</pre>
+<p>En el constructor de la clase hacemos que raiz guarde el valor NULL. Tengamos en cuenta que si raiz tiene almacenado NULL la lista está vacía, en caso contrario tiene la dirección del primer nodo de la lista.</p>
+
+
+<pre>
+void Pila::insertar(int x)
+{
+    Nodo *nuevo;
+    nuevo = new Nodo();
+    nuevo-&gt;info = x;
+    if (raiz == NULL)
+    {
+        raiz = nuevo;
+        nuevo-&gt;sig = NULL;
+    }
+    else
+    {
+        nuevo-&gt;sig = raiz;
+        raiz = nuevo;
+    }
+}
+</pre>
+
+<p>Uno de los métodos más importantes que debemos entender en una pila es el de insertar un elemento en la pila.<br>
+Al método llega la información a insertar, en este caso en particular es un valor entero.</p>
+
+<p>La creación de un nodo requiere dos pasos:</p>
+
+<p>- Definición de un puntero o referencia a un tipo de dato Nodo:</p>
+<pre>
+    Nodo *nuevo;
+</pre>
+</p>- Creación del nodo (creación de un objeto):</p>
+<pre>
+    nuevo = new Nodo();
+</pre>
+<p>Cuando se ejecuta el operador new se reserva espacio para el nodo. Realmente se crea el nodo cuando se ejecuta el new.</p>
+<img src="imagentema/foto061.jpg" border="0" alt="pila"><br>
+<p>Paso seguido debemos guardar la información del nodo (como el atributo info es público luego lo accedemos mediante el operador -&gt;):</p>
+<pre>
+    nuevo-&gt;info = x;
+</pre>
+<p>En el campo info almacenamos lo que llega en el parámetro x. Por ejemplo si llega un 5 el nodo queda:</p>
+<img src="imagentema/foto062.jpg" border="0" alt="pila"><br>
+<p>Por último queda enlazar el nodo que acabamos de crear al principio de la lista.<br>
+
+Si la lista está vacía debemos guardar en el atributo sig del nodo el valor NULL para indicar que no hay otro nodo después de este, y hacer que raiz apunte al nodo creado (sabemos si una lista esta vacía si raiz almacena un NULL, es decir el valor que le almacenamos en el constructor)</p>
+<pre>
+    if (raiz == NULL)
+    {
+        nuevo-&gt;sig = NULL;
+        raiz = nuevo;
+    }
+</pre>
+<img src="imagentema/foto063.jpg" border="0" alt="pila"><br>
+
+<p>Gráficamente podemos observar que cuando indicamos raiz=nuevo, el puntero raiz guarda la dirección del nodo apuntado por nuevo.<br>
+Tener en cuenta que cuando finaliza la ejecución del método el puntero nuevo desaparece, pero no el nodo creado con el operador new.</p>
+
+<p>En caso que la lista no esté vacía, el puntero sig del nodo que acabamos de crear debe apuntar al que es hasta este momento el primer nodo, es decir al nodo que apunta raiz actualmente.</p>
+<pre>
+    else
+    {
+        nuevo-&gt;sig = raiz;
+        raiz = nuevo;
+    }
+</pre>
+<p>Como primera actividad cargamos en el puntero sig del nodo apuntado por nuevo la dirección de raiz, y posteriormente raiz apunta al nodo que acabamos de crear, que será ahora el primero de la lista.</p>
+
+<p>Antes de los enlaces tenemos:</p>
+<img src="imagentema/foto064.jpg" border="0" alt="pila"><br>
+
+<p>Luego de ejecutar la línea:</p>
+<pre>
+        nuevo-&gt;sig = raiz;
+</pre>
+<p>Ahora tenemos:</p>
+<img src="imagentema/foto065.jpg" border="0" alt="pila"><br>
+
+<p>Por último asignamos a raiz la dirección que almacena el puntero nuevo.</p>
+<pre>
+        raiz = nuevo;
+</pre>
+
+<p>La lista queda:</p>
+<img src="imagentema/foto066.jpg" border="0" alt="pila"><br>
+
+
+
+
+
+<p>El método extraer:</p>
+<pre>
+int Pila::extraer()
+{
+    if (raiz != NULL)
+    {
+        int informacion = raiz-&gt;info;
+        Nodo *bor = raiz;
+        raiz = raiz-&gt;sig;
+        delete bor;
+        return informacion;
+    }
+    else
+    {
+        return -1;
+    }
+}
+</pre>
+
+<p>El objetivo del método extraer  es retornar la información del primer nodo y además borrarlo de la lista.</p>
+<p>Si la lista no está vacía (es decir raiz tiene un valor distinto a NULL) guardamos en una variable local la información del primer nodo:</p>
+<pre>
+        int informacion = raiz-&gt;info;
+</pre>
+<p>Creamos un puntero auxiliar y hacemos que apunte al nodo que vamos a borrar:</p>
+<pre>
+        Nodo *bor = raiz;
+</pre>
+<p>Avanzamos raiz al segundo nodo de la lista, ya que borraremos el primero (si no hay otro nodo más adelante en raiz se guarda NULL ya que el último nodo de la lista tiene en el puntero sig dicho valor):</p>
+<pre>
+        raiz = raiz-&gt;sig;
+</pre>
+<p>Procedemos a eliminar el primer nodo de la lista llamando al operador delete:</p>
+<pre>
+        delete bor;
+</pre>
+
+
+<p>Retornamos la información:</p>
+<pre>
+        return informacion;
+</pre>
+<p>En caso de estar vacía la pila retornamos el número -1 y lo tomamos como código de error (es decir nunca debemos guardar el entero -1 en la pila)</p>
+<pre>
+    else
+    {
+        return -1;
+    }
+</pre>
+
+
+<p>Es muy importante entender gráficamente el manejo de las listas. La interpretación gráfica nos permitirá plantear inicialmente las soluciones para el manejo de listas.</p>
+<img src="imagentema/foto067.jpg" border="0" alt="pila"><br>
+
+
+<p>Expliquemos el método para recorrer una lista en forma completa e imprimir la información de cada nodo:</p>
+<pre>
+void Pila::imprimir()
+{
+    Nodo *reco = raiz;
+    cout &lt;&lt; "Listado de todos los elementos de la pila.\n";
+    while (reco != NULL)
+    {
+        cout &lt;&lt; reco-&gt;info &lt;&lt; "-";
+        reco = reco-&gt;sig;
+    }
+    cout &lt;&lt; "\n";
+}
+</pre>
+
+<p>Definimos un puntero auxiliar reco y hacemos que apunte al primer nodo de la lista:</p>
+<pre>
+    Nodo *reco = raiz;
+</pre>
+<p>Disponemos una estructura repetitiva que se repetirá mientras reco sea distinto a NULL. Dentro de la estructura repetitiva hacemos que reco avance al siguiente nodo:</p>
+<pre>
+    while (reco != NULL)
+    {
+        cout &lt;&lt; reco-&gt;info &lt;&lt; "-";
+        reco = reco-&gt;sig;
+    }
+</pre>
+
+<p>Es muy importante entender la línea:</p>
+<pre>
+        reco = reco-&gt;sig;
+</pre>
+
+<p>Estamos diciendo que reco almacena la dirección que tiene el puntero sig del nodo apuntado actualmente por reco.</p>
+
+
+
+<p>Gráficamente:</p>
+<img src="imagentema/foto068.jpg" border="0" alt="pila"><br>
+
+
+<p>Al analizarse la condición:</p>
+<pre>
+    while (reco != NULL)
+</pre> 
+<p>Es verdadero ya que reco apunta a un nodo y se vuelve a ejecutar la línea:</p>
+<pre>
+        reco = reco-&gt;sig;
+</pre>
+<p>Ahora reco apunta al siguiente nodo:</p>
+<img src="imagentema/foto069.jpg" border="0" alt="pila"><br>
+
+<p>La condición del while nuevamente se valúa en verdadera y avanza el puntero reco al siguiente nodo:</p>
+<pre>
+        reco = reco-&gt;sig;
+</pre>
+<img src="imagentema/foto070.jpg" border="0" alt="pila"><br>
+
+<p>Ahora sí reco apunta a NULL (tiene almacenado un NULL) y ha llegado el final de la lista (Recordar que el último nodo de la lista tiene almacenado en el puntero sig  el valor NULL, con el objetivo de saber que es el último nodo)</p>
+
+
+<p>El último método a analizar es el destructor de la clase que tiene por objetivo liberar el espacio ocupado por los nodos de la lista, esta actividad es fundamental:</p>
+
+<pre>
+Pila::~Pila()
+{
+    Nodo *reco = raiz;
+    Nodo *bor;
+    while (reco != NULL)
+    {
+        bor = reco;
+        reco = reco-&gt;sig;
+        delete bor;
+    }
+}
+
+</pre>
+
+<p>Definimos dos punteros auxiliares: reco y bor. A reco lo inicializamos con el primer nodo de la lista (en forma similar a como hicimos el imprimir donde recorremos toda la lista):</p>
+<pre>
+    Nodo *reco = raiz;
+    Nodo *bor;
+</pre>
+<p>Mediante un while recorreremos toda la lista:</p>
+<pre>
+    while (reco != NULL)
+</pre>
+<p>Dentro del while inicializamos el puntero bor con la dirección del nodo que apunta reco:</p>
+<pre>
+        bor = reco;
+</pre>
+<p>Inmediatamente avanzamos reco al siguiente nodo:</p>
+<pre>
+        reco = reco-&gt;sig;
+</pre>
+<p>Y procedemos a borrar el nodo apuntado por bor:</p>
+<pre>
+        delete bor;
+</pre>
+<p>Este while se repite mientras haya nodos en la lista.</p>
+
+
+<p>Para poder probar esta clase recordemos que debemos definir un objeto de la misma y llamar a sus métodos:</p>
+<pre>
+void main()
+{
+    Pila *pila1;
+    pila1= new Pila();
+    pila1-&gt;insertar(10);
+    pila1-&gt;insertar(40);
+    pila1-&gt;insertar(3);
+    pila1-&gt;imprimir();
+    cout&lt;&lt;"Extraemos de la pila:" &lt;&lt;pila1-&gt;extraer()&lt;&lt;"\n";
+    pila1-&gt;imprimir();
+    cout&lt;&lt;"Retornamos primero de la pila:" &lt;&lt;pila1-&gt;retornar()&lt;&lt;"\n";
+    pila1-&gt;imprimir();
+    delete pila1;
+    cin.get();
+}
+
+</pre>
+<p>Insertamos 3 enteros, luego imprimimos la pila, extraemos uno de la pila y finalmente imprimimos nuevamente la pila.</p>
+
+<h3>Problema 2:</h3>
+<p>Agregar a la clase Pila un método que retorne la cantidad de nodos y otro que indique si esta vacía.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include &lt;iostream&gt;
+
+using namespace std;
+
+class Pila {
+private:
+    class Nodo {
+    public:
+        int info;
+        Nodo *sig;
+    };
+
+    Nodo *raiz;
+public:
+    Pila();
+    ~Pila();
+    void insertar(int x);
+    int extraer();
+    void imprimir();
+    int cantidad();
+    bool vacia();
+};
+
+Pila::Pila()
+{
+    raiz = NULL;
+}
+
+void Pila::insertar(int x)
+{
+    Nodo *nuevo;
+    nuevo = new Nodo();
+    nuevo-&gt;info = x;
+    if (raiz == NULL)
+    {
+        raiz = nuevo;
+        nuevo-&gt;sig = NULL;
+    }
+    else
+    {
+        nuevo-&gt;sig = raiz;
+        raiz = nuevo;
+    }
+}
+
+void Pila::imprimir()
+{
+    Nodo *reco = raiz;
+    cout &lt;&lt; "Listado de todos los elementos de la pila.\n";
+    while (reco != NULL)
+    {
+        cout &lt;&lt; reco-&gt;info &lt;&lt; "-";
+        reco = reco-&gt;sig;
+    }
+    cout &lt;&lt; "\n";
+}
+
+int Pila::extraer()
+{
+    if (raiz != NULL)
+    {
+        int informacion = raiz-&gt;info;
+        Nodo *bor = raiz;
+        raiz = raiz-&gt;sig;
+        delete bor;
+        return informacion;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+Pila::~Pila()
+{
+    Nodo *reco = raiz;
+    Nodo *bor;
+    while (reco != NULL)
+    {
+        bor = reco;
+        reco = reco-&gt;sig;
+        delete bor;
+    }
+}
+
+int Pila::cantidad()
+{
+    Nodo *reco = raiz;
+    int cant = 0;
+    while (reco != NULL)
+    {
+        cant++;
+        reco = reco-&gt;sig;
+    }
+    return cant;
+}
+
+bool Pila::vacia()
+{
+    if (raiz == NULL)
+        return true;
+    else
+        return false;
+}
+
+void main()
+{
+    Pila *pila1;
+    pila1 = new Pila();
+    pila1-&gt;insertar(10);
+    pila1-&gt;insertar(40);
+    pila1-&gt;insertar(3);
+    pila1-&gt;imprimir();
+    cout << "La cantidad de nodos de la pila es:" << pila1->cantidad() << "\n";
+    while (pila1-&gt;vacia() == false) 
+    {
+        cout &lt;&lt; "Extraemos de la pila:" &lt;&lt; pila1-&gt;extraer() &lt;&lt; "\n";
+    }
+    delete pila1;
+    cin.get();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/Pila2.zip">Pila2.zip</a></p>
+
+
+<p>Para verificar si la pila esta vacía verificamos el contenido de la variable raiz, si tiene NULL luego la lista esta vacía y por lo tanto retornamos un true (el tipo de dato bool en C++ puede almacenar solo alguno de estos dos valores: true o false):</p>
+<pre>
+bool Pila::vacia()
+{
+    if (raiz == NULL)
+        return true;
+    else
+        return false;
+}
+</pre>
+<p>El algoritmo para saber la cantidad de nodos es similar al imprimir, pero en lugar de mostrar la información del nodo procedemos a incrementar un contador:</p>
+<pre>
+int Pila::cantidad()
+{
+    Nodo *reco = raiz;
+    int cant = 0;
+    while (reco != NULL)
+    {
+        cant++;
+        reco = reco-&gt;sig;
+    }
+    return cant;
+}
+</pre>
+
+<p>Para probar esta clase en la main creamos un objeto de la clase Pila insertamos tres enteros:</p>
+<pre>
+    Pila *pila1;
+    pila1 = new Pila();
+    pila1-&gt;insertar(10);
+    pila1-&gt;insertar(40);
+    pila1-&gt;insertar(3);
+</pre>
+<p>Imprimimos la pila (nos muestra los tres datos):</p>
+<pre>
+    pila1-&gt;imprimir();
+</pre>
+<p>Llamamos al método cantidad (nos retorna un 3):</p>
+<pre>
+    cout << "La cantidad de nodos de la pila es:" << pila1->cantidad() << "\n";
+</pre>
+<p>Luego mientras el método vacía nos retorne un false (lista no vacía) procedemos a llamar al método extraer:</p>
+<pre>
+    while (pila1-&gt;vacia() == false) 
+    {
+        cout &lt;&lt; "Extraemos de la pila:" &lt;&lt; pila1-&gt;extraer() &lt;&lt; "\n";
+    }
+</pre>
+
+<p>Para entender el concepto de punteros el Visual Studio nos provee una herramienta de ejecutar línea a línea un programa y poder ver el estado de las variables.</p>
+<p>Para ejecutar paso a paso debemos seleccionar desde el menú de opciones DEBUG -> Step Into (o más fácil presionar la tecla F11):</p>
+<img src="imagentema/foto071.jpg" border="0" alt="depurar programa"><br>
+<p>Cada vez que presionemos F11 se ejecutará una línea de código de nuestro programa y podremos ver en una ventana el contenido de las variables definidas:</p>
+<img src="imagentema/foto072.jpg" border="0" alt="depurar programa"><br>
+<p>Como vemos presionando F11 se ejecuta una línea de código, en el caso que se llama a un método vemos como la ejecución continua dentro de cada línea del método y al finalizar vuelve a la main para ingresar al siguiente método y así sucesivamente.</p>
+<p>Cuando se ejecuta el cout podemos ver el código fuente del mismo, en muchos casos esto no nos sirve y podemos hacer que se ejecute en un solo paso presionando la tecla F10 (Step Over) en lugar de F11</p>
+
+<h2>Problema propuesto</h2>
+<ol>
+<li>
+Agregar un método a la clase Pila que retorne la información del primer nodo de la Pila sin borrarlo.</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+#include &lt;iostream&gt;
+
+using namespace std;
+
+class Pila {
+private:
+    class Nodo {
+    public:
+        int info;
+        Nodo *sig;
+    };
+
+    Nodo *raiz;
+public:
+    Pila();
+    ~Pila();
+    void insertar(int x);
+    int extraer();
+    int retornar();
+    void imprimir();
+    int cantidad();
+    bool vacia();
+};
+
+Pila::Pila()
+{
+    raiz = NULL;
+}
+
+void Pila::insertar(int x)
+{
+    Nodo *nuevo;
+    nuevo = new Nodo();
+    nuevo-&gt;info = x;
+    if (raiz == NULL)
+    {
+        raiz = nuevo;
+        nuevo-&gt;sig = NULL;
+    }
+    else
+    {
+        nuevo-&gt;sig = raiz;
+        raiz = nuevo;
+    }
+}
+
+void Pila::imprimir()
+{
+    Nodo *reco = raiz;
+    cout &lt;&lt; "Listado de todos los elementos de la pila.\n";
+    while (reco != NULL)
+    {
+        cout &lt;&lt; reco-&gt;info &lt;&lt; "-";
+        reco = reco-&gt;sig;
+    }
+    cout &lt;&lt; "\n";
+}
+
+int Pila::extraer()
+{
+    if (raiz != NULL)
+    {
+        int informacion = raiz-&gt;info;
+        Nodo *bor = raiz;
+        raiz = raiz-&gt;sig;
+        delete bor;
+        return informacion;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+int Pila::retornar()
+{
+    if (raiz != NULL)
+    {
+        return raiz-&gt;info;
+    }
+    else
+        return -1;
+}
+
+Pila::~Pila()
+{
+    Nodo *reco = raiz;
+    Nodo *bor;
+    while (reco != NULL)
+    {
+        bor = reco;
+        reco = reco-&gt;sig;
+        delete bor;
+    }
+}
+
+int Pila::cantidad()
+{
+    Nodo *reco = raiz;
+    int cant = 0;
+    while (reco != NULL)
+    {
+        cant++;
+        reco = reco-&gt;sig;
+    }
+    return cant;
+}
+
+bool Pila::vacia()
+{
+    if (raiz == NULL)
+        return true;
+    else
+        return false;
+}
+
+void main()
+{
+    Pila *pila1;
+    pila1 = new Pila();
+    pila1-&gt;insertar(10);
+    pila1-&gt;insertar(40);
+    pila1-&gt;insertar(3);
+    pila1-&gt;imprimir();
+    cout &lt;&lt; "El primer valor de la pila es:" &lt;&lt; pila1-&gt;retornar() &lt;&lt; "\n";
+    pila1-&gt;imprimir();
+    delete pila1;
+    cin.get();
+}
+
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/Pila3.zip">Pila3.zip</a></p>
+
+</pre><h2><a href="index7732.html?inicio=30">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=36&codigo=167&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:41 GMT -->
+</html>

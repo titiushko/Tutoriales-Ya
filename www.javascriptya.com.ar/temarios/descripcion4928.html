@@ -1,0 +1,215 @@
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=30&cod=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de JavaScript : Conceptos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+div#contentdetalle{clear:left;
+                   max-width:900px;
+				   border-top:0px solid #999;
+				   padding-top:15px;
+				   background-color: #aed7a8;
+				   text-align:left;
+				   font-size:1.3em;
+				   font-weight:normal;
+				   font-family:arial;
+				   padding:20px}
+				   
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;  
+}				   
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td>
+<h1>Archivo JavaScript externo (*.js)</h1></td>
+<td align="right">
+<!--<a href="http://www.javascriptya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div id="contentdetalle">
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 	  
+
+El lenguaje JavaScript permite agrupar funciones y disponerlas en un archivo separado a la página HTML.<br>
+Esto trae muchos beneficios:<br>
+- Reutilización de funciones en muchos archivos. No tenemos que copiar y pegar sucesivamente las funciones en las páginas en las que necesitamos.<br>
+- Facilita el mantenimiento de las funciones al encontrarse en archivos separados.<br>
+- Nos obliga a ser más ordenados.<br>
+<br>
+La mecánica para implementar estos archivos externos en JavaScript es:<br>
+1 - Crear un archivo con extensión *.js y tipear las funciones en la misma:
+<pre>
+function retornarFecha()
+{
+  var fecha
+  fecha=new Date();
+  var cadena=fecha.getDate()+'/'+(fecha.getMonth()+1)+'/'+fecha.getYear();
+  return cadena;
+}
+
+function retornarHora()
+{
+  var fecha
+  fecha=new Date();
+  var cadena=fecha.getHours()+':'+fecha.getMinutes()+':'+fecha.getSeconds();
+  return cadena; 
+}
+</pre>
+2 - Creamos un archivo html que utilizará las funciones contenidas en el archivo *.js:
+<pre>
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;funciones.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+  document.write('La fecha de hoy es:'+retornarFecha());
+  document.write('&lt;br&gt;');
+  document.write('La hora es:'+retornarHora());
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+Es decir debemos disponer el siguiente código para importar el archivo *.js:
+<pre>
+&lt;script type=&quot;text/javascript&quot; src=&quot;funciones.js&quot;&gt;&lt;/script&gt;
+</pre>
+Mediante la propiedad src indicamos el nombre del archivo a importar.<br>
+Luego, podemos llamar dentro de la página HTML, a las funciones que contiene el archivo externo *.js; en nuestro ejemplo llamamos a las funciones retornarFecha() y retornarHora().<br>
+Como podemos ver, el archivo html queda mucho más limpio.<br>
+
+<p>Si quiere probar en su equipo este ejemplo puede descargar el editor de texto 
+<a target="_blank" href="http://notepad-plus-plus.org/">NotePad++.</a><br>
+<p>Tipear los dos archivos y los almacenamos en una carpeta del disco duro:<br>
+funciones.js</p>
+<img src="imagentema/foto001.jpg" border="0" alt="editor NotePad++"><br>
+<p>y la página html (pagina1.html):</p>
+<img src="imagentema/foto002.jpg" border="0" alt="editor NotePad++"><br>
+<p>Procedemos a abrir desde el navegador el archivo: pagina1.html y veremos como se llaman las funciones contenidas en el archivo js:</p>
+<img src="imagentema/foto003.jpg" border="0" alt="archivos externos js"><br>
+</p>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../index7732.html?inicio=30">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=30&cod=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:24 GMT -->
+</html>

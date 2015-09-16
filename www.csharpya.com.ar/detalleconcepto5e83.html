@@ -1,0 +1,312 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=207&inicio=80 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:03:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - SqlCommand (update): Modificar registro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>83 - SqlCommand (update): Modificar registro</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p>Vimos hasta ahora el alta (carga), consulta (búsqueda) y baja (borrado). Ahora veremos como modificar datos de una fila de la tabla.</p>
+<p>Para modificar datos debemos utilizar el comando SQL update.</p>
+<h3>Problema</h3>
+<p>Implementar una aplicación que permita consultar un artículo por su código. Luego mostrar en dos TextBox la descripción y el precio actual. Permitir modificar la descripción y precio dejando registrado dicho cambio en la tabla de la base de datos al presionar un botón.</p>
+<p>Crear un proyecto llamado: PruebaBaseDatos6 y definir la siguiente interfaz visual:</p>
+<pre>
+3 objeto de la clase Label.
+2 objeto de la clase Button (disponer la propiedad Enabled del 
+                             botón de modificación en false para que empiece desactivo)
+3 objeto de la clase TextBox. 
+</pre>
+
+<img src="imagentema/foto183.jpg" border="0" alt="comando update SqlCommand SQL Server"><br>
+<p>El código fuente para resolver la consulta y modificación es:</p>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+using System.Data.SqlClient;
+
+namespace PruebaBaseDatos6
+{
+    public partial class Form1 : Form
+    {
+        private SqlConnection conexion = new SqlConnection("server=DIEGO-PC\\SQLEXPRESS ; database=base1 ; integrated security = true");
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            conexion.Open();
+            string cod = textBox1.Text;
+            string cadena = "select descripcion, precio from articulos where codigo=" + cod;
+            SqlCommand comando = new SqlCommand(cadena, conexion);
+            SqlDataReader registro = comando.ExecuteReader();
+            if (registro.Read())
+            {
+                textBox2.Text = registro["descripcion"].ToString();
+                textBox3.Text = registro["precio"].ToString();
+                button2.Enabled = true;
+            }
+            else
+                MessageBox.Show("No existe un artículo con el código ingresado");
+            conexion.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            conexion.Open();
+            string cod = textBox1.Text;
+            string descri = textBox2.Text;
+            string precio = textBox3.Text;
+            string cadena = "update articulos set descripcion='"+descri+"', precio="+precio+" where codigo=" + cod;
+            SqlCommand comando = new SqlCommand(cadena, conexion);
+            int cant;
+            cant = comando.ExecuteNonQuery();
+            if (cant == 1)
+            {
+                MessageBox.Show("Se modificaron los datos del artículo");
+                textBox1.Text = "";
+                textBox2.Text = "";
+                textBox3.Text = "";
+            }
+            else
+                MessageBox.Show("No existe un artículo con el código ingresado");
+            conexion.Close();
+            button2.Enabled = false;
+        }
+    }
+}
+</pre>
+
+
+<p>Primero indicamos el uso del espacio de nombres relacionado a la comunicación con SQL Server:</p>
+<pre>
+using System.Data.SqlClient;
+</pre>
+
+<p>Como en los dos métodos utilizamos el objeto SqlConnection lo definimos como un atributo de la clase Form1:</p>
+<pre>
+    public partial class Form1 : Form
+    {
+        private SqlConnection conexion = new SqlConnection("server=DIEGO-PC\\SQLEXPRESS ; database=base1 ; integrated security = true");
+</pre>
+<p>El algoritmo de consulta es idéntico al concepto que vimos anteriormente (salvo que los datos rescatados los mostramos en TextBox):</p>
+<pre>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            conexion.Open();
+            string cod = textBox1.Text;
+            string cadena = "select descripcion, precio from articulos where codigo=" + cod;
+            SqlCommand comando = new SqlCommand(cadena, conexion);
+            SqlDataReader registro = comando.ExecuteReader();
+            if (registro.Read())
+            {
+                textBox2.Text = registro["descripcion"].ToString();
+                textBox3.Text = registro["precio"].ToString();
+                button2.Enabled = true;
+            }
+            else
+                MessageBox.Show("No existe un artículo con el código ingresado");
+            conexion.Close();
+        }
+</pre>
+
+<p>En el evento Click de la modificación procedemos a configurar un string con el comando SQL update rescatando los datos de los tres TextBox:</p>
+<pre>
+            string cod = textBox1.Text;
+            string descri = textBox2.Text;
+            string precio = textBox3.Text;
+            string cadena = "update articulos set descripcion='"+descri+"', precio="+precio+" where codigo=" + cod;
+</pre>
+<p>Seguidamente creamos un objeto de la clase SqlCommand pasando al constructor el string con el comando update y la referencia a la conexión:</p>
+<pre>
+            SqlCommand comando = new SqlCommand(cadena, conexion);
+</pre>
+<p>Llamamos al método ExecuteNonQuery para que se ejecute el comando update por parte del SQL Server y nos retorne la cantidad de registros afectados:</p>
+<pre>
+            int cant;
+            cant = comando.ExecuteNonQuery();
+</pre>
+<p>Si retorna un uno significa que se efectuó la modificación:</p>
+<pre>
+            if (cant == 1)
+            {
+                MessageBox.Show("Se modificaron los datos del artículo");
+                textBox1.Text = "";
+                textBox2.Text = "";
+                textBox3.Text = "";
+            }
+</pre>
+
+
+
+<p>En pantalla tenemos la siguiente interfaz luego de modificar un artículo:</p>
+<img src="imagentema/foto184.jpg" border="0" alt="comando delete SqlCommand SQL Server"><br>
+</div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="index20ff.html?inicio=80">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=207&inicio=80 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:03:15 GMT -->
+</html>

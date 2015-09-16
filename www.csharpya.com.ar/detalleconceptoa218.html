@@ -1,0 +1,306 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=127&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:53:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - Codificación del diagrama de flujo en C#</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>3 - Codificación del diagrama de flujo en C#</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p>Ahora debemos codificar el diagrama de flujo utilizando las instrucciones del lenguaje C#. Como hemos visto el entorno de programación del Visual C# nos creó un esqueleto básico sobre el cual continuaremos el programa:</p>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CalculoSueldo
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        }
+    }
+}
+</pre>
+<p>A medida que avancemos en el curso veremos que significa una clase y namespace, cual es el objetivo del using etc. por el momento nos centraremos donde codificaremos nuestros diagramas de flujo.<br>
+La codificación del diagrama de flujo la haremos dentro de la función Main (la función Main es la primera que se ejecuta al iniciarse un programa)</p>
+<p>El programa completo para el calculo del sueldo de un operario conociendo la cantidad de horas trabajadas y el costo por hora es:</p>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CalculoSueldo
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int horasTrabajadas;
+            float costoHora;
+            float sueldo;
+            string linea;
+            Console.Write("Ingrese Horas trabajadas por el operario:");
+            linea = Console.ReadLine();
+            horasTrabajadas = int.Parse(linea);
+            Console.Write("Ingrese el pago por hora:");
+            linea = Console.ReadLine();
+            costoHora = float.Parse(linea);
+            sueldo = horasTrabajadas * costoHora;
+            Console.Write("El sueldo total del operario es:");
+            Console.Write(sueldo);
+            Console.ReadKey();
+        }
+    }
+}
+</pre>
+<p>Para probar el funcionamiento del programa debemos presionar el ícono con un triángulo verde (o la tecla especial F5 o desde el menú elegir la opción "Depurar" -> "Iniciar depuración"):<br>
+<img src="imagentema/foto010.jpg" border="0" alt="ejecucion programa c#"><br>
+<p>La ejecución del programa permite ingresar la cantidad de horas trabajadas por un operario y su pago por hora, mostrando seguidamente el sueldo que se debe pagar, un ejemplo de la ejecución de este programa es :</p>
+<img src="imagentema/foto011.jpg" border="0" alt="ejecucion programa c#"><br>
+
+<p>Si el texto de la ventana donde se ejecuta el programa es muy pequeña podemos modificar su tamaño de fuente desde el menú que tiene a la izquierda:</p>
+<img src="imagentema/foto011b.jpg" border="0" alt="ejecucion programa c#"><br>
+<p>Y seleccionar un tamaño mayor:</p>
+<img src="imagentema/foto011c.jpg" border="0" alt="ejecucion programa c#"><br>
+
+
+<p>Conceptos que deben quedar claros:</p>
+<ol>
+<li>
+<p>Por el momento haremos todo el algoritmo dentro de la función Main. Es decir el resto siempre lo crea el entorno del Visual C#.</p>
+</li>
+<li>
+<p>Si observamos el diagrama de flujos vemos que debemos definir tres variables: (horasTrabajadas,
+costoHora,sueldo), aquí es donde debemos definir que tipos de datos se almacenarán en las mismas. La cantidad de horas normalmente será un valor entero (ej. 100 - 150 - 230 etc.), pero el costo de la hora es muy común que sea un valor real (ej. 5.35 - 7.50 etc.) y como el sueldo resulta de multiplicar las horas trabajadas por el costo por hora el mismo deberá ser real.<br>
+<p>La definición de las variables la hacemos en la Main:<br>
+<pre>
+            int horasTrabajadas;
+            float costoHora;
+            float sueldo;
+</pre>
+Utilizamos la palabra clave int para definir variables enteras (en C# las palabras claves deben ir obligatoriamente en minúsculas, sino se produce un error sintáctico) Luego de la palabra clave debemos indicar el nombre de la variable, por ejemplo: horasTrabajadas (se propone que el nombre de la variable comience con minúscula y en caso de estar constituida por dos palabras o más palabras deben ir en mayúsculas el primer caracter (un nombre de variable no puede tener espacios en blanco, empezar con un número, ni tampoco utilizar caracteres especiales)<br>
+Debemos buscar siempre nombres de variables que nos indiquen que almacenan (no es conveniente llamar a nombres de variables con letras individuales)</p>
+</li>
+<li>
+<p>Para mostrar mensajes en la pantalla utilizamos el objeto "Console":<br>
+<pre>
+            Console.Write("Ingrese Horas trabajadas por el operario:");
+</pre>
+Con esta sintaxis todo lo que se encuentra contenido entre comillas aparecerá exactamente en la ventana de la "Console".<br>
+Si disponemos una variable:<br>
+<pre>
+            Console.Write(sueldo);
+</pre>
+Aparecerá el contenido de la variable. Es decir el valor almacenado en la variable sueldo y no el mensaje "sueldo".<br>
+</li>
+<li>
+<p>Para hacer la entrada de datos por teclado en C# se complica. Debemos definir una variable de tipo string que la llamaremos linea:</p>
+<pre>
+            string linea;
+</pre>
+<p>Luego cada vez que necesitemos ingresar por teclado un conjunto de caracteres utilizaremos la función ReadLine del objeto Console con la siguiente sintaxis:</p>
+<pre>
+            linea = Console.ReadLine();
+</pre>
+<p>Un segundo paso es copiar el contenido de la variable linea en una variable de tipo int:</p>
+<pre>
+            horasTrabajadas = int.Parse(linea);
+</pre>
+<p>O una variable de tipo float:</p>
+<pre>
+            costoHora = float.Parse(linea);
+</pre>
+<p>La variable linea almacena temporalmente los datos que ingresa el operador del programa, para luego copiarse a la variable respectiva (como vemos si queremos convertir un string a tipo de dato entero utilizamos la función Parse del objeto int (int.Parse))</p>
+
+<p>Las operaciones que indicamos en el diagrama de flujo mediante la figura rectángulo la codificamos tal cual:<br>
+<pre>
+            sueldo = horasTrabajadas * costoHora;
+</pre>
+</p>
+</li>
+</ol> 
+
+<p>Podemos ver una relación entre las instrucciones que debemos utilizar para cada símbolo del diagrama de flujo:<br>
+<img src="imagentema/foto012.jpg" border="0" alt="programa y diagrama de flujo"><br>
+</p>
+<p>En el diagrama de flujo no indicamos la definición de variables:<br>
+<pre>
+            int horasTrabajadas;
+            float costoHora;
+            float sueldo;
+            string linea;
+</pre>
+</p>
+</p>No representamos con símbolos los mensajes a mostrar previo a la carga de datos por teclado:<br>
+<pre>
+            Console.Write("Ingrese Horas trabajadas por el operario:");
+</pre>
+</p>
+<p>Como hemos visto hasta ahora hay muchas partes de nuestro código que no entendemos pero son indispensables para la implementación de nuestros programas, a medida que avancemos con el curso muchos de estos conceptos se irán aclarando.</p>
+
+
+<p>Recordar que cuando terminamos con un programa debemos cerrarlo antes de crear uno nuevo mediante Archivo -> Cerrar solución:</p>
+<img src="imagentema/foto008b.jpg" border="0" alt="Cerrar solucion visual studio">
+</div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="index2904.html?inicio=0">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=127&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:53:25 GMT -->
+</html>

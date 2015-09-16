@@ -1,0 +1,436 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=123&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:54:24 GMT -->
+<head>
+<title>Recursividad: Conceptos básicos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Recursividad: Conceptos básicos</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>Primero debemos decir que la recursividad no es una estructura de datos, sino que es una técnica de programación que nos permite que un bloque de instrucciones se ejecute n veces. Remplaza en ocasiones a estructuras repetitivas.</p>
+
+<p>Este concepto será de gran utilidad para el capítulo de la estructura de datos tipo árbol.</p>
+
+<p>La recursividad es un concepto difícil de entender en principio, pero luego de analizar diferentes problemas aparecen puntos comunes.</p>
+
+<p>En Java los métodos pueden llamarse a sí mismos. Si dentro de un método existe la llamada a sí mismo decimos que el método es recursivo.</p>
+
+<p>Cuando un método se llama a sí mismo, se asigna espacio en la pila para las nuevas variables locales y parámetros.</p>
+
+<p>Al volver de una llamada recursiva, se recuperan de la pila las variables locales y los parámetros antiguos y la ejecución se reanuda en el punto de la llamada al método.</p>
+
+
+<h3>Problema 1:</h3>
+<p>Implementación de un método recursivo.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+public class Recursividad {
+
+    void repetir() {
+        repetir();
+    }
+    
+    public static void main(String[] ar) {
+        Recursividad re=new Recursividad();
+        re.repetir();
+    }
+}
+</pre>
+
+<p>La función repetir es recursiva porque dentro de la función se llama a sí misma.<br>
+Cuando ejecuta este programa se bloqueará y generará una excepción: "Exception in thread "main" java.lang.StackOverflowError"</p>
+<p>Analicemos como funciona:<br>
+Primero se ejecuta la función main, luego de crear un objeto llamamos a la función repetir.<br>
+Hay que tener en cuenta que cada vez que se llama a una función se reservan 4 bytes de la memoria que se liberarán cuando finalice su ejecución.<br>
+La primera línea de la función llama a la función repetir, es decir que se reservan 4 bytes nuevamente. Se ejecuta nuevamente una instancia de la función repetir y así sucesivamente hasta que la pila estática se colme y se cuelgue el programa.</p>
+
+<h3>Problema 2:</h3>
+<p>Implementación de un método recursivo que reciba un parámetro de tipo entero y luego llame en forma recursiva con el valor del parámetro menos 1.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+public class Recursividad {
+
+    void imprimir(int x) {
+        System.out.println(x);
+        imprimir(x-1);
+    }
+    
+    public static void main(String[] ar) {
+        Recursividad re=new Recursividad();
+        re.imprimir(5);
+    }
+}
+</pre>
+<p>Desde la main se llama a la función imprimir y se le envía el valor 5. El parámetro x recibe el valor 5. Se ejecuta el algoritmo de la función, imprime el contenido del parámetro (5) y seguidamente se llama a una función, en este caso a sí misma (por eso decimos que es una función recursiva), enviándole el valor 4.<br>
+El parámetro x recibe el valor 4 y se imprime en pantalla el cuatro, llamando nuevamente a la función imprimir enviándole el valor 3.<br>
+Si continuamos este algoritmo podremos observar que en pantalla se imprime:<br>
+<pre>
+5 4 3 2 1 0 ?1 ?2 ?3   . . . . . . . . .
+</pre>
+hasta que se bloquee el programa.<br>
+Tener en cuenta que cada llamada a una función consume 4 bytes por la llamada y en este caso 4 bytes por el parámetro x. Como nunca finaliza la ejecución completa de las funciones se desborda la pila estática por las sucesivas llamadas.</p>
+
+<h3>Problema 3:</h3>
+<p>Implementar un método recursivo que imprima en forma descendente de 5 a 1 de uno en uno.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+public class Recursividad {
+
+    void imprimir(int x) {
+        if (x>0) {
+            System.out.println(x);
+            imprimir(x-1);
+        }    
+    }
+    
+    public static void main(String[] ar) {
+        Recursividad re=new Recursividad();
+        re.imprimir(5);
+    }
+}
+</pre>
+<p>Ahora si podemos ejecutar este programa y observar los resultados en pantalla. Se imprimen los números 5 4 3 2 1 y no se bloquea el programa.<br>
+Analice qué sucede cada vez que el if (x>0) se evalúa como falso, ¿a qué línea del programa retorna?</p>
+
+<h3>Problema 4:</h3>
+<p>Imprimir los números de 1 a 5 en pantalla utilizando recursividad.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+public class Recursividad {
+
+    void imprimir(int x) {
+        if (x>0) {
+            imprimir(x-1);
+            System.out.println(x);            
+        }    
+    }
+    
+    public static void main(String[] ar) {
+        Recursividad re=new Recursividad();
+        re.imprimir(5);
+    }
+}
+</pre>
+<p>Con este ejemplo se presenta una situación donde debe analizarse línea a línea la ejecución del programa y el porque de estos resultados.</p>
+
+
+<p>¿Por qué se imprime en pantalla 1 2 3 4 5 ?</p>
+
+<p>Veamos como se apilan las llamadas recursivas:</p>
+
+<p>En la primera llamada desde la función main el parámetro x recibe el valor 5.</p>
+
+<img src="imagentema/foto116.jpg" border="0" alt="recursividad"><br>
+
+<p>Cuando llamamos desde la misma función le enviamos el valor de x menos 1 y la memoria queda de la siguiente forma:</p>
+<img src="imagentema/foto117.jpg" border="0" alt="recursividad"><br>
+<p>Debemos entender que el parámetro x en la nueva llamada está en otra parte de la memoria y que almacena un 4, nosotros le llamaremos x prima.<br>
+Comienza a ejecutarse la función, la condición del if se valúa como verdadero por lo que entra al bloque y llama recursivamente a la función imprimir pasándole el valor 3 al parámetro.</p>
+<img src="imagentema/foto118.jpg" border="0" alt="recursividad"><br>
+<p>Nuevamente la condición se valúa como verdadero y llama a la función enviándole un 2, lo mismo ocurre cuando le envía un 1 y un 0.</p>
+<img src="imagentema/foto119.jpg" border="0" alt="recursividad"><br>
+<pre>
+    void imprimir(int x) {
+        if (x>0) {
+            imprimir(x-1);
+            System.out.println(x);            
+        }    
+    }
+</pre>
+<p>Cuando x vale 0 la condición del if se valúa como falsa y sale de la función imprimir.<br>
+¿Qué línea ahora se ejecuta ?<br>
+Vuelve a la función main ? NO.</p>
+
+<p>Recordemos que la última llamada de la función imprimir se había hecho desde la misma función imprimir por lo que vuelve a la línea:</p>
+<pre>
+            System.out.println(x);            
+</pre>
+
+<p>Ahora si analicemos que valor tiene el parámetro x. Observemos la pila de llamadas del gráfico:</p>
+<img src="imagentema/foto120.jpg" border="0" alt="recursividad"><br>
+
+<p>x cuarta tiene el valor 1. Por lo que se imprime dicho valor en pantalla.<br>
+Luego de imprimir el 1 finaliza la ejecución de la función, se libera el espacio ocupado por el parámetro x y pasa a ejecutarse la siguiente línea donde se había llamado la función:</p>
+<pre>
+            System.out.println(x);            
+</pre>
+<p>Ahora x en esta instancia de la función tiene el valor 2.<br>
+Así sucesivamente hasta liberar todas las llamadas recursivas.</p>
+
+<p>Es importante tener en cuenta que siempre en una función recursiva debe haber un  if para finalizar la recursividad ( en caso contrario la función recursiva será infinita y provocará que el programa se bloquee)</p>
+
+<h3>Problema 5:</h3>
+<p>Otro problema típico que se presenta para analizar la recursividad es el obtener el factorial de un número.<br>
+Recordar que el factorial de un número es el resultado que se obtiene de multiplicar dicho número por el anterior y así sucesivamente hasta llegar a uno.<br>
+Ej. el factorial de 4 es 4 * 3 * 2 * 1 es decir 24.
+</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+public class Recursividad {
+
+    int factorial(int fact) {
+        if (fact>0) {
+            int valor=fact * factorial(fact-1);
+            return valor;
+        } else
+            return 1;
+    }
+    
+    public static void main(String[] ar) {
+        Recursividad re=new Recursividad();
+        int f=re.factorial(4);
+        System.out.println("El factorial de 4 es "+f);
+    }
+}
+</pre>
+
+<p>La función factorial es recursiva porque desde la misma función llamamos a la función factorial.<br>
+Debemos hacer el seguimiento del problema para analizar como se calcula.<br>
+La memoria en la primera llamada:</p>
+
+<img src="imagentema/foto121.jpg" border="0" alt="recursividad factorial"><br>
+
+<p>fact recibe el valor 4 y valor se cargará con el valor que se obtenga con el producto de fact por el valor devuelto por la función factorial (llamada recursiva)</p>
+<img src="imagentema/foto122.jpg" border="0" alt="recursividad factorial"><br>
+
+<p>Nuevamente se llama recursivamente hasta que el parámetro fact reciba el valor 0.</p>
+<img src="imagentema/foto123.jpg" border="0" alt="recursividad factorial"><br>
+
+<p>Cuando fact recibe un cero la condición del if se valúa como falsa y ejecuta el else retornando un 1, la variable local de la llamada anterior a la función queda de la siguiente manera:</p>
+<img src="imagentema/foto124.jpg" border="0" alt="recursividad factorial"><br>
+
+<p>Es importantísimo entender la liberación del espacio de las variables locales y los parámetros en las sucesivas llamadas recursivas.<br>
+
+Por último la función main recibe "valor", en este caso el valor 24.</p>
+
+
+<h3>Problema 6:</h3>
+<p>Implementar un método recursivo para ordenar los elementos de un vector.
+</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+class Recursivdad {
+    static int [] vec = {312, 614, 88, 22, 54};
+
+    void ordenar (int [] v, int cant) {
+        if (cant &gt; 1) {
+            for (int f = 0 ; f &lt; cant - 1 ; f++)
+                if (v [f] &gt; v [f + 1]) {
+                    int aux = v [f];
+                    v [f] = v [f + 1];
+                    v [f + 1] = aux;
+                }
+            ordenar (v, cant - 1);
+        }
+    }
+
+    void imprimir () {
+        for (int f = 0 ; f &lt; vec.length ; f++)
+            System.out.print (vec [f] + "  ");
+        System.out.println("\n");
+    }
+
+
+    public static void main (String [] ar)  {
+        Recursivdad r = new Recursivdad();
+        r.imprimir ();
+        r.ordenar (vec, vec.length);
+        r.imprimir ();
+    }
+}
+</pre>
+<p>Hasta ahora hemos visto problemas que se pueden resolver tanto con recursividad como con estructuras repetitivas.<br>
+Es muy importante tener en cuenta que siempre que podamos emplear un algoritmo no recursivo será mejor (ocupa menos memoria de ram y se ejecuta más rápidamente)<br>
+Pero hay casos donde el empleo de recursividad hace mucho más sencillo el algoritmo (tener en cuenta que no es el caso de los tres problemas vistos previamente)</p>
+
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index1e61.html?inicio=40">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=123&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:54:29 GMT -->
+</html>

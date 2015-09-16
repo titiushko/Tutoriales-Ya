@@ -1,0 +1,260 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=19&codigo=19&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:25:30 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Framework Express - Generador automático</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++, programación, tutorial, nodejs">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de NodeJS.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>19 - Framework Express - Generador automático</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>El creador del framework Express ha implementado una aplicación (también esta aplicación está escrita en Node.js) que tiene por objetivo crear una estructura mínima de un proyecto que utilice Express (un conjunto de carpetas y archivos)</p>
+<p>Si bien esto no es obligatorio como vimos en conceptos anteriores es muy beneficioso conocerla para que nosotros podamos definir como queremos organizar los archivos de un proyecto grande.</p>
+<p>El primer paso será instalar la aplicación 'express-generator'.</p>
+<p>La aplicación 'express-generator' se ejecuta desde la consola de nuestro sistema operativo y no es un módulo que se instala en una aplicación particular. Para instalar una aplicación en Node.js que se la pueda ejecutar desde la linea de comandos también utilizamos el 'npm' pero le pasamos un parámetro extra '-g' (global), instalemos el programa express-generator:</p>
+<pre>
+npm install express-generator -g
+</pre>
+<p>Es muy importante no olvidarse del parámetro -g</p>
+
+<p>Ahora que tenemos la aplicación 'express-generator' nos posicionamos en el directorio 'c:\ejerciciosnodejs' (o el directorio donde esta almacenando todos sus proyectos) y procederemos a crear nuestra primer aplicación Node.js utilizando Express y su generador de código:</p>
+<pre>
+c:\ejerciciosnodejs> express ejercicio21 --hbs
+</pre>
+<p>Estamos llamando al programa que acabamos de instalar que se llama 'express' y le pasamos dos parámetros, el primero indica el nombre de nuestro proyecto y el segundo el sistema de plantillas que utilizaremos para generar nuestras páginas dinámicas.</p>
+<p>Ya tenemos creado la carpeta ejercicio21 y dentro de esta una serie de archivos y subcarpetas:</p>
+<pre>
+  ejercicio21
+    app.js
+    package.json
+    bin
+      www
+    public
+      images
+      javascripts
+      stylesheets
+    router
+      index.js
+      users.js
+    views
+      error.hbs
+      index.hbs
+      layout.hbs
+</pre>
+     
+<p>Si observamos dentro de todas las carpetas que ha creado el generador de código 'express' no aparece la carpeta 'node_modules'. Es decir que todavía nos hace falta instalar el framework Express. Aquí es donde entra a jugar este nuevo archivo llamado package.json.</p>
+<p>Si abrimos este archivo package.json:</p>
+<pre>
+{
+  "name": "ejercicio21",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.13.2",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "hbs": "~3.1.0",
+    "morgan": "~1.6.1",
+    "serve-favicon": "~2.3.0"
+  }
+}  
+</pre>
+<p>"name": Indicamos el nombre de proyecto</p>
+<p>"version": Indicamos la versión del proyecto.</p>
+<p>"start": Indicamos el archivo que se debe ejecutar para arrancar el proyecto</p>
+<p>"dependencies": Indicamos todos los otros módulos que se requieren en nuestro proyecto.</p>
+
+<p>Como podemos observar en "dependencies" aparece el framework 'express' y el módulo 'body-parser' que hemos utilizado en conceptos anteriores.</p>
+
+<p>Ahora veremos que podemos instalar todos estos módulos con un único comando, nos posicionamos en el directorio ejercicio21 y ejecutamos:</p>
+<pre>
+c:\ejerciciosnodejs\ejercicio21>npm install
+</pre>
+<p>Cuando llamamos a 'npm install' sin ningún otro parámetro lo que hace es buscar el archivo 'package.json' y proceder a instalar todos los módulos especificados en la propiedad 'dependencies'.</p>
+<p>Ahora ya tenemos creado la carpeta 'node_modules' con las 7 carpetas que coinciden con las dependencias especificadas en el archivo json:</p>
+<pre>
+    body-parser
+    cookie-parser
+    debug
+    express
+    hbs
+    morgan
+    serve-favicon
+</pre>
+
+<p>Podemos ejecutar nuestra aplicación mínima creada con el 'express-generador':</p>
+<pre>
+c:\ejerciciosnodejs\ejercicio21>node ./bin/www
+</pre>
+<p>Tener en cuenta que el generador define como puerto el valor 3000 y no el 8888 que utilizamos en ejemplos anteriores.</p>
+<p>Y ya podemos solicitar al servidor la página raíz del sitio (por el puerto 3000):</p>
+<p><img src="imagentema/foto064.jpg" border="0" alt="express-generator express node.js"></p>
+<p>Ahora podemos ver otra forma de iniciar a nuestro proyecto en Node.js cuando definimos el archivo package.json:</p>
+<p>En lugar de escribir:</p>
+<pre>
+c:\ejerciciosnodejs\ejercicio21>node ./bin/www
+</pre>
+<p>Escribimos:</p>
+<pre>
+c:\ejerciciosnodejs\ejercicio21>npm start
+</pre>
+<p>Recordemos que en el archivo json hay una propiedad start donde definimos el archivo que inicia nuestra aplicación:</p>
+<pre>
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+</pre>
+
+
+<p>Hasta aquí hemos visto todo lo que podemos hacer en forma automática, en conceptos sucesivos veremos cada uno de los archivos y carpetas fundamentales para organizar un proyecto Node.js con 'Express'.</p>
+
+
+<p>Este proyecto  lo puede descargar en un zip con todos los archivos desde este enlace :
+<a href="proyectos/ejercicio21.zip">ejercicio21</a></p>
+
+
+<h2><a href="index9187.html?inicio=15">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-35', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=19&codigo=19&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:26:02 GMT -->
+</html>

@@ -1,0 +1,215 @@
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/simulador/simulador.php?inicio=0&cod=69&punto=9&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:09:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+  <title>Ejercicios resueltos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="jQuery, programación, webmaster, tutorial, JavaScript">
+<meta name="description" content="El objetivo de este tutorial es presentar los conceptos de la libreria JavaScript JQUERY.">
+<meta name="author" content="Diego Moisset">
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.editor {
+ /* background-image:url("numeros.png");
+ background-repeat: no-repeat;
+       background-position: 0px 0px;
+       background-attachment: scroll;*/}
+</style>
+
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;		
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=yes,status=yes,toolbar=yes,location=yes');  	
+}
+</script>
+</head>
+
+<body bgcolor="#CCFFCC">
+        
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>9 - Métodos addClass y removeClass.</h1></td>
+<td align="right">
+<!--<a href="http://www.javascriptya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+	<table width="650px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+
+</tr>
+</table>		  
+	  
+	  
+                <b>Simulador <em>(Cuando presiona el bot&oacute;n &quot;ejecutar el programa&quot; 
+        se graban todos los cuadros de texto y se ejecuta el primero de la lista 
+        mostrando en una página el resultado.</em></b>) 
+<form name="formulario" action="http://www.scratchya.com.ar/ejecutajquerya.php" target="ventanaForm" method="post" onsubmit=  "abrirVentana()">
+
+<div style="font-size:1.3em;font-family:arial;"><br></p>Disponer un div con un conjunto de párrafos. Cuando se presione un botón asociarle una clase y cuando se presione otro desasociarlo de dicha clase.</p></div><br><b>pagina1.html</b><input type="hidden" name="archivo1" value="pagina1.html"><br><textarea class="editor" wrap="off" rows="15" cols="110" name="programa1">&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;link rel=&quot;StyleSheet&quot; href=&quot;estilos.css&quot; type=&quot;text/css&quot;&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;../jquery.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;funciones.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;input type=&quot;button&quot; id=&quot;boton1&quot; value=&quot;Asociar clase&quot;&gt;
+&lt;input type=&quot;button&quot; id=&quot;boton2&quot; value=&quot;Desasociar clase&quot;&gt;
+&lt;div id=&quot;descripcion&quot;&gt;
+&lt;p&gt;HTML es el lenguaje que se emplea para el desarrollo de p&aacute;ginas de internet.&lt;/p&gt; 
+&lt;p&gt;Este lenguaje est&aacute; constituido de elementos que el navegador interpreta y las despliega en la pantalla de acuerdo a su objetivo. Veremos que hay elementos para disponer im&aacute;genes sobre una p&aacute;gina, hiperv&iacute;nculos que nos permiten dirigirnos a otra p&aacute;gina, listas, tablas para tabular datos, etc.&lt;/b&gt;
+&lt;p&gt;Para poder crear una p&aacute;gina HTML se requiere un simple editor de texto (en nuestro caso emplearemos este sitio) y un navegador de internet (IExplorer, FireFox etc.), emplearemos el navegador que en este preciso momento est&aacute; utilizando (recuerde que usted est&aacute; viendo en este preciso momento una p&aacute;gina HTML con su navegador).&lt;/p&gt;
+&lt;p&gt;Lo m&aacute;s importante es que en cada concepto desarrolle los ejercicios propuestos y modifique los que se presentan ya resueltos.&lt;p&gt;
+&lt;p&gt;Este curso lo que busca es acercar el lenguaje HTML a una persona que nunca antes trabaj&oacute; con el mismo. No pretende mostrar todas los elementos HTML en forma alfab&eacute;tica.&lt;/p&gt;
+&lt;p&gt;Como veremos, de cada concepto se presenta una parte te&oacute;rica, en la que se da una explicaci&oacute;n completa, luego se pasa a la secci&oacute;n del ejercicio resuelto donde podemos ver el contenido de la p&aacute;gina HTML y c&oacute;mo la visualiza el navegador. Por &uacute;ltimo y tal vez la secci&oacute;n m&aacute;s importante de este tutorial es donde se propone que usted haga p&aacute;ginas en forma aut&oacute;noma (donde realmente podr&aacute; darse cuenta si el concepto qued&oacute; firme).&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea><br><br><input type="submit"  value="Ejecutar el programa.">
+<table width="650px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 26/02/09 graficotot */
+google_ad_slot = "5205806820";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 11/11/08 grafico */
+google_ad_slot = "1392361504";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>
+
+
+
+<br><div style="font-size:1.3em;font-family:arial;"><br></div><br><b>funciones.js</b><input type="hidden" name="archivo2" value="funciones.html"><br><textarea class="editor" wrap="off" rows="15" cols="110" name="programa2">var x;
+x=$(document);
+x.ready(inicializarEventos);
+
+function inicializarEventos()
+{
+  var x=$(&quot;#boton1&quot;);
+  x.click(asociarClase);
+  x=$(&quot;#boton2&quot;);
+  x.click(desasociarClase);
+}
+
+function asociarClase()
+{
+  var x=$(&quot;#descripcion&quot;);
+  x.addClass(&quot;recuadro&quot;);
+}
+
+function desasociarClase()
+{
+  var x=$(&quot;#descripcion&quot;);
+  x.removeClass(&quot;recuadro&quot;);
+}
+</textarea><br><br><div style="font-size:1.3em;font-family:arial;"><br></div><br><b>estilos.css</b><input type="hidden" name="archivo3" value="estilos.html"><br><textarea class="editor" wrap="off" rows="15" cols="110" name="programa3">.recuadro {
+  background-color:#ffffcc;
+  font-family:verdana;
+  font-size:14px;
+
+  border-top-width:1px;
+  border-right-width:3px;
+  border-bottom-width:3px;
+  border-left-width:1px;
+
+  border-top-style:dotted;
+  border-right-style:solid;
+  border-bottom-style:solid;
+  border-left-style:dotted;
+
+  border-top-color:#ffaa00;
+  border-right-color:#ff0000;
+  border-bottom-color:#ff0000;
+  border-left-color:#ffaa00;
+}</textarea><br><br>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-14', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/simulador/simulador.php?inicio=0&cod=69&punto=9&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:09:41 GMT -->
+</html>
+

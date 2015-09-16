@@ -1,0 +1,294 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=104&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:46 GMT -->
+<head>
+<title>Swing - JFrame</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Swing - JFrame</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>La componente básica que requerimos cada vez que implementamos una interfaz visual con la libraría Swing es la clase JFrame. Esta clase encapsula una Ventana clásica de cualquier sistema operativo con entorno gráfico (Windows, OS X, Linux etc.)<p>
+<p>Hemos dicho que esta clase se encuentra en el paquete javax.swing y como generalmente utilizamos varias clases de este paquete luego para importarla utilizamos la sintaxis:</p>
+<pre>
+import javax.swing.*;
+</pre>
+<p>Podemos hacer una aplicación mínima con la clase JFrame:</p>
+<pre>
+import javax.swing.JFrame;
+public class Formulario {
+    public static void main(String[] ar) {
+        JFrame f=new JFrame();
+        f.setBounds(10,10,300,200);
+        f.setVisible(true);
+    }
+}
+</pre>
+<p>Como vemos importamos la clase JFrame del paquete javax.swing:</p>
+<pre>
+import javax.swing.JFrame;
+</pre>
+<p>y luego en la main definimos y creamos un objeto de la clase JFrame (llamando luego a los métodos setBounds y setVisible):</p>
+<pre>
+    public static void main(String[] ar) {
+        JFrame f=new JFrame();
+        f.setBounds(10,10,300,200);
+        f.setVisible(true);
+    }
+</pre>
+<p>Pero esta forma de trabajar con la clase JFrame es de poca utilidad ya que rara vez necesitemos implementar una aplicación que muestre una ventana vacía.</p>
+<p>Lo más correcto es plantear una clase que herede de la clase JFrame y extienda sus responsabilidades agregando botones, etiquetas, editores de línea etc.</p>
+<p>Entonces la estructura básica que emplearemos para crear una interfaz visual será:</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+import javax.swing.*;
+public class Formulario extends JFrame{
+    public Formulario() {
+        setLayout(null);
+    }
+
+    public static void main(String[] ar) {
+        Formulario formulario1=new Formulario();
+        formulario1.setBounds(10,20,400,300);
+        formulario1.setVisible(true);
+    }
+}
+</pre>
+<p>Importamos el paquete donde se encuentra la clase JFrame:</p>
+<pre>
+import javax.swing.*;
+</pre>
+<p>Planteamos una clase que herede de la clase JFrame:</p>
+<pre>
+public class Formulario extends JFrame{
+</pre>
+<p>En el constructor indicamos que ubicaremos los controles visuales con coordenadas absolutas mediante la desactivación del Layout heredado (más adelante veremos otras formas de ubicar los controles visuales dentro del JFrame):</p>
+<pre>
+    public Formulario() {
+        setLayout(null);
+    }
+</pre>
+<p>En la main creamos un objeto de la clase y llamamos a los métodos setBounds y setVisible:</p>
+<pre>
+    public static void main(String[] ar) {
+        Formulario formulario1=new Formulario();
+        formulario1.setBounds(10,20,400,300);
+        formulario1.setVisible(true);
+    }
+</pre>
+<p>El método setBounds ubica el JFrame (la ventana) en la columna 10, fila 20 con un ancho de 400 píxeles y un alto de 300.</p>
+<p>Debemos llamar al método setVisible y pasarle el valor true para que se haga visible la ventana.</p>
+
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Crear una ventana de 1024 píxeles por 800 píxeles. Luego no permitir que el operador modifique el tamaño de la ventana. Sabiendo que hacemos visible al JFrame llamando la método setVisible pasando el valor true, existe otro método llamado setResizable que también requiere como parámetro un valor true o false.
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+import javax.swing.*;
+public class Formulario extends JFrame{
+    Formulario() {
+        setLayout(null);
+    }
+
+    public static void main(String[] ar) {
+        Formulario formulario1=new Formulario();
+        formulario1.setBounds(0,0,1024,800);
+        formulario1.setResizable(false);
+        formulario1.setVisible(true);
+    }
+}
+</pre>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=104&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:46 GMT -->
+</html>

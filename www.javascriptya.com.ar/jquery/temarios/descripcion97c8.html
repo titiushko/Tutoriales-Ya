@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/temarios/descripcion.php?cod=78&punto=24&inicio=18 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Conceptos de JQuery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="jQuery, programación, webmaster, tutorial, JavaScript">
+<meta name="description" content="El objetivo de este tutorial es presentar los conceptos de la libreria JavaScript JQUERY.">
+<meta name="author" content="Diego Moisset">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" type="text/JavaScript">
+
+</script>
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>24 - Iteración por los elementos (each)</h1></td>
+<td align="right">
+<a href="../../publicidad/index.html"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.html"></a>	
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<p>
+<div style="font-size:1.3em;font-family:arial;">
+<p>jQuery dispone de un método que nos permite asociar una función que se ejecutará por cada elemento que contenga la lista del objeto jQuery.</p>
+<p>Dentro de esta función podemos manipular el elemento actual.</p>
+<p>La sintaxis del iterador each es:<p>
+<pre>
+  var x;
+  x=$([elementos]);
+  x.each([nombre de funcion])
+</pre>
+<p><strong>Problema:</strong>Resaltar con fondo amarillo todos los párrafos que tienen menos de 100 caracteres.</p>
+<p>pagina1.html</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;../jquery.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;funciones.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;parrafos&quot;&gt;
+&lt;p&gt;p&aacute;rrafo 1 - p&aacute;rrafo 1 - p&aacute;rrafo 1 - p&aacute;rrafo 
+1 - p&aacute;rrafo 1 - p&aacute;rrafo 1 - p&aacute;rrafo 1 - p&aacute;rrafo 1 - 
+p&aacute;rrafo 1 - p&aacute;rrafo 1 - p&aacute;rrafo 1 - p&aacute;rrafo 1 - p&aacute;rrafo 
+1 - p&aacute;rrafo 1 - p&aacute;rrafo 1 - p&aacute;rrafo 1 - 
+p&aacute;rrafo 1 - p&aacute;rrafo 1 - p&aacute;rrafo 1 - p&aacute;rrafo 1 - p&aacute;rrafo 
+1 - p&aacute;rrafo 1 - p&aacute;rrafo 1 - p&aacute;rrafo 1 - 
+p&aacute;rrafo 1 - p&aacute;rrafo 1 - p&aacute;rrafo 1 - p&aacute;rrafo 1 - p&aacute;rrafo 
+1 - p&aacute;rrafo 1 - p&aacute;rrafo 1 - p&aacute;rrafo 1&lt;/p&gt;
+&lt;p&gt;p&aacute;rrafo 2 - p&aacute;rrafo 2 - p&aacute;rrafo 2 - p&aacute;rrafo 2&lt;/p&gt;
+&lt;p&gt;p&aacute;rrafo 3 - p&aacute;rrafo 3 - p&aacute;rrafo 3 - p&aacute;rrafo 
+3 - p&aacute;rrafo 3 - p&aacute;rrafo 3 - p&aacute;rrafo 3 - 
+p&aacute;rrafo 3 - p&aacute;rrafo 3 - p&aacute;rrafo 3 - p&aacute;rrafo 3 - p&aacute;rrafo 
+3 - p&aacute;rrafo 3 - p&aacute;rrafo 3 - 
+p&aacute;rrafo 3 - p&aacute;rrafo 3 - p&aacute;rrafo 3 - p&aacute;rrafo 3 - p&aacute;rrafo 
+3 - p&aacute;rrafo 3 - p&aacute;rrafo 3 - p&aacute;rrafo 3 - 
+p&aacute;rrafo 3 - p&aacute;rrafo 3 - p&aacute;rrafo 3 - p&aacute;rrafo 3 - p&aacute;rrafo 
+3 - p&aacute;rrafo 3&lt;/p&gt;
+&lt;p&gt;p&aacute;rrafo 4 - p&aacute;rrafo 4 - p&aacute;rrafo 4 - p&aacute;rrafo 
+4 - p&aacute;rrafo 4&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt; 
+&lt;/html&gt; 
+</pre>
+<p>funciones.js</p>
+<pre class="recuadro">
+var x;
+x=$(document);
+x.ready(inicializarEventos);
+
+function inicializarEventos()
+{
+  var x;
+  x=$("#parrafos p");
+  x.each(resaltarParrafos);
+}
+
+function resaltarParrafos()
+{
+  var x=$(this);
+  if (x.text().length<100)
+  {
+    x.css("background-color","#ff0");
+  }
+}
+</pre>
+<p>En la función inicializarEventos obtenemos la lista de párrafos contenidas en el div y luego a este objeto jQuery mediante el método each indicamos el nombre de la función que procesará a cada elemento:</p>
+<pre>
+  x=$("#parrafos p");
+  x.each(resaltarParrafos);
+</pre>
+<p>La función resaltarParrafos se ejecuta por cada uno de los párrafos contenidos en el objeto jQuery (en nuestro caso 4 párrafos):</p>
+<pre>
+function resaltarParrafos()
+{
+  var x=$(this);
+  if (x.text().length<100)
+  {
+    x.css("background-color","#ff0");
+  }
+}
+</pre>
+<p>Lo primero que hacemos mediante la función $ y pasando this como parámetro obtenemos la referencia del párrafo a procesar. Accedemos al método text() que nos retorna el texto del párrafo propiamente dicho.<br>
+El método text() retorna un string por lo que podemos acceder al atributo length y verificar la cantidad de caracteres que tiene, en caso de ser inferior a 100 procedemos a cambiar el color de fondo de dicho párrafo.</p>
+</div>
+</p>
+
+<table width="650px">
+<tr>
+<td align="center">	
+
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../index111c.html?inicio=18">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-14', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/temarios/descripcion.php?cod=78&punto=24&inicio=18 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:22 GMT -->
+</html>

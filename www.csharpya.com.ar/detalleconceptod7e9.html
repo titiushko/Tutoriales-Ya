@@ -1,0 +1,433 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=148&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:58:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - Matrices irregulares o dentadas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>24 - Matrices irregulares o dentadas</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p>C# nos permite crear matrices irregulares o dentadas. Se dice que una matriz es irregular si la cantidad de elementos de cada fila varía. Luego podemos imaginar una matriz irregular:</p>
+<img src="imagentema/foto051.jpg" border="0" alt="matriz irregular"><br>
+<p>Como podemos ver la fila cero tiene reservado dos espacios, la fila uno reserva cuatro espacios y la última fila reserva espacio para tres componentes.<br>
+<p>La sintaxis para declarar una matriz irregular es:</p>
+<pre>
+int [][] mat;
+</pre>
+
+<p>Primero creamos la cantidad de filas dejando vacío el espacio que indica la cantidad de columnas:</p>
+<pre>
+mat=new int[3][];
+</pre>
+<p>Luego debemos ir creando cada fila de la matriz indicando la cantidad de elementos de la respectiva fila:</p>
+<pre>
+mat[0]=new int[2];
+mat[1]=new int[4];
+mat[2]=new int[3];
+</pre>
+<p>Luego la forma para acceder a sus componentes debe ser utilizando corchetes abiertos y cerrados para cada índice:</p>
+<pre>
+mat[0][0]=120;
+</pre>
+
+<p>Dará un error si queremos cargar la tercer componente de la fila cero (esto debido a que no existe):</p>
+<pre>
+mat[0][2]=230;
+</pre>
+<p>Luego si queremos saber la cantidad de filas que tiene la matriz:</p>
+<pre>
+Console.Write(mat.Length);
+</pre>
+<p>Si queremos saber la cantidad de elementos de una determinada fila:</p>
+<pre>
+Console.Write("Cantidad de elementos de la fila 0:"+mat[0].Length);
+Console.Write("Cantidad de elementos de la fila 1:"+mat[1].Length);
+Console.Write("Cantidad de elementos de la fila 2:"+mat[2].Length);
+</pre>
+
+<h3>Problema 1:</h3>
+<p>
+Confeccionaremos un programa que permita crear una matriz irregular y luego imprimir la matriz en forma completa.
+</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace MatrizIrregular1
+{
+    class MatrizIrregular1
+    {
+        private int[][] mat;
+    
+        public void Cargar() 
+        {
+            Console.Write("Cuantas fila tiene la matriz:");
+            string linea=Console.ReadLine();
+            int filas=int.Parse(linea);
+            mat=new int[filas][];
+            for(int f = 0; f < mat.Length; f++)
+            {
+                Console.Write("Cuantas elementos tiene la fila " + f + ":");
+                linea = Console.ReadLine();
+                int elementos=int.Parse(linea);
+                mat[f]=new int[elementos];            
+                for(int c = 0; c < mat[f].Length; c++) 
+                {
+                    Console.Write("Ingrese componente:");
+                    linea=Console.ReadLine();
+                    mat[f][c]=int.Parse(linea);
+                }
+            }
+        }
+    
+        public void Imprimir() 
+        {
+            for(int f = 0; f < mat.Length; f++)
+            {
+                for(int c = 0; c < mat[f].Length; c++)
+                {
+                    Console.Write(mat[f][c]+" ");
+                }
+                Console.WriteLine();
+            }
+            Console.ReadLine();
+        }
+    
+        static void Main(string[] args)
+        {
+            MatrizIrregular1 ma = new MatrizIrregular1();
+            ma.Cargar();
+            ma.Imprimir();
+        }
+    }
+}
+</pre>
+<p>Primero creamos la cantidad de filas que tendrá la matriz (en los corchetes para las columnas no disponemos valor):</p>
+<pre>
+            Console.Write("Cuantas fila tiene la matriz:");
+            string linea=Console.ReadLine();
+            int filas=int.Parse(linea);
+            mat=new int[filas][];
+</pre>
+<p>Dentro del primer for pedimos que ingrese la cantidad de elementos que tendrá cada fila y utilizamos el operador new nuevamente, pero en este caso se están creando cada fila de la matriz (C# trata a cada fila como un vector):</p>
+<pre>
+                Console.Write("Cuantas elementos tiene la fila " + f + ":");
+                linea = Console.ReadLine();
+                int elementos=int.Parse(linea);
+                mat[f]=new int[elementos];            
+</pre>
+<p>Dentro del for interno hacemos la carga de las componentes propiamente dicho de la matriz (podemos ir cargando cada fila a medida que las vamos creando):</p>
+<pre>
+                for(int c=0;c < mat[f].Length;c++) 
+                {
+                    Console.Write("Ingrese componente:");
+                    linea=Console.ReadLine();
+                    mat[f][c]=int.Parse(linea);
+                }
+</pre>
+<p>Luego imprimimos la matriz en forma completa teniendo cuidado las condiciones que disponemos en cada for.<br>
+El primer for se repite tantas veces como filas tiene la matriz: f&lt;mat.Length y<br>
+el for interno se repite tantas veces como elementos tiene la fila que estamos procesando c&lt;mat [f].Length:</p>
+<pre>
+            for(int f = 0; f < mat.Length; f++)
+            {
+                for(int c = 0; c < mat[f].Length; c++)
+                {
+                    Console.Write(mat[f][c]+" ");
+                }
+                Console.WriteLine();
+            }
+</pre>
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Confeccionar una clase para administrar una matriz irregular de 5 filas y 1 columna la primer fila, 2 columnas la segunda fila y así sucesivamente hasta 5 columnas la última fila (crearla sin la intervención del operador)<br>
+Realizar la carga por teclado e imprimir posteriormente.
+</li>
+<li>
+Confeccionar una clase para administrar los días que han faltado los 3 empleados de una empresa.<br> Definir un vector de 3 elementos de tipo string para cargar los nombres y una matriz irregular para cargar los días que han faltado cada empleado (cargar el número de día que faltó)<br> Cada fila de la matriz representan los días de cada empleado.<br>
+Mostrar los empleados con la cantidad de inasistencias.<br>
+Cuál empleado faltó menos días.
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace MatrizIrregular2
+{
+    class MatrizIrregular2
+    {
+        private int[][] mat;
+
+        public void Cargar() 
+        {
+            mat=new int[5][];
+            for(int f = 0; f < mat.Length; f++) 
+            {
+                mat[f]=new int[f+1];            
+                for(int c = 0; c < mat[f].Length; c++)
+                {
+                    Console.Write("Ingrese componente:");
+                    string linea = Console.ReadLine();
+                    mat[f][c]=int.Parse(linea);
+                }
+            }
+        }
+
+        public void Imprimir() 
+        {
+            for(int f = 0; f < mat.Length; f++)
+            {
+                for(int c = 0; c < mat[f].Length; c++)
+                {
+                    Console.Write(mat[f][c]+" ");
+                }
+                Console.WriteLine();
+            }
+            Console.ReadKey();
+        }
+
+        static void Main(string[] args)
+        {
+            MatrizIrregular2 ma = new MatrizIrregular2();
+            ma.Cargar();
+            ma.Imprimir();
+        }
+    }
+}
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace MatrizIrregular3
+{
+    class MatrizIrregular3
+    {
+        private string[] nombres;
+        private int[][] dias;
+
+        public void Cargar() 
+        {
+            nombres=new string[3];
+            dias=new int[3][];
+            for(int f = 0; f < nombres.Length; f++) 
+            {
+                Console.Write("Ingrese el nombre del empleado:");
+                nombres[f]=Console.ReadLine();
+                Console.Write("Cuantas días faltó el empleado:");
+                string linea = Console.ReadLine();
+                int faltas=int.Parse(linea);
+                dias[f]=new int[faltas];            
+                for(int c = 0; c < dias[f].Length; c++)
+                {
+                    Console.Write("Ingrese nro de día:");
+                    linea = Console.ReadLine();
+                    dias[f][c]=int.Parse(linea);
+                }
+            }
+        }
+
+        public void Inasistencias() 
+        {
+            for(int f = 0; f < nombres.Length; f++) 
+            {
+                Console.WriteLine(nombres[f] + " faltó " + dias[f].Length + " días");
+            }
+        }
+
+        public void EmpleadoMensosFaltas() 
+        {
+            int faltas=dias[0].Length;
+            string nom=nombres[0];
+            for(int f = 1; f < dias.Length; f++) 
+            {
+                if (dias[f].Length < faltas) 
+                {
+                    faltas=dias[f].Length;
+                    nom=nombres[f];
+                }
+            }
+            Console.WriteLine("El empleado que faltó menos es "+nom+" con "+faltas+" faltas.");
+            Console.ReadKey();
+        }
+
+        static void Main(string[] args)
+        {
+            MatrizIrregular3 ma = new MatrizIrregular3();
+            ma.Cargar();
+            ma.Inasistencias();
+            ma.EmpleadoMensosFaltas();
+        }
+    }
+}
+
+</pre></div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=148&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:58:36 GMT -->
+</html>

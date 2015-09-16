@@ -1,0 +1,320 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=140&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:53:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - Vector (Tamaño de un vector)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>16 - Vector (Tamaño de un vector)</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p>Como hemos visto cuando se crea un vector indicamos entre corchetes su tamaño:</p>
+<pre>
+  sueldos=new int[5];
+</pre>
+<p>Luego cuando tenemos que recorrer dicho vector disponemos una estructura repetitiva for:</p>
+<pre>
+    for(int f=0;f&lt;5;f++) 
+    {
+        Console.Write("Ingrese valor de la componente:");
+        string linea;
+        linea=Console.ReadLine();
+        sueldos[f]=int.Parse(linea);
+    }	
+</pre>
+<p>Como vemos el for se repite mientras el contador f vale menos de 5. Este estructura repetitiva es idéntica cada vez que recorremos el vector.<br>
+Que pasa ahora si cambiamos el tamaño del vector cuando lo creamos:</p>
+<pre>
+  sueldos=new int[7];
+</pre>
+<p>Con esto tenemos que cambiar todos los for que recorren dicho vector. Ahora veremos que un vector al ser un objeto tiene una propiedad llamada Length que almacena su tamaño. Luego podemos modificar todos los for con la siguiente sintaxis:</p>
+<pre>
+    for(int f=0;f&lt;sueldos.Length;f++) 
+    {
+        Console.Write("Ingrese valor de la componente:");
+        string linea;
+        linea=Console.ReadLine();
+        sueldos[f]=int.Parse(linea);
+    }	
+</pre>
+<p>También podemos pedir al usuario que indique el tamaño del vector en tiempo de ejecución, en estos casos se hace imprescindible el empleo de la propiedad Length.</p>
+
+<h3>Problema 1:</h3>
+<p>Se desea almacenar los sueldos de operarios. Cuando se ejecuta el programa se debe pedir la cantidad de sueldos a ingresar. Luego crear un vector con dicho tamaño.<br>
+<h4>Programa:</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace PruebaVector8
+{
+    class PruebaVector8
+    {
+        private int[] sueldos;
+
+        public void Cargar()
+        {
+            Console.Write("Cuantos sueldos cargará:");
+            string linea;
+            linea=Console.ReadLine();
+            int cant=int.Parse(linea);
+            sueldos=new int[cant];
+            for(int f = 0; f < sueldos.Length; f++) 
+            {
+                Console.Write("Ingrese sueldo:");
+                linea = Console.ReadLine();
+                sueldos[f]=int.Parse(linea);
+            }	
+        }
+
+        public void Imprimir() 
+        {
+            for(int f = 0; f < sueldos.Length; f++) 
+            {
+                Console.WriteLine(sueldos[f]);
+            }
+            Console.ReadKey();
+        }
+
+        static void Main(string[] args)
+        {
+            PruebaVector8 pv = new PruebaVector8();
+            pv.Cargar();
+            pv.Imprimir();
+        }
+    }
+}
+</pre>
+<p>La definición del vector no varía:</p>
+<pre>
+        private int[] sueldos;
+</pre>
+<p>Luego para la creación del mismo ingresamos una variable entera y la utilizamos como subíndice en el momento de la creación del vector:</p>
+<pre>
+            Console.Write("Cuantos sueldos cargará:");
+            string linea;
+            linea=Console.ReadLine();
+            int cant=int.Parse(linea);
+            sueldos=new int[cant];
+</pre>
+<p>Luego las estructuras repetitivas las acotamos accediendo a la propiedad Length del vector:</p>
+<pre>
+            for(int f = 0; f < sueldos.Length; f++) 
+            {
+                Console.Write("Ingrese sueldo:");
+                linea = Console.ReadLine();
+                sueldos[f]=int.Parse(linea);
+            }	
+</pre>
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Desarrollar un programa que permita ingresar un vector de n elementos, ingresar n por teclado. Luego imprimir la suma de todos sus elementos
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace PruebaVector9
+{
+    class PruebaVector9
+    {
+        private int[] vec;
+    
+        public void Cargar() 
+        {
+            Console.Write("Cuantos elementos tiene el vector:");
+            string linea=Console.ReadLine();
+            int n;
+            n=int.Parse(linea);
+            vec=new int[n];        
+            for(int f = 0; f < vec.Length; f++) 
+            {
+                Console.Write("Ingrese elemento:");
+                linea=Console.ReadLine();
+                vec[f]=int.Parse(linea);
+            }
+        }
+    
+        public void AcumularElementos() 
+        {
+            int suma=0;
+            for(int f = 0; f < vec.Length; f++)
+            {
+                suma=suma+vec[f];
+            }
+            Console.WriteLine("La suma de los elementos es:"+suma);
+            Console.ReadKey();
+        }
+    
+        static void Main(string[] args)
+        {
+            PruebaVector9 pv = new PruebaVector9();
+            pv.Cargar();
+            pv.AcumularElementos();
+        }
+    }
+}
+</pre></div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="index2904.html?inicio=0">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=140&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:53:57 GMT -->
+</html>

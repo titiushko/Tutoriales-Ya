@@ -1,0 +1,251 @@
+
+<!DOCTYPE html> 
+<html lang="es"> 
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=174&punto=41&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:09 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>DRAG AND DROP (dragstart, dragover, drop)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="html5, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de HTML 5. Es objetivo prioritario respetar 
+los estándares del W3C">
+<meta name="author" content="Diego Moisset">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+</style>
+
+</head>
+
+<body>
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em"><a href="../../html5.html">Temario del Tutorial</a></span>->41 - DRAG AND DROP (dragstart, dragover, drop)</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>El HTML5 nos permite fácilmente implementar el concepto de drag and drop (arrastrar y soltar).<br>
+Debemos seguir una serie específica de pasos para indicar que un elemento HTML se le permite que sea arrastrado y depositado en otra parte de la página.</p>
+<p>Parte se resuelve con HTML y otra mediante Javascript.</p>
+<p>Debemos indicar primero que elementos HTML se les permitirá ser arrastrados asignándole a la propiedad draggable el valor true:</p>
+<pre>
+    &lt;span id="palabra1" draggable="true"&gt;the &lt;/span&gt;
+</pre>
+<p>Los eventos fundamentales que tenemos que capturar para procesar el arrastrar y soltar son:</p>
+<ul>
+<li>
+dragstart: Se dispara cuando el usuario selecciona el elemento que quiere arrastrar. La función recibe como parámetro la referencia al elemento HTML que está siendo arrastrado.<br>
+</li>
+<li>
+dragover: Se dispara cuando el elemento se ha dispuesto dentro del contenedor. El parámetro de la función hace referencia al elemento contenedor. Como el comportamiento por defecto es denegar el drop, la función debe llamar al método preventDefault  para indicar que se active el soltar elemento.
+</li>
+<li>
+drop: El elemento arrastrado se ha soltado en el elemento contenedor. El parámetro de la función hace referencia al elemento contenedor.
+</li>
+</ul>
+
+
+
+<h3>Problema</h3>
+<p>Confeccionar un programa que muestre una oración en Ingles con las palabras desacomodadas. Permitir mediante drag and drop disponer las palabras dentro de un div.
+<h4>Solución</h4>
+<pre class="recuadro">
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Prueba&lt;/title&gt;
+
+&lt;style&gt;
+  #recuadro {
+    width:300px;
+    height:50px;
+    background-color:yellow;
+    border-style:solid;
+    border-color:red;
+    font-size:1.5em;
+  }
+  #palabras span {
+    font-size:1.5em;
+  }
+&lt;/style&gt;  
+
+&lt;script&gt;
+    window.addEventListener('load', inicio, false);
+
+    function inicio() {
+        document.getElementById('palabra1').addEventListener('dragstart', drag, false);
+        document.getElementById('palabra2').addEventListener('dragstart', drag, false);
+        document.getElementById('palabra3').addEventListener('dragstart', drag, false);
+        document.getElementById('palabra4').addEventListener('dragstart', drag, false);                
+        document.getElementById('recuadro').addEventListener('dragover', permitirDrop, false);        
+        document.getElementById('recuadro').addEventListener('drop', drop, false);                
+    }
+    
+    function drag(ev)
+    {
+        ev.dataTransfer.setData("Text",ev.target.id);
+    }    
+    
+    function drop(ev)
+    {
+        ev.preventDefault();
+        var dato=ev.dataTransfer.getData("Text");
+        ev.target.appendChild(document.getElementById(dato));
+    }  
+
+    function permitirDrop(ev)
+    {
+        ev.preventDefault();
+    }
+&lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Arrastre en orden las palabras para formar la oración correcta.&lt;/p&gt;
+  &lt;div id="recuadro"&gt;&lt;/div&gt;
+  &lt;div id="palabras"&gt;
+    &lt;span id="palabra1" draggable="true"&gt;the &lt;/span&gt;
+    &lt;span id="palabra2" draggable="true"&gt;is &lt;/span&gt;
+    &lt;span id="palabra3" draggable="true"&gt;What &lt;/span&gt;
+    &lt;span id="palabra4" draggable="true"&gt;time &lt;/span&gt;    
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Veamos las partes fundamentales de este programa:</p>
+<p>En el cuerpo de la página definimos un div llamado recuadro donde dispondremos las palabras que se arrastrarán a su interior:</p>
+<pre>
+  &lt;div id="recuadro"&gt;&lt;/div&gt;
+</pre>
+<p>Hemos definido en la hoja de estilo del div el color amarillo de fondo con rojo como borde:</p>
+<pre>
+  #recuadro {
+    width:300px;
+    height:50px;
+    background-color:yellow;
+    border-style:solid;
+    border-color:red;
+    font-size:1.5em;
+  }
+</pre>
+<p>Por otro lado definimos cuatro elementos span que contienen las palabras que pueden ser arrastradas, recordemos que para permitir el arrastre debemos inicializar la propiedad draggable con el valor true:</p>
+<pre>
+    &lt;span id="palabra1" draggable="true"&gt;the &lt;/span&gt;
+    &lt;span id="palabra2" draggable="true"&gt;is &lt;/span&gt;
+    &lt;span id="palabra3" draggable="true"&gt;What &lt;/span&gt;
+    &lt;span id="palabra4" draggable="true"&gt;time &lt;/span&gt;    
+</pre>
+
+<p>Cuando se termina de cargar la página se ejecuta el método inicio donde asociamos para cada elemento span el evento dragstart indicando que se ejecute la función drag.</p>
+<p>Por otro lado debemos indicar los nombres de las funciones que se ejecutarán para los eventos dragover y drop del elemento contenedor (es decir el elemento HTML que recibirá en su interior los elementos arrastrados):</p>
+<pre>
+window.addEventListener('load', inicio, false);
+
+    function inicio() {
+        document.getElementById('palabra1').addEventListener('dragstart', drag, false);
+        document.getElementById('palabra2').addEventListener('dragstart', drag, false);
+        document.getElementById('palabra3').addEventListener('dragstart', drag, false);
+        document.getElementById('palabra4').addEventListener('dragstart', drag, false);                
+        document.getElementById('recuadro').addEventListener('dragover', permitirDrop, false);        
+        document.getElementById('recuadro').addEventListener('drop', drop, false);                
+    }
+</pre>
+
+
+<p>La función drag se ejecuta cuando el operador selecciona el objeto a arrastrar y tiene como objetivo mediante el atributo dataTransfer indicar en este caso el id del objeto que acaba de seleccionarse, para luego poder recuperarlo en el evento drop:</p>
+<pre> 
+    function drag(ev)
+    {
+        ev.dataTransfer.setData("Text",ev.target.id);
+    } 
+</pre>
+
+<p>Por otro lado debemos indicar al objeto que recibe el elemento permitir recibir objetos:</p>
+<pre>
+    function permitirDrop(ev)
+    {
+        ev.preventDefault();
+    }
+</pre>
+
+<p>Finalmente la función drop se ejecuta cuando soltamos el elemento dentro del contenedor. En esta llamamos a preventDefault del contenedor y seguidamente recuperamos la referencia del objeto que estabamos arrastrando mediante el método getData del atributo dataTransfer. Creamos un elemento dentro del div:</p>
+
+<pre>
+    function drop(ev)
+    {
+        ev.preventDefault();
+        var dato=ev.dataTransfer.getData("Text");
+        ev.target.appendChild(document.getElementById(dato));
+    }  
+</pre>
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../index1e61.html?inicio=40">Retornar</a></h2>   
+
+</div>
+
+</body>
+
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=174&punto=41&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:09 GMT -->
+</html>

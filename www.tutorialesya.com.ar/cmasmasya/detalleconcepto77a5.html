@@ -1,0 +1,820 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=15&codigo=142&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Estructura de datos tipo vector en C++</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>15 - Estructura de datos tipo vector en C++</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Hemos empleado variables de distinto tipo para el almacenamiento de datos (variables int, float, cadenas de caracteres) En esta sección veremos otros tipos de variables que permiten almacenar un conjunto de datos en una única variable.</p>
+
+<p>Un vector es una estructura de datos que permite almacenar un CONJUNTO de datos del MISMO tipo.<br>
+Con un único nombre se define un vector y por medio de un subíndice hacemos referencia a cada elemento del mismo (componente)</p>
+<h3>Problema 1:</h3>
+<p>Se desea guardar los sueldos de 5 operarios.<br>
+Según lo conocido deberíamos definir 5 variables si queremos tener en un cierto momento los 5 sueldos almacenados en memoria.<br>
+Empleando un vector solo se requiere definir un único nombre y accedemos a cada elemento por medio del subíndice.</p>
+<img src="imagentema/foto044.jpg" border="0" alt="vector"><br>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class PruebaVector1 {
+private:
+    int sueldos[5];
+public:
+    void cargar();
+    void imprimir();
+};
+
+void PruebaVector1::cargar()
+{
+    for (int f = 0; f &lt; 5; f++)
+    {
+        cout &lt;&lt;"Ingrese valor del sueldo:";
+        cin &gt;&gt;sueldos[f];
+    }
+}
+
+void PruebaVector1::imprimir()
+{
+    cout &lt;&lt;"Listado de sueldos.";
+    cout &lt;&lt;"\n";
+    for(int f = 0; f &lt; 5; f++) 
+    {
+        cout &lt;&lt;sueldos[f];
+        cout &lt;&lt;"\n";
+    }
+    cin.get();
+    cin.get();
+}
+
+void main()
+{
+    PruebaVector1 pv1;
+    pv1.cargar();
+    pv1.imprimir();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/Vector1.zip">Vector1</a></p>
+
+
+<p>Para la declaración de un vector le agregamos corchetes abiertos y cerrados con un valor que indica la cantidad de sueldos que podrá almacenar (en este ejemplo reservamos espacio para cinco sueldos):</p>
+<pre>
+    int sueldos[5];
+</pre>
+<p>Lo definimos como atributo de la clase ya que lo utilizaremos en los dos métodos y además lo ubicamos en la zona private para no poder accederlo fuera de la clase.</p>
+
+<p>Para cargar cada componente debemos indicar entre corchetes que elemento del vector estamos accediendo:</p>
+<pre>
+void PruebaVector1::cargar()
+{
+    for (int f = 0; f &lt; 5; f++)
+    {
+        cout &lt;&lt;"Ingrese valor del sueldo:";
+        cin &gt;&gt;sueldos[f];
+    }
+}
+</pre>
+<p>La estructura de programación que más se adapta para cargar en forma completa las componentes de un vector es un for, ya que sabemos de antemano la cantidad de valores a cargar, de todos modos no es obligatorio tener que utilizar un for.</p>
+<p>Cuando f vale cero estamos accediendo a la primer componente del vector (en nuestro caso sería):</p>
+<pre>
+        cin &gt;&gt;sueldos[f];
+</pre>
+<p>Lo mas común es utilizar una estructura repetitiva for para recorrer cada componente del vector.</p>
+<p>Utilizar el for nos reduce la cantidad de código, si no utilizo un for debería en forma secuencial implementar el siguiente código:</p>
+<pre>
+    cout &lt;&lt;"Ingrese valor de la componente:";
+    cin &gt;&gt;sueldos[0];
+    cout &lt;&lt;"Ingrese valor de la componente:";
+    cin &gt;&gt;sueldos[1];
+    cout &lt;&lt;"Ingrese valor de la componente:";
+    cin &gt;&gt;sueldos[2];
+    cout &lt;&lt;"Ingrese valor de la componente:";
+    cin &gt;&gt;sueldos[3];
+    cout &lt;&lt;"Ingrese valor de la componente:";
+    cin &gt;&gt;sueldos[4];          
+</pre>
+<p>La impresión de las componentes del vector lo hacemos en el otro método:</p>
+<pre>
+void PruebaVector1::imprimir()
+{
+    cout &lt;&lt;"Listado de sueldos.";
+    cout &lt;&lt;"\n";
+    for(int f = 0; f &lt; 5; f++) 
+    {
+        cout &lt;&lt;sueldos[f];
+        cout &lt;&lt;"\n";
+    }
+    cin.get();
+    cin.get();
+}
+</pre>
+<p>Siempre que queremos acceder a una componente del vector debemos indicar entre corchetes la componente, dicho valor comienza a numerarse en cero y continua hasta un número menos del tamaño del vector, en nuestro caso creamos el vector con 5 elementos</p>
+<p>Por último en este programa creamos un objeto en la main y llamamos a lo métodos de cargar e imprimir el vector:</p>
+<pre>
+void main()
+{
+    PruebaVector1 pv1;
+    pv1.cargar();
+    pv1.imprimir();
+}
+</pre>
+<h3>Problema 2:</h3>
+<p>Definir un vector de 5 componentes de tipo float que representen las alturas de 5 personas.<br> Obtener el promedio de las mismas. Contar cuántas personas son más altas que el promedio y cuántas más bajas.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class PruebaVector2 {
+private:
+    float alturas[5];
+    float promedio;
+public:
+    void cargar();
+    void calcularPromedio();
+    void mayoresMenores();
+};
+
+void PruebaVector2::cargar()
+{
+    for (int f = 0; f &lt; 5; f++)
+    {
+        cout &lt;&lt;"Ingrese la altura de la persona:";
+        cin &gt;&gt;alturas[f];
+    }
+}
+
+void PruebaVector2::calcularPromedio()
+{
+    float suma;
+    suma=0;
+    for(int f=0; f &lt; 5; f++) 
+    {
+        suma=suma+alturas[f];
+    }
+    promedio=suma/5;
+    cout &lt;&lt;"Promedio de alturas:";
+    cout &lt;&lt;promedio;
+    cout &lt;&lt;"\n";
+}
+
+void PruebaVector2::mayoresMenores()
+{
+    int may,men;
+    may=0;
+    men=0;
+    for(int f = 0; f &lt; 5; f++) 
+    {
+        if (alturas[f] &gt; promedio) 
+        {
+            may++;
+        }
+        else
+        {
+            if (alturas[f] &lt; promedio) 
+            {
+                men++;
+            }
+        }
+    }
+    cout &lt;&lt;"Cantidad de personas mayores al promedio:";
+    cout &lt;&lt;may;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"Cantidad de personas menores al promedio:";
+    cout &lt;&lt;men;
+    cin.get();
+    cin.get();
+}
+
+void main()
+{
+    PruebaVector2 pv2;
+    pv2.cargar();
+    pv2.calcularPromedio();
+    pv2.mayoresMenores();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/Vector2.zip">Vector2</a></p>
+
+
+<p>Definimos como atributo un vector donde almacenaremos las cinco alturas:</p>
+<pre>
+    float alturas[5];
+</pre>
+<p>En el método cargar procedemos a ingresar por teclado las 5 alturas de personas::</p>
+<pre>
+    for (int f = 0; f &lt; 5; f++)
+    {
+        cout &lt;&lt;"Ingrese la altura de la persona:";
+        cin &gt;&gt;alturas[f];
+    }
+</pre>
+<p>En otro método procedemos a sumar todas sus componentes y obtener el promedio. El promedio lo almacenamos en un atributo de la clase ya que lo necesitamos en otro método:</p>
+<pre>
+void PruebaVector2::calcularPromedio()
+{
+    float suma;
+    suma=0;
+    for(int f=0; f &lt; 5; f++) 
+    {
+        suma=suma+alturas[f];
+    }
+    promedio=suma/5;
+    cout &lt;&lt;"Promedio de alturas:";
+    cout &lt;&lt;promedio;
+    cout &lt;&lt;"\n";
+}
+</pre>
+<p>Por último en un tercer método comparamos cada componente del vector con el atributo promedio, si el valor almacenado supera al promedio incrementamos un contador en caso que sea menor al promedio incrementamos otro contador:</p>
+<pre>
+void PruebaVector2::mayoresMenores()
+{
+    int may,men;
+    may=0;
+    men=0;
+    for(int f = 0; f &lt; 5; f++) 
+    {
+        if (alturas[f] &gt; promedio) 
+        {
+            may++;
+        }
+        else
+        {
+            if (alturas[f] &lt; promedio) 
+            {
+                men++;
+            }
+        }
+    }
+    cout &lt;&lt;"Cantidad de personas mayores al promedio:";
+    cout &lt;&lt;may;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"Cantidad de personas menores al promedio:";
+    cout &lt;&lt;men;
+    cin.get();
+    cin.get();
+}
+</pre>
+<p>En la main creamos un objeto de la clase PruebaVector2 y procedemos a llamar a sus métodos:</p>
+<pre>
+void main()
+{
+    PruebaVector2 pv2;
+    pv2.cargar();
+    pv2.calcularPromedio();
+    pv2.mayoresMenores();
+}
+</pre>
+<h4>Importante:</h4>
+<p>En este problema podemos observar una ventaja de tener almacenadas todas las alturas de las personas. Si no conociéramos los vectores tenemos que  cargar otra vez las alturas por teclado para compararlas con el promedio.<br>
+Mientras el programa está en ejecución tenemos el vector alturas a nuestra disposición. Es importante tener en cuenta que cuando finaliza la ejecución del programa se pierde el contenido de todas las variables (simples y vectores)</p>
+<h3>Problema 3:</h3>
+<p>Una empresa tiene dos turnos (mañana y tarde) en los que trabajan 8 empleados (4 por la mañana y 4 por la tarde)<br>
+Confeccionar un programa que permita almacenar los sueldos de los empleados agrupados por turno.<br>
+Imprimir los gastos en sueldos de cada turno.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class PruebaVector3{
+private:
+    float turnoMan[4];
+    float turnoTar[4];
+public:
+    void cargar();
+    void calcularGastos();
+};
+
+void PruebaVector3::cargar()
+{
+    cout &lt;&lt;"Sueldos de empleados del turno de la mañana.";
+    cout &lt;&lt;"\n";
+    for(int f = 0; f &lt; 4; f++) 
+    {
+        cout &lt;&lt;"Ingrese sueldo:";
+        cin &gt;&gt;turnoMan[f];
+    }
+    cout &lt;&lt;"Sueldos de empleados del turno de la tarde.";
+    cout &lt;&lt;"\n";
+    for(int f = 0; f &lt; 4; f++) 
+    {
+        cout &lt;&lt;"Ingrese sueldo:";
+        cin &gt;&gt;turnoTar[f];
+    }
+}
+
+void PruebaVector3::calcularGastos()
+{
+    float man=0;
+    float tar=0;
+    for(int f = 0; f &lt; 4; f++)
+    {
+        man=man+turnoMan[f];
+        tar=tar+turnoTar[f];
+    }
+    cout &lt;&lt;"Total de gastos del turno de la mañana:";
+    cout &lt;&lt;man;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"Total de gastos del turno de la tarde:";
+    cout &lt;&lt;tar;
+    cin.get();
+    cin.get();
+}
+
+void main()
+{
+    PruebaVector3 pv3;
+    pv3.cargar();
+    pv3.calcularGastos();
+}
+</pre>
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/Vector3.zip">Vector3</a></p>
+
+<p>Definimos dos atributos de tipo vector donde almacenaremos los sueldos de los empleados de cada turno:</p>
+<pre>
+class PruebaVector3{
+private:
+    float turnoMan[4];
+    float turnoTar[4];
+public:
+    void cargar();
+    void calcularGastos();
+};
+</pre>
+<p>Mediante dos estructuras repetitivas procedemos a cargar cada vector:</p>
+<pre>
+void PruebaVector3::cargar()
+{
+    cout &lt;&lt;"Sueldos de empleados del turno de la mañana.";
+    cout &lt;&lt;"\n";
+    for(int f = 0; f &lt; 4; f++) 
+    {
+        cout &lt;&lt;"Ingrese sueldo:";
+        cin &gt;&gt;turnoMan[f];
+    }
+    cout &lt;&lt;"Sueldos de empleados del turno de la tarde.";
+    cout &lt;&lt;"\n";
+    for(int f = 0; f &lt; 4; f++) 
+    {
+        cout &lt;&lt;"Ingrese sueldo:";
+        cin &gt;&gt;turnoTar[f];
+    }
+}
+</pre>
+<p>En otro método procedemos a sumar las componentes de cada vector y mostrar dichos acumuladores:</p>
+<pre>
+void PruebaVector3::calcularGastos()
+{
+    float man=0;
+    float tar=0;
+    for(int f = 0; f &lt; 4; f++)
+    {
+        man=man+turnoMan[f];
+        tar=tar+turnoTar[f];
+    }
+    cout &lt;&lt;"Total de gastos del turno de la mañana:";
+    cout &lt;&lt;man;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"Total de gastos del turno de la tarde:";
+    cout &lt;&lt;tar;
+    cin.get();
+    cin.get();
+}
+</pre>
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Desarrollar un programa que permita ingresar un vector de 8 elementos, e informe:<br>
+El valor acumulado de todos los elementos del vector.<br>
+El valor acumulado de los elementos del vector que sean mayores a 36.<br>
+Cantidad de valores mayores a 50.<br>
+</li>
+<li>
+Realizar un programa que pida la carga de dos vectores numéricos enteros de 4 elementos. Obtener la suma de los dos vectores, dicho resultado guardarlo en un tercer vector del mismo tamaño. Sumar componente a componente.
+</li>
+<li>
+Se tienen las notas del primer parcial de los alumnos de dos cursos, el curso A y el curso B, cada curso cuenta con 5 alumnos.<br>
+Realizar un programa que muestre el curso que obtuvo el mayor promedio general.
+</li>
+<li>
+Cargar un vector de 10 elementos y verificar posteriormente si el mismo está ordenado de menor a mayor.
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class PruebaVector4{
+private:
+    int vec[8];
+public:
+    void cargar();
+    void acumularElementos();
+    void acumularMayores36();
+    void CantidadMayores50();
+};
+
+void PruebaVector4::cargar()
+{
+    for(int f = 0; f &lt; 8; f++) 
+    {
+        cout &lt;&lt;"Ingrese elemento:";
+        cin &gt;&gt;vec[f];
+    }
+}
+
+void PruebaVector4::acumularElementos()
+{
+    int suma=0;
+    for(int f = 0; f &lt; 8; f++) 
+    {
+        suma=suma+vec[f];
+    }
+    cout &lt;&lt;"La suma de los 8 elementos es:";
+    cout &lt;&lt;suma;
+    cout &lt;&lt;"\n";
+}
+
+void PruebaVector4::acumularMayores36()
+{
+    int suma=0;
+    for(int f = 0; f &lt; 8; f++) 
+    {
+        if (vec[f] &gt; 36) 
+        {
+            suma=suma+vec[f];
+        }
+    }
+    cout &lt;&lt;"La suma de los elementos mayores a 36 es:";
+    cout &lt;&lt;suma;
+    cout &lt;&lt;"\n";
+}
+
+void PruebaVector4::CantidadMayores50()
+{
+    int cant=0;
+    for(int f = 0; f &lt; 8; f++) 
+    {
+        if (vec[f] &gt; 50) 
+        {
+            cant++;
+        }    
+    }
+    cout &lt;&lt;"La cantidad de valores mayores a 50 es:";
+    cout &lt;&lt;cant;
+    cout &lt;&lt;"\n";
+    cin.get();
+    cin.get();
+}
+
+void main()
+{
+    PruebaVector4 pv4;
+    pv4.cargar();
+    pv4.acumularElementos();
+    pv4.acumularMayores36();
+    pv4.CantidadMayores50();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/Vector4.zip">Vector4</a></p>
+
+
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class PruebaVector5 {
+private:
+    int vec1[4];
+    int vec2[4];
+    int vecSuma[4];
+public:
+    void cargar();
+    void sumarizarVectores();
+};
+
+void PruebaVector5::cargar()
+{
+    cout &lt;&lt;"Carga del primer vector.";
+    cout &lt;&lt;"\n";
+    for(int f = 0;f &lt; 4; f++) 
+    {
+        cout &lt;&lt;"Ingrese elemento:";
+        cin &gt;&gt;vec1[f];
+    }
+    cout &lt;&lt;"Carga del segundo vector.";
+    cout &lt;&lt;"\n";
+    for(int f = 0; f &lt; 4; f++) 
+    {
+        cout &lt;&lt;"Ingrese elemento:";
+        cin &gt;&gt;vec2[f];
+    }        
+}
+
+void PruebaVector5::sumarizarVectores()
+{
+    for(int f = 0;f &lt; 4; f++)
+    {
+        vecSuma[f]=vec1[f]+vec2[f];
+    }
+    cout &lt;&lt;"Vector resultante.";
+    cout &lt;&lt;"\n";
+    for(int f = 0; f &lt; 4; f++)
+    {
+        cout &lt;&lt;vecSuma[f];
+        cout &lt;&lt;"\n";
+    }
+    cin.get();
+    cin.get();
+}
+
+void main()
+{
+    PruebaVector5 pv5;
+    pv5.cargar();
+    pv5.sumarizarVectores();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/Vector5.zip">Vector5</a></p>
+
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class PruebaVector6 {
+private:
+    int cursoa[5];
+    int cursob[5];
+public:
+    void cargar();
+    void calcularPromedios();
+};
+
+
+void PruebaVector6::cargar()
+{
+    cout &lt;&lt;"Carga de notas del curso A";
+    cout &lt;&lt;"\n";
+    for(int f = 0; f &lt; 5; f++) 
+    {
+        cout &lt;&lt;"Ingrese nota:";
+        cin &gt;&gt;cursoa[f];
+    }
+    cout &lt;&lt;"Carga del notas del curso B";
+    cout &lt;&lt;"\n";
+    for(int f = 0; f &lt; 5; f++) 
+    {
+        cout &lt;&lt;"Ingrese nota:";
+        cin &gt;&gt;cursob[f];
+    }        
+}
+
+void PruebaVector6::calcularPromedios()
+{
+    int suma1=0;
+    int suma2=0;
+    for(int f=0;f&lt;5;f++) 
+    {
+        suma1=suma1+cursoa[f];
+        suma2=suma2+cursob[f];            
+    }
+    int promedioa=suma1/5;
+    int promediob=suma2/5;
+    if (promedioa&gt;promediob) 
+    {
+        cout &lt;&lt;"El curso A tiene un promedio mayor.";
+    }
+    else
+    {
+        cout &lt;&lt;"El curso B tiene un promedio mayor.";
+    }
+    cin.get();
+    cin.get();
+}
+
+void main()
+{
+    PruebaVector6 pv6;
+    pv6.cargar();
+    pv6.calcularPromedios();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/Vector6.zip">Vector6</a></p>
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class PruebaVector7 {
+private:
+    int vec[10];
+public:
+    void cargar();
+    void verificarOrdenado();
+};
+
+void PruebaVector7::cargar()
+{
+    for(int f = 0; f &lt; 10; f++)
+    {
+        cout &lt;&lt;"Ingrese elemento:";
+        cin &gt;&gt;vec[f];
+    }
+}
+
+void PruebaVector7::verificarOrdenado()
+{
+    int orden=1;
+    for(int f = 0; f &lt; 9; f++) 
+    {
+        if (vec[f+1] &lt; vec[f]) 
+        {
+            orden=0;
+        }
+    }
+    if (orden==1) 
+    {
+        cout &lt;&lt;"Esta ordenado de menor a mayor";
+    }
+    else 
+    {
+        cout &lt;&lt;"No esta ordenado de menor a mayor";
+    }
+    cin.get();
+    cin.get();
+}
+
+void main()
+{
+    PruebaVector7 pv7;
+    pv7.cargar();
+    pv7.verificarOrdenado();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/Vector7.zip">Vector7</a></p>
+</pre><h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=15&codigo=142&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:37 GMT -->
+</html>

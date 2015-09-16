@@ -1,0 +1,611 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=151&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:58:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - Concepto de propiedad</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>27 - Concepto de propiedad</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p>La mayoría de los lenguajes de programación orientado a objetos acceden a sus atributos a través de métodos. Esto lo vimos en el concepto anterior cuando accedíamos al atributo monto de un cliente:</p>
+<pre>
+        public void Depositar(int m)
+        {
+            monto = monto + m;
+        }
+
+        public int RetornarMonto()
+        {
+            return monto;
+        }
+</pre>
+<p>Vimos que luego llamamos a dichos métodos con la sintaxis:</p>
+<pre>
+    cliente3.Depositar(200);
+    cliente3.Extraer(150);
+</pre>
+<p>En C# normalmente este tipo de problemas se lo resuelve implementado una propiedad. Veamos el mismo problemas resolviéndolo utilizando propiedades.</p>
+<h3>Problema 1:</h3>
+<p> El problema era : Un banco tiene 3 clientes que pueden hacer depósitos y extracciones. También el banco requiere que al final del día calcule la cantidad de dinero que hay depositada.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Propiedades1
+{
+    class Cliente
+    {
+        private string nombre;
+        private int monto;
+
+        public string Nombre
+        {
+            set
+            {
+                nombre = value;
+            }
+            get
+            {
+                return nombre;
+            }
+        }
+
+        public int Monto
+        {
+            set
+            {
+                monto = value;
+            }
+            get
+            {
+                return monto;
+            }
+        }
+
+        public void Imprimir()
+        {
+            Console.WriteLine(Nombre + " tiene depositado la suma de " + Monto);
+        }
+    }
+
+    class Banco
+    {
+        private Cliente cliente1, cliente2, cliente3;
+
+        public Banco()
+        {
+            cliente1 = new Cliente();
+            cliente1.Nombre = "Juan";
+            cliente1.Monto = 0;
+            cliente2 = new Cliente();
+            cliente2.Nombre = "Ana";
+            cliente2.Monto = 0;
+            cliente3 = new Cliente();
+            cliente3.Nombre = "Pedro";
+            cliente3.Monto = 0;
+        }
+
+        public void Operar()
+        {
+            cliente1.Monto = cliente1.Monto + 100;
+            cliente2.Monto = cliente2.Monto + 150;
+            cliente3.Monto = cliente3.Monto + 200;
+        }
+
+        public void DepositosTotales()
+        {
+            int t = cliente1.Monto + cliente2.Monto + cliente3.Monto;
+            Console.WriteLine("El total de dinero en el banco es:" + t);
+            cliente1.Imprimir();
+            cliente2.Imprimir();
+            cliente3.Imprimir();
+        }
+
+        static void Main(string[] args)
+        {
+            Banco banco1 = new Banco();
+            banco1.Operar();
+            banco1.DepositosTotales();
+            Console.ReadKey();
+        }
+    }
+}
+
+</pre>
+<p>Lo más importante es entender que una propiedad es una forma de acceder al contenido de un atributo, tanto para consultar su valor como modificarlo.</p>
+<pre>
+
+        private string nombre;
+        private int monto;
+
+        public string Nombre
+        {
+            set
+            {
+                nombre = value;
+            }
+            get
+            {
+                return nombre;
+            }
+        }
+
+        public int Monto
+        {
+            set
+            {
+                monto = value;
+            }
+            get
+            {
+                return monto;
+            }
+        }
+</pre>
+<p>La propiedad Nombre mediante el modificador set inicializa el atributo nombre con el valor que llega del objeto:</p>
+<pre>
+            cliente1.Nombre = "Juan";
+</pre>
+<p>Como vemos donde definimos el objeto cliente1 accedemos a la propiedad mediante el operador punto y le asignamos un valor (en este caso un string porque la propiedad es de tipo string)</p>
+<p>Si queremos consultar el atributo nombre lo podemos hacer mediante la propiedad Nombre. Es común definir el nombre que le damos a la propiedad con el mismo nombre que tiene el atributo pero con el primer caracter en mayúsculas:</p>
+<pre>
+        //atributo en minúsculas 
+        private int monto;
+        //nombre de la propiedad con el mismo nombre pero en mayúsculas. 
+        public int Monto
+        {
+            set
+            {
+                monto = value;
+            }
+            get
+            {
+                return monto;
+            }
+        }
+</pre>
+<p>Podemos observar que la sintaxis para acceder a las propiedades donde definimos objetos es mucho mas intuitiva y sencillas, por ejemplo para saber cuanto dinero hay en el banco la sintaxis con propiedades es:</p>
+<pre>
+            int t = cliente1.Monto + cliente2.Monto + cliente3.Monto;
+</pre>
+<p>Y como la vimos anteriormente por medio de un método que retorna el monto tenemos la siguiente sintaxis:</p>
+<pre>
+int t = cliente1.RetornarMonto () + 
+        cliente2.RetornarMonto () + 
+        cliente3.RetornarMonto ();
+</pre>
+
+<p>Lo primero que nos viene a la mente es porque no definir los atributos con el modificador public :</p>
+<pre>
+        public int monto;
+</pre>
+<p>Para luego poder consultarlos y/o modificarlos con la sintaxis:</p>
+<pre>
+            int t = cliente1.monto + cliente2.monto + cliente3.monto;
+</pre>
+<p>Ahora veamos que cuando consultamos o inicializamos una propiedad en realidad lo que está sucediendo es la ejecución de un método (set o get) donde podemos disponer código donde validar el valor asignado. Por ejemplo si disponemos la restricción que el Monto siempre debe ser positivo para que se almacene, luego debemos codificar la propiedad con la siguiente sintaxis:</p>
+<pre>
+
+        public int Monto
+        {
+            set
+            {
+                if (value >= 0)
+                {
+                    monto = value;
+                }
+                else
+                {
+                    Console.WriteLine("No se puede tener un monto negativo.");
+                }
+            }
+            get
+            {
+                return monto;
+            }
+        }
+</pre>
+<p>Es decir si el valor que le asignamos a la propiedad Monto es negativo luego no se inicializa el atributo monto con dicho valor.</p>
+<p>Si ejecutamos este código luego debe mostrar un mensaje indicando que "No se puede tener monto negativo":</p>
+<pre>
+ cliente1.Monto = -100;
+</pre>
+
+
+<h3>Problema 2:</h3>
+<p>Plantear un programa que permita jugar a los dados. Las reglas de juego son: se tiran tres dados si los tres salen con el mismo valor mostrar un mensaje que "gano", sino "perdió".</p>
+
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Propiedades2
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    namespace Colaboracion2
+    {
+        class Dado
+        {
+            private int valor;
+
+            public int Valor
+            {
+                get
+                {
+                    return valor;
+                }
+                private set
+                {
+                    valor = value;
+                }
+            }
+
+            private static Random aleatorio;
+
+            public Dado()
+            {
+                aleatorio = new Random();
+            }
+
+            public void Tirar()
+            {
+                Valor = aleatorio.Next(1, 7);
+            }
+
+            public void Imprimir()
+            {
+                Console.WriteLine("El valor del dado es:" + Valor);
+            }
+        }
+
+        class JuegoDeDados
+        {
+            private Dado dado1, dado2, dado3;
+
+            public JuegoDeDados()
+            {
+                dado1 = new Dado();
+                dado2 = new Dado();
+                dado3 = new Dado();
+            }
+
+            public void Jugar()
+            {
+                dado1.Tirar();
+                dado1.Imprimir();
+                dado2.Tirar();
+                dado2.Imprimir();
+                dado3.Tirar();
+                dado3.Imprimir();
+                if (dado1.Valor == dado2.Valor && dado1.Valor == dado3.Valor)
+                {
+                    Console.WriteLine("Ganó");
+                }
+                else
+                {
+                    Console.WriteLine("Perdió");
+                }
+                Console.ReadKey();
+            }
+
+            static void Main(string[] args)
+            {
+                JuegoDeDados j = new JuegoDeDados();
+                j.Jugar();
+            }
+        }
+    }
+}
+</pre>
+
+<p>El atributo valor se lo accede por medio de la propiedad Valor:</p>
+<pre>
+
+            private int valor;
+
+            public int Valor
+            {
+                get
+                {
+                    return valor;
+                }
+                private set
+                {
+                    valor = value;
+                }
+            }
+</pre>
+<p>Luego cuando queremos consultar el valor del dado desde el jugo de dados por medio de la sintaxis siguiente podemos comparar si los tres dados tienen el mismo número:</p>
+<pre>
+                if (dado1.Valor == dado2.Valor && dado1.Valor == dado3.Valor)
+                {
+                    Console.WriteLine("Ganó");
+                }
+                else
+                {
+                    Console.WriteLine("Perdió");
+                }
+</pre>
+<p>Algo importante es poder restringir la ejecución del set o get desde fuera de la clase, por ejemplo en este caso queremos evitar que desde la clase JuegoDeDados se puede cambiar el valor del dado con la siguiente sintaxis:</p>
+<pre>
+    dado1.Valor=7;
+</pre>
+<p>La línea anterior provocará un error ya que sección del set de la propiedad la hemos definido de tipo private (con esto hacemos que solo los métodos de la clase puedan ejecuta el set. La sintaxis para acceder a la propiedad Valor desde la clase es:</p>
+<pre>
+            public void Tirar()
+            {
+                Valor = aleatorio.Next(1, 7);
+            }
+</pre>
+<p>Esto es correcto ya que el método Tirar pertenece a la clase Dado y por lo tanto puede asignarle un valor a la propiedad Valor (cuando se asigna un valor a una propiedad se ejecuta el set)</p>
+
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Plantear una clase Club y otra clase Socio.<br>
+La clase Socio debe tener los siguientes atributos privados: nombre y la antigüedad en el club (en años) Definir dos propiedades para poder acceder al nombre y la antigüedad del socio(no permitir cargar un valor negativo en la antigüedad). La clase Club debe tener como atributos 3 objetos de la clase Socio. Definir una responsabilidad para imprimir el nombre del socio con mayor antigüedad en el club.
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Propiedades3
+{
+    class Socio
+    {
+        private string nombre;
+        private int antiguedad;
+
+        public string Nombre
+        {
+            set
+            {
+                nombre = value;
+            }
+            get
+            {
+                return nombre;
+            }
+        }
+
+        public int Antiguedad
+        {
+            set
+            {
+                if (value >= 0)
+                {
+                    antiguedad = value;
+                }
+                else
+                {
+                    Console.Write("No se puede asignar aun valor negativo a la antiguedad");
+                }
+            }
+            get
+            {
+                return antiguedad;
+            }
+        }
+    }
+
+
+    class Club
+    {
+        private Socio socio1, socio2, socio3;
+
+        public Club()
+        {
+            socio1 = new Socio();
+            socio1.Nombre = "Juan";
+            socio1.Antiguedad = 7;
+            socio2 = new Socio();
+            socio2.Nombre = "Ana";
+            socio2.Antiguedad = 3;
+            socio3 = new Socio();
+            socio3.Nombre = "Martin";
+            socio3.Antiguedad = 25;
+        }
+
+        public void MayorAntiguedad()
+        {
+            if (socio1.Antiguedad > socio2.Antiguedad &&
+                socio1.Antiguedad > socio3.Antiguedad)
+            {
+                Console.WriteLine("Socio com mayor antiguedad:"+socio1.Nombre);
+            }
+            else
+            {
+                if (socio2.Antiguedad > socio3.Antiguedad)
+                {
+                    Console.WriteLine("Socio com mayor antiguedad:" + socio2.Nombre);    
+                }
+                else
+                {
+                    Console.WriteLine("Socio com mayor antiguedad:" + socio3.Nombre);
+                }
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            Club club1 = new Club();
+            club1.MayorAntiguedad();
+            Console.ReadKey();
+        }
+    }
+}
+</pre></div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=151&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:58:36 GMT -->
+</html>

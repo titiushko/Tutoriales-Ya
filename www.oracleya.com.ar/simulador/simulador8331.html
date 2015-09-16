@@ -1,0 +1,233 @@
+        
+
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=25&cod=193&punto=35 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios resueltos : Secuencias (create sequence - currval - nextval - drop sequence)(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+<body bgcolor="#CCFFCC">
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>35 - Secuencias (create sequence - currval - nextval - drop sequence)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Veamos las secuencias existentes:</p>
+<pre>
+ select *from all_sequences;
+</pre>
+<p>Aparece una tabla que nos muestra todas las secuencias; la columna "SEQUENCE_NAME" contiene el nombre de cada secuencia; las demás columnas nos informan sobre cada una de las secuencias de la base de datos actual (propietario, valores mínimo y máximo, valor de incremento, si es circular o no, etc.).</p>
+
+<p>Vamos a crear una secuencia denominada "sec_codigolibros" para utilizarla en la clave primaria de la tabla "libros".</p>
+<p>En primer lugar vamos a eliminar la secuencia "sec_codigolibros" porque si ya existe no podremos crear otra con el mismo nombre:</p>
+<pre>
+ drop sequence sec_codigolibros;
+</pre>
+<p>Si la secuencia no existe aparecerá un mensaje indicando tal situación.</p>
+
+<p>Creamos la secuencia llamada "sec_codigolibros", estableciendo que comience en 1, sus valores estén entre 1 y 99999 y se incrementen en 1, por defecto, será "nocycle":</p>
+<pre>
+ create sequence sec_codigolibros
+  start with 1
+  increment by 1
+  maxvalue 99999
+  minvalue 1;
+</pre>
+<p>Para acceder a las secuencias (que son tablas) empleamos "select" y la tabla "dual".</p>
+<p>En primer lugar, debemos inicializar la secuencia:</p>
+<pre>
+ select sec_codigolibros.nextval from dual;
+</pre>
+<p>Nos retorna el valor 1.</p>
+
+<p>Recuperamos el valor actual de nuestra secuencia:</p>
+<pre>
+ select sec_codigolibros.currval from dual;
+</pre>
+<p>Retorna 1.</p>
+
+<p>Eliminamos la tabla "libros" y la creamos con la siguiente estructura:</p>
+<pre>
+ drop table libros;
+ create table libros(
+  codigo number(5) not null,
+  titulo varchar2(40) not null,
+  autor varchar2(30),
+  editorial varchar2(20),
+  primary key(codigo)
+ );
+</pre>
+<p>Note que al crear la tabla no se hace referencia en ningún momento a la secuencia que luego servirá para dar valores secuenciales a su clave primaria.</p>
+
+<p>Ingresamos un registro en "libros", almacenando en el campo "codigo" el valor actual de la secuencia:</p>
+<pre>
+ insert into libros values
+  (sec_codigolibros.currval,'El aleph', 'Borges','Emece');
+</pre>
+<p>Ingresamos otro registro en "libros", almacenando en el campo "codigo" el valor siguiente de la secuencia:</p>
+<pre>
+ insert into libros values
+  (sec_codigolibros.nextval,'Matematica estas ahi', 'Paenza','Nuevo siglo');
+</pre>
+<p>Recuerde que "nextval" incrementa la secuencia y retorna el nuevo valor.</p>
+
+<p>Recuperamos todos los registros para ver qué se ha almacenado en "codigo":</p>
+<pre>
+ select *from libros;
+</pre>
+<p>Veamos todos los objetos de la base de datos actual que contengan en su nombre la cadena "LIBROS":</p>
+<pre>
+ select object_name,object_type
+  from all_objects
+  where object_name like '%LIBROS%';
+</pre>
+<p>En la tabla resultado aparecen la tabla "libros" y la secuencia "sec_codigolibros".</p>
+
+<p>Eliminamos la secuencia creada:</p>
+<pre>
+ drop sequence sec_codigolibros;
+</pre>
+<p>Un mensaje indica que la secuencia ha sido eliminada.</p>
+
+<p>Si consultamos todos los objetos de la base de datos veremos que tal secuencia ya no existe:</p>
+<pre>
+ select object_name,object_type
+  from all_objects
+  where object_name like '%LIBROS%';
+</pre>
+        <form name="formulario" action="http://www.sqlserverya.com.ar/aspx/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+        <br>
+   <h2><a href="../indexfc77.html?inicio=25">Retornar</a></h2>   
+        
+	<br>
+   
+
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=25&cod=193&punto=35 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:35 GMT -->
+</html>
+

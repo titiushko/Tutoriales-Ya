@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=40&cod=49&punto=42 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:07:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de CSS - Temarios</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<style>
+
+
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>42 - Propiedad float aplicada a otros elementos HTML</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>La propiedad float permite como hemos visto con las imágenes tomar un elemento HTML y colocarlo lo más a la izquierda o derecha.
+Luego los otros elementos siguen el flujo alrededor del elemento que está flotante. Podemos flotar cualquier elemento HTML</p>
+<p>Normalmente cuando se utiliza la propiedad float, también debe inicializar la propiedad width para fijar el ancho del elemento.</p>
+<p>Cuando se define un elemento que flote el alto del mismo afecta como se disponen los demás elementos de la página, será distinto si es un texto que envolverá al elemento flotante o si se trata de una imagen o div.</p>
+<h3>Problema</h3>
+<p>Mostrar una poesía y disponer la primer letra de cada párrafo que flote a izquierda.</p>
+
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;link rel="StyleSheet" href="estilos.css" type="text/css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;p&gt;&lt;span class="letra"&gt;A&lt;/span&gt;quí me pongo a cantar &lt;br&gt;  
+Al compás de la vigüela; &lt;br&gt; 
+Que el hombre que lo desvela &lt;br&gt; 
+Una pena extraordinaria, &lt;br&gt;
+Como la ave solitaria  &lt;br&gt;
+Con el cantar se consuela.&lt;/p&gt;
+
+&lt;p&gt;&lt;span class="letra"&gt;P&lt;/span&gt;ido a los Santos del Cielo&lt;br&gt;  
+Que ayuden mi pensamiento; &lt;br&gt; 
+Les pido en este momento &lt;br&gt; 
+Que voy a cantar mi historia,&lt;br&gt;  
+Me refresquen la memoria &lt;br&gt; 
+Y aclaren mi entendimiento. &lt;/p&gt;
+
+&lt;p&gt;&lt;span class="letra"&gt;V&lt;/span&gt;engan, santos milagrosos,&lt;br&gt;  
+Vengan todos en mi ayuda,&lt;br&gt;  
+Que la lengua se me añuda &lt;br&gt; 
+Y se me turba la vista. &lt;br&gt; 
+Pido a mi Dios que me asista&lt;br&gt;  
+En una ocasión tan ruda.  &lt;/p&gt;
+
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>La hoja de estilo queda definida:</p>
+<pre class="recuadro">
+.letra {
+  float:left;
+  font-size:3em;
+}
+</pre>
+<p>Definimos la clase letra e inicializamos la propiedad float con el valor left y definimos el tamaño de fuente con 3em (es decir tres veces más grande que el valor de la fuente que tiene por defecto el párrafo.</p>
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../index1e61.html?inicio=40">Retornar</a></h2>   
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=40&cod=49&punto=42 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:07:23 GMT -->
+</html>

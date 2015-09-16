@@ -1,0 +1,229 @@
+        
+
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=50&cod=224&punto=66 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios resueltos : Intersección(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+<body bgcolor="#CCFFCC">
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>66 - Intersección</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Una academia de enseñanza de idiomas da clases de inglés, frances y portugues; almacena los datos de los alumnos que estudian inglés en una tabla llamada "ingles", los que están inscriptos en "francés" en una tabla denominada "frances" y los que cursan portugues en latabla "portugues".</p>
+
+<p>Eliminamos las tablas:</p>
+<pre>
+ drop table ingles;
+ drop table frances;
+ drop table portugues;
+</pre>
+<p>Creamos las tablas:</p>
+<pre>
+ create table ingles(
+  documento varchar2(8) not null,
+  nombre varchar2(30),
+  domicilio varchar2(30),
+  primary key(documento)
+ );
+
+ create table frances(
+  documento varchar2(8) not null,
+  nombre varchar2(30),
+  domicilio varchar2(30),
+  primary key(documento)
+ );
+
+ create table portugues(
+  documento varchar2(8) not null,
+  nombre varchar2(30),
+  domicilio varchar2(30),
+  primary key(documento)
+ );
+</pre>
+<p>Ingresamos algunos registros:</p>
+<pre>
+ insert into ingles values('20111222','Ana Acosta','Avellaneda 111');
+ insert into ingles values('21222333','Betina Bustos','Bulnes 222');
+ insert into ingles values('22333444','Carlos Caseros','Colon 333');
+ insert into ingles values('23444555','Daniel Duarte','Duarte Quiros 444');
+ insert into ingles values('24555666','Estela Esper','Esmeralda 555');
+
+ insert into frances values('23444555','Daniel Duarte','Duarte Quiros 444');
+ insert into frances values('24555666','Estela Esper','Esmeralda 555');
+ insert into frances values('30111222','Fabiana Fuentes','Famatina 666');
+ insert into frances values('30222333','Gaston Gonzalez','Guemes 777');
+
+ insert into portugues values('23444555','Daniel Duarte','Duarte Quiros 444');
+ insert into portugues values('22333444','Carlos Caseros','Colon 333');
+ insert into portugues values('30222333','Gaston Gonzalez','Guemes 777');
+ insert into portugues values('31222333','Hector Huerta','Homero 888');
+ insert into portugues values('32333444','Ines Ilara','Inglaterra 999');
+</pre>
+<p>La academia necesita el nombre y domicilio de todos los alumnos que cursan los tres idiomas para enviarles una tarjeta de descuento.</p>
+
+<p>Obtenemos los datos necesarios de las tres tablas en una sola consulta realizando una intersección entre ellas:</p>
+<pre>
+ select nombre, domicilio from ingles
+  intersect
+   select nombre, domicilio from frances
+  intersect
+   select nombre, domicilio from portugues;
+</pre>
+<p>Aparece solamente un registro, correspondiente a "Daniel Duarte", que está en las tres tablas. Note que los alumnos que solamente asisten a una clase o solamente a dos, no aparecen en el resultado.</p>
+
+<p>Si queremos los registros que están presentes en más de dos tablas podemos realizar una consulta combinando los operadores de intersección y de unión:</p>
+<pre>
+ select nombre, domicilio from ingles
+  intersect
+   select nombre, domicilio from frances
+  union
+ (select nombre, domicilio from ingles
+  intersect 
+  select nombre, domicilio from portugues)
+  union
+  (select nombre, domicilio from frances
+   intersect
+   select nombre, domicilio from portugues);
+</pre>
+<p>En la consulta anterior, la primera intersección (inglés con francés) retorna 2 registros (Esper y Duarte); la segunda intersección (inglés y portugues) retorna 2 registros (Caseros y Duarte); unimos estos dos resultados con "union" y obtenemos 3 registros (Caseros, Duarte y Esper); la tercera intersección (francés y portugués) retorna 2 registros (Duarte y Gozalez) que al "unirlos" al resultado de la primera unión (Caseros, Duarte y Esper) nos devuelve 4 registros.
+Note que algunas consultas se encierran entre paréntesis para especificar que la operación se realiza entre las tablas incluidas en ellos.</p>
+
+        <form name="formulario" action="http://www.sqlserverya.com.ar/aspx/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+        <br>
+   <h2><a href="../indexefd7.html?inicio=50">Retornar</a></h2>   
+        
+	<br>
+   
+
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=50&cod=224&punto=66 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:36 GMT -->
+</html>
+

@@ -1,0 +1,224 @@
+        
+
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=0&cod=160&punto=2 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios resueltos : Crear tablas (create table - describe - all_tables - drop table)(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+<body bgcolor="#CCFFCC">
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>2 - Crear tablas (create table - describe - all_tables - drop table)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Para probar todos los ejercicios resueltos y propuestos debemos ingresar al sqldeveloper.exe y luego en el entorno crear una nueva conexión:</p>
+<ol>
+<li>
+Elegimos File -> New y seleccionamos "New Connection" y presionamos el botón "Aceptar".
+</li>
+<li>
+Ingresamos los campos Connection Name (por ejemplo ingresamos "prueba"), en el campo Username ingresamos el usuario SYSTEM y por último en el campo Password ingresamos la clave que creamos al instalar Oracle. 
+</li>
+<li>
+Luego en la ventana que aparece el mansaje "Enter SQL Statement" debemos tipear los comandos SQL y mediante el primer botón "triangulo verde" ejecutaremos el comando SQL donde se encuentra el cursos (también podemos ejecutar todos los comando SQL mediante el segundo botón.
+</li>
+</ol>
+<p>Veamos las tablas existentes:</p>
+<pre>
+ select *from all_tables;
+</pre>
+<p>Aparece una tabla que nos muestra todas las tablas; la columna "TABLE_NAME" contiene el nombre de cada tabla.</p>
+
+<p>Vamos a crear una tabla denominada "usuarios". En primer lugar vamos a eliminar la tabla "usuarios" porque si ya existe no podremos crear otra con el mismo nombre.</p>
+<pre>
+ drop table usuarios;
+</pre>
+<p>Si la tabla no existe aparecerá un mensaje indicando tal situación.</p>
+
+<p>Ahora si creamos una tabla llamada "usuarios" con dos campos:</p>
+<p>
+- nombre: cadena de caracteres que no supere los 30 caracteres y<br>
+- clave: cadena que no supere los 10 caracteres:</p>
+<pre>
+ create table USUARIOS(
+  nombre varchar2(30),
+  clave varchar2(10)
+ );
+</pre>
+<p>Aparece un mensaje que indica que la sentencia "create table" ha sido procesada.<br>
+Cada usuario ocupará un registro de esta tabla, con su respectivo nombre y clave.
+</p>
+<p>Podemos verificar que se ha creado:</p>
+<pre>
+ select *from all_tables;
+</pre>
+<p>La tabla "usuarios" Debe aparecer en la lista.</p>
+
+<p>Veamos la estructura de la tabla "usuarios":</p>
+<pre>
+ describe usuarios;
+</pre>
+<p>Aparece la siguiente información:</p>
+<pre>
+Name	Null	Type
+-------------------------------
+NOMBRE		VARCHAR2(30)
+CLAVE		VARCHAR2(10)
+</pre>
+<p>Nos informa que la tabla "usuarios" tiene 2 campos, el campo "nombre" de tipo "varchar2" de 30 caracteres de longitud y el campo "clave", de tipo "varchar2" de 10 caracteres de longitud. La columna "Null" aparece vacía y la explicaremos más adelante.</p>
+
+<p>Intentemos crear una tabla con el mismo nombre, mostrará un mensaje indicando que ya hay un objeto llamado "usuarios" y la sentencia no se ejecutará:</p>
+<pre>
+ create table usuarios (
+  nombre varchar(30),
+  clave varchar(10)
+ );
+</pre>
+<p>Eliminemos la tabla:</p>
+<pre>
+ drop table usuarios;
+</pre>
+<p>Verifiquemos si se ha eliminado:</p>
+<pre>
+ select *from all_tables;
+</pre>
+<p>no debe aparecer la tabla "usuarios".</p>
+
+
+        <form name="formulario" action="http://www.sqlserverya.com.ar/aspx/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+        <br>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+        
+	<br>
+   
+
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=0&cod=160&punto=2 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:24 GMT -->
+</html>
+

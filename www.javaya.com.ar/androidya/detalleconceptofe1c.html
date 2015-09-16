@@ -1,0 +1,263 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=149&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:47:35 GMT -->
+<head>
+<title>Layout (FrameLayout)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+.descarga2 a {
+color:#4B4B4B;
+text-decoration:none;
+border-bottom:1px dotted #444;
+}
+.descarga2 {
+background: #F7FABE;
+text-align: left;
+padding: 5px 20px 5px 45px;
+border-top: 2px solid #DFE786;
+border-bottom: 2px solid #DFE786;
+color:#000000;
+margin-left:1.2em;
+margin-right:1.2em;
+border-radius:4px;
+font-size:1em;
+
+}  
+
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-30']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>19 - Layout (FrameLayout)</h1> <p class="descarga2">Ya se encuentra disponible el nuevo tutorial para aprender android con el nuevo entorno <a href="androidstudioya/index.html" target="_blank">Android Studio propuesto por Google y
+que remplaza a Eclipse</a>.
+</td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>El control de tipo FrameLayout dispone dentro del contenedor todos los controles visuales alineados al vértice superior izquierdo. Es decir si disponemos dos o más controles los mismos se apilan.</p>
+<p>Por ejemplo si disponemos dentro de un FrameLayout un ImageView y un Button luego el botón se superpone a la imagen:</p>
+
+<img src="imagentema/foto076.jpg" border="0" alt="FrameLayout"><br>
+
+<p>Otra aplicación del control FrameLayout es disponer una serie de controles visuales no visibles e ir alternando cual se hace visible.<p>
+
+<h3>Problema:</h3>
+<p>Disponer un ImageView y un Button dentro de un layout FrameLayout. Cuando se inicia la aplicación mostrar solo el botón y al ser presionado ocultar el botón y hacer visible la imagen que muestra el ImageView.</p>
+<p>Creamos una interfaz visual similar a la siguiente:</p>
+<img src="imagentema/foto077.jpg" border="0" alt="FrameLayout"><br>
+<p>Seleccionamos el control ImageView y fijarmos la propiedad Visibility con el valor invisible (esto hace que la imagen no se muestre en pantalla)</p>
+<p>Luego inicializamos la propiedad On click del control Button indicando el nombre del método que se ejecutará al ser presionado:</p>
+<img src="imagentema/foto078.jpg" border="0" alt="FrameLayout"><br>
+<p>El código fuente de la clase es:</p>
+
+<pre class="recuadro">
+package com.androidya.proyecto016;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+
+public class MainActivity extends Activity {
+    Button b1;
+    ImageView iv1;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        b1 = (Button) findViewById(R.id.button1);
+        iv1 = (ImageView) findViewById(R.id.imageView1);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return true;
+    }
+
+    public void ocultarBoton(View v) {
+        b1.setVisibility(View.INVISIBLE);
+        iv1.setVisibility(View.VISIBLE);
+    }
+
+}
+
+</pre>
+<p>Cuando se presiona el botón procedemos a ocultar el botón y hacer visible la imagen:</p>
+<pre>
+    public void ocultarBoton(View v) {
+        b1.setVisibility(View.INVISIBLE);
+        iv1.setVisibility(View.VISIBLE);
+    }
+</pre>
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/proyecto016.zip">proyecto016.zip</a></div>
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   <h2><a href="index2904.html?inicio=0">Retornar</a></h2>   
+
+  </div>
+  
+  
+  
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=149&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:47:52 GMT -->
+</html>

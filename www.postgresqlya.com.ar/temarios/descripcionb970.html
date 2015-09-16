@@ -1,0 +1,170 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.postgresqlya.com.ar/temarios/descripcion.php?inicio=50&cod=232&punto=74 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de PostgreSQL - Función SQL que retorna un dato compuesto. </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+	  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>74 - Función SQL que retorna un dato compuesto.</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+	  	  
+
+<p>
+<p>Hemos visto que una función puede no retornar dato, retornar un dato simple (integer, varchar etc.) Ahora veremos como retornar toda una fila de una tabla.</p>
+<p>Para indicar que una función retorna una fila de una tabla debemos indicar luego de la palabra returns el nombre de la tabla. Por ejemplo si creamos la tabla libros y cargamos algunos registros:</p>
+<pre>
+ create table libros(
+  codigo serial,
+  titulo varchar(40) not null,
+  autor varchar(20) default 'Desconocido',
+  editorial varchar(20),
+  precio decimal(6,2),
+  primary key (codigo)
+ );
+
+ insert into libros (titulo,autor,editorial,precio)
+  values('El aleph','Borges','Emece',25.33);
+ insert into libros (titulo,autor,editorial,precio)
+  values('Java en 10 minutos','Mario Molina','Siglo XXI',50.65);
+ insert into libros (titulo,autor,editorial,precio)
+  values('Alicia en el pais de las maravillas','Lewis Carroll','Emece',19.95);
+ insert into libros (titulo,autor,editorial,precio)
+  values('Alicia en el pais de las maravillas','Lewis Carroll','Planeta',15);
+</pre>
+<p>Luego al definir la función indicamos el nombre de la tabla como dato que devuelve:</p>
+<pre>
+ create or replace function retornarlibro(int) returns libros 
+ as
+ 'select * from libros where codigo=$1 ;'
+ language sql;
+</pre>
+<p>Debemos siempre disponer un comando SQL que retorne una fila de la tabla. Luego al llamar la función con un código de libro:</p>
+<pre>
+ select retornarlibro(4);
+</pre>
+<p>Tenemos como resultado un dato compuesto con todos los campos de dicha fila:</p>
+<pre>
+(3,"Alicia en el pais de las maravillas","Lewis Carroll",Emece,19.95)
+</pre></p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../indexefd7.html?inicio=50">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-24");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+
+
+<!-- Mirrored from www.postgresqlya.com.ar/temarios/descripcion.php?inicio=50&cod=232&punto=74 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:41 GMT -->
+</html>

@@ -1,0 +1,353 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=52&codigo=183&inicio=45 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:31:10 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Atributos estáticos de una clase</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>52 - Atributos estáticos de una clase</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Un atributo estático de una clase se crea independientemente a que se definan objetos de la misma, y en el caso que se creen más de un objeto de dicha clase dicho atributo es compartido por todas las instancias.</p>
+<p>Como vemos es muy distinto el funcionamiento a los atributos de la clase que hemos visto hasta ahora. Un atributo estático pertenece a la clase pero su existencia es independiente a que se definan o no objetos de la misma.</p>
+
+<h3>Problema 1:</h3>
+<p>Plantear una clase que defina dos atributos, definir a uno de tipo estático. Crear dos objetos de dicha clase y modificar e imprimir dichos atributos.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Prueba {
+    int x1;
+    static int x2;
+public:
+    Prueba(int v1, int v2) { x1 = v1; x2 = v2; };
+    void imprimir();
+};
+
+int Prueba::x2;
+
+void Prueba::imprimir()
+{
+    cout &lt;&lt; x1 &lt;&lt; "-" &lt;&lt; x2 &lt;&lt; "\n";
+}
+
+void main()
+{
+    Prueba prueba1(1, 1);
+    prueba1.imprimir(); //  1   1
+    Prueba prueba2(20, 20);
+    prueba1.imprimir(); //  1  20
+    cin.get();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/AtributoEstatico1.zip">AtributoEstatico1.zip</a></p>
+
+
+<p>Para declarar un atributo estático tenemos que agregar la palabra clave static:</p>
+<pre>
+class Prueba {
+    int x1;
+    static int x2;
+public:
+    Prueba(int v1, int v2) { x1 = v1; x2 = v2; };
+    void imprimir();
+};
+</pre>
+
+<p>Y luego fuera de la clase crearlo con la siguiente sintaxis:</p>
+<pre>
+int Prueba::x2;
+</pre>
+<p>Como vemos no alcanza con solo declararlo dentro de la clase debemos definirlo fuera de la clase. Si necesitamos inicializarlo con un
+valor podemos hacerlo en este momento:</p>
+<pre>
+int Prueba::x2=100;
+</pre>
+<p>Se puede inicializar el atributo estático ya que se reserva espacio para esta variable indistintamente se creen o no objetos de la clase que contiene dicho atributo estático.</p>
+
+<p>En la main estamos creando un objeto de la clase Prueba, llamando al constructor y finalmente imprimiendo los dos atributos en el método imprimir():</p>
+<pre>
+    Prueba prueba1(1, 1);
+    prueba1.imprimir(); //  1   1
+</pre>
+<p>No hay dudas porque se muestran los dos unos en pantalla. Tanto el atributo común como el estático reciben el 1.</p>
+<p>Ahora creamos otro objeto de la clase Prueba y le pasamos al constructor los valores 20 y 20:</p>
+<pre>
+    Prueba prueba2(20, 20);
+</pre>
+<p>Si llamamos nuevamente al método imprimir() pero del objeto prueba1 (que había impreso anteriormente un 1-1):</p>
+<pre>
+    prueba1.imprimir(); //  1  20
+</pre>
+<p>Vemos que cuando se imprime el atributo estático x2 muestra un 20. Esto es debido que cuando creamos el objeto prueba2 le pasamos un 20 al constructor e inicializó el atributo estático con dicho valor.</p>
+<p>Es muy importante entender que el atributo estático es compartido por todos los objetos que se definan de dicha clase.</p>
+
+
+<h3>Problema 2:</h3>
+<p>Plantear una clase Cuenta que defina dos atributos, uno que almacene el importe de la misma y otro atributo estático llamado cantidad que se debe incrementar en uno cada vez que se crea un objeto de dicha clase. Por otro lado crear una clase Banco que defina tres objetos de la clase Cuenta. Imprimir la cantidad de cuentas accediendo al atributo cantidad de la clase Cuenta.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Cuenta {
+    float saldo;
+    static int cantidad;
+public:
+    Cuenta(float sal) { saldo = sal; cantidad++; };
+    int retornarCantidad() { return cantidad; };
+};
+
+int Cuenta::cantidad = 0;
+
+class Banco {
+    Cuenta *cuenta1, *cuenta2, *cuenta3;
+public:
+    Banco();
+    ~Banco();
+    void cantidadClientes();
+};
+
+Banco::Banco()
+{
+    cuenta1 = new Cuenta(1000);
+    cuenta2 = new Cuenta(3000);
+    cuenta3 = new Cuenta(5000);
+}
+
+Banco::~Banco()
+{
+    delete cuenta1;
+    delete cuenta2;
+    delete cuenta3;
+}
+
+void Banco::cantidadClientes()
+{
+    cout &lt;&lt; cuenta1-&gt;retornarCantidad();
+}
+
+void main()
+{
+    Banco *banco1 = new Banco();
+    banco1-&gt;cantidadClientes();
+    delete banco1;
+    cin.get();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/AtributoEstatico2.zip">AtributoEstatico2.zip</a></p>
+
+<p>Declaramos la clase cuenta con sus dos atributos saldo y cantidad. A cantidad la declaramos de tipo static. Tanto al constructor como al método retornanCantidad los hacemos inline (es decir los implementamos en la declaración de la clase):</p>
+<pre>
+class Cuenta {
+    float saldo;
+    static int cantidad;
+public:
+    Cuenta(float sal) { saldo = sal; cantidad++; };
+    int retornarCantidad() { return cantidad; };
+};
+</pre>
+<p>Como vemos en el constructor inicializamos el atributo saldo con el parámetro sal e incrementamos en 1 el atributo estático cantidad (cada vez que se ejecute este constructor para cada uno de los objetos que creamos de esta clase el atributo cantidad se incrementa en uno).</p>
+<p>Fuera de la clase definimos el atributo estático cantidad que pertenece a la clase Cuenta que es de tipo int y lo inicializamos con el valor 0:</p>
+<pre>
+int Cuenta::cantidad = 0;
+</pre>
+
+<p>Seguidamente declaramos la clase Banco y definimos tres objetos de la clase Cuenta:</p>
+<pre>
+class Banco {
+    Cuenta *cuenta1, *cuenta2, *cuenta3;
+public:
+    Banco();
+    ~Banco();
+    void cantidadClientes();
+};
+</pre>
+
+<p>En el constructor creamos los tres objetos y en el destructor liberamos el espacio de dichos objetos:</p>
+<pre>
+Banco::Banco()
+{
+    cuenta1 = new Cuenta(1000);
+    cuenta2 = new Cuenta(3000);
+    cuenta3 = new Cuenta(5000);
+}
+
+Banco::~Banco()
+{
+    delete cuenta1;
+    delete cuenta2;
+    delete cuenta3;
+}
+</pre>
+
+
+<p>Si queremos saber la cantidad de cuentas que tiene el banco tenemos que acceder al atributo cantidad de la clase Cuenta. Llamamos en este caso al método retornarCantidad() de la clase Cuenta que retorna el valor del atributo estático cantidad:</p>
+<pre>
+void Banco::cantidadClientes()
+{
+    cout &lt;&lt; cuenta1-&gt;retornarCantidad();
+}
+</pre>
+<p>Si bien la llamada al método retornarCantidad() lo hicimos a través del objeto cuenta1 el resultado hubiera sido el mismo si lo llamamos por medio de alguno de los otros dos objetos: cuenta2 o cuenta3.</p>
+
+<p>En la main Creamos un objeto de la clase Banco:</p>
+<pre>
+void main()
+{
+    Banco *banco1 = new Banco();
+    banco1-&gt;cantidadClientes();
+    delete banco1;
+    cin.get();
+}
+</pre><h2><a href="indexb634.html?inicio=45">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=52&codigo=183&inicio=45 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:31:10 GMT -->
+</html>

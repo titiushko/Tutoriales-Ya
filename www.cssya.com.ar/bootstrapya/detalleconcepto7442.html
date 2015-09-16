@@ -1,0 +1,235 @@
+
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/detalleconcepto.php?punto=24&codigo=139&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>button : grupo de botones, barra de herramientas y tamaños.</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="bootstrap,css, html, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de bootstrap.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>24 - button : grupo de botones, barra de herramientas y tamaños.</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Boostrap nos provee la posibilidad de agrupar un conjunto de botones mediante la clase "btn-group". Los botones se agrupan pegados en la misma fila.</p>
+<p>En algunas situaciones podemos agrupar un conjunto de grupos de botones y crear una barra de herramientas.</p>
+<h3>Problema</h3>
+<p>Crear una grupo de botones con los números de 1 al 4. Por otro lado crear una barra de herramientas con dos grupos de botones mostrando los números del 1 al 4 en castellano y en inglés.</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+  &lt;head&gt; 
+    &lt;title&gt;Prueba de Bootstrap&lt;/title&gt; 
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt; 
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+  &lt;div class="container"&gt;
+    
+    &lt;div class="btn-group"&gt;
+      &lt;button type="button" class="btn btn-default"&gt;1&lt;/button&gt;
+      &lt;button type="button" class="btn btn-default"&gt;2&lt;/button&gt;
+      &lt;button type="button" class="btn btn-default"&gt;3&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;hr&gt;
+    &lt;div class="btn-toolbar" role="toolbar"&gt;
+      &lt;div class="btn-group"&gt;
+        &lt;button type="button" class="btn btn-default"&gt;uno&lt;/button&gt;
+        &lt;button type="button" class="btn btn-default"&gt;dos&lt;/button&gt;
+        &lt;button type="button" class="btn btn-default"&gt;tres&lt;/button&gt;
+        &lt;button type="button" class="btn btn-default"&gt;cuatro&lt;/button&gt;
+      &lt;/div&gt; 
+      &lt;div class="btn-group"&gt;
+        &lt;button type="button" class="btn btn-default"&gt;one&lt;/button&gt;
+        &lt;button type="button" class="btn btn-default"&gt;two&lt;/button&gt;
+        &lt;button type="button" class="btn btn-default"&gt;three&lt;/button&gt;
+        &lt;button type="button" class="btn btn-default"&gt;four&lt;/button&gt;
+      &lt;/div&gt;
+     &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt; 
+&lt;/html&gt; 
+</pre>
+<p>En el navegador tenemos una representación similar a:</p>
+<img src="imagentema/foto032.jpg" border="0" alt="button btn-group btn-toolbar bootstrap"><br> 
+
+<p>Es decir debemos agrupar un conjunto de elementos button con un div definiendo la clase "btn-group":</p>
+<pre>
+    &lt;div class="btn-group"&gt;
+      &lt;button type="button" class="btn btn-default"&gt;1&lt;/button&gt;
+      &lt;button type="button" class="btn btn-default"&gt;2&lt;/button&gt;
+      &lt;button type="button" class="btn btn-default"&gt;3&lt;/button&gt;
+    &lt;/div&gt;
+</pre>
+<p>Para crear una barra de herramientas debemos agrupar un conjunto de "btn-group" encerrando los mismos en un div definiendo la clase ""btn-toolbar":</p>
+<pre>
+    &lt;div class="btn-toolbar" role="toolbar"&gt;
+      &lt;div class="btn-group"&gt;
+        &lt;button type="button" class="btn btn-default"&gt;uno&lt;/button&gt;
+        &lt;button type="button" class="btn btn-default"&gt;dos&lt;/button&gt;
+        &lt;button type="button" class="btn btn-default"&gt;tres&lt;/button&gt;
+        &lt;button type="button" class="btn btn-default"&gt;cuatro&lt;/button&gt;
+      &lt;/div&gt; 
+      &lt;div class="btn-group"&gt;
+        &lt;button type="button" class="btn btn-default"&gt;one&lt;/button&gt;
+        &lt;button type="button" class="btn btn-default"&gt;two&lt;/button&gt;
+        &lt;button type="button" class="btn btn-default"&gt;three&lt;/button&gt;
+        &lt;button type="button" class="btn btn-default"&gt;four&lt;/button&gt;
+      &lt;/div&gt;
+     &lt;/div&gt;
+</pre>
+
+<p>Para definir tamaños de los botones en forma conjunta para un grupo de botones podemos utilizar alguna de las siguientes clases:</p>
+<pre>
+btn-group-lg
+btn-group-sm
+btn-group-xs
+</pre>
+<p>Que definen los tamaños grande, pequeño y extra pequeño.</p>
+<p>Un ejemplo asignando esto tres tipos de clases a tres grupos de botones es:</p>
+
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+  &lt;head&gt; 
+    &lt;title&gt;Prueba de Bootstrap&lt;/title&gt; 
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt; 
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+  &lt;div class="container"&gt;
+    
+    &lt;div class="btn-group btn-group-lg"&gt;
+      &lt;button type="button" class="btn btn-default"&gt;one&lt;/button&gt;
+      &lt;button type="button" class="btn btn-default"&gt;two&lt;/button&gt;
+      &lt;button type="button" class="btn btn-default"&gt;three&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;hr&gt;
+    &lt;div class="btn-group btn-group-sm"&gt;
+      &lt;button type="button" class="btn btn-default"&gt;one&lt;/button&gt;
+      &lt;button type="button" class="btn btn-default"&gt;two&lt;/button&gt;
+      &lt;button type="button" class="btn btn-default"&gt;three&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;hr&gt;
+    &lt;div class="btn-group btn-group-xs"&gt;
+      &lt;button type="button" class="btn btn-default"&gt;one&lt;/button&gt;
+      &lt;button type="button" class="btn btn-default"&gt;two&lt;/button&gt;
+      &lt;button type="button" class="btn btn-default"&gt;three&lt;/button&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/body&gt; 
+&lt;/html&gt; 
+</pre>
+<p>Y tenemos como resultado en el navegador una página similar a:</p>
+<img src="imagentema/foto033.jpg" border="0" alt="button btn-group btn-group-xs btn-group-sm btn-group-lg bootstrap"><br> <h2><a target="_blank" href="ejecutareb15.html?cod=139">Ejecutar Ejemplo</a></h2><h2><a href="index28fa.html?inicio=20">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-32', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/detalleconcepto.php?punto=24&codigo=139&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:30 GMT -->
+</html>

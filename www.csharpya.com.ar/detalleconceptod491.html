@@ -1,0 +1,385 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=138&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:53:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - Declaración de métodos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>14 - Declaración de métodos</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p>Cuando uno plantea una clase en lugar de especificar todo el algoritmo en un único método (lo que hicimos en los primeros pasos de este tutorial) es dividir todas las responsabilidades de las clase en un conjunto de métodos.</p>
+<p>Un método hemos visto que tiene la siguiente sintaxis:</p>
+<pre>
+public void [nombre del método]() 
+{
+    [algoritmo]
+}
+</pre>
+<p>Veremos que hay varios tipos de métodos:</p>
+<h3>Métodos con parámetros.</h3>
+<p>Un método puede tener parámetros:</p>
+<pre>
+public void [nombre del método]([parámetros]) 
+{
+    [algoritmo]
+}
+</pre>
+<p>Los parámetros los podemos imaginar como variables locales al método, pero su valor se inicializa con datos que llegan cuando lo llamamos.</p>
+<h3>Problema 1:</h3>
+<p>Confeccionar una clase que permita ingresar valores enteros por teclado y nos muestre la tabla de multiplicar de dicho valor. Finalizar el programa al ingresar el -1.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Tabla
+{
+    class TablaMultiplicar
+    {
+        public void CargarValor()
+        {
+            int valor;
+            string linea;
+            do
+            {
+                Console.Write("Ingrese un valor (-1 para finalizar):");
+                linea = Console.ReadLine();
+                valor = int.Parse(linea);
+                if (valor != -1)
+                {
+                    Calcular(valor);
+                }
+            } while (valor != -1);
+        }
+
+        public void Calcular(int v)
+        {
+            for(int f=v;f<=v*10;f=f+v) 
+            {
+                Console.Write(f+"-");
+            }
+            Console.WriteLine();
+        }
+
+        static void Main(string[] args)
+        {
+            TablaMultiplicar tm = new TablaMultiplicar();
+            tm.CargarValor();
+        }
+    }
+}
+</pre>
+<p>En esta clase no hemos definido ningún atributo.</p>
+<p>El método Calcular recibe un parámetro de tipo entero, luego lo utilizamos dentro del método para mostrar la tabla de multiplicar de dicho valor, para esto inicializamos la variable f con el valor que llega en el parámetro. Luego de cada ejecución del for incrementamos el contador f con el valor de v.</p>
+<pre>
+        public void Calcular(int v)
+        {
+            for(int f=v;f<=v*10;f=f+v) 
+            {
+                Console.Write(f+"-");
+            }
+            Console.WriteLine();
+        }
+</pre>
+<p>Un método puede no tener parámetros como hemos visto en problemas anteriores o puede tener uno o más parámetros (en caso de tener más de un parámetro los mismos se separan por coma)</p>
+<p>El método CargarValores no tiene parámetros y tiene por objetivo cargar un valor entero por teclado y llamar al método Calcular para que muestre la tabla de multiplicar del valor que le pasamos por teclado:</p>
+<pre>
+        public void CargarValor()
+        {
+            int valor;
+            string linea;
+            do
+            {
+                Console.Write("Ingrese un valor (-1 para finalizar):");
+                linea = Console.ReadLine();
+                valor = int.Parse(linea);
+                if (valor != -1)
+                {
+                    Calcular(valor);
+                }
+            } while (valor != -1);
+        }
+</pre>
+<p>Como vemos al método Calcular lo llamamos por su nombre y entre paréntesis le pasamos el dato a enviar (debe ser un valor o variable entera)</p>
+<p>En este problema en la Main solo llamamos al método CargarValor, ya que el método Calcular luego es llamado por el método CargarValor:</p>
+<pre>
+        static void Main(string[] args)
+        {
+            TablaMultiplicar tm = new TablaMultiplicar();
+            tm.CargarValor();
+        }
+</pre>
+
+<h3>Métodos que retornan un dato.</h3>
+<p>Un método puede retornar un dato:</p>
+<pre>
+public [tipo de dato] [nombre del método]([parámetros]) 
+{
+  [algoritmo]
+  return [tipo de dato]
+}
+</pre>
+<p>Cuando un método retorna un dato en vez de indicar la palabra clave void previo al nombre del método indicamos el tipo de dato que retorna. Luego dentro del algoritmo en el momento que queremos que finalice el mismo y retorne el dato empleamos la palabra clave return con el valor respectivo.
+</p>
+<h3>Problema 2:</h3>
+<p>Confeccionar una clase que permita ingresar tres valores por teclado. Luego mostrar el mayor y el menor.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace EspacioMayorMenor
+{
+    class MayorMenor
+    {
+
+        public void cargarValores()
+        {
+            string linea;
+            Console.Write("Ingrese primer valor:");
+            linea = Console.ReadLine();
+            int valor1 = int.Parse(linea);
+            Console.Write("Ingrese segundo valor:");
+            linea = Console.ReadLine();
+            int valor2 = int.Parse(linea);
+            Console.Write("Ingrese tercer valor:");
+            linea = Console.ReadLine();
+            int valor3 = int.Parse(linea);
+            int mayor, menor;
+            mayor = CalcularMayor(valor1, valor2, valor3);
+            menor = CalcularMenor(valor1, valor2, valor3);
+            Console.WriteLine("El valor mayor de los tres es:" + mayor);
+            Console.WriteLine("El valor menor de los tres es:" + menor);
+        }
+
+        public int CalcularMayor(int v1, int v2, int v3)
+        {
+            int m;
+            if (v1 > v2 && v1 > v3)
+            {
+                m = v1;
+            }
+            else
+            {
+                if (v2 > v3)
+                {
+                    m = v2;
+                }
+                else
+                {
+                    m = v3;
+                }
+            }
+            return m;
+        }
+
+        public int CalcularMenor(int v1, int v2, int v3)
+        {
+            int m;
+            if (v1 < v2 && v1 < v3)
+            {
+                m = v1;
+            }
+            else
+            {
+                if (v2 < v3)
+                {
+                    m = v2;
+                }
+                else
+                {
+                    m = v3;
+                }
+            }
+            return m;
+        }
+
+        static void Main(string[] args)
+        {
+            MayorMenor mm = new MayorMenor();
+            mm.cargarValores();
+            Console.ReadKey();
+        }
+    }
+}
+</pre>
+<p>Si vemos la sintaxis que calcula el mayor de tres valores enteros es similar al algoritmo visto en conceptos anteriores:</p>
+<pre>
+</pre>
+<p>Lo primero que podemos observar que el método retorna un entero y recibe tres parámetros:</p>
+<pre>
+        public int CalcularMayor(int v1, int v2, int v3) 
+</pre>
+<p>Dentro del método verificamos cual de los tres parámetros almacena un valor mayor, a este valor lo almacenamos en una variable local llamada "m", al valor almacenado en esta variable lo retornamos al final con un return.</p>
+<p>La llamada al método calcularMayor lo hacemos desde dentro del método CargarCalores:</p>
+<pre>
+        mayor=CalcularMayor(valor1,valor2,valor3);
+</pre>
+<p>Debemos asignar a una variable el valor devuelto por el método CalcularMayor. Luego el contenido de la variable mayor lo mostramos:</p>
+<pre>
+            Console.WriteLine("El valor mayor de los tres es:"+mayor);
+            Console.WriteLine("El valor menor de los tres es:"+menor);
+</pre>
+<p>La lógica es similar para el cálculo del menor.</p></div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="index2904.html?inicio=0">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=138&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:53:55 GMT -->
+</html>

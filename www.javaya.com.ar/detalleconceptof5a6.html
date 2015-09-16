@@ -1,0 +1,387 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=108&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:53 GMT -->
+<head>
+<title>Swing - JTextArea</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Swing - JTextArea</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>El control de tipo JTextArea permite ingresar múltiples líneas, a diferencia del control de tipo JTextField.</p>
+
+<h3>Problema 1:</h3>
+<p>Confeccionar un programa que permita ingresar un mail en un control de tipo JTextField y el cuerpo del mail en un control de tipo JTextArea.</p>
+<img src="imagentema/foto073.jpg" border="0" alt="JTextArea">
+<h4>Programa:</h4>
+<pre class="recuadro">
+import javax.swing.*;
+public class Formulario extends JFrame{
+    private JTextField textfield1;
+    private JTextArea textarea1;
+    public Formulario() {
+        setLayout(null);
+        textfield1=new JTextField();
+        textfield1.setBounds(10,10,200,30);
+        add(textfield1);
+        textarea1=new JTextArea();
+        textarea1.setBounds(10,50,400,300);
+        add(textarea1);
+    }
+
+    public static void main(String[] ar) {
+        Formulario formulario1=new Formulario();
+        formulario1.setBounds(0,0,540,400);
+        formulario1.setVisible(true);
+    }    
+}
+</pre>
+<p>Como vemos crear un control de tipo JTextArea es similar a la creación de controles de tipo JTextField:</p>
+<pre>
+        textarea1=new JTextArea();
+        textarea1.setBounds(10,50,400,300);
+        add(textarea1);
+</pre>
+<p>El inconveniente que tiene este control es que si ingresamos más texto que el que puede visualizar no aparecen las barras de scroll y no podemos ver los caracteres tipeados.</p>
+<p>Para salvar el problema anterior debemos crear un objeto de la clase JScrollPane y añadir en su interior el objeto de la clase JTextArea, luego el programa definitivo es el siguiente:</p>
+<pre class="recuadro">
+import javax.swing.*;
+public class Formulario extends JFrame{
+    private JTextField textfield1;
+    private JScrollPane scrollpane1;
+    private JTextArea textarea1;
+    public Formulario() {
+        setLayout(null);
+        textfield1=new JTextField();
+        textfield1.setBounds(10,10,200,30);
+        add(textfield1);
+        textarea1=new JTextArea();        
+        scrollpane1=new JScrollPane(textarea1);    
+        scrollpane1.setBounds(10,50,400,300);
+        add(scrollpane1);
+    }
+
+    public static void main(String[] ar) {
+        Formulario formulario1=new Formulario();
+        formulario1.setBounds(0,0,540,400);
+        formulario1.setVisible(true);
+    }    
+}
+</pre>
+<img src="imagentema/foto074.jpg" border="0" alt="JTextArea">
+<p>Declaramos los dos objetos:</p>
+<pre>
+    private JScrollPane scrollpane1;
+    private JTextArea textarea1;
+</pre>
+<p>Primero creamos el objeto de la clase JTextArea:</p>
+<pre>
+        textarea1=new JTextArea();        
+</pre>
+<p>Seguidamente creamos el objeto de la clase JScrollPane y le pasamos como parámetro el objeto de la clase JTextArea:</p>
+<pre>
+        scrollpane1=new JScrollPane(textarea1);    
+</pre>
+<p>Definimos la posición y tamaño del control de tipo JScrollPane (y no del control JTextArea):</p>
+<pre>
+        scrollpane1.setBounds(10,50,400,300);
+</pre>
+<p>Finalmente añadimos el control de tipo JScrollPane al JFrame:</p>
+<pre>
+        add(scrollpane1);
+</pre>
+
+<h3>Problema 2:</h3>
+<p>Confeccionar un programa que permita ingresar en un control de tipo JTextArea una carta. Luego al presionar un botón mostrar un mensaje si la carta contiene el String "argentina".</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+import javax.swing.*;
+import java.awt.event.*;
+public class Formulario extends JFrame implements ActionListener{
+    private JScrollPane scrollpane1;
+    private JTextArea textarea1;
+    private JButton boton1;
+    public Formulario() {
+        setLayout(null);
+        textarea1=new JTextArea();
+        scrollpane1=new JScrollPane(textarea1);
+        scrollpane1.setBounds(10,10,300,200);
+        add(scrollpane1);
+        boton1=new JButton("Verificar");
+        boton1.setBounds(10,260,100,30);
+        add(boton1);
+        boton1.addActionListener(this);
+    }
+    
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==boton1) {
+            String texto=textarea1.getText();
+            if (texto.indexOf("argentina")!=-1) {
+                setTitle("Si contiene el texto \"argentina\"");
+            } else {
+                setTitle("No contiene el texto \"argentina\"");            
+            }
+        }
+    }
+    
+    public static void main(String[] ar) {
+        Formulario formulario1=new Formulario();
+        formulario1.setBounds(0,0,400,380);
+        formulario1.setVisible(true);
+    }        
+}
+</pre>
+<p>Cuando se presiona el botón se ejecuta el método actionPerformed y procedemos a extraer el contenido del control TextArea a través del método getText:</p>
+<pre>
+            String texto=textarea1.getText();
+</pre>
+<p>Luego mediante el método indexOf de la clase String verificamos si el String "argentina" está contenido en la variable texto:</p>
+<pre>
+            if (texto.indexOf("argentina")!=-1) {
+                setTitle("Si contiene el texto \"argentina\"");
+            } else {
+                setTitle("No contiene el texto \"argentina\"");            
+            }
+</pre>
+<p>Si queremos introducir una comilla doble dentro de un String de Java debemos antecederle la barra invertida (luego dicho caracter no se lo considera parte del String):</p>
+<pre>
+setTitle("Si contiene el texto \"argentina\"");
+</pre>
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Disponer dos controles de tipo JTextArea, luego al presionar un botón verificar si tienen exactamente el mismo contenido.</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+import javax.swing.*;
+import java.awt.event.*;
+public class Formulario extends JFrame implements ActionListener{
+    private JScrollPane scrollpane1,scrollpane2;
+    private JTextArea textarea1,textarea2;
+    private JButton boton1;
+    public Formulario() {
+        setLayout(null);
+        textarea1=new JTextArea();
+        scrollpane1=new JScrollPane(textarea1);
+        scrollpane1.setBounds(10,10,200,140);
+        add(scrollpane1);
+        textarea2=new JTextArea();
+        scrollpane2=new JScrollPane(textarea2);
+        scrollpane2.setBounds(220,10,200,140);
+        add(scrollpane2);
+        boton1=new JButton("Verificar contenidos");
+        boton1.setBounds(10,170,150,30);
+        add(boton1);
+        boton1.addActionListener(this);
+    }
+    
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==boton1) {
+            String texto1=textarea1.getText();
+            String texto2=textarea2.getText();
+            if (texto1.equals(texto2)==true) {
+                setTitle("Los dos controles tiene el mismo texto.");
+            } else {
+            	setTitle("Los dos controles no tiene el mismo texto.");
+            }            	
+        }
+    }
+
+    public static void main(String[] ar) {
+        Formulario formulario1=new Formulario();
+        formulario1.setBounds(0,0,500,350);
+        formulario1.setVisible(true);
+    }            
+}
+</pre></div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=108&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:54 GMT -->
+</html>

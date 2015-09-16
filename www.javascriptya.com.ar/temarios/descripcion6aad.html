@@ -1,0 +1,224 @@
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=60&cod=64 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de JavaScript : Conceptos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+div#contentdetalle{clear:left;
+                   max-width:900px;
+				   border-top:0px solid #999;
+				   padding-top:15px;
+				   background-color: #aed7a8;
+				   text-align:left;
+				   font-size:1.3em;
+				   font-weight:normal;
+				   font-family:arial;
+				   padding:20px}
+				   
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;  
+}				   
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td>
+<h1>Eventos: click y dblclick</h1></td>
+<td align="right">
+<!--<a href="http://www.javascriptya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div id="contentdetalle">
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 	  
+
+<p>Dos eventos que podemos capturar de cualquier elemento HTML son cuando un usuario hace un clic o un doble clic sobre el mismo.<br>
+El evento click se produce cuando el usuario hace un solo clic sobre el elemento HTML y suelta inmediatamente el botón del mouse en el mismo lugar y el dblclick cuando presiona en forma sucesiva en la misma ubicación.</p>
+<p>Para probar como registramos estos eventos implementaremos una página que muestre dos div y definiremos el evento click para el primero y el evento dblclick para el segundo.</p>
+<br>
+<br>
+<br>
+<br>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+
+&lt;script type="text/javascript"&gt;
+
+  addEventListener('load',inicio,false);
+
+  function inicio()
+  {
+    document.getElementById('recuadro1').addEventListener('click',presion1,false);
+    document.getElementById('recuadro2').addEventListener('dblclick',presion2,false);
+  }
+
+  function presion1()
+  {
+    alert('se hizo click');
+  }
+
+  function presion2()
+  {
+    alert('se hizo doble click');
+  }
+
+&lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;div style="width:200px;height:200px;background:#ffff00" id="recuadro1"&gt;
+Prueba del evento click
+&lt;/div&gt;
+&lt;div style="width:200px;height:200px;background:#ff5500" id="recuadro2"&gt;
+Prueba del evento dblclick
+&lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Primero registramos mediante la llamada al método addEventListener el evento load de la página (recordemos que esta forma de registrar los eventos no funciona en el IE8 o anteriores, pero en muy poco tiempo la cantidad de dispositivos con dichos navegadores serán ínfimas), y dentro de la función inicio registramos los eventos click y dblclick para los dos div que definimos en la página HTML:</p>
+<pre>
+  addEventListener('load',inicio,false);
+
+  function inicio()
+  {
+    document.getElementById('recuadro1').addEventListener('click',presion1,false);
+    document.getElementById('recuadro2').addEventListener('dblclick',presion2,false);
+  }
+</pre>
+ 
+<p>Como vemos lo único que hacemos en los métodos que se disparan es mostrar un mensaje:</p>
+<pre>
+  function presion1()
+  {
+    alert('se hizo click');
+  }
+
+  function presion2()
+  {
+    alert('se hizo doble click');
+  }
+</pre></p>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../indexd6cc.html?inicio=60">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=60&cod=64 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:24 GMT -->
+</html>

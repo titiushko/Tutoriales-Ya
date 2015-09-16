@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=1&codigo=1&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:48:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Instalación de Node.js</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++, programación, tutorial, nodejs">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de NodeJS.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>1 - Instalación de Node.js</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Node.js es una plataforma para el desarrollo de aplicaciones en JavaScript que se ejecutan fundamentalmente en un equipo servidor (pero eventualmente podemos desarrollar aplicaciones cliente)</p>
+<p>Presenta grandes ventajas en la implementación de aplicaciones que deben responder en tiempo real como por ejemplo los juegos multijugador.</p>
+<p>Poco sentido tiene utilizar Nodo.js en sitios web mayormente estáticos. Hay muchas aplicaciones actuales donde el contenido de la página varía constantemente: Twitter, Facebook, chats, juegos multijugador etc. donde Node.js puede hacer más eficiente la aplicación que se ejecuta en el servidor.</p>
+<p>Tiene su origen por el año 2009 y toma como base el motor de JavaScript V8 desarrollado por Google.</p>
+<p>Cuando desarrollamos aplicaciones en la plataforma Node.js utilizamos el lenguaje JavaScript para la implementación. Disponemos de numerosos módulos que nos facilitan la implementación de servidores web, administración de archivos, protocolos de comunicaciones etc.</p>
+<p>Lo primero que haremos es instalar el Node.js que lo podemos descargar de:<a href="https://nodejs.org/download/" target=_blanck">aquí</a>.</p>
+<p>Procedemos a ejecutar el programa que descargamos e instalamos en nuestro equipo:</p>
+<p><img src="imagentema/foto001.jpg" border="0" alt="instalacion nodejs"></p>
+<p>Dejamos por defecto que instale el Node.js runtime (es el corazón de Node.js)<br>
+<p>El npm que es otro programa que nos permitirá agregar otros paquetes a nuestro entorno de desarrollo de Node.js</p>
+<p>Una vez instalado el Node.js debemos abrir una consola ("Símbolo del sistema") en nuestro sistema operativo para controlar que funciona correctamente, esto lo podemos hacer desde el menú:</p>
+<p><img src="imagentema/foto002.jpg" border="0" alt="símbolo del sistema"></p>
+<p>O escribiendo el comando "cmd" donde dice "Buscar programas y archivos":</p>
+<p><img src="imagentema/foto003.jpg" border="0" alt="símbolo del sistema"></p>
+
+<p>Si el programa Node.js se instaló correctamente al tipear node en la consola debería aparecer:</p>
+<p><img src="imagentema/foto004.jpg" border="0" alt="símbolo del sistema y nodejs"></p>
+<p>Desde esta línea de comandos podemos ejecutar instrucciones en JavaScript para ver que Node.js efectivamente está funcionando:</p>
+<p><img src="imagentema/foto005.jpg" border="0" alt="símbolo del sistema y nodejs"></p>
+<p>Como vemos definimos un vector llamado lenguajes y lo inicializamos con 3 string. Luego mediante el objeto console llamamos al método log para que muestre el contenido de la variable de tipo vector llamada lenguajes.</p>
+<p>Desde la línea de comandos de node.js podemos ejecutar instrucciones de Javascript pero si lo que necesitamos es implementar un problema más complejo debemos codificar con un editor de texto un programa y almacenarlo con extensión js para luego ejecutarlo llamando al programa node.</p>
+
+<p>Podemos ahora salir de la línea de comandos de node escribiendo el comando .exit:</p>
+<p><img src="imagentema/foto006.jpg" border="0" alt="salir de la línea de comandos nodejs"></p>
+<p>Ahora nuevamente nos encontramos en la línea de comandos pero del sistema operativo.</p>
+
+<p>Codifiquemos con nuestro editor de texto favorito (por ejemplo <a href="https://notepad-plus-plus.org/" target="_blank">Notepad++</a>) un pequeño programa y lo almacenemos en una carpeta de nuestro sistema operativo donde guardaremos los distintos ejercicios que iremos codificando en este tutorial:</p>
+<p><img src="imagentema/foto007.jpg" border="0" alt="editor notepad++"></p>
+<p>Hemos codificado el programa:</p>
+<pre class="recuadro">
+console.log('Mi primer programa con Node.js');
+console.log('Fin');
+</pre>
+<p>Y lo hemos guardado en un archivo llamado ejercicio1.js en la carpeta c:\ejerciciosnodejs\</p>
+<p>Veamos ahora como lo ejecutaremos a nuestro programa. Primero abrimos nuevamente una consola ("Símbolo del sistema") en nuestro sistema operativo nos posicionamos en la carpeta ejerciciosnodejs:</p>
+<p><img src="imagentema/foto008.jpg" border="0" alt="simbolo del sistema windows"></p>
+<p>Debemos cambiar y posicionarnos en la carpeta donde almacenamos nuestro programa mediante el comando del sistema operativo Windows "cd" y el path (camino) de la carpeta:</p>
+<pre>
+cd c:\ejerciciosnodejs
+</pre>
+<p>Finalmente ejecutamos el programa que almacenamos en el archivo ejercicio1.js mediante la sintaxis (node ejercicio1.js):</p>
+<p><img src="imagentema/foto009.jpg" border="0" alt="ejecución de programa nodejs"></p>
+<p>El resultado del programa aparece en la misma consola (ya que nuestro programa solo muestra dos mensajes utilizando el objeto console)</p>
+
+<p>El resultado de nuestro primer programa es sumamente sencillo pero hemos aprendido a codificar un programa Nodejs, almacenarlo en una carpeta de nuestro sistema y luego ejecutarlo. Este proceso será idéntica a medida que avancemos con este tutorial.</p>
+
+
+<h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-35', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=1&codigo=1&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:49:21 GMT -->
+</html>

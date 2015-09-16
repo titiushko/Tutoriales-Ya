@@ -1,0 +1,223 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.phpya.com.ar/poo/temarios/descripcion.php?cod=36&punto=2&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:08:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<title>Conceptos de PHP Orientado a Objetos</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="PHP,POO, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de POO.">
+<meta name="author" content="Diego Moisset">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" type="text/JavaScript">
+
+</script>
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>2 - Declaración de una clase y creación de un objeto.</h1></td>
+<td align="right">
+<!--<a href="http://www.phpya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+	  
+<div style="font-size:1.3em;font-family:arial;">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+ 
+</div> 
+<p>La programación orientada a objetos se basa en la programación de clases;  a diferencia de la programación estructurada, que está centrada en las funciones.</p>
+<p>Una clase es un molde del que luego se pueden crear múltiples objetos, con similares características.</p>
+<p>Un poco más abajo se define una clase Persona y luego se crean dos objetos de dicha clase.</>
+<p>Una clase es una plantilla (molde), que define atributos (lo que conocemos como variables) y métodos (lo que conocemos como funciones).</p>
+<p>La clase define los atributos y métodos comunes a los objetos de ese tipo, pero luego, cada objeto tendrá sus propios valores y compartirán las mismas funciones.</p>
+<p>Debemos crear una clase antes de poder crear objetos (instancias) de esa clase. Al crear un objeto de una clase, se dice que se crea una instancia de la clase o un objeto propiamente dicho.</p>
+<p>Confeccionaremos nuestra primer clase para conocer la sintaxis en el lenguaje PHP, luego definiremos dos objetos de dicha clase.</p>
+<p>Implementaremos una clase llamada Persona que tendrá como atributo (variable) su nombre y dos métodos (funciones), uno de dichos métodos inicializará el atributo nombre y el siguiente método mostrará en la página el contenido del mismo.</p>
+<p>pagina1.php</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Pruebas&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+class Persona {
+  private $nombre;
+  public function inicializar($nom)
+  {
+    $this-&gt;nombre=$nom;
+  }
+  public function imprimir()
+  {
+    echo $this-&gt;nombre;
+    echo '&lt;br&gt;';
+  }
+}
+
+$per1=new Persona();
+$per1-&gt;inicializar('Juan');
+$per1-&gt;imprimir();
+$per2=new Persona();
+$per2-&gt;inicializar('Ana');
+$per2-&gt;imprimir();
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>La sintaxis básica para declarar una clase es:</p>
+<pre>
+class [Nombre de la Clase] {
+  [atributos]
+  [métodos]
+}
+</pre>
+<p>Siempre conviene buscar un nombre de clase lo más próximo a lo que representa. La palabra clave para declarar la clase es class, seguidamente el nombre de la clase y luego encerramos entre llaves de apertura y cerrado todos sus atributos(variable) y métodos(funciones).</p>
+<p>Nuestra clase Persona queda definida entonces:</p>
+<pre>
+class Persona {
+  private $nombre;
+  public function inicializar($nom)
+  {
+    $this-&gt;nombre=$nom;
+  }
+  public function imprimir()
+  {
+    echo $this-&gt;nombre;
+    echo '&lt;br&gt;';
+  }
+}
+</pre>
+<p>Los atributos normalmente son privados (private), ya veremos que esto significa que no podemos acceder al mismo desde fuera de la clase. Luego para definir los métodos se utiliza la misma sintaxis que las funciones del lenguaje PHP.</p>
+<p>Decíamos que una clase es un molde que nos permite definir objetos. Ahora veamos cual es la sintaxis para la definición de objetos de la clase Persona:</p>
+<pre>
+$per1=new Persona();
+$per1-&gt;inicializar('Juan');
+$per1-&gt;imprimir();
+</pre>
+<p>Definimos un objeto llamado $per1 y lo creamos asignándole lo que devuelve el operador new. Siempre que queremos crear un objeto de una clase utilizamos la sintaxis new [Nombre de la Clase].</p>
+<p>Luego para llamar a los métodos debemos anteceder el nombre del objeto el operador -&gt; y por último el nombre del método. Para poder llamar al método,éste debe ser definido público (con la palabra clave public).  En el caso que tenga parámetros se los enviamos:</p>
+<pre>
+$per1-&gt;inicializar('Juan');
+</pre>
+<p>También podemos ver que podemos definir tantos objetos de la clase Persona como sean necesarios para nuestro algoritmo:</p>
+<pre>
+$per2=new Persona();
+$per2-&gt;inicializar('Ana');
+$per2-&gt;imprimir();
+</pre>
+<p>Esto nos da una idea que si en una página WEB tenemos 2 menúes, seguramente definiremos una clase Menu y luego crearemos dos objetos de dicha clase.</p>
+<p>Esto es una de las ventajas fundamentales de la Programación Orientada a Objetos (POO), es decir reutilización de código (gracias a que está encapsulada en clases) es muy sencilla.</p>
+<p>Lo último a tener en cuenta en cuanto a la sintaxis de este primer problema es que cuando accedemos a los atributos dentro de los métodos debemos utilizar los operadores $this-&gt; (this y -&gt):</p> 
+<pre>
+  public function inicializar($nom)
+  {
+    $this-&gt;nombre=$nom;
+  }
+</pre>
+<p>El atributo $nombre solo puede ser accedido por los métodos de la clase Persona.</p>
+</div>
+</p>
+
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* rec-gra */
+google_ad_slot = "4229715475";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+  <div>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+  </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+try {
+_uacct = "UA-628756-13";
+urchinTracker();
+} catch(err) {}</script>
+
+</body>
+
+
+<!-- Mirrored from www.phpya.com.ar/poo/temarios/descripcion.php?cod=36&punto=2&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:08:18 GMT -->
+</html>

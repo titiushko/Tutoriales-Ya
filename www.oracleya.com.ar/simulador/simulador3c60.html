@@ -1,0 +1,310 @@
+        
+
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=100&cod=273&punto=115 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios resueltos : Disparadores (habilitar y deshabilitar)(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+<body bgcolor="#CCFFCC">
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>115 - Disparadores (habilitar y deshabilitar)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Una empresa almacena los datos de sus empleados en una tabla denominada "empleados". En una tabla denominada "controlCambios" guarda los cambios que se realizan en la tabla "empleados", en ella almacena el nombre del usuario que realiza la modificación, la fecha, el valor anterior del campo modificado y el nuevo valor.</p>
+<p>Eliminamos las tablas:</p>
+<pre>
+  drop table empleados;
+  drop table controlCambios;
+</pre>
+<p>Creamos las tablas, con las siguientes estructuras:</p>
+<pre>
+ create table empleados(
+  documento char(8) not null,
+  nombre varchar2(30) not null,
+  domicilio varchar2(30),
+  seccion varchar2(20)
+ );
+
+ create table controlCambios(
+  usuario varchar2(30),
+  fecha date,
+  datoanterior varchar2(30),
+  datonuevo varchar2(30)
+ );
+</pre>
+<p>Ingresamos algunos registros:</p>
+<pre>
+ insert into empleados values('22222222','Ana Acosta','Bulnes 56','Secretaria');
+ insert into empleados values('23333333','Bernardo Bustos','Bulnes 188','Contaduria');
+ insert into empleados values('24444444','Carlos Caseres','Caseros 364','Sistemas');
+ insert into empleados values('25555555','Diana Duarte','Colon 1234','Sistemas');
+ insert into empleados values('26666666','Diana Duarte','Colon 897','Sistemas');
+ insert into empleados values('27777777','Matilda Morales','Colon 542','Gerencia');
+</pre>
+<p>Creamos un disparador que se active cuando modificamos algún campo de "empleados" y almacene en "controlCambios" el nombre del usuario que realiza la actualización, la fecha, el dato que se cambia y el nuevo valor:</p>
+<pre>
+ create or replace trigger tr_actualizar_empleados
+  before update
+  on empleados
+  for each row
+ begin
+  if updating('documento') then
+   insert into controlCambios values(user,sysdate, :old.documento, :new.documento);
+  end if;
+  if updating('nombre') then
+   insert into controlCambios values(user,sysdate, :old.nombre, :new.nombre);
+  end if;
+  if updating('domicilio') then
+   insert into controlCambios values(user,sysdate, :old.domicilio, :new.domicilio);
+  end if;
+  if updating('seccion') then
+   insert into controlCambios values(user,sysdate, :old.seccion, :new.seccion);
+  end if;
+ end tr_actualizar_empleados;
+</pre>
+<p>Creamos otro desencadenador que se active cuando ingresamos un nuevo registro en "empleados", debe almacenar en "controlCambios" el nombre del usuario que realiza el ingreso, la fecha, "null" en "datoanterior" (porque se dispara con una inserción) y en "datonuevo" el documento:</p>
+<pre>
+ create or replace trigger tr_ingresar_empleados
+  before insert
+  on empleados
+  for each row
+ begin
+   insert into controlCambios values(user,sysdate, null, :new.documento);
+ end tr_ingresar_empleados;
+</pre>
+<p>Creamos un tercer trigger sobre "empleados" que se active cuando eliminamos un registro en "empleados", debe almacenar en "controlCambios" el nombre del usuario que realiza la eliminación, la fecha, el documento en "datoanterior" y "null" en "datonuevo":</p>
+<pre>
+ create or replace trigger tr_eliminar_empleados
+  before delete
+  on empleados
+  for each row
+ begin
+   insert into controlCambios values(user,sysdate, :old.documento, null);
+ end tr_eliminar_empleados;
+</pre>
+<p>Los tres triggers están habilitados. Consultamos el diccionario "user_triggers" para corroborarlo:</p>
+<pre>
+ select trigger_name, triggering_event, status
+  from user_triggers
+  where trigger_name like 'TR%EMPLEADOS';
+</pre>
+<p>Vamos a ingresar un empleado y comprobar que el trigger "tr_ingresar_empleados" se dispara recuperando los registros de "controlCambios":</p>
+<pre>
+ insert into empleados values('28888888','Pedro Perez','Peru 374','Secretaria');
+ select *from controlCambios;
+</pre>
+<p>Deshabilitamos el trigger "tr_ingresar_empleados":</p>
+<pre>
+ alter  trigger tr_ingresar_empleados disable;
+</pre>
+<p>Consultamos el diccionario "user_triggers" para corroborarlo:</p>
+<pre>
+ select trigger_name, status
+  from user_triggers
+  where trigger_name like 'TR%EMPLEADOS';
+</pre>
+<p>El trigger "tr_ingresar_empleados" está deshabilitado, "tr_actualizar_empleados" y "tr_elimnar_empleados" están habilitados.</p>
+
+<p>Vamos a ingresar un empleado y comprobar que el trigger de inserción no se dispara recuperando los registros de "controlCambios":</p>
+<pre>
+ insert into empleados values('29999999','Rosa Rodriguez','Rivadavia 627','Secretaria');
+ select *from controlCambios;
+</pre>
+<p>Vamos a actualizar el domicilio de un empleado y comprobar que el trigger de actualización se dispara recuperando los registros de "controlCambios":</p>
+<pre>
+ update empleados set domicilio='Bulnes 567' where documento='22222222';
+ select *from controlCambios;
+</pre>
+<p>Deshabilitamos el trigger "tr_actualizar_empleados":</p>
+<pre>
+ alter  trigger tr_actualizar_empleados disable;
+</pre>
+<p>Consultamos el diccionario "user_triggers" para corroborarlo:</p>
+<pre>
+ select trigger_name, status
+  from user_triggers
+  where trigger_name like 'TR%EMPLEADOS';
+</pre>
+<p>Los triggers "tr_ingresar_empleados" y "tr_actualizar_empleados" están deshabilitados, "tr_eliminar_empleados" está habilitado.</p>
+
+<p>Vamos a borrar un empleado de "empleados" y comprobar que el trigger de borrado se disparó recuperando los registros de "controlCambios":</p>
+<pre>
+ delete from empleados where documento= '29999999';
+ select *from controlCambios;
+</pre>
+<p>Deshabilitamos el trigger "tr_eliminar_empleados":</p>
+<pre>
+ alter  trigger tr_eliminar_empleados disable;
+</pre>
+<p>Consultamos el diccionario "user_triggers" para comprobarlo:</p>
+<pre>
+ select trigger_name, status
+  from user_triggers
+  where table_name = 'EMPLEADOS';
+</pre>
+<p>Los tres trigger establecidos sobre "empleados" están deshabilitados.</p>
+
+<p>Eliminamos un empleado de "empleados" y comprobamos que el trigger de borrado no se dispara recuperando los registros de "controlCambios":</p>
+<pre>
+ delete from empleados where documento= '28888888';
+ select *from controlCambios;
+</pre>
+<p>Habilitamos el trigger "tr_actualizar_empleados":</p>
+<pre>
+ alter  trigger tr_actualizar_empleados enable;
+</pre>
+<p>Actualizamos la sección de un empleado y comprobamos que el trigger de actualización se dispara recuperando los registros de "controlCambios":</p>
+<pre>
+ update empleados set seccion='Sistemas' where documento='23333333';
+ select *from controlCambios;
+</pre>
+<p>Habilitamos todos los triggers establecidos sobre "empleados":</p>
+<pre>
+ alter table empleados enable all triggers;
+</pre>
+<p>Consultamos el diccionario "user_triggers" para comprobar que el estado (status) de todos los triggers establecidos sobre "empleados" es habilitado:</p>
+<pre>
+ select trigger_name, triggering_event, status
+  from user_triggers
+  where table_name = 'EMPLEADOS';
+</pre>
+<p>Los tres trigger establecidos sobre "empleados" han sido habilitados. Se activarán ante cualquier sentencia "insert", "update" y "delete".</p>
+
+        <form name="formulario" action="http://www.sqlserverya.com.ar/aspx/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+        <br>
+   <h2><a href="../indexf6ce.html?inicio=100">Retornar</a></h2>   
+        
+	<br>
+   
+
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=100&cod=273&punto=115 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+</html>
+

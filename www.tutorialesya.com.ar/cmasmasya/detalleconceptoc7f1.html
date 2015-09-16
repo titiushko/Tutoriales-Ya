@@ -1,0 +1,534 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=22&codigo=149&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Constructor de la clase</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>22 - Constructor de la clase</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>En C++ podemos definir un método que se ejecute inicialmente y en forma automática. Este método se lo llama constructor.</p>
+<p>El constructor tiene las siguientes características:</p>
+<ul>
+<li>Tiene el mismo nombre de la clase.</li>
+<li>Es el primer método que se ejecuta.</li>
+<li>Se ejecuta en forma automática.</li>
+<li>No puede retornar datos.</li>
+<li>Se ejecuta una única vez.</li>
+<li>Un constructor tiene por objetivo inicializar atributos.</li>
+</ul>
+
+
+<h3>Problema 1:</h3>
+<p>Se desea guardar los sueldos de 5 operarios en un vector. Realizar la carga del vector en el constructor.<br>
+</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Operarios {
+private:
+    float sueldos[5];
+public:
+    Operarios();
+    void imprimir();
+};
+
+Operarios::Operarios()
+{
+    cout &lt;&lt;"Carga de sueldos." &lt;&lt;"\n";
+    for(int f=0;f &lt; 5;f++)
+    {
+        cout &lt;&lt;"Ingrese el sueldo:";
+        cin &gt;&gt;sueldos[f];
+    }
+}
+
+void Operarios::imprimir()
+{
+    for(int f = 0; f &lt; 5; f++)
+    {
+        cout &lt;&lt;sueldos[f] &lt;&lt;"\n";;
+    }
+    cin.get();
+    cin.get();
+}
+
+void main()
+{
+    Operarios op;
+    op.imprimir();
+}</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/Constructor1.zip">Constructor1.zip</a></p>
+
+
+<p>Como podemos ver es el mismo problema que resolvimos cuando vimos vectores. La diferencia es que hemos sustituido el método cargar con el constructor:</p>
+<pre>
+Operarios::Operarios()
+{
+    cout &lt;&lt;"Carga de sueldos." &lt;&lt;"\n";
+    for(int f=0;f &lt; 5;f++)
+    {
+        cout &lt;&lt;"Ingrese el sueldo:";
+        cin &gt;&gt;sueldos[f];
+    }
+}
+</pre>
+<p>Como la clase se llama Operarios el constructor tiene el mismo nombre, no disponemos la palabra clave void ya que el constructor no puede retornar datos.</p>
+<p>La ventaja de plantear un constructor en lugar de definir un método con cualquier nombre es que se llamará en forma automática cuando se defina un objeto de esta clase:</p>
+<pre>
+    Operarios op;   //se esta llamando al constructor en esta línea
+</pre>
+<p>Cuando se crea el objeto op se llama al método constructor.</p>
+<p>Finalmente llamamos al método imprimir con la sintaxis que ya conocemos:</p>
+<pre>
+    op.imprimir();
+</pre>
+
+<h3>Problema 2:</h3>
+<p>Plantear una clase llamada Alumno y definir como atributos su nombre y su edad. En el constructor realizar la carga de datos. Definir otros dos métodos para imprimir los datos ingresados y un mensaje si es mayor o no de edad (edad &gt;=18)<br>
+</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Alumno {
+private:
+    char nombre[40];
+    int edad;
+public:
+    Alumno();
+    void imprimir();
+    void esMayorEdad();
+};
+
+Alumno::Alumno()
+{
+    cout &lt;&lt;"Ingrese nombre:";
+    cin.getline(nombre,40);
+    cout &lt;&lt;"Ingrese la edad:";
+    cin &gt;&gt;edad;
+}
+
+void Alumno::imprimir()
+{
+    cout &lt;&lt;"Nombre:" &lt;&lt;nombre &lt;&lt;"\n";
+    cout &lt;&lt;"Edad:" &lt;&lt;edad &lt;&lt;"\n";
+}
+
+void Alumno::esMayorEdad()
+{
+    if (edad &gt;= 18) 
+    {
+        cout &lt;&lt;"es mayor de edad.";
+    }
+    else 
+    {
+        cout &lt;&lt;"no es mayor de edad.";
+    }
+    cin.get();
+    cin.get();
+}
+
+void main()
+{
+    Alumno alumno1;
+    alumno1.imprimir();
+    alumno1.esMayorEdad();
+}</pre>
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/Constructor2.zip">Constructor2.zip</a></p>
+
+<p>Declaramos la clase Alumno, sus dos atributos y definimos el constructor con el mismo nombre de la clase:</p>
+<pre>
+class Alumno {
+private:
+    char nombre[40];
+    int edad;
+public:
+    Alumno();
+    void imprimir();
+    void esMayorEdad();
+};
+</pre>
+<p>En el constructor realizamos la carga de los dos atributos por teclado:</p>
+<pre>
+Alumno::Alumno()
+{
+    cout &lt;&lt;"Ingrese nombre:";
+    cin.getline(nombre,40);
+    cout &lt;&lt;"Ingrese la edad:";
+    cin &gt;&gt;edad;
+}
+</pre>
+<p>En la main el constructor se llama en forma automática cuando definimos un objeto de la clase Alumno:</p>
+<pre>
+void main()
+{
+    Alumno alumno1;
+</pre>
+<p>Los otros dos métodos deben llamarse por su nombre y en el orden que necesitemos:</p>
+<pre>
+    alumno1.imprimir();
+    alumno1.esMayorEdad();
+</pre>
+
+<h3>Problema 3:</h3>
+<p>Plantear una clase llamada Moneda. Al constructor llega como parámetro el valor de la moneda (1,5,50 o 100) Definir luego dos objetos de esta clase con valores de moneda 5 y 50.
+</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Moneda {
+private:
+    int valor;
+public:
+    Moneda(int v);
+    void imprimir();
+};
+
+Moneda::Moneda(int v)
+{
+    valor=v;
+}
+
+void Moneda::imprimir()
+{
+    cout &lt;&lt;"Valor de la moneda:" &lt;&lt;valor &lt;&lt;"\n";
+}
+
+void main()
+{
+    Moneda moneda1(5);
+    Moneda moneda2(50);
+    moneda1.imprimir();
+    moneda2.imprimir();
+    cin.get();
+}
+</pre>
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/Constructor3.zip">Constructor3.zip</a></p>
+
+<p>Como hemos dicho un constructor no puede retornar dato, pero si puede recibir uno o más parámetros, en este caso el constructor recibe un entero (hay un atributo llamado valor que se inicializa en el constructor con el parámetro v):</p>
+<pre>
+class Moneda {
+private:
+    int valor;
+public:
+    Moneda(int v);
+    void imprimir();
+};
+
+Moneda::Moneda(int v)
+{
+    valor=v;
+}
+</pre>
+
+<p>Ahora cuando definimos un objeto de la clase Moneda debemos pasar un parámetro entero en el momento de definir el objeto:</p>
+<pre>
+    Moneda moneda1(5);
+</pre>
+
+<p>Como este problema requiere definir dos objetos de la clase moneda la función main completa es:</p>
+<pre>
+void main()
+{
+    Moneda moneda1(5);
+    Moneda moneda2(50);
+    moneda1.imprimir();
+    moneda2.imprimir();
+    cin.get();
+}
+</pre>
+
+<p>Si el constructor tiene un solo parámetro podemos utilizar la siguiente sintaxis alternativa para definir el objeto y que se llame el constructor:</p>
+<pre>
+	Moneda moneda1=5;
+</pre>
+
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Confeccionar una clase que represente un empleado. Definir como atributos su nombre y su sueldo. En el constructor cargar los atributos y luego en otro método imprimir sus datos y por último uno que imprima un mensaje si debe pagar impuestos (si el sueldo supera a 3000)
+</li>
+
+<li>
+Implementar la clase Operaciones. Al constructor llegan dos enteros que deben utilizarse en los métodos para calcular su suma, resta, multiplicación y división. imprimir dichos resultados.
+</li>
+
+
+</ol>
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class EmpleadoFabrica {
+private:
+    char nombre[40];
+    float sueldo;
+public:
+    EmpleadoFabrica();
+    void imprimir();
+    void pagaImpuestos();
+};
+
+EmpleadoFabrica::EmpleadoFabrica()
+{
+    cout &lt;&lt;"Ingrese el nombre del empleado:";
+    cin.getline(nombre,40);
+    cout &lt;&lt;"Ingrese su sueldo:";
+    cin &gt;&gt;sueldo;
+}
+
+void EmpleadoFabrica::imprimir()
+{
+    cout &lt;&lt;"Nombre:" &lt;&lt;nombre &lt;&lt;"\n";
+    cout &lt;&lt;"Sueldo"  &lt;&lt;sueldo &lt;&lt;"\n\n";
+}
+
+void EmpleadoFabrica::pagaImpuestos() 
+{
+    if (sueldo &gt; 3000)
+    {
+        cout &lt;&lt;"Debe abonar impuestos";
+    }
+    else 
+    {
+        cout &lt;&lt;"No paga impuestos";
+    }
+    cin.get();
+    cin.get();
+}
+    
+void main()
+{
+    EmpleadoFabrica empleado1;
+    empleado1.imprimir();
+    empleado1.pagaImpuestos();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/Constructor4.zip">Constructor4.zip</a></p>
+
+
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Operaciones {
+private:
+    int valor1,valor2;
+public:
+    Operaciones(int v1,int v2);
+    void sumar();
+    void restar();
+    void multiplicar();
+    void dividir();
+};
+
+Operaciones::Operaciones(int v1,int v2)
+{
+    valor1=v1;
+    valor2=v2;
+}
+
+void Operaciones::sumar()
+{
+    int suma;
+    suma=valor1+valor2;
+    cout &lt;&lt;"La suma es:" &lt;&lt;suma &lt;&lt;"\n";
+}
+
+void Operaciones::restar()
+{
+    int resta;
+    resta=valor1-valor2;
+    cout &lt;&lt;"La resta es:" &lt;&lt;resta &lt;&lt;"\n";
+}
+
+void Operaciones::multiplicar()
+{
+    int multi;
+    multi=valor1*valor2;
+    cout &lt;&lt;"El producto es:" &lt;&lt;multi &lt;&lt;"\n";
+}
+
+void Operaciones::dividir()
+{
+    int division;
+    division=valor1/valor2;
+    cout &lt;&lt;"La division es:" &lt;&lt;division &lt;&lt;"\n";
+}
+
+void main()
+{
+    Operaciones operaciones1(100,50);
+    operaciones1.sumar();
+    operaciones1.restar();
+    operaciones1.multiplicar();
+    operaciones1.dividir();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/Constructor5.zip">Constructor5.zip</a></p>
+
+</pre>
+<h2><a href="index9187.html?inicio=15">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=22&codigo=149&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:07 GMT -->
+</html>

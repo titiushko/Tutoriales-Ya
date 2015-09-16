@@ -1,0 +1,286 @@
+<html>
+
+<!-- Mirrored from www.sqlserverya.com.ar/simulador/simulador.php?inicio=75&cod=87&punto=81 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+    <title>Tutorial de SQL Server : Problemas Resueltos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+	  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;		
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=no,status=yes,toolbar=yes,location=yes');  	
+}
+</script>  
+</head>
+<body bgcolor="#CCFFCC">
+        
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>81 - Restricciones al crear la tabla</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Trabajamos con las tablas "libros", "autores" y "editoriales" de una librería:<br>
+Eliminamos las tablas si existen:</p>
+<pre>
+ if object_id('libros') is not null
+  drop table libros;
+ if object_id('editoriales') is not null
+  drop table editoriales;
+ if object_id('autores') is not null
+  drop table autores;
+</pre>
+<p>Creamos la tabla "editoriales" con una restricción "primary key":</p>
+<pre>
+ create table editoriales(
+  codigo tinyint not null,
+  nombre varchar(30),
+  constraint PK_editoriales primary key (codigo)
+);
+</pre>
+<p>Creamos la tabla "autores" con una restricción "primary key", una "unique" y una "check":</p>
+<pre>
+ create table autores(
+  codigo int not null
+   constraint CK_autores_codigo check (codigo>=0),
+  nombre varchar(30) not null,
+  constraint PK_autores_codigo
+   primary key (codigo),
+  constraint UQ_autores_nombre
+    unique (nombre),
+);
+</pre>
+<p>Aplicamos varias restricciones cuando creamos la tabla "libros":</p>
+<pre>
+ create table libros(
+  codigo int identity,
+  titulo varchar(40),
+  codigoautor int not null,
+  codigoeditorial tinyint not null,
+  precio decimal(5,2)
+   constraint DF_libros_precio default (0),
+  constraint PK_libros_codigo
+   primary key clustered (codigo),
+  constraint UQ_libros_tituloautor
+    unique (titulo,codigoautor),
+  constraint FK_libros_editorial
+   foreign key (codigoeditorial)
+   references editoriales(codigo)
+   on update cascade,
+  constraint FK_libros_autores
+   foreign key (codigoautor)
+   references autores(codigo)
+   on update cascade,
+  constraint CK_libros_precio_positivo check (precio>=0)
+);
+</pre>
+<p>Veamos las restricciones de "editoriales":</p>
+<pre>
+ sp_helpconstraint editoriales;
+</pre>
+<p>Aparece la restricción "primary key" para el campo "codigo" y la restricción "foreign key" de "libros" "FK_libros_editorial" que referencia esta tabla.</p>
+
+
+<p>Veamos las restricciones de "autores":</p>
+<pre>
+ sp_helpconstraint autores;
+</pre>
+<p>Aparecen 4 restricciones: una restricción "check" para el campo "codigo", una restricción "primary key" para el campo "codigo", una restricción "unique" para el campo "nombre" y la restricción "foreign key" de "libros" "FK_libros_autores" que referencia esta tabla.
+</p>
+<p>Veamos las restricciones de "libros":</p>
+<pre>
+ sp_helpconstraint libros;
+</pre>
+<p>Aparecen 6 restricciones: una restricción "check" sobre el campo "precio", una "default" sobre el campo "precio", una restricción "foreign key" que establece el campo "codigoeditorial" como clave externa que hace referencia al campo "codigo" de "editoriales" y permite actualizaciones en cascada y no eliminaciones, una restricción "foreign key" que establece el campo "codigoautor" como clave externa que hace referencia al campo "codigo" de "autores" y permite actualizaciones en cascada y no eliminaciones, una restricción "primary key" con índice agrupado para el campo "codigo" y una restricción "unique" con índice no agrupado para los campos "titulo" y "codigoautor".</p>
+
+<p>Recuerde que si definimos una restricción "foreign key" al crear una tabla, la tabla referenciada debe existir, por ello creamos las tablas "editoriales" y "autores" antes que "libros".</p>
+
+<p>También debemos ingresar registros en las tablas "autores" y "editoriales" antes que en "libros", a menos que deshabilitemos la restricción "foreign key".</p>
+
+
+        <form name="formulario" action="http://scratchya.com.ar/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+          <textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off">
+ if object_id('libros') is not null
+  drop table libros;
+ if object_id('editoriales') is not null
+  drop table editoriales;
+ if object_id('autores') is not null
+  drop table autores;
+
+ create table editoriales(
+  codigo tinyint not null,
+  nombre varchar(30),
+  constraint PK_editoriales primary key (codigo)
+ );
+
+ create table autores(
+  codigo int not null
+   constraint CK_autores_codigo check (codigo>=0),
+  nombre varchar(30) not null,
+  constraint PK_autores_codigo
+   primary key (codigo),
+  constraint UQ_autores_nombre
+    unique (nombre),
+ );
+
+ create table libros(
+  codigo int identity,
+  titulo varchar(40),
+  codigoautor int not null,
+  codigoeditorial tinyint not null,
+  precio decimal(5,2)
+   constraint DF_libros_precio default (0),
+  constraint PK_libros_codigo
+   primary key clustered (codigo),
+  constraint UQ_libros_tituloautor
+    unique (titulo,codigoautor),
+  constraint FK_libros_editorial
+   foreign key (codigoeditorial)
+   references editoriales(codigo)
+   on update cascade,
+  constraint FK_libros_autores
+   foreign key (codigoautor)
+   references autores(codigo)
+   on update cascade,
+  constraint CK_libros_precio_positivo check (precio>=0)
+ );
+
+ sp_helpconstraint editoriales;
+
+ sp_helpconstraint autores;
+
+ sp_helpconstraint libros;
+</textarea>
+    <br>
+    <input type="submit"  value="Ejecutar  los comandos SQL">
+    <input type="button" onClick="javascript:formulario.programa.value=''" value="Borrar comando.">
+
+        <br>
+	<br>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   
+
+</form>
+
+   <h2><a href="../indexa021.html?inicio=75">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-11";
+urchinTracker();
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from www.sqlserverya.com.ar/simulador/simulador.php?inicio=75&cod=87&punto=81 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:32 GMT -->
+</html>
+

@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=55&codigo=186&inicio=45 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:31:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Directiva #define</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>55 - Directiva #define</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>La directiva #define especifica un nombre que será reemplazado por un cierto valor en todos los lugares del programa donde se haga referencia.</p>
+<p>Se crean fuera de cualquier función o clase normalmente en la parte inicial del archivo. La sintaxis es la siguiente:</p>
+
+<pre>
+#define [nombre de la macro]  [valor de la macro]
+</pre>
+<p>Un ejemplo concreto es:</p>
+<pre>
+#define TAMANO 20
+#define MENSAJEFIN “Presione una tecla para finalizar”
+</pre>
+
+<p>El nombre de la macro es común que se la escriba con caracteres mayúsculas (es una regla que utilizan muchos programadores pero no es obligatoria)</p>
+<p>Luego de especificar el nombre de la macro hay uno o más espacios y debemos especificar el valor de la macro.</p>
+<p>El primer paso del compilador es reemplazar todas las partes del programa donde hay declaradas macros por los valores de dichas macros.</p>
+<p>El uso excesivo de macros puede tornar muy difícil el mantenimiento de programas.</p>
+
+<h3>Problema:</h3>
+<p>Definir tres macros y utilizarlas en distintas partes del programa.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+#define TAMANO 5
+#define MENSAJEFIN "Presione una tecla para finalizar\n"
+#define DETENER cin.get();cin.get();
+
+using namespace std;
+
+void main()
+{
+    int vec[TAMANO];
+    for(int f=0;f&lt;TAMANO;f++)
+    {
+        cout &lt;&lt;"Ingrese elemento:";
+        cin &gt;&gt;vec[f];
+    }
+    for(int f=0;f&lt;TAMANO;f++)
+    {
+        cout &lt;&lt; vec[f] &lt;&lt; "-";
+    }
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;MENSAJEFIN;
+    DETENER
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/Macros1.zip">Macros1.zip</a></p>
+
+
+<p>Es importante entender que lo primero que hace el compilador es reemplazar todos los lugares donde se hace referencia a la macro por el valor de la misma, luego este programa lo que realmente se está compilando es:</p>
+<pre>
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int vec[5];
+    for(int f=0;f&lt;5;f++)
+    {
+        cout &lt;&lt;"Ingrese elemento:";
+        cin &gt;&gt;vec[f];
+    }
+    for(int f=0;f&lt;5;f++)
+    {
+        cout &lt;&lt; vec[f] &lt;&lt; "-";
+    }
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"Presione una tecla para finalizar\n";
+    cin.get();cin.get();
+}
+</pre>
+
+<p>Es decir en el programa en ejecución no podemos hacer referencias a las macros como hacemos en las variables. Las macros en el programa final no ocupan espacio ya que son sustituidas por las valores asignados a las mismas en tiempo de compilación.</p>
+
+
+<h2>Problema propuesto</h2>
+<ol>
+<li>
+Plantear una clase para administrar una matriz de enteros de 4 filas y 2 columnas. Definir dos macros para indicar la cantidad de filas y columnas.
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+
+<pre class="recuadrooculto">
+#include &lt;iostream&gt;
+
+#define FILAS 4
+#define COLUMNAS 2
+
+using namespace std;
+
+class Matriz {
+    int mat[FILAS][COLUMNAS];
+public:
+    void cargar();
+    void imprimir();
+};
+
+void Matriz::cargar()
+{
+    for(int f=0;f&lt;FILAS;f++)
+    {
+        for(int c=0;c&lt;COLUMNAS;c++)
+        {
+            cout&lt;&lt;"Ingrese elemento de la fila "&lt;&lt; f &lt;&lt; " columna:" &lt;&lt; c &lt;&lt; ":";
+            cin &gt;&gt; mat[f][c];
+        }
+    }
+}
+
+void Matriz::imprimir()
+{
+    for(int f=0;f&lt;FILAS;f++)
+    {
+        for(int c=0;c&lt;COLUMNAS;c++)
+        {
+            cout &lt;&lt; mat[f][c] &lt;&lt; " ";
+        }
+        cout &lt;&lt; "\n";
+    }
+}
+
+void main()
+{
+    Matriz matriz1;
+    matriz1.cargar();
+    matriz1.imprimir();
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/Macros2.zip">Macros2.zip</a></p>
+
+</pre>
+
+
+
+<h2><a href="indexb634.html?inicio=45">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=55&codigo=186&inicio=45 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:31:15 GMT -->
+</html>

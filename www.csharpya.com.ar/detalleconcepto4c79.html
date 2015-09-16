@@ -1,0 +1,337 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=180&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - Tipos de datos primitivos en C#</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>56 - Tipos de datos primitivos en C#</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p>Los tipos de datos primitivos son aquellos que almacenan directamente el valor, a diferencia de los tipos de datos referencia que almacenan la dirección de memoria donde se almacena el dato (los objetos son tipo de datos referencia)</p>
+<p>Los tipos de datos primitivos los podemos agrupar en:</p>
+<h2>Tipos enteros</h2>
+<p>Según el valor entero máximo a almacenar podemos elegir entre: int (?2147483,648, 2147483647) (es el que normalmente hemos elegido hasta este momento cada vez que necesitamos almacenar un valor entero), byte (podemos almacenar un valor entre 0 y 255), sbyte (-128 y 127), short (-32768, 32767), ushort (0, 65535), uint (0, 4294967295), long (?9223372036854775808, 9223372036854775807) y ulong (0,  18446744073709551615)</p>
+
+<h3>Problema 1:</h3>
+<p>Confeccionar un programa que defina variables enteras una por cada tipo. Mostrar por pantalla el valor almacenado en cada variable</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace TiposDatosPrimitivos1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            byte v1 = 200;
+            Console.WriteLine("Valor almacenado en la variable de tipo byte:" + v1);
+            sbyte v2=-100;
+            Console.WriteLine("Valor almacenado en la variable de tipo sbyte:" + v2);
+            short v3 = 30000;
+            Console.WriteLine("Valor almacenado en la variable de tipo short:" + v3);
+            ushort v4 = 60000;
+            Console.WriteLine("Valor almacenado en la variable de tipo ushort:" + v4);
+            int v5 = -2000000000;
+            Console.WriteLine("Valor almacenado en la variable de tipo int:" + v5);
+            uint v6 = 2000000000;
+            Console.WriteLine("Valor almacenado en la variable de tipo uint:" + v6);
+            long v7 = -1000000000000000000;
+            Console.WriteLine("Valor almacenado en la variable de tipo long:" + v7);
+            ulong v8 = 1000000000000000000;
+            Console.WriteLine("Valor almacenado en la variable de tipo ulong:" + v8);
+            Console.ReadKey();
+        }
+    }
+}
+</pre>
+
+
+<h3>Problema 2:</h3>
+<p>Mostrar el valor máximo y mínimo que puede almacenar cada tipo de dato entero en C#.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace TiposDatosPrimitivos2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Valor máximo y mínimo para tipo de dato byte.");
+            Console.WriteLine("Mínimo:" + byte.MinValue);
+            Console.WriteLine("Máximo:" + byte.MaxValue);
+            Console.WriteLine("Valor máximo y mínimo para tipo de dato sbyte.");
+            Console.WriteLine("Mínimo:" + sbyte.MinValue);
+            Console.WriteLine("Máximo:" + sbyte.MaxValue);
+            Console.WriteLine("Valor mínimo y máximo para tipo de dato short.");
+            Console.WriteLine("Mínimo:" + short.MinValue);
+            Console.WriteLine("Máximo:" + short.MaxValue);
+            Console.WriteLine("Valor mínimo y máximo para tipo de dato ushort.");
+            Console.WriteLine("Mínimo:" + ushort.MinValue);
+            Console.WriteLine("Máximo:" + ushort.MaxValue);
+            Console.WriteLine("Valor mínimo y máximo para tipo de dato int.");
+            Console.WriteLine("Mínimo:" + int.MinValue);
+            Console.WriteLine("Máximo:" + int.MaxValue);
+            Console.WriteLine("Valor mínimo y máximo para tipo de dato uint.");
+            Console.WriteLine("Mínimo:" + uint.MinValue);
+            Console.WriteLine("Máximo:" + uint.MaxValue);
+            Console.WriteLine("Valor mínimo y máximo para tipo de dato long.");
+            Console.WriteLine("Mínimo:" + long.MinValue);
+            Console.WriteLine("Máximo:" + long.MaxValue);
+            Console.WriteLine("Valor mínimo y máximo para tipo de dato ulong.");
+            Console.WriteLine("Mínimo:" + ulong.MinValue);
+            Console.WriteLine("Máximo:" + ulong.MaxValue);
+            Console.ReadKey();
+        }
+    }
+}
+</pre>
+<p>Los tipos de datos primitivos tienen asociados clases con una serie de propiedades y métodos. Las propiedades MinValue y MaxValue nos permiten acceder a los valores mínimos y máximos que pueden almacenar cada tipo de dato.</p>
+
+<h2>Tipos reales</h2>
+<p>Podemos almacenar la parte entera y la parte fraccionaria. Disponemos tres tipos de datos reales: float, double y decimal.
+
+
+<h3>Problema 3:</h3>
+<p>Mostrar el valor máximo y mínimo que puede almacenar cada tipo de dato real en C#.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace TiposDatosPrimitivos3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Valor mínimo y máximo para tipo de dato float.");
+            Console.WriteLine("Mínimo:" + float.MinValue);
+            Console.WriteLine("Máximo:" + float.MaxValue);
+            Console.WriteLine("Valor mínimo y máximo para tipo de dato double.");
+            Console.WriteLine("Mínimo:" + double.MinValue);
+            Console.WriteLine("Máximo:" + double.MaxValue);
+            Console.WriteLine("Valor mínimo y máximo para tipo de dato decimal.");
+            Console.WriteLine("Mínimo:" + decimal.MinValue);
+            Console.WriteLine("Máximo:" + decimal.MaxValue);
+            Console.ReadKey();
+        }
+    }
+}
+</pre>
+<p>El tipo de dato decimal es el que más se adecua para almacenar datos monetarios (tiene una precisión de 28 dígitos decimales)</p>
+
+<h2>Tipo char</h2>
+<p>El tipo de dato primitivo char puede almacenar un caracter Unicode.<br>
+<pre>
+  char letra='A';
+</pre>
+<h2>Tipo lógico</h2>
+<p>Puede almacenar el valor true o false.<br>
+<pre>
+  bool encontrado=false;
+</pre>
+
+
+<h3>Problema 4:</h3>
+<p>Mostrar cuantos bytes de memoria requieren cada tipo de dato primitivo en C# (utilizar el operador sizeof)</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace TiposDatosPrimitivos4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Bytes reservados para el tipo byte:" + sizeof(byte));
+            Console.WriteLine("Bytes reservados para el tipo sbyte:" + sizeof(sbyte));
+            Console.WriteLine("Bytes reservados para el tipo short:" + sizeof(short));
+            Console.WriteLine("Bytes reservados para el tipo ushort:" + sizeof(ushort));
+            Console.WriteLine("Bytes reservados para el tipo int:" + sizeof(int));
+            Console.WriteLine("Bytes reservados para el tipo uint:" + sizeof(uint));
+            Console.WriteLine("Bytes reservados para el tipo long:" + sizeof(long));
+            Console.WriteLine("Bytes reservados para el tipo ulong:" + sizeof(ulong));
+            Console.WriteLine("Bytes reservados para el tipo float:" + sizeof(float));
+            Console.WriteLine("Bytes reservados para el tipo double:" + sizeof(double));
+            Console.WriteLine("Bytes reservados para el tipo decimal:" + sizeof(decimal));
+            Console.WriteLine("Bytes reservados para el tipo char:" + sizeof(char));
+            Console.WriteLine("Bytes reservados para el tipo bool:" + sizeof(bool));
+            Console.ReadKey();
+        }
+    }
+}
+</pre></div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="index1e61.html?inicio=40">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=180&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:42 GMT -->
+</html>

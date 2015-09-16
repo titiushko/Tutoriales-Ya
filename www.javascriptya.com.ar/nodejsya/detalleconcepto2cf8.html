@@ -1,0 +1,258 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=13&codigo=13&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:51:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>npm (node package manager)</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++, programación, tutorial, nodejs">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de NodeJS.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>13 - npm (node package manager)</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Es una herramienta que ya instala Node.js y la podemos utilizar desde la línea de comandos. Nos permite reusar código de otros desarrolladores y también nos permite compartir nuestro código.</p>
+<p>Node.js viene por defecto con un conjunto limitado de módulos de uso general.</p>
+<p>Nosotros podemos implementar toda la lógica para un determinado problema o buscar si otro desarrollador ya se le presentó dicho problema y compartió si código.</p>
+<p>El sitio web <a href="https://www.npmjs.com/" target="_blank">npmjs</a> es el repositorio oficial donde podemos compartir nuestros módulos y paquetes, y beneficiarnos de los módulos y paquetes que desarrollaron otros programadores.</p>
+<p>Para darnos una idea de la cantidad de desarrolladores que están utilizando esta tecnología podemos decir que a 2015 hay más de 172000 paquetes publicados en el sitio.</p>
+<p>Existen paquetes con muy diferentes objetivos como por ejemplos frameworks para sitios web (uno de esos llamado express), para acceder a una base de datos mysql o la base de datos mongoDB etc.</p>
+
+<p>Veamos entonces como utilizar el programa npm para administrar paquetes.</p>
+<h3>Problema</h3>
+<p>Desarrollar nuevamente el sitio web que sirve páginas estáticas. Resolver el formato de archivo que retorna el servidor utilizando el paquete 'mime'.</p>
+
+<p>Creemos una carpeta llamada ejercicio15 y en su interior dispongamos todo el contenido del ejercicio10 (solamente cambiemos el nombre del archivo *.js ejercicio10.js por ejercicio15.js)</p>
+<p>Veamos primero como agregamos un paquete a nuestro proyecto. Nos ubiquemos en la carpeta ejercicio15 desde la linea de comando y tipeamos:</p>
+<pre>
+npm install mime
+</pre>
+
+<p><img src="imagentema/foto038.jpg" border="0" alt="npm install mime"></p>
+<p>Una vez que ejecutamos el programa npm indicando que se va a instalar el paquete 'mime' veremos que en nuestro directorio del proyecto se crea una carpeta llamada 'node_modules' (si instalamos un segundo paquete siempre se insertaran en dicha carpeta) y en dicha carpeta encontraremos el paquete 'mime' (con todo su código fuente):</p>
+
+<p><img src="imagentema/foto039.jpg" border="0" alt="npm install mime"></p>
+<p>En la carpeta node_modules tenemos la subcarpeta mime (y en dicha carpeta todo el código fuente de este paquete):</p>
+<p><img src="imagentema/foto040.jpg" border="0" alt="npm install mime"></p>
+
+<p>Para usar un paquete es muy común que los desarrolladores incluyan una documentación para su uso. </p>
+<p>Podemos entrar a la carpeta mime y abrir el archivo README.md donde explica como podemos utilizarlo.</p>
+
+<p>Ahora vemos lo los cambios que se presentan a nuestro programa que sirve páginas estáticas usando el módulo 'mime':</p>
+<pre>ejercicio15.js</pre>
+<pre class="recuadro">
+var http=require('http');
+var url=require('url');
+var fs=require('fs');
+
+var mime=require('mime');
+
+var servidor=http.createServer(function(pedido,respuesta){
+    var objetourl = url.parse(pedido.url);
+    var camino='static'+objetourl.pathname;
+    if (camino=='static/')
+        camino='static/index.html';
+    fs.exists(camino,function(existe){
+        if (existe) {
+            fs.readFile(camino,function(error,contenido){
+                if (error) {
+                    respuesta.writeHead(500, {'Content-Type': 'text/plain'});
+                    respuesta.write('Error interno');
+                    respuesta.end();                    
+                } else {
+                    var tipo=mime.lookup(camino);
+                    console.log(tipo);
+                    respuesta.writeHead(200, {'Content-Type': tipo});
+                    respuesta.write(contenido);
+                    respuesta.end();
+                }
+            });
+        } else {
+            respuesta.writeHead(404, {'Content-Type': 'text/html'});
+            respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;Recurso inexistente&lt;/body&gt;&lt;/html&gt;');        
+            respuesta.end();
+        }
+    });
+});
+
+servidor.listen(8888);
+
+console.log('Servidor web iniciado');
+</pre>
+
+<p>Hemos remplazado nuestro objeto literal que habíamos definido en el ejercicio10:</p>
+<pre>
+var mime = {
+   'html' : 'text/html',
+   'css'  : 'text/css',
+   'jpg'  : 'image/jpg',
+   'ico'  : 'image/x-icon',
+   'mp3'  : 'audio/mpeg3',
+   'mp4'  : 'video/mp4'
+};
+</pre>
+
+<p>Con la definicion de una variable que hace referencia al módulo 'mime' (la gran ventaja que este módulo almacena todos los tipo mime y no solo 6 de nuestro problema)</p>
+<p>Rocordemos que requerimos un módulo con la sintaxis:</p>
+<pre>
+var mime=require('mime');
+</pre>
+<p>Cuando se ejecuta primero el Node.js busca el módulo en el directorio actual, si no lo encuentra lo busca en la carpeta 'nodo_modules'.</p>
+<p>Otra parte que cambia el código de nuestro programa es cuando tenemos que obtener el tipo mime del recurso a devolver al navegador:</p>
+<pre>
+                    var tipo=mime.lookup(camino);
+                    console.log(tipo);
+                    respuesta.writeHead(200, {'Content-Type': tipo});
+</pre>
+<p>Llamamos a la función lookup indicando el recurso y nos devuelve el tipo mime que le corresponde.</p>
+<p>Dispusimos un console.log para ver en la consola los distintos tipo mime que aparecen cuando el navegador solicita la página:</p>
+
+<p><img src="imagentema/foto041.jpg" border="0" alt="progama npm install mime"></p>
+<p>Esto ocurre al solicitar la página:</p>
+<p><img src="imagentema/foto042.jpg" border="0" alt="progama npm install mime"></p>
+
+<p>Este proyecto lo puede descargar en un zip con todos los archivos desde este enlace :
+<a href="proyectos/ejercicio15.zip">ejercicio15</a></p>
+
+<p>Podemos probar de tipear el parámetro ls cuando llamamos a npm y veremos todos los paquetes que contiene nuestro proyecto (en nuestro ejemplo solo uno 'mime'), luego del @ aparece el número de versión:</p>
+<p><img src="imagentema/foto043.jpg" border="0" alt="npm ls"></p>
+
+<p>Veremos en conceptos sucesivos que el npm tiene otras funcionalidades.</p>
+<h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-35', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=13&codigo=13&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:51:55 GMT -->
+</html>

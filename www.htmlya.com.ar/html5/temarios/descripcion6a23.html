@@ -1,0 +1,204 @@
+
+<!DOCTYPE html> 
+<html lang="es"> 
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=180&punto=47&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>API FILE (drag and drop de una imagen del escritorio)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="html5, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de HTML 5. Es objetivo prioritario respetar 
+los estándares del W3C">
+<meta name="author" content="Diego Moisset">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+</style>
+
+</head>
+
+<body>
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em"><a href="../../html5.html">Temario del Tutorial</a></span>->47 - API FILE (drag and drop de una imagen del escritorio)</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Hemos visto que con la API FILE podemos leer archivos que se encuentran en forma local solo disponiendo un control de tipo file y mediante el botón que muestra el navegador seleccionar el archivo que queremos leer.</p>
+<p>Pero veremos ahora que las API de DRAG AND DROP que provee HTML5 nos permiten arrastrar archivos que se encuentran en el escritorio de la computadora (es decir fuera del navegador) y proceder a su lectura como hemos visto.</p>
+
+
+<h3>Problema</h3>
+<p>Permitir arrastrar una imagen que se encuentre en el escritorio de la computadora y posteriormente mostrarla en el fondo de un div.</p>
+<h4>Solución</h4>
+<pre class="recuadro">
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Prueba&lt;/title&gt;
+
+&lt;style&gt;
+#caja {
+  margin: 10px;
+  width: 350px;
+  height: 350px;
+  border: 5px dashed gray;
+  border-radius: 8px;
+  background: rgb(230,230,230);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+&lt;/style&gt;
+  
+  
+&lt;script&gt;
+    window.addEventListener('load', inicio, false);
+
+    function inicio() {
+        document.getElementById('caja').addEventListener('dragover', permitirDrop, false);    
+        document.getElementById('caja').addEventListener('drop', drop, false);
+    }
+    
+    function drop(ev)
+    {
+        ev.preventDefault();
+        var arch=new FileReader();
+        arch.addEventListener('load',leer,false);
+        arch.readAsDataURL(ev.dataTransfer.files[0]);        
+    }      
+    
+    function permitirDrop(ev)
+    {
+        ev.preventDefault();
+    }    
+    
+    function leer(ev) {
+        document.getElementById('caja').style.backgroundImage="url('" + ev.target.result + "')";
+    }
+&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;p&gt;Arrastrar una imagen desde el escritorio.&lt;/p&gt;
+&lt;div id="caja"&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Hemos dispuesto que el archivo solo se pueda arrastrar desde el escritorio (podemos hacer que se pueda arrastrar o seleccionar de un control file como hemos visto hasta ahora)</p>
+<p>Nuestro bloque HTML ahora queda muy cortito:</p>
+<pre>
+&lt;body&gt;
+&lt;p&gt;Arrastrar una imagen desde el escritorio.&lt;/p&gt;
+&lt;div id="caja"&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+</pre>
+
+
+<p>Registramos los eventos dragover y drop de nuestro div:</p>
+<pre>
+    function inicio() {
+        document.getElementById('caja').addEventListener('dragover', permitirDrop, false);    
+        document.getElementById('caja').addEventListener('drop', drop, false);
+    }
+</pre>
+
+<p>Cuando el usuario suelta la imagen dentro del div procedemos a leer el archivo y registrar el evento load para que se muestre posteriormente:</p>    
+<pre>
+    function drop(ev)
+    {
+        ev.preventDefault();
+        var arch=new FileReader();
+        arch.addEventListener('load',leer,false);
+        arch.readAsDataURL(ev.dataTransfer.files[0]);        
+    }      
+</pre>
+<p>Mostramos la imagen en la función leer:</p>
+<pre>    
+    function leer(ev) {
+        document.getElementById('caja').style.backgroundImage="url('" + ev.target.result + "')";
+    }
+</pre>
+
+<p>Desactivamos en la función permitirDrop la actividad por defecto que hace un navegador cuando se arrastra una imagen (que por defecto muestra la imagen ocupando toda la ventana del navegador):</p>
+<pre>
+    function permitirDrop(ev)
+    {
+        ev.preventDefault();
+    }    
+</pre>
+    
+    
+
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../index1e61.html?inicio=40">Retornar</a></h2>   
+
+</div>
+
+</body>
+
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=180&punto=47&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:21 GMT -->
+</html>

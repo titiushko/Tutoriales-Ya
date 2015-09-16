@@ -1,0 +1,363 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=144&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:44:03 GMT -->
+<head>
+<title>Almacenamiento de datos en un archivo de texto localizado en una tarjeta SD</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+.descarga2 a {
+color:#4B4B4B;
+text-decoration:none;
+border-bottom:1px dotted #444;
+}
+.descarga2 {
+background: #F7FABE;
+text-align: left;
+padding: 5px 20px 5px 45px;
+border-top: 2px solid #DFE786;
+border-bottom: 2px solid #DFE786;
+color:#000000;
+margin-left:1.2em;
+margin-right:1.2em;
+border-radius:4px;
+font-size:1em;
+
+}  
+
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-30']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>13 - Almacenamiento de datos en un archivo de texto localizado en una tarjeta SD</h1> <p class="descarga2">Ya se encuentra disponible el nuevo tutorial para aprender android con el nuevo entorno <a href="androidstudioya/index.html" target="_blank">Android Studio propuesto por Google y
+que remplaza a Eclipse</a>.
+</td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>En el concepto anterior vimos como crear y leer un archivo de texto en la memoria interna del equipo Android. En algunas situaciones podría ser útil almacenar los datos en una tarjeta SD, esto debido a su mayor capacidad o la facilidad de compartir los archivos con otras personas entregando la tarjeta SD. </p>
+
+<h3>Problema:</h3>
+<p>Confeccionar un programa que permita ingresar el nombre de un archivo y el contenido. Permitir grabar los datos ingresados al presionar un botón. Disponer un segundo botón que permita recuperar los datos del archivo de texto.<br>
+<p>Hacer que los archivos se graben en una tarjeta SD.</p>
+
+<p>La interfaz visual a implementar es la siguiente:</p>
+<img src="imagentema/foto056.jpg" border="0" alt="Archivos de texto en tarjeta sd"><br>
+
+<p>El primer paso es modificar el archivo AndroidManifest.xml para permitir el acceso a la tarjeta SD desde nuestra aplicación esto lo hacemos desde el editor visual del archivo AndroidManifest.xml:</p>
+<img src="imagentema/foto057.jpg" border="0" alt="Archivos de texto en tarjeta sd"><br>
+ <p>Debemos presionar el botón "Add" seleccionar "Uses Permision" y luego en name seleccionar "android.permission.WRITE_EXTERNAL_STORAGE".</p>
+
+<p>El código fuente es:</p>
+<pre class="recuadro">
+package com.javaya.proyecto014;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.os.Environment;
+import android.view.Menu;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
+    EditText et1;
+    EditText et2;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        et1 = (EditText) findViewById(R.id.editText1);
+        et2 = (EditText) findViewById(R.id.editText2);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return true;
+    }
+
+    public void grabar(View v) {
+        String nomarchivo = et1.getText().toString();
+        String contenido = et2.getText().toString();
+        try {
+            File tarjeta = Environment.getExternalStorageDirectory();
+            File file = new File(tarjeta.getAbsolutePath(), nomarchivo);
+            OutputStreamWriter osw = new OutputStreamWriter(
+                    new FileOutputStream(file));
+            osw.write(contenido);
+            osw.flush();
+            osw.close();
+            Toast.makeText(this, "Los datos fueron grabados correctamente",
+                    Toast.LENGTH_SHORT).show();
+            et1.setText("");
+            et2.setText("");
+        } catch (IOException ioe) {
+        }
+    }
+
+    public void recuperar(View v) {
+        String nomarchivo = et1.getText().toString();
+        File tarjeta = Environment.getExternalStorageDirectory();
+        File file = new File(tarjeta.getAbsolutePath(), nomarchivo);
+        try {
+            FileInputStream fIn = new FileInputStream(file);
+            InputStreamReader archivo = new InputStreamReader(fIn);
+            BufferedReader br = new BufferedReader(archivo);
+            String linea = br.readLine();
+            String todo = "";
+            while (linea != null) {
+                todo = todo + linea + "
+";
+                linea = br.readLine();
+            }
+            br.close();
+            archivo.close();
+            et2.setText(todo);
+
+        } catch (IOException e) {
+        }
+    }
+
+}
+</pre>
+
+
+<p>El método para grabar los datos en un archivo de texto localizado en una tarjeta SD comienza obteniendo el directorio raiz de la tarjeta a través del método getExternalStorageDirectory(), el mismo retorna un objeto de la clase File.<br>
+<pre>
+    public void grabar(View v) {
+        String nomarchivo = et1.getText().toString();
+        String contenido=et2.getText().toString();
+        try
+        {
+            File tarjeta = Environment.getExternalStorageDirectory();
+</pre>
+<p>Creamos un nuevo objeto de la clase File indicando el camino de la unidad SD y el nombre del archivo a crear:</p>
+<pre>
+            File file = new File(tarjeta.getAbsolutePath(), nomarchivo);
+</pre>
+<p>Por último similar al acceso de un archivo interno creamos un objeto de la clase OutputStreamWriter:</p>
+<pre>
+            OutputStreamWriter osw =new OutputStreamWriter(new FileOutputStream(file));
+</pre>
+<p>Grabamos el contenido del EditText:</p>
+<pre>
+            osw.write(contenido);
+</pre>
+<p>Cerramos el archivo:</p>
+<pre>
+            osw.flush();
+            osw.close();
+            Toast.makeText(this,"Los datos fueron grabados correctamente",Toast.LENGTH_SHORT).show();
+            et1.setText("");
+            et2.setText("");
+        }
+        catch (IOException ioe)
+        {
+        }
+    }
+</pre>
+
+
+<p>Para la lectura del archivo nuevamente obtenemos la referencia de la tarjeta SD para obtener el path de la unidad de almacenamiento, el resto del algoritmo es similar al visto con un archivo interno:</p>
+<pre>
+    public void recuperar(View v) {
+        String nomarchivo = et1.getText().toString();        
+        File tarjeta = Environment.getExternalStorageDirectory();
+        File file = new File(tarjeta.getAbsolutePath(), nomarchivo);        
+        try {
+            FileInputStream fIn = new FileInputStream(file);         
+            InputStreamReader archivo=new InputStreamReader(fIn);
+            BufferedReader br=new BufferedReader(archivo);
+            String linea=br.readLine();
+            String todo="";
+            while (linea!=null)
+            {
+                todo=todo+linea+"&#92;n";
+                linea=br.readLine();
+            }
+            br.close();
+            archivo.close();
+            et2.setText(todo);
+
+        } catch (IOException e)
+        {
+        }
+    }
+</pre>
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/proyecto014.zip">proyecto014.zip</a></div>
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   <h2><a href="index2904.html?inicio=0">Retornar</a></h2>   
+
+  </div>
+  
+  
+  
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=144&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:44:33 GMT -->
+</html>

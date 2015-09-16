@@ -1,0 +1,651 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=170&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - Estructuras dinámicas: Listas tipo Cola - Problemas de aplicación</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>46 - Estructuras dinámicas: Listas tipo Cola - Problemas de aplicación</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p><strong>Planteo del problema:</strong></p>
+
+<p>Este práctico tiene por objetivo mostrar la importancia de las colas en las Ciencias de la Computación y más precisamente en las simulaciones.<br>
+Las simulaciones permiten analizar situaciones de la realidad sin la necesidad de ejecutarlas realmente. Tiene el beneficio que su costo es muy inferior a hacer pruebas en la realidad.</p>
+
+<p>Desarrollar un programa para la simulación de un cajero automático.<br>
+Se cuenta con la siguiente información:<br>
+- Llegan clientes a la puerta del cajero cada 2 ó 3 minutos.<br>
+- Cada cliente tarda entre 2 y 4 minutos para ser atendido.</p>
+<p>Obtener la siguiente información:<br>
+1 - Cantidad de clientes que se atienden en 10 horas.<br>
+2 - Cantidad de clientes que hay en cola después de 10 horas.<br>
+3 - Hora de llegada del primer cliente que no es atendido luego de 10 horas (es decir la persona que está primera en la cola cuando se cumplen 10 horas)<br>
+
+
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+archivo: Cola.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ListaTipoCola2
+{
+    class Cola
+    {
+        class Nodo
+        {
+            public int info;
+            public Nodo sig;
+        }
+
+        private Nodo raiz, fondo;
+
+        public Cola()
+        {
+            raiz = null;
+            fondo = null;
+        }
+
+        public bool Vacia()
+        {
+            if (raiz == null)
+                return true;
+            else
+                return false;
+        }
+
+        public void Insertar(int info)
+        {
+            Nodo nuevo;
+            nuevo = new Nodo();
+            nuevo.info = info;
+            nuevo.sig = null;
+            if (Vacia())
+            {
+                raiz = nuevo;
+                fondo = nuevo;
+            }
+            else
+            {
+                fondo.sig = nuevo;
+                fondo = nuevo;
+            }
+        }
+
+        public int Extraer()
+        {
+            if (!Vacia())
+            {
+                int informacion = raiz.info;
+                if (raiz == fondo)
+                {
+                    raiz = null;
+                    fondo = null;
+                }
+                else
+                {
+                    raiz = raiz.sig;
+                }
+                return informacion;
+            }
+            else
+                return int.MaxValue;
+        }
+
+        public int Cantidad()
+        {
+            int cant = 0;
+            Nodo reco = raiz;
+            while (reco != null)
+            {
+                cant++;
+                reco = reco.sig;
+            }
+            return cant;
+        }
+    }
+}
+
+
+
+archivo: Form1.cs
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace ListaTipoCola2
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Random ale=new Random();
+            int estado = 0;
+            int llegada = 2 + ale.Next(0,2);
+            int salida = -1;
+            int cantAtendidas = 0;
+            Cola cola = new Cola();
+            for (int minuto = 0; minuto < 600; minuto++)
+            {
+                if (llegada == minuto)
+                {
+                    if (estado == 0)
+                    {
+                        estado = 1;
+                        salida = minuto + 2 + ale.Next(0, 3);
+                    }
+                    else
+                    {
+                        cola.Insertar(minuto);
+                    }
+                    llegada = minuto + 2 + ale.Next(0, 2);
+                }
+                if (salida == minuto)
+                {
+                    estado = 0;
+                    cantAtendidas++;
+                    if (!cola.Vacia())
+                    {
+                        cola.Extraer();
+                        estado = 1;
+                        salida = minuto + 2 + ale.Next(0, 3);
+                    }
+                }
+            }
+            label1.Text="Atendidos:" + cantAtendidas.ToString();
+            label2.Text="En cola" + cola.Cantidad().ToString();
+            label3.Text="Minuto llegada:" + cola.Extraer().ToString();            
+        }
+    }
+}
+
+</pre>
+<p>La clase Cola colabora con la clase Form1. En la clase cola debemos definir como mínimo los métodos de Insertar, Extraer, Vacía y Cantidad.</p>
+<p>La clase Form1 define tres objetos de la clase Label para mostrar los resultados de la simulación.</p>
+<p>El método más importante es el click del botón, veamos las distintas partes de dicho método:</p>
+<pre>
+            Random ale=new Random();
+            int estado = 0;
+            int llegada = 2 + ale.Next(0,2);
+            int salida = -1;
+            int cantAtendidas = 0;
+            Cola cola = new Cola();
+</pre>
+<p>La variable estado almacena un cero si el cajero está libre y un uno cuando está ocupado.<br>
+La variable llegada almacena en que minuto llegará el próximo cliente (debemos generar un valor entre 2 y 3)</p>
+<p>La variable salida almacenará en que minuto terminará el cliente de ser atendido (como al principio el cajero está vacío inicializamos esta variable con -1)</p>
+<p>Llevamos un contador para saber la cantidad de personas atendidas (cantAtendidas)</p>
+<p>Luego definimos un objeto de la clase Cola para poder almacenar las personas que llegan al cajero y se lo encuentran ocupado.</p>
+<p>Creamos un objeto de la clase Random para poder utilizar el método Next que nos retorna un valor aleatorio en el rango que le pasamos como parámetros (si pasamos un 0 y 2 luego nos puede retornar un 0 o un 1)</p>
+<p>Disponemos un for que se repita 600 veces (600 minutos o lo que es lo mismo 10 horas)<br>
+<pre>
+            for (int minuto = 0; minuto < 600; minuto++)
+</pre>
+<p>Dentro del for hay dos if fundamentales que verifican que sucede cuando llega una persona o cuando una persona se retira:</p>
+<pre>
+                if (llegada == minuto)
+                {
+                    ............
+                }
+                if (salida == minuto)
+                {
+                    ............
+                }
+</pre>
+<p>Cuando llega una persona al cajero primero verificamos si el cajero está desocupado:</p>
+<pre>
+                if (llegada == minuto)
+                {
+                   if (estado==0) 
+                   {
+</pre>
+<p>Si está desocupado lo ocupamos cambiando el valor de la variable estado y generando en que minuto esta persona dejará el cajero (un valor aleatorio entre 2 y 4 minutos):</p>
+<pre>
+                        estado = 1;
+                        salida = minuto + 2 + ale.Next(0, 3);
+</pre>
+<p>Si el cajero está ocupado procedemos a cargar dicha persona en la cola (insertamos el minuto que llega):</p>
+<pre>
+                    else
+                    {
+                        cola.Insertar(minuto);
+                    }
+</pre>
+<p>Luego generamos el próximo minuto que llegará otra persona:</p>
+<pre>
+                    llegada = minuto + 2 + ale.Next(0, 2);
+</pre>
+<p>El otro if importante es ver que sucede cuando sale la persona del cajero:</p>
+                if (salida == minuto)
+                {
+</pre>
+<p>Si sale una persona del cajero cambiamos el valor de la variable estado, incrementamos en uno el contador cantAtendidos y si la cola no está vacía extraemos una persona, cambiamos a uno la variable estado y generamos en que minuto dejará esta persona el cajero:</p>
+<pre>
+                    estado = 0;
+                    cantAtendidas++;
+                    if (!cola.Vacia())
+                    {
+                        cola.Extraer();
+                        estado = 1;
+                        salida = minuto + 2 + ale.Next(0, 3);
+                    }
+</pre>
+<p>Fuera del for actualizamos las tres Label:</p>
+<pre>
+            label1.Text="Atendidos:" + cantAtendidas.ToString();
+            label2.Text="En cola" + cola.Cantidad().ToString();
+            label3.Text="Minuto llegada:" + cola.Extraer().ToString();            
+</pre>
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+<p>Un supermercado tiene tres cajas para la atención de los clientes.<br>
+Las cajeras tardan entre 7 y 11 minutos para la atención de cada cliente.<br>
+
+Los clientes llegan a la zona de cajas cada 2 ó 3 minutos. (Cuando el cliente llega, si todas las cajas tienen 6 personas, el cliente se marcha del supermercado)<br>
+
+Cuando el cliente llega a la zona de cajas elige la caja con una cola menor.</p>
+
+<p>Realizar una simulación durante 8 horas y obtener la siguiente información:<br>
+a - Cantidad de clientes atendidos por cada caja.<br>
+b - Cantidad de clientes que se marcharon sin hacer compras.<br>
+c - Tiempo promedio en cola.</p>
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+Archivo: Cola.cs
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ListaTipoCola3
+{
+    class Cola
+    {
+        class Nodo
+        {
+            public int info;
+            public Nodo sig;
+        }
+
+        private Nodo raiz, fondo;
+
+        public Cola()
+        {
+            raiz = null;
+            fondo = null;
+        }
+
+        public bool Vacia()
+        {
+            if (raiz == null)
+                return true;
+            else
+                return false;
+        }
+
+        public void Insertar(int info)
+        {
+            Nodo nuevo;
+            nuevo = new Nodo();
+            nuevo.info = info;
+            nuevo.sig = null;
+            if (Vacia())
+            {
+                raiz = nuevo;
+                fondo = nuevo;
+            }
+            else
+            {
+                fondo.sig = nuevo;
+                fondo = nuevo;
+            }
+        }
+
+        public int Extraer()
+        {
+            if (!Vacia())
+            {
+                int informacion = raiz.info;
+                if (raiz == fondo)
+                {
+                    raiz = null;
+                    fondo = null;
+                }
+                else
+                {
+                    raiz = raiz.sig;
+                }
+                return informacion;
+            }
+            else
+                return int.MaxValue;
+        }
+
+        public int Cantidad()
+        {
+            int cant = 0;
+            Nodo reco = raiz;
+            while (reco != null)
+            {
+                cant++;
+                reco = reco.sig;
+            }
+            return cant;
+        }
+    }
+}
+
+
+Archivo: Form1.cs
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace ListaTipoCola3
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Random ale = new Random();
+            int estado1 = 0, estado2 = 0, estado3 = 0;
+            int marchan = 0;
+            int llegada = 2 + ale.Next(0, 2);
+            int salida1 = -1, salida2 = -1, salida3 = -1;
+            int cantAte1 = 0, cantAte2 = 0, cantAte3 = 0;
+            int tiempoEnCola = 0;
+            int cantidadEnCola = 0;
+            Cola cola1 = new Cola();
+            Cola cola2 = new Cola();
+            Cola cola3 = new Cola();
+            for (int minuto = 0; minuto < 600; minuto++)
+            {
+                if (llegada == minuto)
+                {
+                    if (estado1 == 0)
+                    {
+                        estado1 = 1;
+                        salida1 = minuto + 7 + ale.Next(0, 5);
+                    }
+                    else
+                    {
+                        if (estado2 == 0)
+                        {
+                            estado2 = 1;
+                            salida2 = minuto + 7 + ale.Next(0, 5);
+                        }
+                        else
+                        {
+                            if (estado3 == 0)
+                            {
+                                estado3 = 1;
+                                salida3 = minuto + 7 + ale.Next(0, 5);
+                            }
+                            else
+                            {
+                                if (cola1.Cantidad() == 6 && cola2.Cantidad() == 6 && cola3.Cantidad() == 6)
+                                {
+                                    marchan++;
+                                }
+                                else
+                                {
+                                    if (cola1.Cantidad() <= cola2.Cantidad() && cola1.Cantidad() <= cola3.Cantidad())
+                                    {
+                                        cola1.Insertar(minuto);
+                                    }
+                                    else
+                                    {
+                                        if (cola2.Cantidad() <= cola3.Cantidad())
+                                        {
+                                            cola2.Insertar(minuto);
+                                        }
+                                        else
+                                        {
+                                            cola3.Insertar(minuto);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                    llegada = minuto + 2 + ale.Next(0, 2);
+                }
+                if (salida1 == minuto)
+                {
+                    cantAte1++;
+                    estado1 = 0;
+                    if (!cola1.Vacia())
+                    {
+                        estado1 = 1;
+                        int m = cola1.Extraer();
+                        salida1 = minuto + 7 + ale.Next(0, 5);
+                        tiempoEnCola = tiempoEnCola + (minuto - m);
+                        cantidadEnCola++;
+                    }
+                }
+                if (salida2 == minuto)
+                {
+                    cantAte2++;
+                    estado2 = 0;
+                    if (!cola2.Vacia())
+                    {
+                        estado2 = 1;
+                        int m = cola2.Extraer();
+                        salida2 = minuto + 7 + ale.Next(0, 5);
+                        tiempoEnCola = tiempoEnCola + (minuto - m);
+                        cantidadEnCola++;
+                    }
+                }
+                if (salida3 == minuto)
+                {
+                    cantAte3++;
+                    estado3 = 0;
+                    if (!cola3.Vacia())
+                    {
+                        estado3 = 1;
+                        int m = cola3.Extraer();
+                        salida3 = minuto + 7 + ale.Next(0, 5);
+                        tiempoEnCola = tiempoEnCola + (minuto - m);
+                        cantidadEnCola++;
+                    }
+                }
+            }
+            label1.Text="Clientes atendidos por caja: caja1=" + cantAte1.ToString() + "  caja2=" + cantAte2.ToString() + "  caja3=" + cantAte3.ToString();
+            label2.Text="Se marchan sin hacer compras:" + marchan.ToString();
+            if (cantidadEnCola > 0)
+            {
+                int tiempoPromedio = tiempoEnCola / cantidadEnCola;
+                label3.Text="Tiempo promedio en cola:" + tiempoPromedio.ToString();
+            }
+        }
+    }
+}
+</pre></div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="index1e61.html?inicio=40">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=170&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:31 GMT -->
+</html>

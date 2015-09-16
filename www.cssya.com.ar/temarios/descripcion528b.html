@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=0&cod=13&punto=9 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:56:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de CSS - Temarios</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<style>
+
+
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>9 - Herencia de propiedades de estilo.</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Ahora veremos que el conjunto de elementos HTML forman en sí un árbol que en su raiz podemos identificar el elemento body del cual se desprenden otros elementos contenidas en esta sección, como podrían ser los elementos h1,h2,h3,h4,h5,h6,p,div luego estas en su interior contienen otros elementos HTML como podrían ser em,strong,pre etc.</p>
+<p>Con ejemplos veamos que hay muchos estilos que se heredan (todos los vistos hasta el momento se heredan), es decir si definimos la propiedad color para el elemento h1, luego si dicho elemento incorpora un texto con el elemento em en su interior, la propiedad color del elemento em tendrá el mismo valor que la propiedad h1 (es decir el elemento em hereda las propiedades del elemento h1)</p>
+<p>Con un ejemplo veremos el resultado de la herencia de propiedades entre los elementos HTML:</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;style&gt;
+body {
+  color:#0000ff;
+  font-family:verdana;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Este es un t&iacute;tulo de nivel 1 y con el elemento 'em' la palabra: 
+&lt;em&gt;Hola&lt;/em&gt;&lt;/h1&gt;
+&lt;p&gt;Todo este p&aacute;rrafo debe ser de color azul ya que lo hereda del 
+elemento body.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>En este ejemplo hemos definido la siguiente regla para el elemento body:</p>
+<pre>
+body {
+  color:#0000ff;
+  font-family:verdana;
+}
+</pre>
+<p>Inicializamos la propiedad color con el valor de azul y la fuente de tipo verdana. Con esto todos los elementos contenidas en el body que no redefinan estas dos propiedades recibirán los valores aquí definidos. En este ejemplo la cabecera de primer nivel es decir h1 y el párrafo tienen como color el azul y la fuente es de tipo verdana.</p>
+
+<p>Ahora bien en muchas situaciones podemos redefinir propiedades para elementos contenidos, veamos como podemos hacer que el texto contenido en los elementos em y p aparezcan de color distinto:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;style&gt;
+body {
+  color:#0000ff;
+  font-family:verdana;
+}
+em {
+  color:#008800;
+}
+p {
+  color:#999999;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;h1&gt;Este es un t&iacute;tulo de nivel 1 y con el elemento 'em' la palabra: 
+&lt;em&gt;Hola&lt;/em&gt;&lt;/h1&gt;
+&lt;p&gt;Todo este p&aacute;rrafo debe ser de color gris ya que lo redefine la 
+marca p y no lo hereda de la marca body.&lt;/p&gt;
+&lt;/html&gt;
+</pre>
+<p>Ahora hemos definido tres reglas, la primera igual que el problema anterior, define la propiedad color en azul y la fuente de tipo verdana para el elemento body:</p>
+<pre>
+body {
+  color:#0000ff;
+  font-family:verdana;
+}
+</pre>
+<p>La segunda regla define la propiedad color en verde para el elemento em, con esto no heredará el color azul del elemento body (que es el elemento padre):</p>
+<pre>
+em {
+  color:#008800;
+}
+</pre>
+<p>Algo similar hacemos con el elemento p para indicar que sea de color gris:</p>
+<pre>
+p {
+  color:#999999;
+}
+</pre>
+<p>Pero podemos ver que todas los elementos heredan la fuente verdana ya que ninguna lo sobreescribe. </p>
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=0&cod=13&punto=9 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:56:26 GMT -->
+</html>

@@ -1,0 +1,225 @@
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=40&cod=48 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de JavaScript : Conceptos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+div#contentdetalle{clear:left;
+                   max-width:900px;
+				   border-top:0px solid #999;
+				   padding-top:15px;
+				   background-color: #aed7a8;
+				   text-align:left;
+				   font-size:1.3em;
+				   font-weight:normal;
+				   font-family:arial;
+				   padding:20px}
+				   
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;  
+}				   
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td>
+<h1>Array: métodos push y pop</h1></td>
+<td align="right">
+<!--<a href="http://www.javascriptya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div id="contentdetalle">
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 	  
+
+<p>Como los Array en Javascript son objetos, los mismos tienen una serie de métodos que nos facilitan trabajar con ellos.</p>
+<p>Para insertar elementos en un vector hemos visto que con solo asignar un valor al vector en un determinado índice el dato queda almacenado y eventualmente el atributo length modificado:</p>
+<pre>
+  var vec=[];
+  vec[0]=10;
+  vec[1]=20;  
+  document.write(vec.length);  //imprime 2
+</pre>
+<p>Esta sintaxis tenemos que tener cuidado como variamos el subíndice para no dejar componentes vacías si queremos implementar un array denso.</p>
+<p>Una variante para resolver este mismo problema es utilizar el método push del objeto Array. Este método añade el valor al final del vector:</p>
+<pre>
+  var vec=[];
+  vec.push(10);
+  vec.push(20);  
+  document.write(vec.length);  //imprime 2
+</pre>
+<p>Automáticamente cuando llamamos al método push el valor que le pasamos en el parámetro se almacena en el vector y se incrementa el atributo length.</p>
+<p>Podemos inclusive llamar al método push pasando más de 1 parámetro:</p>
+<pre>
+  var vec=[];
+  vec.push(10,20);
+  document.write(vec.length);  //imprime 2
+</pre>
+<p>El método inverso llamado pop extrae el último elemento del Array y decrementa en uno el atributo length:</p>
+<pre>
+  var vec=[];
+  vec.push(10,20,30,40);  
+  document.write(vec.length+'&lt;br&gt;');  //imprime 4
+  vec.pop();
+  document.write(vec.length+'&lt;br&gt;');  //imprime 3
+  document.write(vec.pop()+'&lt;br&gt;');   //imprime un 30
+  document.write(vec.length+'&lt;br&gt;');  //imprime 2
+</pre>
+<p>El método pop() además de eliminar el último elemento del vector retorna el valor almacenado en dicha componente.</p>
+<p>Si llamamos al método pop y el vector está vacío retorna el valor undefined.</p>
+<strong>Problema</strong>
+<p>Realizar la carga de sueldos por teclado hasta que se ingrese el cero. Almacenar todos los valores ingresados en un vector empleando el método push. Mostrar la suma de sueldos ingresados.</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+
+  var sueldos=[];
+  var monto;
+  do {
+    monto=prompt('Ingrese el sueldo (0 para finalizar):','');
+    monto=parseInt(monto);
+    if (monto!=0)
+    {
+      sueldos.push(monto);
+    }
+  } while (monto!=0);
+  var suma=0;
+  for(var f=0;f&lt;sueldos.length;f++)
+  {
+    suma=suma+sueldos[f];
+  }
+  document.write('El total en sueldos ingresado es:'+suma);
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>De esta forma no llevamos un contador para indicar la posición donde se debe almacenar la componente en el vector:</p>  
+<pre>
+      sueldos.push(monto);
+</pre></p>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../index1e61.html?inicio=40">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=40&cod=48 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:24 GMT -->
+</html>

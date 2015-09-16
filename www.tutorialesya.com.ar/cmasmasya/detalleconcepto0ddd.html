@@ -1,0 +1,813 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=48&codigo=179&inicio=45 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:31:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Estructuras dinámicas en C++: Implementación de un árbol binario ordenado</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>48 - Estructuras dinámicas en C++: Implementación de un árbol binario ordenado</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<h3>Problema 1:</h3>
+<p>Desarrollar una clase para la administración de un árbol binario ordenado.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include &lt;iostream&gt;
+
+using namespace std;
+
+class ArbolBinario {
+private:
+    class Nodo {
+    public:
+        int info;
+        Nodo *izq;
+        Nodo *der;
+    };
+    Nodo *raiz;
+    void borrar(Nodo *reco);
+    void imprimirPre(Nodo *reco);
+    void imprimirEntre(Nodo *reco);
+    void imprimirPost(Nodo *reco);
+public:
+    ArbolBinario();
+    ~ArbolBinario();
+    void insertar(int x);
+    void imprimirPre();
+    void imprimirEntre();
+    void imprimirPost();
+};
+
+ArbolBinario::ArbolBinario()
+{
+    raiz = NULL;
+}
+
+ArbolBinario::~ArbolBinario()
+{
+    borrar(raiz);
+}
+
+void ArbolBinario::borrar(Nodo *reco)
+{
+    if (reco != NULL)
+    {
+        borrar(reco-&gt;izq);
+        borrar(reco-&gt;der);
+        delete reco;
+    }
+}
+
+void ArbolBinario::insertar(int x)
+{
+    Nodo *nuevo;
+    nuevo = new Nodo();
+    nuevo-&gt;info = x;
+    nuevo-&gt;izq = NULL;
+    nuevo-&gt;der = NULL;
+    if (raiz == NULL)
+        raiz = nuevo;
+    else
+    {
+        Nodo *anterior, *reco;
+        anterior = NULL;
+        reco = raiz;
+        while (reco != NULL)
+        {
+            anterior = reco;
+            if (x &lt; reco-&gt;info)
+                reco = reco-&gt;izq;
+            else
+                reco = reco-&gt;der;
+        }
+        if (x &lt; anterior-&gt;info)
+            anterior-&gt;izq = nuevo;
+        else
+            anterior-&gt;der = nuevo;
+    }
+}
+
+void ArbolBinario::imprimirPre()
+{
+    imprimirPre(raiz);
+    cout &lt;&lt; "\n";
+}
+
+void ArbolBinario::imprimirPre(Nodo *reco)
+{
+    if (reco != NULL)
+    {
+        cout &lt;&lt; reco-&gt;info &lt;&lt; "-";
+        imprimirPre(reco-&gt;izq);
+        imprimirPre(reco-&gt;der);
+    }
+}
+
+void ArbolBinario::imprimirEntre()
+{
+    imprimirEntre(raiz);
+    cout &lt;&lt; "\n";
+}
+
+void ArbolBinario::imprimirEntre(Nodo *reco)
+{
+    if (reco != NULL)
+    {
+        imprimirEntre(reco-&gt;izq);
+        cout &lt;&lt; reco-&gt;info &lt;&lt; "-";
+        imprimirEntre(reco-&gt;der);
+    }
+}
+
+void ArbolBinario::imprimirPost()
+{
+    imprimirPost(raiz);
+    cout &lt;&lt; "\n";
+}
+
+void ArbolBinario::imprimirPost(Nodo *reco)
+{
+    if (reco != NULL)
+    {
+        imprimirPost(reco-&gt;izq);
+        imprimirPost(reco-&gt;der);
+        cout &lt;&lt; reco-&gt;info &lt;&lt; "-";
+    }
+}
+
+
+void main()
+{
+    ArbolBinario *arbol = new ArbolBinario();
+    arbol-&gt;insertar(100);
+    arbol-&gt;insertar(50);
+    arbol-&gt;insertar(25);
+    arbol-&gt;insertar(75);
+    arbol-&gt;insertar(150);
+    cout&lt;&lt;"Impresion preorden: ";
+    arbol-&gt;imprimirPre();
+    cout&lt;&lt;"Impresion entreorden: ";
+    arbol-&gt;imprimirEntre();
+    cout&lt;&lt;"Impresion postorden: ";
+    arbol-&gt;imprimirPost();
+    delete arbol;
+    cin.get();
+}
+
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/ArbolBinario1.zip">ArbolBinario1.zip</a></p>
+
+
+<p>Creamos un nodo y disponemos los punteros izq y der a NULL, guardamos la información que llega al método en el nodo.<br>
+Si el árbol está vacío, apuntamos raíz al nodo creado; en caso de no estar vacío, dentro de una estructura repetitiva vamos comparando x con la información del nodo, si x es mayor a la del nodo descendemos por el subárbol derecho en caso contrario descendemos por el subárbol izquierdo.<br>
+Cuando se encuentra un subárbol vacío insertar el nodo en dicho subárbol. Para esto llevamos un puntero anterior dentro del while:</p>
+<pre>
+void ArbolBinario::insertar(int x)
+{
+    Nodo *nuevo;
+    nuevo = new Nodo();
+    nuevo-&gt;info = x;
+    nuevo-&gt;izq = NULL;
+    nuevo-&gt;der = NULL;
+    if (raiz == NULL)
+        raiz = nuevo;
+    else
+    {
+        Nodo *anterior, *reco;
+        anterior = NULL;
+        reco = raiz;
+        while (reco != NULL)
+        {
+            anterior = reco;
+            if (x &lt; reco-&gt;info)
+                reco = reco-&gt;izq;
+            else
+                reco = reco-&gt;der;
+        }
+        if (x &lt; anterior-&gt;info)
+            anterior-&gt;izq = nuevo;
+        else
+            anterior-&gt;der = nuevo;
+    }
+}
+
+</pre>
+
+<p>El método imprimirPre() llama al método recursivo imprimirPre(Nodo *reco) y le pasa raiz para comenzar a recorrerlo:</pre>
+
+
+<pre>
+void ArbolBinario::imprimirPre()
+{
+    imprimirPre(raiz);
+    cout &lt;&lt; "\n";
+}
+
+void ArbolBinario::imprimirPre(Nodo *reco)
+{
+    if (reco != NULL)
+    {
+        cout &lt;&lt; reco-&gt;info &lt;&lt; "-";
+        imprimirPre(reco-&gt;izq);
+        imprimirPre(reco-&gt;der);
+    }
+}
+</pre>
+<p>El método recursivo lo primero que verifica con un if si reco está apuntando a un nodo (esto es verdad si reco es distinto a NULL), en caso afirmativo ingresa al bloque del if y realiza:</p>
+<pre>
+     - Visitar la raiz.
+     - Recorrer el subárbol izquierdo en pre-orden.
+     - Recorrer el subárbol derecho en pre-orden.
+</pre>
+<p>La visita en este caso es la impresión de la información del nodo y los recorridos son las llamadas recursivas pasando las direcciones de los subárboles izquierdo y derecho.</p>
+<p>Los algoritmos de los recorridos en entreorden y postorden son similares. La diferencia es que la visita la realizamos entre las llamadas recursivas en el recorrido en entre orden:</p>
+<pre>
+void ArbolBinario::imprimirEntre()
+{
+    imprimirEntre(raiz);
+    cout &lt;&lt; "\n";
+}
+
+void ArbolBinario::imprimirEntre(Nodo *reco)
+{
+    if (reco != NULL)
+    {
+        imprimirEntre(reco-&gt;izq);
+        cout &lt;&lt; reco-&gt;info &lt;&lt; "-";
+        imprimirEntre(reco-&gt;der);
+    }
+}
+</pre>
+<p>y por último en el recorrido en postorden la visita la realizamos luego de las dos llamadas recursivas:</p>
+<pre>
+void ArbolBinario::imprimirPost()
+{
+    imprimirPost(raiz);
+    cout &lt;&lt; "\n";
+}
+
+void ArbolBinario::imprimirPost(Nodo *reco)
+{
+    if (reco != NULL)
+    {
+        imprimirPost(reco-&gt;izq);
+        imprimirPost(reco-&gt;der);
+        cout &lt;&lt; reco-&gt;info &lt;&lt; "-";
+    }
+}
+</pre> 
+
+
+<p>En el destructor debemos borrar todos los nodos que quedan en el árbol, para esto debemos recorrer el árbol en post orden y en la visita eliminar el nodo:</p>
+<pre>
+ArbolBinario::~ArbolBinario()
+{
+    borrar(raiz);
+}
+
+void ArbolBinario::borrar(Nodo *reco)
+{
+    if (reco != NULL)
+    {
+        borrar(reco-&gt;izq);
+        borrar(reco-&gt;der);
+        delete reco;
+    }
+}
+
+</pre>
+
+<h3>Problema 2:</h3>
+<p>Confeccionar una clase que permita insertar un entero en un árbol binario ordenado verificando que no se encuentre previamente dicho número.<br>
+Desarrollar los siguientes métodos:<br>
+1 - Retornar la cantidad de nodos del árbol.<br>
+2 - Retornar la cantidad de nodos hoja del árbol.<br>
+3 - Imprimir en entre orden.<br>
+4 - Imprimir en entre orden junto al nivel donde se encuentra dicho nodo.<br>
+5 - Retornar la altura del árbol.<br>
+6 - Imprimir el mayor valor del árbol.<br>
+7 - Borrar el nodo menor del árbol.<br>
+</p>
+<pre class="recuadro">
+#include &lt;iostream&gt;
+
+using namespace std;
+
+class ArbolBinario {
+private:
+    class Nodo {
+    public:
+        int info;
+        Nodo *izq;
+        Nodo *der;
+    };
+    Nodo *raiz;
+    int cant;
+    int altura;
+    void borrar(Nodo *reco);
+    void imprimirEntre(Nodo *reco);
+    void cantidad(Nodo *reco);
+    void cantidadNodosHoja(Nodo *reco);
+    void imprimirEntreConNivel(Nodo *reco, int nivel);
+    void retornarAltura(Nodo *reco, int nivel);
+public:
+    ArbolBinario();
+    ~ArbolBinario();
+    void insertar(int x);
+    bool existe(int x);
+    void imprimirEntre();
+    int cantidad();
+    int cantidadNodosHoja();
+    void imprimirEntreConNivel();
+    int retornarAltura();
+    void mayorValor();
+    void borrarMenor();
+};
+
+ArbolBinario::ArbolBinario()
+{
+    raiz = NULL;
+}
+
+ArbolBinario::~ArbolBinario()
+{
+    borrar(raiz);
+}
+
+void ArbolBinario::borrar(Nodo *reco)
+{
+    if (reco != NULL)
+    {
+        borrar(reco-&gt;izq);
+        borrar(reco-&gt;der);
+        delete reco;
+    }
+}
+
+
+void ArbolBinario::insertar(int x)
+{
+    if (!existe(x))
+    {
+        Nodo *nuevo;
+        nuevo = new Nodo();
+        nuevo-&gt;info = x;
+        nuevo-&gt;izq = NULL;
+        nuevo-&gt;der = NULL;
+        if (raiz == NULL)
+            raiz = nuevo;
+        else
+        {
+            Nodo *anterior, *reco;
+            anterior = NULL;
+            reco = raiz;
+            while (reco != NULL)
+            {
+                anterior = reco;
+                if (x &lt; reco-&gt;info)
+                    reco = reco-&gt;izq;
+                else
+                    reco = reco-&gt;der;
+            }
+            if (x &lt; anterior-&gt;info)
+                anterior-&gt;izq = nuevo;
+            else
+                anterior-&gt;der = nuevo;
+        }
+    }
+}
+
+bool ArbolBinario::existe(int x)
+{
+    Nodo *reco = raiz;
+    while (reco != NULL) 
+    {
+        if (x == reco-&gt;info)
+                return true;
+        else
+            if (x&gt;reco-&gt;info)
+                reco = reco-&gt;der;
+            else
+                reco = reco-&gt;izq;
+    }
+    return false;
+}
+
+
+int ArbolBinario::cantidad() 
+{
+    cant = 0;
+    cantidad(raiz);
+    return cant;
+}
+
+void ArbolBinario::cantidad(Nodo *reco) 
+{
+    if (reco != NULL) 
+    {
+        cant++;
+        cantidad(reco-&gt;izq);
+        cantidad(reco-&gt;der);
+    }
+}
+
+int ArbolBinario::cantidadNodosHoja() 
+{
+    cant = 0;
+    cantidadNodosHoja(raiz);
+    return cant;
+}
+
+
+
+void ArbolBinario::cantidadNodosHoja(Nodo *reco) 
+{
+    if (reco != NULL) {
+        if (reco-&gt;izq == NULL && reco-&gt;der == NULL)
+            cant++;
+        cantidadNodosHoja(reco-&gt;izq);
+        cantidadNodosHoja(reco-&gt;der);
+    }
+}
+
+void ArbolBinario::imprimirEntreConNivel() 
+{
+    imprimirEntreConNivel(raiz, 1);
+    cout &lt;&lt; "\n";
+}
+
+void ArbolBinario::imprimirEntreConNivel(Nodo *reco, int nivel)  
+{
+    if (reco != NULL) {
+        imprimirEntreConNivel(reco-&gt;izq, nivel + 1);
+        cout&lt;&lt;reco-&gt;info &lt;&lt;"(" &lt;&lt;nivel &lt;&lt;") - ";
+        imprimirEntreConNivel(reco-&gt;der, nivel + 1);
+    }
+}
+
+int ArbolBinario::retornarAltura() 
+{
+    altura = 0;
+    retornarAltura(raiz, 1);
+    return altura;
+}
+
+void ArbolBinario::retornarAltura(Nodo *reco, int nivel)    
+{
+    if (reco != NULL) 
+    {
+        retornarAltura(reco-&gt;izq, nivel + 1);
+        if (nivel&gt;altura)
+            altura = nivel;
+        retornarAltura(reco-&gt;der, nivel + 1);
+    }
+}
+
+ void ArbolBinario::mayorValor()
+ {
+    if (raiz != NULL) 
+    {
+        Nodo *reco = raiz;
+        while (reco-&gt;der != NULL)
+            reco = reco-&gt;der;
+        cout&lt;&lt;"Mayor valor del árbol:" &lt;&lt;reco-&gt;info;
+    }
+}
+
+void ArbolBinario::borrarMenor() 
+{
+     if (raiz != NULL) {
+         Nodo *bor;
+         if (raiz-&gt;izq == NULL)
+         {
+             bor = raiz;
+             raiz = raiz-&gt;der;
+             delete bor;
+         }
+         else {
+             Nodo *atras = raiz;
+             Nodo *reco = raiz-&gt;izq;
+             while (reco-&gt;izq != NULL) 
+             {
+                 atras = reco;
+                 reco = reco-&gt;izq;
+             }
+             atras-&gt;izq = reco-&gt;der;
+             delete reco;
+         }
+     }
+ }
+
+
+void ArbolBinario::imprimirEntre()
+{
+    imprimirEntre(raiz);
+    cout &lt;&lt; "\n";
+}
+
+void ArbolBinario::imprimirEntre(Nodo *reco)
+{
+    if (reco != NULL)
+    {
+        imprimirEntre(reco-&gt;izq);
+        cout &lt;&lt; reco-&gt;info &lt;&lt; "-";
+        imprimirEntre(reco-&gt;der);
+    }
+}
+
+void main()
+{
+    ArbolBinario *arbol1 = new ArbolBinario();
+    arbol1-&gt;insertar(100);
+    arbol1-&gt;insertar(50);
+    arbol1-&gt;insertar(25);
+    arbol1-&gt;insertar(75);
+    arbol1-&gt;insertar(150);
+    cout&lt;&lt;"Impresion entreorden: ";
+    arbol1-&gt;imprimirEntre();
+    cout&lt;&lt;"Cantidad de nodos del árbol:" &lt;&lt;arbol1-&gt;cantidad() &lt;&lt;"\n";
+    cout&lt;&lt;"Cantidad de nodos hoja:" &lt;&lt;arbol1-&gt;cantidadNodosHoja()&lt;&lt;"\n";
+    cout&lt;&lt;"Impresion en entre orden junto al nivel del nodo:";
+    arbol1-&gt;imprimirEntreConNivel();
+    cout&lt;&lt;"Artura del arbol:";
+    cout &lt;&lt; arbol1-&gt;retornarAltura();
+    cout &lt;&lt; "\n";
+    arbol1-&gt;mayorValor();
+    cout &lt;&lt; "\n";
+    arbol1-&gt;borrarMenor();
+    cout&lt;&lt;"Luego de borrar el menor:";
+    arbol1-&gt;imprimirEntre();
+    delete arbol1;
+    cin.get();
+}
+</pre>
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/ArbolBinario2.zip">ArbolBinario2.zip</a></p>
+
+<p>
+Para verificar si existe un elemento de información en el árbol disponemos un puntero reco en el nodo apuntado por raiz. Dentro de un while verificamos si la información del parámetro coincide con la información del nodo apuntado por reco, en caso afirmativo salimos del método retornando true, en caso contrario si la información a buscar es mayor a la del nodo procedemos a avanzar reco con la dirección del subárbol derecho:</p>
+<pre>
+bool ArbolBinario::existe(int x)
+{
+    Nodo *reco = raiz;
+    while (reco != NULL) 
+    {
+        if (x == reco-&gt;info)
+                return true;
+        else
+            if (x&gt;reco-&gt;info)
+                reco = reco-&gt;der;
+            else
+                reco = reco-&gt;izq;
+    }
+    return false;
+}
+</pre>
+<p>Para retornar la cantidad de nodos del árbol procedemos a inicializar un atributo de la clase llamado cant con cero. Llamamos al método recursivo y en cada visita al nodo incrementamos el atributo cant en uno (si definimos cant en el método cantidad() no podemos incrementarlo en el otro método):</p>
+<pre>
+int ArbolBinario::cantidad() 
+{
+    cant = 0;
+    cantidad(raiz);
+    return cant;
+}
+
+void ArbolBinario::cantidad(Nodo *reco) 
+{
+    if (reco != NULL) 
+    {
+        cant++;
+        cantidad(reco-&gt;izq);
+        cantidad(reco-&gt;der);
+    }
+}
+</pre>
+
+<p>Para imprimir todos los nodos en entre orden junto al nivel donde se encuentra planteamos un método recursivo que llegue la referencia del nodo a imprimir junto al nivel de dicho nodo. Desde el método no recursivo pasamos la referencia a raiz y un uno (ya que raiz se encuentra en el primer nivel)<br>
+Cada vez que descendemos un nivel le pasamos la referencia del subárbol respectivo junto al nivel que se encuentra dicho nodo:</p>
+<pre>
+void ArbolBinario::imprimirEntreConNivel() 
+{
+    imprimirEntreConNivel(raiz, 1);
+    cout &lt;&lt; "\n";
+}
+
+void ArbolBinario::imprimirEntreConNivel(Nodo *reco, int nivel)  
+{
+    if (reco != NULL) {
+        imprimirEntreConNivel(reco-&gt;izq, nivel + 1);
+        cout&lt;&lt;reco-&gt;info &lt;&lt;"(" &lt;&lt;nivel &lt;&lt;") - ";
+        imprimirEntreConNivel(reco-&gt;der, nivel + 1);
+    }
+}
+</pre>
+<p>Para obtener la altura del árbol procedemos en el método no recursivo a inicializar el atributo altura con el valor cero. Luego llamamos al método recursivo con la referencia a raiz que se encuentra en el nivel uno. Cada vez que visitamos un nodo procedemos a verificar si el parámetro nivel supera al atributo altura, en dicho caso actualizamos el atributo altura con dicho nivel.</p>
+<pre>
+int ArbolBinario::retornarAltura() 
+{
+    altura = 0;
+    retornarAltura(raiz, 1);
+    return altura;
+}
+
+void ArbolBinario::retornarAltura(Nodo *reco, int nivel)    
+{
+    if (reco != NULL) 
+    {
+        retornarAltura(reco-&gt;izq, nivel + 1);
+        if (nivel&gt;altura)
+            altura = nivel;
+        retornarAltura(reco-&gt;der, nivel + 1);
+    }
+}
+</pre>
+
+<p>Para imprimir el mayor valor del árbol debemos recorrer siempre por derecha hasta encontrar un nodo que almacene NULL en el puntero der:</p>
+<pre>
+ void ArbolBinario::mayorValor()
+ {
+    if (raiz != NULL) 
+    {
+        Nodo *reco = raiz;
+        while (reco-&gt;der != NULL)
+            reco = reco-&gt;der;
+        cout&lt;&lt;"Mayor valor del árbol:" &lt;&lt;reco-&gt;info;
+    }
+}
+</pre>
+
+<p>Para borrar el menor valor del árbol lo primero que comprobamos es si el subárbol izquierdo es nulo luego el menor del árbol es el nodo apuntado por raiz, en este caso disponemos un puntero auxiliar bor que apunte a raiz, luego avanzamos a raiz y finamente borramos el nodo que era raiz hasta este momento. Luego si el subárbol izquierdo no está vacío procedemos a descender siempre por la izquierda llevando un puntero en el nodo anterior. Cuando llegamos al nodo que debemos borrar procedemos a enlazar el puntero izq del nodo que se encuentra en el nivel anterior con la referencia del subárbol derecho del nodo a borrar (reco queda apuntantado al nodo a borrar):</p>
+<pre> 
+void ArbolBinario::borrarMenor() 
+{
+     if (raiz != NULL) {
+         Nodo *bor;
+         if (raiz-&gt;izq == NULL)
+         {
+             bor = raiz;
+             raiz = raiz-&gt;der;
+             delete bor;
+         }
+         else {
+             Nodo *atras = raiz;
+             Nodo *reco = raiz-&gt;izq;
+             while (reco-&gt;izq != NULL) 
+             {
+                 atras = reco;
+                 reco = reco-&gt;izq;
+             }
+             atras-&gt;izq = reco-&gt;der;
+             delete reco;
+         }
+     }
+ }
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/ArbolBinario2.zip">ArbolBinario2.zip</a></p>
+<h2><a href="indexb634.html?inicio=45">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=48&codigo=179&inicio=45 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:31:04 GMT -->
+</html>

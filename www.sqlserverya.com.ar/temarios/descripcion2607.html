@@ -1,0 +1,151 @@
+<html>
+
+
+<!-- Mirrored from www.sqlserverya.com.ar/temarios/descripcion.php?inicio=125&cod=139&punto=133 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de SQL Server </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+	  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>133 - Funciones</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>SQL Server ofrece varios tipos de funciones para realizar distintas operaciones. Hemos visto y empleado varias de ellas.</p>
+<p>Se pueden emplear las funciones del sistema en cualquier lugar en el que se permita una expresión en una sentencia "select".</p> 
+
+<p>Las funciones pueden clasificarse en:</p>
+<p>- deterministicas: siempre retornan el mismo resultado si se las invoca enviando el mismo valor de entrada. Todas las funciones de agregado y string son deterministicas, excepto "charindex" y "patindex".</p>
+<p>- no deterministicas: pueden retornar distintos resultados cada vez que se invocan con el mismo valor de entrada. Las siguientes son algunas de las funciones no deterministicas: getdate, datename, textptr, textvalid, rand. Todas las funciones de configuración, cursor, meta data, seguridad y estadísticas del sistema son no deterministicas.</p>
+
+<p>SQL Server provee muchas funciones y además permite que el usuario pueda definir sus propias funciones.</p>
+
+<p>Sabemos que una función es un conjunto de sentencias que operan como una unidad lógica, una rutina que retorna un valor. Una función tiene un nombre, acepta parámetros de entrada y retorna un valor escalar o una tabla.</p>
+
+<p>Los parámetros de entrada pueden ser de cualquier tipo, excepto timestamp, cursor y table.</p>
+<p>Las funciones definidas por el usuario no permiten parámetros de salida.</p>
+
+<p>No todas las sentencias SQL son válidas dentro de una función. NO es posible emplear en ellas funciones no determinadas (como getdate()) ni sentencias de modificación o actualización de tablas o vistas. Si podemos emplear sentencias de asignación, de control de flujo (if), de modificación y eliminación de variables locales.</p>
+
+<p>SQL Server admite 3 tipos de funciones definidas por el usuario clasificadas según el valor retornado:</p>
+<p>1) escalares: retornan un valor escalar;</p>
+<p>2) de tabla de varias instrucciones (retornan una tabla) y</p>
+<p>3) de tabla en línea (retornan una tabla).</p>
+
+<p>Las funciones definidas por el usuario se crean con la instrucción "create function" y se eliminan con "drop function".</p>
+
+
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+<br>
+   <h2><a href="../index28e1.html?inicio=125">Retornar</a></h2>   
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-11";
+urchinTracker();
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from www.sqlserverya.com.ar/temarios/descripcion.php?inicio=125&cod=139&punto=133 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:33 GMT -->
+</html>

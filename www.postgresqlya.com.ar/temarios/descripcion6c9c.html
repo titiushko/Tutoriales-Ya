@@ -1,0 +1,194 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.postgresqlya.com.ar/temarios/descripcion.php?inicio=0&cod=160&punto=2 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:17:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de PostgreSQL - Crear una tabla (create table) </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+	  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>2 - Crear una tabla (create table)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+	  	  
+
+<p>
+<p>Una base de datos almacena su información en tablas.</p>
+<p>Una tabla es una estructura de datos que organiza los datos en columnas y filas; cada columna es un campo (o atributo) y cada fila, un registro. La intersección de una columna con una fila, contiene un dato específico, un solo valor.</p>
+<p>Cada registro contiene un dato por cada columna de la tabla.<br>
+Cada campo (columna) debe tener un nombre. El nombre del campo hace referencia a la información que almacenará.<br>
+Cada campo (columna) también debe definir el tipo de dato que almacenará.</p>
+
+<p>Las tablas forman parte de una base de datos.</p>
+<p>Nosotros trabajaremos con la base de datos llamada bd1 , que ya he creado en el servidor postgresqlya.com.ar.</p>
+
+<p>Al crear una tabla debemos resolver qué campos (columnas) tendrá y que tipo de datos almacenarán cada uno de ellos, es decir, su estructura.</p>
+
+<p>La sintaxis básica y general para crear una tabla es la siguiente:</p>
+<pre>
+ create table NOMBRETABLA(
+  NOMBRECAMPO1 TIPODEDATO,
+  ...
+  NOMBRECAMPON TIPODEDATO
+ );
+</pre>
+<p>La tabla debe ser definida con un nombre que la identifique y con el cual accederemos a ella.</p>
+<p>Creamos una tabla llamada "usuarios" y entre paréntesis definimos los campos y sus tipos:</p>
+<pre>
+ create table usuarios (
+  nombre varchar(30),
+  clave varchar(10)
+ );
+</pre>
+<p>Cada campo con su tipo debe separarse con comas de los siguientes, excepto el último.</p>
+
+<p>Cuando se crea una tabla debemos indicar su nombre y definir al menos un campo con su tipo de dato. En esta tabla "usuarios" definimos 2 campos:</p>
+<ul>
+<li>
+  nombre: que contendrá una cadena de caracteres de 30 caracteres de longitud, que almacenará el nombre de usuario y
+</li>
+<li>
+  clave: otra cadena de caracteres de 10 de longitud, que guardará la clave de cada usuario.</li>
+</ul>
+<p>Cada usuario ocupará un registro de esta tabla, con su respectivo nombre y clave.</p>
+
+<p>Para nombres de tablas, se puede utilizar cualquier caracter alfabético o numérico, el primero debe ser un caracter alfabético y no puede contener espacios en blanco.</p>
+
+<p>Si intentamos crear una tabla con un nombre ya existente (existe otra tabla con ese nombre), mostrará un mensaje indicando que ya hay un objeto llamado 'usuarios' en la base de datos y la sentencia no se ejecutará. Para evitar problemas con otros usuarios de este sitio que creen tablas con el mismo nombre hemos creado una rutina que borra todas las tablas luego que ejecuta el ejercicio.</p>
+
+<p>Para ver la estructura de una tabla consultaremos una tabla propia del PostgreSQL:</p>
+<pre>
+SELECT table_name,column_name,udt_name,character_maximum_length 
+  FROM information_schema.columns WHERE table_name = 'usuarios';
+</pre>
+<p>Aparece el nombre de la tabla, los nombres de columna y el largo máximo de cada campo.:</p>
+<pre>
+table_name      column_name     udt_name        character_maximum_length
+usuarios        clave	        varchar	        10
+usuarios        nombre          varchar         30
+</pre>
+<p>Para eliminar una tabla usamos "drop table" junto al nombre de la tabla a eliminar:</p>
+<pre>
+ drop table usuarios;
+</pre>
+<p>Si intentamos eliminar una tabla que no existe, aparece un mensaje de error indicando tal situación y la sentencia no se ejecuta. </p>
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-24");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+
+
+<!-- Mirrored from www.postgresqlya.com.ar/temarios/descripcion.php?inicio=0&cod=160&punto=2 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:17:27 GMT -->
+</html>

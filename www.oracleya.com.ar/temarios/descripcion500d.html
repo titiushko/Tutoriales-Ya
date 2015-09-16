@@ -1,0 +1,215 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=0&cod=179&punto=21 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Descripción : Funciones string (Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>21 - Funciones string</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>Las funciones de manejo de caracteres alfanuméricos aceptan argumentos de tipo caracter y retornan caracteres o valores numéricos.</p> 
+<p>Las siguientes son algunas de las funciones que ofrece Oracle para trabajar con cadenas de caracteres:</p>
+
+<p>- chr(x): retorna un caracter equivalente al código enviado como argumento "x".
+Ejemplo: </p>
+<pre>
+ select chr(65) from dual;-- retorna 'A'.
+ select chr(100) from dual;-- retorna 'd'.
+</pre>
+<p>- concat(cadena1,cadena2): concatena dos cadenas de caracteres; es equivalente al operador ||.
+Ejemplo:</p>
+<pre>
+ select concat('Buenas',' tardes') from dual;--retorna 'Buenas tardes'.
+</pre>
+<p>- initcap(cadena): retorna la cadena enviada como argumento con la primera letra (letra capital) de cada palabra en mayúscula. Ejemplo:</p>
+<pre>
+ select initcap('buenas tardes alumno') from dual;--retorna 'Buenas Tardes Alumno'.
+</pre>
+<p>- lower(cadena): retorna la cadena enviada como argumento en minúsculas. "lower" significa reducir en inglés. Ejemplo:</p>
+<pre>
+ select lower('Buenas tardes ALUMNO') from dual;--retorna "buenas tardes alumno".
+</pre>
+<p>- upper(cadena): retorna la cadena con todos los caracteres en mayúsculas. Ejemplo:</p>
+<pre>
+ select upper('www.oracle.com') from dual;-- 'WWW.ORACLE.COM'
+</pre>
+<p>- lpad(cadena,longitud,cadenarelleno): retorna la cantidad de caracteres especificados por el argumento "longitud", de la cadena enviada como primer argumento (comenzando desde el primer caracter); si "longitud" es mayor que el tamaño de la cadena enviada, rellena los espacios restantes con la cadena enviada como tercer argumento (en caso de omitir el tercer argumento rellena con espacios); el relleno comienza desde la izquierda. Ejemplos:</p>
+<pre>
+ select lpad('alumno',10,'xyz') from dual;-- retorna 'xyzxalumno'
+ select lpad('alumno',4,'xyz') from dual;-- retorna 'alum'
+</pre>
+<p>- rpad(cadena,longitud,cadenarelleno): retorna la cantidad de caracteres especificados por el argumento "longitud", de la cadena enviada como primer argumento (comenzando desde el primer caracter); si "longitud" es mayor que el tamaño de la cadena enviada, rellena los espacios restantes con la cadena enviada como tercer argumento (en caso de omitir el tercer argumento rellena con espacios); el relleno comienza desde la derecha (último caracter). Ejemplos: </p>
+<pre>
+ select rpad('alumno',10,'xyz') from dual;-- retorna 'alumnoxyzx'
+ select rpad('alumno',4,'xyz') from dual;-- retorna 'alum'
+</pre>
+<p>- ltrim(cadena1,cadena2): borra todas las ocurrencias de "cadena2" en "cadena1", si se encuentran al comienzo; si se omite el segundo argumento, se eliminan los espacios. Ejemplo:</p>
+<pre>
+ select ltrim('la casa de la cuadra','la') from dual;-- ' casa de la cuadra'
+ select ltrim(' es la casa de la cuadra','la') from dual;-- no elimina ningún caracter
+ select ltrim('  la casa') from dual;-- 'la casa'
+</pre>
+<p>- rtrim(cadena1,cadena2): borra todas las ocurrencias de "cadena2" en "cadena1", si se encuentran por la derecha (al final de la cadena); si se omite el segundo argumento, se borran los espacios. Ejemplo:</p>
+<pre>
+ select rtrim('la casa lila','la') from dual;-- 'la casa li'
+ select rtrim('la casa lila ','la') from dual;-- no borra ningún caracter
+ select rtrim('la casa lila    ') from dual; --'la casa lila'
+</pre>
+<p>- trim(cadena): retorna la cadena con los espacios de la izquierda y derecha eliminados. "Trim" significa recortar. Ejemplo:</p>
+<pre>
+select trim('   oracle     ') from dual;--'oracle'
+</pre>
+<p>- replace(cadena,subcade1,subcade2): retorna la cadena con todas las ocurrencias de la subcadena de reemplazo (subcade2) por la subcadena a reemplazar (subcae1). Ejemplo:</p>
+<pre>
+ select replace('xxx.oracle.com','x','w') from dual;
+</pre>
+<p>retorna "www.oracle.com'.</p>
+
+<p>- substr(cadena,inicio,longitud): devuelve una parte de la cadena especificada como primer argumento, empezando desde la posición especificada por el segundo argumento y de tantos caracteres de longitud como indica el tercer argumento. Ejemplo:</p>
+<pre>
+select substr('www.oracle.com',1,10) from dual;-- 'www.oracle'
+select substr('www.oracle.com',5,6) from dual;-- 'oracle'
+</pre>
+<p>- length(cadena): retorna la longitud de la cadena enviada como argumento. "lenght" significa longitud en inglés. Ejemplo:</p>
+<pre>
+ select length('www.oracle.com') from dual;-- devuelve 14.
+</pre>
+<p>- instr (cadena,subcadena): devuelve la posición de comienzo (de la primera ocurrencia) de la subcadena especificada en la cadena enviada como primer argumento. Si no la encuentra retorna 0. Ejemplos:</p>
+<pre>
+ select instr('Jorge Luis Borges','or') from dual;-- 2
+ select instr('Jorge Luis Borges','ar') from dual;-- 0, no se encuentra
+</pre>
+<p>- translate(): reemplaza cada ocurrencia de una serie de caracteres con otra serie de acracteres. La diferencia con "replace" es que aquella trabaja con cadenas de caracteres y reemplaza una cadena completa por otra, en cambio "translate" trabaja con caracteres simples y reemplaza varios. En el siguiente ejemplo se especifica que se reemplacen todos los caracteres "O" por el caracter "0", todos los caracteres "S" por el caracter "5" y todos los caracteres "G" por "6":</p>
+<pre>
+ select translate('JORGE LUIS BORGES','OSG','056') from dual;--'J0R6E LUI5 B0R6E5'
+</pre>
+<p>Se pueden emplear estas funciones enviando como argumento el nombre de un campo de tipo caracter.</p>
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=0&cod=179&punto=21 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:25 GMT -->
+</html>

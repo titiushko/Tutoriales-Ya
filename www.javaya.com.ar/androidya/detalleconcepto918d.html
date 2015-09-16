@@ -1,0 +1,280 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=161&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:10:01 GMT -->
+<head>
+<title>Menú de opciones con submenú</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+.descarga2 a {
+color:#4B4B4B;
+text-decoration:none;
+border-bottom:1px dotted #444;
+}
+.descarga2 {
+background: #F7FABE;
+text-align: left;
+padding: 5px 20px 5px 45px;
+border-top: 2px solid #DFE786;
+border-bottom: 2px solid #DFE786;
+color:#000000;
+margin-left:1.2em;
+margin-right:1.2em;
+border-radius:4px;
+font-size:1em;
+
+}  
+
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-30']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>30 - Menú de opciones con submenú</h1> <p class="descarga2">Ya se encuentra disponible el nuevo tutorial para aprender android con el nuevo entorno <a href="androidstudioya/index.html" target="_blank">Android Studio propuesto por Google y
+que remplaza a Eclipse</a>.
+</td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>Ahora veremos que podemos desplegar un submenú cuando se selecciona una opción del menú principal.</p>
+<h3>Problema:</h3>
+<p>Confeccionar una aplicación que muestre un menú con dos opciones: una que visualice el texto "Sitios interesantes..." y al ser seleccionado muestre otro submenú con una serie de buscadores. y otra opción en el menú principal para que finalice el programa.</p>
+
+<p>Modificaremos el archivo activity_main.xml de la carpeta res/menu. Podemos eliminar el item que crea por defecto el ADT (menu_settings(Item)</p>
+<p>Primero insertamos un item que mostrará el mensaje "Sitios interesantes..." para esto presionamos el botón "Add" y seleccionamos "Item" en Title disponemos "Sitios interesantes..."
+</p>
+<img src="imagentema/foto118.jpg" border="0" alt="menú de opciones en Android"><br>
+<p>Presionamos "Add" y seleccionamos "Sub-Menu":</p>
+<img src="imagentema/foto118a.jpg" border="0" alt="menú de opciones en Android"><br>
+
+
+
+<p>Luego añadimos varios Menu Item al Sub-Menu (uno por cada sitio web a enlazar):</p>
+<img src="imagentema/foto119.jpg" border="0" alt="menú de opciones en Android"><br>
+<p>La estructura final del menú de opciones debe ser la siguiente:</p>
+<img src="imagentema/foto120.jpg" border="0" alt="menú de opciones en Android"><br>
+
+
+<p>El código fuente de la clase Proyecto028Activity.java es:</p>
+<pre class="recuadro">
+package com.androidya.proyecto028;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
+public class MainActivity extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent i;
+        switch (item.getItemId()) {
+        case R.id.item2:
+            i = new Intent("android.intent.action.VIEW",
+                    Uri.parse("http://www.google.com"));
+            startActivity(i);
+            break;
+        case R.id.item3:
+            i = new Intent("android.intent.action.VIEW",
+                    Uri.parse("http://www.yahoo.com"));
+            startActivity(i);
+            break;
+        case R.id.item4:
+            i = new Intent("android.intent.action.VIEW",
+                    Uri.parse("http://www.bing.com"));
+            startActivity(i);
+            break;
+        case R.id.item5:
+            finish();
+        }
+        return true;
+    }
+
+}
+</pre>
+<p>El método onCreateOptionsMenu es idéntico al concepto anterior. En el método onOptionsItemSelected verificamos cual de los MenuItem es seleccionado y procedemos a invocar mediante un Intent al navegador configurado por defecto para el dispositivo.</p>
+<p>La visualización del submenú en tiempo de ejecución es similar a:</p>
+<img src="imagentema/foto121.jpg" border="0" alt="menú de opciones en Android"><br>
+
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/proyecto028.zip">proyecto028.zip</a>
+</div>
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+
+  </div>
+  
+  
+  
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=161&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:10:50 GMT -->
+</html>

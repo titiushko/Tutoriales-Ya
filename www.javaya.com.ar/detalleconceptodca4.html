@@ -1,0 +1,448 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=122&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:54:21 GMT -->
+<head>
+<title>Estructuras dinámicas: Listas genéricas circulares</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Estructuras dinámicas: Listas genéricas circulares</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>Una lista circular simplemente encadenada la podemos representar gráficamente:</p>
+<img src="imagentema/foto114.jpg" border="0" alt="lista circular simplemente encadenada"><br>
+<p>Observemos que el puntero sig del último nodo apunta al primer nodo. En este tipo de listas si avanzamos raiz no perdemos la referencia al nodo anterior ya que es un círculo.</p>
+<p>Una lista circular puede también ser doblemente encadenada:</p>
+<img src="imagentema/foto115.jpg" border="0" alt="lista circular doblemente encadenada"><br>
+<p>El puntero ant del primer nodo apunta al último nodo de la lista y el puntero sig del último nodo de la lista apunta al primero.</p>
+
+<p>
+Resolveremos algunos métodos para administrar listas genéricas circulares doblemente encadenadas  para analizar la mecánica de enlace de nodos.
+</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+public class ListaCircular {
+    
+    class Nodo {
+        int info;
+        Nodo ant,sig;
+    }
+    
+    private Nodo raiz;
+    
+    public ListaCircular () {
+        raiz=null;
+    }
+              
+    public void insertarPrimero(int x) {
+        Nodo nuevo=new Nodo();
+        nuevo.info=x;
+        if (raiz==null) {
+            nuevo.sig=nuevo;
+            nuevo.ant=nuevo;            
+            raiz=nuevo;
+        } else {
+            Nodo ultimo=raiz.ant;
+            nuevo.sig=raiz;
+            nuevo.ant=ultimo;
+            raiz.ant=nuevo;
+            ultimo.sig=nuevo;
+            raiz=nuevo;
+        }
+    }
+    
+    public void insertarUltimo(int x) {
+        Nodo nuevo=new Nodo();
+        nuevo.info=x;
+        if (raiz==null) {
+            nuevo.sig=nuevo;
+            nuevo.ant=nuevo;            
+            raiz=nuevo;
+        } else {
+            Nodo ultimo=raiz.ant;
+            nuevo.sig=raiz;
+            nuevo.ant=ultimo;
+            raiz.ant=nuevo;
+            ultimo.sig=nuevo;
+        }
+    }    
+    
+    public boolean vacia ()
+    {
+        if (raiz == null)
+            return true;
+        else
+            return false;
+    }
+    
+    public void imprimir ()
+    {
+        if (!vacia()) {
+            Nodo reco=raiz;
+            do {
+                System.out.print (reco.info + "-");
+                reco = reco.sig;                
+            } while (reco!=raiz);
+            System.out.println();
+        }    
+    }
+    
+    public int cantidad ()
+    {
+        int cant = 0;
+        if (!vacia()) {
+            Nodo reco=raiz;
+            do {
+                cant++;
+                reco = reco.sig;                
+            } while (reco!=raiz);
+        }    
+        return cant;
+    }
+    
+    public void borrar (int pos)
+    {
+        if (pos &lt;= cantidad ())    {
+            if (pos == 1) {
+                if (cantidad()==1) {
+                    raiz=null;
+                } else {
+                    Nodo ultimo=raiz.ant;    
+                    raiz = raiz.sig;
+                    ultimo.sig=raiz;
+                    raiz.ant=ultimo;
+                } 
+            } else {
+                Nodo reco = raiz;
+                for (int f = 1 ; f &lt;= pos - 1 ; f++)
+                    reco = reco.sig;
+                Nodo anterior = reco.ant;
+                reco=reco.sig;
+                anterior.sig=reco;
+                reco.ant=anterior;
+            }
+        }
+    }    
+    
+    public static void main(String[] ar) {
+        ListaCircular lc=new ListaCircular();
+        lc.insertarPrimero(100);
+        lc.insertarPrimero(45);
+        lc.insertarPrimero(12);
+        lc.insertarPrimero(4);
+        System.out.println("Luego de insertar 4 nodos al principio");
+        lc.imprimir();
+        lc.insertarUltimo(250);
+        lc.insertarUltimo(7);
+        System.out.println("Luego de insertar 2 nodos al final");
+        lc.imprimir();
+        System.out.println("Cantidad de nodos:"+lc.cantidad());
+        System.out.println("Luego de borrar el de la primer posición:");
+        lc.borrar(1);
+        lc.imprimir();
+        System.out.println("Luego de borrar el de la cuarta posición:");
+        lc.borrar(4);
+        lc.imprimir();                
+    }
+}
+</pre>
+<p>Para insertar al principio de una lista circular doblemente encadenada:</p>
+<pre>
+<strong>
+    public void insertarPrimero(int x) {
+</strong>
+</pre>
+<p>Creamos un nodo y guardamos la información:</p>
+<pre>
+        Nodo nuevo=new Nodo();
+        nuevo.info=x;
+</pre>
+<p>Si la lista está vacía luego tanto el puntero sig y ant apuntan a si mismo ya que debe ser circular (y raiz apunta al nodo creado):</p>
+<pre>
+        if (raiz==null) {
+            nuevo.sig=nuevo;
+            nuevo.ant=nuevo;            
+            raiz=nuevo;
+</pre>
+<p>En caso que la lista no esté vacía disponemos un puntero al final de la lista (el puntero ant del primer nodo tiene dicha dirección):</p>
+<pre>
+        } else {
+            Nodo ultimo=raiz.ant;
+</pre>
+<p>El nodo a insertar lo enlazamos previo al nodo apuntado por raiz:</p>
+<pre>
+            nuevo.sig=raiz;
+            nuevo.ant=ultimo;
+            raiz.ant=nuevo;
+            ultimo.sig=nuevo;
+</pre>
+<p>Finalmente hacemos que raiz apunte al nodo creado luego de haber hecho todos los enlaces:</p>
+<pre>
+            raiz=nuevo;
+</pre>
+
+<p>Para insertar un nodo al final de la lista:</p>
+<pre>
+<strong>
+    public void insertarUltimo(int x) {
+</strong>
+</pre>
+<p>El algoritmo es idéntico al método que inserta al principio con la salvedad que no desplazamos raiz con la dirección del nodo creado (es decir al insertar en la posición anterior del primer nodo lo que estamos haciendo realmente es insertar al final de la lista):</p>
+<pre>
+        Nodo nuevo=new Nodo();
+        nuevo.info=x;
+        if (raiz==null) {
+            nuevo.sig=nuevo;
+            nuevo.ant=nuevo;            
+            raiz=nuevo;
+        } else {
+            Nodo ultimo=raiz.ant;
+            nuevo.sig=raiz;
+            nuevo.ant=ultimo;
+            raiz.ant=nuevo;
+            ultimo.sig=nuevo;
+        }
+    }    
+</pre>
+<p>Para imprimir la lista ya no podemos disponer un puntero reco que apunte al primer nodo y que se detenga cuando encuentre un nodo que el atributo sig almacene null.
+<pre>
+<strong>
+    public void imprimir ()
+</strong>
+</pre>
+<p>Si la lista no está vacía disponemos un puntero en el primer nodo y utilizamos un do/while para recorrer la lista. La condición del do/while es que se repita mientras el puntero reco sea distinto a raiz (es decir que no haya dado toda la vuelta a la lista):</p>
+<pre>
+        if (!vacia()) {
+            Nodo reco=raiz;
+            do {
+                System.out.print (reco.info + "-");
+                reco = reco.sig;                
+            } while (reco!=raiz);
+            System.out.println();
+        }    
+    }
+</pre>
+<p>Para borrar el nodo de una determinada posición:</p>
+<pre>
+<strong>
+    public void borrar (int pos)
+</strong>
+</pre>
+<p>Debemos primero identificar si es el primero de la lista (ya que en este caso se modifica el puntero externo raiz):</p>
+<pre>
+        if (pos &lt;= cantidad ())    {
+            if (pos == 1) {
+</pre>
+<p>Si es el primero y el único de la lista hacemos que raiz apunte a null:</p>
+<pre>
+                if (cantidad()==1) {
+                    raiz=null;
+</pre>
+<p>Si no disponemos un puntero al final de la lista, avanzamos raiz y enlazamos el último nodo con el segundo de la lista:</p>
+<pre> 
+                } else {
+                    Nodo ultimo=raiz.ant;    
+                    raiz = raiz.sig;
+                    ultimo.sig=raiz;
+                    raiz.ant=ultimo;
+                } 
+</pre>
+<p>En caso que queremos borrar un nodo que se encuentra en medio de la lista o inclusive al final debemos recorrer con un for hasta el nodo que queremos borrar y luego disponemos un puntero en el nodo anterior y otro puntero en el nodo siguiente. Seguidamente procedemos a enlazar los nodos:</p>
+<pre>
+                Nodo reco = raiz;
+                for (int f = 1 ; f &lt;= pos - 1 ; f++)
+                    reco = reco.sig;
+                Nodo anterior = reco.ant;
+                reco=reco.sig;
+                anterior.sig=reco;
+                reco.ant=anterior;
+</pre></div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index1e61.html?inicio=40">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=122&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:54:24 GMT -->
+</html>

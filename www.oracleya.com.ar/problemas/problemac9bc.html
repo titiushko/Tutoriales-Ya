@@ -1,0 +1,492 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/problemas/problema.php?inicio=50&cod=222&punto=64 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios propuestos : Restricciones al crear la tabla(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+pre {
+  text-align:left;
+  font-family:verdana,sans-serif;
+}
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+</style>
+
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;	
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=no,status=yes,toolbar=yes,location=yes');  	
+}
+
+function VentanaTeorico(codigo)
+{
+  alto=400;
+  window.open('../temarios/descripcion2ade4.html?cod='+codigo+'&origen=problema', '', 'top=0,left=0,width=800,height='+alto+',resizable=yes,scrollbars=yes,menubar=no');  	
+}
+
+function cambiar(nro)
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   if (nro==1)
+   {
+     if (lista[f].id=='solu1')
+       lista[f].style.display='block';
+   }
+   else
+     if (nro==2)
+     {
+       if (lista[f].id=='solu2')
+         lista[f].style.display='block';
+     }
+	   
+  }
+  if (nro==1)
+    document.getElementById('solucion1').style.display='none';
+  if (nro==2)
+    document.getElementById('solucion2').style.display='none';
+}
+
+</script>
+
+</head>
+
+<body>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>64 - Restricciones al crear la tabla</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+	  <table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<b>Primer problema: </b><br><p>Un club de barrio tiene en su sistema 4 tablas:</p>
+<p>- "socios": en la cual almacena documento, número, nombre y domicilio de cada socio;</p>
+<p>- "deportes": que guarda un código, nombre del deporte, día de la semana que se dicta y documento del profesor instructor;</p>
+<p>- "profesores": donde se guarda el documento, nombre y domicilio de los profesores e</p>
+<p>- "inscriptos": que almacena el número de socio, el código de deporte y si la matricula está paga o no.</p>
+<p>1- Elimine las tablas:</p>
+<pre>
+ drop table inscriptos;
+ drop table socios;
+ drop table deportes;
+ drop table profesores;
+</pre>
+<p>2- Considere que:</p>
+<p>- un socio puede inscribirse en varios deportes, pero no dos veces en el mismo.<br>
+- un socio tiene un documento único y un número de socio único.<br>
+- un deporte debe tener asignado un profesor que exista en "profesores" o "null" si aún no tiene un instructor definido.<br>
+- el campo "dia" de "deportes" puede ser: lunes, martes, miercoles, jueves, viernes o sabado.<br>
+- el campo "dia" de "deportes" por defecto debe almacenar 'sabado'.<br>
+- un profesor puede ser instructor de varios deportes o puede no dictar ningún deporte.<br>
+- un profesor no puede estar repetido en "profesores".<br>
+- un inscripto debe ser socio, un socio puede no estar inscripto en ningún deporte.<br>
+- una inscripción debe tener un valor en socio existente en "socios" y un deporte que exista en "deportes".<br>
+- el campo "matricula" de "inscriptos" debe aceptar solamente los caracteres 's' o'n'.<br>
+- si se elimina un profesor de "profesores", el "documentoprofesor" coincidente en "deportes" debe quedar seteado a null.<br>
+- no se puede eliminar un deporte de "deportes" si existen inscriptos para tal deporte en "inscriptos".<br>
+- si se elimina un socio de "socios", el registro con "numerosocio" coincidente en "inscriptos" debe eliminarse.</p>
+
+<p>3- Cree las tablas con las restricciones necesarias:</p>
+<pre>
+ create table profesores(
+  documento char(8) not null,
+  nombre varchar2(30),
+  domicilio varchar2(30),
+  constraint PK_profesores_documento
+   primary key (documento)
+ );
+
+ create table deportes(
+  codigo number(2),
+  nombre varchar2(20) not null,
+  dia varchar2(9) default 'sabado',
+  documentoprofesor char(8),
+  constraint CK_deportes_dia_lista
+   check (dia in ('lunes','martes','miercoles','jueves','viernes','sabado')),
+  constraint PK_deportes_codigo
+   primary key (codigo),
+  constraint FK_deportes_profesor
+   foreign key (documentoprofesor)
+   references profesores(documento)
+   on delete set null
+ );
+
+ create table socios(
+  numero number(4),
+  documento char(8),
+  nombre varchar2(30),
+  domicilio varchar2(30),
+  constraint PK_socios_numero
+   primary key (numero),
+  constraint UQ_socios_documento
+   unique (documento)
+ );
+
+ create table inscriptos(
+  numerosocio number(4),
+  codigodeporte number(2),
+  matricula char(1),
+  constraint PK_inscriptos_numerodeporte
+   primary key (numerosocio,codigodeporte),
+  constraint FK_inscriptos_deporte
+   foreign key (codigodeporte)
+   references deportes(codigo),
+  constraint FK_inscriptos_socios
+   foreign key (numerosocio)
+   references socios(numero)
+   on delete cascade,
+  constraint CK_matricula_valores
+   check (matricula in ('s','n'))
+);
+</pre>
+<p>4- Ingrese registros en "profesores":</p>
+<pre>
+ insert into profesores values('21111111','Andres Acosta','Avellaneda 111');
+ insert into profesores values('22222222','Betina Bustos','Bulnes 222');
+ insert into profesores values('23333333','Carlos Caseros','Colon 333');
+</pre>
+<p>5- Ingrese registros en "deportes". Ingrese el mismo día para distintos deportes, un deporte sin día confirmado, un deporte sin profesor definido:</p>
+<pre>
+ insert into deportes values(1,'basquet','lunes',null);
+ insert into deportes values(2,'futbol','lunes','23333333');
+ insert into deportes values(3,'natacion',null,'22222222');
+ insert into deportes values(4,'padle',default,'23333333');
+ insert into deportes values(5,'tenis','jueves',null);
+</pre>
+<p>6- Ingrese registros en "socios":</p>
+<pre>
+ insert into socios values(100,'30111111','Martina Moreno','America 111');
+ insert into socios values(200,'30222222','Natalia Norte','Bolivia 222');
+ insert into socios values(300,'30333333','Oscar Oviedo','Caseros 333');
+ insert into socios values(400,'30444444','Pedro Perez','Dinamarca 444');
+</pre>
+<p>7- Ingrese registros en "inscriptos". Inscriba a un socio en distintos deportes, inscriba varios socios en el mismo deporte.</p>
+<pre>
+ insert into inscriptos values(100,3,'s');
+ insert into inscriptos values(100,5,'s');
+ insert into inscriptos values(200,1,'s');
+ insert into inscriptos values(400,1,'n');
+ insert into inscriptos values(400,4,'s');
+</pre>
+<p>8- Realice un "join" (del tipo que sea necesario) para mostrar todos los datos del socio junto con el nombre de los deportes en los cuales está inscripto, el día que tiene que asistir y el nombre del profesor que lo instruirá (5 registros)</p>
+<p>9- Realice la misma consulta anterior pero incluya los socios que no están inscriptos en ningún deporte (6 registros)</p>
+<p>10- Muestre todos los datos de los profesores, incluido el deporte que dicta y el día, incluyendo los profesores que no tienen asignado ningún deporte, ordenados por documento (4 registros)</p>
+<p>11- Muestre todos los deportes y la cantidad de inscriptos en cada uno de ellos, incluyendo aquellos deportes para los cuales no hay inscriptos, ordenados por nombre de deporte (5 registros)</p>
+<p>12- Muestre las restricciones de "socios"</p>
+<p>13- Muestre las restricciones de "deportes"</p>
+<p>14- Obtenga información sobre la restricción "foreign key" de "deportes"</p>
+<p>15- Muestre las restricciones de "profesores"</p>
+<p>16- Muestre las restricciones de "inscriptos"</p>
+<p>17- Consulte "user_cons_columns" y analice la información retornada sobre las restricciones de "inscriptos"</p>
+<p>18- Elimine un profesor al cual haga referencia algún registro de "deportes"</p>
+<p>19- Vea qué sucedió con los registros de "deportes" cuyo "documentoprofesor" existía en "profesores"<br>
+Fue seteado a null porque la restricción "foreign key" sobre "documentoprofesor" de "deportes" fue definida "on delete set null".</p>
+<p>20- Elimine un socio que esté inscripto</p>
+<p>21- Vea qué sucedió con los registros de "inscriptos" cuyo "numerosocio" existía en "socios"<br>
+Fue eliminado porque la restricción "foreign key" sobre "numerosocio" de "inscriptos" fue definida "on delete cascade".</p>
+<p>22- Intente eliminar un deporte para el cual haya inscriptos<br>
+Mensaje de error porque la restricción "foreign key sobre "codigodeporte" de "inscriptos" fue establecida "no action".</p>
+<p>23- Intente eliminar la tabla "socios"<br>
+No puede eliminarse, mensaje de error, una "foreign key" sobre "inscriptos" hace referencia a esta tabla.</p>
+<p>24- Elimine la tabla "inscriptos"</p>
+<p>25- Elimine la tabla "socios"</p>
+<p>26- Intente eliminar la tabla "profesores"<br>
+No puede eliminarse, mensaje de error, una "foreign key" sobre "deportes" hace referencia a esta tabla.</p>
+<p>27- Elimine la tabla "deportes"</p>
+<p>28- Elimine la tabla "profesores"</p>
+<a href="javascript:cambiar(1)" id="solucion1">Ver solución</a>
+<br><br>
+<pre id="solu1" class="recuadrooculto">
+ drop table inscriptos;
+ drop table socios;
+ drop table deportes;
+ drop table profesores;
+
+ create table profesores(
+  documento char(8) not null,
+  nombre varchar2(30),
+  domicilio varchar2(30),
+  constraint PK_profesores_documento
+   primary key (documento)
+ );
+
+ create table deportes(
+  codigo number(2),
+  nombre varchar2(20) not null,
+  dia varchar2(9) default 'sabado',
+  documentoprofesor char(8),
+  constraint CK_deportes_dia_lista
+   check (dia in ('lunes','martes','miercoles','jueves','viernes','sabado')),
+  constraint PK_deportes_codigo
+   primary key (codigo),
+  constraint FK_deportes_profesor
+   foreign key (documentoprofesor)
+   references profesores(documento)
+   on delete set null
+ );
+
+ create table socios(
+  numero number(4),
+  documento char(8),
+  nombre varchar2(30),
+  domicilio varchar2(30),
+  constraint PK_socios_numero
+   primary key (numero),
+  constraint UQ_socios_documento
+   unique (documento)
+ );
+
+ create table inscriptos(
+  numerosocio number(4),
+  codigodeporte number(2),
+  matricula char(1),
+  constraint PK_inscriptos_numerodeporte
+   primary key (numerosocio,codigodeporte),
+  constraint FK_inscriptos_deporte
+   foreign key (codigodeporte)
+   references deportes(codigo),
+  constraint FK_inscriptos_socios
+   foreign key (numerosocio)
+   references socios(numero)
+   on delete cascade,
+  constraint CK_matricula_valores
+   check (matricula in ('s','n'))
+);
+
+ insert into profesores values('21111111','Andres Acosta','Avellaneda 111');
+ insert into profesores values('22222222','Betina Bustos','Bulnes 222');
+ insert into profesores values('23333333','Carlos Caseros','Colon 333');
+
+ insert into deportes values(1,'basquet','lunes',null);
+ insert into deportes values(2,'futbol','lunes','23333333');
+ insert into deportes values(3,'natacion',null,'22222222');
+ insert into deportes values(4,'padle',default,'23333333');
+ insert into deportes values(5,'tenis','jueves',null);
+
+ insert into socios values(100,'30111111','Martina Moreno','America 111');
+ insert into socios values(200,'30222222','Natalia Norte','Bolivia 222');
+ insert into socios values(300,'30333333','Oscar Oviedo','Caseros 333');
+ insert into socios values(400,'30444444','Pedro Perez','Dinamarca 444');
+
+ insert into inscriptos values(100,3,'s');
+ insert into inscriptos values(100,5,'s');
+ insert into inscriptos values(200,1,'s');
+ insert into inscriptos values(400,1,'n');
+ insert into inscriptos values(400,4,'s');
+
+  select s.*,d.nombre as deporte,d.dia,p.nombre as profesor
+  from socios s
+  join inscriptos i
+  on numero=i.numerosocio
+  join deportes d
+  on d.codigo=i.codigodeporte
+  left join profesores p
+  on d.documentoprofesor=p.documento;
+
+  select s.*,d.nombre as deporte,d.dia,p.nombre as profesor
+  from socios s
+  full join inscriptos i
+  on numero=i.numerosocio
+  left join deportes d
+  on d.codigo=i.codigodeporte
+  left join profesores p
+  on d.documentoprofesor=p.documento;
+
+  select p.*,d.nombre as deporte,d.dia
+  from profesores p
+  left join deportes d
+  on d.documentoprofesor=p.documento
+  order by documento;
+
+  select d.nombre,count(i.codigodeporte) as cantidad
+  from deportes d
+  left join inscriptos i
+  on d.codigo=i.codigodeporte
+  group by d.nombre;  
+
+ select constraint_name, constraint_type, status, validated
+  from user_constraints where table_name='SOCIOS';
+
+ select constraint_name, constraint_type, status, validated, search_condition
+  from user_constraints where table_name='DEPORTES';
+
+ select *from user_cons_columns
+  where constraint_name='FK_DEPORTES_PROFESOR';
+
+ select constraint_name, constraint_type, status, validated, search_condition
+from user_constraints where table_name='PROFESORES';
+
+ select constraint_name, constraint_type, status, validated, search_condition
+  from user_constraints
+  where table_name='INSCRIPTOS';
+
+ select *from user_cons_columns
+  where table_name='INSCRIPTOS';
+
+ delete from profesores where documento='22222222';
+
+ select *from deportes;
+
+ delete from socios where numero=200;
+
+ select *from inscriptos;
+
+ delete from deportes where codigo=4;
+
+ drop table socios;
+
+ drop table inscriptos;
+
+ drop table socios;
+
+ drop table profesores;
+
+ drop table deportes;
+
+ drop table profesores;
+</pre>
+        <p>&nbsp;</p>
+  
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+	
+	
+
+
+		
+<br>
+   <h2><a href="../indexefd7.html?inicio=50">Retornar</a></h2>   
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/problemas/problema.php?inicio=50&cod=222&punto=64 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:36 GMT -->
+</html>

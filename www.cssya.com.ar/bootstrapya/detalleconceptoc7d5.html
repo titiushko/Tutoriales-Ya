@@ -1,0 +1,247 @@
+
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/detalleconcepto.php?punto=36&codigo=151&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Componente : navegación por pestañas</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="bootstrap,css, html, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de bootstrap.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>36 - Componente : navegación por pestañas</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Otra componente habitual en un sitio web son las pestañas, estas nos permiten en una misma página agrupar contenidos en distintas secciones.</p>
+<p>Debemos utilizar una lista no ordenada &lt;ul&gt; e inicializar las clases "nav" y "nav-tabs".</p>
+<p>Veamos una página implementando una serie de pestañas:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+  &lt;head&gt; 
+    &lt;title&gt;Prueba de Bootstrap&lt;/title&gt; 
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt; 
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+  &lt;div class="container"&gt;
+    &lt;ul class="nav nav-tabs"&gt;
+      &lt;li class="active"&gt;&lt;a href="#"&gt;Opcion 1&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Opcion 2&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Opcion 3&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Opcion 4&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt; 
+&lt;/body&gt; 
+&lt;/html&gt; 
+</pre>
+<p>Para indicar que pestaña aparece seleccionada debemos asignar la clase "active".</p>
+<p>Luego en el navegador tendremos una representación similar a:</p>
+<img src="imagentema/foto057.jpg" border="0" alt="nav nav-tabs bootstrap"><br> 
+
+<p>Agregando la clase "nav-justified" logramos que todas las pestañas tengan el mismo tamaño y ocupen todo el espacio del elemento que la contiene:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+  &lt;head&gt; 
+    &lt;title&gt;Prueba de Bootstrap&lt;/title&gt; 
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt; 
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+  &lt;div class="container"&gt;
+    &lt;ul class="nav nav-tabs nav-justified"&gt;
+      &lt;li class="active"&gt;&lt;a href="#"&gt;Opcion 1&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Opcion 2&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Opcion 3&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Opcion 4&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt; 
+&lt;/body&gt; 
+&lt;/html&gt; 
+</pre>
+<p>Luego en el navegador tendremos:</p>
+<img src="imagentema/foto060.jpg" border="0" alt="nav nav-tabs nav-justified bootstrap"><br> 
+
+
+<p>Una variante de estilo es mostrar unos botones en lugar de pestañas. Para lograr esto solo debemos cambiar la clase "nav-tabs" por "nav-pills":</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+  &lt;head&gt; 
+    &lt;title&gt;Prueba de Bootstrap&lt;/title&gt; 
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt; 
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+  &lt;div class="container"&gt;
+    &lt;ul class="nav nav-pills"&gt;
+      &lt;li class="active"&gt;&lt;a href="#"&gt;Opcion 1&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Opcion 2&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Opcion 3&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Opcion 4&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt; 
+&lt;/body&gt; 
+&lt;/html&gt; 
+</pre>
+
+<p>Luego en el navegador tenemos:</p>
+<img src="imagentema/foto058.jpg" border="0" alt="nav nav-pills bootstrap"><br> 
+<p>Podemos hacer que los botones se muestren uno debajo de otro agregando la clase "nav-stacked":</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+  &lt;head&gt; 
+    &lt;title&gt;Prueba de Bootstrap&lt;/title&gt; 
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt; 
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+  &lt;div class="container"&gt;
+    &lt;ul class="nav nav-pills nav-stacked"&gt;
+      &lt;li class="active"&gt;&lt;a href="#"&gt;Opcion 1&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Opcion 2&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Opcion 3&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Opcion 4&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt; 
+&lt;/body&gt; 
+&lt;/html&gt; 
+</pre>
+<p>Luego en el navegador tenemos:</p>
+<img src="imagentema/foto059.jpg" border="0" alt="nav nav-pills nav-stacked bootstrap"><br> 
+<p>Podemos cambiar el aspecto del enlace a modo desactivo agregando la clase "disabled" a la pestaña respectiva:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+  &lt;head&gt; 
+    &lt;title&gt;Prueba de Bootstrap&lt;/title&gt; 
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt; 
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+  &lt;div class="container"&gt;
+    &lt;ul class="nav nav-tabs nav-justified"&gt;
+      &lt;li class="active"&gt;&lt;a href="#"&gt;Opcion 1&lt;/a&gt;&lt;/li&gt;
+      &lt;li class="disabled"&gt;&lt;a href="#"&gt;Opcion 2&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="#"&gt;Opcion 3&lt;/a&gt;&lt;/li&gt;
+      &lt;li class="disabled"&gt;&lt;a href="#"&gt;Opcion 4&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt; 
+&lt;/body&gt; 
+&lt;/html&gt; 
+</pre>
+
+<p>Luego en el navegador tenemos:</p>
+<img src="imagentema/foto061.jpg" border="0" alt="nav nav-tabs disabled bootstrap"><br> 
+<h2><a target="_blank" href="ejecutar2f41.html?cod=151">Ejecutar Ejemplo</a></h2><h2><a href="index28fa.html?inicio=20">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-32', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/detalleconcepto.php?punto=36&codigo=151&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:00 GMT -->
+</html>

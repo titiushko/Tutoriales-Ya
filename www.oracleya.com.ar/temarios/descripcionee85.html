@@ -1,0 +1,191 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=75&cod=258&punto=100 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Descripción : Control de flujo (loop) (Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>100 - Control de flujo (loop)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>Las estructuras repetitivas permiten ejecutar una secuencia de sentencias varias veces. Hay tres estructuras repetitivas, o bucles: loop, for y while.</p>
+
+<p>Comenzamos por "loop", que es la más simple. Veremos la sintaxis del bucle "loop" que combina una condición y la palabra "exit".</p>
+<p>Sintaxis:</p>
+<pre>
+ loop
+  SENTENCIAS;
+  exit when CONDICION;
+  SENTENCIAS;
+ end loop;
+</pre>
+<p>Cuando se llega a la línea de código en la que se encuentra la condición "exit when", se evalúa dicha condición, si resulta cierta, se salta a la línea donde se encuentra "end loop", saliendo del bucle, omitiendo las sentencias existentes antes del "end loop"; en caso contrario, si la condición resulta falsa, se continúa con las siguientes sentencias y al llegar a "end loop" se repite el bucle.</p>
+
+<p>La sintaxis anterior es equivalente a la siguiente:</p>
+<pre>
+ loop
+  SENTENCIAS
+  if CONDICION then
+   exit;
+  end if;
+  SENTENCIAS
+ end loop;
+</pre>
+<p>En este ejemplo se muestra la tabla del 3. Se va incrementando la variable "multiplicador" y se almacena en una variable "resultado"; el ciclo se repite hasta que el multiplicador llega a 5, es decir, 6 veces.</p>
+<pre>
+set serveroutput on;
+declare
+  resultado number;
+  multiplicador number:=0;
+begin
+  loop
+    resultado:=3*multiplicador;
+    dbms_output.put_line('3x'||to_char(multiplicador)||'='||to_char(resultado));
+    multiplicador:=multiplicador+1;
+    exit when multiplicador>5;
+  end loop;
+end;
+</pre>
+<p>En el siguiente ejemplo se muestra la tabla del 4. Se va incrementando la variable "multiplicador" y se almacena en una variable "resultado"; el ciclo se repite hasta que la variable resultado llega o supera el valor 50.</p>
+<pre>
+declare
+  resultado number;
+  multiplicador number:=0;
+begin
+  loop
+    resultado:=4*multiplicador;
+    exit when resultado>=50;
+    dbms_output.put_line('4x'||to_char(multiplicador)||'='||to_char(resultado));
+    multiplicador:=multiplicador+1;
+  end loop;
+end;
+</pre>
+<p>Cuando se cumple la condición del "exit when" (supera el valor 50), no se ejecutan las sentencias siguientes (líneas de salida y de incremento de "multiplicador"), se salta a "end loop" finalizando el bucle.</p>
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../indexa021.html?inicio=75">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=75&cod=258&punto=100 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+</html>

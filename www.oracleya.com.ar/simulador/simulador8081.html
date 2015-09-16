@@ -1,0 +1,242 @@
+        
+
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=0&cod=162&punto=4 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios resueltos : Tipos de datos(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+<body bgcolor="#CCFFCC">
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>4 - Tipos de datos</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Eliminamos la tabla "libros":</p>
+<pre>
+ drop table libros;
+</pre>
+<p>Vamos a crear una tabla llamada "libros" para almacenar información de los libros de una librería. Necesitamos los siguientes campos:</p>
+<pre>
+ -titulo: cadena de caracteres de 20 de longitud,
+ -autor: cadena de caracteres de 15 de longitud,
+ -editorial: caracteres de 10 de longitud,
+ -precio: valor numérico con 2 decimales y que no superará el valor 9999.99 y
+ -cantidad: valor numérico entero que no superará el valor 999.
+</pre>
+<p>Al crear la tabla, entonces, elegimos el tipo de dato más adecuado para cada campo:</p>
+<pre>
+ create table libros(
+  titulo varchar2(20),
+  autor varchar2(15),
+  editorial varchar2(10),
+  precio number(6,2),
+  cantidad number(3,0)
+ );
+</pre>
+<p>Vemos la estructura de la tabla:</p>
+<pre>
+ describe libros;
+</pre>
+<p>Aparece la siguiente información:</p>
+<pre>
+Name	Null	Type
+--------------------------------------
+titulo		varchar2(20)
+autor		varchar2(15)
+editorial	varchar2(10)
+precio		number(6,2)
+cantidad	number(3)
+</pre>
+<p>Ingresamos algunos registros:</p>
+<pre>
+ insert into libros (titulo,autor,editorial,precio,cantidad)
+  values ('El aleph','Borges','Emece',25.50,100);
+ insert into libros (titulo,autor,editorial,precio,cantidad)
+  values ('Matematica estas ahi','Paenza','Siglo XXI',18.8,200);
+</pre>
+<p>Note que al ingresar valores numéricos no se utilizan comillas y para el separador de decimales se usa el caracter punto (.).</p>
+
+<p>Veamos los registros cargados:</p>
+<pre>
+ select *from libros;
+</pre>
+<p>Aparece la siguiente tabla:</p>
+<pre>
+TITULO			AUTOR	EDITORIAL	PRECIO	CANTIDAD
+----------------------------------------------------------------
+El Aleph		Borges	Emece		25,5	100
+Matematica estas ahi	Paenza	Siglo XXI	18,8	200
+</pre>
+<p>Veamos lo que sucede si intentamos ingresar para el campo "titulo" una cadena de más de 20 caracteres: </p>
+<pre>
+ insert into libros (titulo,autor,editorial,precio,cantidad)
+  values ('Alicia en el pais de las maravillas','Lewis Carroll','Atlantida',10,200);
+</pre>
+<p>aparece un mensaje de error y la sentencia no se ejecuta.</p>
+
+<p>vamos a cortar la cadena para que SQL Server acepte el ingreso del registro:</p>
+<pre> 
+ insert into libros (titulo,autor,editorial,precio,cantidad)
+  values ('Alicia en el pais','Lewis Carroll','Atlantida',10,200);
+</pre>
+<p>Veamos los registros cargados:</p>
+<pre>
+ select *from libros;
+</pre>
+<p>La tabla tiene ahora 3 registros.</p>
+
+<p>Veamos qué sucede si intentamos ingresar para el campo "cantidad" un valor fuera de rango:</p>
+<pre> 
+ insert into libros (titulo,autor,editorial,precio,cantidad)
+  values ('El gato con botas','Anonimo','Atlantida',10,2000);
+</pre>
+<p>Oracle muestra un mensaje de error y la sentencia no se ejecuta, es decir, el registro no fue ingresado.</p>
+
+<p>Veamos qué sucede si intentamos ingresar en el campo "precio" un valor con más decimales que los permitidos: </p>
+<pre>
+ insert into libros (titulo,autor,editorial,precio,cantidad)
+  values ('El gato con botas','Anonimo','Atlantida',10.123,200);
+</pre>
+<p>La sentencia se ejecutó, el registro ha sido cargado. Veamos cómo se almacenó:</p>
+<pre>
+ select *from libros;
+</pre>
+<p>Oracle omitió el último dígito decimal porque el campo sólo admitía 2 decimales.</p>
+
+        <form name="formulario" action="http://www.sqlserverya.com.ar/aspx/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+        <br>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+        
+	<br>
+   
+
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=0&cod=162&punto=4 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:25 GMT -->
+</html>
+

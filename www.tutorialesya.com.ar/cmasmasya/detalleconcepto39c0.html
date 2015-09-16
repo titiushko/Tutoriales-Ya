@@ -1,0 +1,667 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=39&codigo=170&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:48 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Estructuras dinámicas en C++: Listas tipo Cola - Problemas de aplicación</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>39 - Estructuras dinámicas en C++: Listas tipo Cola - Problemas de aplicación</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p><strong>Planteo del problema:</strong></p>
+
+<p>Este práctico tiene por objetivo mostrar la importancia de las colas en las Ciencias de la Computación y más precisamente en las simulaciones.<br>
+Las simulaciones permiten analizar situaciones de la realidad sin la necesidad de ejecutarlas realmente. Tiene el beneficio que su costo es muy inferior a hacer pruebas en la realidad.</p>
+
+<p>Desarrollar un programa para la simulación de un cajero automático.<br>
+Se cuenta con la siguiente información:<br>
+- Llegan clientes a la puerta del cajero cada 2 ó 3 minutos.<br>
+- Cada cliente tarda entre 2 y 4 minutos para ser atendido.</p>
+<p>Obtener la siguiente información:<br>
+1 - Cantidad de clientes que se atienden en 10 horas.<br>
+2 - Cantidad de clientes que hay en cola después de 10 horas.<br>
+3 - Hora de llegada del primer cliente que no es atendido luego de 10 horas (es decir la persona que está primera en la cola cuando se cumplen 10 horas)<br>
+
+
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include &lt;iostream&gt;
+#include&lt;cstdlib&gt;
+#include&lt;ctime&gt;
+
+using namespace std;
+
+class Cola {
+private:
+    class Nodo {
+    public:
+        int info;
+        Nodo *sig;
+    };
+
+    Nodo *raiz;
+    Nodo *fondo;
+public:
+    Cola();
+    ~Cola();
+    void insertar(int x);
+    int extraer();
+    bool vacia();
+    int cantidad();
+};
+
+
+Cola::Cola()
+{
+    raiz = NULL;
+    fondo = NULL;
+}
+
+Cola::~Cola()
+{
+    Nodo *reco = raiz;
+    Nodo *bor;
+    while (reco != NULL)
+    {
+        bor = reco;
+        reco = reco-&gt;sig;
+        delete bor;
+    }
+}
+
+void Cola::insertar(int x)
+{
+    Nodo *nuevo;
+    nuevo = new Nodo();
+    nuevo-&gt;info = x;
+    nuevo-&gt;sig = NULL;
+    if (vacia()) 
+    {
+        raiz = nuevo;
+        fondo = nuevo;
+    }
+    else 
+    {
+        fondo-&gt;sig = nuevo;
+        fondo = nuevo;
+    }
+}
+
+int Cola::extraer()
+{
+    if (!vacia())
+    {
+        int informacion = raiz-&gt;info;
+        Nodo *bor = raiz;
+        if (raiz == fondo)
+        {
+            raiz = NULL;
+            fondo = NULL;
+        }
+        else 
+        {
+            raiz = raiz-&gt;sig;
+        }
+        delete bor;
+        return informacion;
+    }
+    else
+        return -1;
+}
+
+bool Cola::vacia()
+{
+    if (raiz == NULL)
+        return true;
+    else
+        return false;
+}
+
+int Cola::cantidad()
+{
+    Nodo *reco = raiz;
+    int cant = 0;
+    while (reco != NULL)
+    {
+        cant++;
+        reco = reco-&gt;sig;
+    }
+    return cant;
+}
+
+
+class CajeroAutomatico {
+public:
+    void simulacion();
+};
+
+void CajeroAutomatico::simulacion()
+{
+    srand(time(NULL));
+    int estado = 0;
+    int llegada = rand() % 2 + 2; 
+    int salida = -1;
+    int cantAtendidas = 0;
+    Cola *cola = new Cola();
+    for (int minuto = 0; minuto &lt; 600; minuto++) 
+    {
+        if (llegada == minuto)
+        {
+            if (estado == 0) 
+            {
+                estado = 1;
+                salida = minuto + 2 + rand() % 3;
+            }
+            else 
+            {
+                cola-&gt;insertar(minuto);
+            }
+            llegada = minuto + 2 + rand() % 2;
+        }
+        if (salida == minuto)
+        {
+            estado = 0;
+            cantAtendidas++;
+            if (!cola-&gt;vacia()) 
+            {
+                cola-&gt;extraer();
+                estado = 1;
+                salida = minuto + 2 + rand() % 3;
+            }
+        }
+    }
+    cout &lt;&lt;"Atendidos:" &lt;&lt;cantAtendidas &lt;&lt;"\n";
+    cout &lt;&lt;"En cola:" &lt;&lt;cola-&gt;cantidad() &lt;&lt;"\n";
+    cout &lt;&lt;"Minuto llegada:" &lt;&lt;cola-&gt;extraer();
+}
+
+
+void main()
+{
+    CajeroAutomatico *cajero1 = new CajeroAutomatico();
+    cajero1-&gt;simulacion();
+    delete cajero1;
+    cin.get();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/ColaSimulacion1.zip">ColaSimulacion1.zip</a></p>
+
+
+<p>La clase Cola colabora con la clase CajeroAutomatico. En la clase Cola debemos definir como mínimo los métodos de insertar, extraer, vacía y cantidad.</p>
+<p>El método donde implementamos la lógica es el de simulacion, veamos las distintas partes de dicho método:</p>
+<pre>
+    srand(time(NULL));
+    int estado = 0;
+    int llegada = rand() % 2 + 2; 
+    int salida = -1;
+    int cantAtendidas = 0;
+    Cola *cola = new Cola();
+</pre>
+<p>Iniciamos la semilla de valores aleatorios llamando a srand.</p>
+<p>La variable estado almacena un cero si el cajero está libre y un uno cuando está ocupado.<br>
+La variable llegada almacena en que minuto llegará el próximo cliente (debemos generar un valor entre 2 y 3)</p>
+<p>La variable salida almacenará en que minuto terminará el cliente de ser atendido (como al principio el cajero está vacío inicializamos esta variable con -1)</p>
+<p>Llevamos un contador para saber la cantidad de personas atendidas (cantAtendidas)</p>
+<p>Luego definimos y creamos un objeto de la clase Cola para poder almacenar las personas que llegan al cajero y se lo encuentran ocupado.</p>
+<p>Disponemos un for que se repita 600 veces (600 minutos o lo que es lo mismo 10 horas)<br>
+<pre>
+    for (int minuto = 0; minuto &lt; 600; minuto++) 
+</pre>
+<p>Dentro del for hay dos if fundamentales que verifican que sucede cuando llega una persona o cuando una persona se retira:</p>
+<pre>
+        if (llegada == minuto)
+        {
+            ............
+        }
+        if (salida == minuto)
+        {
+            ............
+        }
+</pre>
+<p>Cuando llega una persona al cajero primero verificamos si el cajero está desocupado:</p>
+<pre>
+        if (llegada == minuto)
+        {
+            if (estado==0) {
+</pre>
+<p>Si está desocupado lo ocupamos cambiando el valor de la variable estado y generando en que minuto esta persona dejará el cajero (un valor aleatorio entre 2 y 4 minutos):</p>
+<pre>
+                estado = 1;
+                salida = minuto + 2 + rand() % 3;
+</pre>
+<p>Si el cajero está ocupado procedemos a cargar dicha persona en la cola (insertamos el minuto que llega):</p>
+<pre>
+            else 
+            {
+                cola-&gt;insertar(minuto);
+            }
+</pre>
+<p>Luego generamos el próximo minuto que llegará otra persona:</p>
+<pre>
+            llegada = minuto + 2 + rand() % 2;
+</pre>
+<p>El otro if importante es ver que sucede cuando sale la persona del cajero:</p>
+        if (salida == minuto)
+        {
+</pre>
+<p>Si sale una persona del cajero cambiamos el valor de la variable estado, incrementamos en uno el contador cantAtendidos y si la cola no está vacía extraemos una persona, cambiamos a uno la variable estado y generamos en que minuto dejará esta persona el cajero:</p>
+<pre>
+            estado = 0;
+            cantAtendidas++;
+            if (!cola-&gt;vacia()) 
+            {
+                cola-&gt;extraer();
+                estado = 1;
+                salida = minuto + 2 + rand() % 3;
+            }
+</pre>
+<p>Fuera del for mostramos los tres resultados:</p>
+<pre>
+    cout &lt;&lt;"Atendidos:" &lt;&lt;cantAtendidas &lt;&lt;"\n";
+    cout &lt;&lt;"En cola:" &lt;&lt;cola-&gt;cantidad() &lt;&lt;"\n";
+    cout &lt;&lt;"Minuto llegada:" &lt;&lt;cola-&gt;extraer();
+</pre>
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+<p>Un supermercado tiene tres cajas para la atención de los clientes.<br>
+Las cajeras tardan entre 7 y 11 minutos para la atención de cada cliente.<br>
+
+Los clientes llegan a la zona de cajas cada 2 ó 3 minutos. (Cuando el cliente llega, si todas las cajas tienen 6 personas, el cliente se marcha del supermercado)<br>
+
+Cuando el cliente llega a la zona de cajas elige la caja con una cola menor.</p>
+
+<p>Realizar una simulación durante 8 horas y obtener la siguiente información:<br>
+a - Cantidad de clientes atendidos por cada caja.<br>
+b - Cantidad de clientes que se marcharon sin hacer compras.<br>
+c - Tiempo promedio en cola.</p>
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+#include &lt;iostream&gt;
+#include&lt;cstdlib&gt;
+#include&lt;ctime&gt;
+
+using namespace std;
+
+class Cola {
+private:
+    class Nodo {
+    public:
+        int info;
+        Nodo *sig;
+    };
+
+    Nodo *raiz;
+    Nodo *fondo;
+public:
+    Cola();
+    ~Cola();
+    void insertar(int x);
+    int extraer();
+    bool vacia();
+    int cantidad();
+};
+
+
+Cola::Cola()
+{
+    raiz = NULL;
+    fondo = NULL;
+}
+
+Cola::~Cola()
+{
+    Nodo *reco = raiz;
+    Nodo *bor;
+    while (reco != NULL)
+    {
+        bor = reco;
+        reco = reco-&gt;sig;
+        delete bor;
+    }
+}
+
+void Cola::insertar(int x)
+{
+    Nodo *nuevo;
+    nuevo = new Nodo();
+    nuevo-&gt;info = x;
+    nuevo-&gt;sig = NULL;
+    if (vacia())
+    {
+        raiz = nuevo;
+        fondo = nuevo;
+    }
+    else
+    {
+        fondo-&gt;sig = nuevo;
+        fondo = nuevo;
+    }
+}
+
+int Cola::extraer()
+{
+    if (!vacia())
+    {
+        int informacion = raiz-&gt;info;
+        Nodo *bor = raiz;
+        if (raiz == fondo)
+        {
+            raiz = NULL;
+            fondo = NULL;
+        }
+        else
+        {
+            raiz = raiz-&gt;sig;
+        }
+        delete bor;
+        return informacion;
+    }
+    else
+        return -1;
+}
+
+bool Cola::vacia()
+{
+    if (raiz == NULL)
+        return true;
+    else
+        return false;
+}
+
+int Cola::cantidad()
+{
+    Nodo *reco = raiz;
+    int cant = 0;
+    while (reco != NULL)
+    {
+        cant++;
+        reco = reco-&gt;sig;
+    }
+    return cant;
+}
+
+
+class Supermercado {
+public:
+    void simulacion();
+};
+
+void Supermercado::simulacion()
+{
+    int estado1 = 0, estado2 = 0, estado3 = 0;
+    int marchan = 0;
+    int llegada = 2 + rand() % 2;
+    int salida1 = -1, salida2 = -1, salida3 = -1;
+    int cantAte1 = 0, cantAte2 = 0, cantAte3 = 0;
+    int tiempoEnCola = 0;
+    int cantidadEnCola = 0;
+    Cola *cola1 = new Cola();
+    Cola *cola2 = new Cola();
+    Cola *cola3 = new Cola();
+    srand(time(NULL));
+    for (int minuto = 0; minuto &lt; 600; minuto++) 
+    {
+        if (llegada == minuto) 
+        {
+            if (estado1 == 0) 
+            {
+                estado1 = 1;
+                salida1 = minuto + 7 + rand() % 5;
+            }
+            else 
+            {
+                if (estado2 == 0) 
+                {
+                    estado2 = 1;
+                    salida2 = minuto + 7 + rand() % 5;
+                }
+                else 
+                {
+                    if (estado3 == 0) 
+                    {
+                        estado3 = 1;
+                        salida3 = minuto + 7 + rand() % 5;
+                    }
+                    else 
+                    {
+                        if (cola1-&gt;cantidad() == 6 && cola2-&gt;cantidad() == 6 && cola3-&gt;cantidad() == 6) 
+                        {
+                            marchan++;
+                        }
+                        else 
+                        {
+                            if (cola1-&gt;cantidad() &lt;= cola2-&gt;cantidad() && cola1-&gt;cantidad() &lt;= cola3-&gt;cantidad()) 
+                            {
+                                cola1-&gt;insertar(minuto);
+                            }
+                            else 
+                            {
+                                if (cola2-&gt;cantidad() &lt;= cola3-&gt;cantidad()) 
+                                {
+                                    cola2-&gt;insertar(minuto);
+                                }
+                                else 
+                                {
+                                    cola3-&gt;insertar(minuto);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            llegada = minuto + 2 + rand() % 2;
+        }
+        if (salida1 == minuto) 
+        {
+            cantAte1++;
+            estado1 = 0;
+            if (!cola1-&gt;vacia()) 
+            {
+                estado1 = 1;
+                int m = cola1-&gt;extraer();
+                salida1 = minuto + 7 + rand() % 5;
+                tiempoEnCola = tiempoEnCola + (minuto - m);
+                cantidadEnCola++;
+            }
+        }
+        if (salida2 == minuto) 
+        {
+            cantAte2++;
+            estado2 = 0;
+            if (!cola2-&gt;vacia()) 
+            {
+                estado2 = 1;
+                int m = cola2-&gt;extraer();
+                salida2 = minuto + 7 + rand() % 5;
+                tiempoEnCola = tiempoEnCola + (minuto - m);
+                cantidadEnCola++;
+            }
+        }
+        if (salida3 == minuto) 
+        {
+            cantAte3++;
+            estado3 = 0;
+            if (!cola3-&gt;vacia()) 
+            {
+                estado3 = 1;
+                int m = cola3-&gt;extraer();
+                salida3 = minuto + 7 + rand() % 5;
+                tiempoEnCola = tiempoEnCola + (minuto - m);
+                cantidadEnCola++;
+            }
+        }
+    }
+    cout &lt;&lt;"Clientes atendidos por caja: caja1=" &lt;&lt;cantAte1 &lt;&lt;"  caja2=" &lt;&lt;cantAte2 &lt;&lt;"  caja3=" &lt;&lt;cantAte3 &lt;&lt;"\n";
+    cout &lt;&lt;"Se marchan sin hacer compras:" &lt;&lt;marchan &lt;&lt;"\n";
+    if (cantidadEnCola&gt;0) 
+    {
+        int tiempoPromedio = tiempoEnCola / cantidadEnCola;
+        cout &lt;&lt;"Tiempo promedio en cola:" &lt;&lt;tiempoPromedio &lt;&lt;"\n";
+    }
+}
+
+
+void main()
+{
+    Supermercado *super1;
+    super1 = new Supermercado();
+    super1-&gt;simulacion();
+    delete super1;
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/ColaSimulacion2.zip">ColaSimulacion2.zip</a></p>
+
+
+</pre>
+
+<h2><a href="index7732.html?inicio=30">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=39&codigo=170&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:48 GMT -->
+</html>

@@ -1,0 +1,420 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=10&codigo=10&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:51:17 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Recuperar datos de un formulario HTML mediante Node.js (POST)</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++, programación, tutorial, nodejs">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de NodeJS.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>10 - Recuperar datos de un formulario HTML mediante Node.js (POST)</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Hasta este momento hemos visto como podemos implementar un servidor de un sitio web que responde a peticiones de páginas y recursos estáticos que se encuentran en dicho servidor.</p>
+<p>Ahora veremos como podemos hacer un programa en Node.js que pueda procesar los datos de un formulario HTML.</p>
+<h3>Problema</h3>
+<p>Implementar un formulario HTML que solicite ingresar el nombre de usuario y su clave. Cuando se presione el botón submit proceder a recuperar los datos del formulario y generar una página HTML dinámica que muestre los dos valores ingresados por el usuario.</p>
+<p>Crearemos un directorio ejercicio12 y en el mismo crearemos un archivo llamado ejercicio12.js y un subdirectorio llamado 'public'.</p>
+<p>El contenido del archivo HTML que muestra el formulario de login es (almacenar este archivo en la subcarpeta 'public'):</p>
+<pre>index.html</pre>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Formulario&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;form action="recuperardatos" method="post"&gt;
+  Ingrese su nombre de usuario:
+  &lt;input type="text" name="nombre" size="30"&gt;&lt;br&gt;
+  Ingrese clave:
+  &lt;input type="password" name="clave" size="30"&gt;&lt;br&gt;
+  &lt;input type="submit" value="Enviar"&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Podemos hacer notar que la propiedad action tiene el valor:'recuperardatos'</p>
+<pre>
+  &lt;form action="recuperardatos" method="post"&gt;
+</pre>
+<p>Este nombre no hace referencia a un archivo de nuestro servidor, sino veremos que cuando capturemos dicha 'url' generaremos el archivo HTML en forma dinámica.</p>
+
+<p>Nuestro programa en Node.js que se encargará de servir las páginas y recuperar los datos del formulario es:</p>
+<pre>ejercicio12.js</pre>
+<pre class="recuadro">
+var http=require('http');
+var url=require('url');
+var fs=require('fs');
+var querystring = require('querystring');
+
+var mime = {
+   'html' : 'text/html',
+   'css'  : 'text/css',
+   'jpg'  : 'image/jpg',
+   'ico'  : 'image/x-icon',
+   'mp3'  :    'audio/mpeg3',
+   'mp4'  : 'video/mp4'
+};
+
+var servidor=http.createServer(function(pedido,respuesta){
+    var objetourl = url.parse(pedido.url);
+    var camino='public'+objetourl.pathname;
+    if (camino=='public/')
+        camino='public/index.html';
+    encaminar(pedido,respuesta,camino);
+});
+
+servidor.listen(8888);
+
+
+function encaminar (pedido,respuesta,camino) {
+    switch (camino) {
+        case 'public/recuperardatos': {
+            recuperar(pedido,respuesta);
+            break;
+        }    
+        default : {  
+            fs.exists(camino,function(existe){
+                if (existe) {
+                    fs.readFile(camino,function(error,contenido){
+                        if (error) {
+                            respuesta.writeHead(500, {'Content-Type': 'text/plain'});
+                            respuesta.write('Error interno');
+                            respuesta.end();                    
+                        } else {
+                            var vec = camino.split('.');
+                            var extension=vec[vec.length-1];
+                            var mimearchivo=mime[extension];
+                            respuesta.writeHead(200, {'Content-Type': mimearchivo});
+                            respuesta.write(contenido);
+                            respuesta.end();
+                        }
+                    });
+                } else {
+                    respuesta.writeHead(404, {'Content-Type': 'text/html'});
+                    respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;Recurso inexistente&lt;/body&gt;&lt;/html&gt;');        
+                    respuesta.end();
+                }
+            });    
+        }
+    }    
+}
+
+
+function recuperar(pedido,respuesta) {
+    var info = '';
+    pedido.on('data', function(datosparciales){
+         info += datosparciales;
+    });
+    pedido.on('end', function(){
+        var formulario = querystring.parse(info);
+        respuesta.writeHead(200, {'Content-Type': 'text/html'});
+        var pagina='&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;'+
+                   'Nombre de usuario:'+formulario['nombre']+'&lt;br&gt;'+
+                   'Clave:'+formulario['clave']+'&lt;br&gt;'+
+                   '&lt;a href="index.html"&gt;Retornar&lt;/a&gt;'+
+                   '&lt;/body&gt;&lt;/html&gt;';
+        respuesta.end(pagina);
+    });    
+}
+
+console.log('Servidor web iniciado');
+</pre>
+
+
+<p>Lo primero que podemos ver que hemos subdividido las actividades en distintas funciones para hacer más legible nuestro programa (no lo implementamos con cache para dejar más límpio y entendible el programa)</p>
+
+<p>Requerimos cuatro módulos, tres ya los hemos visto y el cuarto llamado 'querystring' nos ayudará a analizar los datos cargados en el formulario cuando llegan al servidor:</p>
+<pre>
+var http=require('http');
+var url=require('url');
+var fs=require('fs');
+var querystring = require('querystring');
+
+var mime = {
+   'html' : 'text/html',
+   'css'  : 'text/css',
+   'jpg'  : 'image/jpg',
+   'ico'  : 'image/x-icon',
+   'mp3'  :    'audio/mpeg3',
+   'mp4'  : 'video/mp4'
+};
+</pre>
+
+<p>La función anónima que le pasamos a createServer obtenemos el path del recurso solicitado por el navegador y le concatenamos el string 'public' que corresponde a la carpeta donde almacenamos nuestras páginas (en nuestro ejemplo hay una sola llamada index.html)</p>
+<p>Llamamos a la función encaminar pasando los dos objetos 'pedido' y 'respuesta', también pasamos la variable camino que tiene el path del recurso solicitado:</p>
+<pre>
+var servidor=http.createServer(function(pedido,respuesta){
+    var objetourl = url.parse(pedido.url);
+    var camino='public'+objetourl.pathname;
+    if (camino=='public/')
+        camino='public/index.html';
+    encaminar(pedido,respuesta,camino);
+});
+</pre>
+<p>Arrancamos el servidor y lo ponemos a escuchar en el puerto 8888:</p>
+<pre>
+servidor.listen(8888);
+</pre>
+
+
+<p>La función encaminar analiza mediante un switch (podiamos utilizar un if) el contenido del parámetro 'camino'.</p>
+<pre>
+function encaminar (pedido,respuesta,camino) {
+    switch (camino) {
+        case 'public/recuperardatos': {
+            recuperar(pedido,respuesta);
+            break;
+        }    
+        default : {  
+            fs.exists(camino,function(existe){
+                if (existe) {
+                    fs.readFile(camino,function(error,contenido){
+                        if (error) {
+                            respuesta.writeHead(500, {'Content-Type': 'text/plain'});
+                            respuesta.write('Error interno');
+                            respuesta.end();                    
+                        } else {
+                            var vec = camino.split('.');
+                            var extension=vec[vec.length-1];
+                            var mimearchivo=mime[extension];
+                            respuesta.writeHead(200, {'Content-Type': mimearchivo});
+                            respuesta.write(contenido);
+                            respuesta.end();
+                        }
+                    });
+                } else {
+                    respuesta.writeHead(404, {'Content-Type': 'text/html'});
+                    respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;Recurso inexistente&lt;/body&gt;&lt;/html&gt;');        
+                    respuesta.end();
+                }
+            });    
+        }
+    }    
+}
+</pre>
+
+<p>El parámetro camino puede tener alguno de estos dos valores:</p>
+<pre>
+public/index.html
+public/recuperardatos
+</pre>
+<p>Si el parámetro tiene el primer valor: 'public/index.html' luego se ejecuta el default del switch. Es decir retorna la página estática index.html como hemos visto en conceptos anteriores.</p>
+<p>Si el parámetro 'camino' tiene el valor: 'public/recuperardatos' procede a llamar a la función recuperar y le pasa los dos objetos 'pedido' y 'respuesta'.</p>
+
+<p>Finalmente la función recuperar (que se encarga de recuperar los dos datos del formulario y generar un archivo HTML para retornarlo al navegador):</p>
+<pre>
+function recuperar(pedido,respuesta) {
+    var info = '';
+    pedido.on('data', function(datosparciales){
+         info += datosparciales;
+    });
+    pedido.on('end', function(){
+        var formulario = querystring.parse(info);
+        respuesta.writeHead(200, {'Content-Type': 'text/html'});
+        var pagina='&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;'+
+                   'Nombre de usuario:'+formulario['nombre']+'&lt;br&gt;'+
+                   'Clave:'+formulario['clave']+'&lt;br&gt;'+
+                   '&lt;a href="index.html"&gt;Retornar&lt;/a&gt;'+
+                   '&lt;/body&gt;&lt;/html&gt;';
+        respuesta.end(pagina);
+    });    
+}
+</pre>
+
+<p>El objeto 'pedido' tiene un método llamado on. Debemos llamar este método dos veces, la primera pasando un string con el valor 'data' y una función anónima que se irá llamando a medida que lleguen los datos al servidor desde el navegador:</p>
+<pre>
+    pedido.on('data', function(datosparciales){
+         info += datosparciales;
+    });
+</pre>
+<p>Como vemos a medida que van llegando los datos los vamos concatenando en una variable llamada 'info'.</p>
+<p>Cuando terminan de llegar todos los datos se ejecuta la función anónima que le pasamos al método on en la llamada con el string 'end':</p>
+<pre>
+    pedido.on('end', function(){
+        var formulario = querystring.parse(info);
+        respuesta.writeHead(200, {'Content-Type': 'text/html'});
+        var pagina='&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;'+
+                   'Nombre de usuario:'+formulario['nombre']+'&lt;br&gt;'+
+                   'Clave:'+formulario['clave']+'&lt;br&gt;'+
+                   '&lt;a href="index.html"&gt;Retornar&lt;/a&gt;'+
+                   '&lt;/body&gt;&lt;/html&gt;';
+        respuesta.end(pagina);
+    });    
+</pre>
+<p>En esta función anónima la variable info contiene todos los datos del formulario con una estructura similar a:</p>
+<pre>
+nombre=juan&clave=123456
+</pre>
+<p>Lo que nos queda ahora es poder acceder a los valores de cada propiedad del formulario, esto lo hacemos llamando al método parse del objeto querystring:</p>
+<pre>
+        var formulario = querystring.parse(info);
+</pre>
+<p>El método parse genera un objeto literal con el contenido de info y lo guarda en la variable formulario, cuyo contenido ahora es:</p>
+<pre>
+  {
+    nombre:'juan',
+    clave:'123456'
+  }
+</pre>
+<p>Luego de esto ya podemos acceder a cada elemento del formulario mediante el objeto 'formulario':</p>
+<pre>
+formulario['nombre']     //Contiene el valor que cargó el usuario en el formulario
+formulario['clave']      //Contiene la clave
+</pre>
+
+<p>Finalmente vemos que en una variable llamada 'pagina' almacenamos un código HTML válido que procedemos a enviarla al navegador que hizo la petición:</p>
+<pre>
+        respuesta.end(pagina);
+</pre>
+
+<p>Primero arrancamos el servidor:</p>
+<p><img src="imagentema/foto028.jpg" border="0" alt="arrancar servidor Node.js"></p>
+<p>Pedimos desde el navegador la página index.html (si no la indicamos ya codificamos que devuelva por defecto dicha página):</p>
+<p><img src="imagentema/foto029.jpg" border="0" alt="pagina estatica con Node.js"></p>
+<p>Finalmente cuando presionamos el botón 'Enviar' el navegador recibe la página generada en forma dinámica en el servidor:</p>
+<p><img src="imagentema/foto030.jpg" border="0" alt="pagina dinamica con Node.js"></p>
+
+<p>Este proyecto lo puede descargar en un zip con todos los archivos desde este enlace :
+<a href="proyectos/ejercicio12.zip">ejercicio12</a></p>
+<h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-35', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=10&codigo=10&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:51:23 GMT -->
+</html>

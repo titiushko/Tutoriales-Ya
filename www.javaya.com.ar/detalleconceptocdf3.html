@@ -1,0 +1,292 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=105&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:46 GMT -->
+<head>
+<title>Swing - JLabel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Swing - JLabel</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>Veamos la segunda componente de la librería swing llamada JLabel.</p>
+<p>La clase JLabel nos permite mostrar básicamente un texto.</p>
+<h3>Problema 1:</h3>
+<p>Confeccionar una ventana que muestre el nombre de un programa en la parte superior y su número de versión en la parte inferior. No permitir modificar el tamaño de la ventana en tiempo de ejecución.</p>
+<img src="imagentema/foto068.jpg" border="0" alt="JLabel">
+<h4>Programa:</h4>
+<pre class="recuadro">
+import javax.swing.*;
+public class Formulario extends JFrame {
+    private JLabel label1,label2;
+    public Formulario() {
+        setLayout(null);
+        label1=new JLabel("Sistema de Facturación.");
+        label1.setBounds(10,20,300,30);
+        add(label1);
+        label2=new JLabel("Vesion 1.0");
+        label2.setBounds(10,100,100,30);
+        add(label2);
+    }
+    
+    public static void main(String[] ar) {
+        Formulario formulario1=new Formulario();
+        formulario1.setBounds(0,0,300,200);
+        formulario1.setResizable(false);
+        formulario1.setVisible(true);
+    }
+}
+</pre>
+<p>Importamos el paquete javax.swing donde se encuentran definidas las clase JFrame y JLabel:</p>
+<pre>
+import javax.swing.*;
+</pre>
+<p>Heredamos de la clase de JFrame:</p>
+<pre>
+public class Formulario extends JFrame {
+</pre>
+<p>Definimos dos atributos de la clase JLabel:</p>
+<pre>
+    private JLabel label1,label2;
+</pre>
+<p>En el constructor creamos las dos JLabel y las ubicamos llamando al método setBounds, no hay que olvidar de llamar al método add que añade la JLabel al JFrame:</p>
+<pre>
+    public Formulario() {
+        setLayout(null);
+        label1=new JLabel("Sistema de Facturación.");
+        label1.setBounds(10,20,300,30);
+        add(label1);
+        label2=new JLabel("Vesion 1.0");
+        label2.setBounds(10,100,100,30);
+        add(label2);
+    }
+</pre>
+<p>Por último en la main creamos un objeto de la clase que acabamos de codificar, llamamos al setBounds para ubicar y dar tamaño al JFrame, llamamos al método setResizable pasando el valor false para no permitir modificar el tamaño del JFrame en tiempo de ejecución y finalmente llamamos al método setVisible para que se visualice el JFrame:</p>
+<pre>
+    public static void main(String[] ar) {
+        Formulario formulario1=new Formulario();
+        formulario1.setBounds(0,0,300,200);
+        formulario1.setResizable(false);
+        formulario1.setVisible(true);
+    }
+</pre>
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Crear tres objetos de la clase JLabel, ubicarlos uno debajo de otro y mostrar nombres de colores.</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+import javax.swing.*;
+public class Formulario extends JFrame {
+    private JLabel label1,label2,label3;
+    
+    public Formulario() {
+        setLayout(null);
+        label1=new JLabel("Rojo");
+        label1.setBounds(10,20,100,30);
+        add(label1);
+        label2=new JLabel("Verde");
+        label2.setBounds(10,60,100,30);
+        add(label2);
+        label3=new JLabel("Azul");
+        label3.setBounds(10,100,100,30);
+        add(label3);
+    }
+    
+    public static void main(String[] ar) {
+        Formulario formulario1=new Formulario();
+        formulario1.setBounds(0,0,300,200);
+        formulario1.setVisible(true);
+    }
+}
+</pre></div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=105&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:47 GMT -->
+</html>

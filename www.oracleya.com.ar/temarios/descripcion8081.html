@@ -1,0 +1,161 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=0&cod=162&punto=4 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Descripción : Tipos de datos (Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>4 - Tipos de datos</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>Ya explicamos que al crear una tabla debemos resolver qué campos (columnas) tendrá y que tipo de datos almacenará cada uno de ellos, es decir, su estructura.</p> 
+<p>El tipo de dato especifica el tipo de información que puede guardar un campo: caracteres, números, etc.</p>
+
+<p>Estos son algunos tipos de datos básicos de Oracle (posteriormente veremos otros y con más detalle):</p>
+<ul>
+<li>
+<p>- varchar2: se emplea para almacenar cadenas de caracteres. Una cadena es una secuencia de caracteres. Se coloca entre comillas simples; ejemplo: 'Hola', 'Juan Perez', 'Colon 123'. Este tipo de dato definen una cadena de longitud variable en la cual determinamos el máximo de caracteres entre paréntesis. Puede guardar hasta xxx caracteres. Por ejemplo, para almacenar cadenas de hasta 30 caracteres, definimos un campo de tipo varchar2 (30), es decir, entre paréntesis, junto al nombre del campo colocamos la longitud.<br>
+Si intentamos almacenar una cadena de caracteres de mayor longitud que la definida, la cadena no se carga, aparece un mensaje  indicando tal situación y la sentencia no se ejecuta.<br>
+Por ejemplo, si definimos un campo de tipo varchar(10) e intentamos almacenar en él la cadena 'Buenas tardes', aparece un mensaje indicando que el valor es demasiado grande para la columna.
+</p>
+</li>
+<li>
+- number(p,s): se usa para guardar valores numéricos con decimales, de 1.0 x10-120 a 9.9...(38 posiciones).  Definimos campos de este tipo cuando queremos almacenar valores numéricos con los cuales luego realizaremos operaciones matemáticas, por ejemplo, cantidades, precios, etc.<br>
+Puede contener números enteros o decimales, positivos o negativos. El parámetro "p" indica la precisión, es decir, el número de dígitos en total (contando los decimales) que contendrá el número como máximo. El parámetro "s" especifica la escala, es decir, el máximo de dígitos decimales. Por ejemplo, un campo definido "number(5,2)" puede contener cualquier número entre 0.00 y 999.99 (positivo o negativo).<br>
+Para especificar número enteros, podemos omitir el parámetro "s" o colocar el valor 0 como parámetro "s".
+Se utiliza como separador el punto (.).<br>
+Si intentamos almacenar un valor mayor fuera del rango permitido al definirlo, tal valor no se carga, aparece un mensaje indicando tal situación y la sentencia no se ejecuta.<br>
+Por ejemplo, si definimos un campo de tipo number(4,2) e intentamos guardar el valor 123.45, aparece un mensaje indicando que el valor es demasiado grande para la columna. Si ingresamos un valor con más decimales que los definidos, el valor se carga pero con la cantidad de decimales permitidos, los dígitos sobrantes se omiten.</p>
+</li>
+</ul>
+
+<p>Antes de crear una tabla debemos pensar en sus campos y optar por el tipo de dato adecuado para cada uno de ellos. <br>Por ejemplo, si en un campo almacenaremos números telefónicos o un números de documento, usamos "varchar2", no "number" porque si bien son dígitos, con ellos no realizamos operaciones matemáticas. Si en un campo guardaremos apellidos, y suponemos que ningún apellido superará los 20 caracteres, definimos el campo "varchar2(20)". Si en un campo almacenaremos precios con dos decimales que no superarán los 999.99 pesos definimos un campo de tipo "number(5,2)", es decir, 5 dígitos en total, con 2 decimales. Si en un campo almacenaremos valores enteros de no más de 3 dígitos, definimos un campo de tipo "number(3,0)".
+</p>
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=0&cod=162&punto=4 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:25 GMT -->
+</html>

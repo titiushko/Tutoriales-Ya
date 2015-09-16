@@ -1,0 +1,198 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/temarios/descripcion.php?cod=81&punto=27&inicio=18 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Conceptos de JQuery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="jQuery, programación, webmaster, tutorial, JavaScript">
+<meta name="description" content="El objetivo de este tutorial es presentar los conceptos de la libreria JavaScript JQUERY.">
+<meta name="author" content="Diego Moisset">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" type="text/JavaScript">
+
+</script>
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>27 - $.get  y $.post(Pasando datos al servidor por los métodos GET y POST)</h1></td>
+<td align="right">
+<a href="../../publicidad/index.html"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.html"></a>	
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<p>
+<div style="font-size:1.3em;font-family:arial;">
+<p>Utilizamos estas funciones cuando no queremos inyectar directamente los datos a nuestra página, sino que queremos procesarlos y eventualmente agregarlos en distintas partes.</p>
+<p>La sintaxis de la función $.get es distinta a la ya utilizada $, en este caso es una función global de la librería jQuery:</p>
+<pre>
+$.get([nombre de la página],[parámetros a enviarse por el método get],
+      [función que recibe los datos del servidor])
+También podemos llamarla:
+jQuery.get([nombre de la página],[parámetros a enviarse por el método get],
+      [función que recibe los datos del servidor])
+</pre>
+
+<p>La función $.post es idéntica a la función $.get, lo único que difiere es como el protocolo HTTP empaqueta los datos y los envía al servidor. Normalmente se utiliza la función $.post, ya que no está limitado la cantidad de datos que se pueden enviar al servidor.</p>
+<p><strong>Problema:</strong>Implementar una aplicación que calcule el cuadrado de un número que ingresamos por teclado. La operación se realiza en el servidor, le enviamos los datos mediante la función de jQuery $.get</p>
+<p>pagina1.html</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;../jquery.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;funciones.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form action=&quot;pagina1.php&quot; method=&quot;post&quot; id=&quot;formulario&quot;&gt;
+Ingrese nro:&lt;input type=&quot;text&quot; name=&quot;nro&quot; id=&quot;nro&quot; 
+size=&quot;10&quot;&gt;&lt;br&gt;
+&lt;input type=&quot;submit&quot; value=&quot;Calcular el cuadrado&quot; id=&quot;enviar&quot;&gt;
+&lt;div id=&quot;resultados&quot;&gt;&lt;/div&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>funciones.js</p>
+<pre class="recuadro">
+var x;
+x=$(document);
+x.ready(inicializarEventos);
+
+function inicializarEventos()
+{
+  var x;
+  x=$("#enviar");
+  x.click(presionSubmit);
+}
+
+function presionSubmit()
+{
+  var v=$("#nro").attr("value");
+  $.get("pagina1.php",{numero:v},llegadaDatos); 
+  return false;
+}
+
+function llegadaDatos(datos)
+{
+  alert(datos);
+}
+</pre>
+<p>pagina1.php</p>
+<pre class="recuadro">
+&lt;?php
+$cuadrado=$_REQUEST['numero']*$_REQUEST['numero'];
+echo $cuadrado;
+?&gt;
+</pre>
+<p>Veamos el código JavaScript para comunicarse con el servidor:</p>
+<p>Primero en la función inicializarEventos enlazamos el evento click al botón submit del formulario:</p>
+<pre>
+function inicializarEventos()
+{
+  var x;
+  x=$("#enviar");
+  x.click(presionSubmit);
+}
+</pre>
+<p>Cuando presionamos el botón extraemos el valor del control text y llamamos a la función $.get indicando el nombre de la página a llamar, un objeto literal con todos los parámetros y sus valores (en este caso solo tenemos un parámetro llamado numero) y finalmente el nombre de la función que se ejecutará cuando lleguen los datos del servidor:</p>
+<pre>
+function presionSubmit()
+{
+  var v=$("#nro").attr("value");
+  $.get("pagina1.php",{numero:v},llegadaDatos); 
+  return false;
+}
+</pre>
+<p>La función que se ejecuta cuando llegan los datos del servidor recibe un string:</p>
+<pre>
+function llegadaDatos(datos)
+{
+  alert(datos);
+}
+</pre></div>
+</p>
+
+<table width="650px">
+<tr>
+<td align="center">	
+
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../index111c.html?inicio=18">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-14', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/temarios/descripcion.php?cod=81&punto=27&inicio=18 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:23 GMT -->
+</html>

@@ -1,0 +1,235 @@
+        
+
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=50&cod=217&punto=59 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios resueltos : Restricciones foreign key en la misma tabla(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+<body bgcolor="#CCFFCC">
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>59 - Restricciones foreign key en la misma tabla</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Una mutual almacena los datos de sus afiliados en una tabla llamada "afiliados". Algunos afiliados inscriben a sus familiares. La tabla contiene un campo que hace referencia al afiliado que lo incorporó a la mutual, del cual dependen.</p>
+
+<p>Eliminamos la tabla "afiliados" y la creamos:</p>
+<pre>
+ drop table afiliados;
+
+ create table afiliados(
+  numero number(5),
+  documento char(8) not null,
+  nombre varchar2(30),
+  afiliadotitular number(5),
+  primary key (documento),
+  unique (numero)
+ );
+</pre>
+<p>En caso que un afiliado no haya sido incorporado a la mutual por otro afiliado, el campo "afiliadotitular" almacenará "null".</p>
+
+<p>Establecemos una restricción "foreign key" para asegurarnos que el número de afiliado que se ingrese en el campo "afiliadotitular" exista en la tabla "afiliados":</p>
+<pre>
+ alter table afiliados
+  add constraint FK_afiliados_afiliadotitular
+  foreign key (afiliadotitular)
+  references afiliados (numero);
+</pre>
+<p>Ingresamos algunos registros:</p>
+<pre>
+ insert into afiliados values(1,'22222222','Perez Juan',null);
+ insert into afiliados values(2,'23333333','Garcia Maria',null);
+ insert into afiliados values(3,'24444444','Lopez Susana',null);
+ insert into afiliados values(4,'30000000','Perez Marcela',1);
+ insert into afiliados values(5,'31111111','Garcia Luis',2);
+ insert into afiliados values(6,'32222222','Garcia Maria',2);
+</pre>
+<p>Podemos eliminar un afiliado, siempre que no haya otro afiliado que haga referencia a él en "afiliadotitular", es decir, si el "numero" del afiliado está presente en algún registro en el campo "afiliadotitular":</p>
+<pre>
+ delete from afiliados where numero=5;
+</pre> 
+<p>Veamos la información referente a "afiliados":</p>
+<pre>
+ select constraint_name, constraint_type,search_condition
+  from user_constraints
+  where table_name='AFILIADOS';
+</pre>
+<p>Aparece la siguiente tabla:</p>
+<pre>
+CONSTRAINT_NAME			CONSTRAINT_TYPE		SEARCH_CONDITION
+---------------------------------------------------------------------------------
+SYS_C004816			C			"DOCUMENTO" IS NOT NULL
+SYS_C004817			P
+SYS_C004818			U
+FK_AFILIADOS_AFILIADOTITULAR	R
+</pre>
+<p>Los nombres de las tres primeras restricciones son dadas por Oracle.</p>
+<p>La tabla tiene una restricción "check", una "primary key", una "unique" y una "foreign key".</p>
+<p>Veamos sobre qué campos están establecidas:</p>
+<pre>
+ select *from user_cons_columns
+  where table_name='AFILIADOS';
+</pre>
+<p>Aparece la siguiente tabla:</p>
+<pre>
+CONSTRAINT_NAME			COLUMN_NAME	POSITION
+----------------------------------------------------------
+SYS_C004818			NUMERO		1
+SYS_C004817			DOCUMENTO	1
+SYS_C004816			DOCUMENTO	
+FK_AFILIADOS_AFILIADOTITULAR	AFILIADOTITULAR	1
+</pre>                      
+<p>Nos informa que la restricción única está establecida sobre "numero"; la "primary key" sobre "documento", la restricción de chequeo sobre "documento" y la "foreign key" sobre "afiliadotitular".
+</p>
+<p>Ingresamos un nuevo registro con un valor para "afiliadotitular" existente:</p>
+<pre>
+ insert into afiliados values(7,'33333333','Lopez Juana',3);
+</pre>
+<p>Intentamos ingresar un nuevo registro con un valor para "afiliadotitular" inexistente:</p>
+<pre>
+ insert into afiliados values(8,'34555666','Marconi Julio',9);
+</pre>
+<p>Oracle no lo permite porque se violaría la restricción "foreign key".</p>
+
+<p>Igresamos un nuevo registro con el valor "null" para "afiliadotitular":</p>
+<pre>
+ insert into afiliados values(8,'34555666','Marconi Julio',null);
+</pre>
+
+        <form name="formulario" action="http://www.sqlserverya.com.ar/aspx/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+        <br>
+   <h2><a href="../indexefd7.html?inicio=50">Retornar</a></h2>   
+        
+	<br>
+   
+
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=50&cod=217&punto=59 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:36 GMT -->
+</html>
+

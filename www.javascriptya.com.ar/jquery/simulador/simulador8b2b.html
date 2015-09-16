@@ -1,0 +1,269 @@
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/simulador/simulador.php?inicio=18&cod=82&punto=26&inicio=18 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+  <title>Ejercicios resueltos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="jQuery, programación, webmaster, tutorial, JavaScript">
+<meta name="description" content="El objetivo de este tutorial es presentar los conceptos de la libreria JavaScript JQUERY.">
+<meta name="author" content="Diego Moisset">
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.editor {
+ /* background-image:url("numeros.png");
+ background-repeat: no-repeat;
+       background-position: 0px 0px;
+       background-attachment: scroll;*/}
+</style>
+
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;		
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=yes,status=yes,toolbar=yes,location=yes');  	
+}
+</script>
+</head>
+
+<body bgcolor="#CCFFCC">
+        
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>26 - Ajax: métodos ajaxStart y ajaxStop</h1></td>
+<td align="right">
+<!--<a href="http://www.javascriptya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+	<table width="650px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+
+</tr>
+</table>		  
+	  
+	  
+                <b>Simulador <em>(Cuando presiona el bot&oacute;n &quot;ejecutar el programa&quot; 
+        se graban todos los cuadros de texto y se ejecuta el primero de la lista 
+        mostrando en una página el resultado.</em></b>) 
+<form name="formulario" action="http://www.scratchya.com.ar/ejecutajquerya.php" target="ventanaForm" method="post" onsubmit=  "abrirVentana()">
+
+<div style="font-size:1.3em;font-family:arial;"><br><p>Confeccionar un problema que muestre una lista de hipervínculos con los distintos signos del horóscopo y luego al ser presionado no recargue la página completa sino que se envíe una petición al servidor y el mismo retorne la información de dicho signo, luego se actualice solo el contenido de un div del archivo HTML.<br>
+Mostrar un gif animado mientras los datos no llegaron del servidor.</p></div><br><b>pagina1.html</b><input type="hidden" name="archivo1" value="pagina1.html"><br><textarea class="editor" wrap="off" rows="15" cols="110" name="programa1">&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;link rel=&quot;StyleSheet&quot; href=&quot;estilos.css&quot; type=&quot;text/css&quot;&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;../jquery.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;funciones.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Signos del hor&oacute;scopo.&lt;/h1&gt;
+&lt;div id=&quot;menu&quot;&gt;
+&lt;p&gt;&lt;a id=&quot;enlace1&quot; href=&quot;pagina1.php?cod=1&quot;&gt;Aries&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;enlace2&quot; href=&quot;pagina1.php?cod=2&quot;&gt;Tauro&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;enlace3&quot; href=&quot;pagina1.php?cod=3&quot;&gt;Geminis&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;enlace4&quot; href=&quot;pagina1.php?cod=4&quot;&gt;Cancer&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;enlace5&quot; href=&quot;pagina1.php?cod=5&quot;&gt;Leo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;enlace6&quot; href=&quot;pagina1.php?cod=6&quot;&gt;Virgo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;enlace7&quot; href=&quot;pagina1.php?cod=7&quot;&gt;Libra&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;enlace8&quot; href=&quot;pagina1.php?cod=8&quot;&gt;Escorpio&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;enlace9&quot; href=&quot;pagina1.php?cod=9&quot;&gt;Sagitario&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;enlace10&quot; href=&quot;pagina1.php?cod=10&quot;&gt;Capricornio&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;enlace11&quot; href=&quot;pagina1.php?cod=11&quot;&gt;Acuario&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;enlace12&quot; href=&quot;pagina1.php?cod=12&quot;&gt;Piscis&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&quot;detalles&quot;&gt;Seleccione su signo.&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea><br><br><input type="submit"  value="Ejecutar el programa.">
+<table width="650px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 26/02/09 graficotot */
+google_ad_slot = "5205806820";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 11/11/08 grafico */
+google_ad_slot = "1392361504";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>
+
+
+
+<br><div style="font-size:1.3em;font-family:arial;"><br></div><br><b>funciones.js</b><input type="hidden" name="archivo2" value="funciones.html"><br><textarea class="editor" wrap="off" rows="15" cols="110" name="programa2">var x;
+x=$(document);
+x.ready(inicializarEventos);
+
+function inicializarEventos()
+{
+  var x;
+  x=$(&quot;#menu a&quot;);
+  x.click(presionEnlace);
+}
+
+function presionEnlace()
+{
+  var pagina=$(this).attr(&quot;href&quot;);
+  var x=$(&quot;#detalles&quot;);
+  x.ajaxStart(inicioEnvio);
+  x.load(pagina); 
+  return false;
+}
+
+function inicioEnvio()
+{
+  var x=$(&quot;#detalles&quot;);
+  x.html('&lt;img src=&quot;../cargando.gif&quot;&gt;');
+}</textarea><br><br><div style="font-size:1.3em;font-family:arial;"><br></div><br><b>pagina1.php</b><input type="hidden" name="archivo3" value="pagina1-2.html"><br><textarea class="editor" wrap="off" rows="15" cols="110" name="programa3">&lt;?php
+header('Content-Type: text/html; charset=ISO-8859-1');
+if ($_REQUEST['cod']==1)
+  echo &quot;&lt;strong&gt;Aries:&lt;/strong&gt; Hoy los cambios ser&aacute;n f&iacute;sicos, personales, de car&aacute;cter, Te sentir&aacute;s impulsivo y tomar&aacute;s  iniciativas. Per&iacute;odo en donde considerar&aacute;s unirte a agrupaciones de beneficencia, o de ayuda a los dem&aacute;s.&quot;;
+if ($_REQUEST['cod']==2)
+  echo &quot;&lt;strong&gt;Tauro:&lt;/strong&gt; Hoy los cambios ser&aacute;n privados, &iacute;ntimos. Recuerdos. Ayuda, solidaridad. Asuntos en lugares de retiro. Tu c&oacute;nyuge puede aportar buen status a tu vida o apoyo a tu profesi&oacute;n.&quot;;
+if ($_REQUEST['cod']==3)
+  echo &quot;&lt;strong&gt;G&eacute;minis:&lt;/strong&gt; Los asuntos de hoy tienen que ver con las amistades, reuniones, actividades con ellos. D&iacute;a esperanzado, ilusiones. Mucha energ&iacute;a sexual y fuerza emocional. Deseos dif&iacute;ciles de controlar.&quot;;
+if ($_REQUEST['cod']==4)
+  echo &quot;&lt;strong&gt;Cancer:&lt;/strong&gt; Este d&iacute;a la profesi&oacute;n y las relaciones con superiores y con tu madre ser&aacute;n de importancia. Actividad en relaci&oacute;n a estos temas. Momentos positivos con compa&ntilde;eros de trabajo. Actividad laboral agradable.&quot;;
+if ($_REQUEST['cod']==5)
+  echo &quot;&lt;strong&gt;Leo:&lt;/strong&gt; Este d&iacute;a los estudios, los viajes, el extranjero y la espiritualidad ser&aacute;n lo importante. Pensamientos, religi&oacute;n y filosof&iacute;a tambi&eacute;n. Vivencias k&aacute;rmicas de la &eacute;poca te vuelven responsable tomando decisiones.&quot;;
+if ($_REQUEST['cod']==6)
+  echo &quot;&lt;strong&gt;Virgo:&lt;/strong&gt; Para este d&iacute;a toma importancia tu vida sexual, tal vez miedos, temas legales, juicios o herencias. Experiencias extra&ntilde;as. Hay karma de prueba durante este per&iacute;odo en tu parte psicol&oacute;gica, gener&aacute;ndose algunos replanteos.&quot;;
+if ($_REQUEST['cod']==7)
+  echo &quot;&lt;strong&gt;Libra:&lt;/strong&gt; Hoy todo asunto tiene que ver con tu pareja, tambi&eacute;n con socios, con la gente o el p&uacute;blico. Ellos ser&aacute;n lo m&aacute;s importante del d&iacute;a. Ganancias a trav&eacute;s de especulaciones o del juego. Actividades vocacionales art&iacute;sticas.&quot;;
+if ($_REQUEST['cod']==8)
+  echo &quot;&lt;strong&gt;Escorpio:&lt;/strong&gt; Hoy todo asunto tiene que ver con temas de trabajo y de salud. Presta atenci&oacute;n a ambos. Experiencias diversas con compa&ntilde;eros. Durante este per&iacute;odo tendr&aacute;s muchos recursos para ganar dinero.&quot;;
+if ($_REQUEST['cod']==9)
+  echo &quot;&lt;strong&gt;Sagitario:&lt;/strong&gt; Durante este d&iacute;a se vivir&aacute;n cambios en relaci&oacute;n a los noviazgos o a los hijos. Creatividad, actividad, diversiones y salidas. Per&iacute;odo de encuentros con personas o situaciones que te impresionan.&quot;;
+if ($_REQUEST['cod']==10)
+  echo &quot;&lt;strong&gt;Capricornio:&lt;/strong&gt; Los cambios del d&iacute;a tienen que ver con tu hogar, con la convivencia y con el padre. Asuntos relativos al car&aacute;cter en la convivencia. El karma de responsabilidad de estos momentos te acercar&aacute; al mundo de lo desconocido, mucha madurez y contacto con el m&aacute;s all&aacute;.&quot;;
+if ($_REQUEST['cod']==11)
+  echo &quot;&lt;strong&gt;Acuario:&lt;/strong&gt; Hoy todo asunto tiene que ver con el entorno inmediato, hermanos y vecinos, con la comunicaci&oacute;n, los viajes cortos o traslados frecuentes. El hablar y trasladarse ser&aacute; importante hoy. Mentalidad e ideas activas.&quot;;
+if ($_REQUEST['cod']==12)
+  echo &quot;&lt;strong&gt;Piscis:&lt;/strong&gt; Durante este d&iacute;a se vivir&aacute;n cambios en la econom&iacute;a, movimientos en los ingresos, negocios, valores. Momentos de gran fuerza y decisi&oacute;n profesionales, buscar&aacute;s el liderazgo.&quot;;
+sleep(1);
+?&gt;</textarea><br><br><div style="font-size:1.3em;font-family:arial;"><br></div><br><b>estilos.css</b><input type="hidden" name="archivo4" value="estilos.html"><br><textarea class="editor" wrap="off" rows="15" cols="110" name="programa4">#menu {
+  font-family: Arial;
+  margin:5px;
+}
+
+#menu p {
+  margin:0px;
+  padding:0px;
+}
+
+#menu a {
+  display: block;
+  padding: 3px;
+  width: 160px;
+  background-color: #f7f8e8;
+  border-bottom: 1px solid #eee;
+  text-align:center;
+}
+
+#menu a:link, #menu a:visited {
+  color: #f00;
+  text-decoration: none;
+}
+
+#menu a:hover {
+  background-color: #369;
+  color: #fff;
+}
+
+#detalles {
+  background-color:#ffc;
+  text-align:left;
+  font-family:verdana;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #fa0;
+  margin:5px;
+}
+</textarea><br><br>
+   <h2><a href="../index111c.html?inicio=18">Retornar</a></h2>   
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-14', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/simulador/simulador.php?inicio=18&cod=82&punto=26&inicio=18 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:23 GMT -->
+</html>
+

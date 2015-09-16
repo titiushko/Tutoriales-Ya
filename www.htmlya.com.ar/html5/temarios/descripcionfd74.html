@@ -1,0 +1,157 @@
+
+<!DOCTYPE html> 
+<html lang="es"> 
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=173&punto=40&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:09 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>GEOLOCATION (watchPosition)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="html5, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de HTML 5. Es objetivo prioritario respetar 
+los estándares del W3C">
+<meta name="author" content="Diego Moisset">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+</style>
+
+</head>
+
+<body>
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em"><a href="../../html5.html">Temario del Tutorial</a></span>->40 - GEOLOCATION (watchPosition)</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Hasta ahora hemos empleado el método getCurrentPosition para obtener la posición, existe otro método llamado watchPosition que tiene los mismos parámetros que getCurrentPosition con la diferencia que la función que recibe la posición se llama cada vez que se detecta que nos hemos desplazado.</p>
+
+<h3>Problema</h3>
+<p>Confeccionar una aplicación que inmediatamente arranque muestra la longitud, latitud y precisión. Actualizar dicha posición cada vez que cambie empleando para ello la llamada al método watchPosition.<br>
+Para probar este algoritmo es mejor hacerlo en un celular y desplazarnos para que se obtengan distintas posiciones.</p>
+<h4>Solución</h4>
+
+<pre class="recuadro">
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Prueba&lt;/title&gt;
+  
+&lt;script type="text/javascript"&gt;
+
+    window.addEventListener('load', inicio, false);
+
+    function inicio() {
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(mostrarCoordenada);
+        } else {
+          alert('El navegador no dispone la capacidad de geolocalización');
+        }
+    }
+  
+    function mostrarCoordenada(posicion) {
+        document.getElementById('dato').innerHTML='Latitud:'+
+           posicion.coords.latitude+
+           '&lt;br&gt; Longitud:'+posicion.coords.longitude+
+           '&lt;br&gt;Exactitud:'+posicion.coords.accuracy;
+    }
+       
+&lt;/script&gt;  
+  
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;span id="dato"&gt;&lt;/span&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>En la función inicio que se dispara una vez que la página se ha cargado completamente es que llamamos a watchPosition indicando la función que se ejecutará cada vez que cambiemos de posición:</p>
+<pre>
+    function inicio() {
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(mostrarCoordenada);
+        } else {
+          alert('El navegador no dispone la capacidad de geolocalización');
+        }
+    }
+</pre>
+<p>El algoritmo que veíamos para mostrar la coordenada actual no cambia:</p>
+<pre>
+    function mostrarCoordenada(posicion) {
+        document.getElementById('dato').innerHTML='Latitud:'+
+           posicion.coords.latitude+
+           '&lt;br&gt; Longitud:'+posicion.coords.longitude+
+           '&lt;br&gt;Exactitud:'+posicion.coords.accuracy;
+    }
+</pre>
+
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../index28fa.html?inicio=20">Retornar</a></h2>   
+
+</div>
+
+</body>
+
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=173&punto=40&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:09 GMT -->
+</html>

@@ -1,0 +1,230 @@
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=80&cod=88 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de JavaScript : Conceptos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+div#contentdetalle{clear:left;
+                   max-width:900px;
+				   border-top:0px solid #999;
+				   padding-top:15px;
+				   background-color: #aed7a8;
+				   text-align:left;
+				   font-size:1.3em;
+				   font-weight:normal;
+				   font-family:arial;
+				   padding:20px}
+				   
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;  
+}				   
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td>
+<h1>Expresiones regulares: modificadores i (insensitive) g (global) m (multiline)</h1></td>
+<td align="right">
+<!--<a href="http://www.javascriptya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div id="contentdetalle">
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 	  
+
+<p>El objeto RegExp se le puede aplicar tres modificadores que actúan sobre el patrón completo.<br>
+<pre>
+i: especifica que la búsqueda se realiza sin 
+   diferenciar entre mayúsculas y minúsculas.
+g: indica que los caracteres a buscar pueden 
+   ser encontrados varias veces en la cadena 
+   de caracteres.
+m: el modificador m realiza coincidencia de
+   patrones en el modo multilínea. En este modo, 
+   si la cadena a buscar contiene varias líneas, 
+   el metacaracter ^ y $ deben coincidir con el
+   inicio y final de una línea, además de que 
+   coincida con el comienzo y el final de una cadena.
+</pre>
+<p>Estos modificadores pueden aplicarse en forma independiente o conjunta a una expresión regular.</p>
+<p>Veamos un ejemplo del modificador i sobre una expresión regular:</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var palabra='Administracion';
+  var patron=/adm/i;
+  if (patron.test(palabra))
+    document.write('La palabra '+palabra+' contiene la cadena adm sin tener en cuenta mayúsculas/minúsculas');
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Los modificadores se ubican luego de la segundo barra donde declaramos la expresión regular:</p>
+<pre>
+  var patron=/adm/i;
+</pre>
+
+<p>Ahora veamos un problema donde activamos dos modificadores:</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var oracion='El auto tiene el mejor motor que elegimos';
+  var patron=/el/gi;
+  var vec=patron.exec(oracion);
+  document.write(vec.index);  //0
+  document.write('&lt;br&gt;');
+  vec=patron.exec(oracion);
+  document.write(vec.index);  //14
+  document.write('&lt;br&gt;');
+  vec=patron.exec(oracion);
+  document.write(vec.index);  //33
+  document.write('&lt;br&gt;');
+  vec=patron.exec(oracion);  
+  document.write(vec);  //null
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Hemos definido el patron los modificadores g (global) e i (insensitive):</p>
+<pre>
+  var patron=/el/gi;
+</pre>
+<p>Estamos buscando el patrón 'el' dentro de la oración 'El auto tiene el mejor motor que elegimos'. Como vemos la cadena 'el' se repite tres veces en la oración sin tener en cuenta mayúsculas y minúsculas:</p>
+<pre>
+<strong>El</strong> auto tiene <strong>el</strong> mejor motor que <strong>el</strong>egimos
+</pre>
+<p>Utilizamos el método exec ya que el método test solo tiene en cuenta la primera ocurrencia.</p>
+<p>Para que tenga sentido la llamada de sucesivas veces del método exec debemos activar el modificador g (global)</p>
+<p>Si no activamos el modificador global cada vez que llamamos al método exec la búsqueda comienza desde el principio.</p>
+
+</p>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../index20ff.html?inicio=80">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=80&cod=88 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:25 GMT -->
+</html>

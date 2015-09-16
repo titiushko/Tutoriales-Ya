@@ -1,0 +1,599 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=100&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:44 GMT -->
+<head>
+<title>Clase String</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Clase String</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>La clase String está orientada a manejar cadenas de caracteres. Hasta este momento hemos utilizado algunos métodos de la clase String (equals, compareTo)</p>
+<p>Ahora veremos otro conjunto de métodos de uso común de la clase String:</p>
+<h3>Métodos</h3>
+<ul>
+<li>
+<pre>
+boolean equals(String s1)
+</pre>
+Como vimos el método equals retorna true si el contenido de caracteres del parámetro s1 es exactamente igual a la cadena de caracteres del objeto que llama al método equals.
+</li>
+<li>
+<pre>
+boolean equalsIgnoreCase(String s1)
+</pre>
+El funcionamiento es casi exactamente igual que el método equals con la diferencia que no tiene en cuenta mayúsculas y minúsculas (si comparamos 'Ana' y 'ana' luego el método equalsIgnoreCase retorna true)
+</li>
+
+<li>
+<pre>
+int compareTo(String s1)
+</pre>
+Este método retorna un 0 si el contenido de s1 es exactamente igual al String contenido por el objeto que llama al método compareTo. Retorna un valor &gt;0 si el contenido del String que llama al método compareTo es mayor alfabéticamente al parámetro s1.<br>
+</li>
+
+<li>
+<pre>
+char charAt(int pos)
+</pre>
+Retorna un caracter del String, llega al método la posición del caracter a extraer.
+</li>
+<li>
+<pre>
+int length()
+</pre>
+Retorna la cantidad de caracteres almacenados en el String.
+</li>
+<li>
+<pre>
+String substring(int pos1,int pos2)
+</pre>
+Retorna un substring a partir de la posición indicada en el parámetro pos1 hasta la posición pos2 sin incluir dicha posición.
+</li>
+<li>
+<pre>
+int indexOf(String s1)
+</pre>
+Retorna -1 si el String que le pasamos como parámetro no está contenida en la cadena del objeto que llama al método. En caso que se encuentre contenido el String s1 retorna la posición donde comienza a repetirse.
+</li>
+
+<li>
+<pre>
+String toUpperCase()
+</pre>
+Retorna un String con el contenido convertido todo a mayúsculas.
+</li>
+<li>
+<pre>
+String toLowerCase()
+</pre>
+Retorna un String con el contenido convertido todo a minúsculas.
+</li>
+
+</ul>
+
+<h3>Problema 1:</h3>
+<p>Confeccionar una clase que solicite el ingreso de dos String y luego emplee los métodos más comunes de la clase String.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.util.Scanner;
+public class Cadena1 {
+    public static void main(String[] ar) {
+        Scanner teclado=new Scanner(System.in);
+        String cad1;
+        String cad2;
+        System.out.print("Ingrese la primer cadena:");
+        cad1=teclado.nextLine();
+        System.out.print("Ingrese la segunda cadena:");
+        cad2=teclado.nextLine();
+        if (cad1.equals(cad2)==true) {
+            System.out.println(cad1+" es exactamente igual a "+cad2);
+        } else {
+            System.out.println(cad1+" no es exactamente igual a "+cad2);        
+        }
+        if (cad1.equalsIgnoreCase(cad2)==true) {
+            System.out.println(cad1+" es igual a "+cad2+" sin tener en cuenta mayúsculas/minúsculas");
+        } else {
+            System.out.println(cad1+" no es igual a "+cad2+" sin tener en cuenta mayúsculas/minúsculas");        
+        }
+        if (cad1.compareTo(cad2)==0) {
+            System.out.println(cad1+" es exactamente igual a "+cad2);
+        } else {
+            if (cad1.compareTo(cad2)&gt;0) {
+                System.out.println(cad1+ " es mayor alfabéticamente que "+cad2);
+            } else {
+                System.out.println(cad2+ " es mayor alfabéticamente que "+cad1);            
+            }
+        }        
+        char carac1=cad1.charAt(0);
+        System.out.println("El primer caracter de "+cad1+" es "+carac1);
+        int largo=cad1.length();
+        System.out.println("El largo del String "+cad1+" es "+largo);
+        String cad3=cad1.substring(0,3);
+        System.out.println("Los primeros tres caracteres de "+cad1+" son "+cad3);
+        int posi=cad1.indexOf(cad2);
+        if (posi==-1) {
+            System.out.println(cad2+" no está contenido en "+cad1);
+        } else {
+            System.out.println(cad2+" está contenido en "+cad1+" a partir de la posición "+posi);
+        }
+        System.out.println(cad1+ " convertido a mayúsculas es "+cad1.toUpperCase());
+        System.out.println(cad1+ " convertido a minúsculas es "+cad1.toLowerCase());        
+    }
+}
+</pre>
+<p>Para cargar los dos String utilizamos en este caso el método nextLine para permitir ingresar espacios en blanco:</p>
+<pre>
+        System.out.print("Ingrese la primer cadena:");
+        cad1=teclado.nextLine();
+        System.out.print("Ingrese la segunda cadena:");
+        cad2=teclado.nextLine();
+</pre>
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Realizar una clase, que permita cargar una dirección de mail en el constructor, luego en otro método mostrar un mensaje si contiene el caracter '@'.
+</li>
+<li>
+Cargar un String por teclado e implementar los siguientes 
+métodos:<br>  
+a) Imprimir la primera mitad de los caracteres de la cadena. <br>
+b) Imprimir el último caracter. <br>
+c) Imprimirlo en forma inversa. <br>
+d) Imprimir cada caracter del String separado con un guión. <br>
+e) Imprimir la cantidad de vocales almacenadas. <br>
+f) Implementar un método que verifique si la cadena se lee igual de 
+izquierda a derecha tanto como de derecha a izquierda (ej. neuquen se lee igual en las dos direcciones) 
+</li>
+<li>
+Desarrollar un programa que solicite la carga de una clave. La clase debe tener dos métodos uno para la carga y otro que muestre si la clave es la correcta (la clave a comparar es "123abc")
+</li>
+<li>
+Confeccionar un programa que permita cargar los nombres de 5 personas y sus mail, luego implementar los siguientes métodos: <br>
+a) Mostrar por pantalla los datos. <br>
+b) Consulta del mail ingresando su nombre.<br> 
+c) Mostrar los mail que no tienen el carácter @. 
+</li>
+<li>
+Codifique un programa que permita cargar una oración por teclado, luego mostrar cada palabra ingresada en una línea distinta.<br>
+<pre> 
+Por ejemplo si cargo: 
+  La mañana está fría. 
+Debe aparecer: 
+ 
+La 
+mañana 
+está 
+fría. 
+</pre>
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+import java.util.Scanner;
+public class Cadena2 {
+    private Scanner teclado;
+    private String mail;
+    public Cadena2() {
+        teclado=new Scanner(System.in);
+        System.out.print("Ingrese un mail:");
+        mail=teclado.nextLine();
+    }
+    
+    public void verificarArroba() {
+        boolean existe=false;
+        for(int f=0;f&lt;mail.length();f++) {
+            if (mail.charAt(f)=='@') {
+                existe=true;
+            }
+        }
+        if (existe==true) {
+            System.out.println(mail+" contiene el caracter @");
+        } else {
+            System.out.println(mail+" no contiene el caracter @");        
+        }
+    }
+
+    public static void main(String[] ar) {
+        Cadena2 cad=new Cadena2();
+        cad.verificarArroba();
+    }
+}
+
+
+
+
+
+import java.util.Scanner;
+public class Cadena3 {
+    private Scanner teclado;
+    private String cad;
+    public Cadena3() {
+        teclado=new Scanner(System.in);
+        System.out.print("Ingrese una cadena:");
+        cad=teclado.nextLine();
+    }
+
+    public void primerMitad() {
+    	String parte;
+    	parte=cad.substring(0,cad.length()/2);
+        System.out.println("Primer mitad de caraceres:"+parte);
+    }
+    
+    public void ultimoCaracter() {
+    	char ultimo=cad.charAt(cad.length()-1);
+        System.out.println("Ultimo caracter:"+ultimo);
+    }
+    
+    public void formaInversa() {
+    	System.out.println("Impresión en forma inversa:");
+        for(int f=cad.length()-1;f&gt;=0;f--) {
+            System.out.print(cad.charAt(f));
+        }
+        System.out.println();
+    }
+    
+    public void conGuion() {
+        System.out.println("Separado por guiones:");
+        for(int f=0;f&lt;cad.length();f++) {
+            System.out.print(cad.charAt(f)+"-");
+        }
+        System.out.println();
+    }
+    
+    public void cantidadVocales() {
+        int cant=0;
+        for(int f=0;f&lt;cad.length();f++) {
+            if (cad.charAt(f)=='a' || cad.charAt(f)=='e' || 
+                cad.charAt(f)=='i' || cad.charAt(f)=='o' || 
+                cad.charAt(f)=='u' || cad.charAt(f)=='A' || 
+                cad.charAt(f)=='E' || cad.charAt(f)=='I' || 
+                cad.charAt(f)=='O'|| cad.charAt(f)=='U') {
+            	cant++;
+            }
+        }
+        System.out.println("Cantidad de vocales:"+cant);
+    }
+    
+    public void esCapicua() {
+        int cant=0;
+        for(int f=0;f&lt;cad.length()/2;f++) {
+            if (cad.charAt(f)==cad.charAt(cad.length()-1-f)) {
+                cant++;
+            }            	
+        }
+        if (cant==cad.length()/2) {
+            System.out.println("Es capicúa la cadena "+cad);
+        } else {
+            System.out.println("No es capicúa la cadena "+cad);        
+        }
+    }
+
+    public static void main(String[] ar) {
+        Cadena3 cad=new Cadena3();
+        cad.primerMitad();
+        cad.ultimoCaracter();
+        cad.formaInversa();
+        cad.conGuion();
+        cad.cantidadVocales();
+        cad.esCapicua();
+    }
+}
+
+
+
+
+
+import java.util.Scanner;
+public class Cadena4 {
+    private Scanner teclado;
+    private String clave;
+    
+    public Cadena4() {
+        teclado=new Scanner(System.in);
+        System.out.print("Ingrese clave:");
+        clave=teclado.nextLine();
+    }
+    
+    public void verificarClave() {
+        if (clave.equals("123abc")==true) {
+            System.out.println("Se ingresó la clave en forma correcta");
+        } else {
+            System.out.println("No se ingresó la clave en forma correcta");        	
+        }       
+    }
+    
+    public static void main(String[] ar) {
+        Cadena4 cad=new Cadena4();
+        cad.verificarClave();
+    }
+}
+
+
+
+
+
+import java.util.Scanner;
+public class Cadena5 {
+    private Scanner teclado;
+    private String[] nombres;
+    private String[] mail;
+    
+    public Cadena5() {
+         teclado=new Scanner(System.in);
+         nombres=new String[5];
+         mail=new String[5];
+         for(int f=0;f&lt;nombres.length;f++) {
+             System.out.print("Ingrese nombre:");
+             nombres[f]=teclado.nextLine();
+             System.out.print("Ingrese mail");
+             mail[f]=teclado.nextLine();
+         }
+    }
+    
+    public void listar() {
+        for(int f=0;f&lt;nombres.length;f++) {
+            System.out.println(nombres[f]+" - "+mail[f]);
+        }
+    }
+    
+    public void consultaMail() {
+        String aux;
+        System.out.print("Ingrese el nombre de la persona:");
+        aux=teclado.nextLine();
+        boolean existe=false;
+        for(int f=0;f&lt;nombres.length;f++) {
+            if (aux.equals(nombres[f])) {
+                System.out.println("Mail de la persona:"+mail[f]);
+                existe=true;
+            }
+        }
+        if (existe==false) {
+            System.out.println("No existe una persona con ese nombre.");
+        }
+    }
+
+    public void sinArroba() {
+        for(int f=0;f&lt;mail.length;f++) {
+            boolean tiene=false;
+            for(int k=0;k&lt;mail[f].length();k++) {
+                if (mail[f].charAt(k)=='@') {
+        	    tiene=true;
+        	}
+            }
+            if (tiene==false) {
+                System.out.println(mail[f]+" no tiene @");
+            }
+        }	
+    }
+    
+    public static void main(String[] ar) {
+        Cadena5 cad=new Cadena5();
+        cad.listar();
+        cad.consultaMail();
+        cad.sinArroba();
+    }
+}
+
+
+
+
+
+import java.util.Scanner;
+public class Cadena6 {
+    private Scanner teclado;
+    private String oracion;
+    
+    public Cadena6() {
+         teclado=new Scanner(System.in);
+         System.out.print("Ingrese oración:");
+         oracion=teclado.nextLine();
+    }
+    
+    public void imprimir() {
+        for(int f=0;f&lt;oracion.length();f++) {
+            if (oracion.charAt(f)==' ') {
+                System.out.println();
+            } else {
+                System.out.print(oracion.charAt(f));
+            }
+        }
+    }
+        
+    public static void main(String[] ar) {
+        Cadena6 cad=new Cadena6();
+        cad.imprimir();
+    }
+}
+
+</pre></div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=100&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:44 GMT -->
+</html>

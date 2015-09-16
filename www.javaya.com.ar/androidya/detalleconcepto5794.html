@@ -1,0 +1,297 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=160&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:08:34 GMT -->
+<head>
+<title>Menú de opciones</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+.descarga2 a {
+color:#4B4B4B;
+text-decoration:none;
+border-bottom:1px dotted #444;
+}
+.descarga2 {
+background: #F7FABE;
+text-align: left;
+padding: 5px 20px 5px 45px;
+border-top: 2px solid #DFE786;
+border-bottom: 2px solid #DFE786;
+color:#000000;
+margin-left:1.2em;
+margin-right:1.2em;
+border-radius:4px;
+font-size:1em;
+
+}  
+
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-30']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>29 - Menú de opciones</h1> <p class="descarga2">Ya se encuentra disponible el nuevo tutorial para aprender android con el nuevo entorno <a href="androidstudioya/index.html" target="_blank">Android Studio propuesto por Google y
+que remplaza a Eclipse</a>.
+</td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>En Android la implementación de un menú de opciones permite mostrar opciones de una forma estandarizada entre aplicaciones (esto hace que todos los programas tengan una vista de un menú muy parecidos)</p>
+<p>Los menús aparecen en la parte inferior de la pantalla cuando el usuario presiona el botón Menú del celular.</p>
+<p>La implementación del menú se puede hacer de forma similar a la interfaz visual de la aplicación mediante la creación de un archivo XML y la construcción del mismo empleando las herramientas que provee el ADT.</p>
+
+<h3>Problema:</h3>
+<p>Confeccionar una aplicación que muestre un menú con dos opciones: una que visualice el "Acerca de..." (nombre de la aplicación, programador etc.) del programa y otra que finalice el programa.</p>
+
+<p>El ADT ya creo el archivo XML para el activity principal y se encuentra localizado en la carpeta res/menu y se llama activity_main.xml
+</p>
+<p>La intefaz del editor de menu que nos provee el plugin de Android para Eclipse es:</p>
+<img src="imagentema/foto112.jpg" border="0" alt="menú de opciones en Android"><br>
+
+<p>Procedemos a insertar la primera opción presionando el botón "Add", seguidamente seleccionamos "Item":</p>
+<img src="imagentema/foto113.jpg" border="0" alt="menú de opciones en Android"><br>
+
+<p>Luego nos queda inicializar como mínimo el título de que mostrará dicha opción:</p>
+<img src="imagentema/foto114.jpg" border="0" alt="menú de opciones en Android"><br>
+
+<p>Ahora nuevamente presionamos el botón "Add" para añadir la segunda opción. En el diálogo que aparece seleccionamos "Create a new element at the top level, in Menu", seguidamente seleccionamos "Item" y confirmamos:</p>
+<img src="imagentema/foto115.jpg" border="0" alt="menú de opciones en Android"><br>
+<p>Configuramos la propiedad Title de la segunda opción:</p>
+<img src="imagentema/foto116.jpg" border="0" alt="menú de opciones en Android"><br>
+
+<p>Paso seguido debemos sobreescribir los métodos onCreateOptionsMenu (que ya lo tenemos codificado en el archivo Java) y onOptionsItemSelected heredados de la clase Activity.</p>
+
+<p>El código fuente de la clase Proyecto027Activity.java es:</p>
+<pre class="recuadro">
+package com.javaya.proyecto027;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.item1:
+            Toast.makeText(this, "Programador: Diego (23/08/2011)",
+                    Toast.LENGTH_SHORT).show();
+            break;
+        case R.id.item2:
+            finish();
+        }
+        return true;
+    }
+
+}
+</pre>
+<p>En el método onCreateOptionsMenu creamos un objeto de la clase MenuInflater y mediante el método inflate vinculamos el identificador del archivo de recursos: R.menu.activity_main y el objeto de la clase menu que llega como parámetro. Debemos retornar true:</p>
+<pre>
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return true;
+    }
+</pre>
+
+<p>En el método onOptionsItemSelected debemos disponer un switch para identificar cual de las opciones del menú fue seleccionado. El parámetro item de la clase MenuItem tiene la referencia del objeto que fue pulsado. Luego obtenemos su Id llamando al método getItemId y a través del switch verificamos con el recurso que coincide y procedemos a efectuar la actividad respectiva (si se selecciona la primer opción mostramos un mensaje mediante la clase Toast, si se seleccionó la segunda opción llamamos al método finish para finalizar el programa:</p>
+<pre>
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case R.id.item1:
+            Toast.makeText(this, "Programador: Diego (23/08/2011)",
+                    Toast.LENGTH_SHORT).show();
+            break;
+        case R.id.item2:
+            finish();
+        }
+        return true;
+    }
+</pre>
+<p>Desde el emulador para activar el menú debemos presionar el siguiente botón:</p>
+<img src="imagentema/foto117.jpg" border="0" alt="menú de opciones en Android"><br>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/proyecto027.zip">proyecto027.zip</a>
+</div>
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+
+  </div>
+  
+  
+  
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=160&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:10:01 GMT -->
+</html>

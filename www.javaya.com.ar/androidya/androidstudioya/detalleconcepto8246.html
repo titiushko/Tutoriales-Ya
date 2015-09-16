@@ -1,0 +1,561 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=16&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:47:23 GMT -->
+<head>
+<title>Almacenamiento en una base de datos SQLite</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>16 - Almacenamiento en una base de datos SQLite</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+ <div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+<p>Hemos visto hasta ahora dos modos de almacenar datos en forma permanente (archivos de texto y la clase SharedPreferences), ahora veremos otra herramienta nativa de Android para almacenar datos en una base de datos llamada SQLite.</p>
+<p>SQLite es una base de datos Open Source, es muy popular en muchos dispositivos pequeños, como Android.</p>
+<p>Las ventajas que presenta utilizar SQLite es que no requiere configuración, no tiene un servidor de base de datos ejecutándose en un proceso separado y es relativamente simple su empleo.</p>
+
+
+<h3>Problema:</h3>
+<p>Confeccionar un programa que permita almacenar los datos de articulos. Crear la tabla articulos y definir los campos codigo, descripción del articulo y precio.<br>
+El programa debe permitir:<br>
+<pre>
+1 - Carga de articulo.
+2 - Consulta por el codigo.
+3 - Consulta por la descripción.
+4 - Borrado de un articulo ingresando su código.
+4 - Modificación de la descripción y el precio.
+</pre>
+
+
+<p>Lo primero que haremos es crear una clase que herede de SQLiteOpenHelper. Esta clase nos permite crear la base de datos y actualizar la estructura de tablas y datos iniciales.</p>
+
+<p>Para crear una nueva clase desde Android Studio procedemos a presionar el botón derecho del mouse sobre la carpeta que contienen todos los archivo java del proyecto y seleccionamos New - > Java Class:</p>
+<img src="imagentema/foto058.jpg" border="0" alt="Crear clase en Android Studio"><br>
+<p>En este diálogo ingresamos el nombre de nuestra clase, en nuestro ejemplo la llamaremos AdminSQLiteOpenHelper:</p>
+<img src="imagentema/foto058b.jpg" border="0" alt="Crear clase en Android Studio"><br>
+<p>Ya tenemos un nuevo archivo en nuestro proyecto:</p>
+<img src="imagentema/foto058c.jpg" border="0" alt="Crear clase en Android Studio"><br>
+<p>Ahora tenemos que codificar esta clase que tiene por objetivo administrar la base de datos que crearemos. Primero hacemos que nuestra clase herede de la clase SQLiteOpenHelper:</p>
+<pre>
+package ar.com.tutorialesya.proyecto019;
+
+import android.database.sqlite.SQLiteOpenHelper;
+
+/**
+ * Created by diegomoisset on 06/01/2015.
+ */
+public class AdminSQLiteOpenHelper extends SQLiteOpenHelper{
+}
+</pre>
+
+<p>La clase SQLiteOpenHelper requiere que se implementen dos métodos obligatoriamente onCreate y onUpgrade, podemos hacer que el Android Studio nos ayude en su codificación así no tenemos que tipearlos nosotros: presionamos la teclas "ALT" y "ENTER" teniendo el cursor sobre el nombre de la clase "AdminSQLiteOpenHelper" y nos aparece un menú donde seleccionamos "Implement Methods" y luego un diálogo donde seleccionamos los métodos a implementar:</p>
+<img src="imagentema/foto058d.jpg" border="0" alt="Crear clase en Android Studio"><br>
+<p>Ya tenemos la clase con los dos métodos:</p>
+<pre>
+package ar.com.tutorialesya.proyecto019;
+
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+/**
+ * Created by diegomoisset on 06/01/2015.
+ */
+public class AdminSQLiteOpenHelper extends SQLiteOpenHelper{
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+    }
+}
+</pre>
+<p>Pero todavía nos marca un error ya que la clase padre SQLiteOpenHelper implementa constructores que tienen parámetros, entonces tenemos que definir el constructor en esta clase, para ello estando el cursor sobre el nombre de la clase "AdminSQLiteOpenHelper" presionamos nuevamente las teclas "ALT" y "Enter" y en el menú contectual que aparece seleccionamos "Create constructor matching super". Aparece un diálogo con todos los constructores que implementa la clase padre (seleccionammos el que tiene tres parámetros):</p>
+<img src="imagentema/foto058e.html" border="0" alt="Crear clase en Android Studio"><br>
+<p>Ahora la clase no muestra ningún error y pasaremos a implementar la creación de la tabla articulos dentro del método onCreate:</p>
+<pre class="recuadro">
+package ar.com.tutorialesya.proyecto019;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+/**
+ * Created by diegomoisset on 06/01/2015.
+ */
+public class AdminSQLiteOpenHelper extends SQLiteOpenHelper{
+    public AdminSQLiteOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, name, factory, version);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+      db.execSQL("create table articulos(codigo int primary key,descripcion text,precio real)");
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+    }
+}
+</pre>
+<p>Hemos codificado en el método onCreate la creación de la tabla articulos con los campos codigo (que es entero y clave primaria), descripcion que es de tipo texto y precio es un valor real. El método onCreate se ejecutará una única vez (Eventualmente si uno quiere modificar la estructura de la tabla debemos hacerlo en el método onUpgrade).</p>
+
+
+<p>Ahora implementemos la interfaz visual para resolver nuestro problema. Debemos crear en nuestro archivo activity_main.xml la siguiente interfaz:</p>
+<img src="imagentema/foto059.jpg" border="0" alt="Crear clase en Android Studio"><br>
+<p>Como vemos disponemos tres TextView, tres EditText y cinco Button.</p>
+<p>El código fuente de nuestro Activity es el siguiente:</p>
+<pre class="recuadro">
+package ar.com.tutorialesya.proyecto019;
+
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+
+public class MainActivity extends ActionBarActivity {
+
+    private EditText et1,et2,et3;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        et1=(EditText)findViewById(R.id.editText);
+        et2=(EditText)findViewById(R.id.editText2);
+        et3=(EditText)findViewById(R.id.editText3);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void alta(View v) {
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,
+                "administracion", null, 1);
+        SQLiteDatabase bd = admin.getWritableDatabase();
+        String cod = et1.getText().toString();
+        String descri = et2.getText().toString();
+        String pre = et3.getText().toString();
+        ContentValues registro = new ContentValues();
+        registro.put("codigo", cod);
+        registro.put("descripcion", descri);
+        registro.put("precio", pre);
+        bd.insert("articulos", null, registro);
+        bd.close();
+        et1.setText("");
+        et2.setText("");
+        et3.setText("");
+        Toast.makeText(this, "Se cargaron los datos del artículo",
+                Toast.LENGTH_SHORT).show();
+    }
+
+    public void consultaporcodigo(View v) {
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,
+                "administracion", null, 1);
+        SQLiteDatabase bd = admin.getWritableDatabase();
+        String cod = et1.getText().toString();
+        Cursor fila = bd.rawQuery(
+                "select descripcion,precio from articulos where codigo=" + cod, null);
+        if (fila.moveToFirst()) {
+            et2.setText(fila.getString(0));
+            et3.setText(fila.getString(1));
+        } else
+            Toast.makeText(this, "No existe un artículo con dicho código",
+                    Toast.LENGTH_SHORT).show();
+        bd.close();
+    }
+
+    public void consultapordescripcion(View v) {
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,
+                "administracion", null, 1);
+        SQLiteDatabase bd = admin.getWritableDatabase();
+        String descri = et2.getText().toString();
+        Cursor fila = bd.rawQuery(
+                "select codigo,precio from articulos where descripcion='" + descri +"'", null);
+        if (fila.moveToFirst()) {
+            et1.setText(fila.getString(0));
+            et3.setText(fila.getString(1));
+        } else
+            Toast.makeText(this, "No existe un artículo con dicha descripción",
+                    Toast.LENGTH_SHORT).show();
+        bd.close();
+    }
+
+    public void bajaporcodigo(View v) {
+            AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,
+                    "administracion", null, 1);
+            SQLiteDatabase bd = admin.getWritableDatabase();
+            String cod= et1.getText().toString();
+            int cant = bd.delete("articulos", "codigo=" + cod, null);
+            bd.close();
+            et1.setText("");
+            et2.setText("");
+            et3.setText("");
+            if (cant == 1)
+                Toast.makeText(this, "Se borró el artículo con dicho código",
+                        Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(this, "No existe un artículo con dicho código",
+                        Toast.LENGTH_SHORT).show();
+    }
+
+    public void modificacion(View v) {
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,
+                "administracion", null, 1);
+        SQLiteDatabase bd = admin.getWritableDatabase();
+        String cod = et1.getText().toString();
+        String descri = et2.getText().toString();
+        String pre = et3.getText().toString();
+        ContentValues registro = new ContentValues();
+        registro.put("codigo", cod);
+        registro.put("descripcion", descri);
+        registro.put("precio", pre);
+        int cant = bd.update("articulos", registro, "codigo=" + cod, null);
+        bd.close();
+        if (cant == 1)
+            Toast.makeText(this, "se modificaron los datos", Toast.LENGTH_SHORT)
+                    .show();
+        else
+            Toast.makeText(this, "no existe un artículo con el código ingresado",
+                    Toast.LENGTH_SHORT).show();
+    }
+
+}
+</pre>
+
+<p>Recordar de inicializar la propiedad onClick de cada botón para enlazarlo con el método respectivo: "alta","consultaporcodigo","consultapordescripcion","bajaporcodigo" y "modificacion".</p>
+
+
+
+
+
+<p>1 - Alta de datos.</p>
+<p>Cuando se presiona el botón "ALTA" se ejecuta el método "alta" recordemos inicializar la propiedad "onClick" del botón desde la ventana de visualización del archivo XML.<br>
+Lo primero que hacemos en este método es crear un objeto de la clase que planteamos anteriormente y le pasamos al constructor this (referencia del Activity actual), "administracion" (es el nombre de la base de datos que crearemos en el caso que no exista) luego pasamos null y un uno indicando que es la primer versión de la base de datos (en caso que cambiemos la estructura o agreguemos tablas por ejemplo podemos pasar un dos en lugar de un uno para que se ejecute el método onUpgrade donde indicamos la nuestra estructura de la base de datos)</p>
+<p>Luego de crear un objeto de la clase AdminSqLiteOpenHelper procedemos a crear un objeto de la clase SQLiteDataBase llamando al método getWritableDatabase (la base de datos se abre en modo lectura y escritura).</p>
+<p>Creamos un objeto de la clase ContentValues y mediante el método put inicializamos todos tos campos a cargar.<br>
+Seguidamente llamamos al método insert de la clase SQLiteDatabase pasando en el primer parámetro el nombre de la tabla, como segundo parámetro un null y por último el objeto de la clase ContentValues ya inicializado (este método es el que provoca que se inserte una nueva fila en la tabla articulos en la base de datos llamada administracion)<br>
+Borramos seguidamente los EditText y mostramos un mensaje para que conozca el operador que el alta de datos se efectuó en forma correcta:</p>
+<pre>
+    public void alta(View v) {
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,
+                "administracion", null, 1);
+        SQLiteDatabase bd = admin.getWritableDatabase();
+        String cod = et1.getText().toString();
+        String descri = et2.getText().toString();
+        String pre = et3.getText().toString();
+        ContentValues registro = new ContentValues();
+        registro.put("codigo", cod);
+        registro.put("descripcion", descri);
+        registro.put("precio", pre);
+        bd.insert("articulos", null, registro);
+        bd.close();
+        et1.setText("");
+        et2.setText("");
+        et3.setText("");
+        Toast.makeText(this, "Se cargaron los datos del artículo",
+                Toast.LENGTH_SHORT).show();
+    }
+</pre>
+
+
+<p>2 - Consulta de articulo por código.</p>
+<p>Cuando se presiona el botón "CONSULTA POR CODIGO" se ejecuta el método consultaporcodigo:</p>
+<pre>
+    public void consultaporcodigo(View v) {
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,
+                "administracion", null, 1);
+        SQLiteDatabase bd = admin.getWritableDatabase();
+        String cod = et1.getText().toString();
+        Cursor fila = bd.rawQuery(
+                "select descripcion,precio from articulos where codigo=" + cod, null);
+        if (fila.moveToFirst()) {
+            et2.setText(fila.getString(0));
+            et3.setText(fila.getString(1));
+        } else
+            Toast.makeText(this, "No existe un artículo con dicho código",
+                    Toast.LENGTH_SHORT).show();
+        bd.close();
+    }
+</pre>
+<p>En el método consultaporcodigo lo primero que hacemos es crear un objeto de la clase AdminSQLiteOpenHelper y obtener una referencia de la base de datos llamando al método getWritableDatabase.<br>
+Seguidamente definimos una variable de la clase Cursor y la inicializamos con el valor devuelto por el método llamado rawQuery.<br>
+<p>La clase Cursos almacena en este caso una fila o cero filas (una en caso que hayamos ingresado un codigo existente en la tabla articulos), llamamos al método moveToFirst() de la clase Cursos y retorna true en caso de existir un articulo con el codigo ingresado, en caso contrario retorna cero.</p>
+<p>Para recuperar los datos propiamente dichos que queremos consultar llamamos al método getString y le pasamos la posición del campo a recuperar (comienza a numerarse en cero, en este ejemplo la columna cero representa el campo descripcion y la columna 1 representa el campo precio)</p>
+
+
+
+<p>3 - Consulta de articulo por descripción.</p>
+<p>Cuando se presiona el botón "CONSULTA POR DESCRIPCION" se ejecuta el método consultapordescripcion:</p>
+<pre>
+    public void consultapordescripcion(View v) {
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,
+                "administracion", null, 1);
+        SQLiteDatabase bd = admin.getWritableDatabase();
+        String descri = et2.getText().toString();
+        Cursor fila = bd.rawQuery(
+                "select codigo,precio from articulos where descripcion='" + descri +"'", null);
+        if (fila.moveToFirst()) {
+            et1.setText(fila.getString(0));
+            et3.setText(fila.getString(1));
+        } else
+            Toast.makeText(this, "No existe un artículo con dicha descripción",
+                    Toast.LENGTH_SHORT).show();
+        bd.close();
+    }
+</pre>
+<p>En el método consultapordescripcion lo primero que hacemos es crear un objeto de la clase AdminSQLiteOpenHelper y obtener una referencia de la base de datos llamando al método getWritableDatabase.<br>
+Seguidamente definimos una variable de la clase Cursor y la inicializamos con el valor devuelto por el método llamado rawQuery.<br>
+<p>Es importante notar en el where de la clausula SQL hemos dispuesto comillas simples entre el contenido de la variable descri:</p>
+<pre>
+                "select codigo,precio from articulos where descripcion='" + descri +"'", null);
+</pre>
+<p>Esto es obligatorio para los campos de tipo text (en este caso descripcion es de tipo text)</p>
+
+
+<p>4 - Baja o borrado de datos.</p>
+<p>Para borrar uno o más registros la clase SQLiteDatabase tiene un método que le pasamos en el primer parámetro el nombre de la tabla y en el segundo la condición que debe cumplirse para que se borre la fila de la tabla. El método delete retorna un entero que indica la cantidad de registros borrados:</p>
+<pre>
+    public void bajaporcodigo(View v) {
+            AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,
+                    "administracion", null, 1);
+            SQLiteDatabase bd = admin.getWritableDatabase();
+            String cod= et1.getText().toString();
+            int cant = bd.delete("articulos", "codigo=" + cod, null);
+            bd.close();
+            et1.setText("");
+            et2.setText("");
+            et3.setText("");
+            if (cant == 1)
+                Toast.makeText(this, "Se borró el artículo con dicho código",
+                        Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(this, "No existe un artículo con dicho código",
+                        Toast.LENGTH_SHORT).show();
+    }
+
+</pre>
+
+<p>5 - Modificación de datos.</p>
+
+<p>En la modificación de datos debemos crear un objeto de la clase ContentValues y mediante el método put almacenar los valores para cada campo que será modificado. Luego se llama al método update de la clase SQLiteDatabase pasando el nombre de la tabla, el objeto de la clase ContentValues y la condición del where (el cuanto parámetro en este ejemplo no se lo emplea)</p>
+<pre>
+    public void modificacion(View v) {
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,
+                "administracion", null, 1);
+        SQLiteDatabase bd = admin.getWritableDatabase();
+        String cod = et1.getText().toString();
+        String descri = et2.getText().toString();
+        String pre = et3.getText().toString();
+        ContentValues registro = new ContentValues();
+        registro.put("codigo", cod);
+        registro.put("descripcion", descri);
+        registro.put("precio", pre);
+        int cant = bd.update("articulos", registro, "codigo=" + cod, null);
+        bd.close();
+        if (cant == 1)
+            Toast.makeText(this, "se modificaron los datos", Toast.LENGTH_SHORT)
+                    .show();
+        else
+            Toast.makeText(this, "no existe un artículo con el código ingresado",
+                    Toast.LENGTH_SHORT).show();
+    }
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/Proyecto019.zip">proyecto019.zip</a>
+
+
+<h3>Ubicación de la base de datos en el dispositivo</h3>
+<p>Para conocer donde se almacena físicamente la base de datos en el dispositivo podemos abrir el programa "Android Device Monitor" desde el menú del Android Studio Tools->Android->Android Device Monitor:</p>
+<img src="imagentema/foto059b.jpg" border="0" alt="Android Device Monitor"><br>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+<br>
+   <h2><a href="index2904.html?inicio=0">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-34', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=16&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:49:02 GMT -->
+</html>

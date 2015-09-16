@@ -1,0 +1,200 @@
+
+<!DOCTYPE html> 
+<html lang="es"> 
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=178&punto=45&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>API FILE (lectura de múltiples archivos de texto locales)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="html5, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de HTML 5. Es objetivo prioritario respetar 
+los estándares del W3C">
+<meta name="author" content="Diego Moisset">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+</style>
+
+</head>
+
+<body>
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em"><a href="../../html5.html">Temario del Tutorial</a></span>->45 - API FILE (lectura de múltiples archivos de texto locales)</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Hemos visto en el concepto anterior que HTML5 nos permite seleccionar un archivo de texto del disco duro local y seguidamente acceder a sus propiedades como el nombre, tamaño, tipo así como a su contenido.</p>
+<p>Otra variante de este algoritmo es acceder a un conjunto de archivos en forma simultanea. Esto lo logramos cuando definimos un control file e indicamos la propiedad multiple:</p>
+<pre>
+&lt;input type="file" id="archivo" multiple&gt;
+</pre>
+<p>Esta propiedad no es necesario asignarle valor. Con esto cuando el operador presione el botón le permitirá seleccionar múltiples archivos.</p>
+
+
+
+
+<h3>Problema</h3>
+<p>Confeccionar un programa que nos permita seleccionar un conjunto de archivos de texto de una sola vez y muestre sus contenidos en un control textarea (separando el contenido de cada archivo por varios guiones). Mostrar además todos los nombres de archivos leidos.</p>
+<h4>Solución</h4>
+<pre class="recuadro">
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Prueba&lt;/title&gt;
+&lt;script&gt;
+    window.addEventListener('load', inicio, false);
+
+    function inicio() {
+        document.getElementById('archivo').addEventListener('change', cargar, false);               
+    }
+
+    function cargar(ev) {
+        document.getElementById('datos').innerHTML='';
+        document.getElementById('editor').value='';
+        for(var f=0;f&lt;ev.target.files.length;f++) {
+        document.getElementById('datos').innerHTML=document.getElementById('datos').innerHTML+
+                                                   'Nombre del archivo:'+ev.target.files[f].name+'&lt;br&gt;';
+          var arch=new FileReader();
+          arch.addEventListener('load',leer,false);
+          arch.readAsText(ev.target.files[f]);
+        }  
+    }
+    
+    function leer(ev) {
+        document.getElementById('editor').value=document.getElementById('editor').value+ev.target.result+
+                                                '\n-------------------------------------------------------\n';
+    }
+&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;p&gt;Selecciona un conjunto de archivos de texto del disco duro.&lt;/p&gt;
+&lt;input type="file" id="archivo" multiple&gt;&lt;br&gt;
+&lt;textarea rows="10" cols="80" id="editor"&gt;&lt;/textarea&gt;
+&lt;br&gt;
+&lt;p id="datos"&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>En el bloque de HTML solo hemos dispuesto la propiedad multiple al control de tipo file (esto informa al navegador que está permitido la selección de más de un archivo):</p>
+<pre>
+&lt;body&gt;
+&lt;p&gt;Selecciona un conjunto de archivos de texto del disco duro.&lt;/p&gt;
+&lt;input type="file" id="archivo" multiple&gt;&lt;br&gt;
+&lt;textarea rows="10" cols="80" id="editor"&gt;&lt;/textarea&gt;
+&lt;br&gt;
+&lt;p id="datos"&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+
+<p>La función cargar se ejecuta una vez que el usuario seleccionó los archivos del disco duro, lo primero que hacemos es borrar el contenido del párrafo y el textarea por si hay datos de selecciones anteriores:</p>
+<pre>
+    function cargar(ev) {
+        document.getElementById('datos').innerHTML='';
+        document.getElementById('editor').value='';
+</pre>
+<p>Ahora viene lo distinto, como se pueden haber seleccionado más de un archivo debemos disponer una estructura repetitiva for. Para saber la cantidad de archivos seleccionados la propiedad files es un vector por lo que podemos acceder a length que almacena la cantidad de elementos del mismo:</p>
+<pre>
+        for(var f=0;f&lt;ev.target.files.length;f++) {
+</pre>
+<p>Dentro del for vamos concatenando en el párrafo el nombre de archivo que accedemos del vector según su subíndice ev.target.files[f].name:</p>
+<pre>
+        document.getElementById('datos').innerHTML=document.getElementById('datos').innerHTML+
+                                                   'Nombre del archivo:'+ev.target.files[f].name+'&lt;br&gt;';
+</pre>
+<p>Por otro lado creamos por cada archivo un objeto de la clase FileReader y le asociamos la función que se ejecutará cuando se termine de cargar el contenido del archivo en memoria:</p>
+<pre>
+          var arch=new FileReader();
+          arch.addEventListener('load',leer,false);
+          arch.readAsText(ev.target.files[f]);
+        }  
+    }
+</pre>    
+
+<p>La función leer se ejecuta por cada uno de los archivos que se lee, aquí procedemos a acumular el contenido de cada archivo en el textarea y agregarles una serie de guiones de separación:</p>
+<pre>
+    function leer(ev) {
+        document.getElementById('editor').value=document.getElementById('editor').value+ev.target.result+
+                                                '\n-------------------------------------------------------\n';
+    }
+</pre>
+
+<p>Inicialmente se muestra el botón para la selección de archivos y el textarea vacío:</p>
+<img src="imagentema/foto018.jpg" border="0" alt="API FILE"><br>
+<p>Luego de seleccionar archivos de texto del disco duro podemos ver el contenido de los archivos y sus nombres:</p>
+<img src="imagentema/foto019.jpg" border="0" alt="API FILE"><br>
+
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../index1e61.html?inicio=40">Retornar</a></h2>   
+
+</div>
+
+</body>
+
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=178&punto=45&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:21 GMT -->
+</html>

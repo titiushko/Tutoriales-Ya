@@ -1,0 +1,245 @@
+<!doctype html>
+<html>
+
+<!-- Mirrored from www.cssya.com.ar/css3ya/detalleconcepto.php?cod=90 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:05:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+    <title>CSS3 Ya</title>
+    <link href="estilos.css" rel="stylesheet">
+    <link href='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css' rel='stylesheet'>     
+    <script src='../../ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script> 
+    <script src='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>     
+    <script src="funciones.js"></script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-31']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>	
+</head>
+<body>
+
+
+
+
+
+
+<div id="pesta">
+	<ul>
+		<li><a href="#p1">Concepto</a></li>    
+		<li><a href="#p2">Ejemplo</a></li>
+		<li><a href="#p3">Vista Previa</a></li>
+	</ul>
+	<div id="p1" style="background:#fafafa;padding:20px; max-height: 700px;overflow: auto;font-size:13pt">
+	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* css3 detalle arriba */
+google_ad_slot = "3101973371";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+	
+	
+    <h2>Transformaciones 2D: escalado  (transform:scale)</h2><p>Otra función de transformación 2D es el escalado, esta función permite agrandar o reducir el tamaño del elemento. La primer sintaxis que podemos utilizar es la siguiente:</p>
+<pre>
+Elemento { 
+     transform: scale(valorx ,valory); 
+}
+</pre>
+<p>El primer parámetro indica la escala para x (con el valor 1 el elemento queda como está, con un valor mayor crece y con un valor menor decrece), el segundo parámetro es para la escala en y.</p>
+<p>Por ejemplo si queremos que sea del doble de ancho y la mitad de altura luego será:</p>
+<pre>
+Elemento { 
+     transform: scale(2 ,0.5); 
+}
+</pre>
+<p>Un recuadro escalado con 20% menos de ancho y 20% más de alto (definiendo el punto de origen en el vértice superior izquierdo:</p>
+<pre>
+#recuadro1{
+  -ms-transform: scale(0.8 , 1.2);
+  -webkit-transform: scale(0.8 , 1.2);
+  -moz-transform: scale(0.8 , 1.2);
+  -o-transform: scale(0.8 , 1.2);
+  transform: scale(0.8 , 1.2);
+
+  -ms-transform-origin: left top;
+  -webkit-transform-origin: left top;
+  -moz-transform-origin: left top;
+  -o-transform-origin: left top;
+  transform-origin: left top;
+
+  border-radius: 20px;  
+  background-color:#ddd;
+  width:200px;
+  padding:10px;
+}
+</pre>
+<img src="imagentema/foto013.jpg" border="0" alt="transform:scale"><br>
+
+<p>Si tenemos que escalar solo en x o en y podemos utilizar alguna de las dos funciones scaleX o scaleY.</p>
+<pre>
+Elemento { 
+     transform: scaleX(2); 
+}
+</pre>
+
+<pre>
+Elemento { 
+     transform: scaleY(0.5); 
+}
+</pre>
+
+<p>Otra posibilidad es utilizar un valor negativo, lo que nos permite tener una reflexión del elemento. Por ejemplo un recuadro con reflexión en y:</p>
+<pre>
+#recuadro2{
+  -ms-transform: scale(1.20 ,-1);
+  -webkit-transform: scale(1.20 ,-1);
+  -moz-transform: scale(1.20 ,-1);
+  -o-transform: scale(1.20 ,-1);
+  transform: scale(1.20 ,-1);
+
+  border-radius: 20px 40px 40px 20px;  
+  background-color:#aa0;
+  width:200px;
+  padding:10px;
+  margin-top:70px;
+}
+</pre>
+<p>Cuya imagen es:</p>
+<img src="imagentema/foto014.jpg" border="0" alt="transform:scale"><br>
+
+
+
+	
+<table border="0">
+<tr>
+<td>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* css3 cuadrado */
+google_ad_slot = "9333811690";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+ <td>
+ <script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* css3 cuadrado */
+google_ad_slot = "9333811690";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ </td>
+</tr></table> 	
+	
+	</div>    
+	<div id="p2">
+    <textarea name="editor" id="editor" rows="28" style="width:890px;height:700px;font-size:16px;font-family:courier"><!DOCTYPE html> 
+<html> 
+<head> 
+<title>Prueba</title> 
+
+<style type="text/css"> 
+
+#recuadro1{
+  -ms-transform: scale(0.8 , 1.2);
+  -webkit-transform: scale(0.8 , 1.2);
+  -moz-transform: scale(0.8 , 1.2);
+  -o-transform: scale(0.8 , 1.2);
+  transform: scale(0.8 , 1.2);
+
+  -ms-transform-origin: left top;
+  -webkit-transform-origin: left top;
+  -moz-transform-origin: left top;
+  -o-transform-origin: left top;
+  transform-origin: left top;
+
+  border-radius: 20px;  
+  background-color:#ddd;
+  width:200px;
+  padding:10px;
+}
+
+#recuadro2{
+  -ms-transform: scale(1.20 ,-1);
+  -webkit-transform: scale(1.20 ,-1);
+  -moz-transform: scale(1.20 ,-1);
+  -o-transform: scale(1.20 ,-1);
+  transform: scale(1.20 ,-1);
+
+  border-radius: 20px 40px 40px 20px;  
+  background-color:#aa0;
+  width:200px;
+  padding:10px;
+  margin-top:70px;
+}
+
+
+body {
+  background:white;
+  margin:20px;
+}
+
+</style> 
+
+</head> 
+<body> 
+
+<div id="recuadro1"> 
+<h3>Recuadro 1</h3>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, </p>
+</div> 
+
+<div id="recuadro2"> 
+<h3>Recuadro 2</h3>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, </p>
+</div> 
+
+
+</body> 
+
+<!-- Mirrored from www.cssya.com.ar/css3ya/detalleconcepto.php?cod=90 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:05:54 GMT -->
+</html> </textarea>
+	</div>
+	<div id="p3">
+<iframe width="900" height="700" id="documentodinamico" name="documentodinamico" src="vacio.html">
+No tiene disponible el navegador la capacidad de iframe
+</iframe>
+	</div>
+</div>
+<br>
+   <h2><a href="index-2.html">Retornar</a></h2>   
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-31', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

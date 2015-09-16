@@ -1,0 +1,269 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=132&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:56:20 GMT -->
+<head>
+<title>JDBC con MySQL</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - JDBC con MySQL</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>JDBC son las siglas en ingles de Java Database Connectivity. Es un conjunto de clases que nos permite acceder a diversos gestores de bases de datos en forma transparente.</p>
+<p>Veremos como conectarnos con el motor de base de datos MySQL.</p>
+ 
+<h3>Instalación de MySQL integrado en el WampServer</h3>
+<p>Utilizaremos esta herramienta en lugar de descargar solo el MySQL con la finalizar de facilitar la instalación y configuración del motor de base de datos (la instalación de esta herramienta es sumamente sencilla), además utilizaremos otra software que provee el WampServer que es el PhpMyAdmin que nos facilitará la creación de la base de datos.</p>
+<p>Procedemos a descargar el WampServer de la siguiente página: <a target="_blank" href="http://www.wampserver.com/en/download.php">aquí</a>.<p> 
+<p>Luego de descargarlo procedemos a ejecutar el instalador:</p>
+<img src="imagentema/foto177.jpg" border="0" alt="instalación del WampServer con el MySQL"><br>
+<p>Aceptamos los términos y condiciones:</p>
+<img src="imagentema/foto178.jpg" border="0" alt="instalación del WampServer con el MySQL"><br>
+<p>Elegimos el directorio donde se instalará":</p>
+<img src="imagentema/foto179.jpg" border="0" alt="instalación del WampServer con el MySQL"><br>
+<p>Indicamos si queremos que se cree un ícono en el escritorio:</p>
+<img src="imagentema/foto180.jpg" border="0" alt="instalación del WampServer con el MySQL"><br>
+<p>Procedemos a presionar el botón "Install":</p>
+<img src="imagentema/foto181.jpg" border="0" alt="instalación del WampServer con el MySQL"><br>
+<p>Luego de instalarse nos solicita que navegador abrirá por defecto cuando ejecutemos el PhpMyAdmin (para la creación de la base de datos de MySQL):</p>
+<img src="imagentema/foto182.jpg" border="0" alt="instalación del WampServer con el MySQL"><br>
+<p>En el siguiente diálogo dejamos los datos por defecto:</p>
+<img src="imagentema/foto183.jpg" border="0" alt="instalación del WampServer con el MySQL"><br>
+<p>Finalmente aparece el diálogo final donde se nos informa que se iniciará el WampServer (es decir que se cargará en memoria entre otras cosas el MySQL) :</p>
+<img src="imagentema/foto184.jpg" border="0" alt="instalación del WampServer con el MySQL"><br>
+
+<p>Ahora podemos ver el iconos del WampServer en la bandeja del sistema de Windows (si se encuentra en color verde significa que el MySQL está ejecutándose correctamente):</p>
+<img src="imagentema/foto185.jpg" border="0" alt="instalación del WampServer con el MySQL"><br>
+
+
+<h3>Ejecución del PhpMyAdmin para la creación de la base de datos.</h3>
+
+<p>Haciendo clic sobre el ícono de la bandeja del sistema aparece un menú que nos permite lanzar el PhpMyAdmin para crear la base de datos de MySQL:</p>
+<img src="imagentema/foto186.jpg" border="0" alt="instalación del WampServer con el MySQL"><br>
+
+<p>El PhpMyAdmin es un programa web que nos permite administrar las bases de datos del MySQL:</p>
+<img src="imagentema/foto187.jpg" border="0" alt="PhpMyAdmin"><br>
+
+
+<p>Seleccionamos la pestaña "Base de datos" y donde dice "Crear nueva base de datos" especificamos que nuestra base de datos se llamará "bd1":</p>
+<img src="imagentema/foto188.jpg" border="0" alt="PhpMyAdmin"><br>
+
+
+
+
+<p>Presionamos el botón "crear" y con esto ya tenemos nuestra base de datos creada:</p>
+<img src="imagentema/foto189.jpg" border="0" alt="PhpMyAdmin"><br>
+
+
+<p>Luego de seleccionar la base de datos "bd1" que figura a la izquierda procedemos a crear la primer tabla que contendrá (crearemos una tabla llamada "articulos" y que tendrá tres campos):</p>
+<img src="imagentema/foto190.jpg" border="0" alt="PhpMyAdmin"><br>
+
+
+
+
+
+<p>En la tabla "articulos" definimos el campo "codigo" de tipo int (este campo será el "primary key" y auto_increment lo tildamos para que el código se genere automáticamente), el segundo campo es la descripción que es de tipo varchar con un máximo de 50 caracteres y por último el campo precio que es de tipo float.</p>
+<p>Luego de especificar los tres campos en la parte inferior de la misma ventana aparece un  un botón llamada "Guardar" para confirmar la estructura de la tabla:</p>
+<img src="imagentema/foto191.jpg" border="0" alt="creacion tabla MySQL"><br>
+
+
+<p>En el lado izquierdo del navegador podemos ver ahora que la base de datos "bd1" tiene una tabla llamada "articulos"</p>
+<img src="imagentema/foto192.jpg" border="0" alt="MySQL"><br>
+
+<p>Hasta acá lo que nos ayuda el PhpMyAdmin (es decir creación de la base de datos y la tabla), de ahora en más todas las otras actividades las desarrollaremos desde nuestro programa en java (poblar o insertar datos, listar registros, consultar, modificar y borrar datos)</p>
+
+
+
+<h3>Descarga del Driver para permitir conectar nuestro programa Java con el MySQL</h3>
+<p>Como última actividad de configuración previo a implementar los programas en Java para acceder a MySQL es la descarga del Driver que nos permita conectarnos con la base de datos.</p>
+<p>El Driver lo podemos descargar de la página:<a target="_blank" href="http://www.mysql.com/downloads/connector/j/">aquí</a></p>
+<p>Podemos descomprimir el archivo mysql-connector-java-5.1.18.zip que acabamos de descargar. Luego veremos que en nuestro programa en java haremos referencias al archivo mysql-connector-java-5.1.18-bin.jar (que es el Driver propiamente dicho)</p>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index1e61.html?inicio=40">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=132&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:57:05 GMT -->
+</html>

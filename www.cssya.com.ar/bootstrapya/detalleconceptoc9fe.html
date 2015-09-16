@@ -1,0 +1,286 @@
+
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/detalleconcepto.php?punto=38&codigo=153&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Componente : barra de progreso</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="bootstrap,css, html, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de bootstrap.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>38 - Componente : barra de progreso</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Otra herramienta que nos presenta la librería Bootstrap son las barras de progreso. Normalmente se las utiliza para indicar cuanto se ha avanzado en una actividad.</p>
+<h3>Barra de progreso por defecto</h3>
+<p>Para crear una barra de progreso debemos definir un div con la clase "progress" y un div interno al anterior con la clase "progress-bar".</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+  &lt;head&gt; 
+    &lt;title&gt;Prueba de Bootstrap&lt;/title&gt; 
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt; 
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+  &lt;div class="container"&gt;
+
+    &lt;div class="progress"&gt;
+      &lt;div class="progress-bar" role="progressbar" style="width:70%"&gt;
+        70%
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt; 
+&lt;/body&gt; 
+&lt;/html&gt; 
+</pre>
+
+<p>Además de los dos div con las respectivas clases es obligatorio inicializar la propiedad style indicando el porcentaje a mostrar en el avance.</p>
+
+<p>Tenemos como resultado:</p>
+<img src="imagentema/foto067.jpg" border="0" alt="progress progressbar bootstrap"><br> 
+
+<h3>Barra de progreso con colores contextuales</h3>
+<p>Podemos utilizar las clases: "progress-bar-success", "progress-bar-info", "progress-bar-warning" y "progress-bar-danger":</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+  &lt;head&gt; 
+    &lt;title&gt;Prueba de Bootstrap&lt;/title&gt; 
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt; 
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+  &lt;div class="container"&gt;
+
+    &lt;div class="progress"&gt;
+      &lt;div class="progress-bar progress-bar-success" role="progressbar" style="width:70%"&gt;
+        70%
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class="progress"&gt;
+      &lt;div class="progress-bar progress-bar-info" role="progressbar" style="width:80%"&gt;
+        80%
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class="progress"&gt;
+      &lt;div class="progress-bar progress-bar-warning" role="progressbar" style="width:90%"&gt;
+        90%
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class="progress"&gt;
+      &lt;div class="progress-bar progress-bar-danger" role="progressbar" style="width:95%"&gt;
+        95%
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt; 
+&lt;/body&gt; 
+&lt;/html&gt; 
+</pre>
+
+
+<p>Tenemos como resultado:</p>
+<img src="imagentema/foto068.jpg" border="0" alt="progress progressbar progress-bar-info progress-bar-warning progress-bar-danter progress-bar-success bootstrap"><br> 
+
+
+<h3>Barra de progreso a rayas</h3>
+<p>Podemos hacer que las barrar no tengan un color liso sino a rayas. Para esto añadimos al primer div la clase "progress-striped":</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+  &lt;head&gt; 
+    &lt;title&gt;Prueba de Bootstrap&lt;/title&gt; 
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt; 
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+&lt;br&gt;
+  &lt;div class="container"&gt;
+
+    &lt;div class="progress progress-striped"&gt;
+      &lt;div class="progress-bar progress-bar-success" role="progressbar" style="width:70%"&gt;
+        70%
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt; 
+&lt;/body&gt; 
+&lt;/html&gt; 
+</pre>
+
+<p>Tenemos como resultado:</p>
+<img src="imagentema/foto069.jpg" border="0" alt="progress progress-striped bootstrap"><br> 
+<p>Podemos inclusive animar la barra de progreso añadiendo la clase "active":</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+  &lt;head&gt; 
+    &lt;title&gt;Prueba de Bootstrap&lt;/title&gt; 
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt; 
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+&lt;br&gt;
+  &lt;div class="container"&gt;
+
+    &lt;div class="progress progress-striped active"&gt;
+      &lt;div class="progress-bar progress-bar-success" role="progressbar" style="width:70%"&gt;
+        70%
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt; 
+&lt;/body&gt; 
+&lt;/html&gt; 
+</pre>
+
+
+<h3>Barra de progreso compuesta</h3>
+<p>Podemos crear una barra de progreso que esté constituida por varias barras que en su conjunto forman la barra total.</p>
+<p>Para este planteo debemos disponer una serie de div internos al div principal:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+  &lt;head&gt; 
+    &lt;title&gt;Prueba de Bootstrap&lt;/title&gt; 
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt; 
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+  &lt;div class="container"&gt;
+
+    &lt;div class="progress"&gt;
+      &lt;div class="progress-bar progress-bar-success" role="progressbar" style="width:30%"&gt;
+        Correcto
+      &lt;/div&gt;
+      &lt;div class="progress-bar progress-bar-warning" role="progressbar" style="width:30%"&gt;
+        Cuidado
+      &lt;/div&gt;
+      &lt;div class="progress-bar progress-bar-danger" role="progressbar" style="width:20%"&gt;
+        Peligro
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt; 
+&lt;/body&gt; 
+&lt;/html&gt; 
+</pre>
+
+<p>Tenemos como resultado:</p>
+<img src="imagentema/foto070.jpg" border="0" alt="progress bootstrap"><br> 
+<h2><a target="_blank" href="ejecutar1a26.html?cod=153">Ejecutar Ejemplo</a></h2><h2><a href="index28fa.html?inicio=20">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-32', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/detalleconcepto.php?punto=38&codigo=153&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:04 GMT -->
+</html>

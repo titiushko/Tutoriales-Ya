@@ -1,0 +1,323 @@
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=50&cod=58 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de JavaScript : Conceptos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+div#contentdetalle{clear:left;
+                   max-width:900px;
+				   border-top:0px solid #999;
+				   padding-top:15px;
+				   background-color: #aed7a8;
+				   text-align:left;
+				   font-size:1.3em;
+				   font-weight:normal;
+				   font-family:arial;
+				   padding:20px}
+				   
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;  
+}				   
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td>
+<h1>Funciones: objeto arguments</h1></td>
+<td align="right">
+<!--<a href="http://www.javascriptya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div id="contentdetalle">
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 	  
+
+<p>Cuando llamamos a una función JavaScript crea automáticamente un objeto llamado "arguments" que almacena los valores que le pasamos a dicha función. También este objeto arguments almacena en una propiedad llamada length la cantidad de parámetros que llegaron. Veamos un ejemplo muy sencillo.</p>
+<p>Confeccionar una función que retorne la suma de dos enteros:</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+
+  function sumar(x,y)
+  {
+    var s=x+y;
+    return s;
+  }
+
+  document.write(sumar(5,3));
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Luego podemos resolver esta misma función accediendo al objeto arguments que se crea cada vez que llamamos a una función:</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+
+  function sumar(x,y)
+  {
+    var s=arguments[0]+arguments[1];
+    return s;
+  }
+
+  document.write(sumar(5,3));
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+<p>Como podemos observar dentro de la función sumar accedemos al primer parámetro mediante el objeto arguments (con el subíndice 0 accedemos al primer parámetro llamado x) Tenemos dos formas de acceder al primer parámetro de la función : con el nombre x o con arguments[0].</p>
+<p>Como podemos observar si debemos sumar dos valores que llegan como parámetro el algoritmo más claro es el primero en lugar que tener que acceder al objeto "arguments", pero veremos que en muchas situaciones el objeto "arguments" nos favorece en la implementación de funciones mucho más complejas y reutilizables.</p>
+<strong>Problema</strong>
+<p>Confeccionar una función que reciba un conjunto variable de enteros y nos retorne su suma:</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+
+  function sumar()
+  {
+    var s=0;
+    var f;
+    for(f=0; f&lt;arguments.length; f++)
+    {
+      s=s+arguments[f];
+    }
+    return s;
+  }
+
+  document.write(sumar(2,4));
+  document.write('&lt;br&gt;');
+  document.write(sumar(1,2,3,4,5));
+  document.write('&lt;br&gt;');
+  document.write(sumar(100,200,300));
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Como no sabemos con cuantos parámetros llamaremos a la función sumar no indicamos ningún parámetro. Luego la única forma de acceder a los parámetros es mediante el objeto "arguments" y por medio del subíndice accedemos uno a uno. También el objeto "arguments" tiene una propiedad length que almacena la cantidad de parámetros recibidos por la función.</p>
+<p>Esta sintaxis nos permite codificar funciones muy poderosas que se adaptan a muchas situaciones, como vemos luego podemos llamar a la función sumar pasando 2 parámetros:</p>
+<pre>
+  document.write(sumar(2,4));
+</pre>
+<p>5 parámetros:</p>
+<pre>
+  document.write(sumar(1,2,3,4,5));
+</pre>
+<p>3 parámetros:</p>
+<pre>
+  document.write(sumar(100,200,300));
+</pre>
+<p>etc.</p>
+
+
+<strong>Problema</strong>
+<p>Confeccionar una función que reciba un conjunto de string y genere dentro de la página una lista ordenada (&lt;ol&gt;). La función debe recibir en el primer parámetro el id de un div.</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+
+&lt;script type="text/javascript"&gt;
+
+  window.onload=iniciar;
+
+  function iniciar()
+  {
+    generarLista('lista1','uno','dos','tres','cuatro','cinco','seis');
+  }
+
+  function generarLista()
+  {
+    var s='&lt;ol&gt;';
+    var f;
+    for(f=1;f&lt;arguments.length;f++)
+    {
+      s=s+'&lt;li&gt;'+arguments[f]+'&lt;/li&gt;';
+    }
+    s=s+'&lt;/ol&gt;';
+    var elemento1=document.getElementById(arguments[0]);
+    elemento1.innerHTML=s;
+  }
+
+&lt;/script&gt;
+
+
+&lt;body&gt;
+&lt;div id="lista1"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>Veamos por partes el funcionamiento de este programa. En el body de la página hemos definido un div con id llamado "lista1" sin contenido:</p>
+<pre>
+&lt;body&gt;
+&lt;div id="lista1"&gt;&lt;/div&gt;
+&lt;/body&gt;
+</pre>
+<p>En el bloque del script inicializamos la propiedad onload del objeto window indicando la función a ejecutar luego que la página esta completamente cargada:</p>
+<pre>
+  window.onload=iniciar;
+</pre>
+<p>Es decir que la función iniciar se ejecuta una vez que la página está completamente construida (es decir ya está en memoria el div definido en el body)</p>
+<p>La función iniciar es la que llama a la función generarLista pasando como parámetros primero el id del div a cargar y a partir del segundo parámetro en adelante los distintos string a mostrar en cada elemento del &lt;ol&gt;:</p>
+<pre>
+  function iniciar()
+  {
+    generarLista('lista1','uno','dos','tres','cuatro','cinco','seis');
+  }
+</pre>
+
+<p>Finalmente la función generarLista que como podemos observar no tiene parámetros explícitos, sino que los accedemos luego mediante el objeto arguments. Disponemos un for que lo inicializamos en 1 ya que el argumento cero tiene el nombre del id del div:</p>
+<pre>
+  function generarLista()
+  {
+    var s='&lt;ol&gt;';
+    var f;
+    for(f=1;f&lt;arguments.length;f++)
+    {
+      s=s+'&lt;li&gt;'+arguments[f]+'&lt;/li&gt;';
+    }
+    s=s+'&lt;/ol&gt;';
+    var elemento1=document.getElementById(arguments[0]);
+    elemento1.innerHTML=s;
+  }
+</pre>
+<p>Mediante el método getElementById obtenemos la referencia del div que llega como parámetro en el arguments[0]. y luego mediante la propiedad innerHTML indicamos todo el código HTML que debe cargarse en el div. En este caso almacenamos en la variable s todas las marcas necesarios para generar la lista ordenada.</p>
+</p>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../indexefd7.html?inicio=50">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=50&cod=58 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:24 GMT -->
+</html>

@@ -1,0 +1,304 @@
+<html>
+
+<!-- Mirrored from www.sqlserverya.com.ar/simulador/simulador.php?inicio=125&cod=148&punto=142 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+    <title>Tutorial de SQL Server : Problemas Resueltos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+	  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;		
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=no,status=yes,toolbar=yes,location=yes');  	
+}
+</script>  
+</head>
+<body bgcolor="#CCFFCC">
+        
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>142 - Disparador de inserción (insert trigger)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Una librería almacena los datos de sus libros en una tabla denominada "libros" y en otra tabla llamada "ventas", las ventas de los mismos.<br>
+
+Eliminamos las tablas si existen:</p>
+<pre>
+ if object_id('ventas') is not null
+  drop table ventas;
+ if object_id('libros') is not null
+  drop table libros;
+</pre>
+<p>Creamos las tablas, con las siguientes estructuras:</p>
+<pre>
+ create table libros(
+  codigo int identity,
+  titulo varchar(40),
+  autor varchar(30),
+  precio decimal(6,2), 
+  stock int,
+  constraint PK_libros primary key(codigo)
+ );
+
+ create table ventas(
+  numero int identity,
+  fecha datetime,
+  codigolibro int not null,
+  precio decimal (6,2),
+  cantidad int,
+  constraint PK_ventas primary key(numero),
+  constraint FK_ventas_codigolibro
+   foreign key (codigolibro) references libros(codigo)
+ );
+</pre>
+<p>Ingresamos algunos registros en "libros":</p>
+<pre>
+ insert into libros values('Uno','Richard Bach',15,100);
+ insert into libros values('Ilusiones','Richard Bach',18,50);
+ insert into libros values('El aleph','Borges',25,200);
+ insert into libros values('Aprenda PHP','Mario Molina',45,200);
+</pre>
+<p>Cuando ingresamos un registro en "ventas", debemos:</p>
+<p>- controlar que el código del libro exista en "libros" (lo hacemos con la restricción "foreign key" establecida en "ventas"),</p>
+<p>- controlar que exista stock, lo cual no puede controlarse con una restricción "foreign key" porque el campo "stock" no es clave primaria en la tabla "libros"; tampoco puede establecerse una restricción "check", porque ese tipo de restricciones no pueden hacer referencia a campos de otras tablas.</p>
+<p>- disminuir el stock en la tabla "libros".</p>
+
+<p>Creamos un disparador para que se ejecute cada vez que una instrucción "insert" ingrese datos en "ventas"; el mismo controlará que haya stock en "libros" y actualizará el campo "stock":</p>
+<pre>
+ create trigger DIS_ventas_insertar
+  on ventas
+  for insert
+  as
+   declare @stock int
+   select @stock= stock from libros
+		 join inserted
+		 on inserted.codigolibro=libros.codigo
+		 where libros.codigo=inserted.codigolibro
+  if (@stock>=(select cantidad from inserted))
+    update libros set stock=stock-inserted.cantidad
+     from libros
+     join inserted
+     on inserted.codigolibro=libros.codigo
+     where codigo=inserted.codigolibro
+  else
+  begin
+    raiserror ('Hay menos libros en stock de los solicitados para la venta', 16, 1)
+    rollback transaction
+  end
+</pre>
+<p>Ingresamos un registro en "ventas":</p>
+<pre>
+ insert into ventas values('2007/04/01',1,15,1);
+</pre>
+<p>Al ejecutar la sentencia de inserción anterior, se disparó el trigger, el registro se agregó a la tabla del disparador ("ventas") y disminuyó el valor del campo "stock" de "libros". Verifiquemos que el disparador se ejecutó consultando la tabla "ventas" y "libros":</p>
+<pre>
+ select *from ventas;
+ select *from libros where codigo=1;
+</pre>
+<p>Ingresamos un registro en "ventas", solicitando una cantidad superior al stock:</p>
+<pre>
+ insert into ventas values('2007/04/01',2,18,100);
+</pre>
+<p>El disparador se ejecuta y muestra un mensaje, la inserción no se realizó porque la cantidad solicitada supera el stock.</p>
+
+<p>Finalmente probaremos ingresar una venta con un código de libro inexistente:</p>
+<pre>
+ insert into ventas values('2007/04/01',5,18,1);
+</pre>
+<p>El trigger no llegó a ejecutarse, porque la comprobación de restricciones (que se ejecuta antes que el disparador) detectó que la infracción a la "foreign key".</p>
+
+        <form name="formulario" action="http://scratchya.com.ar/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+          <textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off">
+ if object_id('ventas') is not null
+  drop table ventas;
+ if object_id('libros') is not null
+  drop table libros;
+
+ create table libros(
+  codigo int identity,
+  titulo varchar(40),
+  autor varchar(30),
+  precio decimal(6,2), 
+  stock int,
+  constraint PK_libros primary key(codigo)
+ );
+
+ create table ventas(
+  numero int identity,
+  fecha datetime,
+  codigolibro int not null,
+  precio decimal (6,2),
+  cantidad int,
+  constraint PK_ventas primary key(numero),
+  constraint FK_ventas_codigolibro
+   foreign key (codigolibro) references libros(codigo)
+ );
+
+ insert into libros values('Uno','Richard Bach',15,100);
+ insert into libros values('Ilusiones','Richard Bach',18,50);
+ insert into libros values('El aleph','Borges',25,200);
+ insert into libros values('Aprenda PHP','Mario Molina',45,200);
+
+ create trigger DIS_ventas_insertar
+  on ventas
+  for insert
+  as
+   declare @stock int
+   select @stock= stock from libros
+		 join inserted
+		 on inserted.codigolibro=libros.codigo
+		 where libros.codigo=inserted.codigolibro
+  if (@stock>=(select cantidad from inserted))
+    update libros set stock=stock-inserted.cantidad
+     from libros
+     join inserted
+     on inserted.codigolibro=libros.codigo
+     where codigo=inserted.codigolibro
+  else
+  begin
+    raiserror ('Hay menos libros en stock de los solicitados para la venta', 16, 1)
+    rollback transaction
+  end
+
+ insert into ventas values('2007/04/01',1,15,1);
+
+ select *from ventas;
+ select *from libros where codigo=1;
+
+ insert into ventas values('2007/04/01',2,18,100);
+
+ insert into ventas values('2007/04/01',5,18,1);
+</textarea>
+    <br>
+    <input type="submit"  value="Ejecutar  los comandos SQL">
+    <input type="button" onClick="javascript:formulario.programa.value=''" value="Borrar comando.">
+
+        <br>
+	<br>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   
+
+</form>
+
+   <h2><a href="../index28e1.html?inicio=125">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-11";
+urchinTracker();
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from www.sqlserverya.com.ar/simulador/simulador.php?inicio=125&cod=148&punto=142 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:34 GMT -->
+</html>
+

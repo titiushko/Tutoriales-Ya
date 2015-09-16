@@ -1,0 +1,287 @@
+<!doctype html>
+<html>
+
+<!-- Mirrored from www.cssya.com.ar/css3ya/detalleconcepto.php?cod=113 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:07:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+    <title>CSS3 Ya</title>
+    <link href="estilos.css" rel="stylesheet">
+    <link href='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css' rel='stylesheet'>     
+    <script src='../../ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script> 
+    <script src='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>     
+    <script src="funciones.js"></script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-31']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>	
+</head>
+<body>
+
+
+
+
+
+
+<div id="pesta">
+	<ul>
+		<li><a href="#p1">Concepto</a></li>    
+		<li><a href="#p2">Ejemplo</a></li>
+		<li><a href="#p3">Vista Previa</a></li>
+	</ul>
+	<div id="p1" style="background:#fafafa;padding:20px; max-height: 700px;overflow: auto;font-size:13pt">
+	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* css3 detalle arriba */
+google_ad_slot = "3101973371";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+	
+	
+    <h2>Animaciones (animation-timing-function y animation-delay)</h2><p>Similar a las transiciones disponemos de dos propiedades para definir la función de transición y el tiempo que debe esperar para comenzar la animación:</p>
+<pre>
+Elemento {
+      animation-timing-function: [función de transición];
+      animation-delay: [tiempo de demora para iniciar la animación];
+}
+</pre>
+<p>Los valores posibles para la propiedad animation-timing-function:</p>
+<p>
+<ul>
+<li>
+ease : Define un efecto de animación con un comienzo lento, luego rápido y finalmente termina lento 
+(cuando no definimos la función elige esta por defecto)
+</li>
+<li>
+linear : Define un efecto de animación con la misma velocidad de inicio a fin.
+</li>
+<li>
+ease-in : Define un efecto de animación con un comienzo lento.
+</li>
+<li>
+ease-out : Define un efecto de animación con un final lento.
+</li>
+<li>
+ease-in-out : Define un efecto de animación con un comienzo lento y un final lento.
+</li>
+</ul>
+</p>
+
+<p>El problema del concepto anterior definimos la función de animación "linear" y un tiempo de retardo de 2 segundos:</p>
+<pre>
+#recuadro1{
+  left:30px;
+  position:relative;
+  border-radius: 20px;  
+  background-color:#ddd;
+  width:200px;
+  height:100px;
+  padding:4px;
+  -moz-animation-name: animacion1;
+  -moz-animation-duration: 4s;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-direction: alternate;
+  -moz-animation-timing-function: linear;
+  -moz-animation-delay: 2s;
+  -webkit-animation-name: animacion1;
+  -webkit-animation-duration: 4s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-delay: 2s;
+  -o-animation-name: animacion1;
+  -o-animation-duration: 4s;
+  -o-animation-iteration-count: infinite;
+  -o-animation-direction: alternate;
+  -o-animation-timing-function: linear;
+  -o-animation-delay: 2s;
+}
+
+@-moz-keyframes animacion1 {
+  from {
+    left:30px;
+    background-color:#ddd;
+  }
+  to {
+    left:300px; 
+    background-color:#ff0;
+  }
+}
+
+@-webkit-keyframes animacion1 {
+  from {
+    left:30px;
+    background-color:#ddd;
+  }
+  to {
+    left:300px; 
+    background-color:#ff0;
+  }
+}
+
+@-o-keyframes animacion1 {
+  from {
+    left:30px;
+    background-color:#ddd;
+  }
+  to {
+    left:300px; 
+    background-color:#ff0;
+  }
+}
+</pre>	
+<table border="0">
+<tr>
+<td>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* css3 cuadrado */
+google_ad_slot = "9333811690";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+ <td>
+ <script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* css3 cuadrado */
+google_ad_slot = "9333811690";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ </td>
+</tr></table> 	
+	
+	</div>    
+	<div id="p2">
+    <textarea name="editor" id="editor" rows="28" style="width:890px;height:700px;font-size:16px;font-family:courier"><!DOCTYPE html> 
+<html> 
+<head> 
+<title>Prueba</title> 
+
+<style type="text/css"> 
+
+#recuadro1{
+  left:30px;
+  position:relative;
+  border-radius: 20px;  
+  background-color:#ddd;
+  width:200px;
+  height:100px;
+  padding:4px;
+  -moz-animation-name: animacion1;
+  -moz-animation-duration: 4s;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-direction: alternate;
+  -moz-animation-timing-function: linear;
+  -moz-animation-delay: 2s;
+  -webkit-animation-name: animacion1;
+  -webkit-animation-duration: 4s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-delay: 2s;
+  -o-animation-name: animacion1;
+  -o-animation-duration: 4s;
+  -o-animation-iteration-count: infinite;
+  -o-animation-direction: alternate;
+  -o-animation-timing-function: linear;
+  -o-animation-delay: 2s;
+}
+
+@-moz-keyframes animacion1 {
+  from {
+    left:30px;
+    background-color:#ddd;
+  }
+  to {
+    left:300px; 
+    background-color:#ff0;
+  }
+}
+
+@-webkit-keyframes animacion1 {
+  from {
+    left:30px;
+    background-color:#ddd;
+  }
+  to {
+    left:300px; 
+    background-color:#ff0;
+  }
+}
+
+@-o-keyframes animacion1 {
+  from {
+    left:30px;
+    background-color:#ddd;
+  }
+  to {
+    left:300px; 
+    background-color:#ff0;
+  }
+}
+
+
+body {
+  background:white;
+  margin:50px;
+}
+
+</style> 
+
+</head> 
+<body> 
+<div id="recuadro1"> 
+<h3>Título</h3>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </p>
+</div> 
+
+</body> 
+
+<!-- Mirrored from www.cssya.com.ar/css3ya/detalleconcepto.php?cod=113 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:07:20 GMT -->
+</html> </textarea>
+	</div>
+	<div id="p3">
+<iframe width="900" height="700" id="documentodinamico" name="documentodinamico" src="vacio.html">
+No tiene disponible el navegador la capacidad de iframe
+</iframe>
+	</div>
+</div>
+<br>
+   <h2><a href="index-2.html">Retornar</a></h2>   
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-31', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

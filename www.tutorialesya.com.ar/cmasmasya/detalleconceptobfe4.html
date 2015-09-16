@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=53&codigo=184&inicio=45 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:31:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Métodos estáticos de una clase</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>53 - Métodos estáticos de una clase</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Las funciones o métodos de la clase pueden definirse de tipo estático.</p>
+<p>Un método estático solo puede acceder a los atributos estáticos declarados en la clase.</p>
+<p>No se pueden definir dos funciones con igual nombre y que una sea estática y la otra no.</p>
+<p>Un método estático se lo puede llamar sin la necesitad de crear un objeto de dicha clase. Para poder llamarlo debemos anteceder el nombre de la clase y el modificador :: (dos veces dos puntos).</p>
+
+
+<h3>Problema 1:</h3>
+<p>Plantear una clase que defina un atributo y un método estático. Desde la main llamar al método estático sin tener que crear un objeto de dicha clase.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Prueba {
+    static int x1;
+public:
+    static int retornarX();
+};
+
+int Prueba::x1 = 20;
+
+int Prueba::retornarX()
+{
+    return x1;
+}
+
+void main()
+{
+    cout &lt;&lt; Prueba::retornarX(); // 20
+    cin.get();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/MetodoEstatico1.zip">MetodoEstatico1.zip</a></p>
+
+
+<p>Veamos el programa mínimo para crear un atributo estática y un método estático. Primero declaramos el atributo estático y el método estático en la declaración de la clase antecediendo la palabra clave static:</p>
+<pre>
+class Prueba {
+    static int x1;
+public:
+    static int retornarX();
+};
+</pre>
+<p>Definimos e inicializamos la variable estática con el valor 20:</p>
+<pre>
+int Prueba::x1 = 20;
+</pre>
+
+<p>La implementación del método estático es similar a lo ya visto teniendo en cuenta que dentro de dicho método solo podemos acceder a atributos estáticos (tengamos en cuenta que este método se crea y existe independientemente a que se creen objetos de la clase Prueba)</p>
+
+<p>Finalmente podemos ver que para acceder a dicho método no es necesario crear un objeto de la clase Prueba, solo con anteceder al nombre del método con el nombre de la clase y los caracteres :: tenemos acceso:</p>
+<pre>
+void main()
+{
+    cout &lt;&lt; Prueba::retornarX(); // 20
+    cin.get();
+}
+</pre>
+
+
+<h3>Problema 2:</h3>
+
+<p>Plantear una clase Cuenta que defina dos atributos, uno que almacene el importe de la misma y otro atributo estático llamado cantidad que se debe incrementar en uno cada vez que se crea un objeto de dicha clase, definir en esta misma clase un método estático que retorne el contandor cantidad. Por otro lado crear una clase Banco que defina tres objetos de la clase Cuenta. Imprimir la cantidad de cuentas llamando al método estático de la clase Cuenta.</p>
+
+
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Cuenta {
+    float saldo;
+    static int cantidad;
+public:
+    Cuenta(float sal) { saldo = sal; cantidad++; };
+    static int retornarCantidad() { return cantidad; };
+};
+
+int Cuenta::cantidad = 0;
+
+class Banco {
+    Cuenta *cuenta1, *cuenta2, *cuenta3;
+public:
+    Banco();
+    ~Banco();
+    void cantidadClientes();
+};
+
+Banco::Banco()
+{
+    cuenta1 = new Cuenta(1000);
+    cuenta2 = new Cuenta(3000);
+    cuenta3 = new Cuenta(5000);
+}
+
+Banco::~Banco()
+{
+    delete cuenta1;
+    delete cuenta2;
+    delete cuenta3;
+}
+
+void Banco::cantidadClientes()
+{
+    cout &lt;&lt; Cuenta::retornarCantidad();
+}
+
+void main()
+{
+    Banco *banco1 = new Banco();
+    banco1-&gt;cantidadClientes();
+    delete banco1;
+    cin.get();
+}
+</pre>
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/MetodoEstatico2.zip">MetodoEstatico2.zip</a></p>
+
+
+
+<p>Declaramos la clase Cuenta con un atributo estático llamado cantidad y un método estático llamado retornarCantidad, el método estático puede acceder al atributo cantidad y no al de saldo ya que cantidad está declarado de tipo static.</p>
+<pre>
+class Cuenta {
+    float saldo;
+    static int cantidad;
+public:
+    Cuenta(float sal) { saldo = sal; cantidad++; };
+    static int retornarCantidad() { return cantidad; };
+};
+</pre>
+
+<p>Para llamar al método static desde la clase Banco lo hacemos directamente con el nombre de la clase seguido por el operador :: y el nombre del método estático:</p>
+<pre>
+void Banco::cantidadClientes()
+{
+    cout &lt;&lt; Cuenta::retornarCantidad();
+}
+</pre>
+
+<p>De todas forma funciona igual si llamamos al método estático por medio de un objeto de dicha clase:</p>
+
+<pre>
+void Banco::cantidadClientes()
+{
+    cout &lt;&lt; cuenta1-&gt;retornarCantidad();
+}
+</pre>
+
+
+
+<h2><a href="indexb634.html?inicio=45">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=53&codigo=184&inicio=45 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:31:13 GMT -->
+</html>

@@ -1,0 +1,318 @@
+<html>
+
+<!-- Mirrored from www.postgresqlya.com.ar/simulador/simulador.php?inicio=25&cod=208&punto=50 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+    <title>Tutorial de PostgreSQL : Problemas Resueltos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;		
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=no,status=yes,toolbar=yes,location=yes');  	
+}
+</script>  
+</head>
+<body bgcolor="#CCFFCC">
+        
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>50 - Combinaciones y funciones de agrupamiento</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Una librería almacena la información de sus libros para la venta en dos tablas, "libros" y "editoriales".<br>
+Creamos las tablas:</p>
+<pre>
+ create table libros(
+  codigo serial,
+  titulo varchar(40),
+  autor varchar(30),
+  codigoeditorial smallint not null,
+  precio decimal(5,2),
+  primary key(codigo)
+ );
+ create table editoriales(
+  codigo serial,
+  nombre varchar(20),
+  primary key (codigo)
+);
+</pre>
+<p>Ingresamos algunos registros en ambas tablas:</p>
+<pre>
+ insert into editoriales(nombre) values('Planeta');
+ insert into editoriales(nombre) values('Emece');
+ insert into editoriales(nombre) values('Siglo XXI');
+
+ insert into libros(titulo,autor,codigoeditorial,precio) 
+   values('El aleph','Borges',1,20);
+ insert into libros(titulo,autor,codigoeditorial,precio) 
+  values('Martin Fierro','Jose Hernandez',1,30);
+ insert into libros(titulo,autor,codigoeditorial,precio)
+  values('Aprenda PHP','Mario Molina',3,50);
+ insert into libros(titulo,autor,codigoeditorial,precio)
+  values('Uno','Richard Bach',3,15);
+ insert into libros(titulo,autor,codigoeditorial,precio)
+  values('Java en 10 minutos',default,4,45);
+</pre>
+<p>Contamos la cantidad de libros de cada editorial consultando ambas tablas:</p>
+<pre>
+ select nombre as editorial,
+  count(*) as cantidad
+  from editoriales as e
+  join libros as l
+  on codigoeditorial=e.codigo
+  group by e.nombre;
+</pre>
+<p>Buscamos el libro más costoso de cada editorial con un "left join":</p>
+<pre>
+ select nombre as editorial,
+  max(precio) as mayorprecio
+  from editoriales as e
+  left join libros as l
+  on codigoeditorial=e.codigo
+  group by nombre;
+</pre>
+
+   <form name="formulario2" action="http://www.postgresqlya.com.ar/simulador/ejecuta.php" target="ventanaForm" method="post" onsubmit="abrirVentana()"> 
+   <input type="hidden" name="programaautomatico" value=" create table visitantes(
+  nombre varchar(30),
+  edad smallint,
+  sexo char(1) default 'f',
+  domicilio varchar(30),
+  codigociudad smallint not null,
+  mail varchar(30),
+  montocompra decimal (6,2)
+ );
+
+ create table ciudades(
+  codigo serial,
+  nombre varchar(20),
+  primary key(codigo)
+ );
+ 
+ insert into ciudades(nombre) values('Cordoba');
+ insert into ciudades(nombre) values('Carlos Paz');
+ insert into ciudades(nombre) values('La Falda');
+ insert into ciudades(nombre) values('Cruz del Eje');
+
+ insert into visitantes values 
+   ('Susana Molina', 35,'f','Colon 123', 1, null,59.80);
+ insert into visitantes values 
+   ('Marcos Torres', 29,'m','Sucre 56', 1, 'marcostorres@hotmail.com',150.50);
+ insert into visitantes values 
+   ('Mariana Juarez', 45,'f','San Martin 111',2,null,23.90);
+ insert into visitantes values 
+   ('Fabian Perez',36,'m','Avellaneda 213',3,'fabianperez@xaxamail.com',0);
+ insert into visitantes values 
+   ('Alejandra Garcia',28,'f',null,2,null,280.50);
+ insert into visitantes values 
+   ('Gaston Perez',29,'m',null,5,'gastonperez1@gmail.com',95.40);
+ insert into visitantes values 
+   ('Mariana Juarez',33,'f',null,2,null,90);
+ select c.nombre,
+  count(*) as cantidad
+  from ciudades as c
+  join visitantes as v
+  on codigociudad=c.codigo
+  group by c.nombre;
+
+ select c.nombre,sexo,
+  avg(montocompra) as promediodecompra
+  from ciudades as c
+  join visitantes as v
+  on codigociudad=c.codigo
+  group by c.nombre,sexo;
+
+ select c.nombre,
+  count(mail) as tienenmail
+  from ciudades as c
+  join visitantes as v
+  on codigociudad=c.codigo
+  group by c.nombre;
+
+ select c.nombre,
+  max(montocompra)
+  from visitantes as v
+  join ciudades as c
+  on codigociudad=c.codigo
+  group by c.nombre;
+">
+   <input type="hidden" name="extension1" value="">
+
+          <textarea class="programafuente" name="programa" rows=15 cols=80 wrap="off">
+ create table libros(
+  codigo serial,
+  titulo varchar(40),
+  autor varchar(30),
+  codigoeditorial smallint not null,
+  precio decimal(5,2),
+  primary key(codigo)
+ );
+
+ create table editoriales(
+  codigo serial,
+  nombre varchar(20),
+  primary key (codigo)
+);
+
+ insert into editoriales(nombre) values('Planeta');
+ insert into editoriales(nombre) values('Emece');
+ insert into editoriales(nombre) values('Siglo XXI');
+
+ insert into libros(titulo,autor,codigoeditorial,precio) 
+   values('El aleph','Borges',1,20);
+ insert into libros(titulo,autor,codigoeditorial,precio) 
+  values('Martin Fierro','Jose Hernandez',1,30);
+ insert into libros(titulo,autor,codigoeditorial,precio)
+  values('Aprenda PHP','Mario Molina',3,50);
+ insert into libros(titulo,autor,codigoeditorial,precio)
+  values('Uno','Richard Bach',3,15);
+ insert into libros(titulo,autor,codigoeditorial,precio)
+  values('Java en 10 minutos',default,4,45);
+
+ select nombre as editorial,
+  count(*) as cantidad
+  from editoriales as e
+  join libros as l
+  on codigoeditorial=e.codigo
+  group by e.nombre;
+
+ select nombre as editorial,
+  max(precio) as mayorprecio
+  from editoriales as e
+  left join libros as l
+  on codigoeditorial=e.codigo
+  group by nombre;
+</textarea>
+    <br>
+
+	<br>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   
+
+</form>
+<br>
+   <h2><a href="../indexfc77.html?inicio=25">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-24");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+
+
+<!-- Mirrored from www.postgresqlya.com.ar/simulador/simulador.php?inicio=25&cod=208&punto=50 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:41 GMT -->
+</html>
+

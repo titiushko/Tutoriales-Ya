@@ -1,0 +1,595 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=198&inicio=60 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - Indizadores</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>74 - Indizadores</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p>Los indizadores permiten acceder mediante subíndices a un objeto de una clase que lo implementa. El objetivo es facilitar la implementación de un algoritmo.</p>
+<p>El indizador evita que implementemos una serie de métodos para administrar el objeto.</p>
+<p>La sintaxis de un indizador es:</p>
+<pre>
+tipo this[tipo indice]
+{
+    get
+    {
+         valor que retorna según indice
+    }
+    set
+    {
+        fijar el valor según indice
+    }
+}
+</pre>
+<p>Lo más sencillo es la implementación del siguiente programa:</p>
+<pre>
+using System.Linq;
+using System.Text;
+
+namespace Indizador1
+{
+    class Program
+    {
+        class A
+        {
+            private int []vec;
+            public A()
+            {
+                vec=new int[3];
+            }
+
+            public int this[int indice]
+            {
+                set
+                {
+                    vec[indice] = value;
+                }
+                get
+                {
+                    return vec[indice];
+                }
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            A obj1 = new A();
+            obj1[0] = 7;
+            obj1[1] = 34;
+            obj1[2] = 45;
+            Console.WriteLine(obj1[0]);
+            Console.WriteLine(obj1[1]);
+            Console.WriteLine(obj1[2]);
+            Console.ReadKey();
+        }
+    }
+}
+</pre>
+<p>Definimos y creamos un vector de enteros de 3 elementos:</p>
+<pre>
+            private int []vec;
+            public A()
+            {
+                vec=new int[3];
+            }
+</pre>
+<p>Definimos un indizador con parámetro entero llamado indice(veremos más adelante que el parámetro puede ser de otro tipo o inclusive tener más de uno) Utilizamos la palabra this para indicar que es un indizador.<br>
+<p>En la seccion del set se ejecuta cuando le asignamos un valor donde definimos un objeto de dicha clase (obj1[0] = 7;) es cero lo recibe el parámetro indice y el 7 lo almacena la palabra clave value. Por último la sección del get se ejecuta cuando lo accedemos            (Console.WriteLine(obj1[0]); 
+<pre>
+            public int this[int indice]
+            {
+                set
+                {
+                    vec[indice] = value;
+                }
+                get
+                {
+                    return vec[indice];
+                }
+            }
+</pre>
+<p>Para crear un objeto de la clase A lo hacemos como ya conocemos:</p>
+<pre>
+            A obj1 = new A();
+</pre>
+<p>Lo nuevo es cuando queremos utilizar el indizador para inicializar datos (ejecuta el set del indizador):</p>
+<pre>
+            obj1[0] = 7;
+            obj1[1] = 34;
+            obj1[2] = 45;
+</pre>
+<p>O cuando queremos acceder al indizador para consultas (ejecuta el get):</p>
+<pre>
+            Console.WriteLine(obj1[0]);
+            Console.WriteLine(obj1[1]);
+            Console.WriteLine(obj1[2]);
+            Console.ReadKey();
+</pre>
+
+<h3>Problema 1:</h3>
+<p>Confeccionar una clase llamada Cliente definir las propiedades Nombre y Dinero (en el constructor inicializar dichas propiedades)<br>
+Desarrollar otra clase llamada Banco donde debemos definir y crear un vector de tres elementos de tipo Cliente.<br>
+Implementar un indizador en la clase Banco que permita acceder a cada cliente por un subíndice entero.
+</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Indizador2
+{
+    class Cliente
+    {
+        private string nombre;
+        public string Nombre
+        {
+            set
+            {
+                nombre = value;
+            }
+            get
+            {
+                return nombre;
+            }
+        }
+        private int dinero;
+        public int Dinero
+        {
+            set
+            {
+                dinero = value;
+            }
+            get
+            {
+                return dinero;
+            }
+        }
+        public Cliente(string nom, int din)
+        {
+            Nombre = nom;
+            Dinero = din;
+        }
+    }
+
+    class Banco
+    {
+        private Cliente[] clientes;
+        public Banco()
+        {
+            clientes = new Cliente[3];
+        }
+
+        public Cliente this[int indice]
+        {
+            set 
+            {
+                clientes[indice] = value;
+            }
+            get
+            {
+                return clientes[indice];
+            }
+        }
+    }
+
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Banco banco1 = new Banco();
+            Cliente cli1 = new Cliente("juan", 1000);
+            Cliente cli2 = new Cliente("ana", 2000);
+            Cliente cli3 = new Cliente("luis", 1500);
+            banco1[0] = cli1;
+            banco1[1] = cli2;
+            banco1[2] = cli3;
+            Console.WriteLine("Datos de los clientes.");
+            Console.WriteLine(banco1[0].Nombre);
+            Console.WriteLine(banco1[0].Dinero);
+            Console.WriteLine();
+            Console.WriteLine(banco1[1].Nombre);
+            Console.WriteLine(banco1[1].Dinero);
+            Console.WriteLine();
+            Console.WriteLine(banco1[2].Nombre);
+            Console.WriteLine(banco1[2].Dinero);
+            Console.WriteLine();
+            Console.ReadKey();
+        }
+    }
+}
+</pre>
+<p>La clase Banco implementa el indizador:</p>
+<pre>
+        public Cliente this[int indice]
+        {
+            set 
+            {
+                clientes[indice] = value;
+            }
+            get
+            {
+                return clientes[indice];
+            }
+        }
+</pre>
+<p>Para ver las ventajas que presenta implementar un indizador en la clase Banco podemos ver como se inicializan los tres clientes que tiene el banco:</p>
+<pre>
+
+            Banco banco1 = new Banco();
+            Cliente cli1 = new Cliente("juan", 1000);
+            Cliente cli2 = new Cliente("ana", 2000);
+            Cliente cli3 = new Cliente("luis", 1500);
+            banco1[0] = cli1;
+            banco1[1] = cli2;
+            banco1[2] = cli3;
+</pre>
+<p>Como podemos ver le asignamos al objeto indicando un subíndice la referencia del objeto de la clase Cliente.</p>
+<p>Para poder imprimir el nombre y dinero depositado que tiene cada cliente lo hacemos accediendo al subíndice y seguidamente la propiedad del cliente que necesitamos mostrar:</p>
+<pre>
+            Console.WriteLine("Datos de los clientes.");
+            Console.WriteLine(banco1[0].Nombre);
+            Console.WriteLine(banco1[0].Dinero);
+            Console.WriteLine();
+            Console.WriteLine(banco1[1].Nombre);
+            Console.WriteLine(banco1[1].Dinero);
+            Console.WriteLine();
+            Console.WriteLine(banco1[2].Nombre);
+            Console.WriteLine(banco1[2].Dinero);
+            Console.WriteLine();
+</pre>
+<br>
+<p>Un indizador puede tener más de un subíndice, la estructura luego debe ser:</p>
+<pre>
+tipo this[tipo indice1,tipo indice2]
+{
+    get
+    {
+         valor que retorna según indices
+    }
+    set
+    {
+        fijar el valor según indices
+    }
+}
+</pre>
+
+
+<h3>Problema 2:</h3>
+<p>Implementar una clase llamada Tablero del juego de la Batalla Naval. Permitir mediante un indizador de dos dimensiones acceder a las casillas del tablero.
+</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Indizador3
+{
+    public enum DatoCasilla { agua, barco };
+    
+    class Tablero
+    {
+        private DatoCasilla [,] mat;
+
+        public Tablero()
+        {
+            mat = new DatoCasilla[10, 10];
+        }
+
+        public void Graficar()
+        {
+            for (int f = 0; f < mat.GetLength(0); f++)
+            {
+                for (int c = 0; c < mat.GetLength(1); c++)
+                {
+                    if (mat[f, c] == DatoCasilla.agua)
+                    {
+                        Console.Write("0");
+                    }
+                    if (mat[f, c] == DatoCasilla.barco)
+                    {
+                        Console.Write("-");
+                    }
+                }
+                Console.WriteLine();
+            }
+        }
+
+        public DatoCasilla this[int fila, int columna]
+        {
+            set
+            {
+                mat[fila, columna] = value;
+            }
+            get
+            {
+                return mat[fila, columna];
+            }
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Tablero tablero1 = new Tablero();
+            tablero1[0, 0] = DatoCasilla.barco;
+            tablero1[0, 1] = DatoCasilla.barco;
+            tablero1[0, 2] = DatoCasilla.barco;
+            tablero1[0, 9] = DatoCasilla.barco;
+            tablero1[1, 9] = DatoCasilla.barco;
+            tablero1[2, 9] = DatoCasilla.barco;
+            tablero1.Graficar();
+            Console.WriteLine();
+            if (tablero1[0, 0] == DatoCasilla.barco)
+            {
+                Console.WriteLine("Hay un barco en esta casilla");
+            }
+            else
+            {
+                if (tablero1[0, 0] == DatoCasilla.agua)
+                {
+                    Console.WriteLine("Agua");
+                }
+            }
+            Console.ReadKey();
+        }
+    }
+}
+</pre>
+
+<p>Declaramos un tipo de dato enumerado con dos valores posibles:</p>
+<pre>
+    public enum DatoCasilla { agua, barco };
+</pre>    
+<p>Declaramos en la clase Tablero una matriz regular con componentes de tipo DatoCasilla:</p>
+<pre>
+        private DatoCasilla [,] mat;
+</pre>
+<p>En el constructor creamos la matriz de 10 filas por 10 columnas:</p>
+<pre>
+        public Tablero()
+        {
+            mat = new DatoCasilla[10, 10];
+        }
+</pre>
+<p>Imprimimos el tablero, si en la componente hay "agua" mostramos un cero y si hay "barco" mostramos un guión (cuando se creó la matriz en el constructor se inicializan todas las componentes con el valor 0 que es "agua"):</p>
+<pre>
+
+        public void Graficar()
+        {
+            for (int f = 0; f < mat.GetLength(0); f++)
+            {
+                for (int c = 0; c < mat.GetLength(1); c++)
+                {
+                    if (mat[f, c] == DatoCasilla.agua)
+                    {
+                        Console.Write("0");
+                    }
+                    if (mat[f, c] == DatoCasilla.barco)
+                    {
+                        Console.Write("-");
+                    }
+                }
+                Console.WriteLine();
+            }
+        }
+</pre>
+<p>Ahora veamos lo más importante que es la definición del indizador con dos subíndices:</p>
+<pre>
+
+        public DatoCasilla this[int fila, int columna]
+        {
+            set
+            {
+                mat[fila, columna] = value;
+            }
+            get
+            {
+                return mat[fila, columna];
+            }
+        }
+</pre>
+<p>En la otra clase creamos un objeto de la clase Tablero:</p>
+<pre>
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Tablero tablero1 = new Tablero();
+</pre>
+<p>Seguidamente disponemos un barco en la primer fila de la matriz utilizando un indizador (estas tres líneas acceden al set del indizador pasando los dos subíndices y el valor a almacenar):</p>
+<pre>
+
+            tablero1[0, 0] = DatoCasilla.barco;
+            tablero1[0, 1] = DatoCasilla.barco;
+            tablero1[0, 2] = DatoCasilla.barco;
+</pre>
+<p>Un segundo barco lo ubicamos en la última columna:</p>
+<pre>
+
+            tablero1[0, 9] = DatoCasilla.barco;
+            tablero1[1, 9] = DatoCasilla.barco;
+            tablero1[2, 9] = DatoCasilla.barco;
+</pre>
+<p>Para saber que hay en una casilla cualquiera del tablero podemos utilizar el indizador (se ejecuta el get):</p>
+<pre>
+
+            if (tablero1[0, 0] == DatoCasilla.barco)
+            {
+                Console.WriteLine("Hay un barco en esta casilla");
+            }
+            else
+            {
+                if (tablero1[0, 0] == DatoCasilla.agua)
+                {
+                    Console.WriteLine("Agua");
+                }
+            }
+</pre></div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="indexd6cc.html?inicio=60">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=198&inicio=60 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:43 GMT -->
+</html>

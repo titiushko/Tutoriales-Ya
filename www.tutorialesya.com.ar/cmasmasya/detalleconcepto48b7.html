@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=12&codigo=139&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Cadena de caracteres mediante vectores</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>12 - Cadena de caracteres mediante vectores</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Un string es una serie de caracteres seguidos almacenados en la memoria RAM. Veremos la forma de administrar string en C++ heredados del lenguaje C (esta forma de administrar string es ampliamente utilizada)</p>
+<p>Una cadena o string de caracteres es un vector con componentes de tipo char.<br>
+Se define de la siguiente manera:<br>
+<pre>
+char &lt;Nombre&gt; [&lt;Cantidad de caracteres&gt;];
+</pre>
+<p>Ejemplo:</p>
+<pre>
+char cadena[8];
+</pre>
+<p>La variable cadena puede almacenar hasta 7 caracteres (lo definimos de 8 ya que requiere un caracter para indicar el fin)</p>
+<p>No existe operador de asignación para cadenas.</p>
+<p>Podemos definir y almacenar inmediatamente la cadena:</p>
+<pre>
+char cadena [8]="hola";
+</pre>
+<p>
+Al definir la cantidad de componentes que tendrá el vector, debemos tener en cuenta que necesitamos un elemento para guardar el terminador de cadena. El terminador de cadena (‘\0’) marca el fin del vector de caracteres.</p>
+
+<p>El contenido de cada componente del vector es el siguiente:</p>
+<pre>
+componente	[0]   [1]   [2]   [3]   [4]   [5]   [6]   [7]
+Cadena		'h'   'o'   'l'	  'a'   '\0'
+</pre>
+
+
+<h3>Problema 1:</h3>
+<p>Confeccionar un programa que defina dos vectores de caracteres con los nombres de meses de "enero" y "febrero". Mostrar luego por pantalla los dos vectores</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    char mes1[20]="enero";
+    char mes2[20]="febrero";
+    cout &lt;&lt;mes1;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;mes2;
+    cin.get();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/CadenaInicializar.zip">CadenaInicializar</a></p>
+
+<p>Hemos definido los dos vectores de 20 caracteres, si queremos hacer un uso óptimo de la memoria podríamos definir los vectores con los siguientes tamaños:</p>
+<pre>
+    char mes1[6]="enero";
+    char mes2[8]="febrero";
+</pre>
+<p>Como la cadena "enero" requiere 5 caracteres luego el tamaño mínimo del vector debe ser 6.</p>
+<p>Para ingresar cadenas de caracteres por teclado debemos emplear el método getline del objeto cin (le pasamos como parámetro la cadena a ingresar y el tamaño de la cadena):</p>
+<pre>
+cin.getline(cadena,40);
+</pre>
+
+
+<h3>Problema 2:</h3>
+<p>Confeccionar un programa que defina una cadena de caracteres para almacenar el nombre y apellido de una persona. La carga del dato hacerla por teclado.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+
+#include &lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    char nombre[40];
+    cout &lt;&lt;"Ingrese su nombre:";
+    cin.getline(nombre,40);
+    cout &lt;&lt;"El nombre ingresado es:";
+    cout &lt;&lt;nombre;
+    cin.get();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/CadenaCargaTeclado.zip">CadenaCargaTeclado</a></p>
+
+
+<p>Para comparar dos cadenas si son iguales no podemos utilizar el operador == como se utiliza en los tipos de datos enteros vistos anteriormente. Para comparar cadenas debemos emplear la función strcmp:</p>
+
+<pre>
+int strcmp(cadena1,cadena2)
+</pre>
+<p>Retorna 0 si las dos cadenas son exactamente iguales, mayor a cero si cadena1 es mayor alfabéticamente que cadena2 y menor a cero en caso contrario.</p>
+
+
+<h3>Problema 3:</h3>
+<p>Confeccionar un programa que permita ingresar dos cadenas de caracteres por teclado y luego mostrar un mensaje indicando si: "son iguales", "la primer cadena ingresada es mayor alfabéticamente" o "la segunda cadena ingresada es mayor alfabéticamente".</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    char cadena1[50];
+    char cadena2[50];
+    cout &lt;&lt;"Ingrese la primer cadena:";
+    cin.getline(cadena1,50);
+    cout &lt;&lt;"Ingrese la segunda cadena:";
+    cin.getline(cadena2,50);
+    if (strcmp(cadena1,cadena2)==0)
+    {
+        cout &lt;&lt;"son iguales";
+    }
+    else
+    {
+        if (strcmp(cadena1,cadena2)&gt;0)
+        {
+            cout &lt;&lt;"la primer cadena ingresada es mayor alfabeticamente";
+        }
+        else
+        {
+            cout &lt;&lt;"la segunda cadena ingresada es mayor alfabéticamente";
+        }
+    }
+    cin.get();
+}
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/CadenaComparacion.zip">CadenaComparacion</a></p>
+
+</pre><h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=12&codigo=139&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:36 GMT -->
+</html>

@@ -1,0 +1,168 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=100&cod=260&punto=102 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Descripción : Control de flujo (while loop) (Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>102 - Control de flujo (while loop)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>Ya estudiamos dos de las tres estructuras repetitivas. Continuamos con "while".</p>
+<p>Vimos que las sentencias repetitivas permiten ejecutar una secuencia de sentencias varias veces. </p><p>Se coloca la palabra "loop" antes de las sentencias y al final "end loop".</p>
+
+<p>"while...loop" (mientras) ejecuta repetidamente una instrucción (o bloque de instrucciones) siempre que la condición sea verdadera.</p>
+
+<p>Sintaxis básica:</p>
+<pre>
+ while CONDICION loop
+  SENTENCIAS
+ end loop;
+</pre>
+<p>La diferencia entre "while...loop" y "for...loop" es que en la segunda se puede establecer la cantidad de repeticiones del bucle con el valor inicial y final. Además, el segundo siempre se ejecuta, al menos una vez, en cambio el primero puede no ejecutarse nunca, caso en el cual al evaluar la condicion por primera vez resulte falsa.</p>
+
+<p>En el siguiente ejemplo se muestra la tabla del 3 hasta el 5:</p>
+<pre>
+ set server output on;
+ execute dbms_output.enable (20000);
+declare
+ numero number:=0;
+ resultado number;
+begin
+  while numero<=5 loop
+   resultado:=3*numero;
+   dbms_output.put_line('3*'||to_char(numero)||'='||to_char(resultado));
+   numero:=numero+1;
+  end loop;
+end;
+</pre>
+<p>La condición establece que se multiplique la variable "numero" por 3 mientras "numero" sea menor o igual a 5. En el bloque de sentencias se almacena en "resultado" la multiplicación, luego se escribe tal valor y finalmente se incrementa la variable "numero" en 1.</p>
+<p>Hacemos el seguimiento: cuando se inicia el bucle, la variable "numero" tiene el valor 0, se ejecuta la primer linea de sentencias y "resultado" almacena el valor 0, se imprime (0) y se incrementa la variable "numero", ahora contiene el valor 1; se vuelve a la condición, como la condición es verdadera (1 es menor que 5), se vuelven a ejecutar las sentencias (resultado almacena 3, se imprime (3), se guarda en numero el valor 2), se vuelve a evaluar la condición, como resulta cierta (2 es menor que 5), se vuelven a ejecutar las sentencias (resultado almacena 6, se imprime, se guarda en numero el valor 3), se vuelve a evaluar la condición, como resulta cierta (3 es menor que 5), se vuelven a ejecutar las sentencias (resultado almacena 9, se imprime, se guarda en numero el valor 4), se vuelve a evaluar la condición, como resulta cierta (4 es menor que 5), se vuelven a ejecutar las sentencias (resultado almacena 12, se imprime, se guarda en numero el valor 5), se vuelve a evaluar la condición, como resulta cierta (5 es menor o igual a 5), se vuelven a ejecutar las sentencias (resultado almacena 15, se imprime, se guarda en numero el valor 6), se vuelve a evaluar la condición, como resulta falsa (6 NO es menor ni igual a 5), se sale de la estructura.</p>
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../indexf6ce.html?inicio=100">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=100&cod=260&punto=102 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+</html>

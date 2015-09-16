@@ -1,0 +1,592 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=197&inicio=60 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - Sobrecarga de operadores</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>73 - Sobrecarga de operadores</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p>La sobrecarga de operadores en C# permite redefinir la acción de un operador en relación a una clase.<br>
+Por ejemplo podemos plantear una clase Vector y luego redefinir el operador + para dicha clase. Luego cuando sumamos dos objetos de esa clase vector podemos generar otro objeto de dicha clase que resulte de la suma de sus componentes.</p>
+<p>El empleo de la sobrecarga de operadores debe hacerse con mucho cuidado de no desvirtuar el concepto que representa dicho operador (por ejemplo sobrecargar el operador "-" para la clase Vector y que genere la suma de sus componentes)</p>
+
+<h3>Problema 1:</h3>
+<p>Plantear una clase VectorEnteros que permita crear un vector de 5 elementos y sobrecargue el operador +<br>
+</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace SobrecargaOperadores1
+{
+    class VectorEnteros
+    {
+        private int []vec;
+
+        public VectorEnteros()
+        {
+            vec = new int[5];
+        }
+
+        public void Cargar()
+        {
+            for (int f = 0; f < vec.Length; f++)
+            {
+                Console.Write("Ingrese componente:");
+                vec[f] = int.Parse(Console.ReadLine());
+            }
+        }
+
+        public void Imprimir()
+        {
+            for (int f = 0; f < vec.Length; f++)
+            {
+                Console.Write(vec[f] + " ");
+            }
+            Console.WriteLine();
+        }
+
+        public static VectorEnteros operator +(VectorEnteros v1, VectorEnteros v2)
+        {
+            VectorEnteros su = new VectorEnteros();
+            for (int f = 0; f < su.vec.Length; f++)
+            {
+                su.vec[f] = v1.vec[f] + v2.vec[f];
+            }
+            return su;
+        }
+
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            VectorEnteros v1 = new VectorEnteros();
+            Console.WriteLine("Carga del primer vector");
+            v1.Cargar();
+            VectorEnteros v2 = new VectorEnteros();
+            Console.WriteLine("Carga del segundo vector");
+            v2.Cargar();
+            Console.WriteLine("Primer Vector");
+            v1.Imprimir();
+            Console.WriteLine("Segundo Vector");
+            v2.Imprimir();
+            VectorEnteros vt;
+            vt = v1 + v2;
+            Console.WriteLine("Vector Resultante");
+            vt.Imprimir();
+            Console.ReadKey();
+        }
+    }
+}
+</pre>
+<p>La sintaxis para sobrecargar un operador binario es:</p>
+<pre>
+public static {valor que retorna} operator {operador}(tipo-parametro nombre, tipo-parametro nombre)
+</pre>
+<p>En nuestro ejemplo el tipo de dato que retorna es un objeto de la clase VectorEnteros. El operador que estamos sobrecargando es el "+" y entre paréntesis indicamos los dos parámetros que llegan que son objetos de la clase VectorEnteros:</p>
+<pre>
+        public static VectorEnteros operator +(VectorEnteros v1, VectorEnteros v2)
+</pre>
+<p>Dentro del método creamos un objeto de la clase VectorEnteros:</p>
+<pre>
+            VectorEnteros su = new VectorEnteros();
+</pre>
+<p>Luego mediante un for cargamos cada elemento del vector de enteros con los datos de las componentes homólogas de los otros dos vectores:</p>
+<pre>
+            for (int f = 0; f < su.vec.Length; f++)
+            {
+                su.vec[f] = v1.vec[f] + v2.vec[f];
+            }
+</pre>
+<p>Como estamos en la clase VectorEnteros podemos acceder a los atributos privados vec.</p>
+<p>Finalmente retornamos el objeto de la clase VectorEnteros que acabamos de crear:</p>
+<pre>
+            return su;
+</pre>
+<p>El método completo queda codificado entonces con la siguiente sintaxis:</p>
+<pre>
+        public static VectorEnteros operator +(VectorEnteros v1, VectorEnteros v2)
+        {
+            VectorEnteros su = new VectorEnteros();
+            for (int f = 0; f < su.vec.Length; f++)
+            {
+                su.vec[f] = v1.vec[f] + v2.vec[f];
+            }
+            return su;
+        }
+</pre>
+<p>Luego cuando utilizamos el operador + con dos objetos de la clase VectorEnteros el resultado el otro objeto de la clase VectorEnteros:</p>
+<pre>
+
+            VectorEnteros vt;
+            vt = v1 + v2;
+            Console.WriteLine("Vector Resultante");
+            vt.Imprimir();
+</pre>
+<p>Como podemos ver no creamos el objeto vt sino la llamada al operador + con dos objetos de la clase VectorEnteros retorna un objeto de la clase VectorEnteros.</p>
+
+
+<h3>Problema 2:</h3>
+<p>Plantear una clase VectorEnteros que permita crear un vector de 5 elementos y sobrecargue el operador * de un objeto de la clase VectorEnteros con un valor de tipo int (el resultado debe ser otro objeto de la clase VectorEnteros donde cada componente se obtiene de multiplicar su valor por el valor entero)<br>
+</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace SobrecargaOperadores2
+{
+    class VectorEnteros
+    {
+        private int[] vec;
+
+        public VectorEnteros()
+        {
+            vec = new int[5];
+        }
+
+        public void Cargar()
+        {
+            for (int f = 0; f < vec.Length; f++)
+            {
+                Console.Write("Ingrese componente:");
+                vec[f] = int.Parse(Console.ReadLine());
+            }
+        }
+
+        public void Imprimir()
+        {
+            for (int f = 0; f < vec.Length; f++)
+            {
+                Console.Write(vec[f] + " ");
+            }
+            Console.WriteLine();
+        }
+
+        public static VectorEnteros operator *(VectorEnteros v1, int valor)
+        {
+            VectorEnteros resu = new VectorEnteros();
+            for (int f = 0; f < resu.vec.Length; f++)
+            {
+                resu.vec[f] = v1.vec[f] * valor;
+            }
+            return resu;
+        }
+
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            VectorEnteros v1 = new VectorEnteros();
+            Console.WriteLine("Carga del vector");
+            v1.Cargar();
+            VectorEnteros vr;
+            Console.WriteLine("Primer Vector");
+            v1.Imprimir();
+            vr = v1 * 10;
+            Console.WriteLine("Vector resultante");
+            vr.Imprimir();
+            Console.ReadKey();
+        }
+    }    
+}
+</pre>
+
+<p>Como vemos ahora estamos sobrecargando el operador "*". El método tiene dos parámetros uno de tipo VectorEnteros y otro de tipo int:</p>
+<pre>
+        public static VectorEnteros operator *(VectorEnteros v1, int valor)
+        {
+            VectorEnteros resu = new VectorEnteros();
+            for (int f = 0; f < resu.vec.Length; f++)
+            {
+                resu.vec[f] = v1.vec[f] * valor;
+            }
+            return resu;
+        }
+</pre>
+
+<p>No lo hemos hecho pero podríamos también sobrecargar el operador "*" y recibir como parámetro dos objetos de la clase VectorEnteros:</p>
+<pre>
+
+        public static VectorEnteros operator *(VectorEnteros v1, VectorEnteros v2)
+        {
+            VectorEnteros resu = new VectorEnteros();
+            for (int f = 0; f < resu.vec.Length; f++)
+            {
+                resu.vec[f] = v1.vec[f] * v2.vec[f];
+            }
+            return resu;
+        }
+</pre>
+
+<h2>Operación unaria</h2>
+<p>Los ejemplos anteriores mostraban la sobrecarga de operadores binarios (un operador y dos operandos), un operador unario afecta solo un operado.</p>
+
+
+<h3>Problema 3:</h3>
+<p>Sobrecargar el operador ++ en la clase VectorEnteros (se debe incrementar en uno cada elemento)<br>
+</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace SobrecargaOperadores3
+{
+    class VectorEnteros
+    {
+        private int[] vec;
+
+        public VectorEnteros()
+        {
+            vec = new int[5];
+        }
+
+        public void Cargar()
+        {
+            for (int f = 0; f < vec.Length; f++)
+            {
+                Console.Write("Ingrese componente:");
+                vec[f] = int.Parse(Console.ReadLine());
+            }
+        }
+
+        public void Imprimir()
+        {
+            for (int f = 0; f < vec.Length; f++)
+            {
+                Console.Write(vec[f] + " ");
+            }
+            Console.WriteLine();
+        }
+
+        public static VectorEnteros operator ++(VectorEnteros v)
+        {
+            VectorEnteros resu = new VectorEnteros();
+            for (int f = 0; f < v.vec.Length; f++)
+            {
+                resu.vec[f]=v.vec[f]+1;
+            }
+            return resu;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            VectorEnteros v1 = new VectorEnteros();
+            Console.WriteLine("Carga del vector");
+            v1.Cargar();
+            Console.WriteLine("Impresión del vector");
+            v1.Imprimir();
+            v1++;
+            Console.WriteLine("Impresión del vector luego del operador ++");
+            v1.Imprimir();
+            Console.ReadKey();
+        }
+    }
+}
+</pre>
+
+<p>Cuando se sobrecarga un operador unario tenemos un solo parámetro:</p>
+<pre>
+        public static VectorEnteros operator ++(VectorEnteros v)
+        {
+            VectorEnteros resu = new VectorEnteros();
+            for (int f = 0; f < v.vec.Length; f++)
+            {
+                resu.vec[f]=v.vec[f]+1;
+            }
+            return resu;
+        }
+</pre>
+<p>Para ejecutar el operador luego desde la Main:</p>
+<pre>
+
+            VectorEnteros v1 = new VectorEnteros();
+            Console.WriteLine("Carga del vector");
+            v1.Cargar();
+            Console.WriteLine("Impresión del vector");
+            v1.Imprimir();
+            v1++;
+</pre>
+
+
+
+<h2>Sobrecarga de operadores relacionales.</h2>
+<p>Los operadores relacionales devuelven un valor de tipo bool.</p>
+
+<p>Cuando se sobrecargan los operadores relacionales estamos obligados a implementar en pares, es decir si emplementamos el == debemos implementar el != en forma obligatoria (sino se genera un error sintáctico.</p>
+<p>Los pares son:</p>
+<ul>
+<li>
+== <br>
+!=
+</li>
+
+<li>
+&lt;<br>
+&gt;
+</li>
+
+<li>
+&lt;=<br>
+&gt;=
+</li>
+
+</ul>
+<h3>Problema 4:</h3>
+<p>Sobrecargar el operador == en la clase VectorEnteros (retornar true si los cinco enteros son iguales)<br>
+</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace SobrecargaOperadores4
+{
+    class VectorEnteros
+    {
+        private int[] vec;
+
+        public VectorEnteros()
+        {
+            vec = new int[5];
+        }
+
+        public void Cargar()
+        {
+            for (int f = 0; f < vec.Length; f++)
+            {
+                Console.Write("Ingrese componente:");
+                vec[f] = int.Parse(Console.ReadLine());
+            }
+        }
+
+        public void Imprimir()
+        {
+            for (int f = 0; f < vec.Length; f++)
+            {
+                Console.Write(vec[f] + " ");
+            }
+            Console.WriteLine();
+        }
+
+        public static bool operator ==(VectorEnteros v1, VectorEnteros v2)
+        {
+            for (int f = 0; f < v1.vec.Length; f++)
+            {
+                if (v1.vec[f] != v2.vec[f])
+                    return false;
+            }
+            return true;
+        }
+
+        public static bool operator !=(VectorEnteros v1, VectorEnteros v2)
+        {
+            for (int f = 0; f < v1.vec.Length; f++)
+            {
+                if (v1.vec[f] == v2.vec[f])
+                    return false;
+            }
+            return true;
+        }
+
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            VectorEnteros v1 = new VectorEnteros();
+            Console.WriteLine("Carga del primer vector");
+            v1.Cargar();
+            VectorEnteros v2 = new VectorEnteros();
+            Console.WriteLine("Carga del segundo vector");
+            v2.Cargar();
+            if (v1 == v2)
+                Console.Write("Todos los elementos son iguales");
+            else
+                Console.Write("No todos los elementos son iguales");
+            Console.ReadKey();
+        }
+    }
+}
+</pre>
+</div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="indexd6cc.html?inicio=60">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=197&inicio=60 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:43 GMT -->
+</html>

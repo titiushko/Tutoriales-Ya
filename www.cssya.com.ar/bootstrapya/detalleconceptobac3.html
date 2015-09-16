@@ -1,0 +1,233 @@
+
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/detalleconcepto.php?punto=26&codigo=141&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tipografía : colores según el contexto.</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="bootstrap,css, html, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de bootstrap.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>26 - Tipografía : colores según el contexto.</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Bootstrap dispone una serie de clases para definir colores del texto y fondo según el significado de dicho contenido. Esta característica es similar a las clases que vimos orientadas al significado de botones.</p>
+<p>Si accedemos al código fuente del archivo bootstrap.css podemos ubicar las clases referentes a colores en las tipografías:</p>
+<pre>
+.text-muted {
+  color: #777;
+}
+.text-primary {
+  color: #337ab7;
+}
+a.text-primary:hover {
+  color: #286090;
+}
+.text-success {
+  color: #3c763d;
+}
+a.text-success:hover {
+  color: #2b542c;
+}
+.text-info {
+  color: #31708f;
+}
+a.text-info:hover {
+  color: #245269;
+}
+.text-warning {
+  color: #8a6d3b;
+}
+a.text-warning:hover {
+  color: #66512c;
+}
+.text-danger {
+  color: #a94442;
+}
+a.text-danger:hover {
+  color: #843534;
+}
+.bg-primary {
+  color: #fff;
+  background-color: #337ab7;
+}
+a.bg-primary:hover {
+  background-color: #286090;
+}
+.bg-success {
+  background-color: #dff0d8;
+}
+a.bg-success:hover {
+  background-color: #c1e2b3;
+}
+.bg-info {
+  background-color: #d9edf7;
+}
+a.bg-info:hover {
+  background-color: #afd9ee;
+}
+.bg-warning {
+  background-color: #fcf8e3;
+}
+a.bg-warning:hover {
+  background-color: #f7ecb5;
+}
+.bg-danger {
+  background-color: #f2dede;
+}
+a.bg-danger:hover {
+  background-color: #e4b9b9;
+}
+</pre>
+<p>Veamos una página que implementa un conjunto de párrafos y enlaces utilizando estas clases:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+  &lt;head&gt; 
+    &lt;title&gt;Prueba de Bootstrap&lt;/title&gt; 
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt; 
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+  &lt;div class="container"&gt;
+    &lt;p class="text-muted"&gt;Mostramos un texto apagado.&lt;/p&gt;
+    &lt;p class="text-primary"&gt;Mostramos un texto importante.&lt;/p&gt;
+    &lt;p class="text-success"&gt;Mostramos un texto indicando éxito.&lt;/p&gt;
+    &lt;p class="text-info"&gt;Mostramos un texto de información.&lt;/p&gt;
+    &lt;p class="text-warning"&gt;Mostramos un texto que representa una advertencia.&lt;/p&gt;
+    &lt;p class="text-danger"&gt;Mostramos un texto que representa peligro.&lt;/p&gt;
+    &lt;hr&gt; 
+    &lt;p class="bg-primary"&gt;Mostramos un texto importante con el fondo coloreado.&lt;/p&gt;
+    &lt;p class="bg-success"&gt;Mostramos un texto indicando éxito con el fondo coloreado.&lt;/p&gt;
+    &lt;p class="bg-info"&gt;Mostramos un texto de información con el fondo coloreado.&lt;/p&gt;
+    &lt;p class="bg-warning"&gt;Mostramos un texto que representa una advertencia con el fondo coloreado.&lt;/p&gt;
+    &lt;p class="bg-danger"&gt;Mostramos un texto que representa peligro con el fondo coloreado.&lt;/p&gt;
+    &lt;hr&gt;
+    &lt;a class="text-primary" href="#"&gt;Enlace con un texto importante.&lt;/a&gt;&lt;br&gt;
+    &lt;a class="text-success" href="#"&gt;Enlace un texto indicando éxito.&lt;/a&gt;&lt;br&gt;
+    &lt;a class="text-info" href="#"&gt;Enlace un texto de información.&lt;/a&gt;&lt;br&gt;
+    &lt;a class="text-warning" href="#"&gt;Enlace un texto que representa una advertencia.&lt;/a&gt;&lt;br&gt;
+    &lt;a class="text-danger" href="#"&gt;Enlace un texto que representa peligro.&lt;/a&gt;
+    &lt;hr&gt; 
+    &lt;a class="bg-primary" href="#"&gt;Enlace con un texto importante con el fondo coloreado.&lt;/a&gt;&lt;br&gt;
+    &lt;a class="bg-success" href="#"&gt;Enlace con un texto indicando éxito con el fondo coloreado.&lt;/a&gt;&lt;br&gt;
+    &lt;a class="bg-info" href="#"&gt;Enlace con un texto de información con el fondo coloreado.&lt;/a&gt;&lt;br&gt;
+    &lt;a class="bg-warning" href="#"&gt;Enlace con un texto que representa una advertencia con el fondo coloreado.&lt;/a&gt;&lt;br&gt;
+    &lt;a class="bg-danger" href="#"&gt;Enlace con un texto que representa peligro con el fondo coloreado.&lt;/a&gt;
+
+  &lt;/div&gt;
+&lt;/body&gt; 
+&lt;/html&gt;
+</pre>
+<p>En pantalla tenemos un resultado similar a:</p>
+<img src="imagentema/foto036.jpg" border="0" alt="text-primary text-warning text-danger text-success bootstrap"><br> <h2><a target="_blank" href="ejecutar2587.html?cod=141">Ejecutar Ejemplo</a></h2><h2><a href="index28fa.html?inicio=20">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-32', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/detalleconcepto.php?punto=26&codigo=141&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:34 GMT -->
+</html>

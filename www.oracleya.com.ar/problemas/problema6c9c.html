@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/problemas/problema.php?inicio=0&cod=160&punto=2 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios propuestos : Crear tablas (create table - describe - all_tables - drop table)(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+pre {
+  text-align:left;
+  font-family:verdana,sans-serif;
+}
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+</style>
+
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;	
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=no,status=yes,toolbar=yes,location=yes');  	
+}
+
+function VentanaTeorico(codigo)
+{
+  alto=400;
+  window.open('../temarios/descripcion2ade4.html?cod='+codigo+'&origen=problema', '', 'top=0,left=0,width=800,height='+alto+',resizable=yes,scrollbars=yes,menubar=no');  	
+}
+
+function cambiar(nro)
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   if (nro==1)
+   {
+     if (lista[f].id=='solu1')
+       lista[f].style.display='block';
+   }
+   else
+     if (nro==2)
+     {
+       if (lista[f].id=='solu2')
+         lista[f].style.display='block';
+     }
+	   
+  }
+  if (nro==1)
+    document.getElementById('solucion1').style.display='none';
+  if (nro==2)
+    document.getElementById('solucion2').style.display='none';
+}
+
+</script>
+
+</head>
+
+<body>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>2 - Crear tablas (create table - describe - all_tables - drop table)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+	  <table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<b>Primer problema: </b><br><p>Necesita almacenar los datos de amigos en una tabla. Los datos que guardará serán: apellido, nombre, domicilio y teléfono.</p>
+<p>1- Elimine la tabla "agenda"<br>
+Si no existe, un mensaje indicará tal situación.</p>
+<p>2- Intente crear una tabla llamada "*agenda"<br>
+<pre>
+ create table *agenda(
+  apellido varchar2(30),
+  nombre varchar2(20),
+  domicilio varchar2(30),
+  telefono varchar2(11)
+ );
+</pre>
+aparece un mensaje de error indicando que usamos un caracter inválido ("*") para el nombre de la tabla.</p>
+<p>3- Cree una tabla llamada "agenda", debe tener los siguientes campos: apellido, varchar2(30); nombre, varchar2(20); domicilio, varchar2 (30) y telefono, varchar2(11)<br>
+Un mensaje indica que la tabla ha sido creada exitosamente.</p>
+<p>4- Intente crearla nuevamente.<br>
+Aparece mensaje de error indicando que el nombre ya lo tiene otro objeto.</p>
+<p>5- Visualice las tablas existentes (all_tables)<br>
+La tabla "agenda" aparece en la lista.</p>
+<p>6- Visualice la estructura de la tabla "agenda" (describe)<br>
+Aparece la siguiente tabla:</p>
+<pre>
+Name	Null	Type
+-----------------------
+APELLIDO	VARCHAR2(30)
+NOMBRE		VARCHAR2(20)
+DOMICILIO	VARCHAR2(30)
+TELEFONO	VARCHAR2(11)	
+</pre><a href="javascript:cambiar(1)" id="solucion1">Ver solución</a>
+<br><br>
+<pre id="solu1" class="recuadrooculto">
+ drop table agenda;
+
+ create table *agenda(
+  apellido varchar2(30),
+  nombre varchar2(20),
+  domicilio varchar2(30),
+  telefono varchar2(11)
+ );
+
+ create table agenda(
+  apellido varchar2(30),
+  nombre varchar2(20),
+  domicilio varchar2(30),
+  telefono varchar2(11)
+ );
+
+ create table agenda(
+  apellido varchar2(30),
+  nombre varchar2(20),
+  domicilio varchar2(30),
+  telefono varchar2(11)
+ );
+
+ select *from all_tables;
+
+ describe agenda;
+</pre>
+        <p>&nbsp;</p>
+  
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+	
+	
+
+<b>Segundo problema: </b><br><p>Necesita almacenar información referente a los libros de su biblioteca personal. Los datos que guardará serán: título del libro, nombre del autor y nombre de la editorial.</p>
+<p>1- Elimine la tabla "libros"<br>
+Si no existe, un mensaje indica tal situación.</p>
+<p>2- Verifique que la tabla "libros" no existe (all_tables)<br>
+No aparece en la lista.</p>
+<p>3- Cree una tabla llamada "libros". Debe definirse con los siguientes campos: titulo, varchar2(20); autor, varchar2(30) y editorial, varchar2(15)</p>
+<p>4- Intente crearla nuevamente:<br>
+Aparece mensaje de error indicando que existe un objeto con el nombre "libros".</p>
+<p>5- Visualice las tablas existentes</p>
+<p>6- Visualice la estructura de la tabla "libros":<br>
+Aparece "libros" en la lista.</p>
+<p>7- Elimine la tabla</p>
+<p>8- Intente eliminar la tabla<br>
+Un mensaje indica que no existe.</p>
+<br>
+<a href="javascript:cambiar(2)" id="solucion2">Ver solución</a>
+<pre id="solu2" class="recuadrooculto">
+ drop table libros;
+
+ select *from all_tables;
+
+ create table libros(
+  titulo varchar2(20),
+  autor varchar2(30),
+  editorial varchar2(15)
+ );
+
+ create table libros(
+  titulo varchar2(20),
+  autor varchar2(30),
+  editorial varchar2(15)
+ );
+
+ select *from all_tables;
+
+ describe libros;
+
+ drop table libros;
+
+ drop table libros;
+</pre>
+
+		
+<br>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/problemas/problema.php?inicio=0&cod=160&punto=2 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:25 GMT -->
+</html>

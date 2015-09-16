@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=10&cod=22&punto=18 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:07:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de CSS - Temarios</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<style>
+
+
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>18 - Propiedades relacionadas a listas.</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Las listas se utilizan para enumerar una serie de elementos, se utiliza el elemento HTML ul (Unordered List), y cada item de la lista con el elemento HTML li (List Item).</p>
+<p>Las CSS nos permiten configurar las listas por medio de tres propiedades:</p>
+<pre>
+list-style-type
+list-style-position
+list-style-image
+</pre>
+<p>A list-style-type puede asignársele alguno de estos valores:</p>
+<pre>
+none
+disc
+circle
+square
+decimal
+decimal-leading-zero
+lower-roman
+upper-roman
+lower-alpha
+upper-alpha
+</pre>
+<p>Los valores de list-style-position:</p>
+<pre>
+inside
+outside
+</pre> 
+<p>Los valores de list-style-image:</p>
+<pre>
+none
+url
+</pre>
+<p>Veamos un ejemplo que prueba todos los valores posibles que puede tomar la propiedad list-style-type:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;link rel=&quot;StyleSheet&quot; href=&quot;estilos.css&quot; type=&quot;text/css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;ul class=&quot;vacio&quot;&gt;
+&lt;li&gt;Brasil&lt;/li&gt;
+&lt;li&gt;Uruguay&lt;/li&gt;
+&lt;li&gt;Argentina&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class=&quot;circulorelleno&quot;&gt;
+&lt;li&gt;Brasil&lt;/li&gt;
+&lt;li&gt;Uruguay&lt;/li&gt;
+&lt;li&gt;Argentina&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class=&quot;circulovacio&quot;&gt;
+&lt;li&gt;Brasil&lt;/li&gt;
+&lt;li&gt;Uruguay&lt;/li&gt;
+&lt;li&gt;Argentina&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class=&quot;cuadrado&quot;&gt;
+&lt;li&gt;Brasil&lt;/li&gt;
+&lt;li&gt;Uruguay&lt;/li&gt;
+&lt;li&gt;Argentina&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class=&quot;decimal&quot;&gt;
+&lt;li&gt;Brasil&lt;/li&gt;
+&lt;li&gt;Uruguay&lt;/li&gt;
+&lt;li&gt;Argentina&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class=&quot;romanominuscula&quot;&gt;
+&lt;li&gt;Brasil&lt;/li&gt;
+&lt;li&gt;Uruguay&lt;/li&gt;
+&lt;li&gt;Argentina&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class=&quot;romanomayuscula&quot;&gt;
+&lt;li&gt;Brasil&lt;/li&gt;
+&lt;li&gt;Uruguay&lt;/li&gt;
+&lt;li&gt;Argentina&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class=&quot;letrasminusculas&quot;&gt;
+&lt;li&gt;Brasil&lt;/li&gt;
+&lt;li&gt;Uruguay&lt;/li&gt;
+&lt;li&gt;Argentina&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class=&quot;letrasmayusculas&quot;&gt;
+&lt;li&gt;Brasil&lt;/li&gt;
+&lt;li&gt;Uruguay&lt;/li&gt;
+&lt;li&gt;Argentina&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Luego la hoja de estilo es:</p>
+<pre class="recuadro">
+.vacio{
+  list-style-type:none;
+}
+.circulorelleno{
+  list-style-type:disc;
+}
+.decimal{
+  list-style-type:decimal;
+}
+.romanominuscula{
+  list-style-type:lower-roman;
+}
+.romanomayuscula{
+  list-style-type:upper-roman;
+}
+.circulovacio{
+  list-style-type:circle;
+}
+.cuadrado{
+  list-style-type:square;
+}
+.letrasminusculas{
+  list-style-type:lower-alpha;
+}
+.letrasmayusculas{
+  list-style-type:upper-alpha;
+}
+</pre>
+<p>Hemos definido un conjunto de clases para aplicarlas a las listas de HTML.</p>
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../index4231.html?inicio=10">Retornar</a></h2>   
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=10&cod=22&punto=18 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:07:22 GMT -->
+</html>

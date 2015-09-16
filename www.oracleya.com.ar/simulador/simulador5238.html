@@ -1,0 +1,297 @@
+        
+
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=25&cod=198&punto=41 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios resueltos : Restricciones: validación y estados (validate - novalidate - enable - disable)(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+<body bgcolor="#CCFFCC">
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>41 - Restricciones: validación y estados (validate - novalidate - enable - disable)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Trabajamos con la tabla "libros" de una librería.<br>
+Eliminamos la tabla:</p>
+<pre>
+  drop table libros;
+</pre>
+<p>La creamos e ingresamos algunos registros:</p>
+<pre>
+ create table libros(
+  codigo number(5),
+  titulo varchar2(40),
+  autor varchar2(30),
+  editorial varchar2(15),
+  precio number(5,2)
+ );
+
+ insert into libros values (1,'Uno','Bach','Planeta',22);
+ insert into libros values (2,'El quijote','Cervantes','Emece',15);
+ insert into libros values (2,'Aprenda PHP','Mario Molina','Siglo XXI',-40);
+</pre>
+<p>Intentamos agregar una restricción "primary key" para asegurar que los códigos no se repitan, pero como ya tenemos almacenado registros que infringen la restricción, Oracle nos mostrará un mensaje de error:</p>
+<pre>
+ alter table libros
+ add constraint PK_libros_codigo
+ primary key (codigo);
+</pre>
+<p>Vamos a especificar que no haya comprobación de datos existentes agregando "disable" y "novalidate":</p>
+<pre>
+ alter table libros
+ add constraint PK_libros_codigo
+ primary key (codigo) disable novalidate;
+</pre>
+<p>Veamos lo que nos informa "user_constraints":</p>
+<pre>
+ select constraint_name, constraint_type, status, validated
+  from user_constraints
+  where table_name='LIBROS';
+</pre>
+<p>Aparece la siguiente tabla:</p>
+<pre>
+CONSTRAINT_NAME		CONSTRAINT_TYPE		STATUS		VALIDATED
+--------------------------------------------------------------------------
+PK_LIBROS_CODIGO	P			DISABLED	NOT VALIDATED
+</pre>
+<p>La columna "status" nos informa que está deshabilitada (Disabled).</p>
+
+<p>Si ingresamos un registro con código existente, Oracle lo permite, porque la restricción está en estado "disabled":</p>
+<pre>
+ insert into libros values (2,'Momo','Michael Ende','Alfaragua',25);
+</pre>
+<p>Intentamos habilitar la restricción sin verificar los datos ya almacenados:</p>
+<pre>
+ alter table libros
+  enable novalidate constraint PK_libros_codigo;
+</pre>
+<p>No lo permite, aun cuando especificamos que no valide los datos existentes, Oracle realiza la verificación igualmente.</p>
+
+<p>Eliminamos los registros con clave duplicada:</p>
+<pre>
+ delete libros where titulo='El quijote';
+ delete libros where titulo='Momo';
+</pre>
+<p>Ahora Oracle permite habilitar la restricción:</p>
+<pre>
+ alter table libros
+  enable novalidate constraint PK_libros_codigo;
+</pre>
+<p>Si intentamos actualizar un registro repitiendo la clave primaria, Oracle no lo permite:</p>
+<pre>
+ insert into libros values (2,'Momo','Michael Ende','Alfaragua',25);
+</pre>
+<p>Veamos lo que nos informa "user_constraints":</pre>
+<pre>
+ select constraint_name, constraint_type, status, validated
+  from user_constraints
+  where table_name='LIBROS';
+</pre>
+<p>Aparece la siguiente tabla:</p>
+<pre>
+CONSTRAINT_NAME		CONSTRAINT_TYPE		STATUS		VALIDATED
+--------------------------------------------------------------------------
+PK_LIBROS_CODIGO	P			ENABLED		NOT VALIDATED
+</pre>
+<p>Intentamos agregamos una restricción "check" que no permita valores negativos para el precio:</p>
+<pre>
+ alter table libros
+ add constraint CK_libros_precio
+ check(precio>=0);
+</pre>
+<p>Oracle no lo permite porque, por defecto, la opción es "validate" y existen precios que violan la restricción que intentamos establecer.</p>
+
+<p>Agregamos la restricción especificando que no valide los datos almacenados:</p>
+<pre>
+ alter table libros
+ add constraint CK_libros_precio
+ check(precio>=0) novalidate;
+</pre>
+<p>Veamos el estado de la restricción de control:</p>
+<pre>
+ select constraint_type, status, validated
+  from user_constraints
+  where table_name='LIBROS' and
+  constraint_name='CK_LIBROS_PRECIO';
+</pre>
+<p>El resultado es el siguiente:</p>
+<pre>
+CONSTRAINT_TYPE		STATUS		VALIDATED
+-----------------------------------------------------
+C			ENABLED		NOT VALIDATED
+</pre>
+<p>Si intentamos ingresar un valor negativo para el precio, aparecerá un mensaje de error, porque la restricción de control creada está habilitada:</p>
+<pre>
+ insert into libros values (3,'Momo','Michael Ende','Alfaragua',-25);
+</pre>
+<p>Deshabilitamos la restricción "CK_libros_precio":</p>
+<pre>
+ alter table libros
+  disable constraint CK_libros_precio;
+</pre>
+<p>Veamos el estado actual:</p>
+<pre>
+ select constraint_type, status, validated
+  from user_constraints
+  where table_name='LIBROS' and
+  constraint_name='CK_LIBROS_PRECIO';
+</pre>
+<p>Nos muestra que está deshabilitada y no valida los datos existentes.</p>
+
+<p>Ahora si podemos ingresar el registro:</p>
+<pre>
+ insert into libros values (3,'Momo','Michael Ende','Alfaragua',-25);
+</pre>
+<p>Habilitamos la restricción para futuros ingresos pero no para los existentes:</p>
+<pre>
+ alter table libros
+  enable novalidate constraint CK_libros_precio;
+</pre>
+<p>Note que Oracle lo permite, no valida los datos existentes, pero si fuera otro tipo de restricción, no lo permitiría.</p>
+
+<p>Consultamos "user_constraints":</p>
+<pre>
+ select constraint_type, status, validated
+  from user_constraints
+  where table_name='LIBROS' and
+  constraint_name='CK_LIBROS_PRECIO';
+</pre>
+<p>Nos muestra que está habilitada y no valida los datos existentes.</p>
+
+        <form name="formulario" action="http://www.sqlserverya.com.ar/aspx/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+        <br>
+   <h2><a href="../indexfc77.html?inicio=25">Retornar</a></h2>   
+        
+	<br>
+   
+
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=25&cod=198&punto=41 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:36 GMT -->
+</html>
+

@@ -1,0 +1,91 @@
+<HTML>
+<!-- Mirrored from www.htmlya.com.ar/simulador/editor.php?cod=88 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:04:54 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<HEAD>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<script languaje="javascript" src="editor.js" type="text/javascript"></script>
+<STYLE>
+.editor {
+	BORDER-RIGHT: medium none;
+	PADDING-RIGHT: 0px; 
+	BORDER-TOP: medium none; 
+	PADDING-LEFT: 0px; 
+	PADDING-BOTTOM: 0px; 
+	MARGIN: 0px; 
+	BORDER-LEFT: medium none; 
+	PADDING-TOP: 0px; 
+	BORDER-BOTTOM: medium none;
+	WIDTH: 100%; 
+	HEIGHT: 100%
+}
+HTML {
+	OVERFLOW: hidden
+}
+BODY {
+	OVERFLOW: hidden
+}
+</STYLE>
+</HEAD>
+<BODY class="editor">
+<FORM class="editor" id="formulario" name="formulario">
+<TEXTAREA class="editor" style="background-color:#F9F7ED" id="paginahtml" name="paginahtml" wrap="hard">
+<!DOCTYPE html>
+<html>
+<head>
+<title>Título de la página</title>
+</head>
+<body>
+<h1>Tutorial de MySQL</h1>
+<a href="#introduccion">Introducción</a><br>
+<a href="#mostrarbasedatos">show databases</a><br>
+<a href="#creaciontabla">Creación de una tabla y mostrar sus campos</a><br>
+<a href="#cargarregistros">Carga de registros a una tabla y su recuperación</a><br>
+<a name="#introduccion"></a>
+<h2>Introducción</h2>
+<p>
+SQL, Structure Query Language (Lenguaje de Consulta Estructurado) es un lenguaje de programacion para trabajar con base de datos relacionales como MySQL, Oracle, etc.<br>
+MySQL es un interpretador de SQL, es un servidor de base de datos.<br>
+MySQL permite crear base de datos y tablas, insertar datos, modificarlos, eliminarlos, ordenarlos, hacer consultas y realizar muchas operaciones, etc., resumiendo: administrar bases de datos.<br>
+Ingresando instrucciones en la linea de comandos o embebidas en un lenguaje como PHP nos comunicamos con el servidor. Cada sentencia debe acabar con punto y coma (;).<br>
+La sensibilidad a mayúsculas y minúsculas, es decir, si hace diferencia entre ellas, depende del sistema operativo, Windows no es sensible, pero Linux si. Por ejemplo Windows interpreta igualmente las siguientes sentencias:<br>
+	create database administracion;<br>
+	Create DataBase administracion;<br>
+Pero Linux interpretará como un error la segunda.<br>
+Se recomienda usar siempre minúsculas. Es más el sitio mysqlya.com.ar está instalado sobre un servidor Linux por lo que todos los ejercicios deberán respetarse mayúsculas y minúsculas.
+</p>
+<a name="mostrarbasedatos"></a>
+<h2>show databases</h2>
+<p>
+Una base de datos es un conjunto de tablas.<br>
+Una base de datos tiene un nombre con el cual accederemos a ella.<br>
+Vamos a trabajar en una base de datos ya creada en el sitio, llamada "administracion".<br>
+Para que el servidor nos muestre las bases de datos existentes, se lo solicitamos enviando la instrucción:<br>
+show databases;<br>
+Nos mostrará los nombres de las bases de datos, debe aparecer en este sitio "administracion".<br>
+</p>
+<a name="creaciontabla"></a>
+<h2>Creación de una tabla y mostrar sus campos</h2>
+<p>
+Una base de datos almacena sus datos en tablas.<br>
+Una tabla es una estructura de datos que organiza los datos en columnas y filas; cada columna es un campo (o atributo) y cada fila, un registro. La intersección de una columna con una fila, contiene un dato específico, un solo valor.<br>
+Cada registro contiene un dato por cada columna de la tabla.<br>
+Cada campo (columna) debe tener un nombre. El nombre del campo hace referencia a la información que almacenará.<br>
+Cada campo (columna) también debe definir el tipo de dato que almacenará.<br>
+</p>
+<a name="cargarregistros"></a>
+<h2>Carga de registros a una tabla y su recuperación</h2>
+<p>
+Usamos "insert into". Especificamos los nombres de los campos entre paréntesis y separados por comas y luego los valores para cada campo, también entre paréntesis y separados por comas.<br>
+Es importante ingresar los valores en el mismo orden en que se nombran los campos, si ingresamos los datos en otro orden, no aparece un mensaje de error y los datos se guardan de modo incorrecto.<br>
+Note que los datos ingresados, como corresponden a campos de cadenas de caracteres se colocan entre comillas simples. Las comillas simples son OBLIGATORIAS.
+</p>
+</body>
+
+<!-- Mirrored from www.htmlya.com.ar/simulador/editor.php?cod=88 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:04:54 GMT -->
+</html>
+</textarea>
+</form>
+</BODY>
+</html>
+
+

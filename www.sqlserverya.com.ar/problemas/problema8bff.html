@@ -1,0 +1,447 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.sqlserverya.com.ar/problemas/problema.php?inicio=100&cod=114&punto=108 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de SQL Server : Problemas Resueltos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+pre {
+  text-align:left;
+  font-family:verdana,sans-serif;
+}
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+</style>
+
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;	
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=no,status=yes,toolbar=yes,location=yes');  	
+}
+
+function VentanaTeorico(codigo)
+{
+  alto=400;
+  window.open('../temarios/descripcion2ade4.html?cod='+codigo+'&origen=problema', '', 'top=0,left=0,width=800,height='+alto+',resizable=yes,scrollbars=yes,menubar=no');  	
+}
+
+function cambiar(nro)
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   if (nro==1)
+   {
+     if (lista[f].id=='solu1')
+       lista[f].style.display='block';
+   }
+   else
+     if (nro==2)
+     {
+       if (lista[f].id=='solu2')
+         lista[f].style.display='block';
+     }
+	   
+  }
+  if (nro==1)
+    document.getElementById('solucion1').style.display='none';
+  if (nro==2)
+    document.getElementById('solucion2').style.display='none';
+}
+
+</script>
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>108 - Vistas (modificar datos de una tabla a través de vistas)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<b>Primer problema: </b><br><pre>
+Un club dicta cursos de distintos deportes. Almacena la información en varias tablas.
+1- Elimine las tabla "inscriptos", "socios" y "cursos", si existen:
+ if object_id('inscriptos') is not null  
+  drop table inscriptos;
+ if object_id('socios') is not null  
+  drop table socios;
+ if object_id('cursos') is not null  
+  drop table cursos;
+
+2- Cree las tablas:
+ create table socios(
+  documento char(8) not null,
+  nombre varchar(40),
+  domicilio varchar(30),
+  constraint PK_socios_documento
+   primary key (documento)
+ );
+
+ create table cursos(
+  numero tinyint identity,
+  deporte varchar(20),
+  dia varchar(15),
+   constraint CK_inscriptos_dia check (dia in('lunes','martes','miercoles','jueves','viernes','sabado')),
+  profesor varchar(20),
+  constraint PK_cursos_numero
+   primary key (numero),
+ );
+
+ create table inscriptos(
+  documentosocio char(8) not null,
+  numero tinyint not null,
+  matricula char(1),
+  constraint PK_inscriptos_documento_numero
+   primary key (documentosocio,numero),
+  constraint FK_inscriptos_documento
+   foreign key (documentosocio)
+   references socios(documento)
+   on update cascade,
+  constraint FK_inscriptos_numero
+   foreign key (numero)
+   references cursos(numero)
+   on update cascade
+  );
+
+3- Ingrese algunos registros para todas las tablas:
+ insert into socios values('30000000','Fabian Fuentes','Caseros 987');
+ insert into socios values('31111111','Gaston Garcia','Guemes 65');
+ insert into socios values('32222222','Hector Huerta','Sucre 534');
+ insert into socios values('33333333','Ines Irala','Bulnes 345');
+
+ insert into cursos values('tenis','lunes','Ana Acosta');
+ insert into cursos values('tenis','martes','Ana Acosta');
+ insert into cursos values('natacion','miercoles','Ana Acosta');
+ insert into cursos values('natacion','jueves','Carlos Caseres');
+ insert into cursos values('futbol','sabado','Pedro Perez');
+ insert into cursos values('futbol','lunes','Pedro Perez');
+ insert into cursos values('basquet','viernes','Pedro Perez');
+
+ insert into inscriptos values('30000000',1,'s');
+ insert into inscriptos values('30000000',3,'n');
+ insert into inscriptos values('30000000',6,null);
+ insert into inscriptos values('31111111',1,'s');
+ insert into inscriptos values('31111111',4,'s');
+ insert into inscriptos values('32222222',1,'s');
+ insert into inscriptos values('32222222',7,'s');
+
+4- Realice un join para mostrar todos los datos de todas las tablas, sin repetirlos:
+ select documento,nombre,domicilio,c.numero,deporte,dia, profesor,matricula
+  from socios as s
+  join inscriptos as i
+  on s.documento=documentosocio
+  join cursos as c
+  on c.numero=i.numero;
+
+5- Elimine, si existe, la vista "vista_cursos":
+ if object_id('vista_cursos') is not null
+  drop view vista_cursos;
+
+6- Cree la vista "vista_cursos" que muestre el número, deporte y día de todos los cursos.
+
+7- Consulte la vista ordenada por deporte.
+
+8- Ingrese un registro en la vista "vista_cursos" y vea si afectó a "cursos".
+Puede realizarse el ingreso porque solamente afecta a una tabla base.
+
+9- Actualice un registro sobre la vista y vea si afectó a la tabla "cursos".
+Puede realizarse la actualización porque solamente afecta a una tabla base.
+
+10- Elimine un registro de la vista para el cual no haya inscriptos y vea si afectó a "cursos".
+Puede realizarse la eliminación porque solamente afecta a una tabla base.
+
+11- Intente eliminar un registro de la vista para el cual haya inscriptos.
+No lo permite por la restricción "foreign key".
+
+12- Elimine la vista "vista_inscriptos" si existe y créela para que muestre el documento y nombre 
+del socio, el numero de curso, el deporte y día de los cursos en los cuales está inscripto.
+
+13- Intente ingresar un registro en la vista.
+No lo permite porque la modificación afecta a más de una tabla base. 
+
+14- Actualice un registro de la vista.
+Lo permite porque la modificación afecta a una sola tabla base.
+
+15- Vea si afectó a la tabla "socios":
+ select *from socios;
+
+16- Intente actualizar el documento de un socio.
+No lo permite por la restricción.
+
+17- Intente eliminar un registro de la vista.
+No lo permite porque la vista incluye varias tablas.
+</pre><a href="javascript:cambiar(1)" id="solucion1">Ver solución</a>
+<br><br>
+<pre id="solu1" class="recuadrooculto">
+ if object_id('inscriptos') is not null  
+  drop table inscriptos;
+ if object_id('socios') is not null  
+  drop table socios;
+ if object_id('cursos') is not null  
+  drop table cursos;
+
+ create table socios(
+  documento char(8) not null,
+  nombre varchar(40),
+  domicilio varchar(30),
+  constraint PK_socios_documento
+   primary key (documento)
+ );
+
+ create table cursos(
+  numero tinyint identity,
+  deporte varchar(20),
+  dia varchar(15),
+   constraint CK_inscriptos_dia check (dia in('lunes','martes','miercoles','jueves','viernes','sabado')),
+  profesor varchar(20),
+  constraint PK_cursos_numero
+   primary key (numero),
+ );
+
+ create table inscriptos(
+  documentosocio char(8) not null,
+  numero tinyint not null,
+  matricula char(1),
+  constraint PK_inscriptos_documento_numero
+   primary key (documentosocio,numero),
+  constraint FK_inscriptos_documento
+   foreign key (documentosocio)
+   references socios(documento)
+   on update cascade,
+  constraint FK_inscriptos_numero
+   foreign key (numero)
+   references cursos(numero)
+   on update cascade
+  );
+
+ insert into socios values('30000000','Fabian Fuentes','Caseros 987');
+ insert into socios values('31111111','Gaston Garcia','Guemes 65');
+ insert into socios values('32222222','Hector Huerta','Sucre 534');
+ insert into socios values('33333333','Ines Irala','Bulnes 345');
+
+ insert into cursos values('tenis','lunes','Ana Acosta');
+ insert into cursos values('tenis','martes','Ana Acosta');
+ insert into cursos values('natacion','miercoles','Ana Acosta');
+ insert into cursos values('natacion','jueves','Carlos Caseres');
+ insert into cursos values('futbol','sabado','Pedro Perez');
+ insert into cursos values('futbol','lunes','Pedro Perez');
+ insert into cursos values('basquet','viernes','Pedro Perez');
+
+ insert into inscriptos values('30000000',1,'s');
+ insert into inscriptos values('30000000',3,'n');
+ insert into inscriptos values('30000000',6,null);
+ insert into inscriptos values('31111111',1,'s');
+ insert into inscriptos values('31111111',4,'s');
+ insert into inscriptos values('32222222',1,'s');
+ insert into inscriptos values('32222222',7,'s');
+
+ select documento,nombre,domicilio,c.numero,deporte,dia, profesor,matricula
+  from socios as s
+  join inscriptos as i
+  on s.documento=documentosocio
+  join cursos as c
+  on c.numero=i.numero;
+
+ if object_id('vista_cursos') is not null
+  drop view vista_cursos;
+
+ create view vista_cursos
+  as
+  select numero,deporte,dia
+   from cursos;
+
+ select *from vista_cursos order by deporte;
+
+ insert into vista_cursos values('futbol','martes');
+ select *from cursos;
+
+ update vista_cursos set dia='miercoles' where numero=8;
+ select *from cursos;
+
+ delete from vista_cursos where numero=8;
+ select *from cursos;
+
+ delete from vista_cursos where numero=1;
+
+ if object_id('vista_inscriptos') is not null
+  drop view vista_inscriptos;
+ create view vista_inscriptos
+  as
+  select i.documentosocio,s.nombre,i.numero,c.deporte,dia
+  from inscriptos as i
+  join socios as s
+  on s.documento=documentosocio
+  join cursos as c
+  on c.numero=i.numero;
+
+ insert into vista_inscriptos values('32222222','Hector Huerta',6,'futbol','lunes');
+
+ update vista_inscriptos set nombre='Fabio Fuentes' where nombre='Fabian Fuentes';
+
+ select *from socios;
+
+ update vista_inscriptos set documentosocio='30000111' where documentosocio='30000000';
+
+ delete from vista_inscriptos where documentosocio='30000111' and deporte='tenis';
+</pre>
+<form name="formulario" action="http://scratchya.com.ar/procesador.aspx" target="ventanaForm" 
+onsubmit="abrirVentana()" method="post" >
+           
+          <textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off"></textarea>
+    <br>
+ <input type="submit"  value="Ejecutar  los comandos SQL">
+
+    <input type="button" onClick="javascript:formulario.programa.value=''" value="Borrar comando.">
+
+
+    <br>
+	<br>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+</form>
+        <p>&nbsp;</p>
+  
+<table width="650px">
+<tr>
+<td align="center">	
+
+
+
+</td>
+</tr>
+</table>		
+	
+	
+
+
+
+   <h2><a href="../indexf6ce.html?inicio=100">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-11";
+urchinTracker();
+</script>
+
+</body>
+
+<!-- Mirrored from www.sqlserverya.com.ar/problemas/problema.php?inicio=100&cod=114&punto=108 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:33 GMT -->
+</html>

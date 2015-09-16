@@ -1,0 +1,247 @@
+        
+
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=75&cod=239&punto=81 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios resueltos : Crear tabla a partir de otra (create table- select)(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+<body bgcolor="#CCFFCC">
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>81 - Crear tabla a partir de otra (create table- select)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Tenemos la tabla "libros" de una librería y queremos crear una tabla llamada "editoriales" que contenga los nombres de las editoriales.</p>
+<p>Eliminamos las tablas "libros" y "editoriales":</p>
+<pre>
+ drop table libros;
+ drop table editoriales;
+</pre>
+<p>Creamos la tabla "libros":</p>
+<pre>
+ create table libros( 
+  codigo number(5),
+  titulo varchar2(40) not null,
+  autor varchar2(30),
+  editorial varchar2(20),
+  precio number(5,2),
+  primary key(codigo)
+ ); 
+</pre>
+<p>Ingresamos algunos registros;</p>
+<pre>
+ insert into libros values(1,'Uno','Richard Bach','Planeta',15);
+ insert into libros values(2,'El aleph','Borges','Emece',25);
+ insert into libros values(3,'Matematica estas ahi','Paenza','Nuevo siglo',18);
+ insert into libros values(4,'Aprenda PHP','Mario Molina','Nuevo siglo',45);
+ insert into libros values(5,'Ilusiones','Richard Bach','Planeta',14);
+ insert into libros values(6,'Java en 10 minutos','Mario Molina','Nuevo siglo',50);
+</pre>
+<p>Creamos una tabla llamada "editoriales" que contenga los nombres de las editoriales obteniendo tales nombres de la tabla "libros":</p>
+<pre>
+ create table editoriales as
+  (select distinct editorial as nombre
+   from libros);
+</pre>
+<p>Veamos la nueva tabla:</p>
+<pre>
+ select *from editoriales;
+</pre>
+<p>Necesitamos una nueva tabla llamada "librosporeditorial" que contenga la cantidad de libros de cada editorial. Primero eliminamos la tabla:</p>
+<pre>
+  drop table cantidadporeditorial;
+</pre>
+<p>Creamos la nueva tabla empleando una subconsulta:</p>
+<pre>
+ create table cantidadporeditorial as
+  (select editorial as nombre,count(*) as cantidad
+  from libros
+  group by editorial);
+</pre>
+<p>Veamos los registros de la nueva tabla:</p>
+<pre>
+ select *from cantidadporeditorial;
+</pre>
+<p>La tabla "cantidadporeditorial" se ha creado con el campo llamado "nombre" seleccionado del campo "editorial" de "libros" y con el campo "cantidad" con el valor calculado con count(*) de la tabla "libros".</p>
+
+<p>Queremos una tabla llamada "ofertas20" que contenga los mismos campos que "libros" y guarde los libros con un precio menor o igual a 20. Primero eliminamos la tabla "ofertas20":</p>
+<pre>
+  drop table ofertas20;
+</pre>
+<p>Creamos "ofertas20" e insertamos la consulta de "libros":</p>
+<pre>
+ create table ofertas20 as
+  (select *from libros
+  where precio<=20)
+  order by precio desc;
+</pre>
+<p>La consulta anterior retorna los libros de la tabla "libros" cuyo precio es menor o igual a 20 y los almacena en la nueva tabla ("ofertas20") ordenados en forma descendente por precio. Note que no se listan los campos a extraer, se coloca un asterisco para indicar que se incluyen todos los campos.</p>
+
+<p>Veamos los registros de la nueva tabla:</p>
+<pre>
+ select *from ofertas20;
+</pre>
+<p>Agregamos una columna a la tabla "editoriales" que contiene la ciudad en la cual está la casa central de cada editorial:</p>
+<pre>
+ alter table editoriales add ciudad varchar2(30);
+</pre>
+<p>Actualizamos dicho campo:</p>
+<pre>
+ update editoriales set ciudad='Cordoba' where nombre='Planeta';
+ update editoriales set ciudad='Cordoba' where nombre='Emece';
+ update editoriales set ciudad='Buenos Aires' where nombre='Nuevo siglo';
+</pre>
+<p>Queremos una nueva tabla llamada "librosdecordoba" que contenga los títulos y autores de los libros de editoriales de Cordoba. En primer lugar, la eliminamos:</p>
+<pre>
+ drop table librosdecordoba;
+</pre>
+<p>Consultamos las 2 tablas y guardamos el resultado en la nueva tabla que estamos creando:</p>
+<pre>
+ create table librosdecordoba as
+  (select titulo,autor from libros
+  join editoriales
+  on editorial=nombre 
+  where ciudad='Cordoba');
+</pre>
+<p>Consultamos la nueva tabla:</p>
+<pre>
+ select *from librosdecordoba;
+</pre>
+
+        <form name="formulario" action="http://www.sqlserverya.com.ar/aspx/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+        <br>
+   <h2><a href="../indexa021.html?inicio=75">Retornar</a></h2>   
+        
+	<br>
+   
+
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=75&cod=239&punto=81 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+</html>
+

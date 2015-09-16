@@ -1,0 +1,609 @@
+<!doctype html>
+<html>
+
+<!-- Mirrored from www.javascriptya.com.ar/problemas/problema.php?cod=14&inicio=10 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+    <title>JavaScript Ya</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="estilos.css" rel="stylesheet">
+    <link href='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css' rel='stylesheet'>     
+    <script src='../../ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script> 
+    <script src='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>     
+    
+<script type="text/javascript">	
+$(document).ready(function(){
+  var opciones = {
+                   select:tabSeleccionado
+                 };                 
+  $("#pesta").tabs(opciones);
+});
+
+function tabSeleccionado(event,tab) {
+  if (tab.index==2) {
+    var d = parent.documentodinamico.document; 	
+    d.open();
+	d.write(String.fromCharCode(60)+"script ");
+	d.write(' src="debug.js">');
+	d.write(String.fromCharCode(60)+"/script"+String.fromCharCode(62));
+	d.write($('#editor').val());
+    d.close();	
+  }	
+}
+
+
+</script>
+	
+<style type="text/css">	
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>	
+	
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>	
+	
+</head>
+<body>
+
+
+
+
+<h1>Estructura repetitiva (for)</h1>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* javascriptya-superior */
+google_ad_slot = "5739365568";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+
+<div id="pesta">
+	<ul>
+		<li><a href="#p1">Problemas</a></li>    	
+		<li><a href="#p2">Codificar problema</a></li>
+		<li><a href="#p3">Ejecución problema</a></li>
+	</ul>
+	<div id="p1" style="background:#fafafa;padding:30px; max-height: 700px; min-height: 700px;;overflow: auto;font-size:13pt">
+		
+	<b>PROBLEMAS</B><BR><BR>
+<ol>
+<li>
+Confeccionar un programa que lea 3 pares de datos, cada par de datos corresponde a la medida de la base y la altura de un triángulo. El programa deberá informar:<br>
+a)	De cada triángulo la medida de su base, su altura y su superficie.<br>
+b)	La cantidad de triángulos cuya superficie es mayor a 12.
+</li>
+<li>
+Desarrollar un programa que solicite la carga de 10 números e imprima la suma de lo últimos 5 valores ingresados.<br><br>
+</li>
+<li>
+Desarrollar un programa que muestre la tabla de multiplicar del 5 (del 5 al 50).
+</li>
+<li>
+Confeccionar un programa que permita ingresar un valor del 1 al 10 y nos muestre la tabla de multiplicar del mismo (los primeros 12 términos)<br>
+Ejemplo: Si ingreso 3 deberá aparecer en pantalla los valores 3, 6, 9, hasta el 36.
+</li>
+<li>
+ Realizar un programa que lea los lados de 4 triángulos, e informar:<br>
+a)	De cada uno de ellos, qué tipo de triángulo es: equilátero (tres lados iguales), isósceles (dos lados iguales), o escaleno (ningún lado igual)<br>
+b)	Cantidad de triángulos de cada tipo.<br>
+c)	Tipo de triángulo del que hay menor cantidad.
+</li>
+<li>
+ Escribir un programa que pida ingresar coordenadas (x,y) que representan puntos en el plano. Informar cuántos puntos se han ingresado en el primer, segundo, tercer y cuarto cuadrante. Al comenzar el programa se pide que se ingrese la cantidad de puntos a procesar.
+</li>
+<li>
+Se realiza la carga de 10 valores enteros por teclado. Se desea conocer:<br>
+a)	La cantidad de valores negativos ingresados.<br>
+b)	La cantidad de valores positivos ingresados.<br>
+c)	La cantidad de múltiplos de 15.<br>
+d)	El valor acumulado de los números ingresados que son pares.<br>
+</li>
+<li>
+Se cuenta con la siguiente información:<br>
+	Las edades de 5 estudiantes del turno mañana.<br>
+	Las edades de 6 estudiantes del turno tarde.<br>
+	Las edades de 11 estudiantes del turno noche.<br>
+Las edades de cada estudiante deben ingresarse por teclado.<br>
+a)	Obtener el promedio de las edades de cada turno (tres promedios).<br>
+b)	Imprimir dichos promedios (promedio de cada turno).<br>
+c)	Mostrar por pantalla un mensaje que indique cual de los tres turnos tiene un promedio de edades mayor.<br>
+</li>
+
+<div style="margin-top:20px">
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+</div>
+<pre class="recuadrooculto">
+Problema 1.
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var f;
+  var base;
+  var altura;
+  var superficie;
+  var conta1=0;
+  for(f=1;f&lt;=3;f++)
+  {
+    base=prompt('Ingrese la base:','');
+    base=parseInt(base);
+    altura=prompt('Ingrese la altura:','');
+    altura=parseInt(altura);
+    superficie=base*altura/2;
+    if (superficie&gt;12)
+    {
+      conta1++;
+    }
+    document.write('Triángulo nro:'+f+'&lt;br&gt;');
+    document.write('Base:'+base+'&lt;br&gt;');
+    document.write('Altura:'+altura+'&lt;br&gt;');
+    document.write('Superficie:'+superficie+'&lt;br&gt;');    
+  }
+  document.write('Cantidad de triángulos con superficie mayor a 12:'+conta1);
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+
+Problema 2.
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+
+  //Desarrollar un programa que solicite la carga de 10 números e imprima la suma de lo  
+  //últimos 5 valores ingresados.
+  var suma=0;
+  var f;
+  var valor;
+  for(f=1;f&lt;=10;f++)
+  {
+    valor=prompt('Ingrese un nro:','');
+    valor=parseInt(valor);
+    if (f&gt;5)
+    {
+      suma=suma+valor;
+    }
+  }
+  document.write('La suma de los últimos cinco valores ingresados es:'+suma);
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+     
+
+
+Problema 3.     
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  //Desarrollar un programa que muestre la tabla de multiplicar del 5 (del 5 al 50).
+  var tabla=5;
+  var f=1;
+  for(f=1;f&lt;=10;f++)
+  {
+    document.write(tabla+'-');
+    tabla=tabla+5;
+  }
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+     
+
+
+Problema 4.
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+/*Confeccionar un programa que permita ingresar un valor del 1 al 10 y 
+nos muestre la tabla de multiplicar del mismo (los primeros 12 términos)
+Ejemplo: Si ingreso 3 deberá aparecer en pantalla los valores 3, 6, 9, hasta el 36.*/
+  var tabla;
+  var f;
+  var conta;
+  tabla=prompt('Ingrese un valor del 1 al 10:','');
+  tabla=parseInt(tabla);
+  conta=tabla;
+  for(f=1;f&lt;=12;f++)
+  {
+    document.write(conta+ ' ');
+    conta=conta+tabla;
+  }
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+     
+
+
+Problema 5.
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+/* Realizar un programa que lea los lados de 4 triángulos, e informar:
+  a)	De cada uno de ellos, qué tipo de triángulo es: 
+        equilátero (tres lados iguales), isósceles (dos lados iguales), o escaleno (ningún lado igual)
+  b)	Cantidad de triángulos de cada tipo.
+  c)	Tipo de triángulo del que hay menor cantidad. */
+
+  var cant1=0;
+  var cant2=0;
+  var cant3=0;
+  var lado1;
+  var lado2;
+  var lado3;
+  var f;
+  for(f=1;f&lt;=4;f++)
+  {
+    lado1=prompt('Ingrese primer lado:','');
+    lado1=parseInt(lado1);
+    lado2=prompt('Ingrese segundo lado:','');
+    lado2=parseInt(lado2);
+    lado3=prompt('Ingrese tercer lado:','');
+    lado3=parseInt(lado3);
+    if (lado1==lado2 && lado1==lado3)
+    {
+      document.write('Triángulo equilatero.&lt;br&gt;');
+      cant1++;
+    }
+    else
+    {
+      if (lado1==lado2 || lado1==lado3 || lado2==lado3)
+      {
+        document.write('Triángulo isósceles.&lt;br&gt;');
+        cant2++;
+      }
+      else
+      {
+        document.write('Triángulo escaleno.&lt;br&gt;');
+        cant3++;
+      }
+    }    
+  }
+  document.write('&lt;br&gt;');
+  document.write('Cantidad de triángulos equiláteros:'+cant1+'&lt;br&gt;');
+  document.write('Cantidad de triángulos isósceles:'+cant2+'&lt;br&gt;');
+  document.write('Cantidad de triángulos escalenos:'+cant3+'&lt;br&gt;');
+  if (cant1&lt;cant2 && cant1&lt;cant3)
+  {
+    document.write('Se ingresaron menos triángulos equiláteros');
+  }
+  else
+  {
+    if (cant2&lt;cant3)
+    {
+      document.write('Se ingresaron menos triángulos isósceles');
+    }
+    else
+    {
+      document.write('Se ingresaron menos triángulos escalenos');
+    }
+  }
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+
+Problema 6.
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+/*Escribir un programa que pida ingresar coordenadas (x,y) que representan puntos en el plano. 
+Informar cuántos puntos se han ingresado en el primer, segundo, tercer y cuarto cuadrante. 
+Al comenzar el programa se pide que se ingrese la cantidad de puntos a procesar.*/
+
+  var cuad1=0;
+  var cuad2=0;
+  var cuad3=0;
+  var cuad4=0;
+  var x;
+  var y;
+  var f;
+  var cant;
+  cant=prompt('Cuantos puntos procesará:','');
+  cant=parseInt(cant);
+  for(f=1;f&lt;=cant;f++)
+  {
+    x=prompt('Ingrese coordenada x:','');
+    x=parseInt(x);
+    y=prompt('Ingrese coordenada y:','');
+    y=parseInt(y);
+    if (x&gt;0 && y&gt;0)
+    {
+      cuad1++;
+    }
+    else
+    {
+      if (x&lt;0 && y&gt;0)
+      {
+        cuad2++;
+      }
+      else
+      {
+        if (x&lt;0 && y&lt;0)
+        {
+          cuad3++;
+        }
+        else
+        {
+          if (x&gt;0 && y&lt;0)
+          {
+            cuad4++;
+          }
+        }
+      }
+    }
+  }
+  document.write('Cantidad de puntos ingresados en el primer cuadrante:'+cuad1+'&lt;br&gt;');
+  document.write('Cantidad de puntos ingresados en el segundo cuadrante:'+cuad2+'&lt;br&gt;');
+  document.write('Cantidad de puntos ingresados en el tercer cuadrante:'+cuad3+'&lt;br&gt;');
+  document.write('Cantidad de puntos ingresados en el cuarto cuadrante:'+cuad4+'&lt;br&gt;');
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+     
+
+
+Problema 7.
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+/*Se realiza la carga de 10 valores enteros por teclado. Se desea conocer:
+  a)	La cantidad de valores negativos ingresados.
+  b)	La cantidad de valores positivos ingresados.
+  c)	La cantidad de múltiplos de 15.
+  d)	El valor acumulado de los números ingresados que son pares.*/
+ 
+  var cantnegativos=0;
+  var cantpositivos=0;
+  var mult15=0;
+  var sumapares=0;
+  var f;
+  var valor;
+  for(f=1;f&lt;=10;f++)
+  {
+    valor=prompt('Ingrese un valor:','');
+    valor=parseInt(valor);
+    if (valor&lt;0)
+    {
+      cantnegativos++;
+    }
+    else
+    {
+      if (valor&gt;0)
+      {
+        cantpositivos++;
+      }
+    }
+    if (valor%15==0 && valor!=0)
+    {
+      mult15++;
+    }
+    if (valor%2==0)
+    {
+      sumapares=sumapares+valor;
+    }
+  }
+  document.write('Cantidad de valores negativos:'+cantnegativos+'&lt;br&gt;');
+  document.write('Cantidad de valores positivos:'+cantpositivos+'&lt;br&gt;');
+  document.write('Cantidad de múltiplos de 15:'+mult15+'&lt;br&gt;');
+  document.write('Suma de los valores pares ingresados:'+sumapares+'&lt;br&gt;');
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+     
+
+
+Problema 8.
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+/*Se cuenta con la siguiente información:
+  Las edades de 5 estudiantes del turno mañana.
+  Las edades de 6 estudiantes del turno tarde.
+  Las edades de 11 estudiantes del turno noche.
+  Las edades de cada estudiante deben ingresarse por teclado.
+  a) Obtener el promedio de las edades de cada turno (tres promedios)
+  b) Imprimir dichos promedios (promedio de cada turno).
+  c) Mostrar por pantalla un mensaje que indique cual de los 
+     tres turnos tiene un promedio de edades mayor. */
+
+  var suma1=0;
+  var edad;
+  var f;
+  for(f=1;f&lt;=5;f++)
+  {
+    edad=prompt('Edad de estudiante del turno mañana:','');
+    edad=parseInt(edad);
+    suma1=suma1+edad;
+  }  
+  var suma2=0;
+  for(f=1;f&lt;=6;f++)
+  {
+    edad=prompt('Edad de estudiante del turno tarde:','');
+    edad=parseInt(edad);
+    suma2=suma2+edad;
+  }
+  var suma3=0;
+  for(f=1;f&lt;=11;f++)
+  {
+    edad=prompt('Edad de estudiante del turno noche:','');
+    edad=parseInt(edad);
+    suma3=suma3+edad;
+  }
+  var promedio1=suma1/5;
+  var promedio2=suma2/6;
+  var promedio3=suma3/11;
+  document.write('Promedio de edades de alumnos del turno mañana:'+promedio1+'&lt;br&gt;');
+  document.write('Promedio de edades de alumnos del turno tarde:'+promedio2+'&lt;br&gt;');
+  document.write('Promedio de edades de alumnos del turno noche:'+promedio3+'&lt;br&gt;');
+  if (promedio1&gt;promedio2 && promedio1&gt;promedio3)
+  {
+    document.write('El turno mañana tiene un promedio mayor de edades');
+  }
+  else
+  {
+    if (promedio2&gt;promedio3)
+    {
+      document.write('El turno tarde tiene un promedio mayor de edades');
+    }
+    else
+    {
+      document.write('El turno noche tiene un promedio mayor de edades');
+    }
+  }
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;	</div>    	
+	<div id="p2">
+    <textarea name="editor" id="editor" rows="28" style="width:890px;height:700px;font-size:16px;font-family:courier">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+     
+</textarea>
+	</div>
+	<div id="p3">
+<iframe width="900" height="700" id="documentodinamico" name="documentodinamico" src="vacio.html">
+No tiene disponible el navegador la capacidad de iframe
+</iframe>
+	</div>
+</div>
+<br>
+<table width="700px">
+<tr>
+<td align="left">	
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* javascriptya-inferior */
+google_ad_slot = "8692831966";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* javascriptya-inferior */
+google_ad_slot = "8692831966";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../index4231.html?inicio=10">Retornar al menu</a></h2>   
+<br>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+<!-- Mirrored from www.javascriptya.com.ar/problemas/problema.php?cod=14&inicio=10 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:20 GMT -->
+</html>

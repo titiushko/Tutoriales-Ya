@@ -1,0 +1,651 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=118&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:54:19 GMT -->
+<head>
+<title>Estructuras dinámicas: Listas tipo Cola - Problemas de aplicación</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Estructuras dinámicas: Listas tipo Cola - Problemas de aplicación</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p><strong>Planteo del problema:</strong></p>
+
+<p>Este práctico tiene por objetivo mostrar la importancia de las colas en las Ciencias de la Computación y más precisamente en las simulaciones.<br>
+Las simulaciones permiten analizar situaciones de la realidad sin la necesidad de ejecutarlas realmente. Tiene el beneficio que su costo es muy inferior a hacer pruebas en la realidad.</p>
+
+<p>Desarrollar un programa para la simulación de un cajero automático.<br>
+Se cuenta con la siguiente información:<br>
+- Llegan clientes a la puerta del cajero cada 2 ó 3 minutos.<br>
+- Cada cliente tarda entre 2 y 4 minutos para ser atendido.</p>
+<p>Obtener la siguiente información:<br>
+1 - Cantidad de clientes que se atienden en 10 horas.<br>
+2 - Cantidad de clientes que hay en cola después de 10 horas.<br>
+3 - Hora de llegada del primer cliente que no es atendido luego de 10 horas (es decir la persona que está primera en la cola cuando se cumplen 10 horas)<br>
+
+
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+public class Cola {
+    
+    class Nodo {
+        int info;
+        Nodo sig;
+    }
+    
+    Nodo raiz,fondo;
+    
+    Cola() {
+        raiz=null;
+        fondo=null;
+    }
+    
+    boolean vacia (){
+        if (raiz == null)
+            return true;
+        else
+            return false;
+    }
+
+    void insertar (int info)
+    {
+        Nodo nuevo;
+        nuevo = new Nodo ();
+        nuevo.info = info;
+        nuevo.sig = null;
+        if (vacia ()) {
+            raiz = nuevo;
+            fondo = nuevo;
+        } else {
+            fondo.sig = nuevo;
+            fondo = nuevo;
+        }
+    }
+
+    int extraer ()
+    {
+        if (!vacia ())
+        {
+            int informacion = raiz.info;
+            if (raiz == fondo){
+                raiz = null;
+                fondo = null;
+            } else {
+                raiz = raiz.sig;
+            }
+            return informacion;
+        } else
+            return Integer.MAX_VALUE;
+    }
+
+    public void imprimir() {
+        Nodo reco=raiz;
+        System.out.println("Listado de todos los elementos de la cola.");
+        while (reco!=null) {
+            System.out.print(reco.info+"-");
+            reco=reco.sig;
+        }
+        System.out.println();
+    }
+    
+    public int cantidad() {
+        int cant=0;
+        Nodo reco=raiz;
+        while (reco!=null) {
+            cant++;
+            reco=reco.sig;
+        }
+        return cant;
+    }   
+}
+
+
+
+
+
+import javax.swing.*;
+import java.awt.event.*;
+public class Cajero extends JFrame implements ActionListener{
+    private JLabel l1,l2,l3;
+    private JButton boton1;
+    public Cajero() {
+        setLayout(null);
+        boton1=new JButton("Activar Simulación");
+        boton1.setBounds(10,10,180,30);
+        add(boton1);
+        boton1.addActionListener(this);
+        l1=new JLabel("Atendidos:");
+        l1.setBounds(10,50,300,30);
+        add(l1);
+        l2=new JLabel("En cola:");
+        l2.setBounds(10,90,300,30);
+        add(l2);
+        l3=new JLabel("Minuto de llegada:");
+        l3.setBounds(10,130,400,30);
+        add(l3);
+    }
+    
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==boton1) {
+            simulacion();
+        }
+    }
+
+    public void simulacion () {
+        int estado = 0;
+        int llegada = 2 + (int) (Math.random () * 2);
+        int salida = -1;
+        int cantAtendidas = 0;
+        Cola cola = new Cola ();
+        for (int minuto = 0 ; minuto < 600 ; minuto++) {
+            if (llegada == minuto)
+            {
+                if (estado==0) {
+                    estado=1;
+                    salida=minuto+2+(int)(Math.random()*3);
+                } else {
+                    cola.insertar(minuto);
+                }
+                llegada=minuto+2+(int)(Math.random()*2);
+            }
+            if (salida == minuto)
+            {
+                estado=0;
+                cantAtendidas++;
+                if (!cola.vacia()) {
+                    cola.extraer();
+                    estado=1;
+                    salida=minuto+2+(int)(Math.random()*3);
+                }
+            }
+        }
+        l1.setText("Atendidos:"+String.valueOf(cantAtendidas));
+        l2.setText("En cola"+String.valueOf(cola.cantidad()));
+        l3.setText("Minuto llegada:"+String.valueOf(cola.extraer()));            
+    }
+    
+    public static void main(String[] ar) {
+        Cajero cajero1=new Cajero();
+        cajero1.setBounds(0,0,340,250);
+        cajero1.setVisible(true);
+    }    
+}
+</pre>
+<p>La clase Cola colabora con la clase Cajero. En la clase cola debemos definir como mínimo los métodos de insertar, extraer, vacía y cantidad.</p>
+<p>La clase Cajero define tres objetos de la clase JLabel para mostrar los resultados de la simulación.</p>
+<p>El método más importante es el de simulacion, veamos las distintas partes de dicho método:</p>
+<pre>
+        int estado = 0;
+        int llegada = 2 + (int) (Math.random () * 2);
+        int salida = -1;
+        int cantAtendidas = 0;
+        Cola cola = new Cola ();
+</pre>
+<p>La variable estado almacena un cero si el cajero está libre y un uno cuando está ocupado.<br>
+La variable llegada almacena en que minuto llegará el próximo cliente (debemos generar un valor entre 2 y 3)</p>
+<p>La variable salida almacenará en que minuto terminará el cliente de ser atendido (como al principio el cajero está vacío inicializamos esta variable con -1.</p>
+<p>Llevamos un contador para saber la cantidad de personas atendidas (cantAtendidas)</p>
+<p>Luego definimos un objeto de la clase Cola para poder almacenar las personas que llegan al cajero y se lo encuentran ocupado.</p>
+<p>Disponemos un for que se repita 600 veces (600 minutos o lo que es lo mismo 10 horas)<br>
+<pre>
+        for (int minuto = 0 ; minuto < 600 ; minuto++) {
+</pre>
+<p>Dentro del for hay dos if fundamentales que verifican que sucede cuando llega una persona o cuando una persona se retira:</p>
+<pre>
+            if (llegada == minuto)
+            {
+                ............
+            }
+            if (salida == minuto)
+            {
+                ............
+            }
+</pre>
+<p>Cuando llega una persona al cajero primero verificamos si el cajero está desocupado:</p>
+<pre>
+            if (llegada == minuto)
+            {
+                if (estado==0) {
+</pre>
+<p>Si está desocupado lo ocupamos cambiando el valor de la variable estado y generando en que minuto esta persona dejará el cajero (un valor aleatorio entre 2 y 4 minutos):</p>
+<pre>
+                    estado=1;
+                    salida=minuto+2+(int)(Math.random()*3);
+</pre>
+<p>Si el cajero está ocupado procedemos a cargar dicha persona en la cola (insertamos el minuto que llega):</p>
+<pre>
+                } else {
+                    cola.insertar(minuto);
+                }
+</pre>
+<p>Luego generamos el próximo minuto que llegará otra persona:</p>
+<pre>
+                llegada=minuto+2+(int)(Math.random()*2);
+</pre>
+<p>El otro if importante es ver que sucede cuando sale la persona del cajero:</p>
+            if (salida == minuto)
+            {
+</pre>
+<p>Si sale una persona del cajero cambiamos el valor de la variable estado, incrementamos en uno el contador cantAtendidos y si la cola no está vacía extraemos una persona, cambiamos a uno la variable estado y generamos en que minuto dejará esta persona el cajero:</p>
+<pre>
+                estado=0;
+                cantAtendidas++;
+                if (!cola.vacia()) {
+                    cola.extraer();
+                    estado=1;
+                    salida=minuto+2+(int)(Math.random()*3);
+                }
+            }
+</pre>
+<p>Fuera del for actualizamos las tres JLabel:</p>
+<pre>
+        l1.setText("Atendidos:"+String.valueOf(cantAtendidas));
+        l2.setText("En cola"+String.valueOf(cola.cantidad()));
+        l3.setText("Minuto llegada:"+String.valueOf(cola.extraer()));            
+</pre>
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+<p>Un supermercado tiene tres cajas para la atención de los clientes.<br>
+Las cajeras tardan entre 7 y 11 minutos para la atención de cada cliente.<br>
+
+Los clientes llegan a la zona de cajas cada 2 ó 3 minutos. (Cuando el cliente llega, si todas las cajas tienen 6 personas, el cliente se marcha del supermercado)<br>
+
+Cuando el cliente llega a la zona de cajas elige la caja con una cola menor.</p>
+
+<p>Realizar una simulación durante 8 horas y obtener la siguiente información:<br>
+a - Cantidad de clientes atendidos por cada caja.<br>
+b - Cantidad de clientes que se marcharon sin hacer compras.<br>
+c - Tiempo promedio en cola.</p>
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+public class Cola {
+    
+    class Nodo {
+        int info;
+        Nodo sig;
+    }
+    
+    Nodo raiz,fondo;
+    
+    Cola() {
+        raiz=null;
+        fondo=null;
+    }
+    
+    boolean vacia (){
+        if (raiz == null)
+            return true;
+        else
+            return false;
+    }
+
+    void insertar (int info)
+    {
+        Nodo nuevo;
+        nuevo = new Nodo ();
+        nuevo.info = info;
+        nuevo.sig = null;
+        if (vacia ()) {
+            raiz = nuevo;
+            fondo = nuevo;
+        } else {
+            fondo.sig = nuevo;
+            fondo = nuevo;
+        }
+    }
+
+    int extraer ()
+    {
+        if (!vacia ())
+        {
+            int informacion = raiz.info;
+            if (raiz == fondo){
+                raiz = null;
+                fondo = null;
+            } else {
+                raiz = raiz.sig;
+            }
+            return informacion;
+        } else
+            return Integer.MAX_VALUE;
+    }
+
+    public void imprimir() {
+        Nodo reco=raiz;
+        System.out.println("Listado de todos los elementos de la cola.");
+        while (reco!=null) {
+            System.out.print(reco.info+"-");
+            reco=reco.sig;
+        }
+        System.out.println();
+    }
+    
+    public int cantidad() {
+        int cant=0;
+        Nodo reco=raiz;
+        while (reco!=null) {
+            cant++;
+            reco=reco.sig;
+        }
+        return cant;
+    }   
+}
+
+
+
+
+
+import javax.swing.*;
+
+import java.awt.event.*;
+public class Supermercado extends JFrame implements ActionListener {
+    private JButton boton1;
+    private JLabel l1,l2,l3;
+    public Supermercado() {
+        setLayout(null);
+        boton1=new JButton("Activar Simulación");
+        boton1.setBounds(10,10,180,30);
+        add(boton1);
+        boton1.addActionListener(this);
+        l1=new JLabel("Clientes atendidos por caja:");
+        l1.setBounds(10,50,400,30);
+        add(l1);
+        l2=new JLabel("Se marchan sin hacer compras:");
+        l2.setBounds(10,90,400,30);
+        add(l2);
+        l3=new JLabel("Tiempo promedio en cola:");
+        l3.setBounds(10,130,400,30);
+        add(l3);        
+    }
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==boton1) {
+            simulacion();
+        }
+    }
+
+    public void simulacion () {
+        int estado1=0,estado2=0,estado3=0;
+        int marchan=0;
+        int llegada = 2 + (int) (Math.random () * 2);
+        int salida1=-1,salida2=-1,salida3=-1;
+        int cantAte1=0,cantAte2=0,cantAte3=0;
+        int tiempoEnCola=0;
+        int cantidadEnCola=0;
+        Cola cola1 = new Cola ();
+        Cola cola2 = new Cola ();
+        Cola cola3 = new Cola ();        
+        for (int minuto = 0 ; minuto < 600 ; minuto++) {
+            if (llegada == minuto) {
+                if (estado1==0) {
+                    estado1=1;
+                    salida1=minuto+7+(int)(Math.random()*5);
+                } else {
+                    if (estado2==0) {
+                        estado2=1;
+                        salida2=minuto+7+(int)(Math.random()*5);
+                    } else {
+                        if (estado3==0) {
+                            estado3=1;
+                            salida3=minuto+7+(int)(Math.random()*5);
+                        } else {
+                            if (cola1.cantidad()==6 && cola2.cantidad()==6 && cola3.cantidad()==6) {
+                                marchan++;
+                            } else {
+                                if (cola1.cantidad()<=cola2.cantidad() && cola1.cantidad()<=cola3.cantidad()) {
+                                    cola1.insertar(minuto);
+                                } else {
+                                    if (cola2.cantidad()<=cola3.cantidad()) {
+                                        cola2.insertar(minuto);
+                                    } else {
+                                        cola3.insertar(minuto);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+                llegada=minuto+ 2+ (int) (Math.random () * 2);
+            }
+            if (salida1 == minuto) {
+                cantAte1++;
+                estado1=0;
+                if(!cola1.vacia()) {
+                    estado1=1;
+                    int m=cola1.extraer();
+                    salida1=minuto+7+(int)(Math.random()*5);
+                    tiempoEnCola=tiempoEnCola+(minuto-m);
+                    cantidadEnCola++;                    
+                }
+            }
+            if (salida2 == minuto) {
+                cantAte2++;
+                estado2=0;
+                if(!cola2.vacia()) {
+                    estado2=1;
+                    int m=cola2.extraer();
+                    salida2=minuto+7+(int)(Math.random()*5);
+                    tiempoEnCola=tiempoEnCola+(minuto-m);
+                    cantidadEnCola++;                    
+                }
+            }
+            if (salida3 == minuto) {
+                cantAte3++;
+                estado3=0;
+                if(!cola3.vacia()) {
+                    estado3=1;
+                    int m=cola3.extraer();
+                    salida3=minuto+7+(int)(Math.random()*5);
+                    tiempoEnCola=tiempoEnCola+(minuto-m);
+                    cantidadEnCola++;                    
+                }
+            }            
+        }
+        l1.setText("Clientes atendidos por caja: caja1="+cantAte1+"  caja2="+cantAte2+"  caja3="+cantAte3);
+        l2.setText("Se marchan sin hacer compras:"+marchan);
+        if (cantidadEnCola>0) {
+            int tiempoPromedio=tiempoEnCola/cantidadEnCola;
+            l3.setText("Tiempo promedio en cola:"+tiempoPromedio);
+        }
+    }
+    
+    public static void main(String[] ar) {
+        Supermercado super1=new Supermercado();
+        super1.setBounds(0,0,390,250);
+        super1.setVisible(true);
+    }    
+}
+</pre></div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index1e61.html?inicio=40">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=118&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:54:19 GMT -->
+</html>

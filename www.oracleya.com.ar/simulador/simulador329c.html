@@ -1,0 +1,195 @@
+        
+
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=0&cod=173&punto=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios resueltos : Tipos de datos alfanuméricos(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+<body bgcolor="#CCFFCC">
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>15 - Tipos de datos alfanuméricos</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Un comercio que tiene un stand en una feria registra en una tabla llamada "visitantes" algunos datos de las personas que visitan o compran en su stand para luego enviarle publicidad de sus productos.</p>
+
+<p>Eliminamos la tabla "visitantes":</p>
+<pre>
+  drop table visitantes;
+</pre>
+<p>Creamos con la siguiente estructura:</p>
+<pre>
+ create table visitantes(
+  nombre varchar2(30),
+  edad number(2),
+  sexo char(1),
+  domicilio varchar2(30),
+  ciudad varchar2(20),
+  telefono varchar2(11)
+ );
+</pre>
+<p>Los campos "nombre", "domicilio" y "ciudad" almacenarán valores cuya longitud varía, por ello elegimos el tipo "varchar2" y le damos a cada uno una longitud máxima estimando su tamaño. El campo "sexo" se define de tipo "char", porque necesitamos solamente 1 caracter "f" o "m", que siempre será fijo. El campo "telefono" también se define como varchar2 porque no todos los números telefónicos tienen la misma longitud.</p>
+
+<p>Ingresamos un registro:</p>
+<pre>
+ insert into visitantes (nombre,edad,sexo,domicilio,ciudad,telefono)
+  values ('Ana Acosta',25,'f','Avellaneda 123','Cordoba','4223344');
+</pre>
+<p>Intentamos ingresar una cadena de mayor longitud que la definida en el campo "sexo":</p>
+<pre>
+ insert into visitantes (nombre,edad,sexo,domicilio,ciudad,telefono)
+  values ('Betina Bustos',32,'fem','Bulnes 234','Cordoba','4515151');
+</pre>
+<p>aparece un mensaje de error y la sentencia no se ejecuta.</p>
+
+<p>Ingresamos el mismo registro, esta vez con un sólo caracter para el campo "sexo":</p>
+<pre>
+ insert into visitantes (nombre,edad,sexo,domicilio,ciudad,telefono)
+  values ('Betina Bustos',32,'f','Bulnes 234','Cordoba','4515151');
+</pre>
+<p>Ingresamos un número telefónico olvidando las comillas, es decir, como un valor numérico:</p>
+<pre>
+ insert into visitantes (nombre,edad,sexo,domicilio,ciudad,telefono)
+  values ('Carlos Caseres',43,'m','Colon 345','Cordoba',03514555666);
+</pre>
+<p>lo convierte a cadena, veámoslo:</p>
+<pre>
+ select *from visitantes;
+</pre>
+        <form name="formulario" action="http://www.sqlserverya.com.ar/aspx/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+        <br>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+        
+	<br>
+   
+
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=0&cod=173&punto=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:25 GMT -->
+</html>
+

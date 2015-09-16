@@ -1,0 +1,251 @@
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=70&cod=76 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de JavaScript : Conceptos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+div#contentdetalle{clear:left;
+                   max-width:900px;
+				   border-top:0px solid #999;
+				   padding-top:15px;
+				   background-color: #aed7a8;
+				   text-align:left;
+				   font-size:1.3em;
+				   font-weight:normal;
+				   font-family:arial;
+				   padding:20px}
+				   
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;  
+}				   
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td>
+<h1>Funciones setInterval, clearInterval, setTimeout y clearTimeout</h1></td>
+<td align="right">
+<!--<a href="http://www.javascriptya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div id="contentdetalle">
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 	  
+
+<p>La función setTimeout y setInterval permiten pasar como primer parámetro el nombre de una función que se ejecutará después de una determinada cantidad de milisegundos que le pasamos en el segundo parámetro. La única diferencia entre estas funciones es que si llamamos a setInterval la función se ejecutará en forma repetida cada vez que pase dicha cantidad de milisegundos, en cambio con setTimeout solo llamará la función una única vez.</p>
+<p>Estas dos funciones retornan un valor que será de utilidad si necesitamos eliminar la llamada a la función.</p>
+<strong>Problema</strong>
+Mostrar un cronómetro que comience en cero y se incremente en uno cada vez que pase un segundo. Disponer un botón para poder detener o reiniciar el cronómetro.</p>
+
+<pre class="recuadro">
+&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;&lt;/title&gt;
+
+&lt;script type="text/javascript"&gt;
+
+  window.addEventListener('load', inicio, false);
+
+  var reloj;
+
+  function inicio() {
+    reloj=setInterval(procesar,1000);
+    document.getElementById('boton1').addEventListener('click',presionBoton,false);
+  }
+
+  function procesar()
+  {
+    var nro=parseInt(document.getElementById('cronometro').innerHTML);
+    nro++;
+    document.getElementById('cronometro').innerHTML=nro;
+  }
+
+  function presionBoton()
+  {
+    if (document.getElementById('boton1').value=='detener')
+    {
+      clearInterval(reloj);
+      document.getElementById('boton1').value='continuar';
+    }
+    else
+    {
+      reloj=setInterval(procesar,1000);
+      document.getElementById('boton1').value='detener';
+    }
+  }
+
+&lt;/script&gt;
+
+&lt;style&gt;
+  #cronometro {
+    font-size:50px;
+    color:#0a0;
+  }
+&lt;/style&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;span id="cronometro"&gt;0&lt;/span&gt;
+&lt;br&gt;
+&lt;input type="button" id="boton1" value="detener"&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Definimos una variable global que guarde la referencia del timer, en la función inicio registramos la función que debe ejecutarse cada un segundo (1000 milisegundos):</p>
+<pre>
+  window.addEventListener('load', inicio, false);
+
+  var reloj;
+
+  function inicio() {
+    reloj=setInterval(procesar,1000);
+    document.getElementById('boton1').addEventListener('click',presionBoton,false);
+  }
+</pre>
+<p>La función procesar se ejecuta cada un segundo, siempre y cuando se haya registrado esta función llamando a setInterval en la función inicio. El objetivo de esta función es extraer el valor del cronómetro, incrementarlo en uno y actualizarlo:</p>
+<pre>
+  function procesar()
+  {
+    var nro=parseInt(document.getElementById('cronometro').innerHTML);
+    nro++;
+    document.getElementById('cronometro').innerHTML=nro;
+  }
+</pre>
+<p>La función presionBoton se ejecuta cada vez que lo presionamos y lo que hacemos es controlar la etiqueta del botón para ver si dice 'detener' con lo que llamando a la función clearInterval esto hace que se suprime la ejecución continua de la función procesar. Por el falso del if procedemos a registrar nuevamente la función procesar:</p>
+<pre>
+  function presionBoton()
+  {
+    if (document.getElementById('boton1').value=='detener')
+    {
+      clearInterval(reloj);
+      document.getElementById('boton1').value='continuar';
+    }
+    else
+    {
+      reloj=setInterval(procesar,1000);
+      document.getElementById('boton1').value='detener';
+    }
+  }
+</pre></p>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../indexe193.html?inicio=70">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=70&cod=76 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:24 GMT -->
+</html>

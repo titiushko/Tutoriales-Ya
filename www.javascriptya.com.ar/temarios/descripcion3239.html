@@ -1,0 +1,199 @@
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=20&cod=24 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de JavaScript : Conceptos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+div#contentdetalle{clear:left;
+                   max-width:900px;
+				   border-top:0px solid #999;
+				   padding-top:15px;
+				   background-color: #aed7a8;
+				   text-align:left;
+				   font-size:1.3em;
+				   font-weight:normal;
+				   font-family:arial;
+				   padding:20px}
+				   
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;  
+}				   
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td>
+<h1>Controles FORM, BUTTON y TEXT.</h1></td>
+<td align="right">
+<!--<a href="http://www.javascriptya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div id="contentdetalle">
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 	  
+
+Hasta ahora hemos visto como crear un formulario con controles de tipo BUTTON. Agregamos un control de tipo TEXT (permite al operador cargar caracteres por teclado).<br>
+Ahora veremos la importancia de definir un id a todo control de un formulario.<br>
+Con un ejemplo veremos estos controles: Confeccionar un formulario que permita ingresar el nombre y edad de una persona:
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+function mostrar()
+{
+  var nom=document.getElementById('nombre').value;
+  var ed=document.getElementById('edad').value;
+  alert('Ingresó el nombre:' + nom);
+  alert('Y la edad:' + ed);
+}
+&lt;/script&gt;
+
+&lt;form&gt;
+Ingrese su nombre:
+&lt;input type="text" id="nombre"&gt;&lt;br&gt;
+Ingrese su edad:
+&lt;input type="text" id="edad"&gt;&lt;br&gt;
+&lt;input type="button" value="Confirmar" onClick="mostrar()"&gt;
+&lt;/form&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+En este problema tenemos cuatro controles: 1 FORM, 1 BUTTON, 2 TEXT. El evento que se dispara al presionar el botón se llama mostrar.<br>
+La función 'mostrar' accede a los contenidos de los dos controles de tipo TEXT:
+<pre>
+  var nom=document.getElementById('nombre').value;
+  var ed=document.getElementById('edad').value;
+</pre>
+Para hacer más clara la función guardamos en dos variables auxiliares los contenidos de los controles de tipo TEXT.<br>
+La propiedad "id" es un identificar único para cualquier marca HTML que luego nos permite desde Javascript acceder a dicho elemento.<br>
+El método getElementById nos retorna una referencia del objeto HTML que le pasamos como parámetro. a partir de este objeto accedemos a la propiedad value que almacena el valor ingresado por el operador en el control TEXT.<br>
+Luego de extraer los valores ingresados por el operador los mostramos utilizando la función alert:<br>
+<pre>
+  var nom=document.getElementById('nombre').value;
+  var ed=document.getElementById('edad').value;
+  alert('Ingresó el nombre:' + nom);
+  alert('Y la edad:' + ed);
+</pre></p>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../index28fa.html?inicio=20">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=20&cod=24 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:20 GMT -->
+</html>

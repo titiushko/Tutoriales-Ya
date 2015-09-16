@@ -1,0 +1,207 @@
+﻿<html>
+
+
+<!-- Mirrored from www.phpya.com.ar/poo/problemas/resolverproblema.php?cod=50&punto=16&inicio=12 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+  <title>Problemas propuestos</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="PHP,POO, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de POO.">
+<meta name="author" content="Diego Moisset">
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+
+</style>
+
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;		
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=yes,status=yes,toolbar=yes,location=yes');  	
+}
+
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+</head>
+
+<body bgcolor="#CCFFCC">
+        
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>16 - Métodos abstractos.</h1></td>
+<td align="right">
+<!--<a href="http://www.phpya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+	  <table width="650px">
+<tr>
+
+<table>
+<tr>
+<td align="left">
+
+<!--publi-->
+
+</td>
+</tr>
+</table>		  
+	  
+	  
+                
+		
+		<br><br><h3>Problema:</h3>
+<pre class="recuadrooculto">&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Pruebas&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+
+abstract class Trabajador {
+  protected $nombre;
+  protected $sueldo;
+  public function __construct($nom)
+  {
+    $this-&gt;nombre=$nom;
+  }
+  public function imprimir()
+  {
+    echo 'Nombre:'.$this-&gt;nombre.'&lt;br&gt;';
+    echo 'Sueldo:'.$this-&gt;sueldo.'&lt;br&gt;';
+  }
+  public abstract function calcularSueldo();
+}  
+
+class Empleado extends Trabajador {
+  protected $horasTrabajadas;
+  protected $valorHora;
+  public function __construct($nom,$horas,$valor)
+  {
+    parent::__construct($nom);
+    $this-&gt;horasTrabajadas=$horas;
+    $this-&gt;valorHora=$valor;
+  }
+  public function calcularSueldo()
+  {
+    $this-&gt;sueldo=$this-&gt;horasTrabajadas*$this-&gt;valorHora;
+  }
+}
+
+class Gerente extends Trabajador {
+  protected $utilidades;
+  public function __construct($nom,$uti)
+  {
+    parent::__construct($nom);
+    $this-&gt;utilidades=$uti;
+  }
+  public function calcularSueldo()
+  {
+    $this-&gt;sueldo=$this-&gt;utilidades*0.10;
+  }
+}
+
+$empleado1=new Empleado('Pablo Rodriguez',150,3.50);
+$empleado1-&gt;calcularSueldo();
+echo 'El sueldo del empleado&lt;br&gt;';
+$empleado1-&gt;imprimir();
+
+$gerente1=new Gerente('Marcos Herning',1000000);
+$gerente1-&gt;calcularSueldo();
+echo 'El sueldo del gerente&lt;br&gt;';
+$gerente1-&gt;imprimir();
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre><pre class="recuadrooculto">
+  <a href="http://www.scratchya.com.ar/problemas/phpyapoo/propu/50/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>	
+</pre>
+<form name="formulario" action="#" target="ventanaForm" method="post" onsubmit=  "abrirVentana()">
+<div style="font-size:1.3em;font-family:arial;"><p>Plantear una clase abstracta Trabajador. Definir como atributo su nombre y sueldo. Declarar un método abstracto: calcularSueldo. Definir otro método para imprimir el numbre y su sueldo.</p>
+<p>Plantear una subclase Empleado. Definir el atributo $horasTrabajadas, $valorHora. Para calcular el sueldo tener en cuenta que se le paga 3.50 la hora.</p>
+<p>Plantear una clase Gerente que herede de la clase Trabajador. Para calcular el sueldo tener en cuenta que se le abona un 10% de las utilidades de la empresa.</p>
+</div><br><a href="javascript:cambiar()" id="solucion">Ver solución</a><br><br><b>pagina1.php</b><input type="hidden" name="archivo1" value="pagina1.html"><br><textarea rows="15" cols="110" name="programa1" wrap="off"></textarea><br><br><br><TABLE>
+  <TBODY>
+  <TR>
+    <TD align=left>
+
+	<!--publi-->
+	
+    </TD>
+	</TR></TBODY></TABLE>	
+
+
+
+</form>
+  <div>
+
+   <h2><a href="../index754a.html?inicio=12">Retornar</a></h2>   
+
+  </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+
+<!-- Mirrored from www.phpya.com.ar/poo/problemas/resolverproblema.php?cod=50&punto=16&inicio=12 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:21 GMT -->
+</html>
+

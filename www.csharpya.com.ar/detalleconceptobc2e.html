@@ -1,0 +1,354 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=194&inicio=60 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - Atributos y propiedades estáticas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>70 - Atributos y propiedades estáticas</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p>Los atributos estáticos tienen un comportamiento muy distinto a los atributos vistos hasta el momento. Un atributo estático se reserva espacio para el mismo indistintamente que definamos un objeto de dicha clase. En caso de crear varios objetos de dicha clase todas las instancias acceden al mismo atributo estático. Recordemos que los atributos que habíamos visto son independientes en cada objeto de la clase.</p>
+
+<h3>Problema 1:</h3>
+<p>Definir un atributo estático que almacene la cantidad de objetos creados de dicha clase.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace AtributosEstaticos1
+{
+    class Persona
+    {
+        private string nombre;
+        private int edad;
+        public static int cantidad;
+
+        public Persona(string nom,int ed)
+        {
+            cantidad++;
+            nombre = nom;
+            edad = ed;
+        }
+
+        public void Imprimir()
+        {
+            Console.WriteLine(nombre + "-" + edad);
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Valor del atributo estático cantidad:" + Persona.cantidad);
+            Persona per1 = new Persona("juan", 30);
+            per1.Imprimir();
+            Console.WriteLine("Valor del atributo estático cantidad:" + Persona.cantidad);
+            Persona per2 = new Persona("ana", 20);
+            per2.Imprimir();
+            Console.WriteLine("Valor del atributo estático cantidad:" + Persona.cantidad);
+            Persona per3 = new Persona("luis", 10);
+            per3.Imprimir();
+            Console.WriteLine("Valor del atributo estático cantidad:" + Persona.cantidad);
+            Console.ReadKey();
+        }
+    }
+}
+</pre>
+<p>Un atributo estático de tipo entero se inicializa en cero cuando lo definimos (lo definimos de tipo public para poder acceder a su valor desde afuera de la clase):</p>
+<pre>
+
+        public static int cantidad;
+</pre>
+<p>En el constructor de la clase incrementamos el atributo estático en uno:</p>
+<pre>
+        public Persona(string nom,int ed)
+        {
+            cantidad++;
+            nombre = nom;
+            edad = ed;
+        }
+</pre>
+<p>Desde fuera de la clase podemos acceder a dicho atributo mediante el nombre de la clase sin tener que definir un objeto de la misma:</p>
+<pre>
+            Console.WriteLine("Valor del atributo estático cantidad:" + Persona.cantidad);
+</pre>
+<p>Luego de crear un objeto de la clase Persona se ejecuta el constructor de la clase donde se incrementa en uno el atributo  estático cantidad:</p>
+<pre>
+            Persona per1 = new Persona("juan", 30);
+</pre>
+<p>Si mostramos nuevamente el atributo cantidad veremos que su contenido es uno:</p>
+<pre>
+            Console.WriteLine("Valor del atributo estático cantidad:" + Persona.cantidad);
+</pre>
+<p>No importa cuantos objeto de la clase Persona se creen luego existe un solo atributo cantidad:</p>
+<pre>
+
+            Persona per2 = new Persona("ana", 20);
+            per2.Imprimir();
+            Console.WriteLine("Valor del atributo estático cantidad:" + Persona.cantidad);
+            Persona per3 = new Persona("luis", 10);
+            per3.Imprimir();
+            Console.WriteLine("Valor del atributo estático cantidad:" + Persona.cantidad);
+</pre>
+<p>Si queremos encapsular el atributo cantidad en la clase Persona luego podemos definir una propiedad estática.</p>
+
+<h3>Problema 2:</h3>
+<p>Definir una propiedad estática para acceder a un atributo estático que guarda la cantidad de objetos creados de dicha clase.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace PropiedadesEstaticas1
+{
+    class Persona
+    {
+        private string nombre;
+        private int edad;
+        private static int cantidad;
+
+        public static int Cantidad
+        {
+            set
+            {
+                cantidad = value;
+            }
+            get
+            {
+                return cantidad;
+            }
+        }
+
+        public Persona(string nom, int ed)
+        {
+            cantidad++;
+            nombre = nom;
+            edad = ed;
+        }
+
+        public void Imprimir()
+        {
+            Console.WriteLine(nombre + "-" + edad);
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Valor del atributo estático cantidad:" + Persona.Cantidad);
+            Persona per1 = new Persona("juan", 30);
+            per1.Imprimir();
+            Console.WriteLine("Valor del atributo estático cantidad:" + Persona.Cantidad);
+            Persona per2 = new Persona("ana", 20);
+            per2.Imprimir();
+            Console.WriteLine("Valor del atributo estático cantidad:" + Persona.Cantidad);
+            Persona per3 = new Persona("luis", 10);
+            per3.Imprimir();
+            Console.WriteLine("Valor del atributo estático cantidad:" + Persona.Cantidad);
+            Console.ReadKey();
+        }
+    }
+}
+</pre>
+<p>Como vemos ahora definimos el atributo estático de tipo privado:</p>
+<pre>
+        private static int cantidad;
+</pre>
+<p>Esto hace necesario implementar una propiedad estática para acceder a su contenido:</p>
+<pre>
+
+        public static int Cantidad
+        {
+            set
+            {
+                cantidad = value;
+            }
+            get
+            {
+                return cantidad;
+            }
+        }
+</pre>
+<p>Luego para acceder a su valor desde fuera debemos preguntar el valor de la propiedad Cantidad ya que el atributo cantidad es privado:</p>
+<pre>
+            Console.WriteLine("Valor del atributo estático cantidad:" + Persona.Cantidad);
+</pre>
+<p>Si queremos pulir un poco más este problema podemos eliminar la parte del set de la propiedad Cantidad:</p>
+<pre>
+        public static int Cantidad
+        {
+            get
+            {
+                return cantidad;
+            }
+        }
+</pre>
+<p>Esto hace que no podamos por error asignar a la propiedad Cantidad un valor (genera un error en tiempo de compilación, ya que se trata de una propiedad de solo lectura):</p>
+<pre>
+Persona.Cantidad = 71;
+</pre>
+<p>El incremento del atributo cantidad solo se hace en el constructor de la clase Persona cada vez que creamos un objeto.</p></div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="indexd6cc.html?inicio=60">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=194&inicio=60 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:43 GMT -->
+</html>

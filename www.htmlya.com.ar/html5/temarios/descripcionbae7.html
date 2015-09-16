@@ -1,0 +1,192 @@
+
+<!DOCTYPE html> 
+<html lang="es"> 
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=177&punto=44&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:09 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>API FILE (lectura de archivo de texto local)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="html5, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de HTML 5. Es objetivo prioritario respetar 
+los estándares del W3C">
+<meta name="author" content="Diego Moisset">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+</style>
+
+</head>
+
+<body>
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em"><a href="../../html5.html">Temario del Tutorial</a></span>->44 - API FILE (lectura de archivo de texto local)</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Otra funcionalidad que tenemos con el HTML5 es el acceso solo de lectura de los archivos que hay en nuestro equipo.</p>
+<p>Veremos cual es la estructura de Javascript que debemos implementar para poder seleccionar un archivo de texto e inmediatamente poder acceder a su contenido en el navegador.</p>
+<p>Para trabajar con archivos que se encuentran en el disco duro del equipo el usuario es el responsable de seleccionar uno. Hay varias formas para la selección del archivo, veremos primero la más común que es disponer un control HTML:</p>
+<pre>
+  &lt;input type="file" name="archivo"&gt;
+</pre>
+<p>Como sabemos este control dispone en la página web un botón que al ser presionado por el usuario aparece un diálogo para seleccionar un archivo de nuestro disco duro.</p>
+<p>Para poder identificar cuando el usuario seleccionó un archivo debemos implementar el evento change de dicho control.</p>
+
+
+<h3>Problema</h3>
+<p>Confeccionar un programa que nos permita seleccionar de nuestro disco duro un archivo de texto y posteriormente leer su contenido y mostrarlo en un control textarea. Mostrar además su nombre, tamaño y tipo.</p>
+<h4>Solución</h4>
+<pre class="recuadro">
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Prueba&lt;/title&gt;
+&lt;script&gt;
+    window.addEventListener('load', inicio, false);
+
+    function inicio() {
+        document.getElementById('archivo').addEventListener('change', cargar, false);               
+    }
+
+    function cargar(ev) {
+        document.getElementById('datos').innerHTML='Nombre del archivo:'+ev.target.files[0].name+'&lt;br&gt;'+
+                                                   'Tamaño del archivo:'+ev.target.files[0].size+'&lt;br&gt;'+  
+                                                   'Tipo MIME:'+ev.target.files[0].type;
+        var arch=new FileReader();
+        arch.addEventListener('load',leer,false);
+        arch.readAsText(ev.target.files[0]);
+    }
+    
+    function leer(ev) {
+        document.getElementById('editor').value=ev.target.result;
+    }
+&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;input type="file" id="archivo"&gt;&lt;br&gt;
+&lt;textarea rows="10" cols="80" id="editor"&gt;&lt;/textarea&gt;
+&lt;br&gt;
+&lt;p id="datos"&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Veamos detenidamente cual debe ser la estructura de nuestro algoritmo para poder leer el contenido de un archivo de texto que se encuentra en el disco duro del equipo.</p>
+<p>Lo primero definimos un control de tipo file que es el encargado de permitirnos seleccionar un archivo:</p>
+<pre>
+&lt;input type="file" id="archivo"&gt;&lt;br&gt;
+</pre>
+<p>Disponemos un control de tipo textarea donde mostraremos el contenido del archivo que seleccione el operador:</p>
+<pre>
+&lt;textarea rows="10" cols="80" id="editor"&gt;&lt;/textarea&gt;
+</pre>
+<p>Finalmente disponemos un párrafo donde mostraremos el nombre de archivo que se leerá, su tamaño y tipo:</p>
+<pre>
+&lt;p id="datos"&gt;&lt;/p&gt;
+</pre>
+
+<p>Ahora veamos donde se encuentra el programa en Javascript que nos permite acceder al archivo, en la función inicio registramos el evento change del control de tipo file que se disparará cuando el usuario seleccione un archivo del disco duro:</p>
+<pre>
+    window.addEventListener('load', inicio, false);
+
+    function inicio() {
+        document.getElementById('archivo').addEventListener('change', cargar, false);               
+    }
+</pre>
+
+<p>Cuando el usuario selecciona un archivo se ejecuta la función cargar (que registramos en la función inicio), la función recibe un objeto de la clase File que lo accedemos: ev.target.files[0], este objeto tiene tres atributos name (nombre del archivo que acabamos de seleccionar), size (tamaño en bytes del archivo) y type (tipo de archivo).</p>
+<p>Luego de mostrar las tres propiedades fundamentales del archivo procedemos a crear un objeto de la clase FileReader para poder acceder al contenido del archivo. Mediante la llamada al método readAsText procedemos a leer el contenido del archivo y registramos el evento load para indicar la función que se disparará cuando tengamos todo el archivo en memoria:</p>
+<pre>
+    function cargar(ev) {
+        document.getElementById('datos').innerHTML='Nombre del archivo:'+ev.target.files[0].name+'&lt;br&gt;'+
+                                                   'Tamaño del archivo:'+ev.target.files[0].size+'&lt;br&gt;'+  
+                                                   'Tipo MIME:'+ev.target.files[0].type;
+        var arch=new FileReader();
+        arch.addEventListener('load',leer,false);
+        arch.readAsText(ev.target.files[0]);
+    }
+</pre>
+<p>Por último la función leer recibe un objeto que almacena todos los datos contenidos en del archivo:</p>
+<pre>
+    function leer(ev) {
+        document.getElementById('editor').value=ev.target.result;
+    }
+</pre>
+
+<p>Inicialmente se muestra el botón para la selección del archivo y el textarea vacío:</p>
+<img src="imagentema/foto016.jpg" border="0" alt="API FILE"><br>
+<p>Luego de seleccionar un archivo de texto del disco duro podemos ver el contenido del archivo y sus propiedades (nombre, tamaño y tipo):</p>
+<img src="imagentema/foto017.jpg" border="0" alt="API FILE"><br>
+
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../index1e61.html?inicio=40">Retornar</a></h2>   
+
+</div>
+
+</body>
+
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=177&punto=44&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:14 GMT -->
+</html>

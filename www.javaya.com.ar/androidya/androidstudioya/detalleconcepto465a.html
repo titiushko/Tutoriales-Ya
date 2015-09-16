@@ -1,0 +1,347 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=12&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:29:26 GMT -->
+<head>
+<title>Lanzar un segundo "Activity" y pasar parámetros</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>12 - Lanzar un segundo "Activity" y pasar parámetros</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+ <div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+<p>Hemos visto en el concepto anterior que un programa puede tener más de una ventana representando cada ventana con una clase que hereda de ActionBarActivity.<br>
+Una situación muy común es que la primer ventana necesite enviar datos a la segunda para que a partir de estos proceda a efectuar una acción.</p>
+
+<h3>Problema:</h3>
+<p>Confeccionar un programa que solicite el ingrese de una dirección de un sitio web y seguidamente abrir una segunda ventana que muestre dicha página.</p>
+<p>Para resolver este problema utilizaremos el control visual WebView que nos permite mostrar el contenido de un sitio web.</p>
+<p>Crearemos un nuevo proyecto llamado proyecto012.</p>
+<p>1 - Nuestro primer Activity tendrá la siguiente interfaz visual (ver controles):<br>
+<img src="imagentema/foto048.jpg" border="0" alt="lanzar segundo Activity con parametros"><br>
+Tenemos un control de tipo TextView , otro de tipo EditText y finalmente otro de tipo Button (inicializar la propiedad onClick con el nombre de método llamado "ver").</p>
+
+<p>El código fuente de esta Activity es:</p>
+<pre class="recuadro">
+package ar.com.tutorialesya.proyecto12;
+
+import android.content.Intent;
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+
+
+public class MainActivity extends ActionBarActivity {
+
+    private EditText et1;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        et1=(EditText)findViewById(R.id.editText);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void ver(View v) {
+        Intent i=new Intent(this,Actividad2.class);
+        i.putExtra("direccion", et1.getText().toString());
+        startActivity(i);
+    }
+}
+
+</pre>
+<p>Como podemos ver la diferencia con el concepto anterior es que llamamos al método putExtra de la clase Intent. Tiene dos parámetros de tipo String, en el primero indicamos el nombre del dato y en el segundo el valor del dato:</p>
+<pre>
+    public void ver(View v) {
+        Intent i=new Intent(this,Actividad2.class);
+        i.putExtra("direccion", et1.getText().toString());
+        startActivity(i);
+    }
+</pre>
+
+<p>La segunda interfaz visual (recordemos que debemos presionar el botón derecho en la ventana Project (sobre app) y seleccionar la opción New -> Activity -> Blank Activity:</p>
+
+<img src="imagentema/foto049.jpg" border="0" alt="lanzar segundo Activity con parametros"><br>
+
+<p>En el diálogo que aparece especificamos el nombre de nuestra segundo Activity y lo llamaremos Actividad2:</p>
+<img src="imagentema/foto049b.jpg" border="0" alt="lanzar segundo Activity con parametros"><br>
+
+
+<p>Codificamos la funcionalidad de la segunda actividad<br>
+
+<pre class="recuadro">
+package ar.com.tutorialesya.proyecto12;
+
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.webkit.WebView;
+
+
+public class Actividad2 extends ActionBarActivity {
+
+    private WebView webView1;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_actividad2);
+
+        webView1 = (WebView) findViewById(R.id.webView);
+
+        Bundle bundle = getIntent().getExtras();
+        String dato=bundle.getString("direccion");
+        webView1.loadUrl("http://" + dato);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_actividad2, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void finalizar(View v) {
+        finish();
+    }
+}
+
+</pre>
+
+<p>En esta clase definimos una variable de tipo Bundle y la inicializamos llamando al método getExtras() de la clase Intent (esto lo hacemos para recuperar el o los parámetros que envió la otra actividad (Activity)):</p>
+<pre>
+        Bundle bundle = getIntent().getExtras();
+        String dato=bundle.getString("direccion");
+        webView1.loadUrl("http://" + dato);
+</pre>    
+<p>El método loadUrl de la clase WebView permite visualizar el contenido de un sitio web.</p>
+
+
+<h3>Importante</h3>
+<p>Como nuestra aplicación debe acceder a internet debemos hacer una configuración en el archivo "AndroidManifest.xml", podemos ubicar este archivo:</p>
+<img src="imagentema/foto049c.jpg" border="0" alt="lanzar segundo Activity con parametros"><br>
+
+<p>Agregamos el permiso tipeando lo siguiente en este archivo:</p>
+<pre>
+&lt;uses-permission android:name="android.permission.INTERNET" /&gt;
+</pre>
+<p>Luego el archivo AndroidManifest.xml queda con el permiso agregado:</p>
+<img src="imagentema/foto049d.jpg" border="0" alt="lanzar segundo Activity con parametros"><br>
+
+
+
+<p>Ahora nuestro programa debería estar funcionando completamente.</p>
+<p>La primer ventana debería ser algo similar a esto:</p>
+<img src="imagentema/foto051.jpg" border="0" alt="lanzar segundo Activity con parametros"><br>
+<p>La segunda ventana debería ser algo similar a esto otro:</p>
+<img src="imagentema/foto052.jpg" border="0" alt="lanzar segundo Activity con parametros"><br>
+
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/Proyecto012.zip">proyecto012.zip</a>
+</p>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+<br>
+   <h2><a href="index2904.html?inicio=0">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-34', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=12&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:33:43 GMT -->
+</html>

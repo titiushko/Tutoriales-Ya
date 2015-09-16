@@ -1,0 +1,162 @@
+<html>
+
+
+<!-- Mirrored from www.sqlserverya.com.ar/temarios/descripcion.php?inicio=100&cod=117&punto=111 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de SQL Server </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+	  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>111 - Lenguaje de control de flujo (if)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>Existen palabras especiales que pertenecen al lenguaje de control de flujo que controlan la ejecución de las sentencias, los bloques de sentencias y procedimientos almacenados.</p>
+
+<p>Tales palabras son: begin... end, goto, if... else, return, waitfor, while, break y continue.</p>
+<p>- "begin... end" encierran un bloque de sentencias para que sean tratados como unidad.</p>
+<p>- "if... else": testean una condición; se emplean cuando un bloque de sentencias debe ser ejecutado si una condición se cumple y si no se cumple, se debe ejecutar otro bloque de sentencias diferente.</p>
+<p>- "while": ejecuta repetidamente una instrucción siempre que la condición sea verdadera.</p>
+<p>- "break" y "continue": controlan la operación de las instrucciones incluidas en el bucle "while".</p>
+
+<p>Veamos un ejemplo. Tenemos nuestra tabla "libros"; queremos mostrar todos los títulos de los cuales no hay libros disponibles (cantidad=0), si no hay, mostrar un mensaje indicando tal situación:</p>
+<pre>
+ if exists (select *from libros where cantidad=0)
+  (select titulo from libros where cantidad=0)
+ else
+  select 'No hay libros sin stock';
+</pre>
+<p>SQL Server ejecuta la sentencia (en este caso, una subconsulta) luego del "if" si la condición es verdadera; si es falsa, ejecuta la sentencia del "else" (si existe).</p>
+
+<p>Podemos emplear "if...else" en actualizaciones. Por ejemplo, queremos hacer un descuento en el precio, del 10% a todos los libros de una determinada editorial; si no hay, mostrar un mensaje:</p>
+<pre>
+ if exists (select *from libros where editorial='Emece')
+ begin
+  update libros set precio=precio-(precio*0.1) where editorial='Emece'
+  select 'libros actualizados'
+ end
+ else
+  select 'no hay registros actualizados';
+</pre>
+<p>Note que si la condición es verdadera, se deben ejecutar 2 sentencias. Por lo tanto, se deben encerrar en un bloque "begin...end".</p>
+
+<p>En el siguiente ejemplo eliminamos los libros cuya cantidad es cero; si no hay, mostramos un mensaje:</p>
+<pre>
+ if exists (select *from libros where cantidad=0)
+  delete from libros where cantidad=0
+ else
+  select 'No hay registros eliminados;
+</pre></p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+<br>
+   <h2><a href="../indexf6ce.html?inicio=100">Retornar</a></h2>   
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-11";
+urchinTracker();
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from www.sqlserverya.com.ar/temarios/descripcion.php?inicio=100&cod=117&punto=111 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:33 GMT -->
+</html>

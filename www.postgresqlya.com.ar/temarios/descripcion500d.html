@@ -1,0 +1,247 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.postgresqlya.com.ar/temarios/descripcion.php?inicio=0&cod=179&punto=21 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:17:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de PostgreSQL - Funciones para el manejo de cadenas </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+	  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>21 - Funciones para el manejo de cadenas</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+	  	  
+
+<p>
+<p>PostgreSQL tiene algunas funciones para trabajar con cadenas de caracteres. Estas son algunas:</p>
+
+
+<p><strong>char_length(string)</strong>: Retorna la longitud del texto. Ejemplo:</p>
+<pre>
+select char_length('Hola');
+</pre>
+<p>retorna un 4.</p>
+<br>
+
+<p><strong>upper(string)</strong>: Retorna el texto convertido a mayúsculas. Ejemplo:</p>
+<pre>
+select upper('Hola');
+</pre>
+<p>retorna 'HOLA'.</p>
+<br>
+
+<p><strong>lower(string)</strong>: Retorna el texto convertido a minúsculas. Ejemplo:</p>
+<pre>
+select lower('Hola');
+</pre>
+<p>retorna 'hola'.</p>
+<br>
+
+<p><strong>position(string in string)</strong>: Retorna la posición de un string dentro de otro. Si no está contenido retorna un 0. Ejemplo:</p>
+<pre>
+select position('Mundo' in 'Hola Mundo');
+</pre>
+<p>retorna 6.</p>
+<pre>
+select position('MUNDO' in 'Hola Mundo');
+</pre>
+<p>retorna 0 (ya que no coinciden mayúsculas y minúsculas)</p>
+<br>
+
+<p><strong>substring(string [from int] [for int])</strong>: Retorna un substring, le indicamos la posición inicial y la cantidad de caracteres a extraer desde dicha posición. Ejemplo:</p>
+<pre>
+select substring('Hola Mundo' from 1 for 2);
+</pre>
+<p>retorna 'Ho'.</p>
+<pre>
+select substring('Hola Mundo' from 6 for 5);
+</pre>
+<p>retorna 'Mundo'.</p>
+<br>
+
+
+<p><strong>trim([leading|trailing|both] [string] from string)</strong>: Elimina caracteres del principio o o final de un string. Por defecto elimina los espacios en blanco si no indicamos el caracter o string. Ejemplo:</p>
+<pre>
+select char_length(trim('  Hola Mundo  '));
+</pre>
+<p>retorna un 10. Esto es debido a que primero se ejecuta la función trim que elimina los dos espacios iniciales y los dos finales.</p>
+<pre>
+select char_length(trim(leading ' ' from '  Hola Mundo  '));
+</pre>
+<p>retorna un 12. Esto es debido a indicamos que elimine los espacios en blanco de la cadena solo del comienzo (leading).</p>
+<pre>
+select trim(trailing '-' from '--Hola Mundo----');
+</pre>
+<p>retorna '--Hola Mundo'. Esto es debido a indicamos que elimine los guiones del final del stirng.</p>
+<br>
+
+<p><strong>ltrim(string,string)</strong>: Elimina los caracteres de la izquierda según el dato del segundo parámetro de la función. Ejemplo:</p>
+<pre>
+select char_length(ltrim('  Hola'));
+</pre>
+<p>retorna un 4.</p>
+<pre>
+select ltrim('---Hola','-');
+</pre>
+<p>retorna 'Hola'.</p>
+<br>
+
+<p><strong>rtrim(string,string)</strong>: Elimina los caracteres de la derecha según el dato del segundo parámetro de la función. Ejemplo:</p>
+<pre>
+select char_length(rtrim('Hola  '));
+</pre>
+<p>retorna un 4.</p>
+<pre>
+select rtrim('Hola----','-');
+</pre>
+<p>retorna un 'Hola'.</p>
+<br>
+
+<p><strong>substr(text,int[,int])</strong>: Retorna una subcadena a partir de la posición que le indicamos en el segundo parámetro hasta la posición indicada en el tercer parámetro. Ejemplo:</p>
+<pre>
+select substr('Hola Mundo',2,4);
+</pre>
+<p>retorna 'ola'.</p>
+<pre>
+select substr('Hola Mundo',2);
+</pre>
+<p>retorna 'ola Mundo' (si no indicamos el tercer parámetro retorna todo el string hasta el final)</p>
+<br>
+
+<p><strong>lpad(text,int,text)</strong>: Rellena de caracteres por la izquierda. El tamaño total de campo es indicado por el segundo parámetro y el texto a insertar se indica en el tercero. Ejemplo:</p>
+<pre>
+select lpad('Hola Mundo',20,'-');
+</pre>
+<p>retorna '----------Hola Mundo'.</p>
+<br>
+
+<p><strong>rpad(text,int,text)</strong>: Rellena de caracteres por la derecha. El tamaño total de campo es indicado por el segundo parámetro y el texto a insertar se indica en el tercero. Ejemplo:</p>
+<pre>
+select rpad('Hola Mundo',20,'-');
+</pre>
+<p>retorna 'Hola Mundo----------'.</p>
+<pre>
+select rpad('Hola Mundo',20,'-*');
+</pre>
+<p>retorna 'Hola Mundo-*-*-*-*-*'.</p>
+<br>
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-24");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+
+
+<!-- Mirrored from www.postgresqlya.com.ar/temarios/descripcion.php?inicio=0&cod=179&punto=21 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:17:38 GMT -->
+</html>

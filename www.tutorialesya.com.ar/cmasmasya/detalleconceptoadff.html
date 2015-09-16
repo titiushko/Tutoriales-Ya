@@ -1,0 +1,821 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=10&codigo=137&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Estructura repetitiva for</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>10 - Estructura repetitiva for</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Cualquier problema que requiera una estructura repetitiva se puede resolver empleando la estructura while. Pero hay otra estructura repetitiva cuyo planteo es más sencillo en ciertas situaciones.<br>
+En general, la estructura for se usa en aquellas situaciones en las cuales CONOCEMOS la cantidad de veces que queremos que se ejecute el bloque de instrucciones. Ejemplo: cargar 10 números, ingresar 5 notas de alumnos,  etc. Conocemos de antemano la cantidad de veces que queremos que el bloque se repita. Veremos, sin embargo, que en el lenguaje C++ la estructura for puede usarse en cualquier situación repetitiva, porque en última instancia no es otra cosa que una estructura while generalizada.</p>
+<p>Representación gráfica:</p>
+<p><img src="imagentema/foto033.jpg" border="0" alt="estructura repetitiva for"><br>
+</p>
+
+<p>En su forma más típica y básica, esta estructura requiere una variable entera que cumple la función de un CONTADOR de vueltas. En la sección indicada como "inicialización contador", se suele colocar el nombre de la variable que hará de contador, asignándole a dicha variable un valor inicial. En la sección de "condición" se coloca la condición que deberá ser verdadera para que el ciclo continúe (en caso de un falso, el ciclo se detendrá). Y finalmente, en la sección de "incremento contador" se coloca una instrucción que permite modificar el valor de la variable que hace de contador (para permitir que alguna vez la condición sea falsa)</p>
+
+<p>Cuando el ciclo comienza, antes de dar la primera vuelta, la variable del for toma el valor indicado en la sección de de "inicialización contador". Inmediatamente se verifica, en forma automática, si la condición es verdadera. En caso de serlo se ejecuta el bloque de operaciones del ciclo, y al finalizar el mismo se ejecuta la instrucción que se haya colocado en la tercer sección.<br> Seguidamente, se vuelve a controlar el valor de la condición, y así prosigue hasta que dicha condición entregue un falso.</p>
+ 
+<p>Si conocemos la cantidad de veces que se repite el bloque es muy sencillo emplear un for, por ejemplo si queremo que se  repita  50 veces el bloque de instrucciones puede hacerse así:</p>
+
+<p><img src="imagentema/foto034.jpg" border="0" alt="estructura repetitiva for"><br>
+</p>
+
+<p>La variable del for puede tener cualquier nombre. En este ejemplo se la ha definido con el nombre f.<br>
+
+Analicemos el ejemplo:</p>
+<pre>
+- La variable f  toma inicialmente el valor 1.
+- Se controla automáticamente el valor de la condición: como f vale 1 y esto es menor 
+o que 50, la condición da verdadero.
+- Como la condición fue verdadera, se ejecutan la/s operación/es.
+- Al finalizar de ejecutarlas, se retorna a la instrucción f++, por lo que la 
+variable f se incrementa en uno. 
+- Se vuelve a controlar (automáticamente) si f es menor o igual a 50. 
+Como ahora su valor es 2, se ejecuta nuevamente el bloque de instrucciones e 
+incrementa nuevamente la variable del for al terminar el mismo.
+- El proceso se repetirá hasta que la variable f sea incrementada al valor 51. 
+En este momento la condición será falsa, y el ciclo se detendrá.
+</pre>
+<p>La variable f  PUEDE ser modificada dentro del bloque de operaciones del for, aunque esto podría causar problemas de lógica si el programador es inexperto.<br>
+La variable f  puede ser inicializada en cualquier valor y finalizar en cualquier valor. Además, no es obligatorio que la instrucción de modificación sea un incremento del tipo contador  (f++).<br> Cualquier instrucción que modifique el valor de la variable es válida. Si por ejemplo se escribe f=f+2 en lugar de f++, el valor de f será incrementado de a 2 en cada vuelta, y no de a 1. En este caso, esto significará que el ciclo no efectuará las 50 vueltas sino sólo 25.</p>
+<h3>Problema 1:</h3>
+<p>Realizar un programa que imprima en pantalla los números del 1 al 100.</p>
+<h4>Diagrama de flujo:</h4>
+<p><img src="imagentema/foto035.jpg" border="0" alt="estructura repetitiva for"><br>
+</p>
+
+<p>Podemos observar y comparar con el problema realizado con el while. Con la estructura while el CONTADOR x sirve para contar las vueltas. Con el for el CONTADOR f  cumple dicha función. <br>
+
+Inicialmente f vale 1 y como no es superior a 100 se ejecuta el bloque, imprimimos el contenido de f, al finalizar el bloque repetitivo se incrementa la variable f en 1, como 2 no es superior a 100 se repite el bloque de instrucciones.<br>
+Cuando la variable del for llega a 101 sale de la estructura repetitiva y continúa la ejecución del algoritmo que se indica después del círculo.<br>
+La variable f (o como sea que se decida llamarla) debe estar definida como una variable más.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int f;
+    for(f=1; f &lt;= 100 ;f++)
+    {
+        cout &lt;&lt;f;
+        cout &lt;&lt;"-";
+    }
+    cin.get();
+}</pre>
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/ForNumeros1al100.zip">ForNumeros1al100</a></p>
+
+<h3>Problema 2:</h3>
+<p>: Desarrollar un programa que permita la carga de 10 valores por teclado y nos muestre posteriormente la suma de los valores ingresados y su promedio. Este problema ya lo desarrollamos, lo resolveremos empleando la estructura for.</p>
+<h4>Diagrama de flujo:</h4>
+<p><img src="imagentema/foto036.jpg" border="0" alt="estructura repetitiva for"><br>
+</p>
+<p>En este caso, a la variable del for (f) sólo se la requiere para que se repita el bloque de instrucciones 10 veces.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int suma,f,valor,promedio;
+    suma=0;
+    for(f=1; f &lt;= 10;f++) 
+    {
+        cout &lt;&lt;"Ingrese valor:";
+        cin &gt;&gt;valor;
+        suma=suma+valor;
+    }
+    cout &lt;&lt;"La suma es:";
+    cout &lt;&lt;suma;
+    cout &lt;&lt;"\n";
+    promedio=suma/10;
+    cout &lt;&lt;"El promedio es:";
+    cout &lt;&lt;promedio;
+    cin.get();
+    cin.get();
+}
+</pre>
+<p>El problema requiere que se carguen 10 valores y se sumen los mismos.<br>
+Tener en cuenta encerrar entre llaves bloque de instrucciones a repetir dentro del for.<br>
+El promedio se calcula fuera del for luego de haber cargado los 10 valores.</p>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/ForSuma10Valores.zip">ForSuma10Valores</a></p>
+
+
+<h3>Problema 3:</h3>
+<p>Escribir un programa que lea 10 notas de alumnos y nos informe cuántos tienen notas mayores o iguales a 7 y cuántos menores.</p>
+<p>Para resolver este problema se requieren tres contadores:<br>
+<pre>
+aprobados (Cuenta la cantidad de alumnos aprobados)
+reprobados (Cuenta la cantidad de reprobados)
+f (es el contador del for)
+</pre>
+Dentro de la estructura repetitiva debemos hacer la carga de la variable nota y verificar con una estructura condicional si el contenido de la variable nota es mayor o igual a 7 para incrementar el contador aprobados, en caso de que la condición retorne falso debemos incrementar la variable reprobados.</p>
+
+<h4>Diagrama de flujo:</h4>
+<p><img src="imagentema/foto037.jpg" border="0" alt="estructura repetitiva for"><br>
+</p>
+
+<p>Los contadores aprobados y reprobados deben imprimirse FUERA de la estructura repetitiva.<br>
+
+Es fundamental inicializar los contadores aprobados y reprobados en cero antes de entrar a la estructura for.<br>
+
+<strong>Importante:</strong> Un error común es inicializar los contadores dentro de la estructura repetitiva. En caso de hacer esto los contadores se fijan en cero en cada ciclo del for, por lo que al finalizar el for como máximo el contador puede tener el valor 1.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int aprobados,reprobados,f,nota;
+    aprobados=0;
+    reprobados=0;
+    for(f=1; f &lt;= 10 ;f++) 
+    {
+        cout &lt;&lt;"Ingrese la nota:";
+        cin &gt;&gt;nota;
+        if (nota &gt;= 7) 
+        {
+            aprobados=aprobados+1;
+        }
+        else
+        {
+            reprobados=reprobados+1;
+        }
+    }
+    cout &lt;&lt;"Cantidad de aprobados:";
+    cout &lt;&lt;aprobados;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"Cantidad de reprobados:";
+    cout &lt;&lt;reprobados;    
+    cin.get();
+    cin.get();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/ForNotasAlumnos.zip">ForNotasAlumnos</a></p>
+
+
+<h3>Problema 4:</h3>
+<p>Escribir un programa que lea 10 números enteros y luego muestre cuántos valores ingresados fueron múltiplos de 3 y cuántos de 5. Debemos tener en cuenta que hay números que son múltiplos de 3 y de 5 a la vez.</p>
+<h4>Diagrama de flujo:</h4>
+<p><img src="imagentema/foto038.jpg" border="0" alt="estructura repetitiva for"><br>
+</p>
+
+<p>Tengamos en cuenta que el operador matemático % retorna el resto de dividir un valor por otro, en este caso: valor%3 retorna el resto de dividir el valor que ingresamos por teclado,  por tres.<br>
+Veamos: si ingresamos 6 el resto de dividirlo por 3 es 0, si ingresamos 12 el resto de dividirlo por 3 es 0. Generalizando: cuando el resto de dividir por 3 al valor que ingresamos por teclado es cero, se trata de un múltiplo de dicho valor.</p>
+
+<p>Ahora bien ¿por qué no hemos dispuesto una estructura if anidada? Porque hay valores que son múltiplos de 3 y de 5 a la vez. Por lo tanto con if anidados no podríamos analizar los dos casos.<br>
+
+Es importante darse cuenta cuando conviene emplear if anidados y cuando no debe emplearse.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int mul3,mul5,valor,f;
+    mul3=0;
+    mul5=0;
+    for(f=1; f &lt;= 10 ;f++) 
+    {
+        cout &lt;&lt;"Ingrese un valor:";
+        cin &gt;&gt;valor;
+        if (valor%3 == 0) 
+        {
+            mul3=mul3+1;
+        } 
+        if (valor%5 == 0) 
+        {
+            mul5=mul5+1;
+        }
+    }
+    cout &lt;&lt;"Cantidad de valores ingresados múltiplos de 3:";
+    cout &lt;&lt;mul3;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"Cantidad de valores ingresados múltiplos de 5:";
+    cout &lt;&lt;mul5;
+    cin.get();
+    cin.get();
+}</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/ForMultiplo3Multiplo5.zip">ForMultiplo3Multiplo5</a></p>
+
+<h3>Problema 5:</h3>
+<p>Escribir un programa que lea n números enteros y calcule la cantidad de valores mayores o iguales a 1000.<br>
+Este tipo de problemas también se puede resolver empleando la estructura repetitiva for. Lo primero que se hace es cargar una variable que indique la cantidad de valores a ingresar. Dicha variable se carga antes de entrar a la estructura repetitiva for.<br>
+La estructura for permite que el valor inicial o final dependa de una variable cargada previamente por teclado.
+</p>
+<h4>Diagrama de flujo:</h4>
+<p><img src="imagentema/foto039.jpg" border="0" alt="estructura repetitiva for"><br>
+</p>
+<p>Tenemos un contador llamado cantidad y f que es el contador del for.<br>
+La variable entera n se carga previo al inicio del for, por lo que podemos fijar el valor final del for con la variable n.<br>
+Por ejemplo si el operador carga 5 en n la estructura repetitiva for se ejecutará 5 veces.<br>
+La variable valor se ingresa dentro de la estructura repetitiva, y se verifica si el valor de la misma es mayor o igual a 1000, en dicho caso se incrementa en uno el contador cantidad.<br>
+Fuera de la estructura repetitiva imprimimos el contador cantidad que tiene almacenado la cantidad de valores ingresados mayores o iguales a 1000.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int cantidad,n,f,valor;
+    cantidad=0;
+    cout &lt;&lt;"Cuantos valores ingresará:";
+    cin &gt;&gt;n;
+    for(f=1; f &lt;= n ;f++) 
+    {
+        cout &lt;&lt;"Ingrese el valor:";
+        cin &gt;&gt;valor;
+        if (valor &gt;= 1000) 
+        {
+            cantidad=cantidad+1;
+        }
+    }
+    cout &lt;&lt;"La cantidad de valores ingresados mayores o iguales a 1000 son:";
+    cout &lt;&lt;cantidad;
+    cin.get();
+    cin.get();
+}</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/ForValoresMayores1000.zip">ForValoresMayores1000</a></p>
+
+
+<h2>Problemas propuestos</h2>
+<p>
+Ha llegado nuevamente la parte fundamental, que es el momento donde uno desarrolla individualmente un algoritmo para la resolución de un problema.</p>
+
+<ol>
+<li>
+Confeccionar un programa que lea n pares de datos, cada par de datos corresponde a la medida de la base y la altura de un triángulo. El programa deberá informar:<br>
+a) De cada triángulo la medida de su base, su altura y su superficie. <br>
+b) La cantidad de triángulos cuya superficie es mayor a 12.
+</li>
+
+<li>
+Desarrollar un programa que solicite la carga de 10 números e imprima la suma de los últimos 5 valores ingresados.
+</li>
+<li>
+Desarrollar un programa que muestre la tabla de multiplicar del 5 (del 5 al 50)
+</li>
+<li>
+Confeccionar un programa que permita ingresar un valor del 1 al 10  y nos muestre la tabla de multiplicar del mismo (los primeros 12 términos)<br>
+Ejemplo: Si ingreso 3 deberá aparecer en pantalla los valores 3, 6, 9, hasta el 36.
+</li>
+<li>
+Realizar un programa que lea los lados de n triángulos, e informar:<br>
+a) De cada uno de ellos, qué tipo de triángulo es: equilátero (tres lados iguales), isósceles (dos lados iguales), o escaleno (ningún lado igual)<br>
+b) Cantidad de triángulos de cada tipo.<br>
+c) Tipo de triángulo que posee menor cantidad.
+</li>
+<li>
+Escribir un programa que pida ingresar coordenadas (x,y) que representan puntos en el plano.<br> Informar cuántos puntos se han ingresado en el primer, segundo, tercer y cuarto cuadrante. Al comenzar el programa se pide que se ingrese la cantidad de puntos a procesar.
+</li>
+<li>
+Se realiza la carga de 10 valores enteros por teclado. Se desea conocer:<br>
+a) La cantidad de valores ingresados negativos.<br>
+b) La cantidad de valores ingresados positivos.<br>
+c) La cantidad de múltiplos de 15.<br>
+d) El valor acumulado de los números ingresados que son pares.
+</li>
+<li>
+Se cuenta con la siguiente información:<br>
+Las edades de 5 estudiantes del turno mañana.<br>
+Las edades de 6 estudiantes del turno tarde.<br>
+Las edades de 11 estudiantes del turno noche.<br>
+Las edades de cada estudiante deben ingresarse por teclado.<br>
+a) Obtener el promedio de las edades de cada turno (tres promedios)<br>
+b) Imprimir dichos promedios (promedio de cada turno)<br>
+c) Mostrar por pantalla un mensaje que indique cual de los tres turnos tiene un promedio de edades mayor.
+</li>
+
+</ol>
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int basetri,altura,superficie,cantidad,f,n;
+    cantidad=0;
+    cout &lt;&lt;"Cuantos triángulos procesará:";
+    cin &gt;&gt;n;
+    for(f=1; f &lt;= n ;f++) 
+    {
+        cout &lt;&lt;"Ingrese el valor de la base:";
+        cin &gt;&gt;basetri;
+        cout &lt;&lt;"Ingrese el valor de la altura:";
+        cin &gt;&gt;altura;
+        superficie=basetri*altura/2;
+        cout &lt;&lt;"La superficie es:";
+        cout &lt;&lt;superficie;
+        cout &lt;&lt;"\n";
+        if (superficie &gt; 12) 
+        {
+            cantidad=cantidad+1;
+        }
+    }
+    cout &lt;&lt;"La cantidad de triángulos con superficie superior a 12 son:";
+    cout &lt;&lt;cantidad;
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/ForCalculoTriangulos.zip">ForCalculoTriangulos</a></p>
+
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int f,valor,suma;
+    suma=0;
+    for(f=1; f &lt;= 10 ;f++) 
+    {
+        cout &lt;&lt;"Ingrese un valor:";
+        cin &gt;&gt;valor;
+        if (f&gt;5) 
+        {
+            suma=suma+valor;
+        }
+    }
+    cout &lt;&lt;"La suma de los últimos 5 valores es:";
+    cout &lt;&lt;suma;
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/ForSuma.zip">ForSuma</a></p>
+
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int f;
+    for(f=5; f &lt;= 50 ;f=f+5) 
+    {
+        cout &lt;&lt;f;
+        cout &lt;&lt;"-";
+    }
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/ForTabla5.zip">ForTabla5</a></p>
+
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int f,valor;
+    cout &lt;&lt;"Ingrese un valor entre 1 y 10:";
+    cin &gt;&gt;valor;
+    for(f=valor; f &lt;= valor*12 ;f=f+valor) 
+    {
+        cout &lt;&lt;f;
+        cout &lt;&lt;"-";
+    }
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/ForTablaMultiplicar.zip">ForTablaMultiplicar</a></p>
+
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int f,lado1,lado2,lado3,cant1,cant2,cant3,n;
+    cant1=0;
+    cant2=0;
+    cant3=0;
+    cout &lt;&lt;"Ingrese la cantidad de triángulos:";
+    cin &gt;&gt;n;
+    for(f=1; f &lt;= n ;f++) 
+    {
+        cout &lt;&lt;"Ingrese lado 1:";
+        cin &gt;&gt;lado1;
+        cout &lt;&lt;"Ingrese lado 2:";
+        cin &gt;&gt;lado2;
+        cout &lt;&lt;"Ingrese lado 3:";
+        cin &gt;&gt;lado3;
+        if (lado1 == lado2 && lado1 == lado3) 
+        {
+            cout &lt;&lt;"Es un triángulo equilatero.";
+            cout &lt;&lt;"\n";
+            cant1++;
+        }
+        else 
+        {
+            if (lado1 == lado2 || lado1 == lado3 || lado2 == lado3) 
+            {
+                cout &lt;&lt;"Es un triángulo isósceles.";
+                cout &lt;&lt;"\n";
+                cant2++;
+            }
+            else
+            {
+                cant3++;
+                cout &lt;&lt;"Es un triángulo escaleno.";
+                cout &lt;&lt;"\n";
+            }
+        }
+    }
+    cout &lt;&lt;"Cantidad de triángulos equilateros:";
+    cout &lt;&lt;cant1;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"Cantidad de triángulos isósceles:";
+    cout &lt;&lt;cant2;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"Cantidad de triángulos escalenos:";
+    cout &lt;&lt;cant3;
+    cout &lt;&lt;"\n";
+    if (cant1 &lt; cant2 && cant1 &lt; cant3) 
+    {
+        cout &lt;&lt;"Hay menor cantidad de triángulos equilateros.";
+    }
+    else
+    {
+        if (cant2 &lt; cant3) 
+        {
+            cout &lt;&lt;"Han menor cantidad de triángulos isósceles";    
+        }
+        else
+        {
+            cout &lt;&lt;"Han menor cantidad de triángulos escalenos";                    
+        }
+    }
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/ForTipoTriangulos.zip">ForTipoTriangulos</a></p>
+
+
+
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int n,f,x,y,cant1,cant2,cant3,cant4;
+    cant1=0;
+    cant2=0;
+    cant3=0;   
+    cant4=0; 
+    cout &lt;&lt;"Cantidad de puntos:";
+    cin &gt;&gt;n;
+    for(f=1; f &lt;= n ;f++) 
+    {
+        cout &lt;&lt;"Ingrese coordenada x:";
+        cin &gt;&gt;x;
+        cout &lt;&lt;"Ingrese coordenada y:";
+        cin &gt;&gt;y;
+        if (x &gt; 0 && y &gt; 0) 
+        {
+            cant1++;
+        }
+        else
+        {
+            if (x &lt; 0 && y &gt; 0) 
+            {
+                cant2++;
+            }
+            else
+            {
+                if (x &lt; 0 && y &lt; 0) 
+                {
+                    cant3++;
+                }
+                else
+                {
+                    if (x &gt; 0 && y &lt; 0) 
+                    {
+                        cant4++;
+                    }
+                }
+            }
+        }
+    }
+    cout &lt;&lt;"Cantidad de puntos en el primer cuadrante:";
+    cout &lt;&lt;cant1;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"Cantidad de puntos en el segundo cuadrante:";
+    cout &lt;&lt;cant2;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"Cantidad de puntos en el tercer cuadrante:";
+    cout &lt;&lt;cant3;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"Cantidad de puntos en el cuarto cuadrante:";
+    cout &lt;&lt;cant4;
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/ForPuntoCuadrante.zip">ForPuntoCuadrante</a></p>
+
+
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int f,valor,negativos,positivos,mult15,sumapares;
+    negativos=0;
+    positivos=0;
+    mult15=0;
+    sumapares=0;
+    for(f=1; f &lt;= 10 ;f++) 
+    {
+        cout &lt;&lt;"Ingrese valor:";
+        cin &gt;&gt;valor;
+        if (valor &lt; 0) 
+        {
+            negativos++;
+        }
+        else
+        {
+            if (valor&gt;0) 
+            {
+                positivos++;
+            }
+        }
+        if (valor%15==0) 
+        {
+            mult15++;
+        }
+        if (valor%2==0) 
+        {
+            sumapares=sumapares+valor;
+        }
+    }
+    cout &lt;&lt;"Cantidad de valores negativos:";
+    cout &lt;&lt;negativos;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"Cantidad de valores positivos:";
+    cout &lt;&lt;positivos;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"Cantidad de valores múltiplos de 15:";
+    cout &lt;&lt;mult15;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"Suma de los valores pares:";
+    cout &lt;&lt;sumapares;
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/ForOperacionesListaValores.zip">ForOperacionesListaValores</a></p>
+
+
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int f,edad,suma1,suma2,suma3,pro1,pro2,pro3;
+    suma1=0;
+    suma2=0;
+    suma3=0;
+    for(f=1; f &lt;= 5 ;f++) 
+    {
+        cout &lt;&lt;"Ingrese edad:";
+        cin &gt;&gt;edad;
+        suma1=suma1+edad;
+    }
+    pro1=suma1/5;
+    cout &lt;&lt;"Promedio de edades del turno mañana:";
+    cout &lt;&lt;pro1;
+    cout &lt;&lt;"\n";
+    for(f=1; f &lt;= 6 ;f++)
+    {
+        cout &lt;&lt;"Ingrese edad:";
+        cin &gt;&gt;edad;
+        suma2=suma2+edad;
+    }
+    pro2=suma2/6;
+    cout &lt;&lt;"Promedio de edades del turno tarde:";
+    cout &lt;&lt;pro2;
+    cout &lt;&lt;"\n";
+    for(f=1; f &lt;= 11 ;f++) 
+    {
+        cout &lt;&lt;"Ingrese edad:";
+        cin &gt;&gt;edad;
+        suma3=suma3+edad;
+    }
+    pro3=suma3/11;
+    cout &lt;&lt;"Promedio de edades del turno noche:";
+    cout &lt;&lt;pro3;
+    cout &lt;&lt;"\n";
+    if (pro1 &lt; pro2 && pro1 &lt; pro3) 
+    {
+        cout &lt;&lt;"El turno mañana tiene un promedio menor de edades.";
+    }
+    else
+    {
+        if (pro2 &lt; pro3) 
+        {
+            cout &lt;&lt;"El turno tarde tiene un promedio menor de edades.";
+        }
+        else
+        {
+            cout &lt;&lt;"El turno noche tiene un promedio menor de edades.";
+        }
+    }
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/ForEdadesEstudiantes.zip">ForEdadesEstudiantes</a></p>
+
+</pre>
+<h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=10&codigo=137&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:36 GMT -->
+</html>

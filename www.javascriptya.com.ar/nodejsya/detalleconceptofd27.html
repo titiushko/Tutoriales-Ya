@@ -1,0 +1,450 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=24&codigo=24&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:29:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Framework Express - Upload de archivos módulo multer</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++, programación, tutorial, nodejs">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de NodeJS.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>24 - Framework Express - Upload de archivos módulo multer</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Cuando tenemos que implementar formularios que contengan upload de archivos el módulo 'body-parser' no los puede procesar. Para estas situaciones hay otros módulos disponibles.</p>
+<p>Veremos el módulo 'multer' que nos permite administrar la subida de archivos a nuestro servidor.</p>
+<h3>Problema</h3>
+<p>Implementar una página con dos hipervínculos. El primero nos permite acceder a un formulario web para la carga de dos fotos, las mismas deben ser almacenadas en el servidor. El segundo hipervínculo debe mostrar todas las fotos subidas hasta ese momento.</p>
+
+
+
+
+<h4>Paso 1</h4>
+Como vamos a utilizar el Framework Express y en conceptos anteriores ya instalamos el 'express-generator' nos posicionamos en el directorio 'c:\ejerciciosnodejs' (o el directorio donde esta almacenando todos sus proyectos) y procederemos a crear nuestra aplicación Node.js utilizando Express y su generador de código:</p>
+<pre>
+c:\ejerciciosnodejs> express ejercicio26 --hbs
+</pre>
+<p>Estamos llamando al programa 'express' y le pasamos dos parámetros, el primero indica el nombre de nuestro proyecto y el segundo el sistema de plantillas que utilizaremos para generar nuestras páginas dinámicas (<strong>h</strong>andle<strong>b</strong>ar<strong>s</strong>)</p>
+<p>Ya tenemos creado la carpeta ejercicio26 y dentro de esta los archivos y subcarpetas básicos:</p>
+<pre>
+  ejercicio26
+    app.js
+    package.json
+    bin
+      www
+    public
+      images
+      javascripts
+      stylesheets
+    router
+      index.js
+      users.js
+    views
+      error.hbs
+      index.hbs
+      layout.hbs
+</pre>
+
+<p>Descendemos a la carpeta ejercicio26 e instalamos todas las dependencias de módulos:</p>
+<pre>
+c:\ejerciciosnodejs\ejercicio26>npm install
+</pre>
+<p>Cuando llamamos a 'npm install' sin ningún otro parámetro lo que hace es buscar el archivo 'package.json' y proceder a instalar todos los módulos especificados en la propiedad 'dependencies'.</p>
+<p>Ahora ya tenemos creado la carpeta 'node_modules' con las 7 carpetas que coinciden con las dependencias especificadas en el archivo json:</p>
+<pre>
+    body-parser
+    cookie-parser
+    debug
+    express
+    hbs
+    morgan
+    serve-favicon
+</pre>
+
+<p>Recordemos que hasta ahora hemos creado un esqueleto funcional de una aplicación Node.js utilizando el framework Express y lo podemos ejecutar:</p>
+
+<p>Podemos ejecutar nuestra aplicación mínima creada con el 'express-generador':</p>
+<pre>
+c:\ejerciciosnodejs\ejercicio26>node ./bin/www
+</pre>
+<p>Y ya podemos solicitar al servidor la página raíz del sitio:</p>
+<p><img src="imagentema/foto064.jpg" border="0" alt="express-generator express node.js"></p>
+<p>Recordemos que otra forma de iniciar a nuestro proyecto en Node.js cuando definimos el archivo package.json:</p>
+<p>En lugar de escribir:</p>
+<pre>
+c:\ejerciciosnodejs\ejercicio26>node ./bin/www
+</pre>
+<p>Escribimos:</p>
+<pre>
+c:\ejerciciosnodejs\ejercicio26>npm start
+</pre>
+<p>Recordemos que en el archivo json hay una propiedad start donde definimos el archivo que inicia nuestra aplicación:</p>
+<pre>
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+</pre>
+
+
+
+
+
+<h4>Paso 2</h4>
+<p>Pasamos a instalar el módulo 'multer' desde la línea de comandos:</p>
+<pre>
+c:\ejerciciosnodejs\ejercicio26>npm install multer --save
+</pre>
+<p>Después de esto podemos abrir el archivo package.json y ver que se agregó la nueva dependencia "multer" por indicar --save:</p>
+<pre>
+{
+  "name": "ejercicio26",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.13.2",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "hbs": "~3.1.0",
+    "morgan": "~1.6.1",
+    "multer": "^1.0.3",
+    "serve-favicon": "~2.3.0"
+  }
+}
+</pre>
+<p>También si entramos en la carpeta node-modules veremos que se encuentra instalado el módulo "multer".</p>
+
+
+<h4>Paso 3</h4>
+<p>Crearemos dos carpetas, una donde se almacenarán temporalmente los archivos que llegan al servidos desde un navegador y otra carpeta donde los copiaremos desde la carpeta temporal a la definitiva.</p>
+<p>La primer carpeta a crear dependerá de la raíz de nuestro sitio y la llamaremos 'uploads' y la segundo carpeta la crearemos dentro de la carpeta 'public' y la llamaremos 'fotos':</p>
+<pre>
+  ejercicio26
+    app.js
+    package.json
+    <strong>uploads</strong>
+    bin
+      www
+    public
+      <strong>fotos</strong>
+      images
+      javascripts
+      stylesheets
+    router
+      index.js
+      users.js
+    views
+      error.hbs
+      index.hbs
+      layout.hbs
+</pre>
+
+
+
+
+<h4>Paso 4</h4>
+<p>Ahora tenemos que modificar el archivo index.hbs que se encuentra en la carpeta "views" y disponemos dos enlaces al formulario de upload y a la visualización de las fotos:</p>
+<pre class="recuadro">
+&lt;a href="/subirfoto"&gt;Subir foto&lt;/a&gt;
+&lt;br&gt;
+&lt;a href="/verfotos"&gt;Ver fotos&lt;/a&gt;
+</pre>
+
+<p>También creamos otra plantilla llamada 'subirfoto.hbs' y cuyo contenido es:</p>
+<pre class="recuadro">
+ &lt;form method="post" action"/subirfoto" enctype="multipart/form-data"&gt;
+ Seleccione una foto:
+ &lt;input type="file" name="foto"&gt;
+ &lt;br&gt;
+ Seleccione una foto:
+ &lt;input type="file" name="foto"&gt;
+ &lt;br&gt;
+ &lt;input type="submit" value="subir"&gt;
+ &lt;/form&gt;
+</pre>
+
+<p>Es importante ver que a los dos controles de tipo file le definimos el mismo valor en la propiedad name, es decir con el valor 'foto'.</p>
+
+
+
+<h4>Paso 5</h4>
+<p>En el archivo index.js de la carpeta routes disponemos el siguiente código:</p>
+<pre class="recuadro">
+var express = require('express');
+var router = express.Router();
+
+var multer = require('multer');
+var upload = multer({dest: './uploads/'});
+
+var fs = require('fs');
+
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index');
+});
+
+
+router.get('/subirfoto', function(req, res, next) {
+  res.render('subirfoto');
+});
+
+
+router.post('/subirfoto', upload.array('foto', 2), function(req, res, next) {
+    for(var x=0;x&lt;req.files.length;x++) {
+        //copiamos el archivo a la carpeta definitiva de fotos
+       fs.createReadStream('./uploads/'+req.files[x].filename).pipe(fs.createWriteStream('./public/fotos/'+req.files[x].originalname)); 
+       //borramos el archivo temporal creado
+       fs.unlink('./uploads/'+req.files[x].filename); 
+    }  
+    var pagina='&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;'+
+               '&lt;p&gt;Se subieron las fotos&lt;/p&gt;'+
+               '&lt;br&gt;&lt;a href="/"&gt;Retornar&lt;/a&gt;&lt;/body&gt;&lt;/html&gt;';
+      res.send(pagina);        
+});
+
+
+router.get('/verfotos', function(req, res, next) {
+   fs.readdir('./public/fotos/', function(err, files) {  
+      var pagina='&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;';
+      for(var x=0;x&lt;files.length;x++) {
+          pagina+='&lt;img src="fotos/'+files[x]+'"&gt;&lt;br&gt;';
+      }
+      pagina+='&lt;br&gt;&lt;a href="/"&gt;Retornar&lt;/a&gt;&lt;/body&gt;&lt;/html&gt;';
+      res.send(pagina);        
+   });
+});
+
+
+module.exports = router;
+</pre>
+
+
+
+<p>Requerimos el módulo 'multer' y seguidamente llamamos a la función multer pasando como dato el directorio donde se suben los archivos:</p>
+var multer = require('multer');
+var upload = multer({dest: './uploads/'});
+</pre>
+<p>Requerimos el módulo 'fs' para la copia de archivos:</p>
+<pre>
+var fs = require('fs');
+</pre>
+
+<p>Cuando accedemos a la raíz del sitio nos muestra la plantilla index.hbs:</p>
+<pre>
+router.get('/', function(req, res, next) {
+  res.render('index');
+});
+</pre>
+<p>En el navegador tenemos:</p>
+<p><img src="imagentema/foto083.jpg" border="0" alt="multer express node.js"></p>
+<p>Cuando seleccionamos 'Subir foto' se carga la plantilla subirfoto:</p>
+<pre>
+router.get('/subirfoto', function(req, res, next) {
+  res.render('subirfoto');
+});
+</pre>
+<p>En el navegador tenemos:</p>
+<p><img src="imagentema/foto084.jpg" border="0" alt="multer express node.js"></p>
+
+<p>Cuando se presiona el botón submit se ejecuta:</p>
+<pre>
+router.post('/subirfoto', upload.array('foto', 2), function(req, res, next) {
+    for(var x=0;x&lt;req.files.length;x++) {
+        //copiamos el archivo a la carpeta definitiva de fotos
+       fs.createReadStream('./uploads/'+req.files[x].filename).pipe(fs.createWriteStream('./public/fotos/'+req.files[x].originalname)); 
+       //borramos el archivo temporal creado
+       fs.unlink('./uploads/'+req.files[x].filename); 
+    }  
+    var pagina='&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;'+
+               '&lt;p&gt;Se subieron las fotos&lt;/p&gt;'+
+               '&lt;br&gt;&lt;a href="/"&gt;Retornar&lt;/a&gt;&lt;/body&gt;&lt;/html&gt;';
+      res.send(pagina);        
+});
+</pre>
+<p>En el segundo parámetro indicamos el objeto upload que creamos en las primeras líneas llamando al método array y pasando como parámetro la propiedad name del formulario html y un 2 indicando la cantidad de archivos que llegarán.</p>
+<p>Disponemos un for para recorrer el vector que contiene todos los datos de los archivos subidos:</p>
+<pre>
+    for(var x=0;x&lt;req.files.length;x++) {
+</pre>
+<p>En cada vuelta del for copiamos el archivo que se encuentra en la carpeta upload a la carpeta fotos a un archivo que es igual al nombre original:</p>
+<pre>
+       fs.createReadStream('./uploads/'+req.files[x].filename).pipe(fs.createWriteStream('./public/fotos/'+req.files[x].originalname)); 
+</pre>
+<p>Después de copiarlo procedemos a eliminar el archivo que se subió a la carpeta uploads:</p>
+<pre>
+       fs.unlink('./uploads/'+req.files[x].filename); 
+</pre>
+
+<p>Cuando seleccionamos la opción 'Ver fotos' de la página principal del sitio se ejecuta:</p>
+<pre>
+router.get('/verfotos', function(req, res, next) {
+   fs.readdir('./public/fotos/', function(err, files) {  
+      var pagina='&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;';
+      for(var x=0;x&lt;files.length;x++) {
+          pagina+='&lt;img src="fotos/'+files[x]+'"&gt;&lt;br&gt;';
+      }
+      pagina+='&lt;br&gt;&lt;a href="/"&gt;Retornar&lt;/a&gt;&lt;/body&gt;&lt;/html&gt;';
+      res.send(pagina);        
+   });
+});
+</pre>
+<p>Mediante el objeto 'fs' llamamos al método readdir que obtiene una lista con todos los archivos contenidos en la carpeta que le pasamos en el primer parámetro:</p>
+<pre>
+   fs.readdir('./public/fotos/', function(err, files) {  
+</pre>
+<p>Mediante un for recorremos el vector y generamos todas los elementos HTML img con la propiedad src respectiva:</p>
+<pre>
+      for(var x=0;x&lt;files.length;x++) {
+          pagina+='&lt;img src="fotos/'+files[x]+'"&gt;&lt;br&gt;';
+      }
+</pre>
+<p>En el navegador tenemos:</p>
+<p><img src="imagentema/foto085.jpg" border="0" alt="multer express node.js"></p>
+
+
+
+<p>Este proyecto lo puede descargar en un zip con todos los archivos desde este enlace :
+<a href="proyectos/ejercicio26.zip">ejercicio26</a></p>
+
+<h2><a href="index9187.html?inicio=15">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-35', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=24&codigo=24&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:29:59 GMT -->
+</html>

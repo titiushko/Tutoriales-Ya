@@ -1,0 +1,244 @@
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=50&cod=60 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de JavaScript : Conceptos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+div#contentdetalle{clear:left;
+                   max-width:900px;
+				   border-top:0px solid #999;
+				   padding-top:15px;
+				   background-color: #aed7a8;
+				   text-align:left;
+				   font-size:1.3em;
+				   font-weight:normal;
+				   font-family:arial;
+				   padding:20px}
+				   
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;  
+}				   
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td>
+<h1>Funciones: caracteres válidos para su nombre</h1></td>
+<td align="right">
+<!--<a href="http://www.javascriptya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div id="contentdetalle">
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 	  
+
+<p>Cuando definimos una función podemos emplear letras minúsculas, mayúsculas, números siempre y cuando no ocupe la primer posición en el nombre, el caracter '_' y el caracer '$'</p>
+<p>Una  convención muy extendida cuando se define una función es comenzar la primera palabra en minúscula y a partir de la segunda palabra disponer el primer caracter en mayúsculas:<p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+ 
+  function calcularPerimetro(lado)
+  {
+    var per=lado*4;
+    return per;
+  }
+
+  var l=prompt('Ingrese valor del lado:','');
+  l=parseInt(l);
+  document.write(calcularPerimetro(l));
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>El nombre de la función en este ejemplo es: calcularPerimetro <br>
+Como vemos la primer palabra "calcular" hemos utilizado todo minúsculas y en la segunda palabra disponemos en mayúsculas el primer caracter "Perimetro".</p>
+<p>Las funciones estándares de JavaScript tienen esta convención:</p>
+<pre>
+parseInt
+parseFloat
+prompt
+</pre>
+<p>Los métodos de distintas clases (Date, String) también cumplen esta convención:</p>
+<pre>
+ getYear()
+ setYear(año)
+ getFullYear()
+
+ toUpperCase()
+ toLowerCase()
+ indexOf()
+
+ etc.
+</pre>
+<p>Siempre es conveniente utilizar nombres de funciones que sean significativas con el algoritmo que implementan: calcularPerimetro, sumar, calcularRaizCuadrada etc.</p>
+<p>La regla de definir un nombre de función lo más claro posible puede saltearse con funciones que se utilizan constantemente (por ejemplo la librería JQuery de JavaScript define una función que tiene como nombre solo el caracter $)<br> Emplear un solo caracter para definir un nombre de función solo se aconseja para funciones de uso masivo.</p>
+<strong>Problema</strong>
+<p>Definir una función llamada $ que reciba como parámetro el id de un elemento HTML y retorne la referencia del mismo.</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+
+&lt;script type="text/javascript"&gt;
+
+  function $(ele)
+  {
+    return document.getElementById(ele);
+  }
+
+  function inicio()
+  {
+    $('cuerpo').style.backgroundColor='#ffff00';
+  }
+
+  window.onload=inicio;
+
+&lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body id="cuerpo"&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>La función $ recibe como parámetro el id de un elemento HTML y mediante el método getElementById extrae la referencia y lo retorna:</p>
+<pre>
+  function $(ele)
+  {
+    return document.getElementById(ele);
+  }
+</pre>
+<p>La función inicio se ejecuta luego que la página está completamente cargada. Llama a la función $ pasando el id del body de la página y con el valor devuelto accedemos a la propiedad style del objeto:</p>
+<pre>
+  function inicio()
+  {
+    $('cuerpo').style.backgroundColor='#ffff00';
+  }
+</pre>
+</p>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../indexefd7.html?inicio=50">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=50&cod=60 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:24 GMT -->
+</html>

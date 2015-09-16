@@ -1,0 +1,351 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.postgresqlya.com.ar/problemas/problema.php?inicio=0&cod=174&punto=16 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:17:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de PostgreSQL: Problemas Resueltos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+pre {
+  text-align:left;
+  font-family:verdana,sans-serif;
+}
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+</style>
+
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;	
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=no,status=yes,toolbar=yes,location=yes');  	
+}
+
+function VentanaTeorico(codigo)
+{
+  alto=400;
+  window.open('../temarios/descripcion2ade4.html?cod='+codigo+'&origen=problema', '', 'top=0,left=0,width=800,height='+alto+',resizable=yes,scrollbars=yes,menubar=no');  	
+}
+
+function cambiar(nro)
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   if (nro==1)
+   {
+     if (lista[f].id=='solu1')
+       lista[f].style.display='block';
+   }
+   else
+     if (nro==2)
+     {
+       if (lista[f].id=='solu2')
+         lista[f].style.display='block';
+     }
+	   
+  }
+  if (nro==1)
+    document.getElementById('solucion1').style.display='none';
+  if (nro==2)
+    document.getElementById('solucion2').style.display='none';
+}
+
+</script>
+
+</head>
+
+<body>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>16 - Tipo de dato numérico</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<b>Primer problema: </b><br><pre>
+Un banco tiene registrados las cuentas corrientes de sus clientes en una tabla llamada "cuentas".
+La tabla contiene estos datos:
+	Número de Cuenta	Documento	Nombre		Saldo
+	______________________________________________________________
+	1234			25666777	Pedro Perez	500000.60
+	2234			27888999	Juan Lopez	-250000
+	3344			27888999	Juan Lopez	4000.50
+	3346			32111222	Susana Molina	1000
+
+
+1- Cree la tabla eligiendo el tipo de dato adecuado para almacenar los datos descriptos arriba:
+
+ - Número de cuenta: entero, no puede haber valores repetidos, clave primaria;
+ - Documento del propietario de la cuenta: cadena de caracteres de 8 de longitud (siempre 8), no nulo;
+ - Nombre del propietario de la cuenta: cadena de caracteres de 30 de longitud,
+ - Saldo de la cuenta: valores altos con decimales.
+
+2- Ingrese los siguientes registros:
+ insert into cuentas(numero,documento,nombre,saldo)
+  values('1234','25666777','Pedro Perez',500000.60);
+ insert into cuentas(numero,documento,nombre,saldo)
+  values('2234','27888999','Juan Lopez',-250000);
+ insert into cuentas(numero,documento,nombre,saldo)
+  values('3344','27888999','Juan Lopez',4000.50);
+ insert into cuentas(numero,documento,nombre,saldo)
+  values('3346','32111222','Susana Molina',1000);
+Note que hay dos cuentas, con distinto número de cuenta, de la misma persona.
+
+3- Seleccione todos los registros cuyo saldo sea mayor a "4000" (2 registros)
+
+4- Muestre el número de cuenta y saldo de todas las cuentas cuyo propietario sea "Juan Lopez" (2 
+registros)
+
+5- Muestre las cuentas con saldo negativo (1 registro)
+
+6- Muestre todas las cuentas cuyo número es igual o mayor a "3000" (2 registros):
+</pre><a href="javascript:cambiar(1)" id="solucion1">Ver solución</a>
+<br><br>
+<pre id="solu1" class="recuadrooculto">
+ create table cuentas(
+  numero int not null,
+  documento char(8) not null,
+  nombre varchar(30),
+  saldo decimal(15,2),
+  primary key (numero)
+ );
+
+ insert into cuentas(numero,documento,nombre,saldo)
+  values('1234','25666777','Pedro Perez',500000.60);
+ insert into cuentas(numero,documento,nombre,saldo)
+  values('2234','27888999','Juan Lopez',-250000);
+ insert into cuentas(numero,documento,nombre,saldo)
+  values('3344','27888999','Juan Lopez',4000.50);
+ insert into cuentas(numero,documento,nombre,saldo)
+  values('3346','32111222','Susana Molina',1000);
+
+ select * from cuentas
+  where saldo&lt;4000;
+
+ select numero,saldo from cuentas
+  where nombre='Juan Lopez';
+
+ select * from cuentas
+  where saldo&lt;0;
+
+ select * from cuentas
+  where numero&gt;=3000;
+</pre>
+   
+	<br>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>	
+
+
+</form>
+        <p>&nbsp;</p>
+  
+<table width="650px">
+<tr>
+<td align="center">	
+
+
+
+</td>
+</tr>
+</table>		
+	
+	
+
+<b>Segundo problema: </b><br><pre>
+Una empresa almacena los datos de sus empleados en una tabla "empleados" que guarda los siguientes 
+datos: nombre, documento, sexo, domicilio, sueldobasico.
+
+1- Cree la tabla eligiendo el tipo de dato adecuado para cada campo:
+ create table empleados(
+  nombre varchar(30),
+  documento char(8),
+  sexo char(1),
+  domicilio varchar(30),
+  sueldobasico decimal(7,2),--máximo estimado 99999.99
+  cantidadhijos smallint --no superará los 255
+ );
+
+2- Ingrese algunos registros:
+ insert into empleados (nombre,documento,sexo,domicilio,sueldobasico,cantidadhijos)
+  values ('Juan Perez','22333444','m','Sarmiento 123',500,2);
+ insert into empleados (nombre,documento,sexo,domicilio,sueldobasico,cantidadhijos)
+  values ('Ana Acosta','24555666','f','Colon 134',850,0);
+ insert into empleados (nombre,documento,sexo,domicilio,sueldobasico,cantidadhijos)
+  values ('Bartolome Barrios','27888999','m','Urquiza 479',10000.80,4);
+
+3- Ingrese un valor de "sueldobasico" con más decimales que los definidos (redondea los decimales al 
+valor más cercano 800.89):
+ insert into empleados (nombre,documento,sexo,domicilio,sueldobasico,cantidadhijos)
+  values ('Susana Molina','29000555','f','Salta 876',800.888,3);
+
+4- Intente ingresar un sueldo que supere los 7 dígitos (no lo permite)
+
+5- Muestre todos los empleados cuyo sueldo no supere los 900 pesos (1 registro):
+
+6- Seleccione los nombres de los empleados que tengan hijos (3 registros):
+</pre>
+<br>
+<a href="javascript:cambiar(2)" id="solucion2">Ver solución</a>
+<pre id="solu2" class="recuadrooculto">
+ create table empleados(
+  nombre varchar(30),
+  documento char(8),
+  sexo char(1),
+  domicilio varchar(30),
+  sueldobasico decimal(7,2),--m&aacute;ximo estimado 99999.99
+  cantidadhijos smallint --no superar&aacute; los 255
+ );
+
+ insert into empleados (nombre,documento,sexo,domicilio,sueldobasico,cantidadhijos)
+  values ('Juan Perez','22333444','m','Sarmiento 123',500,2);
+ insert into empleados (nombre,documento,sexo,domicilio,sueldobasico,cantidadhijos)
+  values ('Ana Acosta','24555666','f','Colon 134',850,0);
+ insert into empleados (nombre,documento,sexo,domicilio,sueldobasico,cantidadhijos)
+  values ('Bartolome Barrios','27888999','m','Urquiza 479',10000.80,4);
+
+ insert into empleados (nombre,documento,sexo,domicilio,sueldobasico,cantidadhijos)
+  values ('Susana Molina','29000555','f','Salta 876',800.888,3);
+
+ insert into empleados (nombre,documento,sexo,domicilio,sueldobasico,cantidadhijos)
+  values ('Marta Juarez','32444555','f','Sucre 1086',5000000,2);
+
+ select * from empleados
+  where sueldobasico&gt;=900;
+
+ select * from empleados
+  where cantidadhijos&gt;0;
+</pre>
+
+<br>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-24");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+
+<!-- Mirrored from www.postgresqlya.com.ar/problemas/problema.php?inicio=0&cod=174&punto=16 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:17:37 GMT -->
+</html>

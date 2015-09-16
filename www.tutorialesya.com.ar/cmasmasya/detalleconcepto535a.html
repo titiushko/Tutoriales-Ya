@@ -1,0 +1,346 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=30&codigo=161&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Vectores y punteros</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>30 - Vectores y punteros</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<h3>Vectores de tipo numérico.</h3>
+<p>Cuando definimos un vector, por ejemplo:</p>
+<pre>
+    int vec[3];
+    vec[0]=10;
+    vec[1]=50;
+    vec[2]=100;
+</pre>
+<p>lo que estamos definiendo es un puntero que reserva espacio para 3 componentes de tipo entero, guardando la dirección del primer elemento. Esto sucede en memoria (suponiendo que un tipo int ocupa 4 bytes):</p>
+<pre>
+        Dir. de Mem.	Contenido	Nombre de variable
+        1000		1004		vec
+        1004		10		[0]
+        1008		50		[1]
+        1012		100		[2]
+</pre>
+<p>Cuando accedemos a una componente en particular del vector, calcula la dirección correspondiente de la siguiente manera:
+  dirección del puntero + (bytes que ocupa según tipo de dato * subíndice)</p>
+
+<p>Suma a la dirección que almacena, que es la del primer elemento, los bytes según el tipo de dato * subíndice indicado.<br>
+Para ejecutar esta línea:</p>
+<pre>
+    cout&lt;&lt;x[0];
+</pre>
+<p>encuentra la dirección de la componente 0 utilizando el cálculo anterior: 1004 + (4*0), o sea 1004.</p>
+<p>Para encontrar la dirección de la componente subíndice 2: 1004 + (4 * 2), o sea 1012.</p>
+
+<p>Ejemplo:</p>
+<p>Si definimos un vector de tipo float:</p>
+<pre>
+	float vec[5];
+</pre>
+<p>estamos definiendo es un puntero que reserva espacio para 5 componentes de tipo real (float). Esto sucede en memoria (suponiendo que un float ocupa 4 bytes):</p>
+<pre>
+	Dir. de Mem.	Contenido	Nombre de variable
+	1000		1004		vec
+	1004				[0]
+	1008				[1]
+	1012				[2]
+	1016				[3]
+	1020				[4]
+</pre>
+<p>Cuando cargamos las componentes encuentra las direcciones de cada componente realizando los siguientes cálculos:</p>
+<pre>
+	cin &gt;&gt;x[0];	// 1004 + (4 *0), o sea 1004.
+	cin &gt;&gt;x[1];	// 1004 + (4 *1), o sea 1008.
+	cin &gt;&gt;x[2];	// 1004 + (4 *2), o sea 1012.
+	cin &gt;&gt;x[3];	// 1004 + (4 *3), o sea 1016.
+	cin &gt;&gt;x[4];	// 1004 + (4 *4), o sea 1020.
+</pre>
+
+
+<h3>Vectores de caracteres.</h3>
+
+<p>Cuando definimos un vector de caracteres, por ejemplo:</p>
+<pre>
+    char cadena[10];
+</pre>
+<p>lo que estamos definiendo es un puntero que reserva espacio para 10 componentes de tipo char, guardando la dirección del primer elemento, el cero. Esto sucede en memoria:</p>
+<pre>
+	Dir. de Mem.	Contenido	Nombre de variable
+	1000		1004		Cadena
+	1004				[0]
+	1005				[1]
+	1006				[2]
+	1007				[3]
+	1008				[4]
+	1009				[5]
+	1010				[6]
+	1011				[7]
+	1012				[8]
+	1013				[9]
+</pre>
+
+<p>Cuando cargamos la cadena con:</p>
+<pre>
+    strcpy_s(Cadena, 10, "Hola");
+</pre>
+<p>busca la dirección del puntero (1004) y comienza a cargar los caracteres, cuando la cadena finaliza, agrega el terminador de cadena. En memoria:</p>
+<pre>
+	Dir. de Mem.	Contenido	Nombre de variable
+	1000		1004		Cadena
+	1004		'H'		[0]
+	1005		'o'		[1]
+	1006		'l'		[2]
+	1007		'a'		[3]
+	1008		'\0'		[4]
+	1009				[5]
+	1010				[6]
+	1011				[7]
+	1012				[8]
+	1013				[9]
+</pre>
+
+<p>Impresión de cadenas</p>
+
+<p>Cuando imprimimos un vector de caracteres:</p>
+<pre>
+	cout&lt;&lt;Cadena;	// imprime Hola
+</pre>
+<p>no necesitamos indicar el subíndice pues busca la dirección de cadena (1004) y recorre los siguientes bytes imprimiendo cada carácter hasta encontrar el terminador de cadena.</p>
+
+<p>Ejemplo:</p>
+<pre>
+char cad[20];
+strcpy_s(cad,20,"Programar");
+cout&lt;&lt;cad;		// imprime Programar
+cout&lt;&lt;cad[0];		// imprime P
+cout&lt;&lt;cad[6];		// imprime m
+</pre>
+<p>Cuando solicitamos la impresión de la componente 5, encuentra la dirección de dicha componente utilizando el cálculo visto anteriormente: dirección del vector + (bytes según tipo de dato *subíndice). El tipo de dato char ocupan normalmente 1 bytes.</p>
+
+<h3>Punteros a char</h3>
+
+<p>Carga e impresión</p>
+<p>Ejemplo:</p>
+<pre>
+char cad[10];
+strcpy_s(cad,10,"Sol");
+char *pc;
+pc=cad;
+cout&lt;&lt;pc;
+</pre>
+
+<p>Seguimiento del ejemplo:</p>
+
+<p>- Definimos un vector de caracteres:	char cad[10];</p>
+<pre>
+	Dir. de Mem.	Contenido	Nombre de variable
+	1000		1004		cad
+	1004				[0]
+	1005				[1]
+	1006				[2]
+	1007				[3]
+	1008				[4]
+	1009				[5]
+	1010				[6]
+	1011				[7]
+	1012				[8]
+	1013				[9]
+</pre>
+<p>- Cargamos el vector: strcpy_s(cad,10,"Sol");</p>
+<pre>
+	Dir. de Mem.	Contenido	Nombre de variable
+	1000		1004		cad
+	1004		'S'		[0]
+	1005		'o'		[1]
+	1006		'l'		[2]
+	1007		'\0'		[3]
+	1008				[4]
+	1009				[5]
+	1010				[6]
+	1011				[7]
+	1012				[8]
+	1013				[9]
+</pre>
+<p>- Definimos un puntero a char: char *pc;</p>
+<pre>
+	Dir. de Mem.	Contenido	Nombre de variable
+	1000		1004		cad
+	1004		'S'		[0]
+	1005		'o'		[1]
+	1006		'l'		[2]
+	1007		'\0'		[3]
+	1008				[4]
+	1009				[5]
+	1010				[6]
+	1011				[7]
+	1012				[8]
+	1013				[9]
+	1014				pc
+</pre>
+<p>- Asignamos al puntero pc la cadena:	pc=cad;</p>
+<pre>
+	Dir. de Mem.	Contenido	Nombre de variable
+	1000		1004		cad
+	1004		'S'		[0]
+	1005		'o'		[1]
+	1006		'l'		[2]
+	1007		'\0'		[3]
+	1008				[4]
+	1009				[5]
+	1010				[6]
+	1011				[7]
+	1012				[8]
+	1013				[9]
+	1014		1004		pc
+</pre>
+<p>Cuando asignamos a un puntero a char una cadena, no antecedemos a cad el símbolo & porque cad contiene una dirección. Tampoco antecedemos el asterisco * antes de pc. Estamos manejando direcciones.</p>
+
+<p>- Imprimimos donde apunta el puntero: cout&lt;&lt;Pc;</p>
+
+
+<h2><a href="index9187.html?inicio=15">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=30&codigo=161&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:20 GMT -->
+</html>

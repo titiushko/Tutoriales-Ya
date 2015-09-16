@@ -1,0 +1,226 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.phpya.com.ar/poo/temarios/descripcion.php?cod=54&punto=20&inicio=12 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<title>Conceptos de PHP Orientado a Objetos</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="PHP,POO, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de POO.">
+<meta name="author" content="Diego Moisset">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" type="text/JavaScript">
+
+</script>
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>20 - Operador instanceof</h1></td>
+<td align="right">
+<!--<a href="http://www.phpya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+	  
+<div style="font-size:1.3em;font-family:arial;">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+ 
+</div> 
+<p>Cuando tenemos una lista de objetos de distinto tipo y queremos saber si un objeto es de una determinada clase el lenguaje PHP nos provee del operador instanceof.</p>
+<p>Confeccionaremos un problema que contenga un vector con objetos de la clase Empleado y Gerente. Luego calcularemos cuanto ganan en total los empleados y los gerentes.</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Pruebas&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+abstract class Trabajador {
+  protected $nombre;
+  protected $sueldo;
+  public function __construct($nom,$sue)
+  {
+    $this-&gt;nombre=$nom;
+    $this-&gt;sueldo=$sue;
+  }
+  public function retornarSueldo()
+  {
+    return $this-&gt;sueldo;
+  }
+} 
+
+class Empleado extends Trabajador {
+}
+
+class Gerente extends Trabajador {
+}
+
+$vec[]=new Empleado('juan',1200);
+$vec[]=new Empleado('ana',1000);
+$vec[]=new Empleado('carlos',1000);
+
+$vec[]=new Gerente('jorge',25000);
+$vec[]=new Gerente('marcos',8000);
+$suma1=0;
+$suma2=0;
+for($f=0;$f&lt;count($vec);$f++)
+{
+  if ($vec[$f] instanceof Empleado)
+    $suma1=$suma1+$vec[$f]-&gt;retornarSueldo();
+  else
+    if ($vec[$f] instanceof Gerente)
+      $suma2=$suma2+$vec[$f]-&gt;retornarSueldo();
+}
+echo 'Gastos en sueldos de Empleados:'.$suma1.'&lt;br&gt;';
+echo 'Gastos en sueldos de Gerentes:'.$suma2.'&lt;br&gt;';
+
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt; 
+</pre>
+<p>Hemos planteado tres clases, la clase Trabajador es una clase abstracta:</p>
+<pre>
+abstract class Trabajador {
+...
+}
+</pre>
+<p>Las clases Empleado y Gerente son subclase de la clase Trabajador y en este caso por simplicidad no agregan ninguna funcionalidad a la clase padre:</p>
+<pre>
+class Empleado extends Trabajador {
+}
+
+class Gerente extends Trabajador {
+}
+</pre>
+<p>Ahora veamos la parte que nos interesa, primero creamos 5 objetos, 3 de la clase Empleado y 2 de la clase Gerente:</p>
+<pre>
+$vec[]=new Empleado('juan',1200);
+$vec[]=new Empleado('ana',1000);
+$vec[]=new Empleado('carlos',1000);
+
+$vec[]=new Gerente('jorge',25000);
+$vec[]=new Gerente('marcos',8000);
+</pre>
+<p>Como podemos ver los 5 objetos se almacenan en un vector. Ahora tenemos que ver cuanto se gasta en sueldos pero separando lo que ganan los empleados y los gerentes:</p>
+<pre>
+$suma1=0;
+$suma2=0;
+for($f=0;$f&lt;count($vec);$f++)
+{
+  if ($vec[$f] instanceof Empleado)
+    $suma1=$suma1+$vec[$f]-&gt;retornarSueldo();
+  else
+    if ($vec[$f] instanceof Gerente)
+      $suma2=$suma2+$vec[$f]-&gt;retornarSueldo();
+}
+</pre>
+<p>Mediante el operador instanceof preguntamos por cada elemento del vector y verificamos si se trata de una instancia de la clase Empleado o de la clase Gerente.</p>
+<p>Finalmente mostramos los acumuladores:</p>
+<pre>
+echo 'Gastos en sueldos de Empleados:'.$suma1.'&lt;br&gt;';
+echo 'Gastos en sueldos de Gerentes:'.$suma2.'&lt;br&gt;';
+</pre></div>
+</p>
+
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* rec-gra */
+google_ad_slot = "4229715475";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+  <div>
+   <h2><a href="../index754a.html?inicio=12">Retornar</a></h2>   
+  </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+try {
+_uacct = "UA-628756-13";
+urchinTracker();
+} catch(err) {}</script>
+
+</body>
+
+
+<!-- Mirrored from www.phpya.com.ar/poo/temarios/descripcion.php?cod=54&punto=20&inicio=12 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:21 GMT -->
+</html>

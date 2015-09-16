@@ -1,0 +1,434 @@
+﻿<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.phpya.com.ar/temarios/descripcion.php?punto=41&cod=62&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:09:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de PHP - Temario</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="keywords" content="php, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de php.">
+<meta name="author" content="Diego Moisset">
+
+<style>
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Verdana,arial,sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.1em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;
+}
+
+#recuadrooculto {
+  display: none;
+}
+
+
+.recuadroborde {
+  //  max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+	clear:left;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  document.getElementById('recuadrooculto').style.display='block';
+}
+
+</script>
+
+</head>
+
+<body>
+
+
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em;margin-right:1em"><a href="../index1e61-2.html?inicio=40">Temario del Tutorial</a></span>41 - Agregar imágenes dinámicas en un archivo HTML</h1></div>
+
+<br>
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+
+<p>En un concepto anterior habíamos visto como crear un archivo gráfico en forma dinámica y el envío del mismo al navegador que lo solicitó. Ahora veremos como crear el archivo de la imagen y su posterior incorporación en una página HTML.</p>
+
+<p>Continuaremos con el problema del código de verificación, pero ahora lo incorporaremos en un formulario donde el operador debe tipear el número que está viendo. En una tercera página verificaremos si ingresó el mismo valor que se generó en forma aleatoria.</p>
+
+<p>La primera página "pagina1.php" es el formulario: </p>
+<pre class="recuadroborde">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form action=&quot;pagina3.php&quot; method=&quot;post&quot;&gt;
+D&iacute;gitos verificadores:&lt;img src=&quot;pagina2.php&quot;&gt;
+&lt;br&gt;
+Ingrese valor:
+&lt;input type=&quot;text&quot; name=&quot;numero&quot;&gt;
+&lt;br&gt;
+&lt;input type=&quot;submit&quot; value=&quot;Verificar&quot;&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Tengamos en cuenta que ésta es la página que se solicita inicialmente. Dentro de esta página, se incorpora una etiqueta HTML img para agregar una imagen a la página, pero la misma no es un archivo estático sino un archivo PHP que genera la imagen:</p>
+<pre>
+D&iacute;gito verificador:&lt;img src=&quot;pagina2.php&quot;&gt;
+</pre>
+<p>Tengamos en cuenta que la página que procesa el valor ingresado y el valor generado en forma aleatoria es la tercera página:</p>
+<pre>
+&lt;form action=&quot;pagina3.php&quot; method=&quot;post&quot;&gt;
+</pre>
+<p>El segundo archivo "pagina2.php" es la imagen propiamente dicha:</p>
+<pre class="recuadroborde">
+&lt;?php
+$ancho=100;
+$alto=30;
+$imagen=imageCreate($ancho,$alto);
+$amarillo=ImageColorAllocate($imagen,255,255,0);
+ImageFill($imagen,0,0,$amarillo);
+$rojo=ImageColorAllocate($imagen,255,0,0);
+$valoraleatorio=rand(100000,999999);
+session_start();
+$_SESSION['numeroaleatorio']=$valoraleatorio;
+ImageString($imagen,5,25,5,$valoraleatorio,$rojo);
+for($c=0;$c&lt;=5;$c++)
+{
+  $x1=rand(0,$ancho);
+  $y1=rand(0,$alto);
+  $x2=rand(0,$ancho);
+  $y2=rand(0,$alto);
+  ImageLine($imagen,$x1,$y1,$x2,$y2,$rojo);
+}
+Header (&quot;Content-type: image/jpeg&quot;);
+ImageJPEG ($imagen);
+ImageDestroy($imagen);
+?&gt;</font> 
+</pre>
+
+<p>El algoritmo es el mismo visto en un concepto anterior, la única salvedad es que necesitamos almacenar en una variable de sesión, el número aleatorio para poder compararlo en la página que procesa el formulario:</p>
+<pre>
+session_start();
+$_SESSION['numeroaleatorio']=$valoraleatorio;
+</pre>
+<p>Por último el tercer archivo "pagina3.php":</p>
+<pre class="recuadroborde">
+&lt;?php
+session_start();
+?&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+if ($_SESSION['numeroaleatorio']==$_REQUEST['numero'])
+  echo &quot;Ingres&oacute; el valor correcto&quot;;
+else
+  echo &quot;Incorrecto&quot;;
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Lo primero que hacemos es llamar a la función que rescata las variables de sesión:</p>
+<pre>
+&lt;?php
+session_start();
+?&gt;
+</pre>
+<p>Disponemos un if para verificar si el valor ingresado en el formulario es el mismo que el valor almacenado en la variable de sesión:</p>
+<pre>
+if ($_SESSION['numeroaleatorio']==$_REQUEST['numero'])
+  echo &quot;Ingres&oacute; el valor correcto&quot;;
+else
+  echo &quot;Incorrecto&quot;;
+</pre>
+<br>
+<br>
+
+<h2>Problema resuelto.</h2>
+<p>Copiar el contenido de este cuadro de texto al NotePad++ y grabarlo en la carpeta c:\wamp\www con un nombre con extensión php (si hay varios cuadros
+de texto grabar cada uno en un archivo distinto).<br>
+  luego abrir el navegador (Chrome, FireFox, IExplorer etc.) y en la barra de direcciones tipear: http://localhost/pagina1.php (o el nombre del
+archivo que le dió)  </p>
+<form name="formulario" action="#" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+    pagina1.php<br><textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off" readonly>
+<html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+<form action="http://www.phpya.com.ar/temarios/pagina3.php" method="post">
+Dígitos verificadores:<img src="pagina2.html">
+<br>
+Ingrese valor:
+<input type="text" name="numero">
+<br>
+<input type="submit" value="Verificar">
+</form>
+</body>
+
+<!-- Mirrored from www.phpya.com.ar/temarios/descripcion.php?punto=41&cod=62&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:09:07 GMT -->
+</html></textarea>
+    <br>
+	 <a href="http://www.scratchya.com.ar/problemas/phpya/resu/62/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a> 
+<!--    <a href="http://localhost:8080/problemas/phpya/resu/62/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>-->
+
+    <br>
+<table width="650px">
+<tr>
+<td align="left">	
+
+</td>
+</tr>
+</table>
+
+	
+    <br>pagina2.php<br><textarea class="programafuente" name="programa2" rows=15 cols=110 wrap="off" readonly><?php
+  $ancho=100;
+  $alto=30;
+  $imagen=imageCreate($ancho,$alto);
+  $amarillo=ImageColorAllocate($imagen,255,255,0);
+  ImageFill($imagen,0,0,$amarillo);
+  $rojo=ImageColorAllocate($imagen,255,0,0);
+  $valoraleatorio=rand(100000,999999);
+  session_start();
+  $_SESSION['numeroaleatorio']=$valoraleatorio;
+  ImageString($imagen,5,25,5,$valoraleatorio,$rojo);
+  for($c=0;$c<=5;$c++)
+  {
+    $x1=rand(0,$ancho);
+    $y1=rand(0,$alto);
+    $x2=rand(0,$ancho);
+    $y2=rand(0,$alto);
+    ImageLine($imagen,$x1,$y1,$x2,$y2,$rojo);
+  }
+  Header ("Content-type: image/jpeg");
+  ImageJPEG ($imagen);
+  ImageDestroy($imagen);
+?>
+</textarea><br><br>pagina3.php<br><textarea class="programafuente" name="programa3" rows=15 cols=110 wrap="off" readonly><?php
+session_start();
+?>
+<html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+<?php
+if ($_SESSION['numeroaleatorio']==$_REQUEST['numero'])
+  echo "Ingresó el valor correcto";
+else
+  echo "Incorrecto";
+?>
+</body>
+</html>
+</textarea><br>
+</form>
+
+
+
+
+
+
+	
+
+<h2>Problema propuesto.</h2>
+<p>Confeccionar un formulario que pida ingresar la dirección de un sitio de internet y mediante un control de tipo select permita dar un puntaje a la misma (cargar los valores de 0 a 5). Luego, en la segunda página, imprimir el nombre del sitio y un gráfico creado en forma dinámica con el puntaje obtenido (hacer un círculo por cada punto).</p>
+<p>Un poco de ayuda para este problema:</p>
+<p>En el archivo "pagina2.php" debemos disponer la etiqueta HTML img para mostrar la imagen y debemos pasar a este archivo el valor que nos llegó del formulario, es decir, el puntaje seleccionado:</p>
+<pre>
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+echo &quot;La direccion: $_REQUEST[direccion] tiene&quot;;
+?&gt;
+&lt;img src=&quot;pagina3.php?puntos=&lt;?php echo $_REQUEST['puntos'];?&gt;&quot;&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Por último, queda como actividad, dibujar tantos círculos como indica el parámetro puntos:</p>
+<p>Recordemos que para recuperar el parámetro puntos lo accedemos mediante el vector asociativo $_REQUEST:</p>
+<pre>
+REQUEST['puntos']
+</pre>
+<p>Para dibujar los círculos rellenos debemos emplear la función:</p>
+<pre>
+imagefilledellipse ( &lt;manejador de imagen&gt;, &lt;centro en x&gt;, 
+                     &lt;centro en y&gt;, &lt;ancho del elipse&gt;,
+                     &lt;alto del elipse&gt;,&lt;manejador de color&gt;)
+</pre>
+<form name="formulario" action="#" target="ventanaForm" 
+onsubmit="abrirVentana()" method="post" >
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<div id="recuadrooculto">
+pagina1.php<br>
+<textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off" readonly>
+<html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+
+<form method="post" action="http://www.phpya.com.ar/temarios/pagina2.php">
+Ingrese sitio web:
+<input type="text" name="direccion">
+<br>
+<select name="puntos">
+  <option value="0">0</option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>  
+</select>
+<br>
+<input type="submit" value="confirmar">
+</form>
+
+</body>
+</html></textarea>
+ <br>
+<!-- <a href="http://localhost:8080/problemas/phpya/propu/62/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>-->
+
+
+  <a href="http://www.scratchya.com.ar/problemas/phpya/propu/62/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a> 
+	<br>	
+pagina2.php<br><textarea class="programafuente" name="programa2" rows=15 cols=110 wrap="off" readonly><html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+<?php
+echo "La direccion: $_REQUEST[direccion] tiene";
+?>
+<img src="pagina32984.html?puntos=<?php%20echo%20$_REQUEST['puntos'];?>">
+</body>
+</html></textarea><br>pagina3.php<br><textarea class="programafuente" name="programa3" rows=15 cols=110 wrap="off" readonly><?php
+  $ancho=100;
+  $alto=30;
+  $imagen=imageCreate($ancho,$alto);
+  $amarillo=ImageColorAllocate($imagen,255,255,0);
+  ImageFill($imagen,0,0,$amarillo);
+  $rojo=ImageColorAllocate($imagen,255,0,0);
+  $x=10;
+  for($c=0;$c<$_REQUEST['puntos'];$c++)
+  {
+    imagefilledellipse($imagen,$x,15,6,6,$rojo);
+	$x=$x+15;
+  }
+  Header ("Content-type: image/jpeg");
+  ImageJPEG ($imagen);
+  ImageDestroy($imagen);
+?>
+</textarea>
+</div>
+
+</form>
+
+
+
+  
+
+<br>
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>
+
+
+<form name="form1" method="post" action="#">
+  <div>
+   <h2><a href="../index1e61.html?inicio=40">Retornar</a></h2>   
+  </div>
+
+  
+</form>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-4";
+urchinTracker();
+</script>
+
+</body>
+
+</html>

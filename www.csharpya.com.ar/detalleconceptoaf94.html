@@ -1,0 +1,474 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=208&inicio=80 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:03:15 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - SqlCommand : Pasando parámetros</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>84 - SqlCommand : Pasando parámetros</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p>Hemos visto que podemos formar un comando SQL para enviarlo a SQL Server generando un string concatenando los datos que ingresa el operador por teclado:</p>
+<pre>
+string cadena = "insert into articulos(descripcion,precio) values ('" + descri + "'," + precio + ")";
+</pre>
+<p>Esta metodología tiene el inconveniente cuando hay que elaborar comandos SQL con muchos campos (imaginemos que tenemos que elaborar un insert con una tabla que tiene más de 10 campos)</p>
+
+<p>Para solventar esta dificultad se introduce el concepto de parámetros dentro del comando SQL.</p>
+
+<h3>Problema 1</h3>
+
+<p>Implementar una interfaz visual para el alta de registros en la tabla artículos utilizando parámetros en el comando insert.</p>
+
+<p>Implementar una interfaz visual para el alta o carga de registros en la tabla artículos.</p>
+<p>Crearemos un proyecto llamado "pruebabasedatos7" con la siguiente interfaz visual:</p>
+<img src="imagentema/foto173.jpg" border="0" alt="alta registros SqlCommand con parametros SQL Server"><br>
+
+<p>El código fuente de la aplicación para efectuar altas es:</p>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+using System.Data.SqlClient;
+
+namespace PruebaBaseDatos7
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SqlConnection conexion = new SqlConnection("server=DIEGO-PC\\SQLEXPRESS ; database=base1 ; integrated security = true");
+            conexion.Open();
+            string cadena = "insert into articulos(descripcion,precio) values (@descripcion,@precio)";
+            SqlCommand comando = new SqlCommand(cadena, conexion);
+            comando.Parameters.Add("@descripcion", SqlDbType.VarChar);
+            comando.Parameters.Add("@precio", SqlDbType.Float);
+            comando.Parameters["@descripcion"].Value = textBox1.Text;
+            comando.Parameters["@precio"].Value = float.Parse(textBox2.Text);
+            comando.ExecuteNonQuery();
+            MessageBox.Show("Los datos se guardaron correctamente");
+            textBox1.Text = "";
+            textBox2.Text = "";
+            conexion.Close();
+        }
+    }
+}
+</pre>
+
+<p>Para trabajar con parámetros dentro de comandos SQL debemos disponer el caracter @ y un nombre en los lugares donde se sustituye en tiempo de ejecución con el dato que carga el operador.</p>
+<p>En nuestro ejemplo debemos parametrizar la descripción y el precio del artículo:</p>
+<pre>
+            string cadena = "insert into articulos(descripcion,precio) values (@descripcion,@precio)";
+</pre>
+<p>Es importante notar que no disponemos las camillas simple cuando un parámetro es de tipo varchar. Solo indicamos nombres de parámetros y no tipo de parámetros.</p>
+<p>Luego si debemos llamar al método Add de la propiedad Parameters del objeto de la clase SqlCommand indicando cada parámetro y de que tipo se trata (con esto la clase SqlCommand conocerá si tiene que disponer las comillas simples o no):</p>
+<pre>
+            comando.Parameters.Add("@descripcion", SqlDbType.VarChar);
+            comando.Parameters.Add("@precio", SqlDbType.Float);
+</pre>
+<p>Luego que creamos los dos parámetros debemos inicializar sus valores mediante la propiedad Parameters y accediendo como subíndice al nombre de parámetro respectivo:</p>
+<pre>
+            comando.Parameters["@descripcion"].Value = textBox1.Text;
+            comando.Parameters["@precio"].Value = float.Parse(textBox2.Text);
+</pre>
+<p>Finalmente llamamos al método ExecuteNonQuery para enviar al Sql Server el comando Sql respectivo (previamente el objeto comando de la clase SqlCommand se encarga de sustituir los parámetros por los valores asignados y según el tipo de dato del parámetros añadir las comillas simples.</p>
+
+<h3>Problema 2</h3>
+<p>Implementar la consulta de un artículo ingresando por teclado el código y recuperando la descripción y el precio. Definir un parámetro para la consulta</p>
+<p>Crear un proyecto llamado: PruebaBaseDatos8 y definir la siguiente interfaz visual:</p>
+<pre>
+5 objeto de la clase Label.
+1 objeto de la clase Button.
+1 objeto de la clase TextBox. 
+</pre>
+
+<img src="imagentema/foto179.jpg" border="0" alt="comando select consulta SqlCommand SQL Server"><br>
+<p>En el evento Click procedemos a buscar el código del artículo ingresado en el TextBox. El código fuente es:</p>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+using System.Data.SqlClient;
+
+namespace PruebaBaseDatos8
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SqlConnection conexion = new SqlConnection("server=DIEGO-PC\\SQLEXPRESS ; database=base1 ; integrated security = true");
+            conexion.Open();
+            string cadena = "select descripcion, precio from articulos where codigo=@codigo";
+            SqlCommand comando = new SqlCommand(cadena, conexion);
+            comando.Parameters.Add("@codigo", SqlDbType.Int);
+            comando.Parameters["@codigo"].Value = int.Parse(textBox1.Text);
+            SqlDataReader registro = comando.ExecuteReader();
+            if (registro.Read())
+            {
+                label4.Text = registro["descripcion"].ToString();
+                label5.Text = registro["precio"].ToString();
+            }
+            else
+                MessageBox.Show("No existe un artículo con el código ingresado");
+            conexion.Close();
+        }
+    }
+}
+</pre>
+
+<p>Definimos el string con el comando select insertando un parámetro llamado @codigo:</p>
+<pre>
+            string cadena = "select descripcion, precio from articulos where codigo=@codigo";
+</pre>
+<p>Creamos e inicializamos el parámetro @codigo:</p>
+<pre>
+            comando.Parameters.Add("@codigo", SqlDbType.Int);
+            comando.Parameters["@codigo"].Value = int.Parse(textBox1.Text);
+</pre>
+<p>El resto de la aplicación no cambia con respecto a lo que vimos en conceptos anteriores.</p>
+
+
+
+
+<h3>Problema 3</h3>
+<p>Implementar una aplicación que permita consultar un artículo por su código. Luego de mostrarlo activar un botón para poder eliminarlo. Definir parámetros tanto para la consulta como para el borrado.</p>
+<p>Crear un proyecto llamado: PruebaBaseDatos9 y definir la siguiente interfaz visual:</p>
+<pre>
+5 objeto de la clase Label.
+2 objeto de la clase Button (disponer la propiedad Enabled del 
+                             botón de borrado en false para que empiece desactivo)
+1 objeto de la clase TextBox. 
+</pre>
+
+<img src="imagentema/foto181.jpg" border="0" alt="comando delete SqlCommand SQL Server"><br>
+<p>El código fuente para resolver la consulta y borrado es:</p>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+using System.Data.SqlClient;
+
+namespace PruebaBaseDatos9
+{
+    public partial class Form1 : Form
+    {
+        private SqlConnection conexion = new SqlConnection("server=DIEGO-PC\\SQLEXPRESS ; database=base1 ; integrated security = true");
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            conexion.Open();
+            string cadena = "select descripcion, precio from articulos where codigo=@codigo";
+            SqlCommand comando = new SqlCommand(cadena, conexion);
+            comando.Parameters.Add("@codigo", SqlDbType.Int);
+            comando.Parameters["@codigo"].Value = int.Parse(textBox1.Text);
+            SqlDataReader registro = comando.ExecuteReader();
+            if (registro.Read())
+            {
+                label4.Text = registro["descripcion"].ToString();
+                label5.Text = registro["precio"].ToString();
+                button2.Enabled = true;
+            }
+            else
+                MessageBox.Show("No existe un artículo con el código ingresado");
+            conexion.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            conexion.Open();
+            string cadena = "delete from articulos where codigo=@codigo";
+            SqlCommand comando = new SqlCommand(cadena, conexion);
+            comando.Parameters.Add("@codigo", SqlDbType.Int);
+            comando.Parameters["@codigo"].Value = int.Parse(textBox1.Text);
+            int cant;
+            cant = comando.ExecuteNonQuery();
+            if (cant == 1)
+            {
+                label4.Text = "";
+                label5.Text = "";
+                MessageBox.Show("Se borró el artículo");
+            }
+            else
+                MessageBox.Show("No existe un artículo con el código ingresado");
+            conexion.Close();
+            button2.Enabled = false;
+        }
+    }
+}
+</pre>
+
+
+<h3>Problema 4</h3>
+<p>Implementar una aplicación que permita consultar un artículo por su código. Luego mostrar en dos TextBox la descripción y el precio actual. Permitir modificar la descripción y precio dejando registrado dicho cambio en la tabla de la base de datos al presionar un botón. Utilizar parámetros en los comandos SQL en la consulta y borrado</p>
+<p>Crear un proyecto llamado: PruebaBaseDatos10 y definir la siguiente interfaz visual:</p>
+<pre>
+3 objeto de la clase Label.
+2 objeto de la clase Button (disponer la propiedad Enabled del 
+                             botón de modificación en false para que empiece desactivo)
+3 objeto de la clase TextBox. 
+</pre>
+
+<img src="imagentema/foto183.jpg" border="0" alt="comando update SqlCommand SQL Server"><br>
+<p>El código fuente para resolver la consulta y modificación es:</p>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+
+namespace PruebaBaseDatos10
+{
+    public partial class Form1 : Form
+    {
+        private SqlConnection conexion = new SqlConnection("server=DIEGO-PC\\SQLEXPRESS ; database=base1 ; integrated security = true");
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            conexion.Open();
+            string cod = textBox1.Text;
+            string cadena = "select descripcion, precio from articulos where codigo=@codigo";
+            SqlCommand comando = new SqlCommand(cadena, conexion);
+            comando.Parameters.Add("@codigo", SqlDbType.Int);
+            comando.Parameters["@codigo"].Value = int.Parse(textBox1.Text);
+            SqlDataReader registro = comando.ExecuteReader();
+            if (registro.Read())
+            {
+                textBox2.Text = registro["descripcion"].ToString();
+                textBox3.Text = registro["precio"].ToString();
+                button2.Enabled = true;
+            }
+            else
+                MessageBox.Show("No existe un artículo con el código ingresado");
+            conexion.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            conexion.Open();
+            string cadena = "update articulos set descripcion=@descripcion, precio=@precio where codigo=@codigo";
+            SqlCommand comando = new SqlCommand(cadena, conexion);
+            comando.Parameters.Add("@codigo", SqlDbType.Int);
+            comando.Parameters["@codigo"].Value = int.Parse(textBox1.Text);
+            comando.Parameters.Add("@descripcion", SqlDbType.VarChar);
+            comando.Parameters["@descripcion"].Value = textBox2.Text;
+            comando.Parameters.Add("@precio", SqlDbType.Float);
+            comando.Parameters["@precio"].Value = float.Parse(textBox3.Text);
+            int cant;
+            cant = comando.ExecuteNonQuery();
+            if (cant == 1)
+            {
+                MessageBox.Show("Se modificaron los datos del artículo");
+                textBox1.Text = "";
+                textBox2.Text = "";
+                textBox3.Text = "";
+            }
+            else
+                MessageBox.Show("No existe un artículo con el código ingresado");
+            conexion.Close();
+            button2.Enabled = false;
+        }
+    }
+}
+</pre></div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="index20ff.html?inicio=80">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=208&inicio=80 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:03:15 GMT -->
+</html>

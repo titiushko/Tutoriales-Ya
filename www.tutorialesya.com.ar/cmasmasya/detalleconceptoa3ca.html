@@ -1,0 +1,492 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=14&codigo=141&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Sintaxis de un método</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>14 - Sintaxis de un método</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Cuando uno plantea una clase en lugar de especificar todo el algoritmo en la main (lo que hicimos en los primeros pasos de este tutorial) es dividir todas las responsabilidades de las clase en un conjunto de métodos.</p>
+<p>Un método hemos visto que tiene la siguiente sintaxis:</p>
+<pre>
+void [nombre de la clase]::[nombre del método]() 
+{
+    [algoritmo]
+}
+</pre>
+<p>Veremos que hay varios tipos de métodos:</p>
+<h3>Métodos con parámetros.</h3>
+<p>Un método puede tener parámetros:</p>
+<pre>
+void [nombre de la clase]::[nombre del método]([parámetros]) 
+{
+    [algoritmo]
+}
+</pre>
+<p>Los parámetros los podemos imaginar como variables locales al método, pero su valor se inicializa con datos que llegan cuando lo llamamos.</p>
+<h3>Problema 1:</h3>
+<p>Confeccionar una clase que permita ingresar valores enteros por teclado y nos muestre la tabla de multiplicar de dicho valor. Finalizar el programa al ingresar el -1.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class TablaMultiplicar {
+private:
+    void calcular(int v);
+public:
+    void cargarValor();
+};
+
+void TablaMultiplicar::calcular(int v)
+{
+    for(int f=v;f&lt;=v*10;f=f+v) 
+    {
+        cout &lt;&lt;f;
+        cout &lt;&lt;"-";
+    }
+    cout &lt;&lt;"\n";
+}
+
+void TablaMultiplicar::cargarValor()
+{
+    int valor;
+    do
+    {
+        cout &lt;&lt;"Ingrese un valor (-1 para finalizar):";
+        cin &gt;&gt;valor;
+        if (valor != -1)
+        {
+            calcular(valor);
+        }
+    } while (valor != -1);
+}
+
+void main()
+{
+    TablaMultiplicar tabla1;
+    tabla1.cargarValor();
+}
+
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/MetodosConParametros.zip">MetodosConParametros</a></p>
+
+<p>En esta clase no hemos definido ningún atributo. Hemos declarado el método calcular en la zona private (ya que no lo llamaremos desde la main) Luego iremos viendo cuando conviene definir métodos públicos y privados (los métodos públicos son aquellos que podemos llamar desde fuera de la clase, por ahora desde la main pero luego veremos que un problema puede tener más de una clase) </p>
+<p>El método calcular recibe un parámetro de tipo entero, luego lo utilizamos dentro del método para mostrar la tabla de multiplicar de dicho valor, para esto inicializamos la variable f con el valor que llega en el parámetro. Luego de cada ejecución del for incrementamos el contador f con el valor del parámetro v.</p>
+<pre>
+void TablaMultiplicar::calcular(int v)
+{
+    for(int f=v;f&lt;=v*10;f=f+v) 
+    {
+        cout &lt;&lt;f;
+        cout &lt;&lt;"-";
+    }
+    cout &lt;&lt;"\n";
+}
+</pre>
+<p>Un método puede no tener parámetros como hemos visto en problemas anteriores o puede tener uno o más parámetros (en caso de tener más de un parámetro los mismos se separan por coma)</p>
+<p>El método cargarValores no tiene parámetros y tiene por objetivo cargar un valor entero por teclado y llamar al método calcular para que muestre la tabla de multiplicar del valor que le pasamos por teclado:</p>
+<pre>
+void TablaMultiplicar::cargarValor()
+{
+    int valor;
+    do
+    {
+        cout &lt;&lt;"Ingrese un valor (-1 para finalizar):";
+        cin &gt;&gt;valor;
+        if (valor != -1)
+        {
+            calcular(valor);
+        }
+    } while (valor != -1);
+}
+</pre>
+<p>Como vemos al método calcular lo llamamos por su nombre y entre paréntesis le pasamos el dato a enviar (debe ser un valor o variable entera)</p>
+<p>En este problema en la main solo llamamos al método cargarValor, ya que el método calcular luego es llamado por el método cargarValor (tampoco podríamos llamar al método calcular desde la main esto debido a que está definido en la parte private de la clase):</p>
+<pre>
+void main()
+{
+    TablaMultiplicar tabla1;
+    tabla1.cargarValor();
+}
+</pre>
+
+<h3>Métodos que retornan un dato.</h3>
+<p>Un método puede retornar un dato:</p>
+<pre>
+[tipo de dato] [nombre de la clase]::[nombre del método]([parámetros]) 
+{
+  [algoritmo]
+  return [tipo de dato]
+}
+</pre>
+<p>Cuando un método retorna un dato en vez de indicar la palabra clave void (que significa vacío) previo al nombre del método indicamos el tipo de dato que retorna. Luego dentro del algoritmo en el momento que queremos que finalice el mismo y retorne el dato empleamos la palabra clave return con el valor respectivo.
+</p>
+<h3>Problema 2:</h3>
+<p>Confeccionar una clase que permita ingresar tres valores por teclado. Luego mostrar el mayor y el menor. Retornar dichos valores mediante el return.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class MayorMenor {
+private:
+    int calcularMayor(int v1,int v2,int v3);
+    int calcularMenor(int v1,int v2,int v3);
+public:
+    void cargarValores();
+};
+
+int MayorMenor::calcularMayor(int v1,int v2,int v3)
+{
+    int m;
+    if (v1 &gt; v2 && v1 &gt; v3)
+    {
+        m = v1;
+    }
+    else
+    {
+        if (v2 &gt; v3)
+        {
+            m = v2;
+        }
+        else
+        {
+            m = v3;
+        }
+    }
+    return m;
+}
+
+int MayorMenor::calcularMenor(int v1,int v2,int v3)
+{
+    int m;
+    if (v1 &lt; v2 && v1 &lt; v3)
+    {
+        m = v1;
+    }
+    else
+    {
+        if (v2 &lt; v3)
+        {
+            m = v2;
+        }
+        else
+        {
+            m = v3;
+        }
+    }
+    return m;
+}
+
+void MayorMenor::cargarValores()
+{
+    int valor1,valor2,valor3;
+    cout &lt;&lt;"Ingrese primer valor:";
+    cin &gt;&gt;valor1;
+    cout &lt;&lt;"Ingrese segundo valor:";
+    cin &gt;&gt;valor2;
+    cout &lt;&lt;"Ingrese tercer valor:";
+    cin &gt;&gt;valor3;
+    int mayor, menor;
+    mayor = calcularMayor(valor1, valor2, valor3);
+    menor = calcularMenor(valor1, valor2, valor3);
+    cout &lt;&lt;"El valor mayor de los tres es:";
+    cout &lt;&lt;mayor;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"El valor menor de los tres es:";
+    cout &lt;&lt;menor;
+    cin.get();
+    cin.get();
+}
+
+void main()
+{
+    MayorMenor mayormenor1;
+    mayormenor1.cargarValores();
+}</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/MetodosRetornanDato.zip">MetodosRetornanDato</a></p>
+
+<p>Si vemos la sintaxis que calcula el mayor de tres valores enteros es similar al algoritmo visto en conceptos anteriores:</p>
+<pre>
+</pre>
+<p>Lo primero que podemos observar que el método retorna un entero y recibe tres parámetros:</p>
+<pre>
+int MayorMenor::calcularMayor(int v1,int v2,int v3)
+</pre>
+<p>Dentro del método verificamos cual de los tres parámetros almacena un valor mayor, a este valor lo almacenamos en una variable local llamada "m", al valor almacenado en esta variable lo retornamos al final con un return.</p>
+<p>La llamada al método calcularMayor lo hacemos desde dentro del método cargarCalores:</p>
+<pre>
+    mayor = calcularMayor(valor1, valor2, valor3);
+</pre>
+<p>Debemos asignar a una variable el valor devuelto por el método calcularMayor. Luego el contenido de la variable mayor lo mostramos:</p>
+<pre>
+    cout &lt;&lt;"El valor mayor de los tres es:";
+    cout &lt;&lt;mayor;
+</pre>
+<p>La lógica es similar para el cálculo del menor.</p>
+
+<p>Es importante notar que definimos los dos métodos calcularMayor y calcularMenor en la zona private (esto hace que no podamos llamarlos desde la main (significa que estos dos métodos solo pueden ser llamados desde otros métodos de la misma clase)</p>
+<pre>
+class MayorMenor {
+private:
+    int calcularMayor(int v1,int v2,int v3);
+    int calcularMenor(int v1,int v2,int v3);
+public:
+    void cargarValores();
+};
+</pre>
+<p>Si los definimos en la zona public el programa sigue funcionando pero si queremos que no puedan ser llamados desde la main y queden encapsulados en la clase debemos definirlos en la zona private.</p>
+
+
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Plantear una clase que permita cargar un valor entero por teclado. Definir un método que solicite la carga del entero y llame a otro método al que le pasamos el valor ingresado y proceda a mostrar los valores enteros desde el 1 hasta el valor que llega como parámetro (es decir el ingresado por teclado)
+</li>
+<li>
+Desarrollar una clase con dos métodos, uno para la carga de dos enteros. Definir un método privado que le enviemos los valores ingresados por teclado y nos retorne el mayor de ellos.
+</ol>
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class MostrarHasta {
+private:
+    void mostrarEnteros(int valor);
+public:
+    void cargar();
+};
+
+void MostrarHasta::mostrarEnteros(int valor)
+{
+    for (int f = 1; f &lt;= valor; f++)
+    {
+        cout &lt;&lt; f;
+        cout &lt;&lt; "-";
+    }
+}
+
+void MostrarHasta::cargar()
+{
+    int val;
+    cout &lt;&lt; "Ingresar un valor entero:";
+    cin &gt;&gt; val;
+    mostrarEnteros(val);
+}
+
+void main()
+{
+    MostrarHasta mostrarHasta1;
+    mostrarHasta1.cargar();
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/MetodosMostrarEnteros.zip">MetodosMostrarEnteros</a></p>
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class MayorDos {
+private:
+    int mayor(int v1, int v2);
+public:
+        void cargar();
+};
+
+int MayorDos::mayor(int v1, int v2)
+{
+    if (v1 &gt; v2)
+    {
+        return v1;
+    }
+    else
+    {
+        return v2;
+    }
+}
+
+void MayorDos::cargar()
+{
+    int valor1, valor2;
+    cout &lt;&lt;"Ingrese primer valor:";
+    cin &gt;&gt; valor1;
+    cout &lt;&lt; "Ingrese segundo valor:";
+    cin &gt;&gt; valor2;
+    int resu = mayor(valor1, valor2);
+    cout &lt;&lt; "El valor mayor de los numeros ingresados es:";
+    cout &lt;&lt; resu;
+    cin.get();
+    cin.get();
+}
+
+void main()
+{
+    MayorDos mayordos1;
+    mayordos1.cargar();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/MetodosRetornarMayor.zip">MetodosRetornarMayor</a></p>
+
+</pre>
+
+<h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=14&codigo=141&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:37 GMT -->
+</html>

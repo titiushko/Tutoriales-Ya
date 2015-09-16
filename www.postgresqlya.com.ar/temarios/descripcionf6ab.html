@@ -1,0 +1,236 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.postgresqlya.com.ar/temarios/descripcion.php?inicio=50&cod=228&punto=70 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de PostgreSQL - Secuencias (create sequence- alter sequence - nextval - drop sequence) </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+	  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>70 - Secuencias (create sequence- alter sequence - nextval - drop sequence)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+	  	  
+
+<p>
+<p>Una secuencia (sequence) se emplea para generar valores enteros secuenciales únicos y asignárselos a campos numéricos; se utilizan generalmente para las claves primarias de las tablas garantizando que sus valores no se repitan (normalmente utilizamos la definición de un campo serial, este tiene asociado una secuencia en forma automática)</p>
+
+<p>Una secuencia es una tabla con un campo numérico en el cual se almacena un valor y cada vez que se consulta, se incrementa tal valor para la próxima consulta.</p>
+
+<p>Sintaxis general:</p>
+<pre>
+ create sequence NOMBRESECUENCIA
+  start with VALORENTERO
+  increment by VALORENTERO
+  maxvalue VALORENTERO
+  minvalue VALORENTERO
+  cycle;
+</pre>
+<p>- La cláusula "start with" indica el valor desde el cual comenzará la generación de números secuenciales. Si no se especifica, se inicia con el valor que indique "minvalue".</p>
+<p>- La cláusula "increment by" especifica el incremento, es decir, la diferencia entre los números de la secuencia; debe ser un valor numérico entero positivo o negativo diferente de 0. Si no se indica, por defecto es 1.</p>
+<p>- "maxvalue" define el valor máximo para la secuencia. Si se omite, por defecto es 9223372036854775807.</p>
+<p>- "minvalue" establece el valor mínimo de la secuencia. Si se omite será -9223372036854775808.</p>
+<p>- La cláusula "cycle" indica que, cuando la secuencia llegue a máximo valor (valor de "maxvalue") se reinicie, comenzando con el mínimo valor ("minvalue") nuevamente, es decir, la secuencia vuelve a utilizar los números. Si se omite, por defecto la secuencia se crea "nocycle", lo que produce un error si supera el máximo valor.
+</p>
+<p>Si no se especifica ninguna cláusula, excepto el nombre de la secuencia, por defecto, comenzará en 1, se incrementará en 1, el mínimo valor será -9223372036854775808, el máximo será 9223372036854775807 y "nocycle".</p>
+
+<p>En el siguiente ejemplo creamos una secuencia llamada "sec_codigolibros", estableciendo que comience en 1, sus valores estén entre 1 y 99999 y se incrementen en 1, por defecto, será "nocycle":</p>
+<pre>
+ create sequence sec_codigolibros
+  start with 1
+  increment by 1
+  maxvalue 99999
+  minvalue 1;
+</pre>
+<p>Si bien, las secuencias son independientes de las tablas, se utilizarán generalmente para una tabla específica, por lo tanto, es conveniente darle un nombre que referencie a la misma.</p>
+
+<p>Otro ejemplo:</p>
+<pre>
+ create sequence sec_numerosocios
+  start with 2
+  increment by 5
+  cycle;
+</pre>
+<p>La secuencia anterior, "sec_numerosocios", incrementa sus valores en 5 y al llegar al máximo valor recomenzará la secuencia desde el valor mínimo. </p>
+
+<p>Dijimos que las secuencias son tablas; por lo tanto se accede a ellas mediante consultas, empleando "select". <p>
+<pre>
+select * from sec_numerosocios;
+</pre>
+<p>Tenemos una función que nos retorna el próximo valor de la secuencia:</p>
+<pre>
+select nextval('sec_numerosocios');
+select nextval('sec_numerosocios');
+</pre>
+<p>Imprime un 2 y un 3.</p>
+<p>El valor retornado "nextval" pueden usarse cuando definimos una tabla.</p>
+
+<p>Veamos un ejemplo completo:</p>
+<p>Creamos una secuencia para el código de la tabla "libros", especificando el valor máximo, el incremento y que no sea circular:</p>
+<pre>
+ create sequence sec_codigolibros
+  minvalue 1000
+  maxvalue 999999
+  increment by 1;
+</pre>
+<p>Creamos la tabla libros y asociamos a la columna codigo la secuenca sec_codigolibros:</p>
+<pre>
+ create table libros(
+  codigo nextval('sec_codigolibros'),
+  titulo varchar(30),
+  autor varchar(30),
+  editorial varchar(15),
+  primary key (codigo)
+ );
+</pre>
+
+<p>Ingresamos un registro en "libros":</p>
+<pre>
+ insert into libros(titulo,autor,editorial) values
+  ('El aleph', 'Borges','Emece');
+</pre>
+<p>Ingresamos otro registro en "libros":</p>
+<pre>
+ insert into libros(titulo,autor,editorial) values
+  ('Matematica estas ahi', 'Paenza','Nuevo siglo');
+</pre>
+<p>Luego si imprimimos los dos registros podemos comprobar que el campo codigo almacena el valor 1000 y 1001 respectivamente.</p>
+
+<p>Para eliminar una secuencia empleamos "drop sequence". Sintaxis:</p>
+<pre>
+ drop sequence NOMBRESECUENCIA;
+</pre>
+<p>Si la secuencia depende de otro objeto (en este caso una tabla) no se procede al borrado), debemos primero borrar la tabla y luego la secuencia, o utilizar (borra los objetos asociados a la secuencia):</p>
+<pre>
+ drop sequence NOMBRESECUENCIA cascade;
+</pre>
+<p>Si la secuencia no existe aparecerá un mensaje indicando tal situación.</p>
+<p>Podemos modificar una secuencia con la siguiente sintaxis:</p>
+<pre>
+ alter sequence NOMBRESECUENCIA
+  start with VALORENTERO
+  increment by VALORENTERO
+  maxvalue VALORENTERO
+  minvalue VALORENTERO
+  cycle;
+</pre>
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../indexefd7.html?inicio=50">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-24");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+
+
+<!-- Mirrored from www.postgresqlya.com.ar/temarios/descripcion.php?inicio=50&cod=228&punto=70 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:41 GMT -->
+</html>

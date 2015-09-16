@@ -1,0 +1,351 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=79&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:52:04 GMT -->
+<head>
+<title>Estructura de programación secuencial</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Estructura de programación secuencial</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>Cuando en un problema sólo participan operaciones, entradas y salidas se la denomina una estructura secuencial.<br>
+Los problemas diagramados y codificados previamente emplean solo estructuras secuenciales.</p>
+<p>La programación requiere una práctica ininterrumpida de diagramación y codificación de problemas.</p>
+<h3>Problema:</h3>
+<p>Realizar la carga de dos números enteros por teclado e imprimir su suma y su producto.</p>
+<h4>Diagrama de flujo:</h4>
+<p><img src="imagentema/foto030.jpg" border="0" alt="diagrama flujo suma numeros"><br>
+Tenemos dos entradas num1 y num2 (recordar cuáles son los nombres de variables correctas), dos operaciones: realización de la suma y del producto de los valores ingresados y dos salidas, que son los resultados de la suma y el producto de los valores ingresados. En el símbolo de impresión podemos indicar una o más salidas, eso queda a criterio del programador, lo mismo para indicar las entradas por teclado.
+</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.util.Scanner;
+
+public class SumaProductoNumeros {
+    public static void main(String[] ar) {
+    	Scanner teclado=new Scanner(System.in);
+    	int num1,num2,suma,producto;
+    	System.out.print("Ingrese primer valor:");
+    	num1=teclado.nextInt();
+    	System.out.print("Ingrese segundo valor");
+    	num2=teclado.nextInt();
+    	suma=num1 + num2;
+    	producto=num1 * num2;
+    	System.out.print("La suma de los dos valores es:");
+    	System.out.println(suma);
+    	System.out.print("El producto de los dos valores es:");
+    	System.out.println(producto);
+    }
+}
+</pre>
+
+<p>Recordemos que tenemos que seguir todos los pasos vistos para la creación de un proyecto, su clase, definición de la función main y la codificación del diagrama de flujo.</p>
+<p>Algunas cosas nuevas que podemos notar:</p>
+<ul>
+<li>
+Podemos definir varias variables en la misma línea:
+<pre>
+    	int num1,num2,suma,producto;
+</pre>
+</li>
+<li>
+Si llamamos a la función println en lugar de print, la impresión siguiente se efectuará en la próxima línea:
+<pre>
+    	System.out.println(suma);
+</pre>
+</li>
+
+</ul>
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Realizar la carga del lado de un cuadrado, mostrar por pantalla el perímetro del mismo (El perímetro de un cuadrado se calcula multiplicando el valor del lado por cuatro)
+</li>
+<li>
+Escribir un programa en el cual se ingresen cuatro números, calcular e informar la suma de los dos primeros y el producto del tercero y el cuarto.
+</li>
+<li>
+Realizar un programa que lea cuatro valores numéricos e informar su suma y promedio.
+</li>
+<li>
+Se debe desarrollar un programa que pida el ingreso del precio de un artículo y la cantidad que lleva el cliente. Mostrar lo que debe abonar el comprador.
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+import java.util.Scanner;
+
+public class PerimetroCuadrado {
+    public static void main(String[] ar) {
+    	Scanner teclado=new Scanner(System.in);
+    	int lado,perimetro;
+    	System.out.print("Ingrese el lado del cuadrado:");
+    	lado=teclado.nextInt();
+    	perimetro=lado * 4;
+    	System.out.print("El perímetro del cuadrado es:");
+    	System.out.print(perimetro);
+    }
+}
+
+
+
+
+import java.util.Scanner;
+
+public class SumaProducto4Numeros {
+    public static void main(String[] ar) {
+    	Scanner teclado=new Scanner(System.in);
+    	int num1,num2,num3,num4,suma,producto;
+    	System.out.print("Ingrese primer valor:");
+    	num1=teclado.nextInt();
+    	System.out.print("Ingrese segundo valor:");
+    	num2=teclado.nextInt();
+    	System.out.print("Ingrese tercer valor:");
+    	num3=teclado.nextInt();
+    	System.out.print("Ingrese cuarto valor:");
+    	num4=teclado.nextInt();
+    	suma=num1 + num2;
+    	producto=num3 * num4;
+    	System.out.print("La suma de los dos primero valores es:");
+    	System.out.println(suma);
+    	System.out.print("El producto del tercer y cuarto valor es:");
+    	System.out.print(producto);
+    }
+}
+
+
+
+
+import java.util.Scanner;
+
+public class SumaPromedio {
+    public static void main(String[] ar) {
+    	Scanner teclado=new Scanner(System.in);
+    	int num1,num2,num3,num4,suma,promedio;
+    	System.out.print("Ingrese primer valor:");
+    	num1=teclado.nextInt();
+    	System.out.print("Ingrese segundo valor:");
+    	num2=teclado.nextInt();
+    	System.out.print("Ingrese tercer valor:");
+    	num3=teclado.nextInt();
+    	System.out.print("Ingrese cuarto valor:");
+    	num4=teclado.nextInt();
+    	suma=num1 + num2 + num3 + num4;
+    	promedio=suma/4;
+    	System.out.print("La suma de los cuatro valores es:");
+    	System.out.println(suma);
+    	System.out.print("El promedio es:");
+    	System.out.print(promedio);
+    }
+}
+
+
+
+
+import java.util.Scanner;
+
+public class CostoCompra {
+    public static void main(String[] ar) {
+    	Scanner teclado=new Scanner(System.in);
+    	int cantidad;
+    	float precio;
+    	float importe;
+    	System.out.print("Ingrese la cantidad de artículos a llevar:");
+    	cantidad=teclado.nextInt();
+    	System.out.print("Ingrese el valor unitario del producto:");
+    	precio=teclado.nextFloat();
+    	importe=precio * cantidad;
+    	System.out.print("El importe total a pagar es:");
+    	System.out.print(importe);
+    }
+}
+</pre></div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index2904.html?inicio=0">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=79&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:52:07 GMT -->
+</html>

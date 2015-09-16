@@ -1,0 +1,251 @@
+        
+
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=25&cod=190&punto=32 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios resueltos : Seleccionar grupos (Having)(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+<body bgcolor="#CCFFCC">
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>32 - Seleccionar grupos (Having)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Trabajamos con la tabla "libros" de una librería.</p>
+<p>Eliminamos la tabla:</p>
+<pre>
+  drop table libros;
+</pre>
+<p>Creamos la tabla:</p>
+<pre>
+ create table libros(
+  titulo varchar2(40),
+  autor varchar2(30),
+  editorial varchar2(15),
+  precio number(5,2),
+  cantidad number(3)
+ );
+</pre>
+<p>Ingresamos algunos registros:</p>
+<pre>
+ insert into libros
+  values('El aleph','Borges','Planeta',35,null);
+ insert into libros
+  values('Martin Fierro','Jose Hernandez','Emece',22.20,200);
+ insert into libros
+  values('Martin Fierro','Jose Hernandez','Planeta',40,200);
+ insert into libros
+  values('Antologia poetica','J.L. Borges','Planeta',null,150);
+ insert into libros
+  values('Aprenda PHP','Mario Molina','Emece',18,null);
+ insert into libros
+  values('Manual de PHP', 'J.C. Paez', 'Siglo XXI',56,120);
+ insert into libros
+  values('Cervantes y el quijote','Bioy Casares- J.L. Borges','Paidos',null,100);
+ insert into libros
+  values('Harry Potter y la piedra filosofal','J.K. Rowling',default,45.00,90);
+ insert into libros
+  values('Harry Potter y la camara secreta','J.K. Rowling','Emece',null,100);
+ insert into libros
+  values('Alicia en el pais de las maravillas','Lewis Carroll','Paidos',42,80);
+ insert into libros
+  values('PHP de la A a la Z',null,null,110,0);
+ insert into libros
+  values('Uno','Richard Bach','Planeta',25,null);
+</pre>
+<p>Queremos saber la cantidad de libros agrupados por editorial:</p>
+<pre>
+ select editorial, count(*) from libros
+  group by editorial;
+</pre>
+<p>Nos devuelve:</p>
+<pre>
+EDITORIAL	COUNT(*)
+------------------------
+Paidos		2
+		2
+Planeta		4
+Emece		3
+Siglo XXI	1
+</pre>
+<p>Queremos saber la cantidad de libros agrupados por editorial pero considerando sólo algunos grupos, por ejemplo, los que devuelvan un valor mayor a 2, usamos la siguiente instrucción:</p>
+<pre>
+ select editorial, count(*) from libros
+  group by editorial
+  having count(*)>2;
+</pre>
+<p>La salida es la siguiente:</p>
+<pre>
+EDITORIAL	COUNT(*)
+-------------------------
+Planeta		4              
+Emece		3
+</pre>
+<p>Compare esta salida con la de la sentencia anterior.</p>
+
+<p>Queremos el promedio de los precios de los libros agrupados por editorial, pero solamente de aquellos grupos cuyo promedio supere los 25 pesos:</p>
+<pre>
+ select editorial, avg(precio) from libros
+  group by editorial
+  having avg(precio)>25;
+</pre>
+<p>Queremos la cantidad de libros, sin considerar los que tienen precio nulo (where), agrupados por editorial (group by), sin considerar la editorial "Planeta" (having):</p>
+<pre>
+ select editorial, count(*) from libros
+  where precio is not null
+  group by editorial
+  having editorial<>'Planeta';
+</pre>
+<p>Necesitamos el promedio de los precios agrupados por editorial, de aquellas editoriales que tienen más de 2 libros:</p>
+<pre>
+ select editorial, avg(precio) from libros
+  group by editorial
+  having count(*) > 2; 
+</pre>
+<p>Buscamos el mayor valor de los libros agrupados y ordenados por editorial y seleccionamos las filas que tienen un valor menor a 100 y mayor a 30:</p>
+<pre>
+ select editorial, max(precio) as mayor
+  from libros
+  group by editorial
+  having max(precio)<100 and
+  max(precio)>30
+  order by editorial; 
+ </pre>
+
+        <form name="formulario" action="http://www.sqlserverya.com.ar/aspx/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+        <br>
+   <h2><a href="../indexfc77.html?inicio=25">Retornar</a></h2>   
+        
+	<br>
+   
+
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=25&cod=190&punto=32 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:35 GMT -->
+</html>
+

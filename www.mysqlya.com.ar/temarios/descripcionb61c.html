@@ -1,0 +1,169 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.mysqlya.com.ar/temarios/descripcion.php?inicio=42&cod=80&punto=48 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Temario:Remplazar registros (replace)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>48 - Remplazar registros (replace)</h1></td>
+<td align="right">
+<!--<a href="http://www.mysqlya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<p>
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 		  
+
+<p>"replace" reemplaza un registro por otro.</p>
+<p>Cuando intentamos ingresar con "insert" un registro que repite el valor de un campo clave o indexado con índice único, aparece un mensaje de error indicando que el valor está duplicado. Si empleamos "replace" en lugar de "insert", el registro existente se borra y se ingresa el nuevo, de esta manera no se duplica el valor único.</p>
+
+<p>Si tenemos la tabla "libros" con el campo "codigo" establecido como clave primaria e intentamos ingresar ("insert") un valor de código existente, aparece un mensaje de error porque no está permitido repetir los valores del campo clave. Si empleamos "replace" en lugar de "insert", la sentencia se ejecuta reemplazando el registro con el valor de código existente por el nuevo registro.</p>
+
+<p>Veamos un ejemplo. Tenemos los siguientes registros almacenados en "libros":</p>
+<pre>
+codigo	 titulo		autor		editorial	precio
+_______________________________________________________________
+10	Alicia en ..	Lewis Carroll	Emece		15.4
+15	Aprenda PHP	Mario Molina	Planeta		45.8
+23	El aleph	Borges		Planeta		23.0
+</pre>
+<p>Intentamos insertar un registro con valor de clave repetida (código 23):</p>
+<pre>
+ insert into libros values(23,'Java en 10 minutos','Mario Molina','Emece',25.5);
+</pre>
+<p>Aparece un mensaje de error indicando que hay registros duplicados.</p>
+<p>Si empleamos "replace":</p>
+<pre>
+ replace into libros values(23,'Java en 10 minutos','Mario Molina','Emece',25.5);
+</pre>
+<p>la sentencia se ejecuta y aparece un mensaje indicando que se afectaron 2 filas, esto es porque un registro se eliminó y otro se insertó.</p>
+
+<p>"replace" funciona como "insert" en los siguientes casos:
+- si los datos ingresados no afectan al campo único, es decir no se ingresa valor para el campo indexado:</p>
+<pre>
+ replace into libros(titulo,autor,editorial,precio)
+  values('Cervantes y el quijote','Borges','Paidos',28);
+</pre>
+<p>aparece un mensaje indicando que se afectó un solo registro, el ingresado, que se guarda con valor de código 0.</p>
+<p>- si el dato para el campo indexado que se ingresa no existe:</p>
+<pre>
+ replace into libros values(30,'Matematica estas ahi','Paenza','Paidos',12.8);
+</pre>
+<p>aparece un mensaje indicando que se afectó solo una fila, no hubo reemplazo porque el código no existía antes de la nueva inserción.</p>
+<p>- si la tabla no tiene indexación. Si la tabla "libros" no tuviera establecida ninguna clave primaria (ni índice único), podríamos ingresar varios registros con igual código:</p>
+<pre>
+ replace into libros values(1,'Harry Potter ya la piedra filosofal','Hawking','Emece',48);
+</pre>
+<p>aparecería un mensaje indicando que se afectó 1 registro (el ingresado), no se reemplazó ninguno y ahora habría 2 libros con código 1.</p></p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   <h2><a href="../indexd9fe.html?inicio=42">Retornar</a></h2>   
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-5";
+urchinTracker();
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from www.mysqlya.com.ar/temarios/descripcion.php?inicio=42&cod=80&punto=48 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:28 GMT -->
+</html>

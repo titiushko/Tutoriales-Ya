@@ -1,0 +1,426 @@
+﻿<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.phpya.com.ar/temarios/descripcion.php?punto=25&cod=45&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:08:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de PHP - Temario</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="keywords" content="php, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de php.">
+<meta name="author" content="Diego Moisset">
+
+<style>
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Verdana,arial,sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.1em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;
+}
+
+#recuadrooculto {
+  display: none;
+}
+
+
+.recuadroborde {
+  //  max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+	clear:left;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  document.getElementById('recuadrooculto').style.display='block';
+}
+
+</script>
+
+</head>
+
+<body>
+
+
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em;margin-right:1em"><a href="../index28fa-2.html?inicio=20">Temario del Tutorial</a></span>25 - UPDATE (Modificación de un registro de una tabla)</h1></div>
+
+<br>
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+
+<p>De las actividades con una tabla esta es la más larga. Vamos a resolverlo implementando tres páginas, la primera un formulario de consulta del mail de un alumno, la segunda otro formulario que nos permita cargar su mail modificado y la última registrará el cambio en la tabla.</p>
+<p>El formulario de consulta del mail del alumno es similar a problemas anteriores:</p>
+<pre class="recuadroborde">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form action=&quot;pagina2.php&quot; method=&quot;post&quot;&gt;
+Ingrese el mail del alumno:
+&lt;input type=&quot;text&quot; name=&quot;mail&quot;&gt;&lt;br&gt;
+&lt;input type=&quot;submit&quot; value=&quot;buscar&quot;&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>La segunda página es la más interesante y con conceptos nuevos:</p>
+<pre class="recuadroborde">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;?php
+
+$conexion=mysqli_connect("localhost","root","","base1") or
+    die("Problemas con la conexión");
+
+$registros=mysqli_query($conexion,"select * from alumnos
+                        where mail='$_REQUEST[mail]'") or
+  die("Problemas en el select:".mysqli_error($conexion));
+if ($reg=mysqli_fetch_array($registros))
+{
+?&gt;
+
+&lt;form action="pagina3.php" method="post"&gt;
+Ingrese nuevo mail:
+&lt;input type="text" name="mailnuevo" value="&lt;?php echo $reg['mail'] ?&gt;"&gt;
+&lt;br&gt;
+&lt;input type="hidden" name="mailviejo" value="&lt;?php echo $reg['mail'] ?&gt;"&gt;
+&lt;input type="submit" value="Modificar"&gt;
+&lt;/form&gt;
+
+&lt;?php
+}
+else
+  echo "No existe alumno con dicho mail";
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Lo primero que podemos observar es que si el if se verifica verdadero se ejecuta un bloque que contiene código HTML:</p>
+<pre>
+if ($reg=mysqli_fetch_array($registros))
+{
+?&gt;
+  &lt;form action=&quot;pagina3.php&quot; method=&quot;post&quot;&gt;
+  Ingrese nuevo mail:
+  &lt;input type=&quot;text&quot; name=&quot;mailnuevo&quot; value=&quot;&lt;?php echo $reg['mail'] ?&gt;&quot;&gt;
+  &lt;br&gt;
+  &lt;input type=&quot;hidden&quot; name=&quot;mailviejo&quot; value=&quot;&lt;?php echo $reg['mail'] ?&gt;&quot;&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;Modificar&quot;&gt;
+  &lt;/form&gt;
+&lt;?php
+}
+</pre>
+<p>Es decir que podemos disponer bloques de PHP dispersos dentro de la página.</p>
+<p>Otro concepto importante es como enviar el mail del primer formulario a la tercer página, esto se logra con los controles de tipo "hidden", este tipo de control no se visualiza en el formulario pero se envía al presionar el botón submit.</p>
+<p>Si queremos que el control text se cargue con el mail ingresado en el formulario anterior debemos cargar la propiedad value con dicho valor:</p>
+<pre>
+  &lt;input type=&quot;text&quot; name=&quot;mailnuevo&quot; value=&quot;&lt;?php echo $reg['mail'] ?&gt;&quot;&gt;
+</pre>
+<p>Por último la pagina3.php es la que efectúa la modificación de la tabla propiamente dicha. Con el mail ingresado en la pagina1.php, el mail modificado en la pagina2.php se efectúa el update.</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+$conexion=mysqli_connect("localhost","root","","base1") or
+    die("Problemas con la conexión");
+
+mysqli_query($conexion, "update alumnos
+                          set mail='$_REQUEST[mailnuevo]' 
+                        where mail='$_REQUEST[mailviejo]'") or
+  die("Problemas en el select:".mysqli_error($conexion));
+  echo "El mail fue modificado con exito";
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Tengamos en cuenta que el segundo formulario nos envía dos datos: $_REQUEST[mailnuevo] y $_REQUEST[mailviejo].</p>
+
+<br>
+<br>
+
+<h2>Problema resuelto.</h2>
+<p>Copiar el contenido de este cuadro de texto al NotePad++ y grabarlo en la carpeta c:\wamp\www con un nombre con extensión php (si hay varios cuadros
+de texto grabar cada uno en un archivo distinto).<br>
+  luego abrir el navegador (Chrome, FireFox, IExplorer etc.) y en la barra de direcciones tipear: http://localhost/pagina1.php (o el nombre del
+archivo que le dió)  </p>
+<form name="formulario" action="#" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+    pagina1.php<br><textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off" readonly>
+<html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+<form action="http://www.phpya.com.ar/temarios/pagina2.php" method="post">
+Ingrese el mail del alumno:
+<input type="text" name="mail"><br>
+<input type="submit" value="buscar">
+</form>
+</body>
+
+<!-- Mirrored from www.phpya.com.ar/temarios/descripcion.php?punto=25&cod=45&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:08:55 GMT -->
+</html>
+</textarea>
+    <br>
+	 <a href="http://www.scratchya.com.ar/problemas/phpya/resu/45/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a> 
+<!--    <a href="http://localhost:8080/problemas/phpya/resu/45/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>-->
+
+    <br>
+<table width="650px">
+<tr>
+<td align="left">	
+
+</td>
+</tr>
+</table>
+
+	
+    <br>pagina2.php<br><textarea class="programafuente" name="programa2" rows=15 cols=110 wrap="off" readonly><html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+
+<?php
+
+$conexion=mysqli_connect("localhost","root","","base1") or
+    die("Problemas con la conexión");
+
+$registros=mysqli_query($conexion,"select * from alumnos
+                        where mail='$_REQUEST[mail]'") or
+  die("Problemas en el select:".mysqli_error($conexion));
+if ($reg=mysqli_fetch_array($registros))
+{
+?>
+
+<form action="http://www.phpya.com.ar/temarios/pagina3.php" method="post">
+Ingrese nuevo mail:
+<input type="text" name="mailnuevo" value="<?php echo $reg['mail'] ?>">
+<br>
+<input type="hidden" name="mailviejo" value="<?php echo $reg['mail'] ?>">
+<input type="submit" value="Modificar">
+</form>
+
+<?php
+}
+else
+  echo "No existe alumno con dicho mail";
+?>
+</body>
+</html>
+</textarea><br><br>pagina3.php<br><textarea class="programafuente" name="programa3" rows=15 cols=110 wrap="off" readonly><html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+<?php
+$conexion=mysqli_connect("localhost","root","","base1") or
+    die("Problemas con la conexión");
+
+mysqli_query($conexion, "update alumnos
+                          set mail='$_REQUEST[mailnuevo]' 
+                        where mail='$_REQUEST[mailviejo]'") or
+  die("Problemas en el select:".mysqli_error($conexion));
+  echo "El mail fue modificado con exito";
+?>
+</body>
+</html>
+</textarea><br>
+</form>
+
+
+
+
+
+
+	
+
+<h2>Problema propuesto.</h2>
+<p>Efectuar la modificación del nombre del curso de la tabla "cursos". Para la búsqueda ingresar el código de curso.</p><form name="formulario" action="#" target="ventanaForm" 
+onsubmit="abrirVentana()" method="post" >
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<div id="recuadrooculto">
+pagina1.php<br>
+<textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off" readonly>
+<html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+<form action="http://www.phpya.com.ar/temarios/pagina2.php" method="post">
+Ingrese el codigo del curso a modificar:
+<input type="text" name="codigo"><br>
+<input type="submit" value="buscar">
+</form>
+</body>
+</html>
+</textarea>
+ <br>
+<!-- <a href="http://localhost:8080/problemas/phpya/propu/45/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>-->
+
+
+  <a href="http://www.scratchya.com.ar/problemas/phpya/propu/45/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a> 
+	<br>	
+pagina2.php<br><textarea class="programafuente" name="programa2" rows=15 cols=110 wrap="off" readonly><html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+
+<?php
+$conexion=mysqli_connect("localhost","root","","base1") or
+    die("Problemas con la conexión");
+
+$registros=mysqli_query($conexion,"select * from cursos
+                        where codigo=$_REQUEST[codigo]") or
+  die("Problemas en el select:".mysqli_error($conexion));
+if ($reg=mysqli_fetch_array($registros))
+{
+?>
+
+<form action="http://www.phpya.com.ar/temarios/pagina3.php" method="post">
+Ingrese el nuevo nombre del curso:
+<input type="text" name="nombrecurso" value="<?php echo $reg['nombrecurso'] ?>">
+<input type="hidden" name="codigo" value="<?php echo $reg['codigo'] ?>">
+<br>
+<input type="submit" value="Modificar">
+</form>
+
+<?php
+}
+else
+  echo "No existe un curso con dicho codigo";
+?>
+</body>
+</html>
+</textarea><br>pagina3.php<br><textarea class="programafuente" name="programa3" rows=15 cols=110 wrap="off" readonly><html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+<?php
+$conexion=mysqli_connect("localhost","root","","base1") or
+    die("Problemas con la conexión");
+
+mysqli_query($conexion,"update cursos
+                          set nombrecurso='$_REQUEST[nombrecurso]' 
+                        where codigo=$_REQUEST[codigo]") or
+  die("Problemas en el select:".mysqli_error($conexion));
+  echo "Se modificó el nombre del curso";
+?>
+</body>
+</html>
+</textarea>
+</div>
+
+</form>
+
+
+
+  
+
+<br>
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>
+
+
+<form name="form1" method="post" action="#">
+  <div>
+   <h2><a href="../index28fa.html?inicio=20">Retornar</a></h2>   
+  </div>
+
+  
+</form>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-4";
+urchinTracker();
+</script>
+
+</body>
+
+</html>

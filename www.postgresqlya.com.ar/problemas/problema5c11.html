@@ -1,0 +1,418 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.postgresqlya.com.ar/problemas/problema.php?inicio=25&cod=190&punto=32 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de PostgreSQL: Problemas Resueltos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+pre {
+  text-align:left;
+  font-family:verdana,sans-serif;
+}
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+</style>
+
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;	
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=no,status=yes,toolbar=yes,location=yes');  	
+}
+
+function VentanaTeorico(codigo)
+{
+  alto=400;
+  window.open('../temarios/descripcion2ade4.html?cod='+codigo+'&origen=problema', '', 'top=0,left=0,width=800,height='+alto+',resizable=yes,scrollbars=yes,menubar=no');  	
+}
+
+function cambiar(nro)
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   if (nro==1)
+   {
+     if (lista[f].id=='solu1')
+       lista[f].style.display='block';
+   }
+   else
+     if (nro==2)
+     {
+       if (lista[f].id=='solu2')
+         lista[f].style.display='block';
+     }
+	   
+  }
+  if (nro==1)
+    document.getElementById('solucion1').style.display='none';
+  if (nro==2)
+    document.getElementById('solucion2').style.display='none';
+}
+
+</script>
+
+</head>
+
+<body>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>32 - Agrupar registros (group by)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<b>Primer problema: </b><br><pre>
+Un comercio que tiene un stand en una feria registra en una tabla llamada "visitantes" algunos datos 
+de las personas que visitan o compran en su stand para luego enviarle publicidad de sus productos.
+
+1- Cree la tabla con la siguiente estructura:
+ create table visitantes(
+  nombre varchar(30),
+  edad smallint,
+  sexo char(1) default 'f',
+  domicilio varchar(30),
+  ciudad varchar(20) default 'Cordoba',
+  telefono varchar(11),
+  mail varchar(30) default 'no tiene',
+  montocompra decimal (6,2)
+ );
+
+2- Ingrese algunos registros:
+ insert into visitantes
+  values ('Susana Molina',35,default,'Colon 123',default,null,null,59.80);
+ insert into visitantes
+  values ('Marcos Torres',29,'m',default,'Carlos Paz',default,'marcostorres@hotmail.com',150.50);
+ insert into visitantes
+  values ('Mariana Juarez',45,default,default,'Carlos Paz',null,default,23.90);
+ insert into visitantes (nombre, edad,sexo,telefono, mail)
+  values ('Fabian Perez',36,'m','4556677','fabianperez@xaxamail.com');
+ insert into visitantes (nombre, ciudad, montocompra)
+  values ('Alejandra Gonzalez','La Falda',280.50);
+ insert into visitantes (nombre, edad,sexo, ciudad, mail,montocompra)
+  values ('Gaston Perez',29,'m','Carlos Paz','gastonperez1@gmail.com',95.40);
+ insert into visitantes
+  values ('Liliana Torres',40,default,'Sarmiento 876',default,default,default,85);
+ insert into visitantes
+  values ('Gabriela Duarte',21,null,null,'Rio Tercero',default,'gabrielaltorres@hotmail.com',321.50);
+
+3- Queremos saber la cantidad de visitantes de cada ciudad utilizando la cláusula "group by" (4 filas devueltas)
+
+4- Queremos la cantidad visitantes con teléfono no nulo, de cada ciudad (4 filas devueltas)
+
+5- Necesitamos el total del monto de las compras agrupadas por sexo (3 filas)
+
+6- Se necesita saber el máximo y mínimo valor de compra agrupados por sexo y ciudad (6 filas)
+
+7- Calcule el promedio del valor de compra agrupados por ciudad (4 filas)
+
+8- Cuente y agrupe por ciudad sin tener en cuenta los visitantes que no tienen mail (3 filas)
+</pre>
+<a href="javascript:cambiar(1)" id="solucion1">Ver solución</a>
+<br><br>
+<pre id="solu1" class="recuadrooculto">
+ create table visitantes(
+  nombre varchar(30),
+  edad smallint,
+  sexo char(1) default 'f',
+  domicilio varchar(30),
+  ciudad varchar(20) default 'Cordoba',
+  telefono varchar(11),
+  mail varchar(30) default 'no tiene',
+  montocompra decimal (6,2)
+ );
+
+ insert into visitantes
+  values ('Susana Molina',35,default,'Colon 123',default,null,null,59.80);
+ insert into visitantes
+  values ('Marcos Torres',29,'m',default,'Carlos Paz',default,'marcostorres@hotmail.com',150.50);
+ insert into visitantes
+  values ('Mariana Juarez',45,default,default,'Carlos Paz',null,default,23.90);
+ insert into visitantes (nombre, edad,sexo,telefono, mail)
+  values ('Fabian Perez',36,'m','4556677','fabianperez@xaxamail.com');
+ insert into visitantes (nombre, ciudad, montocompra)
+  values ('Alejandra Gonzalez','La Falda',280.50);
+ insert into visitantes (nombre, edad,sexo, ciudad, mail,montocompra)
+  values ('Gaston Perez',29,'m','Carlos Paz','gastonperez1@gmail.com',95.40);
+ insert into visitantes
+  values ('Liliana Torres',40,default,'Sarmiento 876',default,default,default,85);
+ insert into visitantes
+  values ('Gabriela Duarte',21,null,null,'Rio Tercero',default,'gabrielaltorres@hotmail.com',321.50);
+
+ select ciudad, count(*)
+  from visitantes
+  group by ciudad;
+
+ select ciudad, count(telefono)
+  from visitantes
+  group by ciudad;
+
+ select sexo, sum(montocompra)
+  from visitantes
+  group by sexo;
+
+ select sexo,ciudad,
+  max(montocompra) as mayor,
+  min(montocompra) as menor
+  from visitantes
+  group by sexo,ciudad;
+
+ select ciudad,
+  avg(montocompra) as promediodecompras
+  from visitantes
+  group by ciudad;
+
+ select ciudad,
+  count(*) as cantidadconmail
+  from visitantes
+  where mail is not null and
+  mail&lt;&gt;'no tiene'
+  group by ciudad;
+
+</pre>
+   
+	<br>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>	
+
+
+</form>
+        <p>&nbsp;</p>
+  
+<table width="650px">
+<tr>
+<td align="center">	
+
+
+
+</td>
+</tr>
+</table>		
+	
+	
+
+<b>Segundo problema: </b><br><pre>
+Una empresa almacena los datos de sus empleados en una tabla "empleados".
+1- Cree la tabla:
+ create table empleados(
+  nombre varchar(30),
+  documento char(8),
+  domicilio varchar(30),
+  seccion varchar(20),
+  sueldo decimal(6,2),
+  cantidadhijos smallint,
+  fechaingreso date,
+  primary key(documento)
+ );
+
+2- Ingrese algunos registros:
+ insert into empleados
+  values('Juan Perez','22333444','Colon 123','Gerencia',5000,2,'1980-05-10');
+ insert into empleados
+  values('Ana Acosta','23444555','Caseros 987','Secretaria',2000,0,'1980-10-12');
+ insert into empleados
+  values('Lucas Duarte','25666777','Sucre 235','Sistemas',4000,1,'1985-05-25');
+ insert into empleados
+  values('Pamela Gonzalez','26777888','Sarmiento 873','Secretaria',2200,3,'1990-06-25');
+ insert into empleados
+  values('Marcos Juarez','30000111','Rivadavia 801','Contaduria',3000,0,'1996-05-01');
+ insert into empleados
+  values('Yolanda Perez','35111222','Colon 180','Administracion',3200,1,'1996-05-01');
+ insert into empleados
+  values('Rodolfo Perez','35555888','Coronel Olmedo 588','Sistemas',4000,3,'1996-05-01');
+ insert into empleados
+  values('Martina Rodriguez','30141414','Sarmiento 1234','Administracion',3800,4,'2000-09-01');
+ insert into empleados
+  values('Andres Costa','28444555',default,'Secretaria',null,null,null);
+
+3- Cuente la cantidad de empleados agrupados por sección (5 filas)
+
+4- Calcule el promedio de hijos por sección (5 filas)
+
+5- Cuente la cantidad de empleados agrupados por año de ingreso (6 filas)
+
+6- Calcule el promedio de sueldo por sección de los empleados con hijos (4 filas)
+</pre><br>
+<a href="javascript:cambiar(2)" id="solucion2">Ver solución</a>
+<pre id="solu2" class="recuadrooculto">
+ create table empleados(
+  nombre varchar(30),
+  documento char(8),
+  domicilio varchar(30),
+  seccion varchar(20),
+  sueldo decimal(6,2),
+  cantidadhijos smallint,
+  fechaingreso date,
+  primary key(documento)
+ );
+
+ insert into empleados
+  values('Juan Perez','22333444','Colon 123','Gerencia',5000,2,'1980-05-10');
+ insert into empleados
+  values('Ana Acosta','23444555','Caseros 987','Secretaria',2000,0,'1980-10-12');
+ insert into empleados
+  values('Lucas Duarte','25666777','Sucre 235','Sistemas',4000,1,'1985-05-25');
+ insert into empleados
+  values('Pamela Gonzalez','26777888','Sarmiento 873','Secretaria',2200,3,'1990-06-25');
+ insert into empleados
+  values('Marcos Juarez','30000111','Rivadavia 801','Contaduria',3000,0,'1996-05-01');
+ insert into empleados
+  values('Yolanda Perez','35111222','Colon 180','Administracion',3200,1,'1996-05-01');
+ insert into empleados
+  values('Rodolfo Perez','35555888','Coronel Olmedo 588','Sistemas',4000,3,'1996-05-01');
+ insert into empleados
+  values('Martina Rodriguez','30141414','Sarmiento 1234','Administracion',3800,4,'2000-09-01');
+ insert into empleados
+  values('Andres Costa','28444555',default,'Secretaria',null,null,null);
+
+ select seccion, count(*)
+  from empleados
+  group by seccion;
+
+  select seccion, avg(cantidadhijos) as promediodehijos
+   from empleados
+   group by seccion;
+
+ select extract(year from fechaingreso), count(*)
+  from empleados
+  group by extract(year from fechaingreso);
+
+ select seccion, avg(sueldo) as promediodesueldo
+  from empleados
+  where cantidadhijos&gt;0 and
+  cantidadhijos is not null
+  group by seccion;
+</pre>
+
+<br>
+   <h2><a href="../indexfc77.html?inicio=25">Retornar</a></h2>   
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-24");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+
+<!-- Mirrored from www.postgresqlya.com.ar/problemas/problema.php?inicio=25&cod=190&punto=32 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:40 GMT -->
+</html>

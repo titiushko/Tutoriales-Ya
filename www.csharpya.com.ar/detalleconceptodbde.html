@@ -1,0 +1,351 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=158&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:59:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - Ventana de eventos (Windows Forms)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>34 - Ventana de eventos (Windows Forms)</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p>La ventana de eventos coincide con la ventana de propiedades. Para activar la lista de eventos disponibles para un objeto debemos presionar:</p>
+<img src="imagentema/foto064.jpg" border="0" alt="Ventana de eventos Windows Forms"><br>
+<p>Podemos observar la lista de eventos que puede reaccionar el objeto seleccionado en ese momento. Por ejemplo si tenemos seleccionado un objeto de la clase Button el evento más común que deberemos implementar es el Click (este evento se dispara cuando en tiempo de ejecución del programa se presiona el botón)</p>
+<p>Para disponer el código para dicho evento debemos hacer doble clic sobre dicho evento (esto hace que se active la ventana del editor y genere automáticamente el método asociado a dicho evento):</p>
+<img src="imagentema/foto065.jpg" border="0" alt="Ventana de eventos Windows Forms"><br>
+
+
+<h3>Problema:</h3>
+<p>Confeccionar un programa que al presionar un botón se muestre en un objeto de la clase Label el string "Hola Mundo".
+</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace WindowsFormsApplication5
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            label1.Text = "Hola Mundo";
+        }
+    }
+}
+</pre>
+<p>Hay que tener en cuenta que la clase anterior es parcial (el archivo Form1.Designer.cs contiene la definición de los dos objetos y la inicialización de sus propiedades y evento):</p>
+
+
+<pre class="recuadro">
+namespace WindowsFormsApplication5
+{
+    partial class Form1
+    {
+        /// <summary>
+        /// Variable del diseñador requerida.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Limpiar los recursos que se estén utilizando.
+        /// </summary>
+        /// <param name="disposing">true si los recursos administrados se deben eliminar;
+        /// false en caso contrario, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Código generado por el Diseñador de Windows Forms
+
+        /// <summary>
+        /// Método necesario para admitir el Diseñador. No se puede modificar
+        /// el contenido del método con el editor de código.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.label1 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(48, 102);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "label1";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(51, 148);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Presionar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(292, 273);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label1);
+            this.Name = "Form1";
+            this.Text = "Form1";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button1;
+    }
+}
+</pre>
+<p>Al ejecutar el programa si presionamos el botón vemos como cambia el contenido de la Label (esto debido a que en el evento Click del botón cambiamos el valor de la propiedad Text del objeto de la clase Label):</p>
+<img src="imagentema/foto066.jpg" border="0" alt="Ventana de eventos Windows Forms"><br>
+
+<h2>Problema propuesto</h2>
+<ol>
+<li>
+Disponer 7 objetos de la clase Button con los días de la semana. Fijar en los atributos Text de cada botón los días de la semana. Al presionar un botón mostrar en un objeto de la clase Label el día seleccionado.
+</li>
+</ol>
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+
+<pre class="recuadrooculto">
+<img src="imagentema/foto067.jpg" border="0" alt="Ventana de eventos Windows Forms"><br>
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace WindowsFormsApplication6
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            label1.Text = "Lunes";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            label1.Text = "Martes";
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            label1.Text = "Miercoles";
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            label1.Text = "Jueves";
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            label1.Text = "Viernes";
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            label1.Text = "Sábado";
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            label1.Text = "Domingo";
+        }
+    }
+}
+</pre></div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=158&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:59:43 GMT -->
+</html>

@@ -1,0 +1,182 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.postgresqlya.com.ar/temarios/descripcion.php?inicio=25&cod=195&punto=37 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de PostgreSQL - Restricción primary key </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+	  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>37 - Restricción primary key</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+	  	  
+
+<p>
+<p>Hemos visto la restricción que se aplica a los campos con "check".</p>
+<p>Ahora veremos las restricciones que se aplican a las tablas, que aseguran valores únicos para cada registro.</p>
+<p>
+Hay 2 tipos: 1) primary key y 2) unique.
+</p>
+<p>Anteriormente, para establecer una clave primaria para una tabla empleábamos la siguiente sintaxis al crear la tabla, por ejemplo:</p>
+<pre>
+ create table libros(
+  codigo int not null,
+  titulo varchar(30),
+  autor varchar(30),
+  editorial varchar(20),
+  primary key(codigo)
+ );
+</pre>
+<p>Cada vez que establecíamos la clave primaria para la tabla, PostgreSQL creaba automáticamente una restricción "primary key" para dicha tabla. Dicha restricción, a la cual no le dábamos un nombre, recibía un nombre dado por PostgreSQL, por ejemplo 'libros_pkey'
+</p>
+<p>Podemos agregar una restricción "primary key" a una tabla existente con la sintaxis básica siguiente:</p>
+<pre>
+ alter table NOMBRETABLA
+ add constraint NOMBRECONSTRAINT
+ primary key (CAMPO,...);
+</pre>
+<p>En el siguiente ejemplo definimos una restricción "primary key" para nuestra tabla "libros" para asegurarnos que cada libro tendrá un código diferente y único:</p>
+<pre>
+ alter table libros
+ add constraint PK_libros_codigo
+ primary key(codigo);
+</pre>
+<p>Con esta restricción, si intentamos ingresar un registro con un valor para el campo "codigo" que ya existe o el valor "null", aparece un mensaje de error, porque no se permiten valores duplicados ni nulos. Igualmente, si actualizamos. </p>
+
+<p>Por convención, cuando demos el nombre a las restricciones "primary key" seguiremos el formato "PK_NOMBRETABLA_NOMBRECAMPO".</p>
+
+<p>Sabemos que cuando agregamos una restricción a una tabla que contiene información, PostgreSQL controla los datos existentes para confirmar que cumplen las exigencias de la restricción, si no los cumple, la restricción no se aplica y aparece un mensaje de error. Por ejemplo, si intentamos definir la restricción "primary key" para "libros" y hay registros con códigos repetidos o con un valor "null", la restricción no se establece.</p>
+
+<p>PostgreSQL permite definir solamente una restricción "primary key" por tabla, que asegura la unicidad de cada registro de una tabla.</p>
+
+<p>Si ejecutamos:</p>
+<pre>
+ select *
+  from information_schema.table_constraints 
+  where table_name = 'libros';
+</pre>
+podemos ver las restricciones "primary key" (y todos los tipos de restricciones) de dicha tabla.
+</p>
+<p>Un campo con una restricción "primary key" puede tener una restricción "check".</p>
+.</p>
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../indexfc77.html?inicio=25">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-24");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+
+
+<!-- Mirrored from www.postgresqlya.com.ar/temarios/descripcion.php?inicio=25&cod=195&punto=37 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:40 GMT -->
+</html>

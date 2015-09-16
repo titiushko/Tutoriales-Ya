@@ -1,0 +1,222 @@
+        
+
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=75&cod=247&punto=89 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios resueltos : Vistas (otras consideraciones)(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+<body bgcolor="#CCFFCC">
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>89 - Vistas (otras consideraciones)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Una empresa almacena la información de sus empleados en una tabla llamada "empleados".</p>
+<p>Eliminamos la tabla:</p>
+<pre>
+ drop table empleados;
+</pre>
+<p>Eliminamos la vista "vista_empleados":</p>
+<pre>
+ drop view vista_empleados;
+</pre>
+<p>Creamos la vista "vista_empleados" que muestre algunos campos de "empleados", pero la tabla "empleados" no existe, por ello, debemos agregar, al crear la vista "force":</p>
+<pre>
+ create force view vista_empleados
+ as
+  select documento,nombre,seccion
+  from empleados;
+</pre>
+<p>Creamos la tabla:</p>
+<pre>
+ create table empleados(
+  documento char(8),
+  nombre varchar2(30),
+  domicilio varchar2(30),
+  seccion varchar2(30)
+);
+</pre>
+<p>Ingresamos algunos registros:</p>
+<pre>
+ insert into empleados values('22222222','Lopez Ana','Colon 123','Sistemas');
+ insert into empleados values('23333333','Lopez Luis','Sucre 235','Sistemas');
+ insert into empleados values('24444444','Garcia Marcos','Sarmiento 1234','Contaduria');
+ insert into empleados values('25555555','Gomez Pablo','Bulnes 321','Contaduria');
+ insert into empleados values('26666666','Perez Laura','Peru 1254','Secretaria');
+</pre>
+<p>Consultamos la vista:</p>
+<pre>
+ select *from vista_empleados;
+</pre>
+<p>Veamos el texto de la vista consultando "user_views":</p>
+<pre>
+ select view_name,text from user_views where view_name='VISTA_EMPLEADOS';
+</pre>
+<p>Creamos o reemplazamos (si existe) la vista "vista_empleados" que muestre todos los campos de la tabla "empleados":</p>
+<pre>
+ create or replace view vista_empleados
+ as
+  select *from empleados;
+</pre>
+<p>Consultamos la vista:</p>
+<pre>
+ select *from vista_empleados;
+</pre>
+<p>Agregamos un campo a la tabla "empleados":</p>
+<pre>
+ alter table empleados
+ add sueldo number(6,2);
+</pre>
+<p>Consultamos la vista "vista_empleados":</p>
+<pre>
+ select *from vista_empleados;
+</pre>
+<p>Note que el nuevo campo agregado a "empleados" no aparece, a pesar que la vista indica que muestre todos los campos de dicha tabla; esto sucede porque los campos se seleccionan al ejecutar "create view", para que aparezcan debemos volver a crear la vista:</p>
+<pre>
+ create or replace view vista_empleados
+ as
+  select *from empleados;
+</pre>
+<p>Consultemos la vista:</p>
+<pre>
+ select *from vista_empleados; 
+</pre>
+<p>Ahora si aparece el nuevo campo "sueldo" de "empleados";</p>
+
+        <form name="formulario" action="http://www.sqlserverya.com.ar/aspx/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+        <br>
+   <h2><a href="../indexa021.html?inicio=75">Retornar</a></h2>   
+        
+	<br>
+   
+
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=75&cod=247&punto=89 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+</html>
+

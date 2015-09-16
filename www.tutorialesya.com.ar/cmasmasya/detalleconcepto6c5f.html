@@ -1,0 +1,437 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=31&codigo=162&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Operadores ++ y -- con variables de tipo puntero</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>31 - Operadores ++ y -- con variables de tipo puntero</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Los operadores de incremento y decremento ++ y -- pueden utilizarse con punteros.<br>
+Estos operadores aplicados a un puntero incrementan o decrementan la dirección que contiene el puntero según el tipo de dato a que apunta.
+Si a un puntero a entero le aplicamos el operador ++, incrementa la dirección en 4 bytes (puede depender del sistema operativo). Si este puntero a entero almacena la dirección 5000, al aplicarle el operador ++ sucesivamente la dirección irá aumentando 5004, 5008, 5012, 5016, etc. </p>
+<p>Si a un puntero a float le aplicamos el operador ++, incrementa la dirección en 4 bytes (puede depender del sistema operativo). Si este puntero almacena la dirección 5000, al aplicarle el operador ++ sucesivamente la dirección irá aumentando 5004, 5008, 5012, etc.</p>
+<p>Si a un puntero a char le aplicamos el operador --, decrementa la dirección en 1 byte (puede depender del sistema operativo). Si este puntero almacena la dirección 5000, al aplicarle el operador -- sucesivamente la dirección irá disminuyendo: 4009, 4008, 4007, 4006, etc.</p> 
+
+<h3>Problema</h3>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    char cad[5];
+    strcpy_s(cad, 5, "Sol");
+    char *pc;
+    pc = cad;
+    cout &lt;&lt; pc;        //imprime Sol
+    cout &lt;&lt; "\n";
+    pc++;
+    cout &lt;&lt; pc;        //imprime ol
+    cout &lt;&lt; "\n";
+    pc++;
+    cout &lt;&lt; pc;        //imprime l
+    cout &lt;&lt; "\n";
+    pc--;
+    cout &lt;&lt; pc;        //imprime ol
+    cout &lt;&lt; "\n";
+    int x[5] = { 10, 50, 100, 99, 33 };
+    int *pe;
+    pe = &x[3];
+    cout &lt;&lt; *pe;    //imprime 99
+    cout &lt;&lt; "\n";
+    pe--;
+    cout &lt;&lt; *pe;    //imprime 100
+    cin.get();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/PunteroOperador1.zip">PunteroOperador1.zip</a></p>
+
+
+<p>Seguimiento del ejemplo:</p>
+<pre>
+- Definimos una cadena:
+char cad[5];
+	Dir. de Mem.	Contenido	Nombre de variable
+	1000	        1004         	cad
+	1004            		[0]
+	1005		                [1]
+	1006		                [2]
+	1007		                [3]
+	1008		                [4]
+
+- Cargamos la cadena:
+strcpy_s (cad, 5, "Sol");
+	Dir. de Mem.	Contenido	Nombre de variable
+	1000	        1004	        cad
+	1004	        'S'	        [0]
+	1005	        'o'      	[1]
+	1006	        'l'      	[2]
+	1007	        '\0'    	[3]
+	1008		                [4]
+
+- Definimos un puntero a char:
+char *pc;
+	Dir. de Mem.	Contenido	Nombre de variable
+	1000		1004		cad
+	1004		'S'		[0]
+	1005		'o'		[1]
+	1006		'l'		[2]
+	1007		'\0'		[3]
+	1008				[4]
+	1009				pc
+
+- Le asignamos al puntero el contenido de la cadena:
+pc=cad;
+	Dir. de Mem.	Contenido	Nombre de variable
+	1000		1004		cad
+	1004		'S'		[0]
+	1005		'o'		[1]
+	1006		'l'		[2]
+	1007		'\0'		[3]
+	1008				[4]
+	1009		1004		pc
+
+- Imprimimos donde apunta el puntero:
+cout&lt;&lt;pc; //imprime Sol
+Imprime desde la dirección 1004 hasta encontrar el terminador de cadena.
+
+- Incrementamos el puntero: 
+pc++;
+La dirección se incrementa en 1.
+	Dir. de Mem.	Contenido	Nombre de variable
+	1000		1004		cad
+	1004		'S'		[0]
+	1005		'o'		[1]
+	1006		'l'		[2]
+	1007		'\0'		[3]
+	1008				[4]
+	1009		1005		pc
+
+- Imprimimos donde apunta el puntero:
+cout&lt;&lt;pc; //imprime ol
+Imprime desde la dirección 1005 hasta encontrar el terminador de cadena.
+
+- Incrementamos el puntero:		
+pc++;
+La dirección se incrementa en 1.
+
+        Dir. de Mem.	Contenido	Nombre de variable
+	1000		1004		cad
+	1004		'S'		[0]
+	1005		'o'		[1]
+	1006		'l'		[2]
+	1007		'\0'		[3]
+	1008				[4]
+	1009		1006		pc
+
+- Imprimimos donde apunta el puntero:		
+cout &lt;&lt;pc; //imprime l
+Imprime desde la dirección 1006 hasta encontrar el terminador de cadena.
+
+- Decrementamos el puntero:		
+pc--;
+La dirección se decrementa en 1.
+
+	Dir. de Mem.	Contenido	Nombre de variable
+	1000		1004		cad
+	1004		'S'		[0]
+	1005		'o'		[1]
+	1006		'l'		[2]
+	1007		'\0'		[3]
+	1008				[4]
+	1009		1005		pc
+
+- Imprimimos donde apunta el puntero:		
+cout &lt;&lt;pc;   //imprime ol
+Imprime desde la dirección 1005 hasta encontrar el terminador de cadena.
+
+
+- Definimos e inicializamos un vector de enteros:
+int x[5] ={10,50,100,99,33};
+
+	Dir. de Mem.	Contenido	Nombre de variable
+	1000		1004		cad
+	1004		'S'		[0]
+	1005		'o'		[1]
+	1006		'l'		[2]
+	1007		'\0'		[3]
+	1008				[4]
+	1009		1005		pc
+	1013		1017		x
+	1017		10		[0]
+  	1021		50		[1]
+	1025		100		[2]
+	1029		99		[3]
+	1033		33		[4]
+
+- Definimos un puntero a entero:
+int *pe;
+	Dir. de Mem.	Contenido	Nombre de variable
+	1000		1004		cad
+	1004		'S'		[0]
+	1005		'o'		[1]
+	1006		'l'		[2]
+	1007		'\0'		[3]
+	1008				[4]
+	1009		1005		pc
+	1013		1017		x
+	1017		10		[0]
+	1021		50		[1]
+	1025		100		[2]
+	1029		99		[3]
+	1033		33		[4]
+	1037				pe
+		
+- Le asignamos al puntero la dirección  de la cuarta componente del vector:
+pe = &x[3];
+       Dir. de Mem.	Contenido	Nombre de variable
+	1000		1004		cad
+	1004		'S'		[0]
+	1005		'o'		[1]
+	1006		'l'		[2]
+	1007		'\0'		[3]
+	1008				[4]
+	1009		1005		pc
+	1013		1017		x
+	1017		10		[0]
+	1021		50		[1]
+	1025		100		[2]
+	1029		99		[3]
+	1033		33		[4]
+	1037		1029		pe
+
+- Imprimimos donde apunta el puntero:
+cout&lt;&lt;*pe; //99
+
+- Decrementamos el puntero:
+pc--;
+La dirección se decrementa en 4.
+	Dir. de Mem.	Contenido	Nombre de variable
+	1000		1004		cad
+	1004		'S'		[0]
+	1005		'o'		[1]
+	1006		'l'		[2]
+	1007		'\0'		[3]
+	1008				[4]
+	1009		1005		pc
+	1013		1017		x
+	1017		10		[0]
+	1021		50		[1]
+	1025		100		[2]
+	1029		99		[3]
+	1033		33		[4]
+	1037		1025		pe
+
+- Imprimimos donde apunta el puntero:		
+cout&lt;&lt;*pe; //imprime 100
+</pre>
+
+
+
+
+<h2>Problema propuesto</h2>
+<ol>
+<li>
+Plantear una clase para administrar un vector de 5 enteros. Definir además del método para cargar el vector un método que imprima las componentes empleando un puntero que avance por todas las direcciones de las componentes utilizando el operador ++.
+</li>
+
+
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+
+<pre class="recuadrooculto">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Vector {
+    int vec[5];
+public:
+    void cargar();
+    void imprimir();
+};
+
+void Vector::cargar()
+{
+    for (int f = 0; f &lt; 5; f++)
+    {
+        cout &lt;&lt; "Ingrese componente:";
+        cin &gt;&gt; vec[f];
+    }
+}
+
+void Vector::imprimir()
+{
+    int *pe;
+    pe = vec;
+    for (int f = 0; f &lt; 5; f++)
+    {
+        cout &lt;&lt; *pe;
+        pe++;
+        cout &lt;&lt; "-";
+    }
+}
+
+void main()
+{
+    Vector vector1;
+    vector1.cargar();
+    vector1.imprimir();
+    cin.get();
+    cin.get();
+}
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/PunteroOperador2.zip">PunteroOperador2.zip</a></p>
+
+</pre>
+
+
+
+<h2><a href="index7732.html?inicio=30">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=31&codigo=162&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:22 GMT -->
+</html>

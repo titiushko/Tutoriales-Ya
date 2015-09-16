@@ -1,0 +1,219 @@
+
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/detalleconcepto.php?punto=11&codigo=126&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:04:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>table : tabla condensada.</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="bootstrap,css, html, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de bootstrap.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>11 - table : tabla condensada.</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Si tenemos que mostrar grandes tablas con datos puede ser necesario mostrar más información al mismo tiempo por pantalla condensando los datos (son los mismos datos pero más comprimidos en pantalla)</p>
+<p>Esto se logra agregando la clase "table-condensed" a la marca HTML "table".</p>
+<p>Veamos un ejemplo con una tabla común y una tabla condensada:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+  &lt;head&gt; 
+    &lt;title&gt;Prueba de Bootstrap&lt;/title&gt; 
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt; 
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+  &lt;div class="container"&gt;
+     &lt;table class="table"&gt;
+       &lt;thead&gt; 
+         &lt;tr&gt; 
+           &lt;th&gt;Titulo 1&lt;/th&gt; 
+           &lt;th&gt;Titulo 2&lt;/th&gt;
+           &lt;th&gt;Titulo 3&lt;/th&gt;
+         &lt;/tr&gt; 
+       &lt;/thead&gt;
+         &lt;tr&gt; 
+           &lt;td&gt;Elemento 1,1&lt;/td&gt;
+           &lt;td&gt;Elemento 1,2&lt;/td&gt; 
+           &lt;td&gt;Elemento 1,3&lt;/td&gt; 
+         &lt;/tr&gt;
+         &lt;tr&gt; 
+           &lt;td&gt;Elemento 2,1&lt;/td&gt;
+           &lt;td&gt;Elemento 2,2&lt;/td&gt; 
+           &lt;td&gt;Elemento 2,3&lt;/td&gt; 
+         &lt;/tr&gt;
+         &lt;tr&gt; 
+           &lt;td&gt;Elemento 3,1&lt;/td&gt;
+           &lt;td&gt;Elemento 3,2&lt;/td&gt; 
+           &lt;td&gt;Elemento 3,3&lt;/td&gt; 
+         &lt;/tr&gt;
+         &lt;tr&gt; 
+           &lt;td&gt;Elemento 4,1&lt;/td&gt;
+           &lt;td&gt;Elemento 4,2&lt;/td&gt; 
+           &lt;td&gt;Elemento 4,3&lt;/td&gt; 
+         &lt;/tr&gt;
+         &lt;tr&gt; 
+           &lt;td&gt;Elemento 5,1&lt;/td&gt;
+           &lt;td&gt;Elemento 5,2&lt;/td&gt; 
+           &lt;td&gt;Elemento 5,3&lt;/td&gt; 
+         &lt;/tr&gt;
+     &lt;/table&gt;
+
+     &lt;table class="table table-condensed"&gt;
+       &lt;thead&gt; 
+         &lt;tr&gt; 
+           &lt;th&gt;Titulo 1&lt;/th&gt; 
+           &lt;th&gt;Titulo 2&lt;/th&gt;
+           &lt;th&gt;Titulo 3&lt;/th&gt;
+         &lt;/tr&gt; 
+       &lt;/thead&gt;
+         &lt;tr&gt; 
+           &lt;td&gt;Elemento 1,1&lt;/td&gt;
+           &lt;td&gt;Elemento 1,2&lt;/td&gt; 
+           &lt;td&gt;Elemento 1,3&lt;/td&gt; 
+         &lt;/tr&gt;
+         &lt;tr&gt; 
+           &lt;td&gt;Elemento 2,1&lt;/td&gt;
+           &lt;td&gt;Elemento 2,2&lt;/td&gt; 
+           &lt;td&gt;Elemento 2,3&lt;/td&gt; 
+         &lt;/tr&gt;
+         &lt;tr&gt; 
+           &lt;td&gt;Elemento 3,1&lt;/td&gt;
+           &lt;td&gt;Elemento 3,2&lt;/td&gt; 
+           &lt;td&gt;Elemento 3,3&lt;/td&gt; 
+         &lt;/tr&gt;
+         &lt;tr&gt; 
+           &lt;td&gt;Elemento 4,1&lt;/td&gt;
+           &lt;td&gt;Elemento 4,2&lt;/td&gt; 
+           &lt;td&gt;Elemento 4,3&lt;/td&gt; 
+         &lt;/tr&gt;
+         &lt;tr&gt; 
+           &lt;td&gt;Elemento 5,1&lt;/td&gt;
+           &lt;td&gt;Elemento 5,2&lt;/td&gt; 
+           &lt;td&gt;Elemento 5,3&lt;/td&gt; 
+         &lt;/tr&gt;
+     &lt;/table&gt;
+
+  &lt;/div&gt; 
+&lt;/body&gt; 
+&lt;/html&gt;
+</pre>
+
+<p>A la tabla que queremos condensar debemos agregarle la clase "table-condensed":</p>
+<pre>
+     &lt;table class="table table-condensed"&gt;
+</pre>
+
+<p>Podemos ver la diferencia entre una tabla por defecto y una condensada:</p>
+
+<img src="imagentema/foto019.jpg" border="0" alt="bootstrap table table-condensed"><br><h2><a target="_blank" href="ejecutar0c0a.html?cod=126">Ejecutar Ejemplo</a></h2><h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-32', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/detalleconcepto.php?punto=11&codigo=126&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:04:27 GMT -->
+</html>

@@ -1,0 +1,715 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=179&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - Estructuras dinámicas: Implementación en C# de un árbol binario ordenado</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>55 - Estructuras dinámicas: Implementación en C# de un árbol binario ordenado</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<h3>Problema 1:</h3>
+<p>A continuación desarrollamos una clase para la administración de un árbol binario ordenado.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ArbolBinarioOrdenado1
+{
+    public class ArbolBinarioOrdenado {
+        class Nodo
+        {
+            public int info;
+            public Nodo izq, der;
+        }
+        Nodo raiz;
+
+        public ArbolBinarioOrdenado() 
+        {
+            raiz=null;
+        }
+      
+        public void Insertar (int info)
+        {
+            Nodo nuevo;
+            nuevo = new Nodo ();
+            nuevo.info = info;
+            nuevo.izq = null;
+            nuevo.der = null;
+            if (raiz == null)
+                raiz = nuevo;
+            else
+            {
+                Nodo anterior = null, reco;
+                reco = raiz;
+                while (reco != null)
+                {
+                    anterior = reco;
+                    if (info < reco.info)
+                        reco = reco.izq;
+                    else
+                        reco = reco.der;
+                }
+                if (info < anterior.info)
+                    anterior.izq = nuevo;
+                else
+                    anterior.der = nuevo;
+            }
+        }
+
+
+        private void ImprimirPre (Nodo reco)
+        {
+            if (reco != null)
+            {
+                Console.Write(reco.info + " ");
+                ImprimirPre (reco.izq);
+                ImprimirPre (reco.der);
+            }
+        }
+
+        public void ImprimirPre ()
+        {
+            ImprimirPre (raiz);
+            Console.WriteLine();
+        }
+
+        private void ImprimirEntre (Nodo reco)
+        {
+            if (reco != null)
+            {    
+                ImprimirEntre (reco.izq);
+                Console.Write(reco.info + " ");
+                ImprimirEntre (reco.der);
+            }
+        }
+
+        public void ImprimirEntre ()
+        {
+            ImprimirEntre (raiz);
+            Console.WriteLine();
+        }
+
+
+        private void ImprimirPost (Nodo reco)
+        {
+            if (reco != null)
+            {
+                ImprimirPost (reco.izq);
+                ImprimirPost (reco.der);
+                Console.Write(reco.info + " ");
+            }
+        }
+
+
+        public void ImprimirPost ()
+        {
+            ImprimirPost (raiz);
+            Console.WriteLine();
+        }
+
+        static void Main(string[] args)
+        {
+            ArbolBinarioOrdenado abo = new ArbolBinarioOrdenado ();
+            abo.Insertar (100);
+            abo.Insertar (50);
+            abo.Insertar (25);
+            abo.Insertar (75);
+            abo.Insertar (150);
+            Console.WriteLine ("Impresion preorden: ");
+            abo.ImprimirPre ();
+            Console.WriteLine ("Impresion entreorden: ");
+            abo.ImprimirEntre ();
+            Console.WriteLine ("Impresion postorden: ");
+            abo.ImprimirPost ();
+            Console.ReadKey();
+        }
+    }
+}
+</pre>
+
+
+<pre>
+        public void Insertar (int info)
+        {
+            Nodo nuevo;
+            nuevo = new Nodo ();
+            nuevo.info = info;
+            nuevo.izq = null;
+            nuevo.der = null;
+            if (raiz == null)
+                raiz = nuevo;
+            else
+            {
+                Nodo anterior = null, reco;
+                reco = raiz;
+                while (reco != null)
+                {
+                    anterior = reco;
+                    if (info < reco.info)
+                        reco = reco.izq;
+                    else
+                        reco = reco.der;
+                }
+                if (info < anterior.info)
+                    anterior.izq = nuevo;
+                else
+                    anterior.der = nuevo;
+            }
+        }
+</pre>
+<p>Creamos un nodo y disponemos los punteros izq y der a null, guardamos la información que llega al método en el nodo.<br>
+Si el árbol está vacío, apuntamos raíz al nodo creado; en caso de no estar vacío, dentro de una estructura repetitiva vamos comparando info con la información del nodo, si info es mayor a la del nodo descendemos por el subárbol derecho en caso contrario descendemos por el subárbol izquierdo.<br>
+Cuando se encuentra un subárbol vacío insertar el nodo en dicho subárbol. Para esto llevamos un puntero anterior dentro del while.</p>
+
+
+<pre>
+        private void ImprimirPre (Nodo reco)
+        {
+            if (reco != null)
+            {
+                Console.Write(reco.info + " ");
+                ImprimirPre (reco.izq);
+                ImprimirPre (reco.der);
+            }
+        }
+
+        public void ImprimirPre ()
+        {
+            ImprimirPre (raiz);
+            Console.WriteLine();
+        }
+
+</pre>
+<p>El método ImprimirPre(), es decir el no recursivo se encarga de llamar al método recursivo pasando la dirección del nodo raiz.</p>
+<p>El método recursivo void ImprimirPre (Nodo reco) lo primero que verifica con un if si reco está apuntando a un nodo (esto es verdad si reco es distinto a null), en caso afirmativo ingresa al bloque del if y realiza:</p>
+<pre>
+     - Visitar la raiz.
+     - Recorrer el subárbol izquierdo en pre-orden.
+     - Recorrer el subárbol derecho en pre-orden.
+</pre>
+<p>La visita en este caso es la impresión de la información del nodo y los recorridos son las llamadas recursivas pasando las direcciones de los subárboles izquierdo y derecho.</p>
+<p>Los algoritmos de los recorridos en entreorden y postorden son similares. La diferencia es que la visita la realizamos entre las llamadas recursivas en el recorrido en entre orden:</p>
+<pre>
+        private void ImprimirEntre (Nodo reco)
+        {
+            if (reco != null)
+            {    
+                ImprimirEntre (reco.izq);
+                Console.Write(reco.info + " ");
+                ImprimirEntre (reco.der);
+            }
+        }
+</pre>
+<p>y por último en el recorrido en postorden la visita la realizamos luego de las dos llamadas recursivas:</p>
+<pre>
+        private void ImprimirPost (Nodo reco)
+        {
+            if (reco != null)
+            {
+                ImprimirPost (reco.izq);
+                ImprimirPost (reco.der);
+                Console.Write(reco.info + " ");
+            }
+        }
+</pre> 
+
+<h3>Problema 2:</h3>
+<p>Confeccionar una clase que permita insertar un entero en un árbol binario ordenado verificando que no se encuentre previamente dicho número.<br>
+Desarrollar los siguientes métodos:<br>
+1 - Retornar la cantidad de nodos del árbol.<br>
+2 - Retornar la cantidad de nodos hoja del árbol.<br>
+3 - Imprimir en entre orden.<br>
+4 - Imprimir en entre orden junto al nivel donde se encuentra dicho nodo.<br>
+5 - Retornar la altura del árbol.<br>
+6 - Imprimir el mayor valor del árbol.<br>
+7 - Borrar el nodo menor del árbol.<br>
+</p>
+
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ArbolBinarioOrdenado2
+{
+    public class ArbolBinarioOrdenado {
+        class Nodo
+        {
+            public int info;
+            public Nodo izq, der;
+        }
+        private Nodo raiz;
+        private int cant;
+        private int altura;
+
+        public ArbolBinarioOrdenado() 
+        {
+            raiz=null;
+        }
+            
+        public void Insertar (int info) 
+        {
+            if (!Existe(info)) 
+            {
+                Nodo nuevo;
+                nuevo = new Nodo ();
+                nuevo.info = info;
+                nuevo.izq = null;
+                  nuevo.der = null;
+                if (raiz == null)
+                    raiz = nuevo;
+                else 
+                {
+                    Nodo anterior = null, reco;
+                    reco = raiz;
+                    while (reco != null)  
+                    {
+                        anterior = reco;
+                        if (info < reco.info)
+                            reco = reco.izq;
+                        else
+                            reco = reco.der;
+                    }
+                    if (info < anterior.info)
+                        anterior.izq = nuevo;
+                    else
+                        anterior.der = nuevo;
+                }
+            }    
+        }
+
+        public bool Existe(int info) 
+        {
+            Nodo reco=raiz;
+            while (reco!=null) 
+            {
+                if (info==reco.info)
+                    return true;
+                else
+                    if (info>reco.info)
+                        reco=reco.der;
+                    else
+                        reco=reco.izq;
+            }
+            return false;
+        }
+
+        private void ImprimirEntre (Nodo reco)
+        {
+            if (reco != null)  
+            {    
+                ImprimirEntre (reco.izq);
+                Console.Write(reco.info + " ");
+                ImprimirEntre (reco.der);
+            }
+        }
+
+        public void ImprimirEntre () 
+        {
+            ImprimirEntre (raiz);
+            Console.WriteLine();
+        }
+
+    
+        private void Cantidad(Nodo reco) 
+        {
+            if (reco!=null) 
+            {
+                cant++;
+                Cantidad(reco.izq);
+                Cantidad(reco.der);
+            }
+        }
+    
+        public int Cantidad() 
+        {
+            cant=0;
+            Cantidad(raiz);
+            return cant;
+        }
+
+        private void CantidadNodosHoja(Nodo reco) 
+        {
+            if (reco!=null)
+            {
+                if (reco.izq==null && reco.der==null)
+                    cant++;
+                CantidadNodosHoja(reco.izq);
+                CantidadNodosHoja(reco.der);
+            }
+        }
+    
+        public int CantidadNodosHoja()
+        {
+            cant=0;
+            CantidadNodosHoja(raiz);
+            return cant;
+        }
+
+        private void ImprimirEntreConNivel (Nodo reco,int nivel)  
+        {
+            if (reco != null) 
+            {    
+                ImprimirEntreConNivel (reco.izq,nivel+1);
+                Console.Write(reco.info + " ("+nivel+") - ");
+                ImprimirEntreConNivel (reco.der,nivel+1);
+            }
+        }
+
+        public void ImprimirEntreConNivel () 
+        {
+            ImprimirEntreConNivel (raiz,1);
+            Console.WriteLine();
+        }
+    
+        private void RetornarAltura (Nodo reco,int nivel)    
+        {
+            if (reco != null) 
+            {    
+                RetornarAltura (reco.izq,nivel+1);
+                if (nivel>altura)
+                    altura=nivel;
+                RetornarAltura (reco.der,nivel+1);
+            }
+        }
+
+        public  int RetornarAltura () 
+        {
+            altura=0;
+            RetornarAltura (raiz,1);
+            return altura;
+        }
+    
+        public void MayorValorl() 
+        {
+            if (raiz!=null) 
+            {
+                Nodo reco=raiz;
+                while (reco.der!=null)
+                    reco=reco.der;
+                Console.WriteLine("Mayor valor del árbol:"+reco.info);
+            }
+        }
+    
+        public void BorrarMenor() 
+        {
+            if (raiz!=null) 
+            {
+                if (raiz.izq==null)
+                    raiz=raiz.der;
+                else 
+                {
+                    Nodo atras=raiz;
+                    Nodo reco=raiz.izq;
+                    while (reco.izq!=null) 
+                    {
+                        atras=reco;
+                        reco=reco.izq;
+                    }
+                    atras.izq=reco.der;
+                }                  
+            }
+        }
+    
+        static void Main(string[] args)
+        {
+            ArbolBinarioOrdenado abo = new ArbolBinarioOrdenado ();
+            abo.Insertar (100);
+            abo.Insertar (50);
+            abo.Insertar (25);
+            abo.Insertar (75);
+            abo.Insertar (150);
+            Console.WriteLine ("Impresion entreorden: ");
+            abo.ImprimirEntre ();
+            Console.WriteLine("Cantidad de nodos del árbol:"+abo.Cantidad());
+            Console.WriteLine("Cantidad de nodos hoja:"+abo.CantidadNodosHoja());          
+            Console.WriteLine("Impresion en entre orden junto al nivel del nodo.");
+            abo.ImprimirEntreConNivel();
+            Console.Write ("Artura del arbol:");
+            Console.WriteLine(abo.RetornarAltura());        
+            abo.MayorValorl();
+            abo.BorrarMenor();
+            Console.WriteLine("Luego de borrar el menor:");
+            abo.ImprimirEntre ();
+            Console.ReadKey();
+        }
+    }
+}
+
+</pre>
+<p>
+Para verificar si existe un elemento de información en el árbol disponemos un puntero reco en el nodo apuntado por raiz. Dentro de un while verificamos si la información del parámetro coincide con la información del nodo apuntado por reco, en caso afirmativo salimos del método retornando true, en caso contrario si la información a buscar es mayor a la del nodo procedemos a avanzar reco con la dirección del subárbol derecho:</p>
+<pre>
+        public bool Existe(int info) 
+        {
+            Nodo reco=raiz;
+            while (reco!=null) 
+            {
+                if (info==reco.info)
+                    return true;
+                else
+                    if (info>reco.info)
+                        reco=reco.der;
+                    else
+                        reco=reco.izq;
+            }
+            return false;
+        }
+</pre>
+<p>Para retornar la cantidad de nodos del árbol procedemos a inicializar un atributo de la clase llamado cant con cero. Llamamos al método recursivo y en cada visita al nodo incrementamos el atributo cant en uno:</p>
+<pre>
+        private void Cantidad(Nodo reco) 
+        {
+            if (reco!=null) 
+            {
+                cant++;
+                Cantidad(reco.izq);
+                Cantidad(reco.der);
+            }
+        }
+    
+        public int Cantidad() 
+        {
+            cant=0;
+            Cantidad(raiz);
+            return cant;
+        }
+</pre>
+
+<p>Para imprimir todos los nodos en entre orden junto al nivel donde se encuentra planteamos un método recursivo que llegue la referencia del nodo a imprimir junto al nivel de dicho nodo. Desde el método no recursivo pasamos la referencia a raiz y un uno (ya que raiz se encuentra en el primer nivel)<br>
+Cada vez que descendemos un nivel le pasamos la referencia del subárbol respectivo junto al nivel que se encuentra dicho nodo:</p>
+<pre>
+        private void ImprimirEntreConNivel (Nodo reco,int nivel)  
+        {
+            if (reco != null) 
+            {    
+                ImprimirEntreConNivel (reco.izq,nivel+1);
+                Console.Write(reco.info + " ("+nivel+") - ");
+                ImprimirEntreConNivel (reco.der,nivel+1);
+            }
+        }
+
+        public void ImprimirEntreConNivel () 
+        {
+            ImprimirEntreConNivel (raiz,1);
+            Console.WriteLine();
+        }
+</pre>
+<p>Para obtener la altura del árbol procedemos en el método no recursivo a inicializar el atributo altura con el valor cero. Luego llamamos al método recursivo con la referencia a raiz que se encuentra en el nivel uno. Cada vez que visitamos un nodo procedemos a verificar si el parámetro nivel supera al atributo altura, en dicho caso actualizamos el atributo altura con dicho nivel.</p>
+<pre>
+        private void RetornarAltura (Nodo reco,int nivel)    
+        {
+            if (reco != null) 
+            {    
+                RetornarAltura (reco.izq,nivel+1);
+                if (nivel>altura)
+                    altura=nivel;
+                RetornarAltura (reco.der,nivel+1);
+            }
+        }
+
+        public  int RetornarAltura () 
+        {
+            altura=0;
+            RetornarAltura (raiz,1);
+            return altura;
+        }
+</pre>
+
+<p>Para imprimir el mayor valor del árbol debemos recorrer siempre por derecha hasta encontrar un nodo que almacene null en der:</p>
+<pre>
+        public void MayorValorl() 
+        {
+            if (raiz!=null) 
+            {
+                Nodo reco=raiz;
+                while (reco.der!=null)
+                    reco=reco.der;
+                Console.WriteLine("Mayor valor del árbol:"+reco.info);
+            }
+        }
+</pre>
+
+<p>Para borrar el menor valor del árbol lo primero que comprobamos es si el subárbol izquierdo es nulo luego el menor del árbol es el nodo apuntado por raiz. Luego si el subárbol izquierdo no está vacío procedemos a descender siempre por la izquierda llevando un puntero en el nodo anterior. Cuando llegamos al nodo que debemos borrar procedemos a enlazar el puntero izq del nodo que se encuentra en el nivel anterior con la referencia del subárbol derecho del nodo a borrar:</p>
+<pre> 
+        public void BorrarMenor() 
+        {
+            if (raiz!=null) 
+            {
+                if (raiz.izq==null)
+                    raiz=raiz.der;
+                else 
+                {
+                    Nodo atras=raiz;
+                    Nodo reco=raiz.izq;
+                    while (reco.izq!=null) 
+                    {
+                        atras=reco;
+                        reco=reco.izq;
+                    }
+                    atras.izq=reco.der;
+                }                  
+            }
+        }
+</pre></div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="index1e61.html?inicio=40">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=179&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:42 GMT -->
+</html>

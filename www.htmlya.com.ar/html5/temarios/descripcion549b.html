@@ -1,0 +1,198 @@
+
+<!DOCTYPE html> 
+<html lang="es"> 
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=169&punto=36&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>WEB STORAGE (localStorage y sessionStorage)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="html5, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de HTML 5. Es objetivo prioritario respetar 
+los estándares del W3C">
+<meta name="author" content="Diego Moisset">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+</style>
+
+</head>
+
+<body>
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em"><a href="../../html5.html">Temario del Tutorial</a></span>->36 - WEB STORAGE (localStorage y sessionStorage)</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Con el HTML clásico si necesitamos almacenar datos en el cliente (navegador) se utilizan las cookies. Con HTML5 se han agregado otras tecnologías para almacenar datos en el cliente.</p>
+<p>La primer tecnología que vamos a ver para almacenar datos en el navegador empleando HTML5 es la funcionalidad que provee el objeto localStorage.</p>
+<p>El objeto localStorage nos permite almacenar datos que serán recordados por el navegador para siempre, es decir no tienen una fecha de caducidad.</p>
+<p>La cantidad de información que podemos almacenar es muy superior a la permitida con las cookies, el localStorage permite almacenar por lo menos 5 Mb.</p>
+<p>La información que se almacena en el localStorage a diferencia de las cookies no se envía al servidor cada vez que se solicita una página. Necesariamente debemos utilizar Javascript para almacenar y recuperar datos.</p>
+
+<p>El objeto localStorage cuenta con dos métodos fundamentales para grabar y recuperar datos:</p>
+<pre>
+  localStorage.setItem ( [clave] , [valor])
+
+  localStorage.getItem ( [clave] )
+</pre>
+
+<p>El método setItem permite almacenar los datos que le enviamos en el segundo parámetro y los guarda con la clave indicada en el primer parámetro.<p/>
+<p>Para recuperar datos del localStorage debemos llamar al método getItem pasando como parámetro la clave de referencia. La clave sería como el primary key en el modelo de base de datos relacionales.</p>
+<p>Desarrollaremos una aplicación que nos muestre la potencia que disponemos ahora en todo navegador moderno.</p>
+<h3>Problema</h3>
+<p>Confeccionar una aplicación que permita administrar un diccionario ingles/castellano, almacenar en forma local dichos datos.</p>
+<h4>Solución</h4>
+<pre class="recuadro">
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Prueba&lt;/title&gt;
+  
+&lt;script&gt;
+
+    window.addEventListener('load', inicio, false);
+
+    function inicio() {
+        document.getElementById('guardar').addEventListener('click', guardar, false);
+        document.getElementById('traducir').addEventListener('click', recuperar, false);
+    }
+
+    function guardar(evt) {
+        localStorage.setItem(document.getElementById('ingles').value, document.getElementById('castellano').value);        
+        document.getElementById('ingles').value='';
+        document.getElementById('castellano').value='';
+    }
+
+    function recuperar(evt) {
+        if (localStorage.getItem(document.getElementById('ingles').value) == null) 
+            alert('No está almacenala la palabra '+document.getElementById('ingles').value);
+        else  
+            document.getElementById('castellano').value=localStorage.getItem(document.getElementById('ingles').value);
+    }
+       
+&lt;/script&gt;  
+  
+&lt;/head&gt;
+&lt;body&gt;
+  Palabra en ingles:
+  &lt;input type="text" id="ingles"&gt;
+  &lt;input type="button" id="traducir" value="Traducir"&gt; 
+  &lt;br&gt;      
+  Palabra en castellano:
+  &lt;input type="text" id="castellano"&gt;
+  &lt;br&gt;
+  &lt;input type="button" id="guardar" value="Guardar"&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Hemos implementado dos controles input para la carga de datos por parte del operador y dos botones para procesar la grabación de datos en el localStorage y la búsqueda.</p>
+
+<p>Los primero que hacemos en Javascript es indicar que el método inicio se ejecute una vez que la página este cargada:</p>
+<pre>
+    window.addEventListener('load', inicio, false);
+</pre>
+
+<p>En la función inicio asociamos la función que se ejecutará al presionarse cada botón:</p>
+<pre>
+    function inicio() {
+        document.getElementById('guardar').addEventListener('click', guardar, false);
+        document.getElementById('traducir').addEventListener('click', recuperar, false);
+    }
+</pre>
+
+
+<p>El método guardar se ejecuta cuando presionamos el botón "Guardar", en este llamamos al método setItem del objeto localStorage pasando como clave la palabra en ingles y como dato a grabar la palabra en castellano ( por ejemplo si guardamos la traducción de casa luego como clave se almacena 'house' y como dato 'casa'):</p>
+
+    function guardar(evt) {
+        localStorage.setItem(document.getElementById('ingles').value, document.getElementById('castellano').value);        
+        document.getElementById('ingles').value='';
+        document.getElementById('castellano').value='';
+    }
+</pre>
+
+<p>El proceso inverso, es decir la recuperación de datos del localStorage la realizamos en el la función 'recuperar', llamamos al método getItem pasando como parámetro la palabra en ingles que buscamos para que nos retorne su traducción. Agregamos un if para los casos que no exista la palabra dentro del diccionario:</p>
+<pre>
+    function recuperar(evt) {
+        if (localStorage.getItem(document.getElementById('ingles').value) == null) 
+            alert('No está almacenala la palabra '+document.getElementById('ingles').value);
+        else  
+            document.getElementById('castellano').value=localStorage.getItem(document.getElementById('ingles').value);
+    }
+</pre>
+
+<p>Como podemos analizar con un programa de 15 líneas podemos automatizar el almacenamiento y recuperación de datos del diccionario.</p>
+
+<p>Hemos visto como funciona el objeto localStorage para el almacenamiento permanente de datos. El otro objeto llamado sessionStorage cuenta con los mismos métodos pero la diferencia fundamental es que los datos almacenados solo permanecen mientras no cerremos la sesión del navegador, una vez que cerramos el navegador se pierden todos los datos almacenados utilizando el objeto sessionStorage.</p>
+<p>Dependiendo de la necesidad utilizamos el localStorage o el sessionStorage.</p>
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../index28fa.html?inicio=20">Retornar</a></h2>   
+
+</div>
+
+</body>
+
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=169&punto=36&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:02 GMT -->
+</html>

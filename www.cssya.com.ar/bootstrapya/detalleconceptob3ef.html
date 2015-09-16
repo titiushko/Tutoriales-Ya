@@ -1,0 +1,177 @@
+
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/detalleconcepto.php?punto=3&codigo=118&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:04:13 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Múltiples reglas a las columnas de una fila.</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="bootstrap,css, html, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de bootstrap.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>3 - Múltiples reglas a las columnas de una fila.</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Si queremos que una página se muestre de forma diferente si la accedemos desde un dispositivo con pantalla grande, mediana, pequeña o muy pequeña podemos asignar múltiples reglas a cada columna.</p>
+<p>Implementemos una página que muestre los datos en dos columnas y el ancho de las columnas dependa de la pantalla del dispositivo:</p>
+<pre>
+                    1er columna              2da columna
+
+Pantalla grande:    10 unidades              2 unidades
+Pantalla mediana:   8 unidades               4 unidades                       
+Pantalla chica:     7 unidades               5 unidades
+Pantalla muy chica: 6 unidades               6 unidades
+</pre>
+<p>Luego el código de la página queda definido:</p>
+
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+  &lt;head&gt; 
+    &lt;title&gt;Prueba de Bootstrap&lt;/title&gt; 
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt; 
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+
+  &lt;div class="container"&gt;
+
+    &lt;div class="row"&gt;
+      &lt;div class="col-lg-10 col-md-8 col-sm-7 col-xs-6"  style="background-color:#aaa"&gt;
+        &lt;h1&gt;Columna 1&lt;/h1&gt; 
+        &lt;p&gt;Esto es una prueba de bootstrap.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class="col-lg-2 col-md-4 col-sm-5 col-xs-6"  style="background-color:#bbb"&gt;
+        &lt;h1&gt;Columna 2&lt;/h1&gt; 
+        &lt;p&gt;Esto es una prueba de bootstrap.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt; 
+
+&lt;/body&gt; 
+&lt;/html&gt; 
+</pre>
+
+<p>Es decir podemos asignar múltiples reglas a un div de una columna, actuará el que corresponde dependiendo del ancho del dispositivo. Por ejemplo si ejecutamos este ejemplo y comenzamos a reducir el ancho del navegador podremos ver como se redimensionan los anchos de las columnas a medida que reducimos el ancho del navegador.</p>
+
+<p>En un dispositivo grande:</p>
+<img src="imagentema/foto005.jpg" border="0" alt="grid bootstrap multiples reglas"><br>
+<p>En un dispositivo mediano:</p>
+<img src="imagentema/foto006.jpg" border="0" alt="grid bootstrap multiples reglas"><br>
+<p>En un dispositivo pequeño:</p>
+<img src="imagentema/foto007.jpg" border="0" alt="grid bootstrap multiples reglas"><br>
+<p>En un dispositivo muy pequeño:</p>
+<img src="imagentema/foto008.jpg" border="0" alt="grid bootstrap multiples reglas"><br>
+<p>En este caso tengamos en cuenta que nunca colapsan las columnas ya que hemos definido la regla col-xs-*</p>
+
+<h2><a target="_blank" href="ejecutarbae5.html?cod=118">Ejecutar Ejemplo</a></h2><h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-32', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/detalleconcepto.php?punto=3&codigo=118&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:04:16 GMT -->
+</html>

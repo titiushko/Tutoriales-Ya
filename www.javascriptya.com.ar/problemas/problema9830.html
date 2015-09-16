@@ -1,0 +1,362 @@
+<!doctype html>
+<html>
+
+<!-- Mirrored from www.javascriptya.com.ar/problemas/problema.php?cod=8&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:08:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+    <title>JavaScript Ya</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="estilos.css" rel="stylesheet">
+    <link href='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css' rel='stylesheet'>     
+    <script src='../../ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script> 
+    <script src='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>     
+    
+<script type="text/javascript">	
+$(document).ready(function(){
+  var opciones = {
+                   select:tabSeleccionado
+                 };                 
+  $("#pesta").tabs(opciones);
+});
+
+function tabSeleccionado(event,tab) {
+  if (tab.index==2) {
+    var d = parent.documentodinamico.document; 	
+    d.open();
+	d.write(String.fromCharCode(60)+"script ");
+	d.write(' src="debug.js">');
+	d.write(String.fromCharCode(60)+"/script"+String.fromCharCode(62));
+	d.write($('#editor').val());
+    d.close();	
+  }	
+}
+
+
+</script>
+	
+<style type="text/css">	
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>	
+	
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>	
+	
+</head>
+<body>
+
+
+
+
+<h1>Estructuras condicionales anidadas.</h1>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* javascriptya-superior */
+google_ad_slot = "5739365568";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+
+<div id="pesta">
+	<ul>
+		<li><a href="#p1">Problemas</a></li>    	
+		<li><a href="#p2">Codificar problema</a></li>
+		<li><a href="#p3">Ejecución problema</a></li>
+	</ul>
+	<div id="p1" style="background:#fafafa;padding:30px; max-height: 700px; min-height: 700px;;overflow: auto;font-size:13pt">
+		
+	<b>PROBLEMAS</B><br><br>
+<ol>
+<li>
+Se cargan por teclado tres números distintos. Mostrar por pantalla el mayor de ellos.
+</li>
+<li>
+Se ingresa por teclado un valor entero, mostrar una leyenda que indique si el número es positivo, cero o negativo.
+</li>
+<li>
+ Confeccionar un programa que permita cargar un número entero positivo de hasta tres cifras y muestre un mensaje indicando si tiene 1, 2, o 3 cifras.
+</li>
+<li>
+De un postulante a un empleo, que realizó un test de capacitación, se obtuvo la siguiente información: nombre del postulante, cantidad total de preguntas que se le realizaron y cantidad de preguntas que contestó correctamente. Se pide confeccionar un programa que lea los datos del postulante e informe el nivel del mismo según el porcentaje de respuestas correctas que ha obtenido, y sabiendo que:<br>
+	Nivel superior:	Porcentaje>=90%.<br>
+	Nivel medio:	Porcentaje>=75% y <90%.<br>
+	Nivel regular:	Porcentaje>=50% y <75%.<br>
+	Fuera de nivel:	Porcentaje<50%.<br>
+</li>
+</ol>
+
+
+<div style="margin-top:20px">
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+</div>
+<pre class="recuadrooculto">
+Problema 1.
+
+lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var num1,num2,num3;
+  num1=prompt('Ingrese primer valor:','');
+  num1=parseInt(num1);
+  num2=prompt('Ingrese segundo valor:','');
+  num2=parseInt(num2);
+  num3=prompt('Ingrese tercer valor:','');
+  num3=parseInt(num3);
+  if (num1&gt;num2)
+  {
+    if (num1&gt;num3)
+    {
+      document.write('El mayor de los tres es:'+num1); 
+    }
+    else
+    {
+       document.write('El mayor de los tres es:'+num3); 
+    }
+  }
+  else
+  {
+    if (num2&gt;num3)
+    {
+       document.write('El mayor de los tres es:'+num2);   
+    }
+    else
+    {
+       document.write('El mayor de los tres es:'+num3);   
+    }
+  }
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+
+
+Problema 2.
+
+
+&l&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var num;
+  num=prompt('Ingrese un valor entero','');
+  num=parseInt(num);
+  if (num==0)
+  {
+    document.write('El número ingresado es cero');
+  }
+  else
+  {
+    if (num&gt;0)
+    {
+      document.write('El número ingresado es positivo');
+    }
+    else
+    {
+      document.write('El número ingresado es negativo');
+    }
+  }
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+     
+
+
+Problema 3.
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var num;
+  num=prompt('Ingrese un número de 1,2 o 3 dígitos','');
+  num=parseInt(num);
+  if (num&lt;10)
+  {
+    document.write('Tiene un dígito');
+  }
+  else
+  {
+    if (num&lt;100)
+    {
+      document.write('Tiene dos dígitos');
+    }
+    else
+    {
+      document.write('Tiene tres dígitos');
+    }
+  }
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+     
+
+
+Problema 4.
+
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var nombre;
+  nombre=prompt('Ingrese el nombre del postulante','');
+  var cantpreguntas;
+  cantpreguntas=prompt('Cantidad de preguntas del test','');
+  cantpreguntas=parseInt(cantpreguntas);
+  var cantcorrectas;
+  cantcorrectas=prompt('Cantidad de preguntas correctas','');
+  cantcorrectas=parseInt(cantcorrectas);
+  var porcentaje;
+  porcentaje=cantcorrectas/cantpreguntas*100;
+  if (porcentaje&gt;=90)
+  {
+    document.write('Nivel superior');
+  }
+  else
+  {
+    if (porcentaje&gt;=75)
+    {
+      document.write('Nivel medio');
+    }
+    else
+    {
+      if (porcentaje&gt;=50)
+      {
+        document.write('Nivel regular');
+      }
+      else
+      {
+        document.write('Fuera de nivel');
+      }
+    }
+  }
+  
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+	</div>    	
+	<div id="p2">
+    <textarea name="editor" id="editor" rows="28" style="width:890px;height:700px;font-size:16px;font-family:courier">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+     
+</textarea>
+	</div>
+	<div id="p3">
+<iframe width="900" height="700" id="documentodinamico" name="documentodinamico" src="vacio.html">
+No tiene disponible el navegador la capacidad de iframe
+</iframe>
+	</div>
+</div>
+<br>
+<table width="700px">
+<tr>
+<td align="left">	
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* javascriptya-inferior */
+google_ad_slot = "8692831966";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* javascriptya-inferior */
+google_ad_slot = "8692831966";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../index2904.html?inicio=0">Retornar al menu</a></h2>   
+<br>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+<!-- Mirrored from www.javascriptya.com.ar/problemas/problema.php?cod=8&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:08:04 GMT -->
+</html>

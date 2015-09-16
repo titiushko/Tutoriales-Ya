@@ -1,0 +1,408 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=16&codigo=153&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:29:59 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Vectores paralelos</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>16 - Vectores paralelos</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Este concepto se da cuando hay una relación entre las componentes de igual subíndice (misma posición) de un vector y otro.</p>
+<img src="imagentema/foto045.jpg" border="0" alt="vectores paralelos"><br>
+<p>Si tenemos dos vectores de 5 elementos cada uno. En uno se almacenan los nombres de personas en el otro las edades de dichas personas.<br>
+Decimos que el vector nombres es paralelo al vector edades si en la componente 0 de cada vector se almacena información relacionada a una persona (Juan - 12 años)<br>
+Es decir hay una relación entre cada componente de los dos vectores.</p>
+
+<p>Esta relación la conoce únicamente el programador y se hace para facilitar el desarrollo de algoritmos que procesen los datos almacenados en las estructuras de datos.</p>
+
+<h3>Problema 1:</h3>
+<p>Desarrollar un programa que permita cargar 5 nombres de personas y sus edades respectivas. Luego de realizar la carga por teclado de todos los datos imprimir los nombres de las personas mayores de edad (mayores o iguales a 18 años)</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class PersonasEdades {
+private:
+    char nombres[5][40];
+    int edades[5];
+public:
+    void cargar();
+    void mayoresEdad();
+};
+
+void PersonasEdades::cargar()
+{
+    for(int f=0;f &lt; 5;f++) 
+    {
+        cout &lt;&lt;"Ingrese nombre:";
+        cin.getline(nombres[f],40);
+        cout &lt;&lt;"Ingrese edad:";
+        cin &gt;&gt;edades[f];
+        cin.get();
+    }
+}
+
+void PersonasEdades::mayoresEdad()
+{
+    cout &lt;&lt;"Personas mayores de edad.";
+    cout &lt;&lt;"\n";
+    for(int f=0;f &lt; 5;f++) 
+    {
+        if (edades[f] &gt;= 18) 
+        {
+            cout &lt;&lt;nombres[f];
+            cout &lt;&lt;"\n";
+        }
+    }
+    cin.get();
+}
+
+void main()
+{
+    PersonasEdades pe;
+    pe.cargar();
+    pe.mayoresEdad();
+}</pre>
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/VectoresParalelos1.zip">VectoresParalelos1</a></p>
+
+<p>Definimos los dos vectores:</p>
+<pre>
+private:
+    char nombres[5][40];
+    int edades[5];
+</pre>
+<p>Como debemos cargar 5 nombres, luego debemos indicar en el primer subíndice un 5 y un 40 para indicar la cantidad de caracteres por nombre (tener en cuenta que las cadenas de caracteres se almacenan en forma distinta a los int y float).</p>
+<p>Mediante un for procedemos a la carga de los elementos de los vectores:<p>
+<pre>
+    for(int f=0;f &lt; 5;f++) 
+    {
+        cout &lt;&lt;"Ingrese nombre:";
+        cin.getline(nombres[f],40);
+        cout &lt;&lt;"Ingrese edad:";
+        cin &gt;&gt;edades[f];
+        cin.get();
+    }
+</pre>
+<p>Luego de la carga de la edad de la persona se procede a cargar otro nombre por lo que debemos llamar al método get del objeto cin (esto debido a que en el buffer de teclado queda un enter)</p>
+<p>Para imprimir los nombres de las personas mayores de edad verificamos cada componente del vector de edades, en caso que sea igual o mayor o 18 procedemos a mostrar el elemento de la misma posición del otro vector:</p>
+<pre>
+void PersonasEdades::mayoresEdad()
+{
+    cout &lt;&lt;"Personas mayores de edad.";
+    cout &lt;&lt;"\n";
+    for(int f=0;f &lt; 5;f++) 
+    {
+        if (edades[f] &gt;= 18) 
+        {
+            cout &lt;&lt;nombres[f];
+            cout &lt;&lt;"\n";
+        }
+    }
+    cin.get();
+}
+</pre>
+<p>En la main creamos un objeto de la clase PersonasEdades y llamamos a sus dos métodos:</p>
+<pre>
+void main()
+{
+    PersonasEdades pe;
+    pe.cargar();
+    pe.mayoresEdad();
+}
+</pre>
+
+
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Crear una clase que permita ingresar el nombre de 5 productos y sus respectivos precios. Definir dos vectores paralelos. Mostrar cuantos productos tienen un precio mayor al primer producto ingresado.
+</li>
+<li>
+En un curso de 4 alumnos se registraron las notas de sus exámenes y se deben procesar de acuerdo a lo siguiente:<br>
+a) Ingresar Nombre y Nota de cada alumno (almacenar los datos en dos vectores paralelos)<br>
+b) Realizar un listado que muestre los nombres, notas y condición del alumno. En la condición, colocar "Muy Bueno" si la nota
+es mayor o igual a 8, "Bueno" si la nota está entre 4 y 7, y colocar "Insuficiente" si la nota es inferior a 4.<br>
+c) Imprimir cuantos alumnos tienen la leyenda “Muy Bueno”.
+</li>
+</ol>
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class ProductoPrecio {
+private:
+    char nombres[5][40];
+    float precios[5];
+public:
+    void cargar();
+    void precioMayorPrimero();
+};
+
+void ProductoPrecio::cargar()
+{
+    for (int f = 0; f &lt; 5; f++)
+    {
+        cout &lt;&lt; "Ingrese el nombre del producto:";
+        cin.getline(nombres[f], 40);
+        cout &lt;&lt; "Ingrese el precio:";
+        cin &gt;&gt; precios[f];
+        cin.get();
+    }
+}
+
+void ProductoPrecio::precioMayorPrimero()
+{
+    int cantidad = 0;
+    for (int f = 0; f &lt; 5; f++)
+    {
+        if (precios[f]&gt;precios[0])
+        {
+            cantidad++;
+        }
+    }
+    cout &lt;&lt; "Cantidad de productos con un precio mayor al primero:";
+    cout &lt;&lt; cantidad;
+    cin.get();
+}
+
+void main()
+{
+    ProductoPrecio productoprecio1;
+    productoprecio1.cargar();
+    productoprecio1.precioMayorPrimero();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/VectoresParalelos2.zip">VectoresParalelos2</a></p>
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class NotasAlumnos {
+private:
+    char nombres[4][40];
+    int notas[4];
+public:
+    void cargar();
+    void imprimirEstado();
+    void cantidadAlumnosMuyBueno();
+};
+
+void NotasAlumnos::cargar()
+{
+    for (int f = 0; f &lt; 4; f++)
+    {
+        cout &lt;&lt; "Ingrese el nombre del alumno:";
+        cin.getline(nombres[f], 40);
+        cout &lt;&lt; "Ingrese la nota:";
+        cin &gt;&gt; notas[f];
+        cin.get();
+    }
+}
+
+void NotasAlumnos::imprimirEstado()
+{
+    for (int f = 0; f &lt; 4; f++)
+    {
+        cout &lt;&lt; nombres[f];
+        cout &lt;&lt; "-";
+        cout &lt;&lt; notas[f];
+        cout &lt;&lt; "-";
+        if (notas[f] &gt;= 8)
+        {
+            cout &lt;&lt; "Muy bueno";
+        }
+        else
+        {
+            if (notas[f] &gt;= 4)
+            {
+                cout &lt;&lt; "Bueno";
+            }
+            else
+            {
+                cout &lt;&lt; "Insuficiente";
+            }
+        }
+        cout &lt;&lt; "\n";
+    }
+}
+
+void NotasAlumnos::cantidadAlumnosMuyBueno()
+{
+    int cantidad = 0;
+    for (int f = 0; f &lt; 4; f++)
+    {
+        if (notas[f] &gt;= 8)
+        {
+            cantidad++;
+        }
+    }
+    cout &lt;&lt; "Cantidad de alumnos muy buenos:";
+    cout &lt;&lt; cantidad;
+}
+
+
+void main()
+{
+    NotasAlumnos notaslumnos1;
+    notaslumnos1.cargar();
+    notaslumnos1.imprimirEstado();
+    notaslumnos1.cantidadAlumnosMuyBueno();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/VectoresParalelos3.zip">VectoresParalelos3</a></p>
+
+
+</pre><h2><a href="index9187.html?inicio=15">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=16&codigo=153&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:29:59 GMT -->
+</html>

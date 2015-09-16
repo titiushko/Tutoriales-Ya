@@ -1,0 +1,277 @@
+<html>
+
+<!-- Mirrored from www.sqlserverya.com.ar/simulador/simulador.php?inicio=25&cod=48&punto=42 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+    <title>Tutorial de SQL Server : Problemas Resueltos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+	  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;		
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=no,status=yes,toolbar=yes,location=yes');  	
+}
+</script>  
+</head>
+<body bgcolor="#CCFFCC">
+        
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>42 - Cláusulas compute y compute by</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Un comercio que tiene un stand en una feria registra en una tabla llamada "visitantes" algunos datos de las personas que visitan o compran en su stand para luego enviarle publicidad de sus productos.<br>
+Eliminamos la tabla si existe:</p>
+<pre>
+ if object_id('visitantes') is not null
+  drop table visitantes;
+</pre>
+<p>La creamos con la siguiente estructura:</p>
+<pre>
+ create table visitantes(
+  nombre varchar(30),
+  edad tinyint,
+  ciudad varchar(20),
+  provincia varchar(20),
+  mail varchar(30),
+  montocompra decimal(6,2)
+ );
+</pre>
+<p>Ingresamos algunos registros:</p>
+<pre>
+ insert into visitantes
+  values ('Susana Molina',28,'Cordoba','Cordoba','susanamolina@gmail.com',50); 
+ insert into visitantes
+  values ('Marcela Mercado',36,'Carlos Paz','Cordoba',null,20);
+ insert into visitantes
+  values ('Alberto Garcia',35,'La Falda','Cordoba','albertgomgarcia@hotmail.com',30); 
+ insert into visitantes
+  values ('Teresa Garcia',33,'Alta Gracia','Cordoba',null,120);
+ insert into visitantes
+  values ('Roberto Perez',45,'Alta Gracia','Cordoba','robertomarioperez@hotmail.com',30);
+ insert into visitantes
+  values ('Marina Torres',22,'Rosario','Santa Fe','marinatorres@xaxamail.com',90);
+ insert into visitantes
+  values ('Julieta Gomez',24,'Rosario','Santa Fe',null,50);
+ insert into visitantes
+  values ('Roxana Lopez',20,'Alta Gracia','Cordoba',null,200);
+ insert into visitantes
+  values ('Liliana Garcia',50,'Capital Federal','Buenos Aires','lilianagarcia@hotmail.com',40);
+ insert into visitantes
+  values ('Juan Torres',43,'Carlos Paz','Cordoba',null,10);
+</pre>
+<p>Veamos todos los datos de los visitantes y el promedio del monto de compra:</p>
+<pre>
+ select *from visitantes
+ compute avg(montocompra);
+</pre>
+<p>Empleamos dos cláusulas "compute" en una misma instrucción para averiguar el promedio de las edades y el total de los montos de las compras:</p>
+<pre>
+ select edad,ciudad,montocompra
+  from visitantes
+  compute avg(edad),sum(montocompra);
+</pre>
+<p>Veamos la cantidad de visitantes por provincia y ciudad empleando "compute by". Recuerde que DEBE usarse "order by" y los campos que se incluyan luego de "by" deben estar en el "order by":</p>
+<pre>
+ select nombre,ciudad,provincia
+  from visitantes
+  order by provincia,ciudad
+  compute count(provincia)
+  by provincia,ciudad;
+</pre>
+<p>Combinamos dos cláusulas "compute" con dos cláusulas "compute by" para averiguar el promedio de la compra y la cantidad por provincia y ciudad y el promedio de las edades y el total del monto de compras de todos los visitantes:</p>
+<pre>
+ select *from visitantes
+  order by provincia,ciudad
+  compute avg(edad), sum(montocompra)
+  compute avg(montocompra),count(provincia)
+  by provincia,ciudad;
+</pre>
+
+        <form name="formulario" action="http://scratchya.com.ar/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+          <textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off">
+ if object_id('visitantes') is not null
+  drop table visitantes;
+
+ create table visitantes(
+  nombre varchar(30),
+  edad tinyint,
+  ciudad varchar(20),
+  provincia varchar(20),
+  mail varchar(30),
+  montocompra decimal(6,2)
+ );
+
+ insert into visitantes
+  values ('Susana Molina',28,'Cordoba','Cordoba','susanamolina@gmail.com',50); 
+ insert into visitantes
+  values ('Marcela Mercado',36,'Carlos Paz','Cordoba',null,20);
+ insert into visitantes
+  values ('Alberto Garcia',35,'La Falda','Cordoba','albertgomgarcia@hotmail.com',30); 
+ insert into visitantes
+  values ('Teresa Garcia',33,'Alta Gracia','Cordoba',null,120);
+ insert into visitantes
+  values ('Roberto Perez',45,'Alta Gracia','Cordoba','robertomarioperez@hotmail.com',30);
+ insert into visitantes
+  values ('Marina Torres',22,'Rosario','Santa Fe','marinatorres@xaxamail.com',90);
+ insert into visitantes
+  values ('Julieta Gomez',24,'Rosario','Santa Fe',null,50);
+ insert into visitantes
+  values ('Roxana Lopez',20,'Alta Gracia','Cordoba',null,200);
+ insert into visitantes
+  values ('Liliana Garcia',50,'Capital Federal','Buenos Aires','lilianagarcia@hotmail.com',40);
+ insert into visitantes
+  values ('Juan Torres',43,'Carlos Paz','Cordoba',null,10);
+
+ select *from visitantes
+ compute avg(montocompra);
+
+ select edad,ciudad,montocompra
+  from visitantes
+  compute avg(edad),sum(montocompra);
+
+ select nombre,ciudad,provincia
+  from visitantes
+  order by provincia,ciudad
+  compute count(provincia)
+  by provincia,ciudad;
+
+ select *from visitantes
+  order by provincia,ciudad
+  compute avg(edad), sum(montocompra)
+  compute avg(montocompra),count(provincia)
+  by provincia,ciudad;
+</textarea>
+    <br>
+    <input type="submit"  value="Ejecutar  los comandos SQL">
+    <input type="button" onClick="javascript:formulario.programa.value=''" value="Borrar comando.">
+
+        <br>
+	<br>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   
+
+</form>
+
+   <h2><a href="../indexfc77.html?inicio=25">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-11";
+urchinTracker();
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from www.sqlserverya.com.ar/simulador/simulador.php?inicio=25&cod=48&punto=42 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:31 GMT -->
+</html>
+

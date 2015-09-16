@@ -1,0 +1,416 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=80&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:52:07 GMT -->
+<head>
+<title>Estructuras condicionales simples y compuestas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Estructuras condicionales simples y compuestas</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>No todos los problemas pueden resolverse empleando estructuras secuenciales. Cuando hay que tomar una decisión aparecen las estructuras condicionales.<br>
+En nuestra vida diaria se nos presentan situaciones donde debemos decidir.<br>
+¿Elijo la carrera A o la carrera B?<br>
+¿Me pongo este pantalón?<br>
+Para ir al trabajo, ¿elijo el camino A o el camino B?<br>
+Al cursar una carrera, ¿elijo el turno mañana, tarde o noche?<br>
+</p>
+<p>Por supuesto que en un problema se combinan estructuras secuenciales y condicionales.<p>
+<h3>Estructura condicional simple.</h3>
+<p>Cuando se presenta la elección tenemos la opción de realizar una actividad o no realizar ninguna.<br>
+
+Representación gráfica:<br>
+<img src="imagentema/foto031.jpg" border="0" alt="estructura condicional simple"><br>
+</p>
+<p>Podemos observar:
+El rombo representa la condición. Hay dos opciones que se pueden tomar. Si la condición da verdadera se sigue el camino del verdadero, o sea el de la derecha, si la condición da falsa se sigue el camino de la izquierda.<br>
+
+Se trata de una estructura CONDICIONAL SIMPLE porque por el camino del verdadero hay actividades y por el camino del falso no hay actividades.<br>
+
+Por el camino del verdadero pueden existir varias operaciones, entradas y salidas, inclusive ya veremos que puede haber otras estructuras condicionales.</p>
+
+<h3>Problema:</h3>
+<p>Ingresar el sueldo de una persona, si supera los 3000 pesos mostrar un mensaje en pantalla indicando que debe abonar impuestos.</p>
+<h4>Diagrama de flujo:</h4>
+<p><img src="imagentema/foto032.jpg" border="0" alt="problema estructura condicional simple"><br>
+<p>Podemos observar lo siguiente: Siempre se hace la carga del sueldo, pero si el sueldo que ingresamos supera 3000 pesos se mostrará por pantalla el mensaje "Esta persona debe abonar impuestos", en caso que la persona cobre 3000 o menos no aparece nada por pantalla.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.util.Scanner;
+
+public class EstructuraCondicionalSimple1 {
+    public static void main(String[] ar) {
+    	Scanner teclado=new Scanner(System.in);
+    	float sueldo;
+    	System.out.print("Ingrese el sueldo:");
+    	sueldo=teclado.nextFloat();
+    	if (sueldo>3000) {
+    	    System.out.println("Esta persona debe abonar impuestos");
+    	}
+    }
+}
+</pre>
+<p>La palabra clave "if" indica que estamos en presencia de una estructura condicional; seguidamente disponemos la condición entre paréntesis. Por último encerrada entre llaves las instrucciones de la rama del verdadero.</p> 
+<p.>Es necesario que las instrucciones a ejecutar en caso que la condición sea verdadera estén encerradas entre llaves { }, con ellas marcamos el comienzo y el fin del bloque del verdadero.</p>
+<p>Ejecutando el programa e ingresamos un sueldo superior a 3000 pesos. Podemos observar como aparece en pantalla el mensaje "Esta persona debe abonar impuestos", ya que la condición del if es verdadera.<br>
+Volvamos a ejecutar el programa y carguemos un sueldo menor o igual a 3000 pesos. No debe aparecer mensaje en pantalla.</p>
+
+<h3>Estructura condicional compuesta.</h3>
+<p>Cuando se presenta la elección tenemos la opción de realizar una actividad u otra. Es decir tenemos actividades por el verdadero y por el falso de la condición. Lo más importante que hay que tener en cuenta que se realizan las actividades de la rama del verdadero o las del falso, NUNCA se realizan las actividades de las dos ramas.</p>
+<p>Representación gráfica:<br>
+<img src="imagentema/foto033.jpg" border="0" alt="estructura condicional compuesta"><br>
+</p>
+<p>En una estructura condicional compuesta tenemos entradas, salidas, operaciones, tanto por la rama del verdadero como por la rama del falso.</p>
+
+<h3>Problema:</h3>
+<p>Realizar un programa que solicite ingresar dos números distintos y muestre por pantalla el mayor de ellos.</p>
+<h4>Diagrama de flujo:</h4>
+<p><img src="imagentema/foto034.jpg" border="0" alt="problema estructura condicional compuesta"><br>
+<p>Se hace la entrada de num1 y num2 por teclado. Para saber cual variable tiene un valor mayor preguntamos si el contenido de num1 es mayor (&gt;) que el contenido de num2, si la respuesta es verdadera vamos por la rama de la derecha e imprimimos num1, en caso que la condición sea falsa vamos por la rama de la izquierda (Falsa) e imprimimos num2.<br>
+Como podemos observar nunca se imprimen num1 y num2 simultáneamente.</p>
+
+<p>Estamos en presencia de una ESTRUCTURA CONDICIONAL COMPUESTA ya que tenemos actividades por la rama del verdadero y del falso.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.util.Scanner;
+
+public class EstructuraCondicionalCompuesta1 {
+    public static void main(String[] ar) {
+    	Scanner teclado=new Scanner(System.in);
+    	int num1,num2;
+    	System.out.print("Ingrese primer valor:");
+    	num1=teclado.nextInt();
+    	System.out.print("Ingrese segundo valor:");
+    	num2=teclado.nextInt();
+    	if (num1&gt;num2) {
+    		System.out.print(num1);
+    	} else {
+    		System.out.print(num2);
+    	}
+    }
+}
+</pre>
+<p>Cotejemos el diagrama de flujo y la codificación y observemos que el primer bloque de llaves después del if representa la rama del verdadero y el segundo bloque de llaves representa la rama del falso.<br>
+
+<p>Compilemos el programa, si hubo errores sintácticos corrijamos y carguemos dos valores, como por ejemplo:</p>
+<pre>
+Ingrese el primer valor: 10
+Ingrese el segundo valor: 4
+10
+</pre>
+<p>Si ingresamos los valores 10 y 4 la condición del if retorna verdadero y ejecuta el primer bloque.<br>
+Un programa se controla y corrige probando todos sus posibles resultados.<br>
+Ejecutemos nuevamente el programa e ingresemos:</p>
+<pre>
+Ingrese el primer valor: 10
+Ingrese el segundo valor: 54
+54
+</pre>
+<p>Cuando a un programa le corregimos todos los errores sintácticos y lógicos ha terminado nuestra tarea y podemos entregar el mismo al USUARIO que nos lo solicitó.</p>
+
+<h2>Operadores</h2>
+<p>En una condición deben disponerse únicamente variables, valores constantes y operadores relacionales.</p>
+
+<h4>>Operadores Relacionales:</h4>
+<pre>
+&gt;  (mayor)	
+&lt;  (menor)
+&gt;= (mayor o igual)
+&lt;= (menor o igual)
+== (igual)
+!= (distinto)
+</pre>
+<h4>Operadores Matemáticos</h4>
+<pre>
++ (más)
+- (menos)
+* (producto)
+/ (división)
+% (resto de una división)  Ej.:  x=13%5;  {se guarda 3}
+</pre>
+
+<p>Hay que tener en cuenta que al disponer una condición debemos seleccionar que operador relacional se adapta a la pregunta.</p>
+<p>Ejemplos:</p>
+<pre>
+	Se ingresa un número multiplicarlo por 10 si es distinto a 0.   (!=)
+	Se ingresan dos números mostrar una advertencia si son iguales.  (==)
+</pre>
+<p>Los problemas que se pueden presentar son infinitos y la correcta elección del operador sólo se alcanza con la práctica intensiva en la resolución de problemas.</p>
+
+
+</ul>
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+
+Realizar un programa que lea por teclado dos números, si el primero es mayor al segundo informar su suma y diferencia, en caso contrario informar el producto y la división del primero respecto al segundo.</li>
+<li>
+Se ingresan tres notas de un alumno, si el promedio es mayor o igual a siete mostrar un mensaje "Promocionado".
+</li>
+<li>
+Se ingresa por teclado un número positivo de uno o dos dígitos (1..99) mostrar un mensaje indicando si el número tiene uno o dos dígitos.<br> 
+(Tener en cuenta que condición debe cumplirse para tener dos dígitos, un número entero)
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+import java.util.Scanner;
+
+public class EstructuraCondicionalCompuesta2 {
+    public static void main(String[] ar) {
+    	Scanner teclado=new Scanner(System.in);
+    	int num1,num2;
+    	System.out.print("Ingrese primer valor:");
+    	num1=teclado.nextInt();
+    	System.out.print("Ingrese segundo valor:");
+    	num2=teclado.nextInt();
+    	if (num1&gt;num2) {
+    	    int suma,diferencia;
+    	    suma=num1 + num2;
+    	    diferencia=num1 - num2;
+    	    System.out.print("La suma de los dos valores es:");
+    	    System.out.println(suma);
+    	    System.out.print("La diferencia de los dos valores es:");
+    	    System.out.println(diferencia);
+    	} else {
+    	    int producto,division;
+    	    producto=num1 * num2;
+    	    division=num1 / num2;
+    	    System.out.print("El producto de los dos valores es:");
+    	    System.out.println(producto);
+    	    System.out.print("La división de los dos valores es:");
+    	    System.out.println(division);    		
+    	}
+    }
+}
+
+
+
+import java.util.Scanner;
+
+public class EstructuraCondicionalSimple2 {
+    public static void main(String[] ar) {
+    	Scanner teclado=new Scanner(System.in);
+    	int nota1,nota2,nota3;
+    	System.out.print("Ingrese primer nota:");
+    	nota1=teclado.nextInt();
+    	System.out.print("Ingrese segunda nota:");
+    	nota2=teclado.nextInt();
+    	System.out.print("Ingrese tercer nota:");
+    	nota3=teclado.nextInt();
+        int promedio;
+        promedio=(nota1 + nota2 + nota3) / 3;
+    	if (promedio&gt;=7) {
+    	    System.out.print("Promocionado");
+    	}
+    }
+}
+
+
+
+import java.util.Scanner;
+
+public class EstructuraCondicionalCompuesta3 {
+    public static void main(String[] ar) {
+    	Scanner teclado=new Scanner(System.in);
+    	int num;
+    	System.out.print("Ingrese un valor entero de 1 o 2 dígitos:");
+    	num=teclado.nextInt();
+    	if (num&lt;10) {
+    	    System.out.print("Tiene un dígito");
+    	} else {
+    	    System.out.print("Tiene dos dígitos");
+    	}
+    }
+}
+</pre></div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index2904.html?inicio=0">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=80&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:52:13 GMT -->
+</html>

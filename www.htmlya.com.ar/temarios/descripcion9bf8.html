@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.htmlya.com.ar/temarios/descripcion.php?inicio=48&cod=121&punto=50 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:05:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Conceptos de HTML</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="html, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de HTML. Es objetivo prioritario respetar 
+los estándares del W3C">
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+</style>
+</head>
+
+<body>
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em"><a href="../index.html">Temario del Tutorial</a></span>->50 - Frames - Propiedades del elemento frame</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div> 
+
+<p style="background-color: #f2dede;margin-bottom:20px">Los Frames están discontinuados para las versiones actuales de HTML. Solamente téngalo en cuenta si tiene que hacer el mantenimiento de sitios que utilizan este elemento HTML. Evite desarrollar nuevos sitios utilizando Frames.</p>
+
+<p>Hasta hora hemos utilizado y definido las propiedades para la marca de inicio del elemento frame:</p>
+<ul>
+<li><strong>src</strong></li>
+<li><strong>name</strong></li>
+</ul>
+<p>Otras propiedades que pasaremos a ver, comprender y probar su funcionamiento son:</p>
+<ul>
+<li><strong>noresize</strong> Esta propiedad no requiere que se le asigne un valor. Si se encuentra presente el frame no podrá ser redimensionado con el mouse por el visitante del sitio.<br>
+Por ejemplo si disponemos un menú de enlaces en un frame ubicado a la izquierda es muy probable que definamos la propiedad noresize ya que poca utilidad tiene agrandar o contraer esta región de pantalla.</li>
+<li><strong>frameborder</strong> Esta propiedad puede tomar los valores 1 o 0. Por defecto un frame aparece con borde es decir esta propiedad por defecto tiene el valor 1. Si queremos que el borde no aparezca debemos inicializarla con 0.<br>
+Hay que tener en cuenta que por más que los bordes no existan si se puede redimensionar el frame con el mouse.</li>
+<li><strong>scrolling</strong> Los valores posibles de esta propiedad son: "auto","yes","no". Por defecto está inicializada con el valor "auto". El valor auto significa que el navegador decide si se debe mostrar la barra de scroll. La mostrará solo si algún contenido del frame no se ve.<br>
+Si definimos el valor "yes" estamos indicando que siempre debe estar visible la barra de navegación y por último si asignamos el valor "no" estaremos indicando que nunca debe aparecer la barra de navegación para dicho frame.</li>
+</ul>
+<p>Resolvamos el siguiente problema:</p>
+<p>
+Confeccionar una ventana con dos frame verticales. No permitir redimensionarlos y no mostrar el borde de los frames. Hacer que el frame de la derecha siempre muestre la barra de desplazamiento.
+</p>
+pagina1.html
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;prueba de frames&lt;/title&gt;
+&lt;/head&gt;
+&lt;frameset cols=&quot;200,*&quot;&gt;
+&lt;frame src=&quot;pagina2.html&quot; frameborder=&quot;0&quot; noresize&gt;
+&lt;frame src=&quot;pagina3.html&quot; frameborder=&quot;0&quot; scrolling=&quot;yes&quot; 
+noresize&gt;
+&lt;noframes&gt;
+&lt;p&gt;El navegador no soporta frames&lt;/p&gt;
+&lt;/noframes&gt;
+&lt;/frameset&gt;
+&lt;/html&gt;
+</pre>
+pagina2.html
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;prueba de frames&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;P&aacute;gina A&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina A&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina A&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina A&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina A&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina A&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+pagina3.html
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;prueba de frames&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../index7c04.html?inicio=48">Retornar</a></h2>   
+
+</div>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-7";
+urchinTracker();
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.htmlya.com.ar/temarios/descripcion.php?inicio=48&cod=121&punto=50 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:05:31 GMT -->
+</html>

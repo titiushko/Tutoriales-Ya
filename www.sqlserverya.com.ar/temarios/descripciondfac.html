@@ -1,0 +1,198 @@
+<html>
+
+
+<!-- Mirrored from www.sqlserverya.com.ar/temarios/descripcion.php?inicio=125&cod=150&punto=144 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de SQL Server </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+	  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>144 - Disparador de actualización (update trigger)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>Podemos crear un disparador para que se ejecute siempre que una instrucción "update" actualice los datos de una tabla.</p>
+
+<p>Sintaxis básica:</p>
+<pre>
+ create triggre NOMBREDISPARADOR
+  on NOMBRETABLA
+  for update
+ as 
+   SENTENCIAS
+</pre>
+<p>Analizamos la sintaxis:</p>
+<p>"create trigger" junto al nombre del disparador; "on" seguido del nombre de la tabla para la cual se establece el trigger.</p>
+<p>Luego de "for" se coloca el evento (en este caso "update"), lo que indica que las actualizaciones sobre la tabla activarán el trigger.</p>
+<p>Luego de "as" se especifican las condiciones y acciones, es decir, las condiciones que determinan cuando un intento de modificación provoca las acciones que el trigger realizará.</p>
+
+<p>El siguiente disparador de actualización se crea para evitar que se modifiquen los datos de la tabla "libros":</p>
+<pre>
+ create trigger DIS_libros_actualizar
+  on libros
+  for update
+  as
+    raiserror('Los datos de la tabla "libros" no pueden modificarse', 10, 1)
+    rollback transaction
+</pre>
+<p>Entonces, creamos el disparador ("create trigger") dándole un nombre ("DI_libros_actualizar") sobre una tabla específica ("libros") para ("for") el suceso de actualización ("update"). Luego de "as" colocamos las sentencias, las acciones que el trigger realizará cuando se intente actualizar uno o varios registros en "libros" (en este caso, impedir las modificaciones).</p>
+
+<p>Cuando se ejecuta una instrucción "update" en una tabla que tiene definido un disparador, los registros originales (antes de ser actualizados) se mueven a la tabla virtual "deleted" y los registros actualizados (con los nuevos valores) se copian a la tabla virtual "inserted". Dentro del trigger se puede acceder a estas tablas.</p>
+
+<p>En el cuerpo de un trigger se puede emplear la función "update(campo)" que recibe un campo y retorna verdadero si el evento involucra actualizaciones (o inserciones) en ese campo; en caso contrario retorna "false".</p>
+
+<p>Creamos un disparador que evite que se actualice el campo "precio" de la tabla "libros":</p>
+<pre>
+ create trigger DIS_libros_actualizar_precio
+  on libros
+  for update
+  as
+   if update(precio)
+   begin
+    raiserror('El precio de un libro no puede modificarse.', 10, 1)
+    rollback transaction
+   end;
+</pre>
+<p>Empleamos "if update()" para que el trigger controle la actualización del campo "precio"; así, cuando el disparador detecte una actualización en tal campo, realizará las acciones apropiadas (mostrar un mensaje y deshacer la actualización); en caso que se actualice otro campo, el disparador se activa, pero permite la transacción.</p>
+
+<p>Creamos un disparador de actualización que muestra el valor anterior y nuevo valor de los registros actualizados:</p>
+<pre>
+ create trigger DIS_libros_actualizar2
+  on libros
+  for update
+  as
+   if (update(titulo) or update(autor) or update(editorial)) and
+    not (update(precio) or update(stock))
+   begin
+    select d.codigo,
+    (d.titulo+'-'+ d.autor+'-'+d.editorial) as 'registro anterior',
+    (i.titulo+'-'+ i.autor+'-'+i.editorial) as 'registro actualizado'
+     from deleted as d
+     join inserted as i
+     on d.codigo=i.codigo
+   end
+   else
+   begin
+    raiserror('El precio y stock no pueden modificarse. La actualización no se realizó.', 10, 1)
+    rollback transaction
+   end;
+</pre>
+<p>Empleamos "if update" para que el trigger controle si la actualización se realiza en ciertos campos permitidos (titulo, autor y editorial) y no en los campos prohibidos (precio y stock)); si se modifican los campos permitidos y ninguno de los no permitidos, mostrará los antiguos y nuevos valores consultando las tablas "deleted" e "inserted", en caso que se actualice un campo no permitido, el disparador muestra un mensaje y deshace la transacción.</p>
+
+<p>Note que el disparador no controla los intentos de actualización sobre el campo "codigo", esto es porque tal campo, no puede modificarse porque está definido "identity", si intentamos modificarlo, SQL Server muestra un mensaje de error y el trigger no llega a dispararse.</p>
+
+
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+<br>
+   <h2><a href="../index28e1.html?inicio=125">Retornar</a></h2>   
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-11";
+urchinTracker();
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from www.sqlserverya.com.ar/temarios/descripcion.php?inicio=125&cod=150&punto=144 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:34 GMT -->
+</html>

@@ -1,0 +1,433 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=11&codigo=138&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Estructura repetitiva do while</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>11 - Estructura repetitiva do while</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>La estructura do while es otra estructura repetitiva, la cual ejecuta al menos una vez su bloque repetitivo, a diferencia del while o del for que podían no ejecutar el bloque.<br>
+Esta estructura repetitiva se utiliza cuando conocemos de antemano que por lo menos una vez se ejecutará el bloque repetitivo.<br>
+La condición de la estructura está abajo del bloque a repetir, a diferencia del while o del for que está en la parte superior.</p>
+<p>Representación gráfica:</p>
+<p><img src="imagentema/foto040.jpg" border="0" alt="estructura repetitiva do while"><br>
+</p>
+
+<p>El bloque de operaciones se repite MIENTRAS la condición sea Verdadera.<br>
+Si la condición retorna Falso el ciclo se detiene. En C++, todos los ciclos repiten por verdadero y cortan por falso.<br>
+
+Es importante analizar y ver que las operaciones se ejecutan como mínimo una vez.</p>
+
+<h3>Problema 1:</h3>
+<p>Escribir un programa que solicite la carga de un número entre 0 y 999, y nos muestre un mensaje de cuántos dígitos tiene el mismo. Finalizar el programa cuando se cargue el valor 0.</p>
+<h4>Diagrama de flujo:</h4>
+<p><img src="imagentema/foto041.jpg" border="0" alt="estructura repetitiva do while"><br>
+</p>
+
+<p>No hay que confundir los rombos de las estructuras condicionales con los de las estructuras repetitivas  do while.<br>
+En este problema por lo menos se carga un valor. Si se carga un valor mayor o igual a 100 se trata de un número de tres cifras, si es mayor o igual a 10 se trata de un valor de dos dígitos, en caso contrario se trata de un valor de un dígito. Este bloque se repite hasta que se ingresa en la variable valor el número 0 con lo que la condición de la estructura do while retorna falso y sale del bloque repetitivo finalizando el programa.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+     int valor;
+     do {
+         cout &lt;&lt;"Ingrese un valor entre 0 y 999 (0 finaliza):";
+         cin &gt;&gt;valor;
+         if (valor &gt;= 100) 
+         {
+             cout &lt;&lt;"Tiene 3 dígitos.";
+         } 
+         else
+         {
+             if (valor &gt;= 10) 
+             {
+                 cout &lt;&lt;"Tiene 2 dígitos.";
+             } 
+             else 
+             {
+                 cout &lt;&lt;"Tiene 1 dígito.";
+             }
+         }
+         cout &lt;&lt;"\n";
+     } while (valor != 0);
+}</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/DoWhileCantidadDigitos.zip">DoWhileCantidadDigitos</a></p>
+
+<h3>Problema 2:</h3>
+<p>Escribir un programa que solicite la carga de números por teclado, obtener su promedio. Finalizar la carga de valores cuando se cargue el valor 0.</p>
+<p>Cuando la finalización depende de algún valor ingresado por el operador conviene el empleo de la estructura do while, por lo menos se cargará un valor (en el caso más extremo se carga 0, que indica la finalización de la carga de valores)</p>
+<h4>Diagrama de flujo:</h4>
+<p><img src="imagentema/foto042.jpg" border="0" alt="estructura repetitiva do while"><br>
+</p>
+<p>Es importante analizar este diagrama de flujo.<br>
+Definimos un contador cant que cuenta la cantidad de valores ingresados por el operador (no lo incrementa si ingresamos 0)<br>
+El valor 0 no es parte de la serie de valores que se deben sumar.<br>
+Definimos el acumulador suma que almacena todos los valores ingresados por teclado.<br>
+La estructura repetitiva  do while se repite hasta que ingresamos el valor 0. Con dicho valor la condición del ciclo retorna falso y continúa con el flujo del diagrama.<br>
+Disponemos por último una estructura condicional para el caso que el operador cargue únicamente un 0 y por lo tanto no podemos calcular el promedio ya que no existe la división por 0.<br>
+En caso que el contador cant tenga un valor distinto a 0 el promedio se obtiene dividiendo el acumulador suma por el contador cant que tiene la cantidad de valores ingresados antes de introducir el 0.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int suma,cant,valor,promedio;
+    suma=0;
+    cant=0;
+    do {
+        cout &lt;&lt;"Ingrese un valor (0 para finalizar):";
+        cin &gt;&gt;valor;
+        if (valor !=0 ) 
+        {
+            suma=suma+valor;
+            cant++;
+        }
+    } while (valor != 0);
+    if (cant !=0 ) 
+    {
+        promedio=suma/cant;
+        cout &lt;&lt;"El promedio de los valores ingresados es:";
+        cout &lt;&lt;promedio;
+    }
+    else
+    {
+        cout &lt;&lt;"No se ingresaron valores.";
+    }
+    cin.get();
+    cin.get();
+}
+</pre>
+<p>El contador cant DEBE inicializarse antes del ciclo, lo mismo que el acumulador suma.
+El promedio se calcula siempre y cuando el contador cant sea distinto a 0.</p>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/DoWhileCalculoPromedio.zip">DoWhileCalculoPromedio</a></p>
+
+<h3>Problema 3:</h3>
+<p>Realizar un programa que permita ingresar el peso (en kilogramos) de piezas. El proceso termina cuando ingresamos el valor 0. Se debe informar:<br>
+a) Cuántas piezas tienen un peso entre 9.8 Kg. y 10.2 Kg.?, cuántas con más de 10.2 Kg.? y cuántas con menos de 9.8 Kg.?<br>
+b) La cantidad total de piezas procesadas.
+</p>
+<h4>Diagrama de flujo:</h4>
+<p><img src="imagentema/foto043.jpg" border="0" alt="estructura repetitiva do while"><br>
+</p>
+<p>Los tres contadores cont1, cont2, y cont3 se inicializan en 0 antes de entrar a la estructura repetitiva.<br>
+A la variable suma no se la inicializa en 0 porque no es un acumulador, sino que guarda la suma del contenido de las variables cont1, cont2 y cont3.<br>
+La estructura se repite hasta que se ingresa el valor 0 en la variable peso. Este valor no se lo considera un peso menor a 9.8 Kg., sino que indica que ha finalizado la carga de valores por teclado.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int cant1,cant2,cant3,suma;
+    float peso;
+    cant1=0;
+    cant2=0;
+    cant3=0;
+    do {
+        cout &lt;&lt;"Ingrese el peso de la pieza (0 pera finalizar):";
+        cin &gt;&gt;peso;
+        if (peso &gt; 10.2) 
+        {
+            cant1++;
+        }
+        else 
+        {
+            if (peso &gt;= 9.8)
+            {
+                cant2++;
+            }
+            else 
+            {
+                if (peso &gt; 0) 
+                {
+                    cant3++;
+                }
+            }
+        }
+    } while(peso!=0);
+    suma=cant1+cant2+cant3;
+    cout &lt;&lt;"Piezas aptas:";
+    cout &lt;&lt;cant2;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"Piezas con un peso superior a 10.2:";
+    cout &lt;&lt;cant1;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"Piezas con un peso inferior a 9.8:";
+    cout &lt;&lt;cant3;
+    cin.get();
+    cin.get();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/DoWhilePesoPiezas.zip">DoWhilePesoPiezas</a></p>
+
+<h2>Problemas propuestos</h2>
+
+<ol>
+<li>
+Realizar un programa que acumule (sume) valores ingresados por teclado hasta ingresar el 9999 (no sumar dicho valor, indica que ha finalizado la carga). Imprimir el valor acumulado e informar si dicho valor es cero, mayor a cero o menor a cero.
+</li>
+<li>
+En un banco se procesan datos de las cuentas corrientes de sus clientes. De cada cuenta corriente se conoce: número de cuenta y saldo actual. El ingreso de datos debe finalizar al ingresar un valor negativo en el número de cuenta.<br>
+Se pide confeccionar un programa que lea los datos de las cuentas corrientes e informe:<br>
+a)De cada cuenta: número de cuenta y estado de la cuenta según su saldo, sabiendo que:<br>
+<pre>
+Estado de la cuenta	'Acreedor' si el saldo es &gt;0.
+			'Deudor' si el saldo es &lt;0.
+			'Nulo' si el saldo es =0.
+</pre>
+b) La suma total de los saldos acreedores.
+</li>
+</ol>
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int suma,valor;
+    suma=0;
+    do {
+        cout &lt;&lt;"Ingrese un valor:";
+        cin &gt;&gt;valor;
+        if (valor != 9999) 
+        {
+            suma=suma+valor;
+        }
+    }while (valor != 9999);
+    cout &lt;&lt;"El valor acumulado es ";
+    cout &lt;&lt;suma;
+    cout &lt;&lt;"\n";
+    if (suma == 0) 
+    {
+        cout &lt;&lt;"El valor acumulado es cero.";
+    }
+    else 
+    {
+        if (suma &gt; 0) 
+        {
+            cout &lt;&lt;"El valor acumulado es positivo.";
+        } 
+        else 
+        {
+            cout &lt;&lt;"El valor acumulado es negativo";
+        }
+    }
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/DoWhileSumar.zip">DoWhileSumar</a></p>
+
+
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int cuenta;
+    float saldo,suma;
+    suma=0;
+    do {
+        cout &lt;&lt;"Ingrese número de cuenta:";
+        cin &gt;&gt;cuenta;
+        if (cuenta &gt;= 0) 
+        {
+            cout &lt;&lt;"Ingrese saldo:";
+            cin &gt;&gt;saldo;
+            if (saldo &gt;0 ) 
+            {
+                cout &lt;&lt;"Saldo Acreedor.";
+                suma=suma+saldo;
+            } 
+            else 
+            {
+                if (saldo &lt; 0) 
+                {
+                    cout &lt;&lt;"Saldo Deudor.";
+                } 
+                else 
+                {
+                    cout &lt;&lt;"Saldo Nulo.";
+                }
+            }
+            cout &lt;&lt;"\n";
+        }
+    } while(cuenta&gt;=0);
+    cout &lt;&lt;"Total de saldos Acreedores:";
+    cout &lt;&lt;suma;
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/DoWhileCuentasBanco.zip">DoWhileCuentasBanco</a></p>
+
+</pre><h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=11&codigo=138&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:36 GMT -->
+</html>

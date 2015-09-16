@@ -1,0 +1,170 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.postgresqlya.com.ar/temarios/descripcion.php?inicio=50&cod=231&punto=73 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de PostgreSQL - Función SQL que no retorna dato (void) </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+	  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>73 - Función SQL que no retorna dato (void)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+	  	  
+
+<p>
+<p>Cuando queremos crear una función que no retorne dato lo debemos indicar luego de la palabra clave returns disponiendo el valor void:</p>
+<pre>
+create or replace function [nombre de la función]([parámetros]) returns void
+as
+ [comandos sql]
+language sql
+</pre>
+<p>Confeccionaremos una función que cargue cuatro registros en la tabla usuarios:</p>
+<pre>
+create or replace function cargarusuarios() returns void
+as
+$$
+ insert into usuarios (nombre, clave) values ('Marcelo','Boca');
+ insert into usuarios (nombre, clave) values ('JuanPerez','Juancito');
+ insert into usuarios (nombre, clave) values ('Susana','River');
+ insert into usuarios (nombre, clave) values ('Luis','River');
+$$
+ language sql;
+</pre>
+<p>Otra sintaxis permitida en PostgreSQL es encerrar los comando SQL entre dos símbolos de $ (esto es muy útil si tenemos que utilizar la simple comilla dentro de los comandos SQL, en caso de disponer como delimitador las simples comillas la función debe expresarse:</p>
+<pre>
+create or replace function cargarusuarios() returns void
+as
+'
+ insert into usuarios (nombre, clave) values (''Marcelo'',''Boca'');
+ insert into usuarios (nombre, clave) values (''JuanPerez'',''Juancito'');
+ insert into usuarios (nombre, clave) values (''Susana'',''River'');
+ insert into usuarios (nombre, clave) values (''Luis'',''River'');
+'
+language sql;
+</pre>
+<p>Debemos disponer dos comillas simples en lugar de una.</p>
+<p>Luego para llamar la función lo hacemos:</p>
+<pre>
+select cargarusuarios();
+</pre></p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../indexefd7.html?inicio=50">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-24");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+
+
+<!-- Mirrored from www.postgresqlya.com.ar/temarios/descripcion.php?inicio=50&cod=231&punto=73 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:41 GMT -->
+</html>

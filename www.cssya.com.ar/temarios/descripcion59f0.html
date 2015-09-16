@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=30&cod=47&punto=38 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:07:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de CSS - Temarios</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<style>
+
+
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>38 - Posicionamiento absoluto y propiedad z-index</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Hemos visto que cuando disponemos uno o más elementos con la propiedad position con valor absolute los mismos salen del flujo del resto de elementos de la página.</p>
+<p>Ahora veamos que pasa si disponemos una serie de elementos con posición absoluta y se superponen. En esta situación debemos inicializar la propiedad z-index con un valor entero, el mismo indica cual tiene prioridad para visualizarse. El valor más grande indica cual tiene prioridad para visualizarse. Es decir que el navegador imprime los elementos con posición absoluta del valor más bajo al más alto.</p>
+<h3>Problema</h3>
+<p>Mostrar tres div de color rojo, verde y azul con posiciones absolutas e indicando coordenadas que se superpongan. Inicializar la propiedad z-index de cada elemento de tal manera que quede más al frente el div de color verde, luego el azul y finalmente el rojo.<br>
+</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;link rel="StyleSheet" href="estilos.css" type="text/css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id="caja1"&gt;
+&lt;p&gt;Esta es la primer caja.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id="caja2"&gt;
+&lt;p&gt;Esta es la segunda caja.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id="caja3"&gt;
+&lt;p&gt;Esta es la tercer caja.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Definimos los tres div dentro de la página.</p>
+<p>Luego la hoja de estilo que debemos definir es:</p>
+<pre class="recuadro">
+#caja1{
+  position:absolute;
+  background-color:red;
+  left:10px;
+  top:10px;
+  width:200px;
+  height:200px;
+  z-index:1;
+}
+
+#caja2{
+  position:absolute;
+  background-color:green;
+  left:50px;
+  top:50px;
+  width:200px;
+  height:200px;
+  z-index:3;
+}
+
+#caja3{
+  position:absolute;
+  background-color:blue;
+  left:30px;
+  top:30px;
+  width:200px;
+  height:200px;
+  z-index:2;
+}</pre>
+
+<p>Hemos definido los tres div con la propiedad position con el valor absolute. Luego vemos que aquel que tiene color verde (green) le asignamos a la propiedad z-index un valor 3 (el número puede ser cualquiera siempre y cuando sea el mayor de los z-index asignado a los otros dos div)</p>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../index7732.html?inicio=30">Retornar</a></h2>   
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=30&cod=47&punto=38 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:07:22 GMT -->
+</html>

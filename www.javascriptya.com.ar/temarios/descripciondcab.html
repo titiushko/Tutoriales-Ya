@@ -1,0 +1,597 @@
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=70&cod=75 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de JavaScript : Conceptos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+div#contentdetalle{clear:left;
+                   max-width:900px;
+				   border-top:0px solid #999;
+				   padding-top:15px;
+				   background-color: #aed7a8;
+				   text-align:left;
+				   font-size:1.3em;
+				   font-weight:normal;
+				   font-family:arial;
+				   padding:20px}
+				   
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;  
+}				   
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td>
+<h1>Función isFinite</h1></td>
+<td align="right">
+<!--<a href="http://www.javascriptya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div id="contentdetalle">
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 	  
+
+<p>La función isFinite verifica si el parámetro tiene un valor numérico finito, en caso afirmativo retorna true.</p>
+<p>Una variable numérica puede almacenar alguno de los siguientes valores:</p>
+<pre>
+El número propiamente dicho.
+
+El valor NaN
+
+El valor Infinite
+
+El valor -Infinite
+</pre>
+<p>Veamos un ejemplo almacenando valores en variables que nos generen los distintos valores posibles:</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;script type="text/javascript"&gt;
+
+  var x1=120;
+  if (isFinite(x1)) //true
+    document.write('x1 tiene un valor finito que es el '+x1);
+  else
+    document.write('x1 no tiene un valor finito que es el '+x1);
+  document.write('&lt;br&gt;');
+  var x2=10e399;
+  if (isFinite(x2)) //false
+    document.write('x2 tiene un valor finito que es el '+x2);
+  else
+    document.write('x2 no tiene un valor finito que es el '+x2);
+  document.write('&lt;br&gt;');
+  var x3=-10e399;
+  if (isFinite(x3))  //false
+    document.write('x3 tiene un valor finito que es el '+x3);
+  else
+    document.write('x3 no tiene un valor finito que es el '+x3);
+  document.write('&lt;br&gt;');
+  var x4='juan';
+  if (isFinite(x4))  //false
+    document.write('x4 tiene un valor finito que es el '+x4);
+  else
+    document.write('x4 no tiene un valor finito que es el '+x4);
+
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>El primer if donde verificamos si tiene un valor finito la variable x1 se verifica verdadero:</p>
+<pre>
+  var x1=120;
+  if (isFinite(x1)) //true
+    document.write('x1 tiene un valor finito que es el '+x1);
+  else
+    document.write('x1 no tiene un valor finito que es el '+x1);
+</pre>
+<p>El segundo if se verifica falso donde controlamos el valor almacenado en la variable x2 (tener en cuenta que en JavaScript el valor máximo a almacenar es 1.7976931348623157e+308), la variable almacena el valor Infinity:</p>
+<pre>
+  var x2=10e399;
+  if (isFinite(x2)) //false
+    document.write('x2 tiene un valor finito que es el '+x2);
+  else
+    document.write('x2 no tiene un valor finito que es el '+x2);
+</pre>
+<p>De forma similar si almacenamos un valor negativo que supera la capacidad de JavaScript en la variable se almacena -Infinity:</p>
+<pre>
+  var x3=-10e399;
+  if (isFinite(x3))  //false
+    document.write('x3 tiene un valor finito que es el '+x3);
+  else
+    document.write('x3 no tiene un valor finito que es el '+x3);
+</pre>
+<p>Por último si almacenamos un valor no numérico como un string la función isFinite retorna false:</p>
+<pre>
+  var x4='juan';
+  if (isFinite(x4))  //false
+    document.write('x4 tiene un valor finito que es el '+x4);
+  else
+    document.write('x4 no tiene un valor finito que es el '+x4);
+</pre>
+
+<p>Para conocer el máximo y mínimo valor que puede almacenar una variable numérica podemos consultar las constantes MIN_VALUE y MAX_VALUE de la clase Number:</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  document.write(Number.MIN_VALUE);  // 5e-324
+  document.write('&lt;br&gt;');
+  document.write(Number.MAX_VALUE);  // 1.7976931348623157e+308
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<strong>Problema</strong>
+<p>Mostrar por pantalla el valor 10 elevado a la 1,2,3 etc. hasta que se genere un valor infinito.</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;script type="text/javascript"&gt;
+  for(var x=1; ;x++)
+  {
+    var resu=Math.pow(10,x);
+    if (isFinite(resu))
+      document.write('10 elevado a la '+x+' es '+resu+'&lt;br&gt;');
+    else
+      break;
+  }
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Disponemos un for sin condición (con esto hace que para finalizar el mismo debemos llamar al comando break dentro del for cuando se genere un valor infinito, mediante el método pow de la clase Math obtenemos el valor 10 elevado a x (siendo x el contador del for)<br>
+Cuando se almacena un valor infinio en resu el if se vefifica falso y se ejecuta el break del else:</p>
+<pre>
+  for(var x=1; ;x++)
+  {
+    var resu=Math.pow(10,x);
+    if (isFinite(resu))
+      document.write('10 elevado a la '+x+' es '+resu+'&lt;br&gt;');
+    else
+      break;
+  }
+</pre>
+
+<p>Por pantalla obtenemos la lista de 10 elevado a la 1,2,3,4 etc.:</p>
+<pre>
+10 elevado a la 1 es 10
+10 elevado a la 2 es 100
+10 elevado a la 3 es 1000
+10 elevado a la 4 es 10000
+10 elevado a la 5 es 100000
+10 elevado a la 6 es 1000000
+10 elevado a la 7 es 10000000
+10 elevado a la 8 es 100000000
+10 elevado a la 9 es 1000000000
+10 elevado a la 10 es 10000000000
+10 elevado a la 11 es 100000000000
+10 elevado a la 12 es 1000000000000
+10 elevado a la 13 es 10000000000000
+10 elevado a la 14 es 100000000000000
+10 elevado a la 15 es 1000000000000000
+10 elevado a la 16 es 10000000000000000
+10 elevado a la 17 es 100000000000000000
+10 elevado a la 18 es 1000000000000000000
+10 elevado a la 19 es 10000000000000000000
+10 elevado a la 20 es 100000000000000000000
+10 elevado a la 21 es 1e+21
+10 elevado a la 22 es 1e+22
+10 elevado a la 23 es 1e+23
+10 elevado a la 24 es 1e+24
+10 elevado a la 25 es 1e+25
+10 elevado a la 26 es 1e+26
+10 elevado a la 27 es 1e+27
+10 elevado a la 28 es 1e+28
+10 elevado a la 29 es 1e+29
+10 elevado a la 30 es 1e+30
+10 elevado a la 31 es 1e+31
+10 elevado a la 32 es 1e+32
+10 elevado a la 33 es 1.0000000000000001e+33
+10 elevado a la 34 es 1.0000000000000001e+34
+10 elevado a la 35 es 1e+35
+10 elevado a la 36 es 1e+36
+10 elevado a la 37 es 1.0000000000000001e+37
+10 elevado a la 38 es 1e+38
+10 elevado a la 39 es 1.0000000000000001e+39
+10 elevado a la 40 es 1e+40
+10 elevado a la 41 es 1e+41
+10 elevado a la 42 es 1e+42
+10 elevado a la 43 es 1e+43
+10 elevado a la 44 es 1e+44
+10 elevado a la 45 es 1.0000000000000001e+45
+10 elevado a la 46 es 1e+46
+10 elevado a la 47 es 1e+47
+10 elevado a la 48 es 1e+48
+10 elevado a la 49 es 1.0000000000000001e+49
+10 elevado a la 50 es 1e+50
+10 elevado a la 51 es 1e+51
+10 elevado a la 52 es 1e+52
+10 elevado a la 53 es 1e+53
+10 elevado a la 54 es 1e+54
+10 elevado a la 55 es 1e+55
+10 elevado a la 56 es 1e+56
+10 elevado a la 57 es 1.0000000000000002e+57
+10 elevado a la 58 es 1.0000000000000001e+58
+10 elevado a la 59 es 1.0000000000000001e+59
+10 elevado a la 60 es 1e+60
+10 elevado a la 61 es 1e+61
+10 elevado a la 62 es 1e+62
+10 elevado a la 63 es 1e+63
+10 elevado a la 64 es 1.0000000000000002e+64
+10 elevado a la 65 es 1.0000000000000002e+65
+10 elevado a la 66 es 1.0000000000000001e+66
+10 elevado a la 67 es 1.0000000000000001e+67
+10 elevado a la 68 es 1.0000000000000002e+68
+10 elevado a la 69 es 1e+69
+10 elevado a la 70 es 1.0000000000000002e+70
+10 elevado a la 71 es 1.0000000000000002e+71
+10 elevado a la 72 es 1.0000000000000001e+72
+10 elevado a la 73 es 1.0000000000000001e+73
+10 elevado a la 74 es 1.0000000000000002e+74
+10 elevado a la 75 es 1.0000000000000001e+75
+10 elevado a la 76 es 1.0000000000000002e+76
+10 elevado a la 77 es 1.0000000000000001e+77
+10 elevado a la 78 es 1.0000000000000002e+78
+10 elevado a la 79 es 1.0000000000000001e+79
+10 elevado a la 80 es 1.0000000000000001e+80
+10 elevado a la 81 es 1.0000000000000001e+81
+10 elevado a la 82 es 1.0000000000000001e+82
+10 elevado a la 83 es 1.0000000000000002e+83
+10 elevado a la 84 es 1.0000000000000003e+84
+10 elevado a la 85 es 1.0000000000000002e+85
+10 elevado a la 86 es 1.0000000000000002e+86
+10 elevado a la 87 es 1.0000000000000002e+87
+10 elevado a la 88 es 1.0000000000000001e+88
+10 elevado a la 89 es 1.0000000000000003e+89
+10 elevado a la 90 es 1.0000000000000002e+90
+10 elevado a la 91 es 1.0000000000000003e+91
+10 elevado a la 92 es 1.0000000000000002e+92
+10 elevado a la 93 es 1e+93
+10 elevado a la 94 es 1.0000000000000002e+94
+10 elevado a la 95 es 1.0000000000000002e+95
+10 elevado a la 96 es 1.0000000000000002e+96
+10 elevado a la 97 es 1.0000000000000003e+97
+10 elevado a la 98 es 1.0000000000000003e+98
+10 elevado a la 99 es 1.0000000000000001e+99
+10 elevado a la 100 es 1.0000000000000002e+100
+10 elevado a la 101 es 1.0000000000000003e+101
+10 elevado a la 102 es 1.0000000000000001e+102
+10 elevado a la 103 es 1.0000000000000002e+103
+10 elevado a la 104 es 1.0000000000000002e+104
+10 elevado a la 105 es 1.0000000000000002e+105
+10 elevado a la 106 es 1.0000000000000003e+106
+10 elevado a la 107 es 1.0000000000000001e+107
+10 elevado a la 108 es 1.0000000000000003e+108
+10 elevado a la 109 es 1.0000000000000002e+109
+10 elevado a la 110 es 1.0000000000000002e+110
+10 elevado a la 111 es 1.0000000000000002e+111
+10 elevado a la 112 es 1.0000000000000001e+112
+10 elevado a la 113 es 1.0000000000000002e+113
+10 elevado a la 114 es 1.0000000000000003e+114
+10 elevado a la 115 es 1.0000000000000002e+115
+10 elevado a la 116 es 1.0000000000000002e+116
+10 elevado a la 117 es 1.0000000000000002e+117
+10 elevado a la 118 es 1.0000000000000002e+118
+10 elevado a la 119 es 1.0000000000000001e+119
+10 elevado a la 120 es 1.0000000000000003e+120
+10 elevado a la 121 es 1.0000000000000004e+121
+10 elevado a la 122 es 1.0000000000000002e+122
+10 elevado a la 123 es 1.0000000000000003e+123
+10 elevado a la 124 es 1.0000000000000001e+124
+10 elevado a la 125 es 1.0000000000000001e+125
+10 elevado a la 126 es 1.0000000000000002e+126
+10 elevado a la 127 es 1.0000000000000002e+127
+10 elevado a la 128 es 1.0000000000000003e+128
+10 elevado a la 129 es 1.0000000000000003e+129
+10 elevado a la 130 es 1.0000000000000003e+130
+10 elevado a la 131 es 1.0000000000000003e+131
+10 elevado a la 132 es 1.0000000000000003e+132
+10 elevado a la 133 es 1.0000000000000003e+133
+10 elevado a la 134 es 1.0000000000000003e+134
+10 elevado a la 135 es 1.0000000000000003e+135
+10 elevado a la 136 es 1.0000000000000003e+136
+10 elevado a la 137 es 1.0000000000000002e+137
+10 elevado a la 138 es 1.0000000000000002e+138
+10 elevado a la 139 es 1.0000000000000003e+139
+10 elevado a la 140 es 1.0000000000000003e+140
+10 elevado a la 141 es 1.0000000000000002e+141
+10 elevado a la 142 es 1.0000000000000003e+142
+10 elevado a la 143 es 1.0000000000000002e+143
+10 elevado a la 144 es 1.0000000000000002e+144
+10 elevado a la 145 es 1.0000000000000003e+145
+10 elevado a la 146 es 1.0000000000000004e+146
+10 elevado a la 147 es 1.0000000000000003e+147
+10 elevado a la 148 es 1.0000000000000003e+148
+10 elevado a la 149 es 1.0000000000000003e+149
+10 elevado a la 150 es 1.0000000000000003e+150
+10 elevado a la 151 es 1.0000000000000002e+151
+10 elevado a la 152 es 1.0000000000000003e+152
+10 elevado a la 153 es 1.0000000000000004e+153
+10 elevado a la 154 es 1.0000000000000003e+154
+10 elevado a la 155 es 1.0000000000000002e+155
+10 elevado a la 156 es 1.0000000000000002e+156
+10 elevado a la 157 es 1.0000000000000001e+157
+10 elevado a la 158 es 1.0000000000000003e+158
+10 elevado a la 159 es 1.0000000000000003e+159
+10 elevado a la 160 es 1.0000000000000003e+160
+10 elevado a la 161 es 1.0000000000000004e+161
+10 elevado a la 162 es 1.0000000000000003e+162
+10 elevado a la 163 es 1.0000000000000003e+163
+10 elevado a la 164 es 1.0000000000000003e+164
+10 elevado a la 165 es 1.0000000000000003e+165
+10 elevado a la 166 es 1.0000000000000003e+166
+10 elevado a la 167 es 1.0000000000000003e+167
+10 elevado a la 168 es 1.0000000000000004e+168
+10 elevado a la 169 es 1.0000000000000003e+169
+10 elevado a la 170 es 1.0000000000000003e+170
+10 elevado a la 171 es 1.0000000000000004e+171
+10 elevado a la 172 es 1.0000000000000004e+172
+10 elevado a la 173 es 1.0000000000000003e+173
+10 elevado a la 174 es 1.0000000000000003e+174
+10 elevado a la 175 es 1.0000000000000003e+175
+10 elevado a la 176 es 1.0000000000000003e+176
+10 elevado a la 177 es 1.0000000000000003e+177
+10 elevado a la 178 es 1.0000000000000004e+178
+10 elevado a la 179 es 1.0000000000000003e+179
+10 elevado a la 180 es 1.0000000000000002e+180
+10 elevado a la 181 es 1.0000000000000003e+181
+10 elevado a la 182 es 1.0000000000000004e+182
+10 elevado a la 183 es 1.0000000000000003e+183
+10 elevado a la 184 es 1.0000000000000004e+184
+10 elevado a la 185 es 1.0000000000000004e+185
+10 elevado a la 186 es 1.0000000000000003e+186
+10 elevado a la 187 es 1.0000000000000003e+187
+10 elevado a la 188 es 1.0000000000000002e+188
+10 elevado a la 189 es 1.0000000000000003e+189
+10 elevado a la 190 es 1.0000000000000003e+190
+10 elevado a la 191 es 1.0000000000000004e+191
+10 elevado a la 192 es 1.0000000000000004e+192
+10 elevado a la 193 es 1.0000000000000005e+193
+10 elevado a la 194 es 1.0000000000000004e+194
+10 elevado a la 195 es 1.0000000000000004e+195
+10 elevado a la 196 es 1.0000000000000004e+196
+10 elevado a la 197 es 1.0000000000000003e+197
+10 elevado a la 198 es 1.0000000000000005e+198
+10 elevado a la 199 es 1.0000000000000005e+199
+10 elevado a la 200 es 1.0000000000000005e+200
+10 elevado a la 201 es 1.0000000000000004e+201
+10 elevado a la 202 es 1.0000000000000006e+202
+10 elevado a la 203 es 1.0000000000000003e+203
+10 elevado a la 204 es 1.0000000000000004e+204
+10 elevado a la 205 es 1.0000000000000004e+205
+10 elevado a la 206 es 1.0000000000000004e+206
+10 elevado a la 207 es 1.0000000000000005e+207
+10 elevado a la 208 es 1.0000000000000004e+208
+10 elevado a la 209 es 1.0000000000000004e+209
+10 elevado a la 210 es 1.0000000000000004e+210
+10 elevado a la 211 es 1.0000000000000004e+211
+10 elevado a la 212 es 1.0000000000000005e+212
+10 elevado a la 213 es 1.0000000000000004e+213
+10 elevado a la 214 es 1.0000000000000004e+214
+10 elevado a la 215 es 1.0000000000000005e+215
+10 elevado a la 216 es 1.0000000000000003e+216
+10 elevado a la 217 es 1.0000000000000006e+217
+10 elevado a la 218 es 1.0000000000000005e+218
+10 elevado a la 219 es 1.0000000000000006e+219
+10 elevado a la 220 es 1.0000000000000005e+220
+10 elevado a la 221 es 1.0000000000000002e+221
+10 elevado a la 222 es 1.0000000000000005e+222
+10 elevado a la 223 es 1.0000000000000004e+223
+10 elevado a la 224 es 1.0000000000000004e+224
+10 elevado a la 225 es 1.0000000000000006e+225
+10 elevado a la 226 es 1.0000000000000006e+226
+10 elevado a la 227 es 1.0000000000000003e+227
+10 elevado a la 228 es 1.0000000000000004e+228
+10 elevado a la 229 es 1.0000000000000005e+229
+10 elevado a la 230 es 1.0000000000000003e+230
+10 elevado a la 231 es 1.0000000000000004e+231
+10 elevado a la 232 es 1.0000000000000005e+232
+10 elevado a la 233 es 1.0000000000000004e+233
+10 elevado a la 234 es 1.0000000000000005e+234
+10 elevado a la 235 es 1.0000000000000003e+235
+10 elevado a la 236 es 1.0000000000000006e+236
+10 elevado a la 237 es 1.0000000000000005e+237
+10 elevado a la 238 es 1.0000000000000005e+238
+10 elevado a la 239 es 1.0000000000000005e+239
+10 elevado a la 240 es 1.0000000000000004e+240
+10 elevado a la 241 es 1.0000000000000005e+241
+10 elevado a la 242 es 1.0000000000000005e+242
+10 elevado a la 243 es 1.0000000000000005e+243
+10 elevado a la 244 es 1.0000000000000005e+244
+10 elevado a la 245 es 1.0000000000000004e+245
+10 elevado a la 246 es 1.0000000000000005e+246
+10 elevado a la 247 es 1.0000000000000004e+247
+10 elevado a la 248 es 1.0000000000000005e+248
+10 elevado a la 249 es 1.0000000000000007e+249
+10 elevado a la 250 es 1.0000000000000004e+250
+10 elevado a la 251 es 1.0000000000000006e+251
+10 elevado a la 252 es 1.0000000000000003e+252
+10 elevado a la 253 es 1.0000000000000004e+253
+10 elevado a la 254 es 1.0000000000000005e+254
+10 elevado a la 255 es 1.0000000000000004e+255
+10 elevado a la 256 es 1.0000000000000005e+256
+10 elevado a la 257 es 1.0000000000000006e+257
+10 elevado a la 258 es 1.0000000000000005e+258
+10 elevado a la 259 es 1.0000000000000006e+259
+10 elevado a la 260 es 1.0000000000000005e+260
+10 elevado a la 261 es 1.0000000000000006e+261
+10 elevado a la 262 es 1.0000000000000005e+262
+10 elevado a la 263 es 1.0000000000000006e+263
+10 elevado a la 264 es 1.0000000000000005e+264
+10 elevado a la 265 es 1.0000000000000006e+265
+10 elevado a la 266 es 1.0000000000000005e+266
+10 elevado a la 267 es 1.0000000000000005e+267
+10 elevado a la 268 es 1.0000000000000005e+268
+10 elevado a la 269 es 1.0000000000000005e+269
+10 elevado a la 270 es 1.0000000000000005e+270
+10 elevado a la 271 es 1.0000000000000005e+271
+10 elevado a la 272 es 1.0000000000000005e+272
+10 elevado a la 273 es 1.0000000000000005e+273
+10 elevado a la 274 es 1.0000000000000005e+274
+10 elevado a la 275 es 1.0000000000000006e+275
+10 elevado a la 276 es 1.0000000000000005e+276
+10 elevado a la 277 es 1.0000000000000006e+277
+10 elevado a la 278 es 1.0000000000000006e+278
+10 elevado a la 279 es 1.0000000000000004e+279
+10 elevado a la 280 es 1.0000000000000004e+280
+10 elevado a la 281 es 1.0000000000000007e+281
+10 elevado a la 282 es 1.0000000000000005e+282
+10 elevado a la 283 es 1.0000000000000006e+283
+10 elevado a la 284 es 1.0000000000000004e+284
+10 elevado a la 285 es 1.0000000000000005e+285
+10 elevado a la 286 es 1.0000000000000005e+286
+10 elevado a la 287 es 1.0000000000000004e+287
+10 elevado a la 288 es 1.0000000000000005e+288
+10 elevado a la 289 es 1.0000000000000007e+289
+10 elevado a la 290 es 1.0000000000000006e+290
+10 elevado a la 291 es 1.0000000000000005e+291
+10 elevado a la 292 es 1.0000000000000007e+292
+10 elevado a la 293 es 1.0000000000000006e+293
+10 elevado a la 294 es 1.0000000000000005e+294
+10 elevado a la 295 es 1.0000000000000007e+295
+10 elevado a la 296 es 1.0000000000000005e+296
+10 elevado a la 297 es 1.0000000000000006e+297
+10 elevado a la 298 es 1.0000000000000005e+298
+10 elevado a la 299 es 1.0000000000000006e+299
+10 elevado a la 300 es 1.0000000000000006e+300
+10 elevado a la 301 es 1.0000000000000006e+301
+10 elevado a la 302 es 1.0000000000000005e+302
+10 elevado a la 303 es 1.0000000000000006e+303
+10 elevado a la 304 es 1.0000000000000005e+304
+10 elevado a la 305 es 1.0000000000000005e+305
+10 elevado a la 306 es 1.0000000000000006e+306
+10 elevado a la 307 es 1.0000000000000005e+307
+10 elevado a la 308 es 1.0000000000000006e+308
+</pre></p>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../indexe193.html?inicio=70">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=70&cod=75 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:24 GMT -->
+</html>

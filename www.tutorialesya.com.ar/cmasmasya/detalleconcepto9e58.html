@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=51&codigo=182&inicio=45 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:31:09 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Clases amigas (friend)</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>51 - Clases amigas (friend)</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Otra posibilidad en C++ es que una clase sea amiga. Esto hace que todos los métodos de la clase amiga tengan acceso a los atributos privados y protegidos.</p>
+
+<h3>Problema:</h3>
+<p>Declarar dos clases independientes: Nodo y ListaGenerica. En la clase nodo definir el atributo info, los punteros sig y ant e indicar que tiene una clase amiga llamada ListaGenerica por lo que tendrá acceso a sus atributos.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Nodo {
+    int info;
+    Nodo *ant, *sig;
+public:
+    Nodo(int x){ info = x; };
+    friend class ListaGenerica;
+};
+
+
+class ListaGenerica {
+    Nodo *raiz;
+public:
+    ListaGenerica() { raiz = NULL; };
+    ~ListaGenerica();
+    void insertarPrimero(int x);
+    void imprimir();
+};
+
+ListaGenerica::~ListaGenerica()
+{
+    Nodo *reco = raiz;
+    Nodo *bor;
+    while (reco != NULL)
+    {
+        bor = reco;
+        reco = reco-&gt;sig;
+        delete bor;
+    }
+}
+
+void ListaGenerica::insertarPrimero(int x)
+{
+    Nodo *nuevo = new Nodo(x);
+    nuevo-&gt;ant = NULL;
+    if (raiz == NULL)
+    {
+        nuevo-&gt;sig = NULL;
+        raiz = nuevo;
+    }
+    else
+    {
+        nuevo-&gt;sig = raiz;
+        raiz-&gt;ant = raiz;
+        raiz = nuevo;
+    }
+}
+
+void ListaGenerica::imprimir()
+{
+    Nodo *reco = raiz;
+    while (reco != NULL)
+    {
+        cout &lt;&lt; reco-&gt;info &lt;&lt; "-";
+        reco = reco-&gt;sig;
+    }
+    cout &lt;&lt; "\n";
+}
+
+
+void main()
+{
+    ListaGenerica *lista1 = new ListaGenerica();
+    lista1-&gt;insertarPrimero(10);
+    lista1-&gt;insertarPrimero(20);
+    lista1-&gt;insertarPrimero(5);
+    lista1-&gt;imprimir();
+    delete lista1;
+    cin.get();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/ClaseAmiga1.zip">ClaseAmiga1.zip</a></p>
+
+
+<p>Declaramos la clase Nodo definiendo los atributos info,ant y sig en la parte privada, esto significa que no podrán ser accedidos desde métodos fuera de la clase, pero hacemos la excepción con la clase ListaGenerica indicando que se trata de una clase amiga (friend class):</p>
+<pre>
+class Nodo {
+    int info;
+    Nodo *ant, *sig;
+public:
+    Nodo(int x){ info = x; };
+    friend class ListaGenerica;
+};
+</pre>
+
+<p>Esta característica hace que dentro de la clase ListaGenerica podamos acceder a los atributos privados y protegidos sin problemas:</p>
+<pre>
+    Nodo *nuevo = new Nodo(x);
+    nuevo-&gt;ant = NULL;
+</pre>
+<p>Si bien se podrían haber definido métodos para acceder a dichos atributos lo más eficiente a nivel de ejecución es acceder a los mismos directamente.</p>
+
+<p>En la declaración de la clase ListaGenerica no hay ninguna referencia a la otra clase, solo definimos el puntero raiz que tendrá la dirección al primer nodo de la lista:</p>
+<pre>
+class ListaGenerica {
+    Nodo *raiz;
+public:
+    ListaGenerica() { raiz = NULL; };
+    ~ListaGenerica();
+    void insertarPrimero(int x);
+    void imprimir();
+};
+</pre>
+
+
+<p>Ahora en el método insertarPrimero podemos crear un objeto de la clase Nodo y acceder a sus tres atributos privados sin problema mediante el operador -&gt;:</p>
+<pre>
+void ListaGenerica::insertarPrimero(int x)
+{
+    Nodo *nuevo = new Nodo(x);
+    nuevo-&gt;ant = NULL;
+    if (raiz == NULL)
+    {
+        nuevo-&gt;sig = NULL;
+        raiz = nuevo;
+    }
+    else
+    {
+        nuevo-&gt;sig = raiz;
+        raiz-&gt;ant = raiz;
+        raiz = nuevo;
+    }
+}
+</pre>
+
+<p>En conceptos anteriores vimos el tema de listas y planteamos dentro de la clase ListaGenerica una clase interna llamada Nodo.</p>
+<p>Puede haber situaciones donde la clase Nodo convenga declararla fuera de la clase ListaGenerica y luego otras clases puedan acceder a los atributos privados de la misma mediante el modificador friend class.</p> 
+
+<p>Las clases amigas deben utilizarse en situaciones especiales ya que deteriora el concepto de encapsulamiento de nuestra aplicación.</p>
+<h2><a href="indexb634.html?inicio=45">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=51&codigo=182&inicio=45 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:31:09 GMT -->
+</html>

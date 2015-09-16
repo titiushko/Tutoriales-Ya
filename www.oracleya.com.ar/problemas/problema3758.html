@@ -1,0 +1,303 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/problemas/problema.php?inicio=100&cod=278&punto=120 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios propuestos : Permiso de conexión(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+pre {
+  text-align:left;
+  font-family:verdana,sans-serif;
+}
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+</style>
+
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;	
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=no,status=yes,toolbar=yes,location=yes');  	
+}
+
+function VentanaTeorico(codigo)
+{
+  alto=400;
+  window.open('../temarios/descripcion2ade4.html?cod='+codigo+'&origen=problema', '', 'top=0,left=0,width=800,height='+alto+',resizable=yes,scrollbars=yes,menubar=no');  	
+}
+
+function cambiar(nro)
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   if (nro==1)
+   {
+     if (lista[f].id=='solu1')
+       lista[f].style.display='block';
+   }
+   else
+     if (nro==2)
+     {
+       if (lista[f].id=='solu2')
+         lista[f].style.display='block';
+     }
+	   
+  }
+  if (nro==1)
+    document.getElementById('solucion1').style.display='none';
+  if (nro==2)
+    document.getElementById('solucion2').style.display='none';
+}
+
+</script>
+
+</head>
+
+<body>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>120 - Permiso de conexión</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+	  <table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<b>Primer problema: </b><br><p> Una escuela necesita crear 3 usuarios diferentes en su base de datos. Uno denominado "director", otro "profesor" y un tercero "alumno".</p>
+<p>Conéctese como administrador (por ejemplo "system").</p>
+<p>1- Elimine el usuario "director", porque si existe, aparecerá un mensaje de error:</p>
+<pre>
+ drop user director cascade;
+</pre>
+<p>2- Cree un usuario "director", con contraseña "dire" y 100M de espacio en "system"</p>
+<p>3- Elimine el usuario "profesor":</p>
+<pre>
+ drop user profesor cascade;
+</pre>
+<p>4- Cree un usuario "profesor", con contraseña "profe" y espacio en "system"</p>
+<p>5- Elimine el usuario "alumno" y luego créelo con contraseña "alu" y espacio en "system"</p>
+<p>6- Consulte el diccionario "dba_users" y analice la información que nos muestra<br>
+Deben aparecer los tres usuarios creados anteriormente.</p>
+
+<p>7- Consulte el diccionario "dba_sys_privs" para encontrar los privilegios concedidos a nuestros tres usuarios<br>
+Nos muestra que estos usuarios no tienen ningún privilegio concedido.</p>
+
+<p>8- Conceda a "director" permiso para conectarse</p>
+
+<p>9- Conceda a "profesor" permiso para conectarse</p>
+<p>10- Consulte el diccionario "dba_sys_privs" para encontrar los privilegios concedidos a nuestros 3 usuarios</p>
+
+<p>11- Abra una nueva conexión para "director". Se debe abrir una nueva solapa (nueva conexión) con el nombre del usuario (director)</p>
+
+<p>12- En la conexión de "director" consulte sus privilegios</p>
+
+<p>13- Obtenga el nombre del usuario conectado</p>
+<p>14- Vuelva a la conexión "system" (la otra solapa) y compruebe el usuario actual</p>
+
+<p>15- Intente abrir una nueva conexión para el usuario inexistente. Debe aparecer un mensaje de error y denegarse la conexión. Cancele.</p>
+
+<p>16- Intente abrir una nueva conexión para el usuario "profesor" colocando una contraseña incorrecta. Debe aparecer un mensaje de error y denegarse la conexión. Cancele.</p>
+
+<p>17- Abra una nueva conexión para "profesor" colocando los datos correctos. Se debe abrir una nueva solapa (nueva conexión) con el nombre del usuario (profesor).</p>
+
+<p>18- Intentemos abrir una nueva conexión para el usuario "alumno", el cual no tiene permiso.
+Un mensaje de error indica que el usuario "alumno" no tiene permiso "create session" por lo cual se deniega la conexión. Cancele.</p>
+
+<p>19- Conceda a "alumno" permiso de conexión</p>
+
+<p>20- Consulte el diccionario "dba_sys_privs" para encontrar los privilegios concedidos a "alumno"</p>
+
+<p>21- Abra una nueva conexión para "ALUMNO". Se debe abrir una nueva solapa (nueva conexión) con el nombre del usuario (profesor)</p>
+
+<p>22- Consulte el diccionario "user_sys_privs"</p>
+<p>23- Compruebe que está en la sesión de "alumno"</p>
+<a href="javascript:cambiar(1)" id="solucion1">Ver solución</a>
+<br><br>
+<pre id="solu1" class="recuadrooculto">
+ drop user director cascade;
+
+ create user director identified by dire
+ default tablespace system
+ quota 100M on system;
+
+ drop user profesor cascade;
+
+ create user profesor identified by maestro
+ default tablespace system;
+
+ drop user alumno cascade;
+
+ create user alumno identified by alu
+ default tablespace system;
+
+ select username, password, default_tablespace, created from dba_users;
+
+ select grantee, privilege from dba_sys_privs where GRANTEE='DIRECTOR' or grantee='PROFESOR' or grantee='ALUMNO';
+
+ grant create session
+  to director;
+
+ grant create session
+  to profesor;
+
+ select grantee,privilege from dba_sys_privs 
+  where grantee='DIRECTOR' or grantee='PROFESOR' or grantee='ALUMNO';
+&quot;director&quot; y &quot;profesor&quot; tienen permiso &quot;create session&quot;.
+
+ select username, privilege from user_sys_privs;
+
+ select user from dual;
+
+ select user from dual;
+
+ grant create session
+  to alumno;
+
+ select grantee,privilege from dba_sys_privs 
+  where grantee='ALUMNO';
+
+ select username,privilege from user_sys_privs;
+
+ select user from dual;
+</pre>
+        <p>&nbsp;</p>
+  
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+	
+	
+
+
+		
+<br>
+   <h2><a href="../indexf6ce.html?inicio=100">Retornar</a></h2>   
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/problemas/problema.php?inicio=100&cod=278&punto=120 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:38 GMT -->
+</html>

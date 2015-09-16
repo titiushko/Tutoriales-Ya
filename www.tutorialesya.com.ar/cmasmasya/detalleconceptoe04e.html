@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=1&codigo=128&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Objetivos del curso y nociones básicas de programación</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>1 - Objetivos del curso y nociones básicas de programación</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>El curso está ideado para ser desarrollado por una persona que no conoce nada de programación y se utilice C++ como primer lenguaje.</p>
+<p>El objetivo fundamental de este tutorial es permitir que el estudiante pueda resolver problemas de distinta índole (matemáticos, administrativos, gráficos, contables etc.) empleando como herramienta la computadora.</p>
+
+<p>Hay que tener en cuenta que para llegar a ser programador se debe recorrer un largo camino donde cada tema es fundamental para conceptos futuros. Es  importante no dejar temas sin entender y relacionar.</p>
+
+<p>La programación a diferencia de otras materias como podría ser la historia requiere un estudio metódico y ordenado (en historia se puede estudiar la edad media sin tener grandes conocimientos de la edad antigua)</p>
+
+<p>La programación es una actividad nueva para el estudiante, todavía no hay en muchos colegios una materia parecida.</p>
+
+<p>Es bueno tenerse paciencia cuando los problemas no se resuelven por completo, pero es de fundamental importancia dedicar tiempo al análisis individual de los problemas.</p>
+<h3>¿Qué es un programa?</h3>
+<p>Programa: Conjunto de instrucciones que entiende una computadora para realizar una actividad.<br>
+Todo programa tiene un objetivo bien definido: un procesador de texto es un programa que permite cargar, modificar e imprimir textos, un programa de ajedrez permite jugar al ajedrez contra el ordenador u otro contrincante humano.<br>
+La actividad fundamental del programador es resolver problemas empleando el ordenador como herramienta fundamental.</p>
+<p>Para la resolución de un problema hay que plantear un algoritmo.<br>
+Algoritmo: Son los pasos a seguir para resolver un problema.</p>
+<h3>Diagrama de flujo</h3>
+<p>Un diagrama de flujo es la representación gráfica de un ALGORITMO.</p>
+<p>Los símbolos gráficos a utilizar para el planteo de diagramas de flujo son:<br>
+<img src="imagentema/foto001.jpg" border="0" alt="simbolos de diagrama de flujo"><br>
+</p>
+<p>Estos son los elementos esenciales que intervienen en el desarrollo de un diagrama de flujo.</p>
+<h2>Planteo de un problema utilizando diagramas de flujo.</h2>
+<p>Para plantear un diagrama de flujo debemos tener muy en claro el problema a resolver.<br>
+Ejemplo : Calcular el sueldo mensual de un operario conociendo la cantidad de horas trabajadas y el pago por hora.</p>
+<p>Podemos identificar:</p>
+
+<p>Datos conocidos:<br>
+Horas trabajadas en el mes.<br>
+Pago por hora.</p>
+
+<p>Proceso:<br>
+Cálculo del sueldo multiplicando la cantidad de horas por el pago por hora.
+</p>
+<p>Información resultante:<br>
+Sueldo mensual.
+</p>
+<p>Si hacemos un análisis todo problema está constituido por:<br>
+- Datos conocidos: Datos con los que se cuenta al plantear el problema.<br>
+- Proceso: Operaciones a realizar con los datos conocidos.<br>
+- Información resultante: Es la información que resuelve el problema.</p>
+<p>Esta forma de expresar un problema identificando sus datos conocidos, procesos e información resultante puede llegar a ser engorrosa para problemas complejos donde hay muchos datos conocidos y procesos. Es por eso que resulta mucho más efectivo representar los pasos para la resolución del problema mediante un diagrama de flujo.<br>
+<img src="imagentema/foto002.jpg" border="0" alt="diagrama de flujo calculo sueldo"><br>
+</p>
+
+<p>Resulta mucho más fácil entender un gráfico que un texto.<br>
+El diagrama de flujo nos identifica claramente los datos de entrada, operaciones y datos de salida.<br>
+En el ejemplo tenemos dos datos de entrada: horasTrabajadas y costoHora, a las entradas las representamos con un paralelogramo y hacemos un paralelogramo por cada dato de entrada.<br>
+La operación se representa con un rectángulo, debemos hacer un rectángulo por cada operación.
+A la salida la representamos con la hoja rota.</p>
+
+<p>El diagrama de flujo nos da una idea del orden de ejecución de las actividades en el tiempo. Primero cargamos los datos de entrada, luego hacemos las operaciones necesarias y por último mostramos los resultados.</p>
+<h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=1&codigo=128&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:33 GMT -->
+</html>

@@ -1,0 +1,257 @@
+<html>
+
+<!-- Mirrored from www.sqlserverya.com.ar/simulador/simulador.php?inicio=50&cod=77&punto=71 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+    <title>Tutorial de SQL Server : Problemas Resueltos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+	  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;		
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=no,status=yes,toolbar=yes,location=yes');  	
+}
+</script>  
+</head>
+<body bgcolor="#CCFFCC">
+        
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>71 - Autocombinación</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Un pequeño restaurante tiene almacenados los nombres, precios y rubro de sus comidas en una tabla llamada "comidas".<br>
+<p>Eliminamos la tabla, si existe:</p>
+<pre>
+ if object_id('comidas') is not null
+  drop table comidas;
+</pre>
+<p>Creamos la tabla:</p>
+<pre>
+ create table comidas(
+  codigo int identity,
+  nombre varchar(30),
+  precio decimal(4,2),
+  rubro char(6),-- 'plato'=plato principal', 'postre'=postre
+  primary key(codigo)
+ );
+</pre>
+<p>Ingresamos algunos registros:</p>
+<pre>
+ insert into comidas values('ravioles',5,'plato');
+ insert into comidas values('tallarines',4,'plato');
+ insert into comidas values('milanesa',7,'plato');
+ insert into comidas values('cuarto de pollo',6,'plato');
+ insert into comidas values('flan',2.5,'postre');
+ insert into comidas values('porcion torta',3.5,'postre');
+</pre>
+<p>Realizamos un "cross join":</p>
+<pre>
+ select c1.nombre as 'plato principal',
+  c2.nombre as postre,
+  c1.precio+c2.precio as total
+  from comidas as c1
+  cross join comidas as c2;
+</pre>
+<p>Note que aparecen filas duplicadas, por ejemplo, "ravioles" se combina con "ravioles" y la combinación "ravioles- flan" se repite como "flan- ravioles". Debemos especificar que combine el rubro "plato" con "postre":</p>
+<pre>
+ select c1.nombre as 'plato principal',
+  c2.nombre as postre,
+  c1.precio+c2.precio as total
+  from comidas as c1
+  cross join comidas as c2
+  where c1.rubro='plato' and
+  c2.rubro='postre';
+</pre>
+<p>La salida muestra cada plato combinado con cada postre, y una columna extra que calcula el total del menú.</p>
+
+<p>También se puede realizar una autocombinación con "join":</p>
+<pre>
+ select c1.nombre as 'plato principal',
+  c2.nombre as postre,
+  c1.precio+c2.precio as total
+  from comidas as c1
+  join comidas as c2
+  on c1.codigo<>c2.codigo
+  where c1.rubro='plato' and
+  c2.rubro='postre';
+</pre>
+<p>Para que no aparezcan filas duplicadas se agrega un "where".</p>
+
+
+        <form name="formulario" action="http://scratchya.com.ar/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+          <textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off">
+ if object_id('comidas') is not null
+  drop table comidas;
+
+ create table comidas(
+  codigo int identity,
+  nombre varchar(30),
+  precio decimal(4,2),
+  rubro char(6),-- 'plato'=plato principal', 'postre'=postre
+  primary key(codigo)
+ );
+
+ insert into comidas values('ravioles',5,'plato');
+ insert into comidas values('tallarines',4,'plato');
+ insert into comidas values('milanesa',7,'plato');
+ insert into comidas values('cuarto de pollo',6,'plato');
+ insert into comidas values('flan',2.5,'postre');
+ insert into comidas values('porcion torta',3.5,'postre');
+
+ select c1.nombre as 'plato principal',
+  c2.nombre as postre,
+  c1.precio+c2.precio as total
+  from comidas as c1
+  cross join comidas as c2;
+
+ select c1.nombre as 'plato principal',
+  c2.nombre as postre,
+  c1.precio+c2.precio as total
+  from comidas as c1
+  cross join comidas as c2
+  where c1.rubro='plato' and
+  c2.rubro='postre';
+
+ select c1.nombre as 'plato principal',
+  c2.nombre as postre,
+  c1.precio+c2.precio as total
+  from comidas as c1
+  join comidas as c2
+  on c1.codigo<>c2.codigo
+  where c1.rubro='plato' and
+  c2.rubro='postre';
+</textarea>
+    <br>
+    <input type="submit"  value="Ejecutar  los comandos SQL">
+    <input type="button" onClick="javascript:formulario.programa.value=''" value="Borrar comando.">
+
+        <br>
+	<br>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   
+
+</form>
+
+   <h2><a href="../indexefd7.html?inicio=50">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-11";
+urchinTracker();
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from www.sqlserverya.com.ar/simulador/simulador.php?inicio=50&cod=77&punto=71 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:32 GMT -->
+</html>
+

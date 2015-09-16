@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.sqlserverya.com.ar/problemas/problema.php?inicio=100&cod=135&punto=117 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de SQL Server : Problemas Resueltos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+pre {
+  text-align:left;
+  font-family:verdana,sans-serif;
+}
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+</style>
+
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;	
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=no,status=yes,toolbar=yes,location=yes');  	
+}
+
+function VentanaTeorico(codigo)
+{
+  alto=400;
+  window.open('../temarios/descripcion2ade4.html?cod='+codigo+'&origen=problema', '', 'top=0,left=0,width=800,height='+alto+',resizable=yes,scrollbars=yes,menubar=no');  	
+}
+
+function cambiar(nro)
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   if (nro==1)
+   {
+     if (lista[f].id=='solu1')
+       lista[f].style.display='block';
+   }
+   else
+     if (nro==2)
+     {
+       if (lista[f].id=='solu2')
+         lista[f].style.display='block';
+     }
+	   
+  }
+  if (nro==1)
+    document.getElementById('solucion1').style.display='none';
+  if (nro==2)
+    document.getElementById('solucion2').style.display='none';
+}
+
+</script>
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>117 - Tipo de dato text - ntext e image (actualizar)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<b>Primer problema: </b><br><pre>
+Un maestro almacena los datos de sus alumnos en una tabla denominada "alumnos", incluye el 
+documento, el nombre, la nota y un comentario acerca del comportamiento de cada uno de ellos.
+1- Elimine la tabla si existe:
+ if object_id('alumnos') is not null
+  drop table alumnos;
+
+2- Créela con la siguiente estructura:
+ create table alumnos (
+  documento char(8),
+  nombre varchar(30),
+  nota decimal(4,2),
+  concepto text,
+  constraint PK_alumnos
+  primary key(documento)
+ );
+
+3- Ingrese algunos registros:
+ insert into alumnos values ('22222222','Ana Acosta',3,'Participativo. Generoso');
+ insert into alumnos values ('23333333','Carlos Caseres',7,'Poco participativo');
+ insert into alumnos values ('24444444','Diego Duarte',8,'Buen compañero');
+ insert into alumnos values ('25555555','Fabiola Fuentes',2,null);
+
+4- Recupere todos los registros:
+ select *from alumnos;
+
+5- Inserte en el concepto del alumno con documento "23333333" el texto "comunicativo", en la 
+posición 5, borrando todos los caracteres siguientes. Verifique que el puntero sea válido, en caso 
+de no serlo, muestre un mensaje de error.
+
+6- Lea el campo "concepto" actualizado anteriormente para verificar que se actualizó.
+
+7- Intente actualizar el concepto del alumno con documento "25555555" el texto "Muy comunicativo". 
+Verifique que el puntero sea válido, en caso de no serlo, muestre un mensaje de error.
+Puntero inválido.
+
+8- Intente agregar texto al campo "concepto" del alumno con documento "24444444" en la posición 20.
+Mensaje de error porque el texto tiene una longitud menor.
+
+9- Inserte en el concepto del alumno con documento "24444444" el texto "alumno y", en la posición 5, 
+sin borrar ningún caracter. Verifique que el puntero sea válido antes de pasar el puntero a la 
+función "updatetext".
+
+10- Lea el campo "concepto" actualizado anteriormente para verificar que se actualizó.
+
+11- Elimine la tabla "reprobados" si existe:
+ if object_id('reprobados') is not null
+  drop table reprobados;
+
+12- Cree la tabla "reprobados" que contenga 2 campos: documento y concepto:
+ create table reprobados(
+  documento char(8) not null,
+  concepto text
+ );
+
+13- Ingrese los siguientes registros en "reprobados" (en el campo "concepto" ingresamos cadenas 
+vacías para que se creen punteros válidos):
+ insert into reprobados values('22222222','');
+ insert into reprobados values('25555555','');
+
+14- Actualice el "concepto" del alumno "22222222" de la tabla "reprobados" con el concepto de dicho 
+alumno de la tabla "alumnos". Verifique que los punteros sean válidos.
+
+15- Verifique la actualización.
+
+16- Intente actualizar el "concepto" del alumno "25555555" de la tabla "reprobados" con el concepto 
+de dicho alumno de la tabla "alumnos". Verifique que los punteros sean válidos.
+Mensaje de error porque hay un puntero inválido, el de la tabla "alumnos", porque el registro 
+consultado contiene "null" en "concepto".
+
+17- Intente actualizar el "concepto" del alumno "23333333" de la tabla "reprobados" con el concepto 
+de dicho alumno de la tabla "alumnos". Verifique que los punteros sean válidos.
+Mensaje de error porque hay un puntero inválido, el de "reprobados", no existe el registro 
+consultado.
+</pre>
+
+<a href="javascript:cambiar(1)" id="solucion1">Ver solución</a>
+<br><br>
+<pre id="solu1" class="recuadrooculto">
+</pre>
+<form name="formulario" action="http://scratchya.com.ar/procesador.aspx" target="ventanaForm" 
+onsubmit="abrirVentana()" method="post" >
+           
+          <textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off"></textarea>
+    <br>
+ <input type="submit"  value="Ejecutar  los comandos SQL">
+
+    <input type="button" onClick="javascript:formulario.programa.value=''" value="Borrar comando.">
+
+
+    <br>
+	<br>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+</form>
+        <p>&nbsp;</p>
+  
+<table width="650px">
+<tr>
+<td align="center">	
+
+
+
+</td>
+</tr>
+</table>		
+	
+	
+
+
+
+   <h2><a href="../indexf6ce.html?inicio=100">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-11";
+urchinTracker();
+</script>
+
+</body>
+
+<!-- Mirrored from www.sqlserverya.com.ar/problemas/problema.php?inicio=100&cod=135&punto=117 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:33 GMT -->
+</html>

@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=50&codigo=181&inicio=45 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:31:06 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Funciones amigas (friend)</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>50 - Funciones amigas (friend)</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>El lenguaje C++ es compatible y hereda todas las características del lenguaje C. El lenguaje C es un lenguaje estructurado y solo permite definir funciones (no existen las clases).</p>
+<p>En C++ seguimos pudiendo definir funciones independientes fuera de una clase pero no es conveniente para una buena organización de nuestro código.</p>
+<p>En algunas situaciones puede ser conveniente definir una función independiente pero que tenga acceso a los atributos privados y protegidos de una clase, esto se logra con las funciones amiga (friend)</p>
+<p>Para definir una función amiga debemos anteceder la palabra clave friend y cuando la llamamos como realmente no pertenece a la clase sino que es amiga la invocamos por su nombre y no antecedemos un nombre de objeto.</p>
+
+<h3>Problema:</h3>
+<p>Crear una clase llamada Temperatura que permita inicializar la temperatura mínima, máxima y actual. Definir una función amiga que reciba dos objetos de la clase Temperatura y retorne la temperatura promedio actual.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Temperatura {
+    int minima, maxima, actual;
+public:
+    Temperatura(int min, int max, int act){ minima = min; maxima = max; actual = act; }
+    friend int temperaturaMedia(Temperatura t1, Temperatura t2);
+};
+
+int temperaturaMedia(Temperatura t1, Temperatura t2)
+{
+    int pro =(t1.actual + t2.actual)/2;
+    return pro;
+}
+
+void main()
+{
+    Temperatura temperatura1(10, 20, 15);
+    Temperatura temperatura2(12, 25, 17);
+    cout &lt;&lt; "La temperatura promedio de las temperaturas actuales es:";
+    cout &lt;&lt; temperaturaMedia(temperatura1, temperatura2);
+    cin.get();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/FuncionAmiga1.zip">FuncionAmiga1.zip</a></p>
+
+
+<p>Hemos definido tres atributos en la clase Temperatura y como vemos son privados ya que no le antecedemos ningún modificador de acceso (private, public, protected):</p>
+<pre>
+class Temperatura {
+    int minima, maxima, actual;
+</pre>
+<p>El constructor inicializa los tres atributos con los valores de los parámetros y lo definimos inline (es decir lo codificamos en la misma declaración de la clase):</p>
+<pre>
+public:
+    Temperatura(int min, int max, int act){ minima = min; maxima = max; actual = act; }
+</pre>
+<p>La función amiga la declaramos dentro de la clase pero realmente no pertenece a la misma, pero puede acceder a los atributos, recibe como parámetros dos objetos de la clase Temperatura:</p>
+<pre>
+    friend int temperaturaMedia(Temperatura t1, Temperatura t2);
+</pre>
+
+<p>La codificación de la función amiga nos deja bien en claro que no pertenece a la clase Temperatura y por lo mismo no le antecedemos dicho nombre:</p>
+<pre>
+int temperaturaMedia(Temperatura t1, Temperatura t2)
+{
+    int pro =(t1.actual + t2.actual)/2;
+    return pro;
+}
+</pre>
+<p>Dentro del algoritmo de la función temperaturaMedia podemos acceder al atributo actual de cada objeto de la clase Temperatura gracias a que esta función es amiga (friend) de dicha clase.</p>
+<p>Si no declaramos a esta función friend de la clase Temperatura se genera un error sintáctico cuando tratamos de acceder a los atributos t1.actual+t2.actual.</p>
+
+<p>En la función main creamos dos objetos de la clase Temperatura:</p>
+<pre>
+    Temperatura temperatura1(10, 20, 15);
+    Temperatura temperatura2(12, 25, 17);
+</pre>
+<p>Y es muy importante entender que cuando llamamos a una función amiga lo hacemos directamente por su nombre y no le antecedemos ningún nombre de objeto:</p>
+<pre>
+    cout &lt;&lt; temperaturaMedia(temperatura1, temperatura2);
+</pre>
+<p>Es decir la función temperaturaMedia es una función que no pertenece a la clase Temperatura pero se le ha dado el privilegio de poder acceder a sus atributos en el caso que defina o reciba como parámetros objetos de la clase Temperatura.</p>
+<h2><a href="indexb634.html?inicio=45">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=50&codigo=181&inicio=45 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:31:06 GMT -->
+</html>

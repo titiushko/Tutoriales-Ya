@@ -1,0 +1,772 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=21&codigo=21&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:27:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Framework Express - Altas, Bajas, Modificación y listado de una tabla MySQL</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++, programación, tutorial, nodejs">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de NodeJS.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>21 - Framework Express - Altas, Bajas, Modificación y listado de una tabla MySQL</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<h3>Problema</h3>
+<p>Implementar un ABM y listado de una tabla MySQL utilizando el framework Express como base para la aplicación web.</p>
+<p>Ya vimos en un concepto anterior la instalación del MySQL y la creación de la base de datos <a href="http://localhost:8080/paginas/javascriptya/nodejsya/detalleconcepto.php?punto=15&amp;codigo=15&amp;inicio=0" target="_blanck">aquí</a>.</p>
+
+
+<h4>Paso 1</h4>
+En conceptos anteriores ya instalamos el 'express-generator' por lo que nos posicionamos en el directorio 'c:\ejerciciosnodejs' (o el directorio donde esta almacenando todos sus proyectos) y procederemos a crear nuestra aplicación Node.js utilizando Express y su generador de código:</p>
+<pre>
+c:\ejerciciosnodejs> express ejercicio23 --hbs
+</pre>
+<p>Estamos llamando al programa 'express' y le pasamos dos parámetros, el primero indica el nombre de nuestro proyecto y el segundo el sistema de plantillas que utilizaremos para generar nuestras páginas dinámicas (<strong>h</strong>andle<strong>b</strong>ar<strong>s</strong>)</p>
+<p>Ya tenemos creado la carpeta ejercicio23 y dentro de esta los archivos y subcarpetas básicos:</p>
+<pre>
+  ejercicio23
+    app.js
+    package.json
+    bin
+      www
+    public
+      images
+      javascripts
+      stylesheets
+    router
+      index.js
+      users.js
+    views
+      error.hbs
+      index.hbs
+      layout.hbs
+</pre>
+
+<p>Instalamos todas las dependencias de módulos:</p>
+<pre>
+c:\ejerciciosnodejs\ejercicio23>npm install
+</pre>
+<p>Cuando llamamos a 'npm install' sin ningún otro parámetro lo que hace es buscar el archivo 'package.json' y proceder a instalar todos los módulos especificados en la propiedad 'dependencies'.</p>
+<p>Ahora ya tenemos creado la carpeta 'node_modules' con las 7 carpetas que coinciden con las dependencias especificadas en el archivo json:</p>
+<pre>
+    body-parser
+    cookie-parser
+    debug
+    express
+    hbs
+    morgan
+    serve-favicon
+</pre>
+
+<p>Recordemos que hasta ahora hemos creado un esqueleto funcional de una aplicación Node.js utilizando el framework Express y lo podemos ejecutar:</p>
+
+<p>Podemos ejecutar nuestra aplicación mínima creada con el 'express-generador':</p>
+<pre>
+c:\ejerciciosnodejs\ejercicio23>node ./bin/www
+</pre>
+<p>Y ya podemos solicitar al servidor la página raíz del sitio:</p>
+<p><img src="imagentema/foto064.jpg" border="0" alt="express-generator express node.js"></p>
+<p>Recordemos que otra forma de iniciar a nuestro proyecto en Node.js cuando definimos el archivo package.json:</p>
+<p>En lugar de escribir:</p>
+<pre>
+c:\ejerciciosnodejs\ejercicio23>node ./bin/www
+</pre>
+<p>Escribimos:</p>
+<pre>
+c:\ejerciciosnodejs\ejercicio23>npm start
+</pre>
+<p>En el archivo json hay una propiedad start donde definimos el archivo que inicia nuestra aplicación:</p>
+<pre>
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+</pre>
+
+<h4>Paso 2</h4>
+<p>Instalamos el módulo para comunicarnos con MySQL desde la línea de comandos:</p>
+<pre>
+c:\ejerciciosnodejs\ejercicio23>npm install mysql --save
+</pre>
+<p>Luego de esto ya tenemos instalado en la carpeta node_modules el paquete mysql y mediante la directiva --save modificamos el archivo package.json agregando la nueva dependencia:</p>
+<pre>
+{
+  "name": "ejercicio23",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.13.2",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "hbs": "~3.1.0",
+    "morgan": "~1.6.1",
+    <strong>"mysql": "^2.9.0",</strong>
+    "serve-favicon": "~2.3.0"
+  }
+}
+
+</pre>
+
+
+<h4>Paso 3</h4>
+<p>Entramos en la carpeta routes y abrimos y modificamos el archivo index.js por el siguiente código:</p>
+<pre class="recuadro">
+var express = require('express');
+var router = express.Router();
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index');
+});
+
+module.exports = router;
+
+</pre>
+<p>Lo único que modificamos es la llamada a render borrando el segundo parámetro.</p>
+
+<p>Ahora abrimos el archivo index.hbs de la carpeta views y creamos el HTML con un menú de opciones de nuestro programa:</p>
+<pre class="recuadro">
+&lt;a href="/articulos/creartabla"&gt;Creacion de una tabla 'articulos' con MySQL&lt;/a&gt;&lt;/p&gt;
+&lt;a href="/articulos/alta"&gt;alta de articulos&lt;/a&gt;&lt;/p&gt;
+&lt;a href="/articulos/listado"&gt;Listado completo de articulos&lt;/a&gt;&lt;/p&gt;   
+&lt;a href="/articulos/consulta"&gt;Consulta de un articulo por codigo&lt;/a&gt;&lt;/p&gt;
+&lt;a href="/articulos/modificacion"&gt;Modificacion de un articulo&lt;/a&gt;&lt;/p&gt;
+</pre>
+
+<p>Si ejecutamos la aplicación ya podemos ver nuestro menú de opciones:</p>
+<p><img src="imagentema/foto067.jpg" border="0" alt="menu opciones articulos express node.js"></p>
+
+
+<h4>Paso 4</h4>
+<p>Agregaremos a nuestro archivo app.js una nueva ruta que se encargará todo lo relacionado con el tema de artículos:</p>
+<pre class="recuadro">
+var express = require('express');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+
+var routes = require('./routes/index');
+var users = require('./routes/users');
+<strong>var articulos = require('./routes/articulos');</strong>
+
+var app = express();
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', routes);
+app.use('/users', users);
+<strong>app.use('/articulos',articulos);</strong>
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// error handlers
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
+});
+
+
+module.exports = app;
+</pre>
+<p>Las dos líneas que agregamos son el requerimiento del paquete articulos:</p>
+<pre>
+var articulos = require('./routes/articulos');
+</pre>
+<p>Y el enlace con la aplicación Express:</p>
+<pre>
+app.use('/articulos',articulos);
+</pre>
+
+<h4>Paso 5</h4>
+<p>En la carpeta routes crearemos un módulo para iniciar la conexión con la base de datos y poder recuperar una referencia a la misma.</p>
+<pre>bd.js</pre>
+<pre class="recuadro">
+var mysql=require('mysql');
+
+var conexion=mysql.createConnection({
+    host:'localhost',
+    user:'root',
+    password:'',
+    database:'base1'
+});
+
+conexion.connect(function (error){
+    if (error)
+        console.log('Problemas de conexion con mysql');
+    else
+        console.log('se inicio conexion');
+});
+
+
+module.exports=conexion;
+</pre>
+
+
+<h4>Paso 6</h4>
+<p>Procedemos ahora a crear el módulo 'articulos.js' en la carpeta 'routes' donde dispondremos la lógica para implementar el ABM.</p>
+<pre>articulos.js</pre>
+<pre class="recuadro">
+var express = require('express');
+var router = express.Router();
+
+var bd=require('./bd');
+
+//Creación de la tabla
+router.get('/creartabla', function(req, res, next) {
+   bd.query('drop table if exists articulos',function (error,resultado){
+        if (error) {
+          console.log(error);                
+          return;
+        }
+   });    
+   bd.query('create table articulos ('+
+                       'codigo int primary key auto_increment,'+
+                       'descripcion varchar(50),'+
+                       'precio float'+
+                    ')', function (error,resultado){
+        if (error) {            
+          console.log(error);                
+          return;
+        }  
+  });    
+  res.render('mensajearticulos',{mensaje:'La tabla se creo correctamente.'});  
+});
+
+
+//Alta de registros
+router.get('/alta', function(req, res, next) {
+  res.render('altaarticulos');
+});
+
+
+router.post('/alta', function(req, res, next) {
+      var registro={
+          descripcion:req.body.descripcion,
+          precio:req.body.precio
+        };
+      bd.query('insert into articulos set ?',registro, function (error,resultado){
+          if (error){
+              console.log(error);
+              return;
+          }
+      });    
+  res.render('mensajearticulos',{mensaje:'La carga se efectuo correctamente'});
+});
+
+
+//Listado de registros
+router.get('/listado', function(req, res, next) {
+  bd.query('select codigo,descripcion,precio from articulos', function(error,filas){
+        if (error) {            
+            console.log('error en el listado');
+            return;
+        }    
+        res.render('listararticulos',{articulos:filas});
+  });
+});
+
+
+//Consulta
+router.get('/consulta', function(req, res, next) {
+  res.render('consultaarticulos');
+});
+
+
+router.post('/consulta', function(req, res, next) {
+  bd.query('select descripcion,precio from articulos where codigo=?',req.body.codigo, function(error,filas){
+            if (error) {            
+                console.log('error en la consulta');
+                return;
+            }
+            if (filas.length&gt;0) {
+                res.render('listadoconsulta',{articulos:filas});
+            } else {
+                res.render('mensajearticulos',{mensaje:'No existe el codigo de articulo ingresado'});
+            }    
+        });
+});
+
+
+//Modificacion
+router.get('/modificacion', function(req, res, next) {
+  res.render('consultamodificacion');
+});
+
+
+router.post('/modificar', function(req, res, next) {
+  bd.query('select descripcion,precio,codigo from articulos where codigo=?',req.body.codigo, function(error,filas){
+            if (error) {            
+                console.log('error en la consulta');
+                return;
+            }
+            if (filas.length&gt;0) {
+                res.render('formulariomodifica',{articulos:filas});
+            } else {
+                res.render('mensajearticulos',{mensaje:'No existe el codigo de articulo ingresado'});
+            }    
+        });
+});
+
+
+router.post('/confirmarmodifica', function(req, res, next) {
+  var registro={
+          descripcion:req.body.descripcion,
+          precio:req.body.precio
+      };    
+  bd.query('UPDATE articulos SET ? WHERE ?',[registro,{codigo:req.body.codigo}], function(error,filas){
+            if (error) {            
+                console.log('error en la consulta');
+                console.log(error);
+                return;
+            }
+            res.render('mensajearticulos',{mensaje:'El articulo fue modificado'});
+        });
+});
+
+
+module.exports = router;
+
+
+</pre>
+
+
+<p>Lo primero que hacemos es requerir el paquete bd que se encuentra en la misma carpeta (tanto el archivo articulos.js y bd.js se ubican en la carpeta routes):</p>
+<pre>
+var bd=require('./bd');
+</pre>
+
+
+<h4>Paso 7</h4>
+<p>Para implementar la creación de la tabla tenemos que en el menú de opciones el primer enlace pasa la ruta '/articulos/creartabla':</p>
+<pre>
+&lt;a href="/articulos/creartabla"&gt;Creacion de una tabla 'articulos' con MySQL&lt;/a&gt;&lt;/p&gt;
+</pre>
+
+<p>Luego esta ruta la capturamos mediante el método get del objeto routes y solo indicamos '/creartabla' ya que en el archivo app.js indicamos app.use('/articulos',articulos)</p>
+<pre>
+//Creación de la tabla
+router.get('/creartabla', function(req, res, next) {
+   bd.query('drop table if exists articulos',function (error,resultado){
+        if (error) {
+          console.log(error);                
+          return;
+        }
+   });    
+   bd.query('create table articulos ('+
+                       'codigo int primary key auto_increment,'+
+                       'descripcion varchar(50),'+
+                       'precio float'+
+                    ')', function (error,resultado){
+        if (error) {            
+          console.log(error);                
+          return;
+        }  
+  });    
+  res.render('mensajearticulos',{mensaje:'La tabla se creo correctamente.'});  
+});
+</pre>
+<p>Dentro del callback del método get procedemos a llamar al método query del objeto bd y efectuamos el borrado de la tabla articulos si ya existe y posteriormente la creamos con tres campos.</p>
+<p>Finalmente pedimos que se muestre la plantilla 'mensajearticulos' y le pasamos como parámetro un objeto literal con un atributo llamado mensaje. El archivo mensajearticulos se almacena en la carpeta views y su contenido es:</p>
+<pre class="recuadro">
+&lt;p&gt;{{mensaje}}&lt;/p&gt;
+&lt;a href="/"&gt;Retornar&lt;/a&gt;
+</pre>
+<p>Es decir mostramos el contenido del mensaje en un hipervínculo a la raiz del sitio web.</p>
+<p>Si probamos de ejecutar la primer opción de nuestro menú tendremos como resultado la creación de la tabla (no olvidar de iniciar de arrancar el MySQL y crear la base de datos 'base1'):</p>
+<p><img src="imagentema/foto068.jpg" border="0" alt="express articulos creacion tabla node.js"></p>
+
+<h4>Paso 8</h4>
+<p>Para implementar el alta en la tabla articulos se inicia cuando presionamos la segunda opción de nuestro menú:</p>
+<pre>
+&lt;a href="/articulos/alta"&gt;alta de articulos&lt;/a&gt;&lt;/p&gt;
+</pre>
+
+<p>Y desde el archivo articulos.js procedemos a capturar dicha ruta:</p>
+<pre>
+router.get('/alta', function(req, res, next) {
+  res.render('altaarticulos');
+});
+</pre>
+<p>En el método get procedemos a mostrar el contenido del archivo 'altaarticulos' que se encuentra como ya sabemos en la carpeta views y su contenido es:</p>
+<pre class="recuadro">
+&lt;form method="post" action="/articulos/alta"&gt;
+Ingrese descripcion del articulo:
+&lt;input type="descripcion" name="descripcion" size="50"&gt;
+&lt;br&gt;
+Ingrese el precio del articulo:
+&lt;input type="text" name="precio" size="10"&gt;
+&lt;br&gt;
+&lt;input type="submit" value="Agregar"&gt;
+&lt;/form&gt;
+</pre>
+<p>Desde el navegador podemos observar el formulario de carga:</p>
+<p><img src="imagentema/foto069.jpg" border="0" alt="express articulos alta mysql tabla node.js"></p>
+<p>Cuando se presiona el botón submit procedemos a capturar dicha ruta en el archivo articulos.js donde procedemos a cargar los datos en la tabla de la base de datos:</p>
+<pre>
+
+router.post('/alta', function(req, res, next) {
+      var registro={
+          descripcion:req.body.descripcion,
+          precio:req.body.precio
+        };
+      bd.query('insert into articulos set ?',registro, function (error,resultado){
+          if (error){
+              console.log(error);
+              return;
+          }
+      });    
+  res.render('mensajearticulos',{mensaje:'La carga se efectuo correctamente'});
+});
+</pre>
+<p>Podemos observar que llamamos nuevamente a la plantilla 'mensajearticulos' pero con un mensaje distinto a la creación de la tabla que vimos en el paso anterior.</p>
+
+
+<h4>Paso 9</h4>
+<p>Para implementar el listado completo de la tabla articulos se llama desde nuestro menú:</p>
+<pre>
+&lt;a href="/articulos/listado"&gt;Listado completo de articulos&lt;/a&gt;&lt;/p&gt;   
+</pre>
+<p>Y en el archivo 'articulos.js' procedemos a capturar dicha ruta en el método:</p>
+<pre>
+router.get('/listado', function(req, res, next) {
+  bd.query('select codigo,descripcion,precio from articulos', function(error,filas){
+        if (error) {            
+            console.log('error en el listado');
+            return;
+        }    
+        res.render('listararticulos',{articulos:filas});
+  });
+});
+</pre>
+<p>Mediante un select recuperamos todas las filas de la tabla 'articulos' y llamamos al método sender pasando como segundo parámetro un objeto literal con un atributo que contiene todas las filas recuperadas.</p>
+<p>En el archivo listaarticulos.hbs procedemos a mostrar los datos pasados en el objeto literal:</p>
+<pre class="recuadro">
+&lt;table border="1"&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Codigo&lt;/td&gt;&lt;td&gt;Descripcion&lt;/td&gt;&lt;td&gt;Precio&lt;/td&gt;
+  &lt;/tr&gt;
+{{#each articulos}}
+  &lt;tr&gt;  
+     &lt;td&gt;{{codigo}} &lt;/td&gt; &lt;td&gt;{{descripcion}}&lt;/td&gt; &lt;td&gt;{{precio}}&lt;/td&gt;
+  &lt;/tr&gt;   
+{{/each}}
+&lt;/table&gt;
+&lt;a href="/"&gt;Retornar&lt;/a&gt;
+</pre>
+<p>En el navegador podemos observar como se muestra la tabla de datos luego de procesarse la plantilla:</p>
+<p><img src="imagentema/foto070.jpg" border="0" alt="express listado mysql articulos  node.js"></p>
+
+
+<h4>Paso 10</h4>
+<p>Para implementar la consulta de un articulo por su código llamamos desde nuestro menú:</p>
+<pre>
+&lt;a href="/articulos/consulta"&gt;Consulta de un articulo por codigo&lt;/a&gt;&lt;/p&gt;
+</pre>
+
+<p>Y en el archivo articulos.js capturamos la ruta y devolvemos la plantilla 'consultaarticulos':</p>
+<pre>
+router.get('/consulta', function(req, res, next) {
+  res.render('consultaarticulos');
+});
+</pre>
+<p>La plantilla consultaarticulos.hbs:</p>
+<pre class="recuadro">
+&lt;form method="post" action="/articulos/consulta"&gt;
+Ingrese codigo del articulo a consultar:
+&lt;input type="text" name="codigo" size="5"&gt;
+&lt;br&gt;
+&lt;input type="submit" value="consultar"&gt;
+&lt;/form&gt;
+</pre>
+<p>En el navegador podemos ver:</p>
+<p><img src="imagentema/foto071.jpg" border="0" alt="express consulta mysql articulos  node.js"></p>
+<p>Y luego que se presiona el botón submit capturamos la ruta en el método donde procedemos a buscar el código de articulo ingresado:</p>
+<pre>
+router.post('/consulta', function(req, res, next) {
+  bd.query('select descripcion,precio from articulos where codigo=?',req.body.codigo, function(error,filas){
+            if (error) {            
+                console.log('error en la consulta');
+                return;
+            }
+            if (filas.length&gt;0) {
+                res.render('listadoconsulta',{articulos:filas});
+            } else {
+                res.render('mensajearticulos',{mensaje:'No existe el codigo de articulo ingresado'});
+            }    
+        });
+});
+</pre>
+
+<p>En el caso que exista el código de articulo ingresado procedemos a generar la plantilla 'listadoconsulta.hbs' y pasar un objeto literal para que se muestre los datos:</p>
+
+<pre class="recuadro">
+{{#each articulos}}
+&lt;p&gt;Descripcion:{{descripcion}}&lt;br&gt;
+Precio:{{precio}}&lt;/p&gt;
+{{/each}}
+
+&lt;a href="/"&gt;Retornar&lt;/a&gt;
+</pre>
+
+<p>En el navegador podemos ver en el caso que exista el código:</p>
+<p><img src="imagentema/foto072.jpg" border="0" alt="express consulta mysql articulos  node.js"></p>
+<p>Si no existe el código de artículo mostramos la plantilla 'mensajearticulos.hbs' pasando el mensaje respectivo.</p>
+
+
+<h4>Paso 11</h4>
+<p>Finalmente para implementar la modificación de un articulo llamamos desde nuestro menú:</p>
+<pre>
+&lt;a href="/articulos/modificacion"&gt;Modificacion de un articulo&lt;/a&gt;&lt;/p&gt;
+</pre>
+
+<p>Y en el archivo articulos.js capturamos la ruta y devolvemos la plantilla 'consultamodificacion':</p>
+<pre>
+router.get('/modificacion', function(req, res, next) {
+  res.render('consultamodificacion');
+});
+</pre>
+<p>La plantilla consultamodificacion es:</p>
+<pre class="recuadro">
+&lt;form method="post" action="/articulos/modificar"&gt;
+Ingrese codigo del articulo a modificar:
+&lt;input type="text" name="codigo" size="5"&gt;
+&lt;br&gt;
+&lt;input type="submit" value="buscar"&gt;
+&lt;/form&gt;
+</pre>
+
+<p>En el navegador podemos ver:</p>
+<p><img src="imagentema/foto073.jpg" border="0" alt="express modificacion mysql articulos  node.js"></p>
+<p>Cuando se presiona el botón submit se captura la ruta y procedemos a consultar el código y cargar la plantilla formulariomodifica.hbs:</p>
+<pre>
+router.post('/modificar', function(req, res, next) {
+  bd.query('select descripcion,precio,codigo from articulos where codigo=?',req.body.codigo, function(error,filas){
+            if (error) {            
+                console.log('error en la consulta');
+                return;
+            }
+            if (filas.length&gt;0) {
+                res.render('formulariomodifica',{articulos:filas});
+            } else {
+                res.render('mensajearticulos',{mensaje:'No existe el codigo de articulo ingresado'});
+            }    
+        });
+});
+</pre>
+
+<p>La plantilla formulariomodifica.hbs muestra la descripción y precio actual del artículo y almacena en un campo hidden el código de artículo que estamos modificando:</p>
+<pre class="recuadro">
+{{#each articulos}}
+  &lt;form method="post" action="/articulos/confirmarmodifica"&gt;
+  Ingrese nueva descripcion del articulo:
+  &lt;input type="descripcion" name="descripcion" size="50" value="{{descripcion}}"&gt;
+  &lt;br&gt;
+  Ingrese nuevo precio del articulo:
+  &lt;input type="text" name="precio" size="10" value="{{precio}}"&gt;
+  &lt;input type="hidden" name="codigo" size="10" value="{{codigo}}"&gt;  
+  &lt;br&gt;
+  &lt;input type="submit" value="Modificar"&gt;
+  &lt;/form&gt;
+{{/each}}  
+</pre>
+
+<p>En el navegador podemos ver:</p>
+<p><img src="imagentema/foto074.jpg" border="0" alt="express modificacion mysql articulos  node.js"></p>
+<p>Cuando se presiona el botón 'submit' procedemos a capturar la ruta mediante el método:</p>
+<pre>
+router.post('/confirmarmodifica', function(req, res, next) {
+  var registro={
+          descripcion:req.body.descripcion,
+          precio:req.body.precio
+      };    
+  bd.query('UPDATE articulos SET ? WHERE ?',[registro,{codigo:req.body.codigo}], function(error,filas){
+            if (error) {            
+                console.log('error en la consulta');
+                console.log(error);
+                return;
+            }
+            res.render('mensajearticulos',{mensaje:'El articulo fue modificado'});
+        });
+});
+</pre>
+<p>En este algoritmo procedemos a modificar una fila de la tabla artículos y mostrar un mensaje que la modificación fue hecha.</p>
+
+
+<p>Este proyecto lo puede descargar en un zip con todos los archivos desde este enlace :
+<a href="proyectos/ejercicio23.zip">ejercicio23</a></p>
+<h2><a href="index9187.html?inicio=15">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-35', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=21&codigo=21&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:28:00 GMT -->
+</html>

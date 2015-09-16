@@ -1,0 +1,207 @@
+
+<!DOCTYPE html> 
+<html lang="es"> 
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=149&punto=17&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:03:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>CANVAS (gradiente lineal)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="html5, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de HTML 5. Es objetivo prioritario respetar 
+los estándares del W3C">
+<meta name="author" content="Diego Moisset">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+</style>
+
+</head>
+
+<body>
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em"><a href="../../html5.html">Temario del Tutorial</a></span>->17 - CANVAS (gradiente lineal)</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Hasta ahora hemos visto que una figura la podemos llenar con un color liso. Las gradientes nos permite llenar una figura con dos o más colores.</p>
+<p>Nosotros indicamos por ejemplo dos colores y luego las librerías disponibles nos generan todos los colores intermedios entre los colores indicados.</p>
+<p>Veremos primero la gradiente lineal. Los métodos necesarios para implementar una gradiente lineal son:</p>
+<pre>
+[objeto de tipo CanvasGradient]=lienzo.createLinearGradient(x1,y1,x2,y2);
+</pre>
+<p>Los cuatro parámetros indican dos puntos del canvas, luego en dichas coordenadas graficaremos la figura.</p>
+<p>Seguidamente debemos llamar al método:</p>
+<pre>
+    [objeto de tipo Gradient].addColorStop([valor entre 0 y 1],color);
+</pre>
+<p>Con un ejemplo quedará claro:</p>
+<pre>
+   var gradiente1=lienzo.createLinearGradient(0,0,200,0);
+    gradiente1.addColorStop(0,"rgb(255,0,0)");
+    gradiente1.addColorStop(1,"rgb(0,0,0)");
+    lienzo.fillStyle=gradiente1;
+    lienzo.fillRect(0,0,200,200);
+</pre>
+<p>Creamos un objeto de la clase CanvasGradient pasando dos puntos del Canvas:</p>
+<pre>
+   var gradiente1=lienzo.createLinearGradient(0,0,200,0);
+</pre>
+<p>Definimos color inicial(como el primer parámetro es cero luego es el punto inicial):</p>
+<pre>
+    gradiente1.addColorStop(0,"rgb(255,0,0)");
+</pre>
+<p>Definimos el color del punto final:</p>
+<pre>
+    gradiente1.addColorStop(1,"rgb(0,0,0)");
+</pre>
+<p>Inicializamos la propiedad fillStyle del lienzo con el objeto de tipo CanvasGradient (acá es donde antes asignamos un color):</p>
+<pre>
+    lienzo.fillStyle=gradiente1;
+</pre>
+<p>Por último dibujamos el cuadrado:</p>
+<pre>
+    lienzo.fillRect(0,0,200,200);
+</pre>
+<p>Luego al verlo en ejecución veremos que el cuadrado comienza con color rojo en el lado de la izquierda y luego va variando al negro.</p>
+<p>El siguiente ejemplo dibuja cuatro cuadrados con distintas variantes de gradientes lineales:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+
+&lt;script type="text/javascript"&gt;
+function retornarLienzo(x) {
+  var canvas = document.getElementById(x);
+  if (canvas.getContext) {
+    var lienzo = canvas.getContext("2d");   
+    return lienzo;
+  } else
+    return false;
+}
+
+function dibujar() {
+  var lienzo=retornarLienzo("lienzo1");
+  if (lienzo) {
+    var gradiente1=lienzo.createLinearGradient(0,0,200,0);
+    gradiente1.addColorStop(0,"rgb(255,0,0)");
+    gradiente1.addColorStop(1,"rgb(0,0,0)");
+    lienzo.fillStyle=gradiente1;
+    lienzo.fillRect(0,0,200,200);
+    
+    var gradiente2=lienzo.createLinearGradient(200,300,0,300);
+    gradiente2.addColorStop(0,"rgb(255,0,0)");
+    gradiente2.addColorStop(1,"rgb(0,0,0)");
+    lienzo.fillStyle=gradiente2;
+    lienzo.fillRect(0,300,200,200);
+    
+    var gradiente3=lienzo.createLinearGradient(300,0,500,200);
+    gradiente3.addColorStop(0,"rgb(255,0,0)");
+    gradiente3.addColorStop(1,"rgb(0,0,0");
+    lienzo.fillStyle=gradiente3;
+    lienzo.fillRect(300,0,200,200);
+    
+    var gradiente4=lienzo.createLinearGradient(300,300,500,500);
+    gradiente4.addColorStop(0,"rgb(255,0,0)");
+    gradiente4.addColorStop(0.5,"rgb(0,0,0)");
+    gradiente4.addColorStop(1,"rgb(255,0,0)");
+    lienzo.fillStyle=gradiente4;
+    lienzo.fillRect(300,300,200,200);
+  }
+}
+
+&lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body onLoad="dibujar()"&gt;
+&lt;canvas id="lienzo1" width="600" height="600"&gt;
+Su navegador no permite utilizar canvas.
+&lt;/canvas&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Para pintar un cuadrado y que el gradiente se desplace en forma diagonal debemos pasar como parámetros al método createLinearGradient las coordenadas de dos vértices opuestos del cuadrado:</p>
+<pre>
+    var gradiente4=lienzo.createLinearGradient(300,300,500,500);
+</pre>
+<p>Y si además queremos que comience en rojo, luego avance hasta el negro y finalmente regrese al rojo debemos llamar al método addColorStop con los siguientes parámetros:</p>
+<pre>
+    gradiente4.addColorStop(0,"rgb(255,0,0)");
+    gradiente4.addColorStop(0.5,"rgb(0,0,0)");
+    gradiente4.addColorStop(1,"rgb(255,0,0)");
+</pre>
+<p>Finalmente solo nos falta inicializar la propiedad fillStyle y llamar al método fillRect:</p>
+<pre>
+    lienzo.fillStyle=gradiente4;
+    lienzo.fillRect(300,300,200,200);
+</pre>
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+
+</div>
+
+</body>
+
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=149&punto=17&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:03:31 GMT -->
+</html>

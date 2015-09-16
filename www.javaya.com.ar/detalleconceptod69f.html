@@ -1,0 +1,401 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=106&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:48 GMT -->
+<head>
+<title>Swing - JButton</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Swing - JButton</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>El tercer control visual de uso muy común es el que provee la clase JButton. Este control visual muestra un botón.</p>
+<p>El proceso para añadir botones a un control JFrame es similar a añadir controles de tipo JLabel.</p>
+<p>Ahora veremos la captura de eventos con los controles visuales. Uno de los eventos más comunes es cuando hacemos clic sobre un botón.<br>
+Java implementa el concepto de interfaces para poder llamar a métodos de una clase existente a una clase desarrollada por nosotros.</p>
+
+<h3>Problema 1:</h3>
+<p>Confeccionar una ventana que muestre un botón. Cuando se presione finalizar la ejecución del programa Java.</p>
+<img src="imagentema/foto069.jpg" border="0" alt="JButton">
+<h4>Programa:</h4>
+<pre class="recuadro">
+import javax.swing.*;
+import java.awt.event.*;
+public class Formulario extends JFrame implements ActionListener {
+    JButton boton1;
+    public Formulario() {
+        setLayout(null);
+        boton1=new JButton("Finalizar");
+        boton1.setBounds(300,250,100,30);
+        add(boton1);
+        boton1.addActionListener(this);
+    }
+    
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==boton1) {
+            System.exit(0);
+        }
+    }
+    
+    public static void main(String[] ar) {
+        Formulario formulario1=new Formulario();
+        formulario1.setBounds(0,0,450,350);
+        formulario1.setVisible(true);
+    }
+}
+</pre>
+<p>La mecánica para atrapar el clic del objeto de la clase JButton se hace mediante la implementación de una interface. Una interface es un protocolo que permite la comunicación entre dos clases. Una interface contiene uno o más cabecera de métodos, pero no su implementación. Por ejemplo la interface ActionListener tiene la siguiente estructura:</p>
+<pre>
+interface ActionListener {
+    public void actionPerformed(ActionEvent e) {
+}
+</pre>
+<p>Luego las clases que implementen la interface ActionListener deberán especificar el algorítmo del método actionPerformed.</p>
+<p>Mediante el concepto de interfaces podemos hacer que desde la clase JButton se puede llamar a un método que implementamos en nuestra clase.</p>
+<p>Para indicar que una clase implementará una interface lo hacemos en la declaración de la clase con la sintaxis:</p>
+<pre>
+public class Formulario extends JFrame implements ActionListener {
+</pre>
+<p>Con esto estamos diciendo que nuestra clase implementa la interface ActionListener, luego estamos obligados a codificar el método actionPerformed.</p>
+<p>Definimos un objeto de la clase JButton:</p>
+<pre>
+    JButton boton1;
+</pre>
+<p>En el constructor creamos el objeto de la clase JButton y mediante la llamada del método addActionListener le pasamos la referencia del objeto de la clase JButton utilizando la palabra clave this (this almacena la dirección de memoria donde se almacena el objeto de la clase JFrame, luego mediante dicha dirección podemos llamar al método actionPerformed):</p>
+<pre>
+    public Formulario() {
+        setLayout(null);
+        boton1=new JButton("Finalizar");
+        boton1.setBounds(300,250,100,30);
+        add(boton1);
+        boton1.addActionListener(this);
+    }
+</pre>
+<p>El método actionPerformed (este método de la interface ActionListener debe implementarse obligatoriamente, en caso de no codificarlo o equivocarnos en su nombre aparecerá un mensaje de error en tiempo de compilación de nuestro programa.</p>
+<p>El método actionPerformed se ejecutará cada vez que hagamos clic sobre el objeto de la clase JButton.</p>
+<p>La interface ActionListener y el objeto de la clase ActionEvent que llega como parámetro están definidos en el paquete:</p>
+<pre>
+import java.awt.event.*;
+</pre>
+<p>Es decir que cada vez que se presiona el botón desde la clase JButton se llama al método actionPerformed y recibe como parámetro un objeto de la clase ActionEvent.</p>
+<p>En el método actionPerformed mediante el acceso al método getSource() del objeto que llega como parámetro podemos analizar que botón se presionó:</p>
+<pre>
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==boton1) {
+            System.exit(0);
+        }
+    }
+</pre>
+<p>Si se presionón el boton1 luego el if se verifica verdadero y por lo tanto llamando al método exit de la clase System se finaliza la ejecución del programa.</p>
+<p>La main no varía en nada con respecto a problemas anteriores.</p>
+
+<h3>Problema 2:</h3>
+<p>Confeccionar una ventana que contenga tres objetos de la clase JButton con las etiquetas "1", "2" y "3". Al presionarse cambiar el título del JFrame indicando cuál botón se presionó.</p>
+<img src="imagentema/foto070.jpg" border="0" alt="JButton">
+<h4>Programa:</h4>
+<pre class="recuadro">
+import javax.swing.*;
+import java.awt.event.*;
+public class Formulario extends JFrame implements ActionListener{
+    private JButton boton1,boton2,boton3;
+    public Formulario() {
+        setLayout(null);
+        boton1=new JButton("1");
+        boton1.setBounds(10,100,90,30);
+        add(boton1);
+        boton1.addActionListener(this);
+        boton2=new JButton("2");
+        boton2.setBounds(110,100,90,30);
+        add(boton2);
+        boton2.addActionListener(this);
+        boton3=new JButton("3");
+        boton3.setBounds(210,100,90,30);
+        add(boton3);
+        boton3.addActionListener(this);        	
+    }
+    
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==boton1) {
+            setTitle("boton 1");
+        }
+        if (e.getSource()==boton2) {
+            setTitle("boton 2");
+        }
+        if (e.getSource()==boton3) {
+            setTitle("boton 3");
+        }        
+    }
+    
+    public static void main(String[] ar){
+        Formulario formulario1=new Formulario();
+        formulario1.setBounds(0,0,350,200);
+        formulario1.setVisible(true);
+    }
+}
+</pre>
+<p>Debemos declarar 3 objetos de la clase JButton:</p>
+<pre>
+    private JButton boton1,boton2,boton3;
+</pre>
+<p>En el constructor creamos los tres objetos de la clase JButton y los ubicamos dentro del control JFrame (también llamamos al método addActionListener para enviarle la dirección del objeto de la clase Formulario):</p>
+<pre>
+    public Formulario() {
+        setLayout(null);
+        boton1=new JButton("1");
+        boton1.setBounds(10,100,90,30);
+        add(boton1);
+        boton1.addActionListener(this);
+        boton2=new JButton("2");
+        boton2.setBounds(110,100,90,30);
+        add(boton2);
+        boton2.addActionListener(this);
+        boton3=new JButton("3");
+        boton3.setBounds(210,100,90,30);
+        add(boton3);
+        boton3.addActionListener(this);        	
+    }
+</pre>
+<p>Cuando se presiona alguno de los tres botones se ejecuta el método actionPerformed y mediante tres if verificamos cual de los botones se presionó:</p>
+<pre>
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==boton1) {
+            setTitle("boton 1");
+        }
+        if (e.getSource()==boton2) {
+            setTitle("boton 2");
+        }
+        if (e.getSource()==boton3) {
+            setTitle("boton 3");
+        }        
+    }
+</pre>
+<p>Según el botón presionado llamamos al método setTitle que se trata de un método heredado de la clase JFrame y que tiene por objetivo mostrar un String en el título de la ventana.</p>
+ 
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Disponer dos objetos de la clase JButton con las etiquetas: "varón" y "mujer", al presionarse mostrar en la barra de títulos del JFrame la etiqueta del botón presionado.</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+import javax.swing.*;
+import java.awt.event.*;
+public class Formulario extends JFrame implements ActionListener{
+    private JButton boton1,boton2;
+    public Formulario() {
+        setLayout(null);
+        boton1=new JButton("Varón");
+        boton1.setBounds(10,10,100,30);
+        boton1.addActionListener(this);
+        add(boton1);
+        boton2=new JButton("Mujer");
+        boton2.setBounds(10,70,100,30);
+        boton2.addActionListener(this);
+        add(boton2);
+    }
+    
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==boton1) {
+            setTitle("Varón");
+        }
+        if (e.getSource()==boton2) {
+            setTitle("Mujer");
+        }
+    }
+    
+    public static void main(String[] ar) {
+        Formulario formulario1=new Formulario();
+        formulario1.setBounds(0,0,130,140);
+        formulario1.setVisible(true);
+    }
+}
+</pre></div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=106&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:49 GMT -->
+</html>

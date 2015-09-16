@@ -1,0 +1,271 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.mysqlya.com.ar/problemas/problema.php?inicio=21&cod=30&punto=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Problemas propuestos:Otros operadores relacionales (between - in)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+pre {
+  text-align:left;
+  font-family:verdana,sans-serif;
+}
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+</style>
+
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;	
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=no,status=yes,toolbar=yes,location=yes');  	
+}
+
+function VentanaTeorico(codigo)
+{
+  alto=400;
+  window.open('../temarios/descripcion2ade4.html?cod='+codigo+'&origen=problema', '', 'top=0,left=0,width=800,height='+alto+',resizable=yes,scrollbars=yes,menubar=no');  	
+}
+
+
+</script>
+
+</head>
+
+<body>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>30 - Otros operadores relacionales (between - in)</h1></td>
+<td align="right">
+<!--<a href="http://www.mysqlya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<b>Problema: </b><br><pre>
+Trabaje con la tabla llamada "medicamentos" de una farmacia.
+
+1- Elimine la tabla, si existe.
+
+2- Cree la tabla con la siguiente estructura:
+ create table medicamentos(
+  codigo int unsigned auto_increment,
+  nombre varchar(20),
+  laboratorio varchar(20),
+  precio decimal(5,2) unsigned,
+  cantidad int unsigned,
+  primary key(codigo)
+ );
+
+3- Visualice la estructura de la tabla "medicamentos".
+
+4- Ingrese los siguientes registros:
+ insert into medicamentos (nombre,laboratorio,precio,cantidad)
+  values('Sertal','Roche',5.2,100);
+ insert into medicamentos (nombre,laboratorio,precio,cantidad)
+  values('Buscapina','Roche',4.10,200);
+ insert into medicamentos (nombre,laboratorio,precio,cantidad)
+  values('Amoxidal 500','Bayer',15.60,100);
+ insert into medicamentos (nombre,laboratorio,precio,cantidad)
+  values('Paracetamol 500','Bago',1.90,200);
+ insert into medicamentos (nombre,laboratorio,precio,cantidad)
+  values('Bayaspirina','Bayer',2.10,150); 
+ insert into medicamentos (nombre,laboratorio,precio,cantidad)
+  values('Amoxidal jarabe','Bayer',5.10,250); 
+
+5- Recupere los nombres y precios de los medicamentos cuyo precio esté entre 5 y 15:
+ select nombre,precio from medicamentos
+  where precio between 5 and 15;
+
+6- Seleccione los registros cuyo laboratorio sea "Bayer" o "Bago":
+ select * from medicamentos
+  where laboratorio in ('Bayer','Bago');
+
+7- Elimine los registros cuya cantidad esté entre 100 y 200:
+ delete from medicamentos
+ where cantidad between 100 and 200;
+</pre><form name="formulario" action="http://www.mysqlya.com.ar/simulador/ejecuta.php" target="ventanaForm" 
+onsubmit="abrirVentana()" method="post" >
+           
+          <textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off"></textarea>
+    <br>
+ <input type="submit"  value="Ejecutar  los comandos SQL">
+
+    <input type="button" onClick="javascript:formulario.programa.value=''" value="Borrar comando.">
+<input type="button" onClick="javascript:history.back()" name="cancelar" value="Finalizar">
+
+    <br>
+	<br>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<input type="hidden" name="extension1" value="problema1.php">
+<input type="hidden" name="extension2" value="problema1.php">
+<input type="hidden" name="extension3" value="problema1.php">
+
+</form>
+        <p>&nbsp;</p>
+  
+<table width="650px">
+<tr>
+<td align="center">	
+
+
+
+</td>
+</tr>
+</table>		
+	
+	
+
+<b>Otros problemas: </b><br><pre>
+Una concesionaria de autos vende autos usados y almacena la información en una tabla 
+llamada "autos".
+
+1- Elimine la tabla "autos" si existe.
+
+2- Cree la tabla con la siguiente estructura:
+ create table autos(
+  patente char(6),
+  marca varchar(20),
+  modelo char(4),
+  precio decimal(8,2) unsigned,
+  primary key(patente)
+ );
+3- Ingrese los siguientes registros:
+ insert into autos(patente,marca,modelo,precio)
+  values('ACD123','Fiat 128','1970',15000);
+ insert into autos(patente,marca,modelo,precio)
+  values('ACG234','Renault 11','1990',40000);
+ insert into autos(patente,marca,modelo,precio)
+  values('BCD333','Peugeot 505','1990',80000);
+ insert into autos(patente,marca,modelo,precio)
+  values('GCD123','Renault Clio','1990',70000);
+ insert into autos(patente,marca,modelo,precio)
+  values('BCC333','Renault Megane','1998',95000);
+ insert into autos(patente,marca,modelo,precio)
+  values('BVF543','Fiat 128','1975',20000);
+
+4- Seleccione todos los autos cuyo año sea '1970' o '1975' usando el operador "in":
+ select * from autos
+  where modelo in ('1970','1975');
+
+5- Seleccione todos los autos cuyo precio esté entre 50000 y 100000:
+ select * from autos
+  where precio between 50000 and 100000; 
+<br>
+   <h2><a href="../index10fd.html?inicio=21">Retornar</a></h2>   
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-5";
+urchinTracker();
+</script>
+
+</body>
+
+<!-- Mirrored from www.mysqlya.com.ar/problemas/problema.php?inicio=21&cod=30&punto=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:28 GMT -->
+</html>

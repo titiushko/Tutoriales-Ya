@@ -1,0 +1,457 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=27&codigo=158&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Herencia en C++</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>27 - Herencia en C++</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Vimos en el concepto anterior que dos clases pueden estar relacionadas por la colaboración. Ahora veremos otro tipo de relaciones entre clases que es la Herencia.</p>
+<p>La herencia significa que se pueden crear nuevas clases partiendo de clases existentes, que tendrá todas los atributos y los métodos de su 'superclase' o 'clase padre' y además se le podrán añadir otros atributos y métodos propios.</p>
+
+<h4>Clase padre</h4>
+<p>Clase de la que desciende o deriva una clase. Las clases hijas (descendientes) heredan (incorporan) automáticamente los atributos y métodos de la la clase padre.</p>
+<h4>Subclase</h4>
+<p>Clase que desciende de otra. Hereda automáticamente los atributos y métodos de su superclase. Es una especialización de otra clase. Admiten la definición de nuevos atributos y métodos para aumentar la especialización de la clase.</p>
+
+<p>Veamos algunos ejemplos teóricos de herencia:</p>
+
+<p>1) Imaginemos la clase Vehículo. ¿Qué clases podrían derivar de ella?</p>
+<pre>
+                            Vehiculo
+
+   Colectivo                Moto                    Auto
+                             
+                                             FordK        Renault 19
+</pre>
+<p>Siempre hacia abajo en la jerarquía hay una especialización (las subclases añaden nuevos atributos y métodos)</p>
+
+<p>2) Imaginemos la clase Software. Qué clases podrían derivar de ella?</p>
+<pre>
+                                           Software
+
+             DeAplicacion                                        DeBase
+
+ProcesadorTexto       PlanillaDeCalculo                          SistemaOperativo
+
+Word   WordPerfect    Excel     Lotus123                         Linux    Windows   Mac OS X      
+</pre>
+<p>El primer tipo de relación que habíamos visto entre dos clases, es la de colaboración. Recordemos que es cuando una clase contiene un objeto de otra clase como atributo.<br>
+Cuando la relación entre dos clases es del tipo "...tiene un..." o "...es parte de...", no debemos implementar herencia. Estamos frente a una relación de colaboración de clases no de herencia.</p>
+
+<p>Si tenemos una ClaseA y otra ClaseB y notamos que entre ellas existe una relación de tipo "... tiene un...", no debe implementarse herencia sino declarar en la clase ClaseA un atributo de la clase ClaseB.</p>
+<p>Por ejemplo: tenemos una clase Auto, una clase Rueda y una clase Volante. Vemos que la relación entre ellas es: Auto "...tiene 4..." Rueda, Volante "...es parte de..." Auto; pero la clase Auto no debe derivar de Rueda ni Volante de Auto porque la relación no es de tipo-subtipo sino de colaboración. Debemos declarar en la clase Auto 4 atributos de tipo Rueda y 1 de tipo Volante.
+</p>
+<p>Luego si vemos que dos clase responden a la pregunta ClaseA "..es un.." ClaseB es posible que haya una relación de herencia.</p>
+<p>Por ejemplo:</p>
+<pre>
+Auto "es un" Vehiculo
+Circulo "es una" Figura
+Mouse "es un" DispositivoEntrada
+Suma "es una" Operacion
+</pre>
+<h3>Problema 1:</h3>
+<p>Ahora plantearemos el primer problema utilizando herencia. Supongamos que necesitamos implementar dos clases que llamaremos Suma y Resta. Cada clase tiene como atributo valor1, valor2 y resultado. Los métodos a definir son cargar1 (que inicializa el atributo valor1), carga2 (que inicializa el atributo valor2), operar (que en el caso de la clase "Suma" suma los dos atributos y en el caso de la clase "Resta" hace la diferencia entre valor1 y valor2, y otro método mostrarResultado)</p>
+<p>Si analizamos ambas clases encontramos que muchos atributos y métodos son idénticos. En estos casos es bueno definir una clase padre que agrupe dichos atributos y responsabilidades comunes.</p>
+
+<p>La relación de herencia que podemos disponer para este problema es:</p>
+<pre>
+                                        Operacion
+
+                        Suma                              Resta
+</pre>
+Solamente el método operar es distinto para las clases Suma y Resta (esto hace que no lo podamos disponer en la clase Operacion), luego los métodos cargar1, cargar2 y mostrarResultado son idénticos a las dos clases, esto hace que podamos disponerlos en la clase Operacion. Lo mismo los atributos valor1, valor2 y resultado se definirán en la clase padre Operacion.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Operacion {
+protected:
+    int valor1;
+    int valor2;
+    int resultado;
+public:
+    void cargar1();
+    void cargar2();
+    void mostrarResultado();
+};
+
+
+class Suma: public Operacion{
+public:
+    void operar();
+};
+
+
+class Resta : public Operacion {
+public:
+    void operar();
+};
+
+
+void Operacion::cargar1()
+{
+    cout &lt;&lt; "Ingrese primer valor:";
+    cin &gt;&gt; valor1;
+}
+
+void Operacion::cargar2()
+{
+    cout &lt;&lt; "Ingrese segundo valor:";
+    cin &gt;&gt; valor2;
+}
+
+void  Operacion::mostrarResultado()
+{
+    cout &lt;&lt;resultado&lt;&lt;"\n";
+}
+
+void Suma::operar()
+{
+    resultado = valor1 + valor2;
+}
+
+void Resta::operar()
+{
+    resultado = valor1 - valor2;
+}
+
+
+void main()
+{
+    Suma suma1;
+    suma1.cargar1();
+    suma1.cargar2();
+    suma1.operar();
+    cout &lt;&lt; "La suma de los dos valores es:";
+    suma1.mostrarResultado();
+
+    Resta resta1;
+    resta1.cargar1();
+    resta1.cargar2();
+    resta1.operar();
+    cout &lt;&lt; "La diferencia de los dos valores es:";
+    resta1.mostrarResultado();
+
+    cin.get();
+    cin.get();
+}</pre>
+
+<p>La clase Operación define los tres atributos:</p>
+<pre>
+class Operacion {
+protected:
+    int valor1;
+    int valor2;
+    int resultado;
+public:
+    void cargar1();
+    void cargar2();
+    void mostrarResultado();
+};
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/Herencia1.zip">Herencia1.zip</a></p>
+
+
+<p>Ya veremos que definimos los atributos con este nuevo modificador de acceso (protected) para que la subclase tenga acceso a dichos atributos. Si los definimos private las subclases no pueden acceder a dichos atributos.</p>
+
+<p>Los métodos de la clase Operacion son:</p>
+<pre>
+void Operacion::cargar1()
+{
+    cout &lt;&lt; "Ingrese primer valor:";
+    cin &gt;&gt; valor1;
+}
+
+void Operacion::cargar2()
+{
+    cout &lt;&lt; "Ingrese segundo valor:";
+    cin &gt;&gt; valor2;
+}
+
+void  Operacion::mostrarResultado()
+{
+    cout &lt;&lt;resultado&lt;&lt;"\n";
+}
+</pre>
+<p>Ahora veamos como es la sintaxis para indicar que una clase hereda de otra:</p>
+<pre>
+class Suma: public Operacion{
+public:
+    void operar();
+};
+</pre>
+<p>Utilizamos el caracter dos puntos y seguidamente el nombre de la clase padre precedido por el modificador public (con esto estamos indicando que todos los métodos y atributos de la clase Operación son también métodos de la clase Suma)</p>
+
+<p>Luego la característica que añade la clase Suma es el siguiente método:</p>
+<pre>
+void Suma::operar()
+{
+    resultado = valor1 + valor2;
+}
+</pre>
+
+<p>El método operar puede acceder a los atributos heredados (siempre y cuando los mismos se declaren protected, en caso que sean private si bien lo hereda de la clase padre solo los pueden modificar métodos de dicha clase padre)</p>
+
+<p>Ahora podemos decir que la clase Suma tiene cuatro métodos (tres heredados y uno propio) y 3 atributos (todos heredados)</p>
+
+<p>Luego en la main creamos un objeto de la clase Suma y otro de la clase Resta:</p>
+<pre>
+void main()
+{
+    Suma suma1;
+    suma1.cargar1();
+    suma1.cargar2();
+    suma1.operar();
+    cout &lt;&lt; "La suma de los dos valores es:";
+    suma1.mostrarResultado();
+
+    Resta resta1;
+    resta1.cargar1();
+    resta1.cargar2();
+    resta1.operar();
+    cout &lt;&lt; "La diferencia de los dos valores es:";
+    resta1.mostrarResultado();
+
+    cin.get();
+    cin.get();
+}</pre>
+
+<p>Podemos llamar tanto al método propio de la clase Suma "operar()" como a los métodos heredados. Quien utilice la clase Suma solo debe conocer que métodos públicos tiene (independientemente que pertenezcan a la clase Suma o a una clase superior), no podemos acceder a los métodos privados y protegidos.</p>
+
+<p>La lógica es similar para declarar la clase Resta.</p>
+
+<p>La clase Operación agrupa en este caso un conjunto de atributos y métodos comunes a un conjunto de subclases (Suma, Resta). No tiene sentido definir objetos de la clase Operacion.</p>
+
+<p>El planteo de jerarquías de clases es una tarea compleja que requiere un perfecto entendimiento de todas las clases que intervienen en un problema, cuales son sus atributos y responsabilidades.</p>
+
+
+<h2>Problema propuesto</h2>
+<ol>
+<li>
+Confeccionar una clase Persona que tenga como atributos el nombre y la edad. Definir como responsabilidades un método que cargue los datos personales y otro que los imprima.<br>
+
+Plantear una segunda clase Empleado que herede de la clase Persona. Añadir un atributo sueldo y los métodos de cargar el sueldo e imprimir su sueldo.<br>
+
+Definir un objeto de la clase Persona y llamar a sus métodos. También crear un objeto de la clase Empleado y llamar a sus métodos.
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Persona {
+protected:
+    char nombre[40];
+    int edad;
+public:
+    void cargarDatosPersonales();
+    void imprimirDatosPersonales();
+};
+
+class Empleado : public Persona {
+private:
+    float sueldo;
+public:
+    void cargarSueldo();
+    void imprimirSueldo();
+};
+
+
+void Persona::cargarDatosPersonales()
+{
+    cout &lt;&lt; "Ingrese nombre:";
+    cin.getline(nombre, 40);
+    cout &lt;&lt; "Ingrese edad:";
+    cin &gt;&gt; edad;
+    cin.get();
+}
+
+void Persona::imprimirDatosPersonales()
+{
+    cout &lt;&lt; "Nombre:"&lt;&lt;nombre&lt;&lt;"\n";
+    cout &lt;&lt; "Edad:" &lt;&lt; edad &lt;&lt; "\n";
+}
+
+
+void Empleado::cargarSueldo()
+{
+    cout &lt;&lt; "Ingrese sueldo:";
+    cin &gt;&gt; sueldo;
+}
+
+void Empleado::imprimirSueldo()
+{
+    cout &lt;&lt; "Sueldo:" &lt;&lt; sueldo &lt;&lt; "\n";
+}
+
+
+void main()
+{
+    Persona persona1;
+    persona1.cargarDatosPersonales();
+    persona1.imprimirDatosPersonales();
+
+    Empleado empleado1;
+    empleado1.cargarDatosPersonales();
+    empleado1.cargarSueldo();
+    empleado1.imprimirDatosPersonales();
+    empleado1.imprimirSueldo();
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/Herencia2.zip">Herencia2.zip</a></p>
+
+</pre><h2><a href="index9187.html?inicio=15">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=27&codigo=158&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:14 GMT -->
+</html>

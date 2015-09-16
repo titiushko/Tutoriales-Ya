@@ -1,0 +1,209 @@
+        
+
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=100&cod=267&punto=109 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios resueltos : Disparador de actualización a nivel de fila (update trigger)(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+<body bgcolor="#CCFFCC">
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>109 - Disparador de actualización a nivel de fila (update trigger)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Una librería almacena los datos de sus libros en una tabla denominada "libros" y controla las acciones que los empleados realizan sobre dicha tabla almacenando en la tabla "control" el nombre del usuario y la fecha, cada vez que se modifica un registro en la tabla "libros".</p>
+<p>Eliminamos las tablas:</p>
+<pre>
+ drop table control;
+ drop table libros;
+</pre>
+<p>Creamos las tablas con las siguientes estructuras:</p>
+<pre>
+ create table libros(
+  codigo number(6),
+  titulo varchar2(40),
+  autor varchar2(30),
+  editorial varchar2(20),
+  precio number(6,2)
+ );
+
+ create table control(
+  usuario varchar2(30),
+  fecha date
+ );
+</pre>
+<p>Ingresamos algunos registros en "libros":</p>
+<pre>
+ insert into libros values(100,'Uno','Richard Bach','Planeta',25);
+ insert into libros values(103,'El aleph','Borges','Emece',28);
+ insert into libros values(105,'Matematica estas ahi','Paenza','Nuevo siglo',12);
+ insert into libros values(120,'Aprenda PHP','Molina Mario','Nuevo siglo',55);
+ insert into libros values(145,'Alicia en el pais de las maravillas','Carroll','Planeta',35);
+</pre>
+<p>Establecemos el formato de fecha para que muestre "DD/MM/YYYY HH24:MI":</p>
+<pre>
+ alter session set NLS_DATE_FORMAT = 'DD/MM/YYYY HH24:MI';
+</pre>
+<p>Creamos un disparador que se dispare cada vez que se actualice un registro en "libros"; el trigger debe ingresar en la tabla "control", el nombre del usuario, la fecha y la hora en la cual se realizó un "update" sobre "libros":</p>
+<pre>
+ create or replace trigger tr_actualizar_libros
+  before update
+  on libros
+  for each row
+ begin
+  insert into control values(user,sysdate);
+ end tr_actualizar_libros;
+</pre>
+<p>Actualizamos varios registros de "libros". Aumentamos en un 10% el precio de todos los libros de editorial "Nuevo siglo':</p>
+<pre>
+ update libros set precio=precio+precio*0.1 where editorial='Nuevo siglo';
+</pre>
+<p>Veamos cuántas veces se disparó el trigger consultando la tabla "control":</p>
+<pre>
+ select *from control;
+ </pre>
+<p>El trigger se disparó 2 veces, una vez por cada registro modificado en "libros". Si el trigger hubiese sido creado a nivel de sentencia, el "update" anterior hubiese disparado el trigger 1 sola vez aún cuando se modifican 2 filas.</p>
+
+<p>Veamos qué nos informa el diccionario "user_triggers" respecto del trigger anteriormente creado:</p>
+<pre>
+ select *from user_triggers where trigger_name ='TR_ACTUALIZAR_LIBROS';
+</pre>
+<p>obtenemos el nombre del disparador, el momento y nivel (before each row), evento que lo dispara (update), a qué objeto está asociado (table), nombre de la tabla al que está asociado (libros) y otras columnas que no analizaremos por el momento.</p>
+
+        <form name="formulario" action="http://www.sqlserverya.com.ar/aspx/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+        <br>
+   <h2><a href="../indexf6ce.html?inicio=100">Retornar</a></h2>   
+        
+	<br>
+   
+
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=100&cod=267&punto=109 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+</html>
+

@@ -1,0 +1,1086 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=42&codigo=173&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Estructuras dinámicas en C++: Listas genéricas doblemente encadenadas</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>42 - Estructuras dinámicas en C++: Listas genéricas doblemente encadenadas</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>A las listas vistas hasta el momento podemos recorrerlas solamente en una dirección (Listas simplemente encadenadas). Hay problemas donde se requiere recorrer la lista en ambas direcciones, en estos casos el empleo de listas doblemente encadenadas es recomendable.</p>
+<p>Como ejemplo pensemos que debemos almacenar un menú de opciones en una lista, la opción a seleccionar puede ser la siguiente o la anterior, podemos desplazarnos en ambas direcciones.</p>
+
+<p>Representación gráfica de una lista doblemente encadenada:</p>
+<img src="imagentema/foto085.jpg" border="0" alt="listas doblemente encadenadas"><br>
+
+<p>Observemos que una lista doblemente encadenada tiene dos punteros por cada nodo, uno apunta al nodo siguiente y otro al nodo anterior.<br>
+Seguimos teniendo un puntero (raiz) que tiene la dirección del primer nodo de la lista.<br>
+El puntero sig del último nodo igual que las listas simplemente encadenadas apunta a NULL, y el puntero ant del primer nodo apunta a NULL.</p>
+
+<p>Se pueden plantear Listas tipo pila, cola y genéricas con enlace doble.<br>
+Hay que tener en cuenta que el requerimiento de memoria es mayor en las listas doblemente encadenadas ya que tenemos dos punteros  por nodo.</p>
+
+<p>La estructura del nodo es:</p>
+<pre>
+    class Nodo {
+    public:
+        int info;
+        Nodo *sig;
+        Nodo *ant;
+    };
+</pre>
+<p>
+Resolveremos algunos métodos para administrar listas genéricas empleando listas doblemente encadenadas para analizar la mecánica de enlace de nodos.<br>
+Muchos de los métodos, para listas simple y doblemente encadenadas no varía, como por ejemplo: el constructor, destructor, vacia, cantidad, etc.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include &lt;iostream&gt;
+
+using namespace std;
+
+class ListaGenericaDoble {
+private:
+    class Nodo {
+    public:
+        int info;
+        Nodo *sig;
+        Nodo *ant;
+    };
+
+    Nodo *raiz;
+public:
+    ListaGenericaDoble();
+    ~ListaGenericaDoble();
+    int cantidad();
+    void insertar(int pos, int x);
+    int extraer(int pos);
+    void borrar(int pos);
+    void intercambiar(int pos1, int pos2);
+    bool vacia();
+    int mayor();
+    void imprimir();
+    int posMayor();
+    bool ordenada();
+    bool existe(int x);
+};
+
+
+ListaGenericaDoble::ListaGenericaDoble()
+{
+    raiz = NULL;
+}
+
+ListaGenericaDoble::~ListaGenericaDoble()
+{
+    Nodo *reco = raiz;
+    Nodo *bor;
+    while (reco != NULL)
+    {
+        bor = reco;
+        reco = reco-&gt;sig;
+        delete bor;
+    }
+}
+
+int ListaGenericaDoble::cantidad()
+{
+    Nodo *reco = raiz;
+    int cant = 0;
+    while (reco != NULL)
+    {
+        cant++;
+        reco = reco-&gt;sig;
+    }
+    return cant;
+}
+
+void ListaGenericaDoble::insertar(int pos, int x)
+{
+    if (pos &lt;= cantidad() + 1)   
+    {
+        Nodo *nuevo = new Nodo();
+        nuevo-&gt;info = x;
+        if (pos == 1)
+        {
+            nuevo-&gt;sig = raiz;
+            if (raiz != NULL)
+                raiz-&gt;ant = nuevo;
+            raiz = nuevo;
+        }
+        else
+            if (pos == cantidad() + 1)    
+            {
+                Nodo *reco = raiz;
+                while (reco-&gt;sig != NULL)
+                {
+                    reco = reco-&gt;sig;
+                }
+                reco-&gt;sig = nuevo;
+                nuevo-&gt;ant = reco;
+                nuevo-&gt;sig = NULL;
+            }
+            else 
+            {
+                Nodo *reco = raiz;
+                for (int f = 1; f &lt;= pos - 2; f++)
+                    reco = reco-&gt;sig;
+                Nodo *siguiente = reco-&gt;sig;
+                reco-&gt;sig = nuevo;
+                nuevo-&gt;ant = reco;
+                nuevo-&gt;sig = siguiente;
+                siguiente-&gt;ant = nuevo;
+            }
+    }
+}
+
+int ListaGenericaDoble::extraer(int pos)
+{
+    if (pos &lt;= cantidad())
+    {
+        int informacion;
+        Nodo *bor;
+        if (pos == 1)
+        {
+            informacion = raiz-&gt;info;
+            bor = raiz;
+            raiz = raiz-&gt;sig;
+            if ((raiz != NULL))
+                raiz-&gt;ant = NULL;
+        }
+        else
+        {
+            Nodo *reco;
+            reco = raiz;
+            for (int f = 1; f &lt;= pos - 2; f++)
+                reco = reco-&gt;sig;
+            Nodo *prox = reco-&gt;sig;
+            bor = prox;
+            reco-&gt;sig = prox-&gt;sig;
+            Nodo *siguiente = prox-&gt;sig;
+            if (siguiente != NULL)
+                siguiente-&gt;ant = reco;
+            informacion = prox-&gt;info;
+        }
+        delete bor;
+        return informacion;
+    }
+    else
+        return -1;
+}
+
+void ListaGenericaDoble::borrar(int pos)
+{
+    if (pos &lt;= cantidad())
+    {
+        Nodo *bor;
+        if (pos == 1)
+        {
+            bor = raiz;
+            raiz = raiz-&gt;sig;
+            if (raiz != NULL)
+                raiz-&gt;ant = NULL;
+        }
+        else 
+        {
+            Nodo *reco;
+            reco = raiz;
+            for (int f = 1; f &lt;= pos - 2; f++)
+                reco = reco-&gt;sig;
+            Nodo *prox = reco-&gt;sig;
+            bor = prox;
+            reco-&gt;sig = prox-&gt;sig;
+            Nodo *siguiente = prox-&gt;sig;
+            if (siguiente != NULL)
+                siguiente-&gt;ant = reco;
+        }
+        delete bor;
+    }
+}
+
+
+void ListaGenericaDoble::intercambiar(int pos1, int pos2)
+{
+    if (pos1 &lt;= cantidad() && pos2 &lt;= cantidad())
+    {
+        Nodo *reco1 = raiz;
+        for (int f = 1; f &lt; pos1; f++)
+        {
+            reco1 = reco1-&gt;sig;
+        }
+        Nodo *reco2 = raiz;
+        for (int f = 1; f &lt; pos2; f++)
+        {
+            reco2 = reco2-&gt;sig;
+        }
+        int aux = reco1-&gt;info;
+        reco1-&gt;info = reco2-&gt;info;
+        reco2-&gt;info = aux;
+    }
+}
+
+bool ListaGenericaDoble::vacia()
+{
+    if (raiz == NULL)
+        return true;
+    else
+        return false;
+}
+
+
+int ListaGenericaDoble::mayor()
+{
+    if (!vacia())
+    {
+        int may = raiz-&gt;info;
+        Nodo *reco = raiz-&gt;sig;
+        while (reco != NULL)
+        {
+            if (reco-&gt;info &gt; may)
+            {
+                may = reco-&gt;info;
+            }
+            reco = reco-&gt;sig;
+        }
+        return may;
+    }
+    else
+        return -1;
+}
+
+void ListaGenericaDoble::imprimir()
+{
+    Nodo *reco = raiz;
+    cout &lt;&lt; "Listado completo.\n";
+    while (reco != NULL)
+    {
+        cout &lt;&lt; reco-&gt;info &lt;&lt; "-";
+        reco = reco-&gt;sig;
+    }
+    cout &lt;&lt; "\n";
+}
+
+
+int ListaGenericaDoble::posMayor()
+{
+    if (!vacia())
+    {
+        int may = raiz-&gt;info;
+        int x = 1;
+        int pos = x;
+        Nodo *reco = raiz-&gt;sig;
+        while (reco != NULL)
+        {
+            if (reco-&gt;info &gt; may)
+            {
+                may = reco-&gt;info;
+                pos = x;
+            }
+            reco = reco-&gt;sig;
+            x++;
+        }
+        return pos;
+    }
+    else
+        return -1;
+}
+
+bool ListaGenericaDoble::ordenada()
+{
+    if (cantidad()&gt;1)
+    {
+        Nodo *reco1 = raiz;
+        Nodo *reco2 = raiz-&gt;sig;
+        while (reco2 != NULL)
+        {
+            if (reco2-&gt;info&lt;reco1-&gt;info)
+            {
+                return false;
+            }
+            reco2 = reco2-&gt;sig;
+            reco1 = reco1-&gt;sig;
+        }
+    }
+    return true;
+}
+
+bool ListaGenericaDoble::existe(int x)
+{
+    Nodo *reco = raiz;
+    while (reco != NULL)
+    {
+        if (reco-&gt;info == x)
+            return true;
+        reco = reco-&gt;sig;
+    }
+    return false;
+}
+
+void main()
+{
+    ListaGenericaDoble *lg = new ListaGenericaDoble();
+    lg-&gt;insertar(1, 10);
+    lg-&gt;insertar(2, 20);
+    lg-&gt;insertar(3, 30);
+    lg-&gt;insertar(2, 15);
+    lg-&gt;insertar(1, 115);
+    lg-&gt;imprimir();
+    cout &lt;&lt; "Luego de Borrar el primero\n";
+    lg-&gt;borrar(1);
+    lg-&gt;imprimir();
+    cout &lt;&lt; "Luego de Extraer el segundo\n";
+    lg-&gt;extraer(2);
+    lg-&gt;imprimir();
+    cout &lt;&lt; "Luego de Intercambiar el primero con el tercero\n";
+    lg-&gt;intercambiar(1, 3);
+    lg-&gt;imprimir();
+    if (lg-&gt;existe(20))
+        cout &lt;&lt; "Se encuentra el 20 en la lista\n";
+    else
+        cout &lt;&lt; "No se encuentra el 20 en la lista\n";
+    cout &lt;&lt; "La posición del mayor es:" &lt;&lt; lg-&gt;posMayor() &lt;&lt; "\n";
+    if (lg-&gt;ordenada())
+        cout &lt;&lt; "La lista esta ordenada de menor a mayor\n";
+    else
+        cout &lt;&lt; "La lista no esta ordenada de menor a mayor\n";
+    delete lg;
+    cin.get();
+}</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/ListaGenericaDoble1.zip">ListaGenericaDoble1.zip</a></p>
+
+
+<p>Para insertar en una determinada posición dentro de la lista:</p>
+<pre>
+ <strong>   void insertar (int pos, int x)</strong>
+</pre>
+<p>Primero con un if verificamos que exista esa posición en la lista (por ejemplo si la lista tiene 4 nodos podemos insertar hasta la posición 5, es decir uno más allá del último):</p>
+<pre>
+    if (pos &lt;= cantidad() + 1)
+</pre>
+<p>Si ingresa al if ya podemos crear el nodo:</p>
+<pre>
+        Nodo *nuevo = new Nodo();
+        nuevo-&gt;info = x;
+</pre>
+<p>Ahora debemos analizar si la inserción es al principio de la lista, al final o en medio ya que los enlaces varían según donde se lo inserta. <br>
+<p>Para saber si se inserta al principio de la lista preguntamos si en pos llega un 1:</p>
+<pre>
+        if (pos == 1)
+</pre>
+<p>Si llega un 1 luego enlazamos el puntero sig del nodo que creamos con la dirección del primer nodo de la lista (raiz apunta siempre al primer nodo de la lista)<br>
+Verificamos si raiz está apuntando actualmente a un nodo, en caso afirmativo enlazamos el puntero ant con el nodo que acabamos de crear y luego desplazamos raiz al nodo creado:</p>
+<pre>
+            nuevo-&gt;sig = raiz;
+            if (raiz != NULL)
+                raiz-&gt;ant = nuevo;
+            raiz = nuevo;
+</pre>
+<p>Si no se inserta al principio de la lista preguntamos si se inserta al final:</p>
+<pre>
+            if (pos == cantidad() + 1)    
+</pre>
+<p>En caso de insertarse al final recorremos la lista hasta el último nodo:</p>
+<pre>
+                Nodo *reco = raiz;
+                while (reco-&gt;sig != NULL)
+                {
+                    reco = reco-&gt;sig;
+                }
+</pre>
+<p>y enlazamos el puntero sig del último nodo de la lista con la dirección del nodo que acabamos de crear (disponemos en sig del nodo creado el valor NULL ya que no hay otro nodo más adelante) El puntero ant del nodo que creamos lo enlazamos con el nodo que era último hasta este momento y está siendo apuntado por reco:</p>
+<pre>
+                reco-&gt;sig = nuevo;
+                nuevo-&gt;ant = reco;
+                nuevo-&gt;sig = NULL;
+</pre>
+<p>Si no se inserta al principio o al final significa que tenemos que insertar en medio de la lista.<br>
+Disponemos un for donde avanzamos un puntero auxiliar y nos detenemos una posición antes a donde tenemos que insertarlo:</p>
+<pre>
+                Nodo *reco = raiz;
+                for (int f = 1; f &lt;= pos - 2; f++)
+                    reco = reco-&gt;sig;
+</pre>
+<p>Disponemos otro puntero auxiliar que apunte al nodo siguiente a donde está apuntando reco. Ahora enlazamos el puntero sig del nodo apuntado por reco con la dirección del nodo creado y el puntero sig del nodo creado con la dirección del nodo siguiente. El puntero ant del nodo apuntado por nuevo lo enlazamos con el nodo apuntado por reco y el puntero ant del nodo apuntado por siguiente lo apuntamos a nuevo (con esto tenemos actualizados los cuatro punteros internos a la lista):</p>
+<pre>
+                Nodo *siguiente = reco-&gt;sig;
+                reco-&gt;sig = nuevo;
+                nuevo-&gt;ant = reco;
+                nuevo-&gt;sig = siguiente;
+                siguiente-&gt;ant = nuevo;
+</pre>
+<br>
+<br>
+<p>El método extraer recibe como parámetro la posición del nodo a extraer:</p>
+<pre>
+<strong>    int extraer (int pos) {</strong>
+</pre>
+<p>Primero verificamos que la posición exista en la lista:</p>
+<pre>
+    if (pos &lt;= cantidad())
+</pre>
+<p>En caso que exista verificamos si el nodo a extraer es el primero de la lista (este análisis debe hacerse ya que si es el primero de la lista se modifica el puntero raiz) y definimos previamente un puntero que utilizaremos para borrar el nodo y un entero que almacenaremos el valor a retornar:</p>
+<pre>
+        int informacion;
+        Nodo *bor;
+        if (pos == 1)
+</pre>
+<p>Si es el primero guardamos en una variable auxiliar la información del nodo y avanzamos el puntero raiz, luego si raiz apunta a un nodo disponemos el puntero ant de dicho nodo a NULL (también inicializamos bor con la dirección que hay que borrar):</p>
+<pre>
+            informacion = raiz-&gt;info;
+            bor = raiz;
+            raiz = raiz-&gt;sig;
+            if ((raiz != NULL))
+                raiz-&gt;ant = NULL;
+</pre>
+<p>Si el nodo a extraer no está al principio de la lista avanzamos con una estructura repetitiva hasta el nodo anterior a extraer:</p>
+<pre>
+            Nodo *reco;
+            reco = raiz;
+            for (int f = 1; f &lt;= pos - 2; f++)
+                reco = reco-&gt;sig;
+</pre>
+<p>Luego definimos otro puntero auxiliar y lo disponemos en el siguiente nodo a donde está apuntando reco:</p>
+<pre>
+            Nodo *prox = reco-&gt;sig;
+</pre>
+<p>Ahora enlazamos el puntero sig del nodo apuntado por reco al nodo siguiente del nodo apuntado por prox (es decir el nodo apuntado por prox queda fuera de la lista) disponemos finalmente otro puntero llamado siguiente que apunte al nodo que se encuentra una posición más adelante del nodo apuntado por prox, si dicho puntero apunta a un nodo actualizamos el puntero ant de dicho nodo con la dirección del nodo apuntado por reco:</>
+<pre>
+            Nodo *prox = reco-&gt;sig;
+            bor = prox;
+            reco-&gt;sig = prox-&gt;sig;
+            Nodo *siguiente = prox-&gt;sig;
+            if (siguiente != NULL)
+                siguiente-&gt;ant = reco;
+            informacion = prox-&gt;info;
+</pre>
+<p>Finalmente liberamos el espacio del nodo que queremos borrar y retornamos la información:</p>
+<pre>
+        delete bor;
+        return informacion;
+</pre>
+<br><br>
+<p>El método borrar es muy similar al método extraer con la diferencia de que no retorna valor:</p>
+<pre>
+void ListaGenericaDoble::borrar(int pos)
+{
+    if (pos &lt;= cantidad())
+    {
+        Nodo *bor;
+        if (pos == 1)
+        {
+            bor = raiz;
+            raiz = raiz-&gt;sig;
+            if (raiz != NULL)
+                raiz-&gt;ant = NULL;
+        }
+        else 
+        {
+            Nodo *reco;
+            reco = raiz;
+            for (int f = 1; f &lt;= pos - 2; f++)
+                reco = reco-&gt;sig;
+            Nodo *prox = reco-&gt;sig;
+            bor = prox;
+            reco-&gt;sig = prox-&gt;sig;
+            Nodo *siguiente = prox-&gt;sig;
+            if (siguiente != NULL)
+                siguiente-&gt;ant = reco;
+        }
+        delete bor;
+    }
+}
+</pre>
+<br>
+<br>
+<p>El método intercambiar recibe dos enteros que representan las posiciones de los nodos que queremos intercambiar sus informaciones:</p>
+<pre>
+<strong>    void intercambiar (int pos1, int pos2) {</strong>
+</pre>
+<p>Mediante un if verificamos que las dos posiciones existan en la lista:</p>
+<pre>
+    if (pos1 &lt;= cantidad() && pos2 &lt;= cantidad())    
+</pre>
+<p>Definimos un puntero auxiliar llamado reco1, lo inicializamos con la dirección del primer nodo y mediante un for avanzamos hasta la posición almacenada en pos1:</p>
+<pre>
+        Nodo *reco1 = raiz;
+        for (int f = 1; f &lt; pos1; f++)
+        {
+            reco1 = reco1-&gt;sig;
+        }
+</pre>
+<p>De forma similar con un segundo puntero auxiliar avanzamos hasta la posición indicada por pos2:</p>
+<pre>
+        Nodo *reco2 = raiz;
+        for (int f = 1; f &lt; pos2; f++)
+        {
+            reco2 = reco2-&gt;sig;
+        }
+</pre>
+<p>Por último intercambiamos las informaciones que almacenan cada nodo:</p>
+<pre>
+        int aux = reco1-&gt;info;
+        reco1-&gt;info = reco2-&gt;info;
+        reco2-&gt;info = aux;
+</pre>
+<p>El método que retorna el mayor de la lista:</p>      
+<pre>
+    <strong>int mayor () {</strong>
+</pre>
+<p>Verificamos que la lista no esté vacía:</p>
+<pre>
+   if (!vacia()) 
+</pre>
+<p>Suponemos que el mayor es el primero de la lista e inicializamos un puntero auxiliar con la dirección del segundo nodo de la lista:</p>
+<pre>
+        int may = raiz-&gt;info;
+        Nodo *reco = raiz-&gt;sig;
+</pre>
+<p>Mediante una estructura repetitiva recorremos toda la lista:</p>
+<pre>
+        while (reco != NULL) 
+</pre>
+<p>Cada vez que encontramos un nodo con información mayor que la variable may la actualizamos con este nuevo valor y avanzamos el puntero reco para visitar el siguiente nodo:</p>
+<pre>
+            if (reco-&gt;info &gt; may)
+            {
+                may = reco-&gt;info;
+            }
+            reco = reco-&gt;sig;
+</pre>
+<p>Fuera de la estructura repetitiva retornamos el mayor:</p>
+<pre>
+        return may;
+</pre>
+
+<p>El método que retorna la posición del mayor es similar al anterior con la salvedad que debemos almacenar en otro auxiliar la posición donde se almacena el mayor:</p>
+<pre>
+<strong>int ListaGenerica::posMayor() </strong>
+{
+    if (!vacia())    
+    {
+        int may = raiz-&gt;info;
+        int x = 1;
+        int pos = x;
+        Nodo *reco = raiz-&gt;sig;
+        while (reco != NULL)
+        {
+            if (reco-&gt;info &gt; may) 
+            {
+                may = reco-&gt;info;
+                pos = x;
+            }
+            reco = reco-&gt;sig;
+            x++;
+        }
+        return pos;
+    }
+    else
+        return -1;
+}
+</pre>
+
+<p>El método que debe retornar si está ordenada la lista de menor a mayor es:</p>
+<pre>
+    <strong>bool ordenada() {</strong>
+</pre>
+<p>Lo primero que verificamos si la lista tiene más de un nodo significa que debemos controlarla:</p>
+<pre>
+    if (cantidad()&gt;1) 
+</pre>
+<p>Disponemos dos punteros auxiliares con las direcciones del primer y segundo nodo de la lista:</p>
+<pre>
+        Nodo *reco1 = raiz;
+        Nodo *reco2 = raiz-&gt;sig;
+</pre>
+<p>Mediante un while mientras no se finaliza la lista:</p>
+<pre>
+        while (reco2 != NULL) 
+</pre>
+<p>controlamos si la información del segundo nodo es menor al nodo anterior significa que la lista no está ordenada y podemos parar el análisis retornando un false</p>
+<pre>
+            if (reco2-&gt;info&lt;reco1-&gt;info) 
+            {
+                return false;
+            }
+</pre>
+<p>Dentro del while avanzamos los dos punteros a sus nodos siguientes respectivamente.</p>
+<pre>
+            reco2 = reco2-&gt;sig;
+            reco1 = reco1-&gt;sig;
+</pre>
+
+<p>Fuera del while retornamos true indicando que la lista está ordenada de menor a mayor</p>
+<pre>
+    return true;
+</pre>
+<br>
+<br>
+<p>El método existe:</p>
+<pre>
+<strong>
+    bool existe(int x) {
+</strong>
+</pre>
+<p>Mediante un while recorremos la la lista:</p>
+<pre>
+    Nodo *reco = raiz;
+    while (reco != NULL) 
+</pre>
+<p>y en cada nodo que visitamos controlamos si el parámetro x es igual a la información del nodo, en caso afirmativo salimos del método retornando true:</p>
+<pre>
+        if (reco-&gt;info == x)
+            return true;
+        reco = reco-&gt;sig;
+</pre>
+<p>Fuera del while retornamos false indicando que ningún nodo coincide con el parámetro x:</p>
+<pre>
+    return false;
+</pre>
+<br><br>
+
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+<p>Plantear una clase para administrar una lista genérica doblemente encadenada implementando los siguientes métodos:<br>
+a) Insertar un nodo al principio de la lista.<br>
+b) Insertar un nodo al final de la lista.<br>
+c) Insertar un nodo en la segunda posición. Si la lista está vacía no se inserta el nodo.<br>
+d) Insertar un nodo en la ante última posición.<br>
+e) Borrar el primer nodo.<br>
+f) Borrar el segundo nodo.<br>
+g) Borrar el último nodo.<br>
+h) Borrar el nodo con información mayor.
+</p>
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+#include &lt;iostream&gt;
+
+using namespace std;
+
+class ListaGenerica {
+private:
+    class Nodo {
+    public:
+        int info;
+        Nodo *sig;
+        Nodo *ant;
+    };
+
+    Nodo *raiz;
+public:
+    ListaGenerica();
+    ~ListaGenerica();
+    void imprimir();
+    void insertarPrimero(int x);
+    void insertarUtlimo(int x);
+    void insertarSegundo(int x);
+    void insertarAnteUltimo(int x);
+    void borrarPrimero();
+    void borrarSegundo();
+    void borrarUltimo();
+    void borrarMayor();
+};
+
+ListaGenerica::ListaGenerica()
+{
+    raiz = NULL;
+}
+
+ListaGenerica::~ListaGenerica()
+{
+    Nodo *reco = raiz;
+    Nodo *bor;
+    while (reco != NULL)
+    {
+        bor = reco;
+        reco = reco-&gt;sig;
+        delete bor;
+    }
+}
+
+void ListaGenerica::imprimir()
+{
+    Nodo *reco = raiz;
+    cout &lt;&lt; "Listado completo.\n";
+    while (reco != NULL)
+    {
+        cout &lt;&lt; reco-&gt;info &lt;&lt; "-";
+        reco = reco-&gt;sig;
+    }
+    cout &lt;&lt; "\n";
+}
+
+
+void ListaGenerica::insertarPrimero(int x)
+{
+    Nodo *nuevo = new Nodo();
+    nuevo-&gt;info = x;
+    nuevo-&gt;sig = raiz;
+    if (raiz != NULL)
+        raiz-&gt;ant = nuevo;
+    raiz = nuevo;
+}
+
+void ListaGenerica::insertarUtlimo(int x)
+{
+    Nodo *nuevo = new Nodo();
+    nuevo-&gt;info = x;
+    if (raiz == NULL)
+        raiz = nuevo;
+    else
+    {
+        Nodo *reco = raiz;
+        while (reco-&gt;sig != NULL)
+        {
+            reco = reco-&gt;sig;
+        }
+        reco-&gt;sig = nuevo;
+        nuevo-&gt;ant = reco;
+    }
+}
+
+void ListaGenerica::insertarSegundo(int x)
+{
+    if (raiz != NULL)
+    {
+        Nodo *nuevo = new Nodo();
+        nuevo-&gt;info = x;
+        if (raiz-&gt;sig == NULL)
+        {
+            //Hay un solo nodo.
+            raiz-&gt;sig = nuevo;
+            nuevo-&gt;ant = raiz;
+        }
+        else
+        {
+            Nodo *segundo = raiz-&gt;sig;
+            nuevo-&gt;sig = segundo;
+            nuevo-&gt;ant = raiz;
+            raiz-&gt;sig = nuevo;
+            segundo-&gt;ant = nuevo;
+        }
+    }
+}
+
+void ListaGenerica::insertarAnteUltimo(int x)
+{
+    if (raiz != NULL)
+    {
+        Nodo *nuevo = new Nodo();
+        nuevo-&gt;info = x;
+        if (raiz-&gt;sig == NULL) {
+            //Hay un solo nodo.
+            nuevo-&gt;sig = raiz;
+            raiz-&gt;ant = nuevo;
+            nuevo-&gt;ant = NULL;
+            raiz = nuevo;
+        }
+        else
+        {
+            Nodo *reco = raiz;
+            while (reco-&gt;sig != NULL)
+            {
+                reco = reco-&gt;sig;
+            }
+            Nodo *anteultimo = reco-&gt;ant;
+            anteultimo-&gt;sig = nuevo;
+            nuevo-&gt;ant = anteultimo;
+            nuevo-&gt;sig = reco;
+            reco-&gt;ant = nuevo;
+        }
+    }
+}
+
+void ListaGenerica::borrarPrimero()
+{
+    if (raiz != NULL)
+    {
+        Nodo *bor = raiz;
+        raiz = raiz-&gt;sig;
+        if (raiz != NULL)
+            raiz-&gt;ant = NULL;
+        delete bor;
+    }
+}
+
+void ListaGenerica::borrarSegundo()
+{
+    if (raiz != NULL)
+    {
+        if (raiz-&gt;sig != NULL)
+        {
+            Nodo *bor = raiz-&gt;sig;
+            Nodo *tercero = raiz-&gt;sig;
+            tercero = tercero-&gt;sig;
+            raiz-&gt;sig = tercero;
+            if (tercero != NULL)
+                tercero-&gt;ant = raiz;
+            delete bor;
+        }
+    }
+}
+
+void ListaGenerica::borrarUltimo()
+{
+    if (raiz != NULL)
+    {
+        if (raiz-&gt;sig == NULL)
+        {
+            delete raiz;
+            raiz = NULL;
+        }
+        else
+        {
+            Nodo *reco = raiz;
+            while (reco-&gt;sig != NULL)
+            {
+                reco = reco-&gt;sig;
+            }
+            Nodo *ante = reco-&gt;ant;
+            ante-&gt;sig = NULL;
+            delete reco;
+        }
+    }
+}
+
+void ListaGenerica::borrarMayor()
+{
+    if (raiz != NULL)
+    {
+        Nodo *reco = raiz;
+        int may = raiz-&gt;info;
+        while (reco != NULL)
+        {
+            if (reco-&gt;info&gt;may)
+            {
+                may = reco-&gt;info;
+            }
+            reco = reco-&gt;sig;
+        }
+        reco = raiz;
+        Nodo *bor;
+        while (reco != NULL)
+        {
+            if (reco-&gt;info == may)
+            {
+                if (reco == raiz)
+                {
+                    bor = raiz;
+                    raiz = raiz-&gt;sig;
+                    if (raiz != NULL)
+                        raiz-&gt;ant = NULL;
+                    delete bor;
+                    return;
+                }
+                else {
+                    if (reco-&gt;sig == NULL)
+                    {
+                        bor = reco;
+                        reco = reco-&gt;ant;
+                        reco-&gt;sig = NULL;
+                        delete bor;
+                        return;
+                    }
+                    else
+                    {
+                        Nodo *ante = reco-&gt;ant;
+                        bor = reco;
+                        reco = reco-&gt;sig;
+                        ante-&gt;sig = reco;
+                        reco-&gt;ant = ante;
+                        delete bor;
+                        return;                        
+                    }
+                }
+            }
+            else {
+                reco = reco-&gt;sig;
+            }
+        }
+    }
+}
+
+
+void main()
+{
+    ListaGenerica *lg = new ListaGenerica();
+    lg-&gt;insertarPrimero(10);
+    lg-&gt;insertarPrimero(45);
+    lg-&gt;insertarPrimero(23);
+    lg-&gt;insertarPrimero(89);
+    lg-&gt;imprimir();
+    cout &lt;&lt; "Insertamos un nodo al final:\n";
+    lg-&gt;insertarUtlimo(160);
+    lg-&gt;imprimir();
+    cout &lt;&lt; "Insertamos un nodo en la segunda posición:\n";
+    lg-&gt;insertarSegundo(13);
+    lg-&gt;imprimir();
+    cout &lt;&lt; "Insertamos un nodo en la anteultima posición:\n";
+    lg-&gt;insertarAnteUltimo(600);
+    lg-&gt;imprimir();
+    cout &lt;&lt; "Borramos el primer nodo de la lista:\n";
+    lg-&gt;borrarPrimero();
+    lg-&gt;imprimir();
+    cout &lt;&lt; "Borramos el segundo nodo de la lista:\n";
+    lg-&gt;borrarSegundo();
+    lg-&gt;imprimir();
+    cout &lt;&lt; "Borramos el ultimo nodo de la lista:\n";
+    lg-&gt;borrarUltimo();
+    lg-&gt;imprimir();
+    cout &lt;&lt; "Borramos el mayor de la lista:\n";
+    lg-&gt;borrarMayor();
+    lg-&gt;imprimir();
+    cin.get();
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/ListaGenericaDoble2.zip">ListaGenericaDoble2.zip</a></p>
+
+}</pre>
+<h2><a href="index7732.html?inicio=30">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=42&codigo=173&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:55 GMT -->
+</html>

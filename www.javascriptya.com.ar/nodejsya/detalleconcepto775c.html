@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=17&codigo=17&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:25:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Framework Express - servir archivos estáticos html, css, jpg, mp3, mp4, ico, js etc</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++, programación, tutorial, nodejs">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de NodeJS.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>17 - Framework Express - servir archivos estáticos html, css, jpg, mp3, mp4, ico, js etc</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>En el concepto anterior vimos los pasos para implementar una aplicación web mínima utilizando el Framework Express.</p>
+<p>Ahora vamos a ve que debemos agregarle a dicha aplicación para que nuestro servidor retorne al navegador archivos estáticos con distintos formatos como podrían ser imágenes, archivos HTML, js, videos mp4 etc.</p>
+<p>Vamos a implementar el mismo problema que resolvimos anteriormente con Node.js sin utilizar un framework.</p>
+
+<h3>Problema</h3>
+<p>Confeccionaremos un sitio que contenga una serie de archivos html, css, jpg, mp3, mp4 e ico.</p>
+<p>Crearemos un directorio llamado 'ejercicio19' y dentro de este otro directorio interno llamado 'public' donde se deben disponer todos los archivos html,css, jpg, mp3, mp4 e ico (al final de la página hay un enlace para descargar este proyecto que contiene todos estos archivos):</p>
+<p><img src="imagentema/foto058.jpg" border="0" alt="archivos estaticos express node.js"></p>
+<p>Ahora procedemos a instalar el framework Express para nuestro nuevo proyecto (tengamos en cuenta que en casa proyecto debemos instalarlo)</p>
+<p>Para la instalación vimos que desde la línea de comando nos ubicamos en la carpeta de nuestro proyecto (ejercicio19) y utilizamos la herramienta npm:</p>
+<pre>
+c:\ejerciciosnodejs\ejercicio19>node install express
+</pre>
+<p>Ya tenemos instalado la última versión del framework Express y pasamos a crear el archivo app.js:</p>
+<pre class="recuadro">
+var express=require('express');
+var app=express();
+
+app.use(express.static(__dirname + '/public'));
+
+var server=app.listen(8888,function(){
+    console.log('Servidor web iniciado');
+});
+</pre>
+<p>Ya podemos arrancar nuestro programa desde la línea de comandos estando en el directorio de nuestro proyecto:</p>
+<pre>
+node app
+</pre>
+<p>Desde el navegador hacemos las peticiones al servidor local y podemos comprobar que nos retorna los distintos recursos enumerados dentro de cada página (imágenes, audios, videos, hojas de estilo etc.):</p>
+<p><img src="imagentema/foto022.jpg" border="0" alt="servidor web nodejs múltples archivos html, jpg, mp3, mp4, ico etc."></p>
+
+<p>Si vemos para poder servir archivos estáticos solo tenemos que llamar al método use y dentro llamar al método static de la variable express con un string que indique el path donde se encuentran los archivos estáticos.</p>
+<p>La variable global '__dirname' almacena el path donde se encuentra la aplicación Node.js propiamente dicha, en nuestro ejemplo se encuentra en c:\ejerciciosnodejs\ejercicio19</p>
+<p>Le concatenamos la subcarpeta donde se almacenan los archivos estáticos (recordemos que creamos una carpeta llamada public donde localizamos los archivos estáticos):</p>
+
+<pre>
+app.use(express.static(__dirname + '/public'));
+</pre>
+
+<p>Este proyecto con Express lo puede descargar en un zip con todos los archivos desde este enlace :
+<a href="proyectos/ejercicio19.zip">ejercicio19</a></p>
+<h2><a href="index9187.html?inicio=15">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-35', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=17&codigo=17&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:25:07 GMT -->
+</html>

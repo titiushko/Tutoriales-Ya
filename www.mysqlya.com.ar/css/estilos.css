@@ -1,0 +1,103 @@
+div.upperleft {
+	max-width: 970px;
+	margin-left: auto;
+	margin-right: auto;
+
+	background-color: #AED7A8;
+	background-image: url('../imagenes/upperleft.png');
+	background-repeat: no-repeat;
+	background-position: top left;
+	text-align:left;
+}
+
+div.upperright {
+	background-image: url('../imagenes/upperright.png');
+	background-repeat: no-repeat;
+	background-position: top right;
+}
+
+div.lowerleft {
+	background-image: url('../imagenes/lowerleft.png');
+	background-repeat: no-repeat;
+	background-position: bottom left;
+}
+
+div.lowerright {
+	background-image: url('../imagenes/lowerright.png');
+	background-repeat: no-repeat;
+	background-position: bottom right;
+	padding: 1% 1% 1% 1%;
+}
+
+.titulotabla {
+	font-family:  font-family: Courier, "Courier New", monospace;
+	font-size: 13px;
+    font-style: italic;
+	background-color: #ffff00;
+}
+
+.cuerpotabla {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+    font-style: italic;
+}
+
+.cuerpoformulario {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+    font-style: italic;
+	background-color: #e0e0e0;
+	
+}
+
+.tablaa {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+    font-style: italic;
+	background-color: #aaaaaa;
+	border: outset 5px; 
+    border-collapse: separate;
+    border-spacing: 5px;
+}
+
+.programafuente {
+	 font-family: Courier, "Courier New", monospace;
+	font-size: 13px;
+}
+
+.texto {
+	COLOR: #666666;
+	FONT-FAMILY: Tahoma, Verdana, sans-serif; 
+	FONT-SIZE: 14px; 
+	padding-top: 10px;
+	padding-left: 10px;	
+	padding-bottom: 10px;
+	padding-right: 10px;
+	TEXT-DECORATION: none
+}
+.texto-grande-bold {
+	COLOR: #666666; FONT-FAMILY: Tahoma, Verdana, sans-serif;
+	FONT-SIZE: 15px; 
+	FONT-WEIGHT: bold; 
+	TEXT-DECORATION: none;
+	padding-top: 10px;
+	padding-left: 10px;	
+	padding-bottom: 10px;
+	padding-right: 10px	
+}
+
+#cuadrodescri {
+	BORDER-RIGHT: #333 3px groove;
+	PADDING-RIGHT: 15px;
+	BORDER-TOP: #333 10px groove;
+	PADDING-LEFT: 15px; 
+	BACKGROUND: #ffc; 
+	PADDING-BOTTOM: 15px; 
+	MARGIN: 20px auto; 
+	BORDER-LEFT: #333 3px groove; 
+	MAX-WIDTH: 750px; 
+	PADDING-TOP: 15px; 
+	BORDER-BOTTOM: #333 3px groove; 
+	TEXT-ALIGN: left; 
+	voice-family: inherit
+}

@@ -1,0 +1,488 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=3&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:11:35 GMT -->
+<head>
+<title>Capturar el clic de un botón</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>3 - Capturar el clic de un botón</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+ <div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+<h3>Problema:</h3>
+<p>Confeccionar un programa que permita la carga de dos números en controles de tipo EditText. Mostrar mensajes que soliciten la carga de los valores. Disponer un Button para sumar los dos valores ingresados. Mostrar el resultado en un tercer TextView.</p>
+
+<p>La interfaz visual debe quedar algo semejante a esto:<br>
+<img src="imagentema/foto014.jpg" border="0" alt="interfaz sumar dos números android"><br>
+</p>
+
+
+<p>Veamos paso a paso como creamos la interfaz visual de nuestro programa. Primero borramos el TextView que aparece por defecto cuando se crea un proyecto con el Android Studio. Ahora desde la ventana "Palette" seleccionamos de la pestaña "Widgets" el control "Medium Text" (es de la clase TextView) y lo arrastramos a la ventana de diseño de nuestra interfaz a la parte superior izquierda:</p>
+<img src="imagentema/foto015.jpg" border="0" alt="interfaz sumar dos numeros android"><br>
+<p>Ahora lo seleccionamos y en la ventana de propiedades (Properties) especificamos la propiedad text (como habíamos visto anteriormente) disponemos el texto "Ingrese el primer valor:":<br>
+<img src="imagentema/foto016.jpg" border="0" alt="interfaz sumar dos numeros android"><br></p>
+<p>También vamos a especificar la propiedad "id", y le asignaremos el valor tv1<br>
+<img src="imagentema/foto017.jpg" border="0" alt="interfaz sumar dos numeros android"><br>
+Hemos entonces asignado como nombre a este objeto: tv1 (recordemos que se trata de un objeto de la clase TextView)</p>
+<p>Ahora de la paleta de componentes seleccionamos la pestaña "Text Fields" y arrastramos el "Number" (pertenece a la clase EditText)<br>
+<img src="imagentema/foto018.jpg" border="0" alt="interfaz sumar dos numeros android"><br>
+En la ventana de properties estando seleccionado el EditText configuramos la propiedad "id" con el nombre et1 (este nombre haremos referencia posteriormente desde Java)</p>
+
+<p>Efectuamos los mismos pasos para crear el segundo "Medium Text" y "Number" (inicializamos las propiedades respectivas) Definimos los id con los nombres tv2 y et2, el resultado visual debe ser algo semejante a esto:</p>
+<img src="imagentema/foto019.jpg" border="0" alt="interfaz sumar dos numeros android"><br>
+</p>
+<p>De la pestaña "Widgets" arrastramos un control de tipo "Button":<br>
+<img src="imagentema/foto020.jpg" border="0" alt="interfaz sumar dos numeros android"><br>
+Inicializamos la propiedad text con el texto "Sumar" y la propiedad id la dejamos con el valor ya creado llamado "button".</p>
+<p>Para terminar con nuestra interfaz visual arrastramos un tercer objeto de tipo "Medium Text" (es de la clase TextView) y definimos la propiedad id con el valor "tv3" y la propiedad text con el texto "Resultado", recordemos que la interfaz final debe ser semejante a esta:<br>
+<img src="imagentema/foto014.jpg" border="0" alt="interfaz sumar dos numeros android"><br>
+</p>
+<p>Si en este momento ejecutamos la aplicación aparece la interfaz visual correctamente pero cuando presionemos el botón no mostrará la suma.</p>
+
+<p>Hasta ahora hemos trabajado solo con el archivo xml (activity_main.xml) donde se definen los controles visuales de la ventana que estamos creando.</p>
+<p>Abrimos seguidamente el archivo MainActivity.java que lo podemos ubicar en la carpeta app\java\ar\com\tutorialesya\proyecto002\MainActivity:</p>
+ <img src="imagentema/foto021.jpg" border="0" alt="carpetas y archivos de un proyecto android"><br>
+
+<p>La clase MainActivity hereda de la clase ActionBarActivity. La clase ActionBarActivity representa una ventana de Android y tiene todos los métodos necesarios para crear y mostrar los objetos que hemos dispuesto en el archivo xml.</p>
+<p>El código fuente de la clase MainActivity.java es:</p>
+<pre class="recuadro">
+package ar.com.tutorialesya.proyecto002;
+
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
+
+public class MainActivity extends ActionBarActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+}
+</pre>
+<p>Como mínimo se debe sobrescribir el método onCreate heredado de la clase ActionBarActivity donde procedemos a llamar al método setContentView pasando como referencia una valor almacenado en una constante llamada activity_main contenida en una clase llamada layout que a su vez la contiene una clase llamada R (veremos más adelante que el Android Studio se encarga de crear la clase R en forma automática y sirve como puente entre el archivo xml y nuestra clase MainActivity)<br>
+Luego veremos los otros métodos onCreateOptionsMenu y onOptionsItemSelected.</p>
+<h3>Captura de eventos.</h3>
+<p>Ahora viene la parte donde definimos variables en java donde almacenamos las referencias a los objetos definidos en el archivo XML.<p>
+<p>Definimos tres variables, dos de tipo EditText y finalmente una de tipo TextView (estas dos clases se declaran en el paquete android.widget, es necesario importar dichas clases para poder definir las variables de dichas clases, la forma más fácil de importar las clases es una vez que definimos el 
+objeto por ejemplo privete TextView tv3 veremos que aparece en rojo el nombre de la clase y si disponemos el cursor sobre el nombre de la clase y presionamos las teclas "Alt" y "Enter" luego el Android Studio codifica automáticamente la línea que importa la clase: import android.widget.TextView;):</p>
+<pre class="recuadro">
+package ar.com.tutorialesya.proyecto002;
+
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.TextView;
+
+
+public class MainActivity extends ActionBarActivity {
+
+    private EditText et1,et2;
+    private TextView tv3;
+  
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+}
+</pre>
+<p>Recordar que la forma más fácil de importar las clases EditText y TextView es tipear las dos líneas:</p>
+<pre>
+    private EditText et1,et2;
+    private TextView tv3;
+</pre>
+<p>y luego presionar las teclas "Alt" y "Enter" en cada nombre de clase que se debe importar<br>
+Esto hace que se escriban automáticamente los import:</p>
+<pre>
+import android.widget.EditText;
+import android.widget.TextView;
+</pre>
+
+<p>Los nombres que le dí a los objetos en este caso coinciden con la propiedad id (no es obligatorio):</p>
+<pre>
+
+    private EditText et1,et2;
+    private TextView tv3;
+</pre>
+<p>No definimos TextView para los dos mensajes "Ingrese el primer valor" e "Ingrese el segundo valor" ya que no necesitaremos interactuar con ellos. También veremos que el objeto de la clase Button no es necesario definir un atributo sino que desde el archivo XML inicializaremos la propiedad onClick.</p>
+<p>En el método onCreate debemos enlazar estas variables con los objetos definidos en el archivo XML, esto se hace llamando al método findViewById:</p>
+<pre>
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        et1=(EditText)findViewById(R.id.et1);
+        et2=(EditText)findViewById(R.id.et2);
+        tv3=(TextView)findViewById(R.id.tv3);
+    }
+</pre>
+<p>Al método findViewById debemos pasar la constante creada en la clase R (recordemos que se crea automáticamente esta clase) el nombre de la constante si debe ser igual con el nombre de la propiedad del objeto creado en el archivo XML. Como la clase findViewById retorna una clase de tipo View luego debemos utilizar el operador cast (es decir le antecedemos entre paréntesis el nombre de la clase)</p>
+<p>Ya tenemos almacenados en las variables las referencias a los tres objetos que se crean al llamar al método:setContentView(R.layout.main); . </p>
+
+
+<p>Ahora planteamos el método que se ejecutará cuando se presione el botón (el método debe recibir como parámetro un objeto de la clase View) En nuestro ejemplo lo llamé sumar:</p>
+<pre class="recuadro">
+package ar.com.tutorialesya.proyecto002;
+
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+
+public class MainActivity extends ActionBarActivity {
+
+    private EditText et1,et2;
+    private TextView tv3;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        et1=(EditText)findViewById(R.id.et1);
+        et2=(EditText)findViewById(R.id.et2);
+        tv3=(TextView)findViewById(R.id.tv3);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    //Este método se ejecutará cuando se presione el botón
+    public void sumar(View view) {
+
+    }
+
+}
+</pre>
+<p>Debemos importar lar clase View ("Alt" y "Enter" estando el cursor sobre el nombre de la clase "View")</p>
+<p>Ahora debemos ir al archivo XML e inicializar la propiedad onClick del objeto button con el nombre del método que acabamos de crear (este paso es fundamental para que el objeto de la clase Button pueda llamar al método sumar que acabamos de crear):</p>
+<img src="imagentema/foto022.jpg" border="0" alt="interfaz sumar dos numeros android"><br>
+
+<p>Finalmente implementaremos la lógica para sumar los dos valores ingresados en los controles EditText:</p>
+<pre>
+    public void sumar(View view) {
+        String valor1=et1.getText().toString();
+        String valor2=et2.getText().toString();
+        int nro1=Integer.parseInt(valor1);
+        int nro2=Integer.parseInt(valor2);
+        int suma=nro1+nro2;
+        String resu=String.valueOf(suma);
+        tv3.setText(resu);
+    }
+</pre>
+<p>Extraemos el texto de los dos controles de tipo EditText y los almacenamos en dos variables locales de tipo String. Convertimos los String a tipo entero, los sumamos y el resultado lo enviamos al TextView donde se muestra la suma (previo a convertir la suma a String)</p>
+<p>La clase completa queda entonces como:</p>
+<pre class="recuadro">
+package ar.com.tutorialesya.proyecto002;
+
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+
+public class MainActivity extends ActionBarActivity {
+
+    private EditText et1,et2;
+    private TextView tv3;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        et1=(EditText)findViewById(R.id.et1);
+        et2=(EditText)findViewById(R.id.et2);
+        tv3=(TextView)findViewById(R.id.tv3);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    //Este método se ejecutará cuando se presione el botón
+    public void sumar(View view) {
+        String valor1=et1.getText().toString();
+        String valor2=et2.getText().toString();
+        int nro1=Integer.parseInt(valor1);
+        int nro2=Integer.parseInt(valor2);
+        int suma=nro1+nro2;
+        String resu=String.valueOf(suma);
+        tv3.setText(resu);
+    }
+
+
+}
+
+</pre>
+<p>Si ejecutamos nuestro programa podemos ver ahora que luego de cargar dos valores al presionar el botón aparece en el tercer TextView el resultado de la suma de los dos EditText:</p>
+
+<img src="imagentema/foto023.jpg" border="0" alt="interfaz sumar dos numeros android"><br>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/Proyecto002.zip">proyecto002.zip</a>
+</p></div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+<br>
+   <h2><a href="index2904.html?inicio=0">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-34', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=3&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:12:54 GMT -->
+</html>

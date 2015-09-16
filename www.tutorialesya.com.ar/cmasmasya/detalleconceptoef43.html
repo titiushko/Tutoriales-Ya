@@ -1,0 +1,435 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=38&codigo=169&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:46 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Estructuras dinámicas en C++: Listas tipo Cola</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>38 - Estructuras dinámicas en C++: Listas tipo Cola</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Una lista se comporta como una cola si las inserciones las hacemos al final y las extracciones las hacemos por el frente de la lista. También se las llama listas FIFO (First In First Out - primero en entrar primero en salir)</p>
+
+<p>Confeccionaremos un programa que permita administrar una lista tipo cola. Desarrollaremos los métodos de insertar, extraer, vacia e imprimir, además del constructor y destructor.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include &lt;iostream&gt;
+
+using namespace std;
+
+class Cola {
+private:
+    class Nodo {
+    public:
+        int info;
+        Nodo *sig;
+    };
+
+    Nodo *raiz;
+    Nodo *fondo;
+public:
+    Cola();
+    ~Cola();
+    void insertar(int x);
+    int extraer();
+    void imprimir();
+    bool vacia();
+};
+
+
+Cola::Cola()
+{
+    raiz = NULL;
+    fondo = NULL;
+}
+
+Cola::~Cola()
+{
+    Nodo *reco = raiz;
+    Nodo *bor;
+    while (reco != NULL)
+    {
+        bor = reco;
+        reco = reco-&gt;sig;
+        delete bor;
+    }
+}
+
+void Cola::insertar(int x)
+{
+    Nodo *nuevo;
+    nuevo = new Nodo();
+    nuevo-&gt;info = x;
+    nuevo-&gt;sig = NULL;
+    if (vacia()) 
+    {
+        raiz = nuevo;
+        fondo = nuevo;
+    }
+    else {
+        fondo-&gt;sig = nuevo;
+        fondo = nuevo;
+    }
+}
+
+int Cola::extraer()
+{
+    if (!vacia())
+    {
+        int informacion = raiz-&gt;info;
+        Nodo *bor = raiz;
+        if (raiz == fondo)
+        {
+            raiz = NULL;
+            fondo = NULL;
+        }
+        else 
+        {
+            raiz = raiz-&gt;sig;
+        }
+        delete bor;
+        return informacion;
+    }
+    else
+        return -1;
+}
+
+void Cola::imprimir()
+{
+    Nodo *reco = raiz;
+    cout &lt;&lt; "Listado de todos los elementos de la cola.\n";
+    while (reco != NULL)
+    {
+        cout &lt;&lt; reco-&gt;info &lt;&lt; "-";
+        reco = reco-&gt;sig;
+    }
+    cout &lt;&lt; "\n";
+}
+
+bool Cola::vacia()
+{
+    if (raiz == NULL)
+        return true;
+    else
+        return false;
+}
+
+void main()
+{
+    Cola *cola1 = new Cola();
+    cola1-&gt;insertar(5);
+    cola1-&gt;insertar(10);
+    cola1-&gt;insertar(50);
+    cola1-&gt;imprimir();
+    cout &lt;&lt;"Extraemos uno de la cola:" &lt;&lt;cola1-&gt;extraer()&lt;&lt;"\n";
+    cola1-&gt;imprimir();
+    delete cola1;
+    cin.get();
+}</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/Cola1.zip">Cola1.zip</a></p>
+
+
+
+<p>La declaración del nodo es igual a la clase Pila. Luego definimos dos punteros externos llamados raiz y fondo:</p>
+<pre>
+class Cola {
+private:
+    class Nodo {
+    public:
+        int info;
+        Nodo *sig;
+    };
+
+    Nodo *raiz;
+    Nodo *fondo;
+public:
+    Cola();
+    ~Cola();
+    void insertar(int x);
+    int extraer();
+    void imprimir();
+    bool vacia();
+};
+
+</pre>
+<p>raíz apunta al principio de la lista y fondo al final de la lista. Utilizar dos punteros tiene como ventaja que cada vez que tengamos que insertar un nodo al final de la lista no tengamos que recorrerla. Por supuesto que es perfectamente válido implementar una cola con un único puntero externo a la lista.</p>
+<p>En el constructor inicializamos a los dos punteros en NULL :</p>
+<pre>
+Cola::Cola()
+{
+    raiz = NULL;
+    fondo = NULL;
+}
+</pre>
+
+<p>Y en el destructor igual que en la clase Pila procedemos a liberar el espacio ocupado por cada uno de los nodos de la lista;</p>
+<pre>
+Cola::~Cola()
+{
+    Nodo *reco = raiz;
+    Nodo *bor;
+    while (reco != NULL)
+    {
+        bor = reco;
+        reco = reco-&gt;sig;
+        delete bor;
+    }
+}
+</pre>
+
+<p>El método vacía retorna true si la lista no tiene nodos y false en caso contrario:</p>
+<pre>
+bool Cola::vacia()
+{
+    if (raiz == NULL)
+        return true;
+    else
+        return false;
+}
+</pre>
+
+<p>En la inserción luego de crear el nodo tenemos dos posibilidades: que la cola esté vacía, en cuyo caso los dos punteros externos a la lista deben apuntar al nodo creado, o que haya nodos en la lista.</p>
+<pre>
+void Cola::insertar(int x)
+{
+    Nodo *nuevo;
+    nuevo = new Nodo();
+    nuevo-&gt;info = x;
+    nuevo-&gt;sig = NULL;
+    if (vacia()) 
+    {
+        raiz = nuevo;
+        fondo = nuevo;
+    }
+    else 
+    {
+        fondo-&gt;sig = nuevo;
+        fondo = nuevo;
+    }
+}
+</pre>
+<p>Recordemos que definimos un puntero llamado nuevo, luego creamos el nodo con el operador new y cargamos los dos atributos, el de información con lo que llega en el parámetro y el puntero con NULL ya que se insertará al final de la lista, es decir no hay otro después de este.</p>
+<p>Si la lista está vacía:</p>
+<img src="imagentema/foto073.jpg" border="0" alt="Cola"><br>
+<p>En caso de no estar vacía:</p>
+<img src="imagentema/foto074.jpg" border="0" alt="Cola"><br>
+
+<p>Debemos enlazar el puntero sig del último nodo con el nodo recién creado:</p>
+<pre>
+        fondo-&gt;sig = nuevo;
+</pre>
+<img src="imagentema/foto075.jpg" border="0" alt="Cola"><br>
+<p>Y por último el puntero externo fondo debe apuntar al nodo apuntado por nuevo:</p>
+<pre>
+        fondo = nuevo;
+</pre>
+<img src="imagentema/foto076.jpg" border="0" alt="Cola"><br>
+
+<p>Con esto ya tenemos correctamente enlazados los nodos en la lista tipo cola. Recordar que el puntero nuevo desaparece cuando se sale del método insertar, pero el nodo creado no se pierde porque queda enlazado en la lista.</p>
+
+
+<p>El funcionamiento del método extraer es similar al de la pila:</p>
+<pre>
+int Cola::extraer()
+{
+    if (!vacia())
+    {
+        int informacion = raiz-&gt;info;
+        Nodo *bor = raiz;
+        if (raiz == fondo)
+        {
+            raiz = NULL;
+            fondo = NULL;
+        }
+        else 
+        {
+            raiz = raiz-&gt;sig;
+        }
+        delete bor;
+        return informacion;
+    }
+    else
+        return -1;
+}
+</pre>
+
+<p>Si la lista no está vacía guardamos en una variable local la información del primer nodo:
+<pre>
+        int informacion = raiz-&gt;info;
+</pre>
+<p>Definimos un puntero y lo inicializamos con el primero de la lista:</p>
+<pre>
+        Nodo *bor = raiz;
+</pre>
+
+<p>Para saber si hay un solo nodo verificamos si los dos punteros raiz y fondo apuntan a la misma dirección de memoria:</p>
+<pre>
+        if (raiz == fondo)
+        {
+</pre>
+<img src="imagentema/foto077.jpg" border="0" alt="Cola"><br>
+<p>Luego hacemos:</p>
+<pre>
+            raiz = NULL;
+            fondo = NULL;
+</pre>
+<img src="imagentema/foto078.jpg" border="0" alt="Cola"><br>
+<p>En caso de haber 2 o más nodos debemos avanzar el puntero raiz al siguiente nodo:</p>
+<img src="imagentema/foto079.jpg" border="0" alt="Cola"><br>
+<pre>
+            raiz = raiz-&gt;sig;
+</pre>
+<img src="imagentema/foto079.jpg" border="0" alt="Cola"><br>
+<p>Ya tenemos la lista correctamente enlazada (raiz apunta al primer nodo y fondo continúa apuntando al último nodo)</p>
+<p>Finalmente eliminamos el nodo y retornamos la información:</p>
+<pre>
+        delete bor;
+        return informacion;
+</pre>
+
+<p>Si la lista tipo cola está vacía retornamos un -1 (que representa que la cola está vacía, no debemos insertar este valor -1 en la lista)</p>
+<h2><a href="index7732.html?inicio=30">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=38&codigo=169&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:46 GMT -->
+</html>

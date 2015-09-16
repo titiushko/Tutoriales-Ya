@@ -1,0 +1,494 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=133&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:57:05 GMT -->
+<head>
+<title>Alta y Consulta de una tabla de MySQL</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Alta y Consulta de una tabla de MySQL</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<h3>Problema 1</h3>
+<p>Ya creamos en el concepto anterior una base de datos llamada bd1 y en la misma creamos una tabla llamada articulos.</p>
+<p>Procederemos a implementar en Java un programa que nos permita comunicarnos con la base de datos "bd1" e insertar filas en la tabla "articulos" y posteriormente consultar su contenido.</p>
+
+<p>1 - Creamos desde Eclipse un proyecto llamado "basededatos01" y seguidamente con el WindowBuilder creamos una clase llamada "Formulario".</p>
+<p>2 - Primero debemos añadir el driver que descargamos (mysql-connector-java-5.1.18-bin.jar) presionamos el botón derecho del mouse sobre nuestro proyecto y seleccionamos la opción "Properties", aparece el siguiente diálogo:</p>
+<img src="imagentema/foto193.jpg" border="0" alt="properties eclipse"><br>
+<p>Seleccionamos la opción "Java Build Path", de la parte central seleccionamos la pestaña "Libraries" y procedemos a presionar el botón "Add External JARs...", donde procedemos a buscar el archivo mysql-connector-java-5.1.18-bin.jar</p>
+
+<p>El código fuente de la clase formulario es:</p>
+
+<pre class="recuadroborde">
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+
+public class Formulario extends JFrame {
+
+  private JPanel contentPane;
+  private JTextField tf1;
+  private JTextField tf2;
+  private JLabel labelResultado;
+  private JButton btnConsultaPorCdigo;
+  private JLabel lblIngreseCdigoDe;
+  private JTextField tf3;
+
+  /**
+   * Launch the application.
+   */
+  public static void main(String[] args) {
+    EventQueue.invokeLater(new Runnable() {
+      public void run() {
+        try {
+          Formulario frame = new Formulario();
+          frame.setVisible(true);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+    });
+  }
+
+  /**
+   * Create the frame.
+   */
+  public Formulario() {
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setBounds(100, 100, 606, 405);
+    contentPane = new JPanel();
+    contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+    setContentPane(contentPane);
+    contentPane.setLayout(null);
+    
+    JLabel lblDescripcinDelArtculo = new JLabel("Descripción del artículo:");
+    lblDescripcinDelArtculo.setBounds(23, 38, 193, 14);
+    contentPane.add(lblDescripcinDelArtculo);
+    
+    tf1 = new JTextField();
+    tf1.setBounds(247, 35, 193, 20);
+    contentPane.add(tf1);
+    tf1.setColumns(10);
+    
+    JLabel lblPrecio = new JLabel("Precio:");
+    lblPrecio.setBounds(23, 74, 95, 14);
+    contentPane.add(lblPrecio);
+    
+    tf2 = new JTextField();
+    tf2.setBounds(247, 71, 107, 20);
+    contentPane.add(tf2);
+    tf2.setColumns(10);
+    
+    JButton btnAlta = new JButton("Alta");
+    btnAlta.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent arg0) {
+        labelResultado.setText("");        
+        try {
+          Connection conexion=DriverManager.getConnection("jdbc:mysql://localhost/bd1","root" ,"");
+          Statement comando=conexion.createStatement();
+          comando.executeUpdate("insert into articulos(descripcion,precio) values ('"+tf1.getText()+"',"+tf2.getText()+")");
+          conexion.close();
+          labelResultado.setText("se registraron los datos");
+          tf1.setText("");
+          tf2.setText("");
+        } catch(SQLException ex){
+          setTitle(ex.toString());
+        }
+      }
+    });
+    btnAlta.setBounds(247, 118, 89, 23);
+    contentPane.add(btnAlta);
+    
+    labelResultado = new JLabel("resultado");
+    labelResultado.setBounds(361, 122, 229, 14);
+    contentPane.add(labelResultado);
+    
+    btnConsultaPorCdigo = new JButton("Consulta por código");
+    btnConsultaPorCdigo.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent arg0) {
+        labelResultado.setText("");
+        tf1.setText("");
+        tf2.setText("");        
+        try {
+          Connection conexion=DriverManager.getConnection("jdbc:mysql://localhost/bd1","root" ,"");
+          Statement comando=conexion.createStatement();
+          ResultSet registro = comando.executeQuery("select descripcion,precio from articulos where codigo="+tf3.getText());
+          if (registro.next()==true) {
+            tf1.setText(registro.getString("descripcion"));
+            tf2.setText(registro.getString("precio"));
+          } else {
+            labelResultado.setText("No existe un artículo con dicho código");
+          }
+          conexion.close();
+        } catch(SQLException ex){
+          setTitle(ex.toString());
+        }
+      }
+    });
+    btnConsultaPorCdigo.setBounds(23, 212, 177, 23);
+    contentPane.add(btnConsultaPorCdigo);
+    
+    lblIngreseCdigoDe = new JLabel("Ingrese código de articulo a consultar:");
+    lblIngreseCdigoDe.setBounds(10, 179, 243, 14);
+    contentPane.add(lblIngreseCdigoDe);
+    
+    tf3 = new JTextField();
+    tf3.setBounds(247, 176, 86, 20);
+    contentPane.add(tf3);
+    tf3.setColumns(10);
+    cargarDriver();
+  }
+  
+  private void cargarDriver() {
+    try {
+      Class.forName("com.mysql.jdbc.Driver");
+    }catch(Exception ex) {
+      setTitle(ex.toString());
+    }
+  }
+}
+
+</pre>
+<p>La interfaz visual de la aplicación a implementar es la siguiente (se solicita el ingrese de la descripción del artículo y su precio, cuando se presiona el botón "Alta" se procede a insertar una fila en la tabla articulos de la base de datos bd1):</p>
+<img src="imagentema/foto194.jpg" border="0" alt="alta consulta mysql desde java"><br>
+<p>Expliquemos ahora el código fuente de la aplicación:</p>
+<p>Primero debemos cargar en memoria el Driver, esto lo hacemos mediante el método cargarDriver que es llamado luego desde el constructor de la clase:</p>
+<pre  class="recuadroborde">
+  private void cargarDriver() {
+    try {
+      Class.forName("com.mysql.jdbc.Driver");
+    }catch(Exception ex) {
+      setTitle(ex.toString());
+    }
+  }
+</pre>
+<p>Tenemos una clase llamada "Class" que tiene un método estático llamado forName, al mismo hay que pasar el nombre de la clase a importar:</p>
+<pre  class="recuadroborde">
+      Class.forName("com.mysql.jdbc.Driver");
+</pre>
+<p>com.mysql.jdbc es el nombre del paquete donde se encuentra la clase Driver. Esta el la forma que importamos los driver en Java.</p>
+<p>El método forName de la clase Class genera excepciones de tipo Excepcion que deben ser capturadas obligatoriamente (luego por eso encerramos el código en un bloque try/catch.</p>
+<p>Si no importamos el driver desde el diálogo Properties del proyecto o indicamos en forma incorrecta el nombre del paquete o clase luego aparece en el título del JFrame un mensaje del error sucedido.</p>
+
+<p>Luego desde el constructor llamamos por única vez al método cargarDriver:</p>
+<pre  class="recuadroborde">
+                ...........
+		tf3 = new JTextField();
+		tf3.setBounds(247, 176, 86, 20);
+		contentPane.add(tf3);
+		tf3.setColumns(10);
+		cargarDriver();
+	}
+</pre>
+
+
+<p>Veamos ahora cual es el código a implementar cuando se presiona el botón "Alta":</p>
+
+<pre  class="recuadroborde">
+    JButton btnAlta = new JButton("Alta");
+    btnAlta.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent arg0) {
+        labelResultado.setText("");        
+        try {
+          Connection conexion=DriverManager.getConnection("jdbc:mysql://localhost/bd1","root" ,"");
+          Statement comando=conexion.createStatement();
+          comando.executeUpdate("insert into articulos(descripcion,precio) values ('"+tf1.getText()+"',"+tf2.getText()+")");
+          conexion.close();
+          labelResultado.setText("se registraron los datos");
+          tf1.setText("");
+          tf2.setText("");
+        } catch(SQLException ex){
+          setTitle(ex.toString());
+        }
+      }
+    });
+</pre>
+<p>En el actionPerformed procedemos primero a limpiar la label que puede tener un mensaje de ejecuciones anteriores:</p>
+<pre  class="recuadroborde">
+        labelResultado.setText("");        
+</pre>
+<p>Todas las clases orientadas al acceso a base de datos generan excepciones de tipo SQLException y deben ser capturadas obligatoriamente. Lo primero que hacemos es crear un objeto de la clase Connection, para esto la clase DriverManager tiene un método llamado getConnection que retorna un objeto de la clase Connection:</p>
+<pre  class="recuadroborde">
+
+          Connection conexion=DriverManager.getConnection("jdbc:mysql://localhost/bd1","root" ,"");
+</pre>
+<p>El método getConnection debemos pasarle tres String, el primero indica el nombre de la base de datos que queremos acceder (en este caso "bd1"), el segundo parámetro es el nombre de usuario (recordemos que cuando instalamos el MySQL se crea un usuario por defecto llamado "root") y el último parámetro el la clave del usuario "root", por defecto esta clave es un String vacío.</p>
+<p>Como podemos ver también previo a la base de datos tenemos en la cadena de conexión el nombre de nuestro servidor (localhost)</p>
+<p>Si nos equivocamos por ejemplo con el nombre de base de datos a comunicarnos (por ejemplo cambiar "bd1" por "bdx") veremos en el título del JFrame el mensaje de error que nos devuelve el MySQL:</p>
+
+<img src="imagentema/foto195.jpg" border="0" alt="altas consulta mysql desde java"><br>
+
+<p>Luego creamos un objeto de la clase Statement a partir del objeto de la clase Connection que acabamos de crear:</p>
+<pre  class="recuadroborde">
+          Statement comando=conexion.createStatement();
+</pre>
+<p>La clase Statement tiene un método llamado executeUpdate que le pasamos el comando SQL insert para agregar una fila a la tabla articulos:</p>
+<pre  class="recuadroborde">
+          comando.executeUpdate("insert into articulos(descripcion,precio) values ('"+tf1.getText()+"',"+tf2.getText()+")");
+</pre>
+<p>Como podemos ver generamos el String con el comando insert rescatando los datos de los dos controles de tipo JTextField. Es importante notar que en Java los String están encerrados entre comillas dobles y los contatenamos con el operador +. Las comillas simples son necesarias para los campos de tipo varchar de MySql (como podemos notar el lugar donde se dispondrá el texto de la descripción del artículo deben ir obligatoriamente las comillas simples):</p>
+<pre  class="recuadroborde">
+...'"+tf1.getText()+"'...
+</pre>
+<p>Si nos olvidamos las comillas simples al generar el String con el comando Insert el MySQL nos devolverá un error que será capturado por el try/catch, por ejemplo si lo ejecutamos con la siguiente sintaxis (sin las comillas simples envolviendo el valor de la descripción):</p>
+<pre  class="recuadroborde">
+          comando.executeUpdate("insert into articulos(descripcion,precio) values ("+tf1.getText()+","+tf2.getText()+")");
+</pre>
+<img src="imagentema/foto196.jpg" border="0" alt="altas consultas mysql desde java"><br>
+<p>Luego de solicitar la ejecución del comando Insert al MySQL procedemos a llamar al método close de la clase Connection:</p>
+<pre  class="recuadroborde">
+          conexion.close();
+</pre>
+<p>Con lo visto ya podemos agregar filas a la tabla articulos. Veamos ahora como consultar datos. El código a implementar cuando se presiona el botón "Consulta por código" es el siguiente:</p>
+
+<pre  class="recuadroborde">
+		btnConsultaPorCdigo = new JButton("Consulta por código");
+		btnConsultaPorCdigo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				labelResultado.setText("");
+				tf1.setText("");
+				tf2.setText("");				
+				try {
+					Connection conexion=DriverManager.getConnection("jdbc:mysql://localhost/bd1","root" ,"");
+					Statement comando=conexion.createStatement();
+					ResultSet registro = comando.executeQuery("select descripcion,precio from articulos where codigo="+tf3.getText());
+					if (registro.next()==true) {
+						tf1.setText(registro.getString("descripcion"));
+						tf2.setText(registro.getString("precio"));
+					} else {
+						labelResultado.setText("No existe un artículo con dicho código");
+					}
+					conexion.close();
+				} catch(SQLException ex){
+					setTitle(ex.toString());
+				}
+			}
+		});
+</pre>
+<p>De forma similar al Insert procedemos a crear un objeto de la clase Connection y otro objeto de la clase Statement:</p>
+<pre  class="recuadroborde">
+					Connection conexion=DriverManager.getConnection("jdbc:mysql://localhost/bd1","root" ,"");
+					Statement comando=conexion.createStatement();
+</pre>
+<p>Seguidamente definimos una variable de la clase ResultSet llamada registro y llamamos al método executeQuery de la clase Statement del objeto que acabamos de crear previamente:</p>
+<pre  class="recuadroborde">
+					ResultSet registro = comando.executeQuery("select descripcion,precio from articulos where codigo="+tf3.getText());
+</pre>
+<p>La clase ResultSet lo podemos imaginar como una tabla con todos los datos recuperados del comando SQL select que acaba de ejecutar el MySQL. En este ejemplo puede retornar una fila o ninguna ya que estamos utilizando la cláusula where y preguntando por el campo clave codigo.</p>
+<p>Para acceder al registro devuelto debemos llamar al método next(), si retorna true es que si se recuperó una fila de la tabla articulos (es decir si existe el codigo de articulo ingresado), en caso que retorne false el método next() significa que no hay un artículo con el código que ingresamos en el control JTextField:</p>
+<pre  class="recuadroborde">
+					if (registro.next()==true) {
+						tf1.setText(registro.getString("descripcion"));
+						tf2.setText(registro.getString("precio"));
+					} else {
+						labelResultado.setText("No existe un artículo con dicho código");
+					}
+</pre>
+<img src="imagentema/foto197.jpg" border="0" alt="altas consultas mysql desde java"><br>
+
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/basededatos01.zip">basededatos01.zip</a>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index1e61.html?inicio=40">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=133&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:57:20 GMT -->
+</html>

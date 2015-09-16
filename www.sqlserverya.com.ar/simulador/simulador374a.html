@@ -1,0 +1,281 @@
+<html>
+
+<!-- Mirrored from www.sqlserverya.com.ar/simulador/simulador.php?inicio=100&cod=120&punto=120 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+    <title>Tutorial de SQL Server : Problemas Resueltos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+	  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;		
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=no,status=yes,toolbar=yes,location=yes');  	
+}
+</script>  
+</head>
+<body bgcolor="#CCFFCC">
+        
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>120 - Procedimientos almacenados (crear - ejecutar)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Vamos a crear un procedimiento almacenado que contenga las siguientes instrucciones:</p>
+<p>- eliminación de la tabla "libros" si existe;<br>
+- creación de la tabla "libros" con: codigo, titulo, autor, editorial, precio, cantidad;<br>
+- ingresode algunos registros.</p>
+
+<p>En primer lugar, debemos eliminarlo, si existe (no hemos aprendido aún a eliminar procedimientos almacenados, en próximos capítulos lo veremos):</p>
+<pre>
+ if object_id('pa_crear_libros') is not null
+  drop procedure pa_crear_libros;
+</pre>
+<p>Creamos el procedimiento:</p>
+<pre>
+ create procedure pa_crear_libros 
+ as
+  if object_id('libros')is not null
+   drop table libros
+  create table libros(
+   codigo int identity,
+   titulo varchar(40),
+   autor varchar(30),
+   editorial varchar(20),
+   precio decimal(5,2),
+   cantidad smallint,
+   primary key(codigo)
+  )
+  insert into libros values('Uno','Richard Bach','Planeta',15,5)
+  insert into libros values('Ilusiones','Richard Bach','Planeta',18,50)
+  insert into libros values('El aleph','Borges','Emece',25,9)
+  insert into libros values('Aprenda PHP','Mario Molina','Nuevo siglo',45,100)
+  insert into libros values('Matematica estas ahi','Paenza','Nuevo siglo',12,50)
+  insert into libros values('Java en 10 minutos','Mario Molina','Paidos',35,300);
+</pre>
+<p>Disponemos un punto y coma (;) en la última instrucción del procedimiento almacenado.</p>
+<p>Ejecutamos el procedimiento:</p>
+<pre>
+ exec pa_crear_libros;
+</pre>
+<p>Veamos si ha creado la tabla:</p>
+<pre>
+ select *from libros;
+</pre>
+<p>Ejecutamos el procedimiento almacenado del sistema "sp_help" y el nombre del procedimiento almacenado para verificar que existe el procedimiento creado recientemente:</p>
+<pre>
+ sp_help pa_crear_libros;
+</pre>
+<p>Aparece el nombre, propietario, tipo y fecha de creación.</p>
+
+<p>Necesitamos un procedimiento almacenado que muestre los libros de los cuales hay menos de 10. En primer lugar, lo eliminamos si existe:</p>
+<pre>
+ if object_id('pa_libros_limite_stock') is not null
+  drop procedure pa_libros_limite_stock;
+</pre> 
+<p>Creamos el procedimiento:</p>
+<pre>
+ create proc pa_libros_limite_stock
+  as
+   select *from libros
+   where cantidad <=10;
+</pre>
+<p>Ejecutamos el procedimiento almacenado del sistema "sp_help" junto al nombre del procedimiento creado recientemente para verificar que existe:</p>
+<pre>
+ sp_help pa_libros_limite_stock;
+</pre>
+<p>Aparece el nombre, propietario, tipo y fecha de creación.</p>
+
+<p>Lo ejecutamos:</p>
+<pre>
+ exec pa_libros_limite_stock;
+</pre>
+<p>Modificamos algún registro y volvemos a ejecutar el procedimiento:</p>
+<pre>
+ update libros set cantidad=2 where codigo=4;
+ exec pa_libros_limite_stock;
+</pre>
+<p>Note que el resultado del procedimiento ha cambiado porque los datos han cambiado.</p>
+
+
+        <form name="formulario" action="http://scratchya.com.ar/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+          <textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off">
+ if object_id('pa_crear_libros') is not null
+  drop procedure pa_crear_libros;
+
+ create procedure pa_crear_libros 
+ as
+  if object_id('libros')is not null
+   drop table libros
+ 
+  create table libros(
+   codigo int identity,
+   titulo varchar(40),
+   autor varchar(30),
+   editorial varchar(20),
+   precio decimal(5,2),
+   cantidad smallint,
+   primary key(codigo)
+  )
+
+  insert into libros values('Uno','Richard Bach','Planeta',15,5)
+  insert into libros values('Ilusiones','Richard Bach','Planeta',18,50)
+  insert into libros values('El aleph','Borges','Emece',25,9)
+  insert into libros values('Aprenda PHP','Mario Molina','Nuevo siglo',45,100)
+  insert into libros values('Matematica estas ahi','Paenza','Nuevo siglo',12,50)
+  insert into libros values('Java en 10 minutos','Mario Molina','Paidos',35,300);
+
+ exec pa_crear_libros;
+
+ select *from libros;
+
+ sp_help pa_crear_libros;
+
+ if object_id('pa_libros_limite_stock') is not null
+  drop procedure pa_libros_limite_stock;
+ 
+ create proc pa_libros_limite_stock
+  as
+   select *from libros
+   where cantidad <=10;
+
+ sp_help pa_libros_limite_stock;
+
+ exec pa_libros_limite_stock;
+
+ update libros set cantidad=2 where codigo=4;
+ exec pa_libros_limite_stock;
+
+</textarea>
+    <br>
+    <input type="submit"  value="Ejecutar  los comandos SQL">
+    <input type="button" onClick="javascript:formulario.programa.value=''" value="Borrar comando.">
+
+        <br>
+	<br>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   
+
+</form>
+
+   <h2><a href="../indexf6ce.html?inicio=100">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-11";
+urchinTracker();
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from www.sqlserverya.com.ar/simulador/simulador.php?inicio=100&cod=120&punto=120 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:33 GMT -->
+</html>
+

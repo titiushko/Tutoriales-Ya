@@ -1,0 +1,232 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=50&cod=214&punto=56 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Descripción : Otros tipos de combinaciones (Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>56 - Otros tipos de combinaciones</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>Hemos aprendido que existen varios tipos de combinaciones en Oracle:</p>
+<p>1) combinaciones internas (inner join o simplemente join),</p>
+<p>2) combinaciones externas (left join, right join y full join)</p>
+<p>3) combinaciones cruzadas (cross join).</p>
+<p>También vimos que es posible emplear varios tipos de combinaciones en una consulta, incluso puede combinarse una tabla consigo misma.</p>
+
+<p>Existen otros tipos de "join" en Oracle, que veremos rápidamente, ya que se resuelven con los que vimos anteriormente, básicamente lo que cambia es la sintaxis.</p>
+<p>1) combinación natural: realiza un join entre dos tablas cuando los campos por los cuales se enlazan tienen el mismo nombre. Involucra claves primarias y foráneas.</p>
+<p>Sintaxis:</p>
+<pre>
+ select CAMPOS 
+  from TABLA1
+  natural join TABLA2; 
+</pre>
+<p>Ejemplo:</p>
+<pre>
+ select titulo,nombre as editorial
+  from libros
+  natural join
+  editoriales;
+</pre>
+<p>En el ejemplo anterior la tabla "libros" combina su campo "codigoeditorial" con el campo "codigoeditorial" de "editoriales". La cláusula "on" no aparece, este "join" no necesita condición de enlace porque Oracle busca los campos con nombres iguales de ambas tablas (ambas tablas deben tener un único campo con idéntico nombre, si tiene más de un campo con igual nombre, Oracle no podrá realizar el enlace y mostrará un mensaje de error).</p>
+
+<p>2) combinación empleando la cláusula "using": permite especificar el campo (o los campos) por el cual se enlazarán las tablas; los campos de ambas tablas DEBEN tener el mismo nombre y ser de tipos compatibles.</p>
+<p>Sintaxis: </p>
+<pre>
+ select CAMPOS
+  from TABLA1
+  join TABLA2
+  using (CAMPOenCOMUN);
+</pre> 
+<p>Ejemplo:</p>
+<pre>
+ select titulo,nombre as editorial
+  from libros
+  join editoriales
+  using (codigoeditorial);
+</pre>
+<p>En el ejemplo anterior la tabla "libros" combina su campo "codigoeditorial" con el campo "codigoeditorial" de "editoriales". La cláusula "on" no aparece, es reemplazada por "using" seguido del nombre del campo en común por el cual se enlazan.</p>
+
+<p>3) combinación izquierda empleando "join" y el operador o modificador "(+)": Podemos obtener el mismo resultado que un "left join" empleando "join" y el modificador "(+)", con lo cual se indica que se consideran los registros con valor nulo. La sintaxis es la siguiente:</p>
+<pre>
+ select CAMPOS
+  from TABLA1
+  join TABLA2
+  on CAMPOTABLA1=CAMPOTABLA2(+);
+</pre>
+<p>Es decir, se coloca el modificador "(+)" luego del campo de la tabla de la derecha para indicar que se incluyan los que tienen valor nulo.</p>
+
+<p>Las siguientes consultas retornan el mismo resultado. Una de ellas emplea "left join" y la otra un "join" con el modificador "(+)":</p>
+<pre>
+ select titulo,nombre as editorial
+  from libros l
+  left join editoriales l
+  on l.codigoeditorial = e.codigoeditorial;
+
+ select titulo,nombre as editorial
+  from libros l
+  join editoriales e
+  on l.codigoeditorial = e.codigoeditorial(+);
+</pre>
+<p>Ambas mostrarán el título y nombre de la editorial; los libros cuyo código de editorial no esté presente en "editoriales" aparecerán con el valor "null" en la columna "editorial".</p>
+
+<p>4) combinación derecha empleando "join" y el modificador "(+)": de modo similar al anterior, podemos obtener el mismo resultado que un "right join" empleando "join" y el modificador "(+)", con lo cual se indica que se consideren los registros con valor nulo. La sintaxis es la siguiente:</p>
+<pre>
+ select CAMPOS
+  from TABLA1
+  join TABLA2
+  on CAMPOTABLA1(+)=CAMPOTABLA2;
+</pre>
+<p>Entonces, se coloca el modificador "(+)" luego del campo de la tabla de la izquierda para indicar que se incluyan los que tienen valor nulo.</p>
+
+<p>Las siguientes consultas retornan el mismo resultado. Una de ellas emplea "right join"· y la otra un "join" con el modificador "(+)":</p>
+<pre>
+ select titulo,nombre as editorial
+  from editoriales e
+  right join libros l
+  on e.codigoeditorial = l.codigoeditorial;
+
+ select titulo,nombre as editorial
+  from editoriales e
+  join libros l
+  on e.codigoeditorial(+) = l.codigoeditorial;
+</pre>
+<p>Ambas mostrarán el título y nombre de la editorial; las editoriales que no encuentran coincidencia en "libros", aparecen con el valor "null" en la columna "titulo".</p>
+
+<p>Si la condición de combinación es compuesta (más de un campo), DEBE colocarse el modificador "(+)" en todos los campos que forman parte del enlace.</p>
+
+<p>No se puede colocar el modificador en campos de distintas tablas. La siguiente combinación producirá un mensaje de error:</p>
+<pre>
+  select titulo,nombre as editorial
+  from libros l
+  join editoriales e
+  on l.codigoeditorial(+)= e.codigoeditorial(+);
+</pre></p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../indexefd7.html?inicio=50">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=50&cod=214&punto=56 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:36 GMT -->
+</html>

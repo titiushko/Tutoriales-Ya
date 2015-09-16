@@ -1,0 +1,320 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.sqlserverya.com.ar/problemas/problema.php?inicio=125&cod=131&punto=131 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de SQL Server : Problemas Resueltos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+pre {
+  text-align:left;
+  font-family:verdana,sans-serif;
+}
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+</style>
+
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;	
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=no,status=yes,toolbar=yes,location=yes');  	
+}
+
+function VentanaTeorico(codigo)
+{
+  alto=400;
+  window.open('../temarios/descripcion2ade4.html?cod='+codigo+'&origen=problema', '', 'top=0,left=0,width=800,height='+alto+',resizable=yes,scrollbars=yes,menubar=no');  	
+}
+
+function cambiar(nro)
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   if (nro==1)
+   {
+     if (lista[f].id=='solu1')
+       lista[f].style.display='block';
+   }
+   else
+     if (nro==2)
+     {
+       if (lista[f].id=='solu2')
+         lista[f].style.display='block';
+     }
+	   
+  }
+  if (nro==1)
+    document.getElementById('solucion1').style.display='none';
+  if (nro==2)
+    document.getElementById('solucion2').style.display='none';
+}
+
+</script>
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>131 - Procedimientos Almacenados (con join)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<b>Primer problema: </b><br><pre>
+Una librería almacena los datos de los libros en una tabla denominada "libros" y en una tabla 
+"ventas" las ventas de los mismos.
+1- Elimine las tablas si existen y créelas:
+ if (object_id('libros')) is not null
+  drop table libros;
+ if (object_id('ventas')) is not null
+  drop table ventas;
+
+ create table libros(
+  codigo int identity,
+  titulo varchar(40),
+  autor varchar(30),
+  editorial varchar(20),
+  precio decimal(6,2),
+  cantidad int,
+  primary key (codigo)
+ );
+
+ create table ventas(
+  numero int identity,
+  codigo int not null,
+  preciounitario decimal(6,2),
+  cantidad int, 
+  constraint PK_ventas primary key (numero),
+  constraint FK_ventas_codigolibro
+   foreign key (codigo)
+   references libros(codigo)
+   on update cascade
+ );
+
+2- Ingrese algunos registros para ambas:
+ insert into libros values('Uno','Richard Bach','Planeta',15,100);
+ insert into libros values('Ilusiones','Richard Bach','Planeta',18,150);
+ insert into libros values('El aleph','Borges','Emece',25,200);
+ insert into libros values('Matematica estas ahi','Paenza','Nuevo siglo',20,300);
+ insert into libros values('Aprenda PHP','Mario Molina','Nuevo siglo',45,200);
+ 
+ insert into ventas values(1,15,1);
+ insert into ventas values(2,18,1);
+ insert into ventas values(3,25,100);
+ insert into ventas values(1,15,50);
+
+3- Elimine el procedimiento "pa_ventas", si existe:
+ if (object_id('pa_ventas')) is not null
+  drop proc pa_ventas;
+
+4- Cree un procedimiento que muestre los datos de las ventas (número, título, autor y editorial del 
+libro vendido, precio unitario, cantidad vendida, total por item)
+
+5- Ejecute el procedimiento:
+ pa_ventas;
+
+6- Elimine el procedimiento "pa_vender", si existe:
+ if (object_id('pa_vender')) is not null
+  drop proc pa_vender;
+
+7- Cree un procedimiento que permita ingresar una venta en "ventas" con los siguientes datos: código 
+del libro y cantidad que se vende. El procedimiento debe controlar que haya libros disponibles (es 
+decir, que la cantidad que se vende sea mayor o igual a la cantidad existente del libro) y luego 
+restar la cantidad vendida de la tabla "libros":
+ create procedure pa_vender
+  @codigo int=null,
+  @cantidad int=1
+  as
+   --verificamos que el código exista
+   if not exists (select *from libros where codigo=@codigo) or (@codigo is null)
+     select 'Ingrese un codigo de libro válido'
+   else
+   begin --verificamos que haya stock
+     declare @disponibles int
+     select @disponibles= cantidad from libros where codigo=@codigo
+     if (@disponibles<@cantidad)
+       select 'Solo hay '+cast(@disponibles as varchar(10))+' disponibles'
+     else
+     begin
+       declare @precio decimal(6,2) 
+       select @precio= precio from libros where codigo=@codigo
+       insert into ventas values(@codigo,@precio,@cantidad)
+       update libros set cantidad=cantidad-@cantidad where @codigo=codigo
+     end
+   end;
+
+Este procedimiento recibe parámetros, declara variables locales y modifica 2 tablas, en una de ellas 
+realiza una inserción y en la otra una actualización.
+
+8- Ejecute el procedimiento "pa_vender".
+
+9- Vea si las tablas se modificaron:
+ select *from ventas;
+ select *from libros;
+
+10- Envíe al procedimiento "pa_vender" un código de libro inexistente.
+
+11- Envíe una cantidad que supere el stock.
+</pre><a href="javascript:cambiar(1)" id="solucion1">Ver solución</a>
+<br><br>
+<pre id="solu1" class="recuadrooculto">
+</pre>
+<form name="formulario" action="http://scratchya.com.ar/procesador.aspx" target="ventanaForm" 
+onsubmit="abrirVentana()" method="post" >
+           
+          <textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off"></textarea>
+    <br>
+ <input type="submit"  value="Ejecutar  los comandos SQL">
+
+    <input type="button" onClick="javascript:formulario.programa.value=''" value="Borrar comando.">
+
+
+    <br>
+	<br>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+</form>
+        <p>&nbsp;</p>
+  
+<table width="650px">
+<tr>
+<td align="center">	
+
+
+
+</td>
+</tr>
+</table>		
+	
+	
+
+
+
+   <h2><a href="../index28e1.html?inicio=125">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-11";
+urchinTracker();
+</script>
+
+</body>
+
+<!-- Mirrored from www.sqlserverya.com.ar/problemas/problema.php?inicio=125&cod=131&punto=131 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:33 GMT -->
+</html>

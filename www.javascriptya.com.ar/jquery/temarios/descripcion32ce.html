@@ -1,0 +1,238 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/temarios/descripcion.php?cod=58&punto=2&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:09:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Conceptos de JQuery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="jQuery, programación, webmaster, tutorial, JavaScript">
+<meta name="description" content="El objetivo de este tutorial es presentar los conceptos de la libreria JavaScript JQUERY.">
+<meta name="author" content="Diego Moisset">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" type="text/JavaScript">
+
+</script>
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>2 - Nueva manera de programar JavaScript con jQuery.</h1></td>
+<td align="right">
+<a href="../../publicidad/index.html"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.html"></a>	
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<p>
+<div style="font-size:1.3em;font-family:arial;">
+<p>Cuando uno utiliza una librería debe adaptarse a sus mecanismos de uso, el tratar de llevar los conocimientos que tenemos sobre un tema y aplicarlos a la fuerza en dicha librería puede ser frustrante. Lo más adecuado es ir viendo cual es la mecánica de trabajar con dicha librería con problemas muy sencillos e ir complicándolo a medida que entendemos su funcionamiento.</p>
+<p>Dispongamos el problema trivial de capturar el evento de un control HTML de tipo button, lo desarrollaremos utilizando la metodología tradicional accediendo directamente a las funciones del DOM y luego empleando la librería jQuery:</p>
+<p>pagina1.html</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h2&gt;Captura del evento click de un control HTML de tipo button.&lt;/h2&gt;
+&lt;a href=&quot;pagina2.html&quot;&gt;M&eacute;todo tradicional con las funciones 
+del DOM &lt;/a&gt;&lt;br&gt;
+&lt;a href=&quot;pagina3.html&quot;&gt;Utilizando la librer&iacute;a jQuery&lt;/a&gt;&lt;br&gt;
+&lt;/body&gt;
+&lt;/html&gt; 
+</pre>
+<p>pagina2.html</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;funciones1.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;input type=&quot;button&quot; id=&quot;boton1&quot; value=&quot;presioname&quot;&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>funciones1.js</p>
+<pre class="recuadro">
+addEvent(window,'load',inicializarEventos,false);
+
+function inicializarEventos()
+{
+  var boton1=document.getElementById('boton1');
+  addEvent(boton1,'click',presionBoton,false);
+}
+
+function presionBoton(e)
+{
+  alert('se presionó el botón');
+}
+
+function addEvent(elemento,nomevento,funcion,captura)
+{
+  if (elemento.attachEvent)
+  {
+    elemento.attachEvent('on'+nomevento,funcion);
+    return true;
+  }
+  else  
+    if (elemento.addEventListener)
+    {
+      elemento.addEventListener(nomevento,funcion,captura);
+      return true;
+    }
+    else
+      return false;
+}
+</pre>
+<p>Todo lo anterior no debería haber problemas de entendimiento, en caso de estar olvidado del manejo del DOM sería conveniente refrescar los conceptos en el tutorial de <a href="http://www.dhtmlya.com.ar/" target="_blank">DHTMLYa</a>.</p> 
+<p>pagina3.html</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;../jquery.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;funciones2.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;input type=&quot;button&quot; id=&quot;boton1&quot; value=&quot;presioname&quot;&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Lo primero que tenemos en cuenta es que debemos importar la librería:</p>
+&lt;script type=&quot;text/javascript&quot; src=&quot;../jquery.js&quot;&gt;&lt;/script&gt;
+</p>
+<p>Como se encuentra en la carpeta superior a donde se encuentra el archivo pagina3.html ponemos src=&quot;../jquery.js&quot;, si estuviera en la misma carpeta disponemos src=&quot;jquery.js&quot;, es decir directamente el nombre de la librería.</p>
+<p>Siempre debemos disponer esta inclusión de la librería antes de incluir los otros archivos *.js que utilizan esta librería, es por eso el orden:</p>
+<pre>
+&lt;script type=&quot;text/javascript&quot; src=&quot;../jquery.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;funciones2.js&quot;&gt;&lt;/script&gt;
+</pre> 
+<p>funciones2.js</p>
+<pre class="recuadro">
+var x;
+x=$(document);
+x.ready(inicializarEventos);
+
+function inicializarEventos()
+{
+  var x;
+  x=$("#boton1");
+  x.click(presionBoton)
+}
+
+function presionBoton()
+{
+  alert("Se presionó el botón");
+}
+</pre>
+<p>En este archivo (funciones2.js) comienza nuestro estudio de la librería jquery</p>
+<p>La función principal de esta librería se llama $.</p>
+<p>A la función $ le podemos pasar distintos valores como veremos (en la primer llamada le pasamos la referencia del objeto document del DOM y en la segunda el id del control button):</p>
+<pre>
+x=$(document);
+...
+x=$("#boton1");
+</pre>
+<p>Esta función nos devuelve un objeto de tipo jQuery.</p>
+<p>El primer método que nos interesa de esta clase es el ready:</p>
+<pre>
+var x;
+x=$(document);
+x.ready(inicializarEventos);
+</pre>
+<p>El método ready tiene como parámetro un nombre de función. Esta función se ejecutará cuando todos los elementos de la página estén cargados. Es importante notar que solo pasamos el nombre de la función y no disponemos los paréntesis abiertos y cerrados al final.</p>
+<p>El código de esta función:</p>
+<pre>
+function inicializarEventos()
+{
+  var x;
+  x=$("#boton1");
+  x.click(presionBoton)
+}
+</pre>
+<p>Utilizamos nuevamente la función $ para crear un objeto de la clase jQuery pero ahora asociándolo al botón (esto lo hacemos pasando el id del control button precediéndolo por el caracter # y encerrado entre paréntesis. Finalmente llamamos al método click pasándo como parámetro el nombre de la función que se ejecutará al presionar dicho botón.</p>
+</div>
+</p>
+
+<table width="650px">
+<tr>
+<td align="center">	
+
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-14', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/temarios/descripcion.php?cod=58&punto=2&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:09:23 GMT -->
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=154&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:58:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - Clase parcial (partial class)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>30 - Clase parcial (partial class)</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p>Hasta ahora hemos visto que una clase se la implementa en forma completa dentro de un archivo. El lenguaje C# permite la implementación de una clase en dos o más archivos. Para esto hay que agregarle el modificador partial cuando declaramos la clase.</p>
+</p>
+<p>Este concepto es ámpliamente utilizado por el entorno del Visual Studio .Net en la generación de interfaces visuales.<br>
+<p>Como veremos en conceptos futuros es necesario presentar "partial class" para su entendimiento.</p>
+<p>Una clase parcial no es más ni menos que crear una clase completa y luego agrupar métodos y propiedades en dos o más archivos.</p>
+
+<h3>Problema 1:</h3>
+<p>Plantear una clase Rectangulo, definir dos propiedades: Lado1 y Lado2. Definir dos métodos RetornarSuperficie y RetornarPerimetro. Dividir la clase en dos archivos utilizando el concepto de "partial class".</p>
+<h4>Programa:</h4>
+<h4>Archivo1.cs</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ClaseParcial1
+{
+    partial class Rectangulo
+    {
+        private int lado1;
+        public int Lado1
+        {
+            set
+            {
+                lado1 = value;
+            }
+            get
+            {
+                return lado1;
+            }
+        }
+        private int lado2;
+        public int Lado2
+        {
+            set
+            {
+                lado2 = value;
+            }
+            get
+            {
+                return lado2;
+            }
+        }
+    }
+}
+</pre>
+<br>
+<h4>Archivo2.cs</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ClaseParcial1
+{
+    partial class Rectangulo
+    {
+        public int RetornarSuperficie()
+        {
+            int sup = Lado1 * Lado2;
+            return sup;
+        }
+
+        public int RetornarPerimetro()
+        {
+            int per = Lado1 * 2 + Lado2 * 2;
+            return per;
+        }
+    }
+}
+</pre>
+<br>
+<h4>Program.cs</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ClaseParcial1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Rectangulo rectangulo1 = new Rectangulo();
+            rectangulo1.Lado1 = 5;
+            rectangulo1.Lado2 = 10;
+            Console.WriteLine("La superficie del rectángulo es:" +
+                                rectangulo1.RetornarSuperficie());
+            Console.WriteLine("El perímetro del rectángulo es:" + 
+                                rectangulo1.RetornarPerimetro());
+            Console.ReadKey();
+        }
+    }
+}
+</pre>
+<p>Para codificar este proyecto procedemos de la siguiente forma:</p>
+<ol>
+<li>
+Seleccionamos desde el menú de opciones Archivo -> Nuevo proyecto...
+</li>
+<li>
+En el diálogo definimos el nombre del proyecto: ClaseParcial1
+</li>
+<li>
+Ahora tenemos que agregar los otros archivos. Presionamos el botón derecho del mouse en la ventana del "Explorador de soluciones" sobre el nombre del proyecto ("ClaseParcial1") y seleccionamos la opción Agregar -> Nuevo elemento.<br>
+
+</li>
+<li>
+Seleccionamos en el diálogo la plantilla "Clase" y en la parte inferior del diálogo definimos el nombre del archivo, en nuestro caso lo llamamos "archivo1.cs".
+</li>
+<li>
+En este archivo planteamos la clase "partial class Rectangulo" que define las dos propiedades y atributos.
+</li>
+<li>
+En forma similar seguimos los pasos para crear el archivo2.cs y codificar la clase "partial class Rectangulo" que define los dos métodos.
+</li>
+<li>
+Finalmente codificamos la clase principal en el archivo Program.cs<br>
+En la main creamos un objeto de la clase Rectangulo e inicializamos las propiedades y llamamos a sus métodos.
+</li>
+</ol>
+</div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=154&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:58:36 GMT -->
+</html>

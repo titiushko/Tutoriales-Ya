@@ -1,0 +1,170 @@
+
+<!DOCTYPE html> 
+<html lang="es"> 
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=153&punto=21&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:32:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>CANVAS (grabar y recuper el estado -  save(), restore())</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="html5, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de HTML 5. Es objetivo prioritario respetar 
+los estándares del W3C">
+<meta name="author" content="Diego Moisset">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+</style>
+
+</head>
+
+<body>
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em"><a href="../../html5.html">Temario del Tutorial</a></span>->21 - CANVAS (grabar y recuper el estado -  save(), restore())</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Cuando tenemos que hacer dibujos complejos es muy común que necesitemos almacenar el estado de algunas propiedades del canvas para luego recuperarlas. Estas dos actividades se logran mediante los métodos:</p>
+<pre>
+save()
+restore()
+</pre>
+<p>Los valores que se almacenan son strokeStyle, FillStyle, globalAlpha, LineCap, LineJoin, miterLimit, shadowOffsetX, shadowOffsetY, shadowBlur, shadowColor entre otras propiedades.</p>
+<p>Tengamos en cuenta que si se llama dos veces en forma sucesiva al método save() para retornar al estado inicial debemos llamar dos veces al método restore().</p>
+<p>Para ver su funcionamiento desarrollaremos un programa que muestre un cuadrado en color rojo, otro con un gradiente del rojo al azul y finalmente otro cuadrado rojo:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+
+&lt;script type="text/javascript"&gt;
+function retornarLienzo(x) {
+  var canvas = document.getElementById(x);
+  if (canvas.getContext) {
+    var lienzo = canvas.getContext("2d");   
+    return lienzo;
+  } else
+    return false;
+}
+
+function dibujarCuadradoGradiente(lienzo,x,y,ancho,alto) {
+  lienzo.save();
+  var gradiente1=lienzo.createLinearGradient(x,y,x+ancho,y+alto);
+  gradiente1.addColorStop(0,"rgb(255,0,0)");
+  gradiente1.addColorStop(1,"rgb(0,0,255)");
+  lienzo.fillStyle=gradiente1;
+  lienzo.fillRect(x,y,ancho,alto);
+  lienzo.restore();
+}
+
+function dibujar() {
+  var lienzo=retornarLienzo("lienzo1");
+  if (lienzo) {
+    lienzo.fillStyle="rgb(255,0,0)";
+    lienzo.fillRect(10,30,30,30);
+    dibujarCuadradoGradiente(lienzo,70,30,30,30);
+    lienzo.fillRect(130,30,30,30);
+  }
+}
+
+&lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body onLoad="dibujar()"&gt;
+&lt;canvas id="lienzo1" width="600" height="600"&gt;
+Su navegador no permite utilizar canvas.
+&lt;/canvas&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Dibujamos un cuadrado de color rojo:</p>
+<pre>
+    lienzo.fillStyle="rgb(255,0,0)";
+    lienzo.fillRect(10,30,30,30);
+</pre>
+<p>Llamamos a la función dibujarCuadradoGradiente:</p>
+<pre>
+    dibujarCuadradoGradiente(lienzo,70,30,30,30);
+</pre>
+<p>La función dibujarCuadradoGradiente lo primero que hace es grabar el estado actual (save()) y luego configura nuevamente la propiedad fillStyle con un objeto de tipo LinearGradient. Finalmente luego de graficar el cuadrado restaura el estado actual (restore()):</p>
+<pre>
+function dibujarCuadradoGradiente(lienzo,x,y,ancho,alto) {
+  lienzo.save();
+  var gradiente1=lienzo.createLinearGradient(x,y,x+ancho,y+alto);
+  gradiente1.addColorStop(0,"rgb(255,0,0)");
+  gradiente1.addColorStop(1,"rgb(0,0,255)");
+  lienzo.fillStyle=gradiente1;
+  lienzo.fillRect(x,y,ancho,alto);
+  lienzo.restore();
+}
+</pre>
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../index28fa.html?inicio=20">Retornar</a></h2>   
+
+</div>
+
+</body>
+
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=153&punto=21&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:32:40 GMT -->
+</html>

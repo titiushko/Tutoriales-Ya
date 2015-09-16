@@ -1,0 +1,450 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=111&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:58 GMT -->
+<head>
+<title>Swing - JCheckBox</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Swing - JCheckBox</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>El control JCheckBox permite implementar un cuadro de selección (básicamente un botón de dos estados)</p>
+
+<h3>Problema 1:</h3>
+<p>Confeccionar un programa que muestre 3 objetos de la clase JCheckBox con etiquetas de tres idiomas. Cuando se lo selecciona mostrar en el título del JFrame todos los JCheckBox seleccionados hasta el momento.</p>
+<img src="imagentema/foto079.jpg" border="0" alt="JCheckBox">
+<h4>Programa:</h4>
+<pre class="recuadro">
+import javax.swing.*;
+import javax.swing.event.*;
+public class Formulario extends JFrame implements ChangeListener{
+    private JCheckBox check1,check2,check3;
+    public Formulario() {
+        setLayout(null);
+        check1=new JCheckBox("Inglés");
+        check1.setBounds(10,10,150,30);
+        check1.addChangeListener(this);
+        add(check1);
+        check2=new JCheckBox("Francés");
+        check2.setBounds(10,50,150,30);
+        check2.addChangeListener(this);        
+        add(check2);
+        check3=new JCheckBox("Alemán");
+        check3.setBounds(10,90,150,30);
+        check3.addChangeListener(this);        
+        add(check3);        
+    }
+    
+    public void stateChanged(ChangeEvent e){
+        String cad="";
+        if (check1.isSelected()==true) {
+            cad=cad+"Inglés-";
+        }
+        if (check2.isSelected()==true) {
+            cad=cad+"Francés-";
+        }
+        if (check3.isSelected()==true) {
+            cad=cad+"Alemán-";
+        }
+        setTitle(cad);
+    }
+
+    public static void main(String[] ar) {
+        Formulario formulario1=new Formulario();
+        formulario1.setBounds(0,0,300,200);
+        formulario1.setVisible(true);
+    }    
+}
+</pre>
+<p>Lo primero y más importante que tenemos que notar que para capturar el cambio de estado del JCheckBox hay que implementar la interface ChangeListener que se encuentra en el paquete:</p>
+<pre>
+import javax.swing.event.*;
+</pre>
+y no en el paquete:
+<pre>
+import java.awt.event.*
+</pre>
+<p>Cuando declaramos la clase JFrame indicamos que implementaremos la interface ChangeListener:</p>
+<pre>
+public class Formulario extends JFrame implements ChangeListener{
+</pre>
+<p>Definimos tres objetos de la clase JCheckBox:</p>
+<pre>
+    private JCheckBox check1,check2,check3;
+</pre>
+<p>En el constructor creamos cada uno de los objetos de la clase JCheckBox y llamamos al método addChangeListener indicando quien procesará el evento de cambio de estado:</p>
+<pre>
+        check1=new JCheckBox("Inglés");
+        check1.setBounds(10,10,150,30);
+        check1.addChangeListener(this);
+        add(check1);
+</pre>
+<p>El método que debemos implementar de la interface ChangeListener es:</p>
+<pre>
+    public void stateChanged(ChangeEvent e){
+</pre>
+<p>En este mediante tres if verificamos el estado de cada JCheckBox y concatenamos los String con los idiomas seleccionados:</p>
+<pre>
+        String cad="";
+        if (check1.isSelected()==true) {
+            cad=cad+"Inglés-";
+        }
+        if (check2.isSelected()==true) {
+            cad=cad+"Francés-";
+        }
+        if (check3.isSelected()==true) {
+            cad=cad+"Alemán-";
+        }
+        setTitle(cad);
+</pre>
+
+<h3>Problema 2:</h3>
+<p>Disponer un control JLabel que muestre el siguiente mensaje: "Esta de acuerdo con las normas del servicio?", luego un JCheckBox y finalmente un objeto de tipo JButton desactivo. Cuando se tilde el JCheckBox debemos activar el botón.</p>
+<img src="imagentema/foto080.jpg" border="0" alt="JCheckBox">
+<h4>Programa:</h4>
+<pre class="recuadro">
+import javax.swing.*;
+import javax.swing.event.*;
+import java.awt.event.*;
+public class Formulario extends JFrame implements ActionListener, ChangeListener{
+    private JLabel label1;
+    private JCheckBox check1;
+    private JButton boton1;
+    public Formulario() {
+        setLayout(null);
+        label1=new JLabel("Esta de acuerdo con las normas del servicio?");
+        label1.setBounds(10,10,400,30);
+        add(label1);
+        check1=new JCheckBox("Acepto");
+        check1.setBounds(10,50,100,30);
+        check1.addChangeListener(this);
+        add(check1);
+        boton1=new JButton("Continuar");
+        boton1.setBounds(10,100,100,30);
+        add(boton1);
+        boton1.addActionListener(this);
+        boton1.setEnabled(false);
+    }
+    
+    public void stateChanged(ChangeEvent e) {
+        if (check1.isSelected()==true) {
+            boton1.setEnabled(true);
+        } else {
+            boton1.setEnabled(false);	
+        }
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==boton1) {
+            System.exit(0);
+        }
+    }
+    
+    public static void main(String[] ar) {
+        Formulario formulario1=new Formulario();
+        formulario1.setBounds(0,0,350,200);
+        formulario1.setVisible(true);
+    }        
+}
+</pre>
+<p>Importamos los paquetes donde se encuentran las interfaces para captura de eventos de objetos de tipo JButton y JCheckBox:</p>
+<pre>
+import javax.swing.event.*;
+import java.awt.event.*;
+</pre>
+<p>También importamos el paquete donde están definidas las clase JFrame, JButton y JCheckBox:</p>
+<pre>
+import javax.swing.*;
+</pre>
+<p>Como debemos implementar dos interfaces las debemos enumerar después de la palabra implements separadas por coma:</p>
+public class Formulario extends JFrame implements ActionListener, ChangeListener{
+</pre>
+<p>Definimos los tres objetos:</p>
+<pre>
+    private JLabel label1;
+    private JCheckBox check1;
+    private JButton boton1;
+</pre>
+<p>En el constructor creamos el objeto de tipo JLabel:</p>
+<pre>
+    public Formulario() {
+        setLayout(null);
+        label1=new JLabel("Esta de acuerdo con las normas del servicio?");
+        label1.setBounds(10,10,400,30);
+        add(label1);
+</pre>
+<p>El objeto de tipo JCheckBox:</p>
+<pre>
+        check1=new JCheckBox("Acepto");
+        check1.setBounds(10,50,100,30);
+        check1.addChangeListener(this);
+        add(check1);
+</pre>
+<p>y también creamos el objeto de tipo JButton y llamando al método setEnabled con un valor false luego el botón aparece desactivo:</p>
+<pre>
+        boton1=new JButton("Continuar");
+        boton1.setBounds(10,100,100,30);
+        add(boton1);
+        boton1.addActionListener(this);
+        boton1.setEnabled(false);
+</pre>
+<p>Cuando se cambia el estado del control JCheckBox se ejecuta el método stateChanged donde verificamos si está seleccionado procediendo a activar el botón en caso negativo lo desactivamos:</p>
+<pre>
+    public void stateChanged(ChangeEvent e) {
+        if (check1.isSelected()==true) {
+            boton1.setEnabled(true);
+        } else {
+            boton1.setEnabled(false);	
+        }
+    }
+</pre>
+<p>El método actionPerformed se ejecuta cuando se presiona el objeto de tipo JButton (debe estar activo para poder presionarlo):</p>
+<pre>
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==boton1) {
+            System.exit(0);
+        }
+    }
+</pre>
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Disponer tres objetos de la clase JCheckBox con nombres de navegadores web. Cuando se presione un botón mostrar en el título del JFrame los programas seleccionados.</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+import javax.swing.*;
+
+import java.awt.event.*;
+public class Formulario extends JFrame implements ActionListener {
+    private JCheckBox check1,check2,check3;
+    private JButton boton1;
+    public Formulario() {
+        setLayout(null);
+        check1=new JCheckBox("Chrome");
+        check1.setBounds(10,10,150,30);
+        add(check1);
+        check2=new JCheckBox("FireFox");
+        check2.setBounds(10,50,150,30);      
+        add(check2);
+        check3=new JCheckBox("Opera");
+        check3.setBounds(10,90,150,30);        
+        add(check3);               
+        boton1=new JButton("Confirmar");
+        boton1.setBounds(10,140,100,30);
+        boton1.addActionListener(this);
+        add(boton1);
+    }
+    
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==boton1) {
+            String cad="";
+            if (check1.isSelected()==true) {
+                cad=cad+"Chrome-";
+            }
+            if (check2.isSelected()==true) {
+                cad=cad+"FireFox-";
+            }
+            if (check3.isSelected()==true) {
+                cad=cad+"Opera-";
+            }
+            setTitle(cad);        	
+        }
+    }
+    public static void main(String[] ar) {
+        Formulario formulario1=new Formulario();
+        formulario1.setBounds(0,0,350,230);
+        formulario1.setVisible(true);
+    } 	
+}
+</pre></div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=111&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:59 GMT -->
+</html>

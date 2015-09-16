@@ -1,0 +1,334 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=161&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - Controles comunes - TextBox</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>37 - Controles comunes - TextBox</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p>El control más común para la entrada de datos por teclado es el TextBox.
+
+<h3>Problema 1:</h3>
+<p>Confeccionar un programa que permita ingresar dos valores enteros por teclado y al presionar un botón mostrar en una Label la suma de dichos valores.</p>
+<img src="imagentema/foto072.jpg" border="0" alt="TextBox">
+<h4>Programa:</h4>
+<pre class="recuadro">
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace WindowsFormsApplicationTextBox1
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int valor1 = int.Parse(textBox1.Text);
+            int valor2 = int.Parse(textBox2.Text);
+            int suma = valor1 + valor2;
+            label4.Text = suma.ToString();
+        }
+    }
+}
+</pre>
+<p>Para saber el valor almacenado en un TextBox disponemos de la propiedad Text. Como la propiedad Text es de tipo string debemos convertir dicho valor a tipo entero mediante el método estático Parse de la clase int.</p>
+<p>Luego para recuperar como enteros los dos valores almacenados en los TextBox:</p>
+<pre>
+            int valor1 = int.Parse(textBox1.Text);
+            int valor2 = int.Parse(textBox2.Text);
+</pre>
+<p>Sumamos los dos enteros:</p>
+<pre>
+            int suma = valor1 + valor2;
+</pre>
+<p>Y finalmente cargamos en un objeto de la clase Label el resultado de la suma. Como la variable suma es un entero debemos llamar al método ToString() para retornar dicho valor como string:</p>
+<pre>
+            label4.Text = suma.ToString();
+</pre>
+
+
+<h3>Problema 2:</h3>
+<p>Solicitar que se ingrese una clave. Si se ingresa la cadena "abc123" mostrar un mensaje de clave correcta en caso contrario mostrar clave incorrecta.<br>
+Utilizar un control de tipo TextBox para el ingreso de la clave y una Label para mostrar el resultado al presionar un botón.</p>
+<p>Inicializar la propiedad UseSystemPasswordChar con el valor true (esto hace que cuando el operador tipee caracteres dentro del TextBox se visualicen como asteriscos)</p>
+<img src="imagentema/foto073.jpg" border="0" alt="TextBox">
+<h4>Programa:</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace WindowsFormsApplicationTextBox2
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "abc123")
+            {
+                label2.Text = "Clave correcta";
+            }
+            else
+            {
+                label2.Text = "Clave incorrecta";
+            }
+        }
+    }
+}
+</pre>
+<p>Para verificar si la clave es correcta comparamos la cadena cargada en el textBox1 con la cadena "abc123".</p>
+<p>Hay otra propiedad en la clase TextBox llamada PasswordChar, si la propiedad UseSystemPasswordChar esta configurada con false podemos inicializar la propiedad PasswordChar con el caracter que queremos que se muestre al ingresar datos en el TextBox. Probar de inicializarlo con el caracter '+' y veremos que en vez de aparecer asteriscos aparecen caracteres '+'</p>
+
+
+<h3>Problema 3:</h3>
+<p>Disponer un control de tipo TextBox e inicializar la propiedad Multiline con el valor true (esto permite ingresar múltiples líneas dentro de un TextBox.</p>
+<img src="imagentema/foto074.jpg" border="0" alt="TextBox">
+<h4>Programa:</h4>
+<pre class="recuadro">
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace WindowsFormsApplicationTextBox3
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(textBox2.Text);
+        }
+    }
+}
+</pre>
+<p>Cuando se presiona un botón se muestra en cuadro de mensajes (MessageBox) el texto ingresado en el textBox2:</p>
+<pre>
+            MessageBox.Show(textBox2.Text);
+</pre>
+
+
+<h2>Problema propuesto</h2>
+<ol>
+<li>
+Solicitar el ingreso de una clave de hasta 10 caracteres en un control de tipo TextBox (inicializar la propiedad MaxLength con el valor 10)<br>
+Mostrar en un cuadro de mensajes la clave ingresada al presionar un botón.
+</li>
+</ol>
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+
+<pre class="recuadrooculto">
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace WindowsFormsApplicationTextBox4
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(textBox1.Text);
+        }
+    }
+}
+</pre></div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=161&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:05 GMT -->
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=187&inicio=60 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - Parámetros por referencia (out)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>63 - Parámetros por referencia (out)</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p>Existe una segunda forma de implementar parámetros por referencia utilizando la palabra clave out. La diferencia es que las variables que le pasamos al método no requieren que estén inicializadas.</p>
+
+<h3>Problema 1:</h3>
+<p>Implementar un programa que permita crear, cargar y obtener el menor y mayor valor de un vector. La obtención del mayor y menor hacerlo en un único método que retorne dichos dos valores.<br>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ParametrosReferencia3
+{
+    class Program
+    {
+        private int[] vec;
+
+        public Program()
+        {
+            Console.Write("Tamaño del vector:");
+            int tam = int.Parse(Console.ReadLine());
+            vec = new int[tam];
+        }
+
+        public void Cargar()
+        {
+            for (var f = 0; f < vec.Length; f++)
+            {
+                Console.Write("Ingrese elemento:");
+                vec[f] = int.Parse(Console.ReadLine());
+            }
+        }
+
+        public void MayorMenor(out int may,out int men)
+        {
+            may=vec[0];
+            men=vec[0];
+            for (var f = 1; f < vec.Length; f++)
+            {
+                if (vec[f] > may)
+                {
+                    may = vec[f];
+                }
+                else
+                {
+                    if (vec[f] < men)
+                    {
+                        men = vec[f];
+                    }
+                }
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            Program p = new Program();
+            p.Cargar();
+            int ma, me;
+            p.MayorMenor(out ma, out me);
+            Console.WriteLine("El mayor elemento del vector es:" + ma);
+            Console.WriteLine("El menor elemento del vector es:" + me);
+            Console.ReadKey();
+        }
+    }
+}
+</pre>
+
+<p>
+Para definir un parámetro por referencia que no requiere que la variable que le enviemos esté inicializada le antecedemos la palabra clave out:</p>
+<pre>
+        public void MayorMenor(out int may,out int men)
+        {
+            may=vec[0];
+            men=vec[0];
+            for (var f = 1; f < vec.Length; f++)
+            {
+                if (vec[f] > may)
+                {
+                    may = vec[f];
+                }
+                else
+                {
+                    if (vec[f] < men)
+                    {
+                        men = vec[f];
+                    }
+                }
+            }
+        }
+
+</pre>
+<p>Lo mismo cuando llamamos al método debemos anteceder las variables que le pasamos con la palabra clave out:</p>
+<pre>
+
+            int ma, me;
+            p.MayorMenor(out ma, out me);
+</pre>
+<p>Como podemos ver las variables ma y me no tienen un valor previo a la llamada al método MayorMenor.</p>
+
+
+<h2>Problema propuesto</h2>
+<ol>
+<li>
+Confeccionar un método que me retorne dos valores aleatorios comprendidos entre 1 y 100 mediante parámetros por referencia.
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+
+<pre class="recuadrooculto">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ParametrosReferencia4
+{
+    class Program
+    {
+        public void DosValoresAleatorios(out int v1, out int v2)
+        {
+            Random r = new Random();
+            v1 = r.Next(1, 101);
+            v2 = r.Next(1, 101);            
+        }
+
+        static void Main(string[] args)
+        {
+            int ale1, ale2;
+            Program p = new Program();
+            p.DosValoresAleatorios(out ale1, out ale2);
+            Console.WriteLine("Primer valor aleatorio:" + ale1);
+            Console.WriteLine("Segundo valor aleatorio:" + ale2);
+            Console.ReadKey();
+        }
+    }
+}
+</pre>
+</div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="indexd6cc.html?inicio=60">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=187&inicio=60 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:43 GMT -->
+</html>

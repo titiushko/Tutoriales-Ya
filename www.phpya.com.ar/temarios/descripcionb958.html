@@ -1,0 +1,337 @@
+﻿<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.phpya.com.ar/temarios/descripcion.php?punto=23&cod=44&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:08:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de PHP - Temario</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="keywords" content="php, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de php.">
+<meta name="author" content="Diego Moisset">
+
+<style>
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Verdana,arial,sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.1em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;
+}
+
+#recuadrooculto {
+  display: none;
+}
+
+
+.recuadroborde {
+  //  max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+	clear:left;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  document.getElementById('recuadrooculto').style.display='block';
+}
+
+</script>
+
+</head>
+
+<body>
+
+
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em;margin-right:1em"><a href="../index28fa-2.html?inicio=20">Temario del Tutorial</a></span>23 - DELETE (Baja de un registro en una tabla)</h1></div>
+
+<br>
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+
+<p>El objetivo de este punto es el borrado de un registro de una tabla. Para ello, implementaremos un algoritmo que solicite ingresar el mail de un alumno y posteriormente efectúe su borrado.</p>
+<p>Para eliminar filas en una tabla debemos utilizar el comando SQL delete.</p>
+<p>La primera página es idéntica a la consulta, ya que debemos implementar un formulario que solicite la carga del mail del alumno:</p>
+<pre class="recuadroborde">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form action=&quot;pagina2.php&quot; method=&quot;post&quot;&gt;
+Ingrese el mail del alumno a borrar:
+&lt;input type=&quot;text&quot; name=&quot;mail&quot;&gt;
+&lt;br&gt;
+&lt;input type=&quot;submit&quot; value=&quot;buscar&quot;&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Por otro lado tenemos el archivo "pagina2.php" que se encarga de buscar el mail ingresado en el formulario y en caso que exista se procede a borrarlo:</p>
+<pre class="recuadroborde">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+$conexion=mysqli_connect("localhost","root","","base1") or
+    die("Problemas con la conexión");
+
+$registros=mysqli_query($conexion, "select codigo from alumnos
+                        where mail='$_REQUEST[mail]'") or
+  die("Problemas en el select:".mysqli_error($conexion));
+if ($reg=mysqli_fetch_array($registros))
+{
+  mysqli_query($conexion,"delete from alumnos where mail='$_REQUEST[mail]'") or
+    die("Problemas en el select:".mysqli_error($conexion));
+  echo "Se efectuó el borrado del alumno con dicho mail.";
+}
+else
+{
+  echo "No existe un alumno con ese mail.";
+}
+mysqli_close($conexion);
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>En esta segunda página efectuamos dos llamadas a la función mysqli_query, una para consultar si existe el mail ingresado y otra para efectuar el borrado del registro respectivo. Si no existe el mail ingresado mostramos un mensaje de tal situación.</p>
+
+<br>
+<br>
+
+<h2>Problema resuelto.</h2>
+<p>Copiar el contenido de este cuadro de texto al NotePad++ y grabarlo en la carpeta c:\wamp\www con un nombre con extensión php (si hay varios cuadros
+de texto grabar cada uno en un archivo distinto).<br>
+  luego abrir el navegador (Chrome, FireFox, IExplorer etc.) y en la barra de direcciones tipear: http://localhost/pagina1.php (o el nombre del
+archivo que le dió)  </p>
+<form name="formulario" action="#" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+    pagina1.php<br><textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off" readonly>
+<html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+<form action="http://www.phpya.com.ar/temarios/pagina2.php" method="post">
+Ingrese el mail del alumno a borrar:
+<input type="text" name="mail">
+<br>
+<input type="submit" value="buscar">
+</form>
+</body>
+
+<!-- Mirrored from www.phpya.com.ar/temarios/descripcion.php?punto=23&cod=44&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:08:55 GMT -->
+</html>
+
+</textarea>
+    <br>
+	 <a href="http://www.scratchya.com.ar/problemas/phpya/resu/44/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a> 
+<!--    <a href="http://localhost:8080/problemas/phpya/resu/44/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>-->
+
+    <br>
+<table width="650px">
+<tr>
+<td align="left">	
+
+</td>
+</tr>
+</table>
+
+	
+    <br>pagina2.php<br><textarea class="programafuente" name="programa2" rows=15 cols=110 wrap="off" readonly><html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+<?php
+$conexion=mysqli_connect("localhost","root","","base1") or
+    die("Problemas con la conexión");
+
+$registros=mysqli_query($conexion, "select codigo from alumnos
+                        where mail='$_REQUEST[mail]'") or
+  die("Problemas en el select:".mysqli_error($conexion));
+if ($reg=mysqli_fetch_array($registros))
+{
+  mysqli_query($conexion,"delete from alumnos where mail='$_REQUEST[mail]'") or
+    die("Problemas en el select:".mysqli_error($conexion));
+  echo "Se efectuó el borrado del alumno con dicho mail.";
+}
+else
+{
+  echo "No existe un alumno con ese mail.";
+}
+mysqli_close($conexion);
+?>
+</body>
+</html>
+</textarea><br>
+</form>
+
+
+
+
+
+
+	
+
+<h2>Problema propuesto.</h2>
+<p>Confeccionar un programa que permita ingresar el nombre de un curso por teclado y posteriormente efectúe el borrado de dicho registro en la tabla cursos. Mostrar un mensaje si no existe el curso.</p><form name="formulario" action="#" target="ventanaForm" 
+onsubmit="abrirVentana()" method="post" >
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<div id="recuadrooculto">
+pagina1.php<br>
+<textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off" readonly>
+<html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+<form action="http://www.phpya.com.ar/temarios/pagina2.php" method="post">
+Ingrese nombre del curso a borrar:
+<input type="text" name="nombrecurso">
+<br>
+<input type="submit" value="Borrar">
+</form>
+</body>
+</html>
+
+</textarea>
+ <br>
+<!-- <a href="http://localhost:8080/problemas/phpya/propu/44/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>-->
+
+
+  <a href="http://www.scratchya.com.ar/problemas/phpya/propu/44/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a> 
+	<br>	
+pagina2.php<br><textarea class="programafuente" name="programa2" rows=15 cols=110 wrap="off" readonly><html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+<?php
+$conexion=mysqli_connect("localhost","root","","base1") or
+    die("Problemas con la conexión");
+
+$registros=mysqli_query($conexion,"select codigo from cursos
+                        where nombrecurso='$_REQUEST[nombrecurso]'") or
+  die("Problemas en el select:".mysqli_error($conexion));
+if ($reg=mysqli_fetch_array($registros))
+{
+  mysqli_query($conexion,"delete from cursos where nombrecurso='$_REQUEST[nombrecurso]'") or
+    die("Problemas en el select:".mysqli_error($conexion));
+  echo "Se efectuó el borrado del curso ingresado.";
+}
+else
+{
+  echo "No existe un curso con dicho nombre.";
+}
+mysqli_close($conexion);
+?>
+</body>
+</html></textarea>
+</div>
+
+</form>
+
+
+
+  
+
+<br>
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>
+
+
+<form name="form1" method="post" action="#">
+  <div>
+   <h2><a href="../index28fa.html?inicio=20">Retornar</a></h2>   
+  </div>
+
+  
+</form>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-4";
+urchinTracker();
+</script>
+
+</body>
+
+</html>

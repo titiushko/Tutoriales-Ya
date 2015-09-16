@@ -1,0 +1,183 @@
+
+<!DOCTYPE html> 
+<html lang="es"> 
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=179&punto=46&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>API FILE (lectura de una imagen)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="html5, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de HTML 5. Es objetivo prioritario respetar 
+los estándares del W3C">
+<meta name="author" content="Diego Moisset">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+</style>
+
+</head>
+
+<body>
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em"><a href="../../html5.html">Temario del Tutorial</a></span>->46 - API FILE (lectura de una imagen)</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Las API para manejo de archivos no se limitan solo al formato de texto, sino que podemos leer cualquier tipo de archivo y luego mediante Javascipt procesarlo en forma local. Un formato muy fácil de leerlo y mostrarlo son las imágenes.</p>
+<p>Para la lectura de un archivo con formato de imagen la clase FileReader dispone de un método llamado readAsDataURL que transforma los datos de la imagen en una URL de datos.</p>
+
+<h3>Problema</h3>
+<p>Permitir seleccionar una imagen del disco duro y posteriormente mostrarla en el fondo de un div.</p>
+<h4>Solución</h4>
+<pre class="recuadro">
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Prueba&lt;/title&gt;
+
+&lt;style&gt;
+#caja {
+  margin: 10px;
+  width: 350px;
+  height: 350px;
+  border: 5px dashed gray;
+  border-radius: 8px;
+  background: rgb(230,230,230);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+&lt;/style&gt;
+  
+  
+&lt;script&gt;
+    window.addEventListener('load', inicio, false);
+
+    function inicio() {
+        document.getElementById('archivo').addEventListener('change', cargar, false);               
+    }
+
+    function cargar(ev) {
+        var arch=new FileReader();
+        arch.addEventListener('load',leer,false);
+        arch.readAsDataURL(ev.target.files[0]);
+    }
+    
+    function leer(ev) {
+        document.getElementById('caja').style.backgroundImage="url('" + ev.target.result + "')";
+    }
+&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;p&gt;Lectura de una imagen almacenada en el disco duro.&lt;/p&gt;
+&lt;input type="file" id="archivo"&gt;&lt;br&gt;
+&lt;div id="caja"&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Para resolver este problema hemos dispuesto un div llamado caja que configuraremos la propiedad backgroundImage cuando el usuario seleccione una imagen del disco duro:</p>
+<pre>
+&lt;body&gt;
+&lt;p&gt;Lectura de una imagen almacenada en el disco duro.&lt;/p&gt;
+&lt;input type="file" id="archivo"&gt;&lt;br&gt;
+&lt;div id="caja"&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+</pre>
+
+<p>En la función inicio registramos el evento change para el control HTML de tipo file:</p>
+<pre>
+    function inicio() {
+        document.getElementById('archivo').addEventListener('change', cargar, false);               
+    }
+</pre>
+
+<p>Cuando el usuario terminó de seleccionar la foto se ejecuta la función cargar donde creamos un objeto de la clase FileReader, registramos el evento load para indicar que se ejecute la función leer una vez que el archivo esté en memoria, y finalmente llamamos al método readAsDataURL que procede a cargar la imagen:</p>
+<pre>
+    function cargar(ev) {
+        var arch=new FileReader();
+        arch.addEventListener('load',leer,false);
+        arch.readAsDataURL(ev.target.files[0]);
+    }
+</pre>
+<p>En la función leer inicializamos la propiedad backgroundImage con la imagen que acabamos de leer (como está con formato de URL de datos debemos llamar a la función url previo a la asignación):</p>
+<pre>
+    function leer(ev) {
+        alert(ev.target.result);
+        document.getElementById('caja').style.backgroundImage="url('" + ev.target.result + "')";
+    }
+</pre>
+
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../index1e61.html?inicio=40">Retornar</a></h2>   
+
+</div>
+
+</body>
+
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=179&punto=46&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:21 GMT -->
+</html>

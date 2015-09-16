@@ -1,0 +1,252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=202&inicio=60 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:02:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - SqlConnection: Conexión con el SQL Server</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>78 - SqlConnection: Conexión con el SQL Server</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p>Desde .Net disponemos de un conjunto de clases para conectarnos y pedir al SQL Server que ejecute comandos.</p>
+<p>El primer paso es conectarnos con nuestro servidor de base de datos que instalamos en los conceptos anteriores y vimos como podemos comunicarnos utilizando el Microsoft SQL Server Management Studio.</p>
+<h3>Problema</h3>
+<p>Confeccionar una aplicación que permita conectarnos con nuestro servidor de base de datos y seleccionar una determinada base de datos. Luego de la conexión cerrar la misma.</p>
+<p>Para conectarnos con el servidor y seleccionar una base de datos debemos utilizar la clase SqlConnection:</p>
+<pre>
+SqlConnection conexion=new SqlConnection("server=DIEGO-PC\\SQLEXPRESS ; database=base1 ; integrated security = true");
+</pre>
+<p>El string que le pasamos al constructor del SqlConnection le indicamos como primer dato el nombre de nuestro servidor, en su máquina lo puede ubicar cuando arranca el SQL Server Management Studio:</p>
+
+<img src="imagentema/foto169.jpg" border="0" alt="Nombre del servidor SQL Server"><br>
+<p>Algo importante si su nombre incluye la barra "\" luego disponga dos seguidas ya que C# esta barra es un caracter de control y por lo tanto para disponer una debemos disponer "\\".</p>
+<p>El segundo dato que se le pasa es el nombre de la base de datos con la que nos comunicaremos, en nuestro caso creamos previamente la base de datos "base1" y finalmente el último dato obligatorio es indicar "integrated security = true", esto hace que se utilice el usuario propio de Windows y no necesitemos por el momento crear otros usuarios propios de SQL Server.</p>
+
+<p>Creemos un nuevo proyecto en Visual Studio y demos como nombre: BaseDatos1. La interfaz visual es un simple botón:</p>
+<img src="imagentema/foto170.jpg" border="0" alt="Nombre del servidor SQL Server"><br>
+<p>El código fuente es:</p>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+using System.Data.SqlClient;
+
+namespace PruebaBaseDatos1
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SqlConnection conexion = new SqlConnection("server=DIEGO-PC\\SQLEXPRESS ; database=base1 ; integrated security = true");
+            conexion.Open();
+            MessageBox.Show("Se abrió la conexión con el servidor SQL Server y se seleccionó la base de datos");
+            conexion.Close();
+            MessageBox.Show("Se cerró la conexión.");
+        }
+    }
+}
+</pre>
+
+<p>Lo primero que hacemos es incluir el espacio de nombres:</p>
+<pre>
+using System.Data.SqlClient;
+</pre>
+<p>Este espacio de nombres define la clase SqlConnection.</p>
+<p>Para el evento Click del button1 implementamos primero la creación de un objeto de tipo SqlConnection:</p>
+<pre>
+            SqlConnection conexion = new SqlConnection("server=DIEGO-PC\\SQLEXPRESS ; database=base1 ; integrated security = true");
+</pre>
+<p>Abrimos la conexión:</p>
+<pre>
+            conexion.Open();
+</pre>
+<p>Mostramos un mensaje que la conexión se abrió:</p>
+<pre>
+            MessageBox.Show("Se abrió la conexión con el servidor SQL Server y se seleccionó la base de datos");
+</pre>
+<p>Cerramos la conexión:</p>
+<pre>
+            conexion.Close();
+</pre>
+<p>Mostramos finalmente un mensaje del cierre de la conexión:</p>
+<pre>
+            MessageBox.Show("Se cerró la conexión.");
+</pre>
+<p>Si aparece algún error es que especificó en forma incorrecta la cadena de conexión, por ejemplo si disponemos un nombre equivocado de servidor por ejemplo:</p>
+<pre>
+            SqlConnection conexion = new SqlConnection("server= --------- ; database=base1 ; integrated security = true");
+</pre>
+<p>Luego debe detenerse nuestro programa indicando donde ocurrió el error:</p>
+<img src="imagentema/foto171.jpg" border="0" alt="error SqlConnection SQL Server"><br>
+<p>También ocurrirá un error si disponemos un nombre de base de datos inexistente:</p>
+<img src="imagentema/foto172.jpg" border="0" alt="error SqlConnection SQL Server"><br>
+
+<p>Si todo está correcto podemos seguir con los próximos conceptos para pedir que SQL Server ejecute comando y recuperar los resultados.</p>
+</div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="indexd6cc.html?inicio=60">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=202&inicio=60 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:02:58 GMT -->
+</html>

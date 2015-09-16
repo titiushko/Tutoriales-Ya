@@ -1,0 +1,213 @@
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=20&cod=26 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de JavaScript : Conceptos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+div#contentdetalle{clear:left;
+                   max-width:900px;
+				   border-top:0px solid #999;
+				   padding-top:15px;
+				   background-color: #aed7a8;
+				   text-align:left;
+				   font-size:1.3em;
+				   font-weight:normal;
+				   font-family:arial;
+				   padding:20px}
+				   
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;  
+}				   
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td>
+<h1>Control SELECT</h1></td>
+<td align="right">
+<!--<a href="http://www.javascriptya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div id="contentdetalle">
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 	  
+
+Este otro objeto visual que podemos disponer en un FORM permite realizar la selección de un string de una lista y tener asociado al mismo un valor no visible. El objetivo fundamental en JavaScript es determinar qué elemento está seleccionado y qué valor tiene asociado. Esto lo hacemos cuando ocurre el evento onChange.<br>
+<br>
+Para determinar la posición del índice seleccionado en la lista:<br>
+  document.getElementById('select1').selectedIndex;
+<br>
+Considerando que el objeto SELECT se llama select1 accedemos a la propiedad selectedIndex (almacena la posición del string seleccionado de la lista, numerando a partir de cero).
+<br>
+Para determinar el string seleccionado:
+<pre>
+  document.getElementById('select1').options[document.getElementById('select1').selectedIndex].text;
+</pre>
+Es decir que el objeto select1 tiene otra propiedad llamada options, a la que accedemos por medio de un subíndice, al string de una determinada posición.
+<br><br>
+Hay problemas en los que solamente necesitaremos el string almacenado en el objeto SELECT y no el valor asociado (no es obligatorio asociar un valor a cada string).<br>
+Y por último con esta expresión accedemos al valor asociado al string:
+<pre>
+  document.getElementById('select1').options[document.getElementById('select1').selectedIndex].value;
+</pre>
+Un ejemplo completo que muestra el empleo de un control SELECT es:
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt; 
+function cambiarColor()
+{
+  var seleccion=document.getElementById('select1');
+  document.getElementById('text1').value=seleccion.selectedIndex;
+  document.getElementById('text2').value=seleccion.options[seleccion.selectedIndex].text;
+  document.getElementById('text3').value=seleccion.options[seleccion.selectedIndex].value;
+}
+&lt;/script&gt;
+
+&lt;form&gt;
+  &lt;select id="select1" onChange="cambiarColor()"&gt;
+    &lt;option value="0xff0000"&gt;Rojo&lt;/option&gt;
+    &lt;option value="0x00ff00"&gt;Verde&lt;/option&gt;
+    &lt;option value="0x0000ff"&gt;Azul&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;br&gt;
+  Número de índice seleccionado del objeto SELECT:&lt;input type="text" id="text1"&gt;&lt;br&gt;
+  Texto seleccionado:&lt;input type="text" id="text2"&gt;&lt;br&gt;
+  Valor asociado:&lt;input type="text" id="text3"&gt;&lt;br&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+Se debe analizar en profundidad este problema para comprender primeramente la creación del objeto SELECT en HTML, y cómo acceder luego a sus valores desde Javascript.<br>
+Es importante para el objeto SELECT definir qué función llamar cuando ocurra un cambio: onChange="cambiarColor()".
+<br>
+Por cada opción del objeto SELECT tenemos una línea:
+<pre>
+    <option value="0xff0000">Rojo</option>
+</pre>
+Donde Rojo es el string que se visualiza en el objeto SELECT y value es el valor asociado a dicho string.<br>
+<br>
+Analizando la función cambiarColor() podemos ver cómo obtenemos los valores fundamentales del objeto SELECT.
+</p>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../index28fa.html?inicio=20">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=20&cod=26 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:20 GMT -->
+</html>

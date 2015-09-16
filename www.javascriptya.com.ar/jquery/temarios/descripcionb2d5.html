@@ -1,0 +1,207 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/temarios/descripcion.php?cod=76&punto=23&inicio=18 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Conceptos de JQuery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="jQuery, programación, webmaster, tutorial, JavaScript">
+<meta name="description" content="El objetivo de este tutorial es presentar los conceptos de la libreria JavaScript JQUERY.">
+<meta name="author" content="Diego Moisset">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" type="text/JavaScript">
+
+</script>
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>23 - Efecto con el método toggle.</h1></td>
+<td align="right">
+<a href="../../publicidad/index.html"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.html"></a>	
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<p>
+<div style="font-size:1.3em;font-family:arial;">
+<p>El método toggle permite cada vez que se ejecute cambiar de estado la visibilidad del elemento HTML, es decir si está visible pasa a oculto y si se encuentra oculto pasa a visible.</p>
+<p><strong>Problema:</strong>Hacer que un bloque de información pase de visible a oculto lentamente y viceversa al presionar un botón.</p>
+<p>pagina1.html</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;link rel=&quot;StyleSheet&quot; href=&quot;estilos.css&quot; type=&quot;text/css&quot;&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;../jquery.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;funciones.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;input type=&quot;button&quot; id=&quot;boton1&quot; value=&quot;Mostrar/Ocultar&quot;&gt;
+&lt;div id=&quot;descripcion&quot; class=&quot;recuadro&quot;&gt;
+&lt;p&gt;HTML es el lenguaje que se emplea para el desarrollo de p&aacute;ginas 
+de internet.&lt;/p&gt; 
+&lt;p&gt;Este lenguaje est&aacute; constituido de elementos que el navegador interpreta 
+y las despliega en la pantalla 
+de acuerdo a su objetivo. Veremos que hay elementos para disponer im&aacute;genes 
+sobre una p&aacute;gina, hiperv&iacute;nculos
+que nos permiten dirigirnos a otra p&aacute;gina, listas, tablas para tabular 
+datos, etc.&lt;/b&gt;&lt;p&gt;Para poder crear una p&aacute;gina HTML se requiere un simple editor 
+de texto (en nuestro caso emplearemos 
+este sitio) y un navegador de internet (IExplorer, FireFox etc.), emplearemos 
+el navegador que en este preciso momento est&aacute; utilizando 
+(recuerde que usted est&aacute; viendo en este preciso momento una p&aacute;gina HTML
+con su navegador).&lt;/p&gt;
+&lt;p&gt;Lo m&aacute;s importante es que en cada concepto desarrolle los ejercicios 
+propuestos y modifique los que se presentan ya resueltos.&lt;p&gt;
+&lt;p&gt;Este curso lo que busca es acercar el lenguaje HTML a una persona que 
+nunca antes trabaj&oacute; con el mismo.
+No pretende mostrar todas los elementos HTML en forma alfab&eacute;tica.&lt;/p&gt;
+&lt;p&gt;Como veremos, de cada concepto se presenta una parte te&oacute;rica, 
+en la que se da una explicaci&oacute;n completa,
+luego se pasa a la secci&oacute;n del ejercicio resuelto donde podemos ver el 
+contenido de la p&aacute;gina HTML y c&oacute;mo la visualiza el navegador. 
+Por &uacute;ltimo y tal vez la secci&oacute;n m&aacute;s importante de este tutorial es donde se 
+propone que usted haga p&aacute;ginas en forma aut&oacute;noma (donde realmente 
+podr&aacute; darse cuenta si el concepto qued&oacute; 
+firme).&lt;/p&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt; 
+</pre>
+<p>funciones.js</p>
+<pre class="recuadro">
+var x;
+x=$(document);
+x.ready(inicializarEventos);
+
+function inicializarEventos()
+{
+  var x=$("#boton1");
+  x.click(ocultarMostrarRecuadro);
+}
+
+function ocultarMostrarRecuadro()
+{
+  var x=$("#descripcion");
+  x.toggle("slow");
+}
+</pre>
+<p>estilos.css</p>
+<pre class="recuadro">
+.recuadro {
+  background-color:#ffffcc;
+  font-family:verdana;
+  font-size:14px;
+
+  border-top-width:1px;
+  border-right-width:3px;
+  border-bottom-width:3px;
+  border-left-width:1px;
+
+  border-top-style:dotted;
+  border-right-style:solid;
+  border-bottom-style:solid;
+  border-left-style:dotted;
+
+  border-top-color:#ffaa00;
+  border-right-color:#ff0000;
+  border-bottom-color:#ff0000;
+  border-left-color:#ffaa00;
+}
+</pre>
+<p>La función ocultarMostrarRecuadro:</p>
+<pre>
+function ocultarMostrarRecuadro()
+{
+  var x=$("#descripcion");
+  x.toggle("slow");
+}
+</pre>
+<p>se encarga de llamar al método toggle del objeto jQuery, y este analiza si actualmente el elemento está visible u oculto, la transición se hace en forma lenta ya que le pasamos como parámetro el string "slow".</p>
+
+
+ </div>
+</p>
+
+<table width="650px">
+<tr>
+<td align="center">	
+
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../index111c.html?inicio=18">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-14', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/temarios/descripcion.php?cod=76&punto=23&inicio=18 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:22 GMT -->
+</html>

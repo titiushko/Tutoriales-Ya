@@ -1,0 +1,191 @@
+<html>
+
+
+<!-- Mirrored from www.sqlserverya.com.ar/temarios/descripcion.php?inicio=100&cod=120&punto=120 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:33 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de SQL Server </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+	  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>120 - Procedimientos almacenados (crear - ejecutar)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>Los procedimientos almacenados se crean en la base de datos seleccionada, excepto los procedimientos almacenados temporales, que se crean en la base de datos "tempdb".</p>
+
+<p>En primer lugar se deben tipear y probar las instrucciones que se incluyen en el procedimiento almacenado, luego, si se obtiene el resultado esperado, se crea el procedimiento.</p>
+
+<p>Los procedimientos almacenados pueden hacer referencia a tablas, vistas, a funciones definidas por el usuario, a otros procedimientos almacenados y a tablas temporales.</p>
+<p>Un procedimiento almacenado pueden incluir cualquier cantidad y tipo de instrucciones, excepto:</p>
+<p>create default, create procedure, create rule, create trigger y create view.<br>
+Se pueden crear otros objetos (por ejemplo índices, tablas), en tal caso deben especificar el nombre del propietario; se pueden realizar inserciones, actualizaciones, eliminaciones, etc.
+</p>
+<p>Si un procedimiento almacenado crea una tabla temporal, dicha tabla sólo existe dentro del procedimiento y desaparece al finalizar el mismo. Lo mismo sucede con las variables.
+</p>
+<p>Hemos empleado varias veces procedimientos almacenados del sistema ("sp_help", "sp_helpconstraint", etc.), ahora aprenderemos a crear nuestros propios procedimientos almacenados.</p>
+
+<p>Para crear un procedimiento almacenado empleamos la instrucción "create procedure".<br> La sintaxis básica parcial es:</p>
+<pre>
+ create procedure NOMBREPROCEDIMIENTO
+  as INSTRUCCIONES;
+</pre>
+<p>Para diferenciar los procedimientos almacenados del sistema de los procedimientos almacenados locales use un prefijo diferente a "sp_" cuando les de el nombre.</p>
+
+<p>Con las siguientes instrucciones creamos un procedimiento almacenado llamado "pa_libros_limite_stock" que muestra todos los libros de los cuales hay menos de 10 disponibles:</p>
+<pre>
+ create proc pa_libros_limite_stock
+  as
+   select *from libros
+   where cantidad <=10;
+</pre>
+<p>Entonces, creamos un procedimiento almacenado colocando "create procedure" (o "create proc", que es la forma abreviada), luego el nombre del procedimiento y seguido de "as" las sentencias que definen el procedimiento.</p>
+<p>"create procedure" debe ser la primera sentencia de un lote.</p>
+
+<p>Para ejecutar el procedimiento almacenado creado anteriormente tipeamos:</p>
+<pre>
+ exec pa_libros_limite_stock;
+</pre>
+<p>Entonces, para ejecutar un procedimiento almacenado colocamos "execute" (o "exec") seguido del nombre del procedimiento.</p>
+
+<p>Cuando realizamos un ejercicio nuevo, siempre realizamos las mismas tareas: eliminamos la tabla si existe, la creamos y luego ingresamos algunos registros. Podemos crear un procedimiento almacenado que contenga todas estas instrucciones:</p>
+<pre>
+ create procedure pa_crear_libros
+  as
+  if object_id('libros')is not null
+   drop table libros;
+  create table libros(
+   codigo int identity,
+   titulo varchar(40),
+   autor varchar(30),
+   editorial varchar(20),
+   precio decimal(5,2),
+   primary key(codigo)
+  );
+
+  insert into libros values('Uno','Richard Bach','Planeta',15);
+  insert into libros values('Ilusiones','Richard Bach','Planeta',18);
+  insert into libros values('El aleph','Borges','Emece',25);
+  insert into libros values('Aprenda PHP','Mario Molina','Nuevo siglo',45);
+  insert into libros values('Matematica estas ahi','Paenza','Nuevo siglo',12);
+  insert into libros values('Java en 10 minutos','Mario Molina','Paidos',35);
+</pre>
+<p>Y luego lo ejecutamos cada vez que comenzamos un nuevo ejercicio y así evitamos tipear tantas sentencias:</p>
+<pre>
+ exec pa_crear_libros;
+</pre>
+
+
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+<br>
+   <h2><a href="../indexf6ce.html?inicio=100">Retornar</a></h2>   
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-11";
+urchinTracker();
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from www.sqlserverya.com.ar/temarios/descripcion.php?inicio=100&cod=120&punto=120 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:33 GMT -->
+</html>

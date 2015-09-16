@@ -1,0 +1,357 @@
+<!doctype html>
+<html>
+
+<!-- Mirrored from www.javascriptya.com.ar/problemas/problema.php?cod=5&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:08:04 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+    <title>JavaScript Ya</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="estilos.css" rel="stylesheet">
+    <link href='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css' rel='stylesheet'>     
+    <script src='../../ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script> 
+    <script src='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>     
+    
+<script type="text/javascript">	
+$(document).ready(function(){
+  var opciones = {
+                   select:tabSeleccionado
+                 };                 
+  $("#pesta").tabs(opciones);
+});
+
+function tabSeleccionado(event,tab) {
+  if (tab.index==2) {
+    var d = parent.documentodinamico.document; 	
+    d.open();
+	d.write(String.fromCharCode(60)+"script ");
+	d.write(' src="debug.js">');
+	d.write(String.fromCharCode(60)+"/script"+String.fromCharCode(62));
+	d.write($('#editor').val());
+    d.close();	
+  }	
+}
+
+
+</script>
+	
+<style type="text/css">	
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>	
+	
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>	
+	
+</head>
+<body>
+
+
+
+
+<h1>Estructuras secuenciales de programación.</h1>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* javascriptya-superior */
+google_ad_slot = "5739365568";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+
+<div id="pesta">
+	<ul>
+		<li><a href="#p1">Problemas</a></li>    	
+		<li><a href="#p2">Codificar problema</a></li>
+		<li><a href="#p3">Ejecución problema</a></li>
+	</ul>
+	<div id="p1" style="background:#fafafa;padding:30px; max-height: 700px; min-height: 700px;;overflow: auto;font-size:13pt">
+		
+	Es de fundamental importancia realizar los programas. Viendo sólo los problemas resueltos en este curso de estudio no alcanza para convertirse en un programador de aplicaciones.
+<br><br>
+<b>PROBLEMAS</b><br>
+<ol>
+<li>
+ Realizar la carga del lado de un cuadrado, mostrar por pantalla el perímetro del mismo (El perímetro de un cuadrado se calcula multiplicando el valor del lado por cuatro)
+</li>
+<li>
+Escribir un programa en el cual se ingresen cuatro números, calcular e informar la suma de los dos primeros y el producto del tercero y el cuarto.
+</li>
+<li>
+Realizar un programa que lea cuatro valores numéricos e informar su suma y producto.
+</li>
+<li>
+Se debe desarrollar un programa que pida el ingreso del precio de un artículo y la cantidad que lleva el cliente. Mostrar lo que debe abonar el comprador (Ingresar por teclado un precio sin decimales, es decir un entero: 2, 7, 90 etc.)
+</li>
+</ol>
+
+
+<div style="margin-top:20px">
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+</div>
+<pre class="recuadrooculto">
+Problema 1.
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var lado;
+  lado=prompt('Ingrese medida del lado:','');
+  var perimetro;
+  perimetro=lado*4;
+  document.write('Su perímetro es:');
+  document.write(perimetro);
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+     
+
+
+Problema 2.
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var num1;
+  var num2;
+  var num3;
+  var num4;
+  num1=prompt('Ingrese primer valor:','');
+  num2=prompt('Ingrese segundo valor:','');
+  num3=prompt('Ingrese tercer valor:','');
+  num4=prompt('Ingrese cuarto valor:','');
+  var suma;
+  suma=parseInt(num1)+parseInt(num2);
+  var producto;
+  producto=parseInt(num3)*parseInt(num4);
+  document.write('La suma de los dos primeros valores es:');
+  document.write(suma);
+  document.write('&lt;br&gt;');
+  document.write('El producto del tercer y cuarto valor es:');
+  document.write(producto);
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+
+Problema 3.
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var num1;
+  var num2;
+  var num3;
+  var num4;
+  num1=prompt('Ingrese primer valor:','');
+  num2=prompt('Ingrese segundo valor:','');
+  num3=prompt('Ingrese tercer valor:','');
+  num4=prompt('Ingrese cuarto valor:','');
+  var suma;
+  suma=parseInt(num1)+parseInt(num2)+parseInt(num3)+parseInt(num4);
+  var producto;
+  producto=parseInt(num1)*parseInt(num2)*parseInt(num3)*parseInt(num4);
+  document.write('La suma de los cuatro valores es:');
+  document.write(suma);
+  document.write('&lt;br&gt;');
+  document.write('El producto de los cuatro valor es:');
+  document.write(producto);
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+
+Problema 4.     
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var precio;
+  var cantidad;
+  precio=prompt('Ingrese precio del artículo','');
+  cantidad=prompt('Ingrese la cantidad de artículos a llevar:','');
+  var importe;
+  importe=parseInt(precio)*parseInt(cantidad);
+  document.write('Debe abonar:');
+  document.write(importe);
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+     
+
+
+Problema 5.     
+
+
+html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var total1=0;
+  var x=0;
+  var nro;
+  while(x&lt;3)
+  {
+    nro=prompt('Ingrese valor de la primer lista:','');
+    nro=parseInt(nro);
+    total1=total1+nro;
+    x=x+1;
+  }
+  var total2=0;
+  x=0;
+  while(x&lt;3)
+  {
+    nro=prompt('Ingrese valor de la segunda lista:','');
+    nro=parseInt(nro);
+    total2=total2+nro;
+    x=x+1;
+  }
+  if (total1&gt;total1)
+  {
+    document.write('Tiene mayor valor la lista1');
+  }
+  else
+  {
+    if (total1&lt;total2)
+    {
+      document.write('Tiene mayor valor la lista2');
+    }
+    else
+    {
+      document.write('Tienen el mismo valor acumuado las dos listas');
+    }
+  }
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>	</div>    	
+	<div id="p2">
+    <textarea name="editor" id="editor" rows="28" style="width:890px;height:700px;font-size:16px;font-family:courier">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+     
+</textarea>
+	</div>
+	<div id="p3">
+<iframe width="900" height="700" id="documentodinamico" name="documentodinamico" src="vacio.html">
+No tiene disponible el navegador la capacidad de iframe
+</iframe>
+	</div>
+</div>
+<br>
+<table width="700px">
+<tr>
+<td align="left">	
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* javascriptya-inferior */
+google_ad_slot = "8692831966";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* javascriptya-inferior */
+google_ad_slot = "8692831966";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../index2904.html?inicio=0">Retornar al menu</a></h2>   
+<br>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+<!-- Mirrored from www.javascriptya.com.ar/problemas/problema.php?cod=5&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:08:04 GMT -->
+</html>

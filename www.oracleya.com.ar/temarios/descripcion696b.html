@@ -1,0 +1,169 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=100&cod=277&punto=119 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Descripción : Usuarios (crear) (Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>119 - Usuarios (crear)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>Puede haber varios usuarios diferentes de la base de datos. Cada uno es propietario de sus objetos.</p>
+
+<p>Para crear un usuario debemos conectarnos a la base datos como administradores (por ejemplo "system").</p>
+
+<p>Sintaxis básica para crear un usuario:</p>
+<pre>
+ create user NOMBREUSUARIO identified by CONTRASEÑA
+ default tablespace NOMBRETABLESPACEPORDEFECTO
+ quota CANTIDAD on TABLEESPACE;
+** [default role ROLE, ALL];
+</pre>
+<p>La cláusula "identified by" permite indicar una contraseña.</p>
+<p>La cláusula "default tablespace" será el tablespace (espacio de tablas) por defecto en la creación de objetos del usuario. Si se omite se utilizará el tablespace SYSTEM. Los tablespaces son unidades lógicas en las cuales de divide una base de datos, en las cuales se almacenan los objetos (tablas, secuencias, etc.); todos los objetos están almacenados dentro de un tablespace.</p>
+<p>La cláusula "quota" permite configurar un espacio en bytes, Kb o Mb en la base de datos. Si no se especifica, por defecto es cero y no podrá crear objetos.</p>
+<p>La cláusula "default role" permite asignar roles de permisos durante la creación del usuario.</p>
+<p>Ejemplo:</p>
+<pre>
+ create user ana identified by anita;
+</pre>
+<p>Con la sentencia anterior se crea un usuario denominado "ana" con la clave "anita", el tablespace por defecto es "system" porque no se especificó otro.</p>
+<p>Con la siguiente sentencia se crea un usuario denominado "juan" con la clave "juancito", se le asigna un espacio de 100 mb:</p>
+<pre>
+ create user juan identified by juancito
+ default tablespace system
+ quota 100M on system;
+</pre>
+<p>Si intentamos crear un usuario que ya existe, Oracle muestra un mensaje de error indicando tal situación.</p>
+
+<p>El diccionario "dba_users" muestra información sobre todos los usuarios; el nombre de usuario (username), contraseña (password), estado (account_status), espacio (default_tablespace), fecha de expiración (expiry_date), fecha de creación (created), entre otros.</p>
+
+<p>Luego de crear un usuario, aún no podemos conectarnos, ya que no tenemos permiso para crear una sesión. Los permisos se aprenderán próximamente.</p>
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../indexf6ce.html?inicio=100">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=100&cod=277&punto=119 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:38 GMT -->
+</html>

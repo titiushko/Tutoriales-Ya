@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=12&codigo=12&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:51:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Recuperar datos de los parámetros de una url (GET)</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++, programación, tutorial, nodejs">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de NodeJS.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>12 - Recuperar datos de los parámetros de una url (GET)</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Vimos en conceptos anteriores como se recuperan los datos cargados en un formulario HTML pasados por el método POST del protocolo HTTP.</p>
+<p>Veamos ahora como recuperar datos que llegan normalmente como parámetros en una url.</p>
+<p>Si tenemos la siguiente url:</p>
+<pre>
+http://www.ventas.com/pedido?articulo=serrucho&cantidad=3
+</pre>
+<p>Decimos en este caso que tenemos dos parámetros con sus respectivos valores:</p>
+<p>El parámetro 'articulo' tiene el valor 'serrucho' y el parámetro 'cantidad' tiene el valor '3'.</p>
+<h3>Problema</h3>
+<p>Desarrollar un sitio que muestre una lista de valores del 1 al 20 como hipervínculos. Cuando se presione alguno de dichos hipervínculos mostrar la tabla de multiplicar del valor seleccionado. Pasar como parámetro el valor del número seleccionado.</p>
+<p>En el navegador debe mostrarse algo similar a estas dos páginas:</p>
+
+<p><img src="imagentema/foto036.jpg" border="0" alt="recuperar node.js por GET"></p>
+<p>Y cuando se selecciona un número generamos una página dinámica con la tabla de multiplicar:</p>
+<p><img src="imagentema/foto037.jpg" border="0" alt="recuperar node.js por GET"></p>
+<p>Para resolver este problema creemos una carpeta llamada ejercicio14 y en su interior crear el archivo ejercicio14.js y una subcarpeta llamada public con un único archivo que será nuestro menú de opciones llamado index.html.</p>
+<p>El archivo index.html es:</p>
+<pre class="recuadro">
+&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Prueba&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;a href="listanumeros"&gt;Lista de numeros de 1 al 20.&lt;/a&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Veamos ahora el archivo ejercicio14.js donde se encuentra nuestro programa en Node.js completo:</p>
+<pre class="recuadro">
+var http=require('http');
+var url=require('url');
+var fs=require('fs');
+
+var mime = {
+   'html' : 'text/html',
+   'css'  : 'text/css',
+   'jpg'  : 'image/jpg',
+   'ico'  : 'image/x-icon',
+   'mp3'  : 'audio/mpeg3',
+   'mp4'  : 'video/mp4'
+};
+
+var servidor=http.createServer(function(pedido,respuesta){
+    var objetourl = url.parse(pedido.url);
+    var camino='public'+objetourl.pathname;
+    if (camino=='public/')
+        camino='public/index.html';
+    encaminar(pedido,respuesta,camino);
+});
+
+servidor.listen(8888);
+
+
+function encaminar (pedido,respuesta,camino) {
+    
+    switch (camino) {
+        case 'public/listanumeros': {
+            listar(pedido,respuesta);
+            break;
+        }    
+        case 'public/listadotabla': {
+            listarTablaMultiplicar(pedido,respuesta);
+            break;
+        }            
+        default : {  
+            fs.exists(camino,function(existe){
+                if (existe) {
+                    fs.readFile(camino,function(error,contenido){
+                        if (error) {
+                            respuesta.writeHead(500, {'Content-Type': 'text/plain'});
+                            respuesta.write('Error interno');
+                            respuesta.end();                    
+                        } else {
+                            var vec = camino.split('.');
+                            var extension=vec[vec.length-1];
+                            var mimearchivo=mime[extension];
+                            respuesta.writeHead(200, {'Content-Type': mimearchivo});
+                            respuesta.write(contenido);
+                            respuesta.end();
+                        }
+                    });
+                } else {
+                    respuesta.writeHead(404, {'Content-Type': 'text/html'});
+                    respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;Recurso inexistente&lt;/body&gt;&lt;/html&gt;');        
+                    respuesta.end();
+                }
+            });    
+        }
+    }    
+}
+
+
+function listar(pedido,respuesta) {
+    var info = '';
+    respuesta.writeHead(200, {'Content-Type': 'text/html'});
+    var pagina='&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;';
+    for(var f=1;f&lt;=20;f++) {
+       pagina+='&lt;a href="listadotabla?num='+f+'"&gt;'+f+'&lt;/a&gt;&lt;br&gt;';
+    }
+    pagina+='&lt;/body&gt;&lt;/html&gt;';
+    respuesta.end(pagina);
+}
+
+function listarTablaMultiplicar(pedido,respuesta) {
+    var valor=url.parse(pedido.url,true).query.num;
+    respuesta.writeHead(200, {'Content-Type': 'text/html'});
+    var pagina='&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;';
+    for(var f=1;f&lt;=10;f++) {
+        pagina+=valor+'*'+f+'='+(valor*f)+'&lt;br&gt;';
+    }           
+    pagina+='&lt;/body&gt;&lt;/html&gt;';
+    respuesta.end(pagina);
+}
+
+
+console.log('Servidor web iniciado');
+</pre>
+
+<p>La primer parte del código es lo mismo visto en conceptos anteriores. En la función encaminar capturamos cuando se presiona el hipervínculo del archivo index.html y alguno de los hipervínculos de los números del 1 al 20:</p>
+<pre>
+    switch (camino) {
+        case 'public/listanumeros': {
+            listar(pedido,respuesta);
+            break;
+        }    
+        case 'public/listadotabla': {
+            listarTablaMultiplicar(pedido,respuesta);
+            break;
+        }            
+</pre>
+
+<p>Veamos primero que sucede cuando se presiona el hipervínculo listanumeros.</p>
+<p>Llamamos a la función listar:</p>
+<pre>
+function listar(pedido,respuesta) {
+    var info = '';
+    respuesta.writeHead(200, {'Content-Type': 'text/html'});
+    var pagina='&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;';
+    for(var f=1;f&lt;=20;f++) {
+       pagina+='&lt;a href="listadotabla?num='+f+'"&gt;'+f+'&lt;/a&gt;&lt;br&gt;';
+    }
+    pagina+='&lt;/body&gt;&lt;/html&gt;';
+    respuesta.end(pagina);
+}
+</pre>
+<p>Esta función listar genera una página HTML dinámica mostrando 20 hipervínculos y disponiendo en la propiedad href el valor listadotabla pasando un parámetro llamado num que coincide con el valor mostrado por el hipervínculo.</p>
+
+<p>Veamos ahora lo más importante de este concepto que es rescatar el valor del hipervínculo:</p>
+<pre>
+function listarTablaMultiplicar(pedido,respuesta) {
+    var valor=url.parse(pedido.url,true).query.num;
+    respuesta.writeHead(200, {'Content-Type': 'text/html'});
+    var pagina='&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;';
+    for(var f=1;f&lt;=10;f++) {
+        pagina+=valor+'*'+f+'='+(valor*f)+'&lt;br&gt;';
+    }           
+    pagina+='&lt;/body&gt;&lt;/html&gt;';
+    respuesta.end(pagina);
+}
+</pre>
+
+<p>Como vemos utilizamos el objeto url llamando al método parse y pasando dos parámetros: pedido.url y el valor true. Mediante el objeto que nos devuelve accedemos a la propiedad query y en este objeto tenemos una propiedad llamada igual a nuestro parámetro 'num'. Si tiene más parámetros los accedemos de la misma forma.</p>
+<p>El resto de la función es generar la página dinámica.</p>
+
+<p>Este proyecto lo puede descargar en un zip con todos los archivos desde este enlace :
+<a href="proyectos/ejercicio14.zip">ejercicio14</a></p>
+<h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-35', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=12&codigo=12&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:51:42 GMT -->
+</html>

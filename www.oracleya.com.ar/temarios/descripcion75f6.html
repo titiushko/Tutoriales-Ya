@@ -1,0 +1,175 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=50&cod=223&punto=65 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Descripción : Unión (Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>65 - Unión</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>Las operaciones de conjuntos combinan los resultados de dos o más consultas "select" en un único resultado.</p>
+<p>Se usan cuando los datos que se quieren obtener pertenecen a distintas tablas y no se puede acceder a ellos con una sola consulta.</p>
+<p>Es necesario que las tablas referenciadas tengan tipos de datos similares, la misma cantidad de campos y el mismo orden de campos en la lista de selección de cada consulta.</p>
+
+<p>Hay tres operadores de conjuntos: union, intersect y minus.
+Veremos en primer lugar "union".</p>
+
+<p>La sintaxis para unir dos consultas con el operador "union" es la siguiente:</p>
+<pre>
+ CONSULTA1
+  union
+  CONSULTA2;
+</pre>
+<p>Recuerde que las consultas DEBEN tener el mismo numero de valores retornados y los valores deben ser del mismo tipo.</p>
+
+<p>Veamos un ejemplo. Una academia de enseñanza de idiomas da clases de inglés y frances; almacena los datos de los alumnos que estudian inglés en una tabla llamada "ingles" y los que están inscriptos en "francés" en una tabla denominada "frances".</p>
+<p>La academia necesita el nombre y domicilio de todos los alumnos, de todos los cursos para enviarles una tarjeta de felicitación para el día del alumno.</p>
+
+<p>Para obtener los datos necesarios de ambas tablas en una sola consulta necesitamos realizar una unión:</p>
+<pre>
+ select nombre, domicilio from ingles
+  union
+  select nombre, domicilio from frances;
+</pre>
+<p>El primer "select" devuelve el nombre y domicilio de todos los alumnos de "ingles"; el segundo, el nombre y domicilio de todos los alumnos de "frances". Esta sentencia de unión retornará la combinacion de los resultados de ambas consultas "select", mostrando el nombre y domicilio de los registros de ambas tablas.</p>
+
+<p>Los encabezados del resultado de una unión son los que se especifican en el primer "select".
+
+El operador de conjunto "union" no retorna duplicados; es decir, si un registro de la primer consulta es igual a otro registro de la segunda consulta, tal registro aparece una sola vez. Si queremos que se incluyan TODOS los registros, aún duplicados, debemos emplear "union all":</p>
+<pre>
+ select nombre,domicilio from ingles
+  union all
+  select nombre,domicilio from frances;
+</pre>
+<p>En el ejemplo anterior, si un registro de la primer consulta es igual a otro registro de la segunda consulta, tal registro aparece dos veces; es decir, si un alumno está cursando ambos idiomas, aparecerá dos veces en el resultado.</p>
+
+<p>"union" puede combinarse con la cláusula "order by".</p>
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../indexefd7.html?inicio=50">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=50&cod=223&punto=65 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:36 GMT -->
+</html>

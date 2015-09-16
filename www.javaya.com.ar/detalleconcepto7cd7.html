@@ -1,0 +1,466 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=96&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:41 GMT -->
+<head>
+<title>Matrices (cantidad de filas y columnas)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Matrices (cantidad de filas y columnas)</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>Como hemos visto para definir y crear la matriz utilizamos la siguiente sintaxis:</p>
+<pre>
+int[][] mat;
+</pre>
+<p>Creación:</p>
+<pre>
+mat=new int[3][4];
+</pre>
+<p>Como las matrices son objetos en Java disponemos por un lado del atributo length que almacena la cantidad de filas de la matriz:</p>
+<pre>
+System.out.println("Cantidad de filas de la matriz:" + mat.length);
+</pre>
+<p>También podemos preguntarle a cada fila de la matriz la cantidad de elementos que almacena:</p>
+<pre>
+System.out.println("Cantidad de elementos de la primer fila:" + mat[0].length);
+</pre>
+
+<h3>Problema 1:</h3>
+<p>Crear una matriz de n * m filas (cargar n y m por teclado) Imprimir la matriz completa y la última fila.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.util.Scanner;
+public class Matriz5 {
+    private Scanner teclado;
+    private int[][] mat;
+    
+    public void cargar() {
+        teclado=new Scanner(System.in);
+        System.out.print("Cuantas fila tiene la matriz:");
+        int filas=teclado.nextInt();
+        System.out.print("Cuantas columnas tiene la matriz:");
+        int columnas=teclado.nextInt();
+        mat=new int[filas][columnas];
+        for(int f=0;f&lt;mat.length;f++) {
+            for(int c=0;c&lt;mat[f].length;c++) {
+                System.out.print("Ingrese componente:");
+                mat[f][c]=teclado.nextInt();
+            }
+        }
+    }
+    
+    public void imprimir() {
+        for(int f=0;f&lt;mat.length;f++) {
+            for(int c=0;c&lt;mat[f].length;c++) {
+                System.out.print(mat[f][c]+" ");
+            }
+            System.out.println();
+        }
+    }
+    
+    public void imprimirUltimaFila() {
+    	System.out.println("Ultima fila");
+        for(int c=0;c&lt;mat[mat.length-1].length;c++) {
+             System.out.print(mat[mat.length-1][c]+" ");
+        }
+    }
+    
+    public static void main(String[] ar) {
+        Matriz5 ma=new Matriz5();
+        ma.cargar();
+        ma.imprimir();
+        ma.imprimirUltimaFila();
+    }   
+}
+</pre>
+<p>En este ejemplo cada vez que se ejecute el programa el tamaño de la matriz lo define el usuario, para ello ingresamos por teclado dos enteros y seguidamente procedemos a crear la matriz con dichos valores:</p>
+<pre>
+        System.out.print("Cuantas fila tiene la matriz:");
+        int filas=teclado.nextInt();
+        System.out.print("Cuantas columnas tiene la matriz:");
+        int columnas=teclado.nextInt();
+        mat=new int[filas][columnas];
+</pre>
+<p>Ahora las estructuras repetitivas las acotamos preguntando a la misma matriz la cantidad de filas y la cantidad de elementos de cada fila(mat.length almacena la cantidad de filas de la matriz y mat[f].length cuando f vale cero accedemos a la cantidad de elementos de la fila cero y así sucesivamente para cada valor de f):</p>
+<pre>
+        for(int f=0;f&lt;mat.length;f++) {
+            for(int c=0;c&lt;mat[f].length;c++) {
+                System.out.print("Ingrese componente:");
+                mat[f][c]=teclado.nextInt();
+            }
+        }
+</pre>
+<p>El algoritmo de impresión es idéntico al visto anteriormente con la modificación de las condiciones de los for:</p>
+<pre>
+    public void imprimir() {
+        for(int f=0;f&lt;mat.length;f++) {
+            for(int c=0;c&lt;mat[f].length;c++) {
+                System.out.print(mat[f][c]+" ");
+            }
+            System.out.println();
+        }
+    }
+</pre>
+<p>Para imprimir la última fila debemos disponer un valor fijo en el subíndice de la fila (en este caso no podemos disponer un número fijo sino preguntarle a la misma matriz la cantidad de filas y restarle uno ya que las filas comienzan a numerarse a partir de cero: mat[mat.length-1][c])</p>
+<p>También la condición del for debemos acceder al atributo length de la última fila mat[mat.length-1].length</p>
+<pre>
+        for(int c=0;c&lt;mat[mat.length-1].length;c++) {
+             System.out.print(mat[mat.length-1][c]+" ");
+        }
+</pre>
+
+<h3>Problema 2:</h3>
+<p>Crear una matriz de n * m filas (cargar n y m por teclado) Imprimir el mayor elemento y la fila y columna donde se almacena.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.util.Scanner;
+public class Matriz6 {
+    private Scanner teclado;
+    private int[][] mat;
+    
+    public void cargar() {
+        teclado=new Scanner(System.in);
+        System.out.print("Cuantas fila tiene la matriz:");
+        int filas=teclado.nextInt();
+        System.out.print("Cuantas columnas tiene la matriz:");
+        int columnas=teclado.nextInt();
+        mat=new int[filas][columnas];
+        for(int f=0;f&lt;mat.length;f++) {
+            for(int c=0;c&lt;mat[f].length;c++) {
+                System.out.print("Ingrese componente:");
+                mat[f][c]=teclado.nextInt();
+            }
+        }
+    }
+        
+    public void imprimirMayor() {
+    	int mayor=mat[0][0];
+    	int filamay=0;
+    	int columnamay=0;
+        for(int f=0;f&lt;mat.length;f++) {
+            for(int c=0;c&lt;mat[f].length;c++) {
+                if (mat[f][c]&gt;mayor) {
+                    mayor=mat[f][c];
+                    filamay=f;
+                    columnamay=c;
+                }
+            }
+        }
+        System.out.println("El elemento mayor es:"+mayor);
+        System.out.println("Se encuentra en la fila:"+filamay+ " y en la columna: "+columnamay);
+    }
+    
+    public static void main(String[] ar) {
+        Matriz6 ma=new Matriz6();
+        ma.cargar();
+        ma.imprimirMayor();
+    }   
+}
+</pre>
+<p>Para obtener el mayor elemento de la matriz y la fila y columna donde se ubica debemos inicializar una variable mayor con el elemento de la fila cero y columna cero (esto lo hacemos suponiendo que en dicha posición se almacena el mayor):</p>
+<pre>
+    	int mayor=mat[0][0];
+    	int filamay=0;
+    	int columnamay=0;
+</pre>
+<p>Luego mediante dos for recorremos todos los elementos de la matriz y cada vez que encontramos un elemento mayor al actual procedemos a actualizar la variable mayor y la posición donde se almacena:</p>
+<pre>
+        for(int f=0;f&lt;mat.length;f++) {
+            for(int c=0;c&lt;mat[f].length;c++) {
+                if (mat[f][c]&gt;mayor) {
+                    mayor=mat[f][c];
+                    filamay=f;
+                    columnamay=c;
+                }
+            }
+        }
+</pre>
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Crear una matriz de n * m filas (cargar n y m por teclado) Intercambiar la primer fila con la segundo. Imprimir luego la matriz.
+</li>
+<li>
+Crear una matriz de n * m filas (cargar n y m por teclado) Imprimir los cuatro valores que se encuentran en los vértices de la misma (mat[0][0] etc.)
+</li>
+
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+import java.util.Scanner;
+public class Matriz7 {
+    private Scanner teclado;
+    private int[][] mat;
+    
+    public void cargar() {
+        teclado=new Scanner(System.in);
+        System.out.print("Cuantas fila tiene la matriz:");
+        int filas=teclado.nextInt();
+        System.out.print("Cuantas columnas tiene la matriz:");
+        int columnas=teclado.nextInt();
+        mat=new int[filas][columnas];
+        for(int f=0;f&lt;mat.length;f++) {
+            for(int c=0;c&lt;mat[f].length;c++) {
+                System.out.print("Ingrese componente:");
+                mat[f][c]=teclado.nextInt();
+            }
+        }
+    }
+        
+    public void intercambiar() {
+        for(int c=0;c&lt;mat[0].length;c++) {
+            int aux=mat[0][c];
+            mat[0][c]=mat[1][c];
+            mat[1][c]=aux;
+        }
+    }
+    
+    public void imprimir() {
+        for(int f=0;f&lt;mat.length;f++) {
+            for(int c=0;c&lt;mat[f].length;c++) {
+                System.out.print(mat[f][c]+" ");
+            }
+            System.out.println();
+        }
+    }    
+    
+    public static void main(String[] ar) {
+        Matriz7 ma=new Matriz7();
+        ma.cargar();
+        ma.intercambiar();
+        ma.imprimir();
+    }   
+}
+
+
+
+
+import java.util.Scanner;
+public class Matriz8 {
+    private Scanner teclado;
+    private int[][] mat;
+    
+    public void cargar() {
+        teclado=new Scanner(System.in);
+        System.out.print("Cuantas fila tiene la matriz:");
+        int filas=teclado.nextInt();
+        System.out.print("Cuantas columnas tiene la matriz:");
+        int columnas=teclado.nextInt();
+        mat=new int[filas][columnas];
+        for(int f=0;f&lt;mat.length;f++) {
+            for(int c=0;c&lt;mat[f].length;c++) {
+                System.out.print("Ingrese componente:");
+                mat[f][c]=teclado.nextInt();
+            }
+        }
+    }
+           
+    public void imprimirVertices() {
+    	System.out.println("Vértice superior izquierdo:");
+        System.out.println(mat[0][0]);
+    	System.out.println("Vértice superior derecho:");        
+        System.out.println(mat[0][mat[0].length-1]);
+    	System.out.println("Vértice inferior izquierdo:");        
+        System.out.println(mat[mat.length-1][0]);
+    	System.out.println("Vértice inferior derecho:");        
+        System.out.println(mat[mat.length-1][mat[mat.length-1].length-1]);
+    }    
+    
+    public static void main(String[] ar) {
+        Matriz8 ma=new Matriz8();
+        ma.cargar();
+        ma.imprimirVertices();
+    }   
+}
+
+</pre></div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=96&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:41 GMT -->
+</html>

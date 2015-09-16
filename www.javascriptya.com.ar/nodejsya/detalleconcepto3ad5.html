@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=2&codigo=2&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:49:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Módulos en Node.js</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++, programación, tutorial, nodejs">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de NodeJS.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>2 - Módulos en Node.js</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>La primera gran diferencia en el JavaScript que se utiliza en Node.js es el concepto de módulo. Sabemos que cuando nuestra aplicación comienza a crecer un único archivo es imposible de manejar todas las funcionalidades, lo mismo ocurre con librerías desarrolladas por otros programadores.</p>
+<p>Un módulo contiene funciones, objetos, variables donde indicamos cuales serán exportados para ser utilizados por otros programas.</p>
+<h2>Módulo de un único archivo</h2>
+<p>Vamos a crear un programa muy sencillo que nos permita sumar, restar y dividir números y mostrarlos por la consola. Las funcionalidades las dispondremos en un módulo de archivo y veremos como la consumimos en nuestro programa principal.</p>
+<p>Primero creemos nuestro módulo llamado matematica.js con el siguiente código:</p> 
+<pre>matematica.js</pre>
+<pre class="recuadro">
+var PI=3.14;
+
+function sumar(x1,x2)
+{
+    return x1+x2;
+}
+ 
+function restar(x1,x2)
+{
+    return x1-x2;
+}
+ 
+function dividir(x1,x2)
+{
+    if (x2==0)
+	{
+	    mostrarErrorDivision();
+	}
+	else
+	{
+	    return x1/x2;
+	}
+}
+ 
+function mostrarErrorDivision() {
+    console.log('No se puede dividir por cero');
+}
+ 
+exports.sumar=sumar;
+exports.restar=restar;
+exports.dividir=dividir;
+exports.PI=PI; 
+</pre>
+
+<p>En este archivo podemos definir variables, funciones, objetos etc. y los que necesitamos que sean accedidos desde otro archivo los exportamos agregándolos al objeto exports:</p>
+<pre>
+exports.sumar=sumar;
+exports.restar=restar;
+exports.dividir=dividir;
+exports.PI=PI; 
+</pre>
+<p>Aquello que no necesitemos llamarlo desde otra archivo como en este ejemplo pasa con la función mostrarErrorDivision simplemente no la agregamos al objeto exports.</p>
+
+<p>Codifiquemos ahora nuestra aplicación principal que la llamaremos ejercicio2.js y también la guardamos en la misma carpeta donde tenemos el archivo matematica.js:</p>
+<pre class="recuadro">
+var mat=require('./matematica');
+
+console.log('La suma de 2+2='+mat.sumar(2,2));
+console.log('La resta de 4-1='+mat.restar(4,1));
+console.log('La división de 6/3='+mat.dividir(6,3));
+console.log('El valor de PI='+mat.PI);
+</pre>
+
+<p>El JavaScript que se ejecuta en un navegador web actualmente no puede hacer referencia a otro archivo, en Node.js esto se hace llamando a la función require e indicando el path donde se encuentra en este caso el archivo matematica.js (no es necesario indicar la extensión):</p>
+<pre>
+var mat=require('./matematica');
+</pre>
+
+<p>Luego la variable mat tiene acceso a todas las variables, funciones y objetos exportados.</p>
+<p>Llamamos luego a las funciones y accedemos a las variables mediante la variable mat:</p>
+<pre>
+console.log('La suma de 2+2='+mat.sumar(2,2));
+console.log('La resta de 4-1='+mat.restar(4,1));
+console.log('La división de 6/3='+mat.dividir(6,3));
+console.log('El valor de PI='+mat.PI);
+</pre>
+<p>En nuestra consola al ejecutar nuestro programa ejercicio2.js tenemos como resultado:</p>
+<p><img src="imagentema/foto010.jpg" border="0" alt="modulo en nodejs"></p>
+
+<p>Tengamos en cuenta que solo podemos acceder del módulo a aquellos elementos exportados, si por ejemplo tratamos de acceder a la función mostrarErrorDivision del módulo matematica.js:</p>
+<pre>
+mat.mostrarErrorDivision();
+</pre>
+<p>Tendremos como resultado un error en tiempo de ejecución ("undefined is not a function"):</p>
+<p><img src="imagentema/foto011.jpg" border="0" alt="modulo en nodejs con error"></p>
+
+<p>Esta pequeña introducción de módulos es para entender en los próximos temas cada vez que consumamos módulos que ya vienen con Node.js y de otras librerias que descarguemos de internet.</p>
+<p>Veremos más adelante que los módulos pueden ser una carpeta que contiene un conjunto de archivos y de subcarpetas (esto es muy útil si la funcionalidad del módulo es muy compleja y por lo tanto no debería estar en un único archivo)</p>
+<p>No nos preocuparemos por ahora de crear módulos propios más complejos ya que la forma de consumir módulos con la función require es idéntica ya sea que el módulo sea un único archivo o una carpeta.</p>
+
+<h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-35', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=2&codigo=2&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:49:27 GMT -->
+</html>

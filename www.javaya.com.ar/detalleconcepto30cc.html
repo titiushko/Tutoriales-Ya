@@ -1,0 +1,375 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=117&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:54:15 GMT -->
+<head>
+<title>Estructuras dinámicas: Listas tipo Cola</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Estructuras dinámicas: Listas tipo Cola</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>Una lista se comporta como una cola si las inserciones las hacemos al final y las extracciones las hacemos por el frente de la lista. También se las llama listas FIFO (First In First Out - primero en entrar primero en salir)</p>
+
+<p>Confeccionaremos un programa que permita administrar una lista tipo cola. Desarrollaremos los métodos de insertar, extraer, vacia e imprimir.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+public class Cola {
+    
+    class Nodo {
+        int info;
+        Nodo sig;
+    }
+    
+    private Nodo raiz,fondo;
+    
+    Cola() {
+        raiz=null;
+        fondo=null;
+    }
+    
+    boolean vacia (){
+        if (raiz == null)
+            return true;
+        else
+            return false;
+    }
+
+    void insertar (int info)
+    {
+        Nodo nuevo;
+        nuevo = new Nodo ();
+        nuevo.info = info;
+        nuevo.sig = null;
+        if (vacia ()) {
+            raiz = nuevo;
+            fondo = nuevo;
+        } else {
+            fondo.sig = nuevo;
+            fondo = nuevo;
+        }
+    }
+
+    int extraer ()
+    {
+        if (!vacia ())
+        {
+            int informacion = raiz.info;
+            if (raiz == fondo){
+                raiz = null;
+                fondo = null;
+            } else {
+                raiz = raiz.sig;
+            }
+            return informacion;
+        } else
+            return Integer.MAX_VALUE;
+    }
+
+    public void imprimir() {
+        Nodo reco=raiz;
+        System.out.println("Listado de todos los elementos de la cola.");
+        while (reco!=null) {
+            System.out.print(reco.info+"-");
+            reco=reco.sig;
+        }
+        System.out.println();
+    }
+        
+    public static void main(String[] ar) {
+        Cola cola1=new Cola();
+        cola1.insertar(5);
+        cola1.insertar(10);
+        cola1.insertar(50);
+        cola1.imprimir();
+        System.out.println("Extraemos uno de la cola:"+cola1.extraer());
+        cola1.imprimir();        
+    }
+}
+</pre>
+<p>La declaración del nodo es igual a la clase Pila. Luego definimos dos punteros externos:</p>
+<pre>
+    private Nodo raiz,fondo;
+</pre>
+<p>raíz apunta al principio de la lista y fondo al final de la lista. Utilizar dos punteros tiene como ventaja que cada vez que tengamos que insertar un nodo al final de la lista no tengamos que recorrerla. Por supuesto que es perfectamente válido implementar una cola con un único puntero externo a la lista.</p>
+<p>En el constructor inicializamos a los dos punteros en null (Realmente esto es opcional ya que los atributos de una clase en java se inicializan automáticamente con null):</p>
+<pre>
+    Cola() {
+        raiz=null;
+        fondo=null;
+    }
+</pre>
+<p>El método vacía retorna true si la lista no tiene nodos y false en caso contrario:</p>
+<pre>
+    boolean vacia (){
+        if (raiz == null)
+            return true;
+        else
+            return false;
+    }
+</pre>
+
+<p>En la inserción luego de crear el nodo tenemos dos posibilidades: que la cola esté vacía, en cuyo caso los dos punteros externos a la lista deben apuntar al nodo creado, o que haya nodos en la lista.</p>
+<pre>
+        Nodo nuevo;
+        nuevo = new Nodo ();
+        nuevo.info = info;
+        nuevo.sig = null;
+        if (vacia ()) {
+            raiz = nuevo;
+            fondo = nuevo;
+        } else {
+            fondo.sig = nuevo;
+            fondo = nuevo;
+        }
+</pre>
+<p>Recordemos que definimos un puntero llamado nuevo, luego creamos el nodo con el operador new y cargamos los dos campos, el de información con lo que llega en el parámetro y el puntero con null ya que se insertará al final de la lista, es decir no hay otro después de este.</p>
+<p>Si la lista está vacía:</p>
+<img src="imagentema/foto101.jpg" border="0" alt="Cola"><br>
+<p>En caso de no estar vacía:</p>
+<img src="imagentema/foto102.jpg" border="0" alt="Cola"><br>
+
+<p>Debemos enlazar el puntero sig del último nodo con el nodo recién creado:</p>
+<pre>
+            fondo.sig = nuevo;
+</pre>
+<img src="imagentema/foto103.jpg" border="0" alt="Cola"><br>
+<p>Y por último el puntero externo fondo debe apuntar al nodo apuntado por nuevo:</p>
+<pre>
+            fondo = nuevo;
+</pre>
+<img src="imagentema/foto104.jpg" border="0" alt="Cola"><br>
+
+<p>Con esto ya tenemos correctamente enlazados los nodos en la lista tipo cola. Recordar que el puntero nuevo desaparece cuando se sale del método insertar, pero el nodo creado no se pierde porque queda enlazado en la lista.</p>
+
+
+<p>El funcionamiento del método extraer es similar al de la pila:</p>
+<pre>
+    int extraer ()
+    {
+        if (!vacia ())
+        {
+            int informacion = raiz.info;
+            if (raiz == fondo){
+                raiz = null;
+                fondo = null;
+            } else {
+                raiz = raiz.sig;
+            }
+            return informacion;
+        } else
+            return Integer.MAX_VALUE;
+    }
+</pre>
+
+<p>Si la lista no está vacía guardamos en una variable local la información del primer nodo:
+<pre>
+            int informacion = raiz.info;
+</pre>
+<p>Para saber si hay un solo nodo verificamos si los dos punteros raiz y fondo apuntan a la misma dirección de memoria:</p>
+<pre>
+            if (raiz == fondo){
+</pre>
+<img src="imagentema/foto105.jpg" border="0" alt="Cola"><br>
+<p>Luego hacemos:</p>
+<pre>
+                raiz = null;
+                fondo = null;
+</pre>
+<img src="imagentema/foto106.jpg" border="0" alt="Cola"><br>
+<p>En caso de haber 2 o más nodos debemos avanzar el puntero raiz al siguiente nodo:</p>
+<img src="imagentema/foto107.jpg" border="0" alt="Cola"><br>
+<pre>
+                raiz = raiz.sig;
+</pre>
+<img src="imagentema/foto108.jpg" border="0" alt="Cola"><br>
+<p>Ya tenemos la lista correctamente enlazada (raiz apunta al primer nodo y fondo continúa apuntando al último nodo)</p>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index1e61.html?inicio=40">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=117&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:54:19 GMT -->
+</html>

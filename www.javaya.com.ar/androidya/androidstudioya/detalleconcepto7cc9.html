@@ -1,0 +1,494 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=44&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 17:18:49 GMT -->
+<head>
+<title>Componente ActionBar (Básica)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>44 - Componente ActionBar (Básica)</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+ <div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+<p>A partir de la versión 4.0 se introduce para el desarrollo de aplicaciones para celulares Android la componente ActionBar.<br>
+La componente ActionBar es la barra que aparece en la parte superior de gran cantidad de aplicaciones. Esta componente busca estandarizar entre distintas aplicaciones desarrolladas para Android la ubicación de botones de acciones, menú de opciones etc.</p>
+
+<p>Ahora cuando creamos con el Android Studio una aplicación mínima con la opción "Blank Activity" se genera por defecto el ActionBar.</p>
+<p>La interfaz mínima del ActionBar es:</p>
+<img src="imagentema/foto165.jpg" border="0" alt="ActionBar"><br>
+<p>En el lado izquierdo aparece el nombre de la aplicación y del lado derecha aparece un botón que al ser presionado nos muestra un menú desplegable:</p>
+<img src="imagentema/foto166.jpg" border="0" alt="ActionBar"><br>
+
+<h3>Problema:</h3>
+<p>Confeccionar una aplicación que muestre en el ActionBar el título "Este mundo" y luego tres opciones en el menú desplegable del ActionBar.</p>
+<p>La interfaz del ActionBar y el menú desplegable debe ser similar a:</p>
+<img src="imagentema/foto169.jpg" border="0" alt="ActionBar"><br>
+
+<p>Veamos los pasos que debemos dar para obtener este resultado:<p>
+<ol>
+
+<li>
+El título del ActionBar lo debemos modificar abriendo el archivo strings que se encuentra en la carpeta res/values y su contenido por defecto al crear el proyecto es:</p>
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;resources&gt;
+
+    &lt;string name="app_name"&gt;Proyecto047&lt;/string&gt;
+    &lt;string name="hello_world"&gt;Hello world!&lt;/string&gt;
+    &lt;string name="action_settings"&gt;Settings&lt;/string&gt;
+
+&lt;/resources&gt;
+</pre>
+
+<p>Podemos cambiar el contenido de la constante "app_name":</p>
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;resources&gt;
+
+    &lt;string name="app_name"&gt;Este mundo&lt;/string&gt;
+    &lt;string name="hello_world"&gt;Hello world!&lt;/string&gt;
+    &lt;string name="action_settings"&gt;Settings&lt;/string&gt;
+
+&lt;/resources&gt;
+</pre>
+
+<p>Recordemos que este archivo de recursos se utiliza para agrupar todos los mensajes que aparecen en pantalla y facilitar la implementación de aplicaciones para varios idiomas independiente de los algoritmos de la misma.</p>
+<p>En este archivo hemos creado un string llamado "app_name" con el valor "Este mundo".<br>
+Luego este string se asocia con el título de la aplicación  con la propiedad label en el archivo AndroidManifest.xml:</p>
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ar.com.tutorialesya.proyecto047" &gt;
+
+    &lt;application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" &gt;
+        &lt;activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" &gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name="android.intent.action.MAIN" /&gt;
+
+                &lt;category android:name="android.intent.category.LAUNCHER" /&gt;
+            &lt;/intent-filter&gt;
+        &lt;/activity&gt;
+    &lt;/application&gt;
+
+&lt;/manifest&gt;
+</pre>
+
+<p>Desde el Editor del Android Studio cuando vemos el archivo AndroidManifest.xml nos sustituye visualmente las constantes por los valores de las constantes para ver que realmente se almacena:</p>
+
+<img src="imagentema/foto167.jpg" border="0" alt="ActionBar AndroidManifest.xml"><br>
+<p>Pero si posicionamos el mouse sobre el valor veremos que está definida una constante con la sintaxis @string/[nombre de constante]:</p>
+<img src="imagentema/foto168.jpg" border="0" alt="ActionBar AndroidManifest.xml"><br>
+<p>Y si hacemos clic veremos el contenido real del valor con el que se inicializa la propiedad.</p>
+
+<p>En este archivo XML ya está inicializada la propiedad label de la marca application con el valor definido en el archivo xml (como vemos acá hacemos referencia al string app_name):</p>
+<pre>
+        android:label="@string/app_name"
+</pre>
+
+
+</li>
+
+<li>Ahora tenemos que definir las opciones de nuestro menú desplegable, para esto abrimos el archivo menu_main.xml de la carpeta res/menu y definimos las tres opciones que contendrá nuestro menú y eliminamos la que define por defecto cuando creamos un proyecto desde Android Studio:</p>
+<pre>
+&lt;menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity"&gt;
+
+    &lt;item
+        android:id="@+id/opcion1"
+        app:showAsAction="never"
+        android:title="Opción 1"/&gt;
+    &lt;item
+        android:id="@+id/opcion2"
+        app:showAsAction="never"
+        android:title="Opción 2"/&gt;
+    &lt;item
+        android:id="@+id/opcion3"
+        app:showAsAction="never"
+        android:title="Opción 3"/&gt;
+&lt;/menu&gt;
+</pre>
+<p>Como necesitamos tres opciones definimos tres marcas item e inicialzamos las propiedades id, showAsAction (indicando con el valor never que deben aparecer en el menú desplegable) y mediante la propiedad title el texto que queremos que muestre (como vemos al asignar directamente el texto a la propiedad title hay que tener en cuenta que la mejor práctica es definir el mensaje en el archivo strings.xml y acá hacer referencia a dicho string mediante un @string/[constante], por el momento para hacerlo más corto y directo al problema lo hacemos con el texto a mostrar directamente)</p>
+</li>
+
+<li>
+<p>La funcionalidad de nuestro programa será mostrar un Toast cuando se seleccione alguno de las opciones del menú. El código java de la clase debe ser:</p>
+<pre class="recuadro">
+package ar.com.tutorialesya.proyecto047;
+
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+
+
+public class MainActivity extends ActionBarActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+
+
+//        Debemos borrar este if que creó el Android Studio con la opción por defecto.
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+
+        if (id==R.id.opcion1) {
+            Toast.makeText(this,"Se seleccionó la primer opción",Toast.LENGTH_LONG).show();
+        }
+
+        if (id==R.id.opcion2) {
+            Toast.makeText(this,"Se seleccionó la segunda opción",Toast.LENGTH_LONG).show();
+        }
+
+        if (id==R.id.opcion3) {
+            Toast.makeText(this,"Se seleccionó la tercer opción",Toast.LENGTH_LONG).show();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+}
+</pre>
+
+<p>Como podemos observar hemos modificado el método onOptionsItemSelected que se ejecuta cada vez que el usuario selecciona una opción del menú:</p>
+<pre>
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+
+
+//        Debemos borrar este if que creó el Android Studio con la opción por defecto.
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+
+        if (id==R.id.opcion1) {
+            Toast.makeText(this,"Se seleccionó la primer opción",Toast.LENGTH_LONG).show();
+        }
+
+        if (id==R.id.opcion2) {
+            Toast.makeText(this,"Se seleccionó la segunda opción",Toast.LENGTH_LONG).show();
+        }
+
+        if (id==R.id.opcion3) {
+            Toast.makeText(this,"Se seleccionó la tercer opción",Toast.LENGTH_LONG).show();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+}</pre>
+
+<p>Podemos ahora entender el objetivo del método onCreateOptionsMenu que se genera al crear el proyecto. En el mismo se procesa el archivo menu_main.xml donde definimos el menú de opciones:</p>
+<pre>
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+</pre>
+
+</li>
+
+</ol>
+<p>Hemos borrado las líneas:</p>
+<pre>
+        Debemos borrar este if que creó el Android Studio con la opción por defecto.
+        if (id == R.id.action_settings) {
+            return true;
+        }
+</pre>
+<p>Ya que es la opción que crea por defecto el Android Studio en nuestro esquelelo básico del proyecto.</p>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/Proyecto047.zip">proyecto047.zip</a>
+
+
+
+<h3>Problema:</h3>
+<p>Confeccionar el mismo problema del ActionBar con el menú de opciones pero utilizando constantes para cada opción del menú y también constantes para los tres mensajes que aparecen cuando se seleccionan cada una de las opciones.</p>
+<p>Creemos un proyecto llamado "Proyecto048" y creemos primero el archivo strings.xml con todas las constantes necesarias de nuestro programa:</p>
+
+<img src="imagentema/foto170.jpg" border="0" alt="strings.xml"><br>
+
+<p>Es decir modificamos el valor de app_name y creamos seis constantes más, tres para las etiquetas de las opciones del menú y tres para los mensajes que deben aparecer cuando se presionen las opciones.</p>
+
+<p>El archivo menu_main ahora queda codificado así:</p>
+<pre class="recuadro">
+&lt;menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity"&gt;
+
+    &lt;item
+        android:id="@+id/opcion1"
+        app:showAsAction="never"
+        android:title="@string/opcion_menu1"/&gt;
+    &lt;item
+        android:id="@+id/opcion2"
+        app:showAsAction="never"
+        android:title="@string/opcion_menu2"/&gt;
+    &lt;item
+        android:id="@+id/opcion3"
+        app:showAsAction="never"
+        android:title="@string/opcion_menu3"/&gt;
+&lt;/menu&gt;
+</pre>
+
+<p>Es decir hemos inicializado cada propiedad title de los item con los nombres de las constantes que creamos en el archivo strings.xml.</p>
+
+<p>Finalmente el código fuente de la aplicación sufre los siguientes cambios para utilizar las constantes del archivo strings.xml cuando se deben mostrar los mensajes:</p>
+<pre class="recuadro">
+package ar.com.tutorialesya.proyecto048;
+
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+
+
+public class MainActivity extends ActionBarActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (id==R.id.opcion1) {
+            Toast.makeText(this,getString(R.string.mensaje_1),Toast.LENGTH_LONG).show();
+        }
+
+        if (id==R.id.opcion2) {
+            Toast.makeText(this,getString(R.string.mensaje_2),Toast.LENGTH_LONG).show();
+        }
+
+        if (id==R.id.opcion3) {
+            Toast.makeText(this,getString(R.string.mensaje_3),Toast.LENGTH_LONG).show();
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
+}
+</pre>
+
+<p>Lo nuevo aquí es ver que antes para mostrar el mensaje directamente en el código Java hacíamos:</p>
+<pre>
+        if (id==R.id.opcion1) {
+            Toast.makeText(this,"Se seleccionó la primer opción",Toast.LENGTH_LONG).show();
+        }
+</pre>
+
+<p>Ahora vemos si queremos extraer el dato de la constante que se encuentra en el archivo strings.xml lo debemos hacer llamando al método getString y pasando la referencia al nombre de la constante que se encuentra en la clase R y dentro de esta en una clase interna llamada string:</p>
+<pre>
+        if (id==R.id.opcion1) {
+            Toast.makeText(this,getString(R.string.mensaje_1),Toast.LENGTH_LONG).show();
+        }
+</pre></div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+<br>
+   <h2><a href="index1e61.html?inicio=40">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-34', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=44&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 17:22:24 GMT -->
+</html>

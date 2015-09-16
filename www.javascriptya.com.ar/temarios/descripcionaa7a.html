@@ -1,0 +1,327 @@
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=70&cod=80 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de JavaScript : Conceptos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+div#contentdetalle{clear:left;
+                   max-width:900px;
+				   border-top:0px solid #999;
+				   padding-top:15px;
+				   background-color: #aed7a8;
+				   text-align:left;
+				   font-size:1.3em;
+				   font-weight:normal;
+				   font-family:arial;
+				   padding:20px}
+				   
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;  
+}				   
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td>
+<h1>Expresiones regulares: [] conjunto de caracteres opcionales</h1></td>
+<td align="right">
+<!--<a href="http://www.javascriptya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div id="contentdetalle">
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 	  
+
+<p>Ahora veremos el significado de los caracteres [] en una expresión regular. Se emplea estos caracteres para encerrar los caracteres permitidos.<br>
+<strong>problema</strong>
+Controlar si la palabra ingresada comienza con el primer carácter alfabético ya sea en mayúsculas o en minúsculas:</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var palabra=prompt('Ingrese una palabra','');
+  var patron=/^[a-zA-Z]/;
+  if (patron.test(palabra))
+    alert('La palabra comienza con un carácter alfabético (mayúscula o minúscula)');
+  else
+    alert('La palabra no comienza con un carácter alfabético (mayúscula o minúscula)');
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Debemos especificar cada uno de los caracteres permitidos encerrados entre los corchetes. Cuando los caracteres son seguidos en la tabla de caracteres podemos utilizar el carácter '-' para indicar un rango de caracteres:</p>
+<pre>
+  var patron=/^[a-zA-Z]/;
+</pre>
+<p>Como solo debemos verificar el primer carácter utilizamos el comando '^' y le sigue los caracteres posibles.</p>
+
+<strong>problema</strong>
+<p>Ingresar una palabra y luego mostrar un mensaje si finaliza con vocal.</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var palabra=prompt('Ingrese una palabra','');
+  var patron=/[aeiouAEIOUáéíóú]$/;
+  if (patron.test(palabra))
+    alert('La palabra finaliza con vocal');
+  else
+    alert('La palabra no finaliza con vocal');
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>En la expresión regular debemos especificar entre corchetes todas las vocales y como no están en forma seguida en la tabla de caracteres debemos especificarlas una por una:</p>
+<pre>
+  var patron=/[aeiouAEIOUáéíóú]$/;
+</pre>
+<p>Como debemos controlar el último carácter de la oración utilizamos el comando $</p>
+<p>Hemos utilizado el carácter '^' para encontrar coincidencias desde el principio del string, pero este carácter dentro de los corchetes abiertos y cerrados tiene otro uso. Permite obtener todos los otros caracteres distintos a los especificados.</p>
+
+<strong>problema</strong>
+<p>Ingresar una clave que no finalice en vocal.</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var palabra=prompt('Ingrese una palabra','');
+  var patron=/[^aeiouAEIOUáéíóú]$/;
+  if (patron.test(palabra))
+    alert('La palabra no finaliza con vocal');
+  else
+    alert('La palabra finaliza con vocal');
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+
+<strong>problema</strong>
+<p>Ingresar una palabra y luego mostrar un mensaje si contiene una vocal en alguna parte de la palabra.</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var palabra=prompt('Ingrese una palabra','');
+  var patron=/[aeiouAEIOUáéíóú]/;
+  if (patron.test(palabra))
+    alert('La palabra tiene al menos una vocal');
+  else
+    alert('La palabra no tiene vocales');
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Ahora nuestra expresión regular queda especificada como:</p>
+<pre>
+  var patron=/[aeiouAEIOUáéíóú]/;
+</pre>
+<p>El método test retorna true si ingresamos alguna de las siguientes palabras:</p>
+<pre>
+c<strong>a</strong>s<strong>a</strong>
+m<strong>a</strong>dr<strong>e</strong>
+s<strong>a</strong>l<strong>i</strong>r
+</pre>
+<p>En cambio retorna false si ingresamos:</p>
+<pre>
+pbt
+</pre>
+<p>Cuando tenemos que buscar en el string alguno de los caracteres que tienen un significado especial en las expresiones regulares '^ $. * +? =! : | \ / () [] {} ' debemos escaparlos a algunos dentro de los corchetes.</p>
+
+
+<strong>problema</strong>
+<p>Ingresar una oración por teclado y luego mostrar un mensaje si el string ingresado contiene al menos uno de los caracteres que son un comando o metacaracter para las expresiones regulares:</p>
+
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var oracion=prompt('Ingrese una oracion','');
+  var patron=/[\^$.*+?=!:|\\/()\[\]{}]/;
+  if (patron.test(oracion))
+    alert('La oración tiene al menos un carácter ^ $. * +? =! : | \ / () [] {}');
+  else
+    alert('La oración no tiene ningún carácter ^ $. * +? =! : | \ / () [] {}');
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Se verifica verdadero el método test si ingresamos:</p>
+<pre>
+La tarde estaba soleada<strong>!</strong>
+</pre>
+<p>Se verifica falso el método test si ingresamos:</p>
+<pre>
+La tarde estaba soleada
+</pre>
+
+<strong>problema</strong>
+<p>Ingresar todos los caracteres con significada especial en las expresiones regulares en el siguiente orden:   ^$.*+?=!:|\/()[]{}   (es necesario escapar todos los metacaracteres):</p>
+
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var cadena=prompt('Ingrese esos caracteres especiales para expresiones regulares en este mismo orden: ^$.*+?=!:|\/()[]{} ','');
+  var patron=/^\^\$\.\*\+\?\=\!\:\|\\\/\(\)\[\]\{\}$/;
+  if (patron.test(cadena))
+    alert('Orden correcto');
+  else
+    alert('Incorrecto');
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre></p>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../indexe193.html?inicio=70">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=70&cod=80 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:24 GMT -->
+</html>

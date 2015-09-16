@@ -1,0 +1,226 @@
+        
+
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=75&cod=255&punto=97 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios resueltos : Funciones(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+<body bgcolor="#CCFFCC">
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>97 - Funciones</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Una librería almacena la información de sus libros en una tabla llamada "libros".</p>
+<p>Eliminamos la tabla:</p>
+<pre>
+ drop table libros;
+</pre>
+<p>Creamos la tabla "libros" con la siguiente estructura:</p>
+<pre>
+ create table libros(
+  codigo number(3),
+  titulo varchar2(40),
+  autor varchar2(30),
+  precio number(5,2)
+);
+</pre>
+<p>Ingresamos algunos registros:</p>
+<pre>
+ insert into libros values(100,'Uno','Richard Bach',15);
+ insert into libros values(300,'Aprenda PHP','Mario Molina',55);
+ insert into libros values(102,'Matematica estas ahi','Paenza',18);
+ insert into libros values(105,'El aleph','Borges',25);
+ insert into libros values(109,'El experto en laberintos','Gaskin',20);
+ insert into libros values(204,'Alicia en el pais de las maravillas','Carroll',31);
+</pre>
+<p>Creamos o reemplazamos una función que reciba 1 parámetro (un valor numérico a incrementar) y retorne el valor ingresado como argumento con el incremento del 10%:</p>
+<pre>
+create or replace function f_incremento10 (avalor number)
+  return number
+ is
+ begin 
+   return avalor+(avalor*0.1);
+ end;
+</pre>
+<p>Realizamos un "select" sobre "libros" que muestre el título, precio y llamamos a la función creada anteriormente para que nos devuelva el precio incrementado en un 10%:</p>
+<pre>
+ select titulo,precio,f_incremento10(precio) from libros;
+</pre>
+<p>Creamos otra función que reciba 2 parámetros, un valor a incrementar y el incremento, y que nos retorne el valor ingresado como primer argumento con el incremento especificado por el segundo argumento:</p>
+<pre>
+create or replace function f_incremento (avalor number, aincremento number)
+  return number
+ is
+  begin 
+   return avalor+(avalor*aincremento/100);
+  end;
+</pre>
+<p>Realizamos un "select" sobre "libros" que muestre el título, precio y el precio incrementado en un 20% (llamando a la función creada anteriormente, enviando como primer argumento el campo "precio" y como segundo argumento el valor "20"):</p>
+<pre>
+ select titulo,precio,f_incremento(precio,20) from libros;
+</pre>
+<p>Realizamos otro "select" similar al anterior, pero en esta ocasión le enviamos a la función otro valor como segundo argumento:</p>
+<pre>
+ select titulo,precio,f_incremento(precio,50) from libros;
+</pre>
+<p>Creamos o reemplazamos una función que recibe un parámetro de tipo numérico y retorna una cadena de caracteres. Se define una variable en la zona de definición de variables denominada "valorretornado" de tipo varchar. En el cuerpo de la función empleamos una estructura condicional (if) para averiguar si el valor enviado como argumento es menor o igual a 20, si lo es, almacenamos en la variable "valorretornado" la cadena "economico", en caso contrario guardamos en tal variable la cadena "costoso"; al finalizar la estructura condicional retornamos la variable "valorretornado":</p>
+<pre>
+create or replace function f_costoso (avalor number)
+  return varchar2
+ is
+  valorretornado varchar2(20);
+ begin
+   valorretornado:='';
+   if avalor<=20 then
+    valorretornado:='economico';
+   else valorretornado:='costoso';
+   end if;
+   return valorretornado;
+ end;
+</pre>
+<p>Realizamos un "select" para mostrar el título, precio y una cadena que indique si el libro es económico o costoso (llamando a la función creada anteriormente):</p>
+<pre>
+ select titulo,precio,f_costoso(precio) from libros;.
+</pre>
+<p>Podemos emplear la función "f_costoso" sin incluir campos de una tabla. Por ejemplo:</p>
+<pre>
+ select f_costoso (10) from dual;
+</pre>
+        <form name="formulario" action="http://www.sqlserverya.com.ar/aspx/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+        <br>
+   <h2><a href="../indexa021.html?inicio=75">Retornar</a></h2>   
+        
+	<br>
+   
+
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=75&cod=255&punto=97 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+</html>
+

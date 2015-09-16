@@ -1,0 +1,156 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.mysqlya.com.ar/temarios/descripcion.php?inicio=0&cod=23&punto=19 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:10:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Temario:Tipos de datos (fechas y horas)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>19 - Tipos de datos (fechas y horas)</h1></td>
+<td align="right">
+<!--<a href="http://www.mysqlya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<p>
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 		  
+
+<p>Para guardar fechas y horas dispone de varios tipos:</p>
+<p> 1) date: representa una fecha con formato "YYYY-MM-DD". El rango va de "1000-01-01" a "9999-12-31".</p>
+<p> 2) datetime: almacena fecha y hora, su formato es "YYYY-MM-DD HH:MM:SS". El rango es de "1000-01-01 00:00:00" a "9999-12-31 23:59:59".</p>
+<p> 3) time: una hora. Su formato es "HH:MM:SS". El rango va de "-838:59:59" a "838:59:59".</p>
+<p>4) year(2) y year(4): un año. Su formato es "YYYY" o "YY". Permite valores desde 1901 a 2155 (en formato de 4 dígitos) y desde 1970 a 2069 (en formato de 2 dígitos).</p>
+<p>Si ingresamos los valores como cadenas, un valor entre "00" y "69" es convertido a valores "year" en el rango de 2000 a 2069; si el valor está entre "70" y "99", se convierten a valores "year" en el rango 1970 a 1999.</p>
+<p>Si ingresamos un valor numérico 0, se convierte en "0000"; entre 1 y 69, se convierte a valores "year" entre 2001 a 2069; entre 70 y 99, es convertido a valores "year" de 1970 a 1999.</p>
+<p>Para almacenar valores de tipo fecha se permiten como separadores "/", "-" y ".".</p> 
+
+<p>Si ingresamos '06-12-31' (año de 2 dígitos), lo toma como '2006-12-31'.</p>
+<p>Si ingresamos '2006-2-1' (mes y día de 1 dígito), lo toma como '2006-02-01'.</p>
+<p>Si ingresamos '20061231' (cadena sin separador), lo toma como '2006-12-31'.</p>
+<p>Si ingresamos 20061231 (numérico), lo toma como '2006-12-31'.</p>
+<p>Si ingresamos '20061231153021' (cadena sin separadores), lo toma como '2006-12-31 15:30:21'.</p>
+<p>Si ingresamos '200612311530' (cadena sin separadores con un dato faltante) no lo reconoce como fechahora y almacena ceros.</p>
+<p>Si ingresamos '2006123' (cadena sin separadores con un dato faltante) no lo reconoce como fecha y almacena ceros.</p>	
+<p>Si ingresamos '2006-12-31 11:30:21' (valor date time) en un campo 'date', toma sólo la parte de la fecha, la hora se corta, se guarda '2006-12-31'.</p>
+
+
+<p>Es importante elegir el tipo de dato adecuado según el caso, el más preciso. Por ejemplo, si sólo necesitamos registrar un año (sin día ni mes), el tipo adecuado es "year" y no "date".</p>
+<pre>
+Tipo		Bytes de almacenamiento
+_______________________________________
+date		3
+datetime	8
+time		3
+year		1
+</pre></p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-5";
+urchinTracker();
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from www.mysqlya.com.ar/temarios/descripcion.php?inicio=0&cod=23&punto=19 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:10:55 GMT -->
+</html>

@@ -1,0 +1,200 @@
+html,body{margin:0;padding:0}
+body{color: #333;padding: 15px}
+p{margin: 0;padding: 0 15px 0.7em;line-height: 1.5}
+pre{font-size:1.1em}
+
+div#container{max-width:960px;margin: 0 auto;text-align: left;    box-shadow: 0px 0px 8px #000;border-radius:25px;background-color:#8395CB;  overflow: hidden;}
+div#header{background-color: #e7e7e7;padding:10px 0;overflow: hidden;}
+div#header h1{color: #FFF;font-size: 270%;font-weight: 900}
+
+div#content{clear:left;max-width:960px;border-top:1px solid #999;padding-top:15px;background-color: #C0CDF2;text-align:justify;}
+div#footer{padding-top:5px;padding-left:4px;text-align: left;font-size: 1em;;color: #FFF;border-bottom-right-radius: 25px;border-bottom-left-radius: 25px}
+
+
+
+.sitiosya {
+padding-top:5px;
+padding-left:15;
+text-align: left;
+font-size: 130%;
+background: #8395CB;
+color: #FFF;
+margin-left:15px;
+}
+
+
+.cuerpotabla {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 1.1em;
+    font-style: italic;
+    border-collapse:collapse;
+    border-width:1px;
+    border-style:solid;
+    box-shadow: 0px 0px 8px #000;    
+    width:100%;
+}
+
+.cuerpotabla  td{  
+    border: 1px solid #000;
+    border-color:#000000;
+    padding:10px 5px 5px 5px;
+}
+
+
+#tuto {
+ background-color: #c0cdf2;
+ margin: 10px;
+ width: 120px;
+ padding: 10px;
+ text-align: center;
+ -webkit-border-radius: 5px;
+ -moz-border-radius: 5px;
+ border-radius: 5px;
+ -webkit-box-shadow: rgba(0,0,0,0.2) 0px 1px 3px;
+ -moz-box-shadow: rgba(0,0,0,0.2) 0px 1px 3px;
+ box-shadow: rgba(0,0,0,0.2) 0px 1px 3px;
+}
+
+
+
+#tuto a:link {
+  text-decoration: none;
+  color:#00f;
+}
+#tuto a:visited {
+  text-decoration: none;
+  color:#00f;  
+}
+
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+
+.texto {
+	COLOR: #666666;
+	FONT-FAMILY: Tahoma, Verdana, sans-serif; 
+	FONT-SIZE: 14px; 
+	padding-top: 10px;
+	padding-left: 10px;	
+	padding-bottom: 10px;
+	padding-right: 10px;
+	TEXT-DECORATION: none
+}
+
+#cuadrodescri {
+	BORDER-RIGHT: #333 3px groove;
+	PADDING-RIGHT: 15px;
+	BORDER-TOP: #333 10px groove;
+	PADDING-LEFT: 15px; 
+	BACKGROUND: #ffc; 
+	PADDING-BOTTOM: 15px; 
+	MARGIN: 20px auto; 
+	BORDER-LEFT: #333 3px groove; 
+	MAX-WIDTH: 750px; 
+	PADDING-TOP: 15px; 
+	BORDER-BOTTOM: #333 3px groove; 
+	TEXT-ALIGN: left; 
+	voice-family: inherit
+}
+
+.boton {
+  font-size:1.2em;
+}
+
+
+/*listado de enlaces de sitios*/
+  .columnasitios {
+    background: #8395CB;    
+    float:left;
+  }
+  .columnaenlaces {
+   padding:2px;
+   list-style-type:none;  
+  }
+  #footer li {
+    margin:4px;
+  }
+  .columnaenlaces a {
+    font-size:1.1em;
+  }
+
+  /*paginacion*/
+  .opcionnoselect {
+    border-radius:8px;
+    font-weight:bold;
+    font-size:2em;
+    padding:7px;
+  }
+  
+  .opcionselect {
+    border-radius:8px;
+    font-weight:bold;
+    font-size:2em;
+    padding:7px;
+    background-color:#ffff00;
+  }
+  
+  
+  
+#menuop {
+  font-family: Arial;
+  list-style-type:none;  
+}
+
+#menuop li {
+  margin:0px;
+}
+
+#menuop a {
+  display: block;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  width: 99%;
+  background-color: #eee;
+  text-align:left;
+  border-bottom: 1px solid #eeeeee;  
+}
+
+#menuop a:link, #menuop a:visited {
+  color: #356aa0;
+  text-decoration: none;
+  font-family:sans-serif;
+  font-size:20px;
+  font-style:italic;
+  font-weight:bold;
+}
+
+#menuop a:hover {
+  background-color: #fef7b7;
+  color: #0061e4;
+}
+
+
+  /*paginacion*/
+  .opcionnoselect {
+    border-radius:8px;
+    font-weight:bold;
+    font-size:2em;
+    padding:7px;
+  }
+  
+  .opcionselect {
+    border-radius:8px;
+    font-weight:bold;
+    font-size:2em;
+    padding:7px;
+    background-color:#ffff00;
+  }
+  
+ul {
+    list-style-position: inside;
+}  

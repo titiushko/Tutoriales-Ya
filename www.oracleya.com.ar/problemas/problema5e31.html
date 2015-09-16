@@ -1,0 +1,786 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/problemas/problema.php?inicio=100&cod=274&punto=116 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios propuestos : Disparador (eliminar)(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+pre {
+  text-align:left;
+  font-family:verdana,sans-serif;
+}
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+</style>
+
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;	
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=no,status=yes,toolbar=yes,location=yes');  	
+}
+
+function VentanaTeorico(codigo)
+{
+  alto=400;
+  window.open('../temarios/descripcion2ade4.html?cod='+codigo+'&origen=problema', '', 'top=0,left=0,width=800,height='+alto+',resizable=yes,scrollbars=yes,menubar=no');  	
+}
+
+function cambiar(nro)
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   if (nro==1)
+   {
+     if (lista[f].id=='solu1')
+       lista[f].style.display='block';
+   }
+   else
+     if (nro==2)
+     {
+       if (lista[f].id=='solu2')
+         lista[f].style.display='block';
+     }
+	   
+  }
+  if (nro==1)
+    document.getElementById('solucion1').style.display='none';
+  if (nro==2)
+    document.getElementById('solucion2').style.display='none';
+}
+
+</script>
+
+</head>
+
+<body>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>116 - Disparador (eliminar)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+	  <table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<b>Primer problema: </b><br><p>Un comercio almacena los datos de los artículos que tiene para la venta en una tabla denominada "articulos".  En otra tabla denominada "ventas" almacena el código de cada artículo, la cantidad que se vende y la fecha.</p>
+<p>1- Elimine las tablas:</p>
+<pre>
+ drop table ventas;
+ drop table articulos;
+</pre>
+<p>2- Cree las tablas con las siguientes estructuras:</p>
+<pre>
+ create table articulos(
+  codigo number(4) not null,
+  descripcion varchar2(40),
+  precio number (6,2),
+  stock number(4),
+  constraint PK_articulos_codigo
+   primary key (codigo)
+ );
+
+ create table ventas(
+  codigo number(4),
+  cantidad number(4),
+  fecha date,
+  constraint FK_ventas_articulos
+   foreign key (codigo)
+   references articulos(codigo)
+);
+</pre>
+<p>3- Cree una secuencia llamada "sec_codigoart", estableciendo que comience en 1, sus valores estén entre 1 y 9999 y se incrementen en 1. Antes elimínela por si existe</p>
+<p>4- Active el paquete para permitir mostrar salida en pantalla</p>
+<p>5- Cree un trigger que coloque el siguiente valor de una secuencia para el código de "articulos" cada vez que se ingrese un nuevo artículo<br>
+Podemos ingresar un nuevo registro en "articulos" sin incluir el código porque lo ingresará el disparador luego de calcularlo. Si al ingresar un registro en "articulos" incluimos un valor para código, será ignorado y reemplazado por el valor calculado por el disparador.</p>
+<p>6- Ingrese algunos registros en "articulos" sin incluir el código:</p>
+<pre>
+ insert into articulos (descripcion, precio, stock) values ('cuaderno rayado 24h',4.5,100);
+ insert into articulos (descripcion, precio, stock) values ('cuaderno liso 12h',3.5,150);
+ insert into articulos (descripcion, precio, stock) values ('lapices color x6',8.4,60);
+</pre>
+<p>7- Recupere todos los artículos para ver cómo se almacenó el código</p>
+<p>8- Ingrese algunos registros en "articulos" incluyendo el código:</p>
+<pre>
+ insert into articulos values(160,'regla 20cm.',6.5,40);
+ insert into articulos values(173,'compas metal',14,35);
+ insert into articulos values(234,'goma lapiz',0.95,200);
+</pre>
+<p>9- Recupere todos los artículos para ver cómo se almacenó los códigos<br>
+Ignora los códigos especificados ingresando el siguiente de la secuencia.</p>
+<p>10- Cuando se ingresa un registro en "ventas", se debe:</p>
+<p>- controlar que el código del artículo exista en "articulos" (lo hacemos con la restricción "foreign key" establecida en "ventas");</p>
+<p>- controlar que exista stock, lo cual no puede controlarse con una restricción "foreign key" porque el campo "stock" no es clave primaria en la tabla "articulos"; cree un trigger. Si existe stock, debe disminuirse en "articulos".</p>
+<p>Cree un trigger a nivel de fila sobre la tabla "ventas" para el evento se inserción. Cada vez que se realiza un "insert" sobre "ventas", el disparador se ejecuta. El disparador controla que la cantidad que se intenta vender sea menor o igual al stock del articulo y actualiza el campo "stock" de "articulos", restando al valor anterior la cantidad vendida. Si la cantidad supera el stock, debe producirse un error, revertirse la acción y mostrar un mensaje</p>
+<p>11- Ingrese un registro en "ventas" cuyo código no exista en "articulos"<br>
+Aparece un mensaje de error, porque el código no existe. El trigger se ejecutó.</p>
+<p>12- Verifique que no se ha agregado ningún registro en "ventas"</p>
+<p>13- Ingrese un registro en "ventas" cuyo código exista en "articulos" y del cual haya suficiente stock<br>
+Note que el trigger se disparó, aparece el texto "tr_insertar_ventas activado".</p>
+<p>14- Verifique que el trigger se disparó consultando la tabla "articulos" (debe haberse disminuido el stock) y se agregó un registro en "ventas"</p>
+<p>15- Ingrese un registro en "ventas" cuyo código exista en "articulos" y del cual NO haya suficiente stock<br>
+Aparece el mensaje mensaje de error 20001 y el texto que muestra que se disparó el trigger.</p>
+<p>16- Verifique que NO se ha disminuido el stock en "articulos" ni se ha agregado un registro en "ventas"</p>
+<p>17- El comercio quiere que se realicen las ventas de lunes a viernes de 8 a 18 hs. Reemplace el trigger creado anteriormente "tr_insertar_ventas" para que No permita que se realicen ventas fuera de los días y horarios especificados y muestre un mensaje de error</p>
+<p>18- Ingrese un registro en "ventas", un día y horario permitido, si es necesario, modifique la fecha y la hora del sistema</p>
+<p>19- Verifique que se ha agregado un registro en "ventas" y se ha disminuido el stock en "articulos"</p>
+<p>20- Ingrese un registro en "ventas", un día permitido fuera del horario permitido (si es necesario, modifique la fecha y hora del sistema)<br>
+Se muestra un mensaje de error.</p>
+<p>21- Ingrese un registro en "ventas", un día sábado a las 15 hs.</p>
+<p>22- El comercio quiere que los registros de la tabla "articulos" puedan ser ingresados, modificados y/o eliminados únicamente los sábados de 8 a 12 hs. Cree un trigger "tr_articulos" que No permita que se realicen inserciones, actualizaciones ni eliminaciones en "articulos" fuera del horario especificado los días sábados, mostrando un mensaje de error. Recuerde que al ingresar un registro en "ventas", se actualiza el "stock" en "articulos"; el trigger debe permitir las actualizaciones del campo "stock" en "articulos" de lunes a viernes de 8 a 18 hs. (horario de ventas)</p>
+<p>23- Ingrese un nuevo artículo un sábado a las 9 AM<br>
+Note que se activan 2 triggers.</p>
+<p>24- Elimine un artículo, un sábado a las 16 hs.<br>
+Mensaje de error.</p>
+<p>25- Actualice el precio de un artículo, un domingo</p>
+<p>26- Actualice el precio de un artículo, un lunes en horario de ventas<br>
+Mensaje de error.</p>
+<p>27- Ingrese un registro en "ventas" que modifique el "stock" en "articulos", un martes entre las 8 y 18 hs.<br>
+Note que se activan 2 triggers.</p>
+<p>28- Consulte el diccionario "user_triggers" para ver cuántos trigger están asociados a "articulos" y a "ventas" (3 triggers)</p>
+<p>29- Elimine el trigger asociado a "ventas"</p>
+<p>30- Elimine las tablas "ventas" y "articulos"</p>
+<p>31- Consulte el diccionario "user_triggers" para verificar que al eliminar la tabla "articulos" se han eliminado todos los triggers asociados a ella</p>
+<a href="javascript:cambiar(1)" id="solucion1">Ver solución</a>
+<br><br>
+<pre id="solu1" class="recuadrooculto">
+ drop table ventas;
+ drop table articulos;
+
+ create table articulos(
+  codigo number(4) not null,
+  descripcion varchar2(40),
+  precio number (6,2),
+  stock number(4),
+  constraint PK_articulos_codigo
+   primary key (codigo)
+ );
+
+ create table ventas(
+  codigo number(4),
+  cantidad number(4),
+  fecha date,
+  constraint FK_ventas_articulos
+   foreign key (codigo)
+   references articulos(codigo)
+);
+
+ drop sequence sec_codigoart;
+ create sequence sec_codigoart
+  start with 1
+  increment by 1;
+
+ set serveroutputon;
+ execute dbms_output.enable (20000);
+
+ create or replace trigger tr_insertar_codigo_articulos
+  before insert
+  on articulos
+  for each row
+ begin
+  select sec_codigoart.nextval into :new.codigo from dual;
+  dbms_output.put_line('&quot;tr_insertar_codigo_articulos&quot; activado');
+ end tr_insertar_codigo_articulos;
+
+ insert into articulos (descripcion, precio, stock) values ('cuaderno rayado 24h',4.5,100);
+ insert into articulos (descripcion, precio, stock) values ('cuaderno liso 12h',3.5,150);
+ insert into articulos (descripcion, precio, stock) values ('lapices color x6',8.4,60);
+
+ select *from articulos;
+
+ insert into articulos values(160,'regla 20cm.',6.5,40);
+ insert into articulos values(173,'compas metal',14,35);
+ insert into articulos values(234,'goma lapiz',0.95,200);
+
+ select *from articulos;
+
+ create or replace trigger tr_insertar_ventas
+  before insert
+  on ventas
+  for each row
+ declare
+   canti number:=null;
+ begin
+  dbms_output.put_line('&quot;tr_insertar_ventas&quot; activado');
+  select stock into canti from articulos where codigo=:new.codigo;
+   if :new.cantidad&gt;canti then
+    raise_application_error(-20001,'S&oacute;lo hay '|| to_char(canti)||' en stock');
+   else
+     update articulos set stock=stock-:new.cantidad where codigo=:new.codigo; 
+   end if; 
+ end tr_insertar_ventas;
+
+  insert into ventas values(200,10,sysdate);
+
+ select *from ventas;
+
+  insert into ventas values(2,10,sysdate);
+
+ select *from articulos;
+ select *from ventas;
+
+  insert into ventas values(2,300,sysdate);
+
+ select *from articulos;
+ select *from ventas;
+
+ create or replace trigger tr_insertar_ventas
+  before insert
+  on ventas
+  for each row
+ declare
+   canti number:=null;
+ begin
+  dbms_output.put_line('&quot;tr_insertar_ventas&quot; activado');
+  if (to_char(sysdate, 'DY','nls_date_language=SPANISH') in ('LUN','MAR','MIE','JUE','VIE')) then 
+    if(to_number(to_char(sysdate, 'HH24')) between 8 and 17) then
+      select stock into canti from articulos where codigo=:new.codigo;
+      if :new.cantidad&gt;canti then
+        raise_application_error(-20001,'S&oacute;lo hay '|| to_char(canti)||' en stock');
+      else
+        update articulos set stock=stock-:new.cantidad where codigo=:new.codigo; 
+      end if;
+    else--hora
+      raise_application_error(-20002,'Solo se pueden realizar ventas entre las 8 y 18 hs.');
+    end if;--hora
+  else
+    raise_application_error(-20003,'Solo se pueden realizar ventas de lunes a viernes.');
+  end if; --dia
+ end tr_insertar_ventas;
+
+ insert into ventas values(3,20,sysdate);
+
+ select *from articulos;
+ select *from ventas;
+
+ insert into ventas values(3,20,sysdate);
+
+ insert into ventas values(3,20,sysdate);
+
+ create or replace trigger tr_articulos
+  before insert or update or delete
+  on articulos
+  for each row
+ begin
+  dbms_output.put_line('&quot;tr_update_articulos&quot; activado');
+  if (to_char(sysdate, 'DY','nls_date_language=SPANISH')='S&Aacute;B')then
+     if(to_number(to_char(sysdate, 'HH24')) not between 8 and 11) then
+       raise_application_error(-20004,'Esta tarea en s&aacute;bado s&oacute;lo de 8 a 12 hs.');
+     end if;
+  else
+    if(to_char(sysdate, 'DY','nls_date_language=SPANISH')='DOM')then
+      raise_application_error(-20005,'Esta tarea no en domingo.');
+    else 
+      if updating ('stock') then
+        if  (to_number(to_char(sysdate, 'HH24')) not between 8 and 17) then
+           raise_application_error(-20006,'Esta tarea de LUN a VIE de 8 a 18 hs. o SAB de 8 a 12 hs.');
+        end if;
+      else
+         raise_application_error(-20007,'Esta tarea solo SAB de 8 a 12 hs.');
+      end if;--stock
+    end if;--domingo
+  end if;--sab
+ end tr_articulos;
+
+insert into articulos values(234,'cartulina',0.95,100);
+
+ delete from articulos where codigo=1;
+
+ update articulos set precio=precio+precio*0.1 where codigo=5;
+
+ update articulos set precio=precio+precio*0.1 where codigo=5;
+
+ insert into ventas values(3,5,sysdate);
+
+select table_name, trigger_name, triggering_event from user_triggers
+  where table_name ='ARTICULOS' or table_name='VENTAS';
+
+ drop trigger tr_insertar_ventas;
+
+ drop table ventas;
+ drop table articulos;
+
+select * from user_triggers where trigger_name='TR_ARTICULOS' or trigger_name='TR_INSERTAR_CODIGO_ARTICULOS'; 
+</pre>
+        <p>&nbsp;</p>
+  
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+	
+	
+
+<b>Segundo problema: </b><br><p>Una empresa almacena los datos de sus empleados en una tabla denominada "empleados" y en otra tabla llamada "secciones", el código de la sección y el sueldo máximo de cada una de ellas.</p>
+<p>1- Elimine las tablas:</p>
+<pre>
+ drop table empleados;
+ drop table secciones;
+</pre>
+<p>2- Cree las tablas, con las siguientes estructuras:</p>
+<pre>
+ create table secciones(
+  codigo number(2),
+  nombre varchar2(30),
+  sueldomaximo number(8,2),
+  constraint PK_secciones primary key(codigo)
+ );
+
+ create table empleados(
+  documento char(8) not null,
+  nombre varchar2(30) not null,
+  domicilio varchar2(30),
+  codigoseccion number(2) not null,
+  sueldo number(8,2),
+  constraint PK_empleados primary key(documento),
+  constraint FK_empleados_seccion
+   foreign key (codigoseccion)
+   references secciones(codigo)
+ );
+</pre>
+<p>3- Ingrese algunos registros en ambas tablas:</p>
+<pre>
+ insert into secciones values(1,'Administracion',1500);
+ insert into secciones values(2,'Sistemas',2000);
+ insert into secciones values(3,'Secretaria',1000);
+
+ insert into empleados values('22222222','Ana Acosta','Avellaneda 88',1,1100);
+ insert into empleados values('23333333','Bernardo Bustos','Bulnes 345',1,1200);
+ insert into empleados values('24444444','Carlos Caseres','Colon 674',2,1800);
+ insert into empleados values('25555555','Diana Duarte','Colon 873',3,1000);
+</pre>
+<p>4- Active el paquete necesario para mostrar mensaje por pantalla:</p>
+<pre>
+ set serveroutput on;
+ execute dbms_output.enable (20000);
+</pre>
+<p>5- En cada disparador que cree próximamente muestre un mensaje por pantalla que indique su nombre.</p>
+<p>6- Cree un disparador para que se ejecute cada vez que una instrucción "insert" ingrese datos en "empleados"; el mismo debe verificar que el sueldo del empleado no sea mayor al sueldo máximo establecido para la sección, si lo es, debe mostrar un mensaje indicando tal situación y deshacer la transacción</p>
+<p>7- Ingrese un nuevo registro en "empleados" cuyo sueldo sea menor o igual al establecido para la sección:</p>
+<pre>
+ insert into empleados values('26666666','Federico Fuentes','Francia 938',2,1000);
+</pre>
+<p>El disparador se ejecutó, un texto en pantalla muestra su nombre.</p>
+<p>8- Verifique que el disparador se ejecutó consultando la tabla "empleados"</p>
+<p>9- Intente ingresar un nuevo registro en "empleados" cuyo sueldo sea mayor al establecido para la sección<br>
+El disparador se ejecutó mostrando un mensaje de error y la transacción se deshizo.</p>
+<p>10- Verifique que el registro no se agregó en "empleados"</p>
+<p>11- Intente ingresar un empleado con código de sección inexistente<br>
+Aparece un mensaje de error porque se viola la restricción "foreign key"; el trigger se ejecutó, aparece el mensaje de texto que lo indica.</p>
+<p>12- Cree un disparador para que se ejecute cada vez que una instrucción "update" aumente el sueldo de "empleados"; el mismo debe verificar que el sueldo del empleado no supere al sueldo máximo establecido para la sección, si lo es, debe mostrar un mensaje indicando tal situación y deshacer la transacción</p>
+<p>13- Modifique el sueldo de un empleado, debe ser menor o igual al establecido para la sección<br>
+El trigger se disparó.</p>
+<p>14- Verifique que el disparador se ejecutó consultando la tabla "empleados"</p>
+<p>15- Intente actualizar el sueldo de un empleado a un valor mayor al establecido para la sección<br>
+El disparador se ejecutó mostrando un mensaje de error y la transacción se deshizo.</p>
+<p>16- Verifique que el registro no se modificó en "empleados"</p>
+<p>17- Disminuya el sueldo de un empleado<br>
+El trigger no se disparo (no se mostró el texto con su nombre) porque se estableció en la condición "when" que el sueldo nuevo fuera mayor al anterior.</p>
+<p>18- Verifique que el registro se modificó en "empleados"</p>
+<p>19- Modifique el código de sección del empleado cuyo documento es "22222222" a "3"<br>
+Note que el cambio se realizó, y ahora existe un empleado de la sección "Secretaria" con sueldo "1350" cuando el máximo para esa sección es de "1000". Debe crear el trigger "tr_empleados_update_seccion", que se dispare cada vez que se modifique la seccion de un empleado y verifique que el sueldo no supere el máximo de la nueva sección, si lo supera, la transacción debe deshacerse</p>
+<p>20- Modifique el código de sección del empleado cuyo documento es "22222222" a "1"<br>
+El trigger se disparó, como el sueldo no supera el máximo permitido para la nueva sección, el cambio se realizó.</p>
+<p>21- Verifique que el cambio se realizó</p>
+<p>22- Modifique el código de sección del empleado cuyo documento es "23333333" a "3"<br>
+El trigger se disparó y mostró el mensaje de error, la transacción se deshizo.</p>
+<p>23- Verifique que el cambio no se realizó</p>
+<p>24- Modifique el sueldo del empleado cuyo documento es "23333333" a "1000" y el código de sección a "3"<br>
+El trigger se disparó.</p>
+<p>25- Verifique que el cambio se realizó</p>
+<p>26- Si modificamos el sueldo máximo de una sección de "secciones", disminuyéndolo, pueden quedar en "empleados" valores de sueldos superiores al permitido para la sección. Para evitar esto debe crear un disparador sobre "secciones" que se active cuando se disminuya el campo "sueldomaximo" y modifique el sueldo (al máximo permitido para la sección) de todos los empleados de esa sección cuyos sueldos superen el nuevo máximo establecido</p>
+<p>27- Modifique el sueldo máximo para la sección "Administracion" a 2000, es decir, auméntelo<br>
+Note que el trigger No se disparó, porque el trigger tiene una condición "when" que especifica que se active unicamente cuando el nuevo sueldo maximo sea menor al anterior.</p>
+<p>28- Verifique que el sueldo máximo de "Administracion" se ha modificado</p>
+<p>29- Modifique el sueldo máximo para la sección "Administracion" a 1800, es decir, disminúyalo<br>
+Note que el trigger se disparó, cumple con la condición "when". Pero, como no hay en "empleados", sueldos de tal sección que superen tal valor, no se han modificado registros en "empleados".</p>
+<p>30- Verifique que se modificó el sueldo máximo en "secciones" pero ningún registro en "empleados"</p>
+<p>31- Modifique el sueldo máximo para la sección "Administracion" a 1200, es decir, disminúyalo<br>
+Note que el trigger se disparó, cumple con la condición "when". Como hay en "empleados" un sueldo de 1350, de "Administracion", es decir supera el nuevo "sueldomaximo" que se intenta establecer, se modifica tal registro en "empleados".</p>
+<p>32- Verifique que se modificó el sueldo máximo en "secciones" y un registro en "empleados"</p>
+<p>33- Cree un trigger que no permita que se modifique el código de "secciones"</p>
+<p>34- Intente modificar el código de una sección de "secciones"<br>
+Note que el trigger se disparó y muestra el mensaje de error. El código no se modificó. Verifíquelo</p>
+<p>35- Actualice en una misma sentencia "update", el sueldo a "1800" y el codigo de sección a "2" del empleado cuyo documento es "22222222"<br>
+Note que se activan 2 triggers.</p>
+<p>36- Cree un trigger a nivel de sentencia sobre "empleados", que muestre un mensaje de error para evitar que se actualice el campo "documento"</p>
+<p>37- Consulte el diccionario "user_triggers" para ver cuántos trigger están asociados a "empleados" y a "secciones"</p>
+<p>38- Elimine los 2 triggers asociados a la tabla "secciones"</p>
+<p>39- Consulte el diccionario "user_triggers" para verificar que "secciones" ya no tiene disparadores asociados a ella</p>
+<p>40- Cree un trigger sobre "secciones", para el evento de actualización que realice todas las acciones que ejecutaban los 2 triggers que "secciones" tenía asociados anteriormente; es decir:</p>
+<p>- si se actualiza un sueldo máximo, modificar el sueldo, al máximo permitido, a todos los empleados (de la sección modificada) cuyos sueldos superen el nuevo sueldo máximo;</p>
+<p>- definir un mensaje de error si se intenta actualizar un código se sección.</p>
+<p>41- Probarlo. Disminuir el sueldo máximo de una sección que no supere el sueldo de ningun empleado:<br>
+Se activó el trigger de actualizacion de secciones pero ningún registro de "empleados" fue modificado.</p>
+<p>42- Disminuir el sueldo máximo de una sección de modo que supere el sueldo de algún empleado<br>
+Se activó el trigger de actualizacion de secciones y 2 registros de "empleados" fueron modificados.</p>
+<p>43- Intente modificar un código de sección<br>
+Mensaje de error.</p>
+<p>44- Consulte el diccionario "user_triggers" para ver cuántos triggers están asociados a las tablas "secciones" y "empleados"</p>
+<p>45- Elimine la tabla "empleados"</p>
+<p>46- Consulte el diccionario "user_triggers" para verificar que al borrar la tabla "empleados" se eliminaron todos los disparadores asociados a ella</p>
+<p>47- Elimine la tabla "secciones" y consulte "user_triggers" para verificar que al borrar la tabla "secciones" se eliminaron todos los desencadenadores asociados a ella</p>
+<br>
+<a href="javascript:cambiar(2)" id="solucion2">Ver solución</a>
+<pre id="solu2" class="recuadrooculto">
+ drop table empleados;
+ drop table secciones;
+
+ create table secciones(
+  codigo number(2),
+  nombre varchar2(30),
+  sueldomaximo number(8,2),
+  constraint PK_secciones primary key(codigo)
+ );
+
+ create table empleados(
+  documento char(8) not null,
+  nombre varchar2(30) not null,
+  domicilio varchar2(30),
+  codigoseccion number(2) not null,
+  sueldo number(8,2),
+  constraint PK_empleados primary key(documento),
+  constraint FK_empleados_seccion
+   foreign key (codigoseccion)
+   references secciones(codigo)
+ );
+
+ insert into secciones values(1,'Administracion',1500);
+ insert into secciones values(2,'Sistemas',2000);
+ insert into secciones values(3,'Secretaria',1000);
+
+ insert into empleados values('22222222','Ana Acosta','Avellaneda 88',1,1100);
+ insert into empleados values('23333333','Bernardo Bustos','Bulnes 345',1,1200);
+ insert into empleados values('24444444','Carlos Caseres','Colon 674',2,1800);
+ insert into empleados values('25555555','Diana Duarte','Colon 873',3,1000);
+
+ set serveroutput on;
+ execute dbms_output.enable (20000);
+
+  create or replace trigger tr_empleados_insertar
+  before insert
+  on empleados
+  for each row
+ declare
+   varsueldo number:=null;
+   varseccion varchar2(30):=null;
+ begin
+  dbms_output.put_line('Trigger de insercion de &quot;empleados&quot; activado');  
+  select sueldomaximo into varsueldo from secciones where codigo=:new.codigoseccion;   
+  select nombre into varseccion from secciones where codigo=:new.codigoseccion;
+  if (:new.sueldo&gt;varsueldo) then
+    raise_application_error(-20001,'Ud. intenta ingresar un sueldo de $ '||to_char(:new.sueldo)
+|| ' y el m&aacute;x. para ' || varseccion ||' es de '|| to_char(varsueldo));
+  end if;--sueldo mayor
+ end tr_empleados_insertar;
+
+ insert into empleados values('26666666','Federico Fuentes','Francia 938',2,1000);
+
+ select *from empleados;
+
+ insert into empleados values('27777777','Gaston Garcia','Guemes 366',3,1200);
+
+ select *from empleados;
+
+ insert into empleados values('27777777','Gaston Garcia','Guemes 366',9,1200);
+
+create or replace trigger tr_empleados_update_sueldos
+  before update of sueldo
+  on empleados
+  for each row when (new.sueldo&gt;old.sueldo)
+ declare
+   varsueldo number:=null;
+   varseccion varchar2(30):=null;
+ begin
+  dbms_output.put_line('Trigger de actualizacion de sueldo activado');  
+  select sueldomaximo into varsueldo from secciones where codigo=:new.codigoseccion;   
+  select nombre into varseccion from secciones where codigo=:new.codigoseccion;
+  if (:new.sueldo&gt;varsueldo) then
+   raise_application_error(-20002,'Ud. intenta cambiar el sueldo de $ '||to_char(:old.sueldo)||' por '
+||to_char(:new.sueldo)||' y el m&aacute;x. para ' || varseccion ||' es de '|| to_char(varsueldo));
+  end if;--sueldo mayor
+ end tr_empleados_update_sueldos;
+
+ update empleados set sueldo=1500 where documento='22222222';
+
+ select *from empleados;
+
+ update empleados set sueldo=1600 where documento='22222222';
+
+ select *from empleados;
+
+ update empleados set sueldo=sueldo-sueldo*0.1 where documento='22222222';
+
+ select *from empleados;
+
+ update empleados set codigoseccion=3 where documento='22222222';
+
+ create or replace trigger tr_empleados_update_seccion
+  before update of codigoseccion
+  on empleados
+  for each row
+ declare
+   varsueldo number:=null;
+   varseccion varchar2(30):=null;
+ begin
+  dbms_output.put_line('Trigger de actualizacion de codigo de seccion activado');  
+  select sueldomaximo into varsueldo from secciones where codigo=:new.codigoseccion;
+  select nombre into varseccion from secciones where codigo=:new.codigoseccion;
+  if (:new.sueldo&gt;varsueldo) then
+     raise_application_error(-20003,'Intenta cambiar la secci&oacute;n, pero el sueldo m&aacute;x. para ' 
+|| varseccion ||' es de '|| to_char(varsueldo)|| ' y el sueldo actual de '||
+ to_char(:new.sueldo)|| ' lo supera');
+  end if;--sueldo mayor
+ end tr_empleados_update_seccion;
+
+ update empleados set codigoseccion=1 where documento='22222222';
+
+ select *from empleados;
+
+ update empleados set codigoseccion=3 where documento='23333333';
+
+ select *from empleados;
+
+ update empleados set sueldo=1000, codigoseccion=3 where documento='23333333';
+
+ select *from empleados;
+
+create or replace trigger tr_secciones_maximo
+  before update of sueldomaximo
+  on secciones
+  for each row when (new.sueldomaximo&lt;old.sueldomaximo)
+ declare
+   existen number:=0;
+ begin
+  dbms_output.put_line('Trigger de actualizacion de maximo sueldo activado');  
+  select count(*) into existen from empleados
+      where codigoseccion=:new.codigo
+      and sueldo&gt;:new.sueldomaximo;
+  if (existen&gt;0)Then
+   update empleados set sueldo=:new.sueldomaximo
+    where codigoseccion=:new.codigo
+    and sueldo&gt;:new.sueldomaximo;
+   dbms_output.put_line(to_char(existen)|| ' registros de &quot;empleados&quot; actualizados');      
+  end if; 
+ end tr_secciones_maximo;
+
+ update secciones set sueldomaximo=2000 where nombre='Administracion';
+
+ select sueldomaximo from secciones where nombre='Administracion';
+
+ update secciones set sueldomaximo=1800 where nombre='Administracion';
+
+ select sueldomaximo from secciones where nombre='Administracion';
+ select *from empleados where codigoseccion=1;
+
+ update secciones set sueldomaximo=1200 where nombre='Administracion';
+
+ select sueldomaximo from secciones where nombre='Administracion';
+ select *from empleados where codigoseccion=1;
+
+ create or replace trigger tr_secciones_update_codigo
+  before update of codigo
+  on secciones
+  for each row
+ begin
+  dbms_output.put_line('Trigger de actualizacion de codigo activado');  
+  raise_application_error(-20004,'El c&oacute;digo de secci&oacute;n no puede modificarse');
+ end tr_secciones_update_codigo;
+
+ update secciones set codigo=9 where codigo=1;
+
+ select *from secciones;
+
+ update empleados set sueldo=1800, codigoseccion=2 where documento='22222222';
+
+create or replace trigger tr_empleados_documento
+  before update of documento
+  on empleados
+ begin
+  dbms_output.put_line('Trigger de actualizacion de documento activado');  
+  raise_application_error(-20005,'El documento no puede modificarse');
+ end tr_empleados_documento;
+
+select table_name, trigger_name, triggering_event from user_triggers
+  where table_name ='EMPLEADOS' or table_name='SECCIONES';
+
+ drop trigger tr_secciones_maximo;
+ drop trigger tr_secciones_update_codigo;
+
+ select trigger_name, triggering_event from user_triggers
+  where table_name ='SECCIONES';
+
+create or replace trigger tr_secciones
+  before update
+  on secciones
+  for each row
+ declare
+   existen number:=0;
+ begin
+  dbms_output.put_line('Trigger de actualizacion de secciones activado');  
+  if (updating('sueldomaximo'))then
+   if (:new.sueldomaximo&lt;:old.sueldomaximo) then
+     select count(*) into existen from empleados where codigoseccion=:new.codigo and sueldo&gt;:new.sueldomaximo;
+     if (existen&gt;0)Then
+      update empleados set sueldo=:new.sueldomaximo
+      where codigoseccion=:new.codigo
+      and sueldo&gt;:new.sueldomaximo;
+     end if; --existen
+     dbms_output.put_line(to_char(existen)|| ' registros de &quot;empleados&quot; actualizados');   
+   end if;--mayor
+  end if;--actualizacion de sueldo
+  if updating('codigo')then
+   raise_application_error(-20004,'El c&oacute;digo no puede modificarse');
+  end if;
+ end tr_secciones;
+
+ update secciones set sueldomaximo=1100 where codigo=1;
+
+ update secciones set sueldomaximo=1500 where codigo=2;
+
+ update secciones set codigo=10 where codigo=2;
+
+ select trigger_name, table_name, triggering_event from user_triggers
+  where table_name ='SECCIONES' or table_name ='EMPLEADOS';
+
+ drop table empleados;
+
+ select trigger_name, table_name, triggering_event from user_triggers
+  where table_name ='EMPLEADOS';
+
+ drop table secciones;
+ select *from user_triggers
+  where table_name ='SECCIONES';
+</pre>
+
+		
+<br>
+   <h2><a href="../indexf6ce.html?inicio=100">Retornar</a></h2>   
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/problemas/problema.php?inicio=100&cod=274&punto=116 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:38 GMT -->
+</html>

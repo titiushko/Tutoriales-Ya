@@ -1,0 +1,175 @@
+
+<!DOCTYPE html> 
+<html lang="es"> 
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=171&punto=38&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>GEOLOCATION (mostrar en un mapa)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="html5, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de HTML 5. Es objetivo prioritario respetar 
+los estándares del W3C">
+<meta name="author" content="Diego Moisset">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+</style>
+
+</head>
+
+<body>
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em"><a href="../../html5.html">Temario del Tutorial</a></span>->38 - GEOLOCATION (mostrar en un mapa)</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Hemos visto que es muy sencillo obtener la latitud y la longitud empleando HTML5, pero estos dos números brindan poca información si no los posicionamos en un mapa.</p>
+<p>El mejor software actualmente sobre mapas es el Google Maps. Veremos ahora como el servicio de Google nos puede generar un mapa en forma dinámica a partir de la latitud y longitud que obtenemos en nuestro sitio web con el consentimiento del visitante.</p>
+
+<h3>Problema</h3>
+<p>Confeccionar una aplicación que al presionar un botón obtenga la latitud y longitud de nuestra posición actual y luego solicitar a los servicios de Google Maps un mapa de dicha coordenada.</p>
+<h4>Solución</h4>
+
+<pre class="recuadro">
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Prueba&lt;/title&gt;
+  
+&lt;script type="text/javascript"&gt;
+
+    window.addEventListener('load', inicio, false);
+
+    function inicio() {
+        document.getElementById('obtener').addEventListener('click', recuperarLocalizacion, false);
+    }
+
+    function recuperarLocalizacion() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(mostrarCoordenada);
+        } else {
+          alert('El navegador no dispone la capacidad de geolocalización');
+        }
+    }
+    
+    function mostrarCoordenada(posicion) {
+        var direccion = posicion.coords.latitude + "," + posicion.coords.longitude;
+        var mapa = "http://maps.googleapis.com/maps/api/staticmap?center="
+           +direccion+"&zoom=14&size=500x500&sensor=false";
+        document.getElementById("dato").innerHTML = "&lt;img src='"+mapa+"'&gt;";    
+    }
+       
+&lt;/script&gt;  
+  
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;input type="button" id="obtener" value="Obtener la localización actual en Google Maps"&gt;
+  &lt;br&gt;
+  &lt;div id="dato"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Cuando ejecutamos el programa, presionamos el botón y luego de dar el consentimiento de obtener nuestra ubicación se muestra una imagen del mapa:</p>
+
+
+<img src="imagentema/foto015.jpg" border="0" alt="geolocation en Google Maps"><br>
+<p>Ahora si los resultados en pantalla son muy claros.</p>
+<p>Igual que el problema del concepto anterior primero registramos el evento click para nuestro botón y cuando se presiona procedemos a verificar que se trate de un navegador moderno que acepte el HTML5, con lo que procedemos a llamar al método getCurrentPosition indicando el nombre de la función que recibirá la coordenada:</p>
+<pre>
+    window.addEventListener('load', inicio, false);
+
+    function inicio() {
+        document.getElementById('obtener').addEventListener('click', recuperarLocalizacion, false);
+    }
+
+    function recuperarLocalizacion() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(mostrarCoordenada);
+        } else {
+          alert('El navegador no dispone la capacidad de geolocalización');
+        }
+    }
+</pre>
+
+
+<p>En la función mostrarCoordenada procedemos a llamar la página staticmap de los servidores de Google pasando como parámetro fundamental la coordenada actual (latitud y longitud), esta página genera una imagen que la mostramos en el div dato:</p>
+<pre>
+    function mostrarCoordenada(posicion) {
+        var direccion = posicion.coords.latitude + "," + posicion.coords.longitude;
+        var mapa = "http://maps.googleapis.com/maps/api/staticmap?center="
+           +direccion+"&zoom=14&size=500x500&sensor=false";
+        document.getElementById("dato").innerHTML = "&lt;img src='"+mapa+"'&gt;";    
+    }
+</pre>
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../index28fa.html?inicio=20">Retornar</a></h2>   
+
+</div>
+
+</body>
+
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=171&punto=38&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:09 GMT -->
+</html>

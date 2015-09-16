@@ -1,0 +1,491 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=93&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:52:33 GMT -->
+<head>
+<title>Vectores (ordenamiento)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Vectores (ordenamiento)</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>El ordenamiento de un vector se logra intercambiando las componentes de manera que:<br>
+vec[0] <= vec[1] <= vec[2]  etc.</p>
+
+<p>El contenido de la componente vec[0] sea menor o igual al contenido de la componente vec[1] y así sucesivamente.<br>
+Si se cumple lo dicho anteriormente decimos que el vector está ordenado de menor a mayor. Igualmente podemos ordenar un vector de mayor a menor.</p>
+
+<p>Se puede ordenar tanto vectores con componentes de tipo int, float como String. En este último caso el ordenamiento es alfabético.</p>
+
+<h3>Problema 1:</h3>
+<p>Se debe crear un vector donde almacenar 5 sueldos. Ordenar el vector sueldos de menor a mayor.</p>
+<img src="imagentema/foto062.jpg" border="0" alt="ordenamiento de un vector"><br>
+
+<p>Esta primera aproximación tiene por objetivo analizar los intercambios de elementos dentro del vector.</p>
+
+<p>El algoritmo consiste en comparar si la primera componente es mayor a la segunda, en caso que la condición sea verdadera, intercambiamos los contenidos de las componentes.</p>
+<p>Vamos a suponer que se ingresan los siguientes valores por teclado:</p>
+<pre>
+1200
+750
+820
+550
+490
+</pre>
+
+<p>En este ejemplo: ¿es 1200 mayor a 750? La respuesta es verdadera, por lo tanto intercambiamos el contenido de la componente 0 con el de la componente 1.<br>
+Luego comparamos el contenido de la componente 1 con el de la componente 2: ¿Es 1200 mayor a 820?<br> La respuesta es verdadera entonces intercambiamos.<br>
+Si hay 5 componentes hay que hacer 4 comparaciones, por eso el for se repite 4 veces.<br> Generalizando: si el vector tiene N componentes hay que hacer N-1 comparaciones.<br>
+<pre>
+Cuando		f = 0		f = 1		f  = 2		f = 3
+		
+		750		750		750		750
+		1200		820		820		820
+		820		1200		550		550
+		550		550		1200		490
+		490		490		490		1200
+</pre>
+
+<p>Podemos ver cómo el valor más grande del vector desciende a la última componente. Empleamos una variable auxiliar (aux) para el proceso de intercambio:</p>
+<pre>
+aux=sueldos[f];
+sueldos[f]=sueldos[f+1];
+sueldos[f+1]=aux;
+</pre>
+
+<p>Al salir del for en este ejemplo el contenido del vector es el siguiente:</p>
+<pre>
+750
+820
+550
+490
+1200
+</pre>
+<p>Analizando el algoritmo podemos comprobar que el elemento mayor del vector se ubica ahora en el último lugar.<br>
+Podemos definir otros vectores con distintos valores y comprobar que siempre el elemento mayor queda al final.</p>
+
+<p>Pero todavía con este algoritmo no se ordena un vector. Solamente está ordenado el último elemento del vector.</p>
+
+<p>Ahora bien, con los 4 elementos que nos quedan podemos hacer el mismo proceso visto anteriormente, con lo cual quedará ordenado otro elemento del vector. Este proceso lo repetiremos hasta que quede ordenado por completo el vector.</p>
+
+<p>Como debemos repetir el mismo algoritmo podemos englobar todo el bloque en otra estructura repetitiva.</p>
+<img src="imagentema/foto063.jpg" border="0" alt="ordenamiento de un vector"><br>
+<p>Realicemos una prueba del siguiente algoritmo:</p>
+<pre>
+Cuando k = 0
+		f = 0		f = 1		f = 2		f = 3
+		750		750		750		750
+		1200		820		820		820
+		820		1200		550		550
+		550		550		1200		490
+		490		490		490		1200
+		
+Cuando k = 1
+		f = 0		f = 1		f  = 2		f = 3
+		750		750		750		750	
+		820		550		550		550
+		550		820		490		490
+		490		490		820		820
+		1200		1200		1200		1200
+
+Cuando k = 2
+		f = 0		f = 1		f  = 2		f = 3
+		550		550		550		550
+		750		490		490		490
+		490		750		750		750
+		820		820		820		820
+		1200		1200		1200		1200
+
+
+Cuando k = 3
+		f = 0		f = 1		f  = 2		f = 3
+		490		490		490		490
+		550		550		550		550
+		750		750		750		750
+		820		820		820		820
+		1200		1200		1200		1200
+</pre>
+<p>
+¿Porque repetimos 4 veces el for externo?<br>
+Como sabemos cada vez que se repite en forma completa el for interno queda ordenada una componente del vector. A primera vista diríamos que deberíamos repetir el for externo la cantidad de componentes del vector, en este ejemplo el vector sueldos tiene 5 componentes.</p>
+
+<p>Si observamos, cuando quedan dos elementos por ordenar, al ordenar uno de ellos queda el otro automáticamente ordenado (podemos imaginar que si tenemos un vector con 2 elementos no se requiere el for externo, porque este debería repetirse una única vez)</p>
+
+<p>Una última consideración a este ALGORITMO de ordenamiento es que los elementos que se van ordenando continuamos comparándolos.</p>
+
+<p>Ejemplo: En la primera ejecución del for interno el valor 1200 queda ubicado en la posición 4 del vector. En la segunda ejecución comparamos si el 820 es mayor a 1200, lo cual seguramente será falso.<br>
+Podemos concluir que la primera vez debemos hacer para este ejemplo 4 comparaciones, en la segunda ejecución del for interno debemos hacer 3 comparaciones y en general debemos ir reduciendo en uno la cantidad de comparaciones.<br>
+
+Si bien el algoritmo planteado funciona, un algoritmo más eficiente, que se deriva del anterior es el plantear un for interno con la siguiente estructura: (f=0 ; f&lt;4-k; f++)<br>
+Es decir restarle el valor del contador del for externo.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.util.Scanner;
+public class PruebaVector13 {
+    private Scanner teclado;
+    private int[] sueldos;
+
+    public void cargar() {
+        teclado=new Scanner(System.in);
+        sueldos=new int[5];
+        for(int f=0;f&lt;sueldos.length;f++) {
+            System.out.print("Ingrese el sueldo:");
+            sueldos[f]=teclado.nextInt();
+        }
+    }
+	
+    public void ordenar() {
+        for(int k=0;k&lt;4;k++) {
+            for(int f=0;f&lt;4-k;f++) {
+                if (sueldos[f]&gt;sueldos[f+1]) {
+                    int aux;
+                    aux=sueldos[f];
+                    sueldos[f]=sueldos[f+1];
+                    sueldos[f+1]=aux;
+                }
+            }
+        }
+    }
+	
+    public void imprimir() {
+        System.out.println("Sueldos ordenados de menor a mayor.");
+        for(int f=0;f&lt;sueldos.length;f++) {
+            System.out.println(sueldos[f]);
+        }
+    }
+	
+    public static void main(String[] ar) {
+        PruebaVector13 pv=new PruebaVector13();
+        pv.cargar();
+        pv.ordenar();
+        pv.imprimir();
+    }
+}
+</pre>
+
+<p>También podemos ordenar vectores cuyas componentes sean de tipo String. Para esto no podemos utilizar el operador &gt; sino debemos utilizar un método de la clase String:</p>
+<pre>
+String cad1="juan";
+String cad2="analia";
+if (cad1.compareTo(cad2)>0)
+{
+  System.out.println(cad1 + " es mayor alfabéticamente que " + cad2);
+}
+</pre>
+<p>El método compareTo retorna un valor mayor a cero si cad1 es mayor alfabéticamente. En este ejemplo cad1 tiene un valor alfabéticamente mayor a cad2, luego el compareTo retorna un valor mayor a cero.<br>
+<p>Si los dos String son exactamente iguales el método compareTo retorna un cero, y finalmente si cad1 es menor alfabeticamente retorna un valor menor a cero.</p>
+
+<h3>Problema 2:</h3>
+<p>Definir un vector donde almacenar los nombres de 5 paises. Confeccionar el algoritmo de ordenamiento alfabético.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.util.Scanner;
+public class PruebaVector14 {
+    private Scanner teclado;
+    private String[] paises;
+	
+    public void cargar() {
+        teclado=new Scanner(System.in);
+        paises=new String[5];
+        for(int f=0;f&lt;paises.length;f++) {
+            System.out.print("Ingrese el nombre del pais:");
+            paises[f]=teclado.next();
+        }
+    }
+
+    public void ordenar() {
+        for(int k=0;k&lt;4;k++) {
+            for(int f=0;f&lt;4-k;f++) {
+                if (paises[f].compareTo(paises[f+1])&gt;0) {
+                    String aux;
+                    aux=paises[f];
+                    paises[f]=paises[f+1];
+                    paises[f+1]=aux;
+                }
+            }
+        }
+    }
+	
+    public void imprimir() {
+    	System.out.println("Paises ordenados en forma alfabética:");
+        for(int f=0;f&lt;paises.length;f++) {
+            System.out.println(paises[f]);
+        }
+    }
+
+    public static void main(String[] ar) {
+        PruebaVector14 pv=new PruebaVector14();
+        pv.cargar();
+        pv.ordenar();
+        pv.imprimir();
+    }
+}
+</pre>
+<p>Definimos un vector de tipo String:</p>
+<pre>
+    private String[] paises;
+</pre>
+<p>Lo creamos indicando que almacenará cinco elementos:</p>
+<pre>
+        paises=new String[5];
+</pre>
+<p>Procedemos a cargar el vector:</p>
+<pre>
+        for(int f=0;f&lt;paises.length;f++) {
+            System.out.print("Ingrese el nombre del pais:");
+            paises[f]=teclado.next();
+        }
+</pre>
+<p>Para el ordenamiento utilizamos el método compareTo para verificar si tenemos que intercambiar las componentes:</p>
+<pre>
+                if (paises[f].compareTo(paises[f+1])&gt;0) {
+</pre>
+<p>En el caso que si tenemos que intercambiarla utilizamos un auxilir de tipo String:</p>
+<pre>
+                    String aux;
+                    aux=paises[f];
+                    paises[f]=paises[f+1];
+                    paises[f+1]=aux;
+</pre>
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Cargar un vector de n elementos de tipo entero. Ordenar posteriormente el vector.</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+import java.util.Scanner;
+public class PruebaVector15 {
+    private Scanner teclado;
+    private int[] vec;
+	
+     public void cargar() {
+        teclado=new Scanner(System.in);
+        System.out.print("Cuantos elementos tendrá el vector:");
+         int cant;
+        cant=teclado.nextInt();
+        vec=new int[cant];
+	    for(int f=0;f&lt;vec.length;f++) {
+            System.out.print("Ingrese elemento:");
+            vec[f]=teclado.nextInt();
+	    }
+	}
+	
+    public void ordenar() {
+        for(int k=0;k&lt;vec.length;k++) {
+            for(int f=0;f&lt;vec.length-1-k;f++) {
+                if (vec[f]&gt;vec[f+1]) {
+                    int aux;
+                    aux=vec[f];
+                    vec[f]=vec[f+1];
+                    vec[f+1]=aux;
+                }
+            }
+        }
+    }
+	
+    public void imprimir() {
+	    System.out.println("Vector ordenados de menor a mayor.");
+        for(int f=0;f&lt;vec.length;f++) {
+            System.out.println(vec[f]);
+        }
+    }
+	
+    public static void main(String[] ar) {
+        PruebaVector15 pv=new PruebaVector15();
+        pv.cargar();
+        pv.ordenar();
+        pv.imprimir();
+    }
+}
+</pre></div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index2904.html?inicio=0">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=93&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:52:34 GMT -->
+</html>

@@ -1,0 +1,447 @@
+﻿<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.phpya.com.ar/temarios/descripcion.php?punto=42&cod=63&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:09:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de PHP - Temario</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="keywords" content="php, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de php.">
+<meta name="author" content="Diego Moisset">
+
+<style>
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Verdana,arial,sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.1em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;
+}
+
+#recuadrooculto {
+  display: none;
+}
+
+
+.recuadroborde {
+  //  max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+	clear:left;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  document.getElementById('recuadrooculto').style.display='block';
+}
+
+</script>
+
+</head>
+
+<body>
+
+
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em;margin-right:1em"><a href="../index1e61-2.html?inicio=40">Temario del Tutorial</a></span>42 - Administración de fechas y horas (función date)</h1></div>
+
+<br>
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+
+<p>La función date retorna un string con una fecha y hora, o partes de ella según un string de formato que le pasamos como parámetro. Se obtiene la fecha y hora del servidor.</p>
+<p>Veamos como ejemplo la impresión de la fecha y hora actual del servidor:</p>
+<pre class="recuadroborde">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+echo &quot;La fecha de hoy es:&quot;;
+$fecha=date(&quot;d/m/Y&quot;);
+echo $fecha;
+echo &quot;&lt;br&gt;&quot;;
+echo &quot;La hora actual es:&quot;;
+$hora=date(&quot;H:i:s&quot;);
+echo $hora;
+echo &quot;&lt;br&gt;&quot;;
+?&gt;
+&lt;a href=&quot;pagina2.php&quot;&gt;Siguiente problema&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</font>
+</pre>
+<p>Los caracteres de formato utilizados en las dos llamadas de la función date son:</p>
+<b>d</b> día del mes con dos dígitos "01" al "31"<br>
+<b>m</b> mes con dos dígitos "01" al "12"<br>
+<b>Y</b> año con cuatro dígitos<br>
+Para la hora, los caracteres que serán sustituidos son:<br>
+<b>H</b> hora con dos dígitos "00" a "23"<br>
+<b>i</b> minutos con dos dígitos "00" a "59"<br>
+<b>s</b> segundos con dos dígitos "00" a "59"<br>
+<br>
+<p>Los otros caracteres que disponemos al llamar a la función date, son retornados sin cambios, en este caso la barra y los dos puntos.</p>
+
+<p>Los caracteres de formato que veíamos son los más comunes, pero tenemos otras variantes posibles. Si queremos los días y meses sin el cero delante y el año con dos dígitos tenemos entonces:</p>
+<pre class="recuadroborde">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+echo &quot;La fecha de hoy es:&quot;;
+$fecha=date(&quot;j/n/y&quot;);
+echo $fecha;
+echo &quot;&lt;br&gt;&quot;;
+?&gt;
+&lt;a href=&quot;pagina3.php&quot;&gt;Siguiente problema&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Los caracteres que ahora tenemos son:</p>
+<b>j</b> día del mes "1" al "31"<br>
+<b>n</b> mes "1" al "12"<br>
+<b>y</b> año con dos dígitos<br>
+<br>
+<p>Por último, a los otros caracteres de formato de la función date que nos pueden servir en alguna ocasión, los podemos ver en el siguiente ejemplo:</p>
+<pre class="recuadroborde">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+$dato=date(&quot;L&quot;);
+if ($dato==1)
+  echo &quot;A&ntilde;o bisiesto&quot;;
+else
+  echo &quot;A&ntilde;o no bisiesto&quot;;
+echo &quot;&lt;br&gt;&quot;;
+echo &quot;D&iacute;a de la semana:&quot;;
+$dato=date(&quot;w&quot;);
+switch ($dato) {
+  case 0: echo &quot;domingo&quot;;
+          break;
+  case 1: echo &quot;lunes&quot;;
+          break;
+  case 2: echo &quot;martes&quot;;
+          break;
+  case 3: echo &quot;mi&eacute;rcoles&quot;;
+          break;
+  case 4: echo &quot;jueves&quot;;
+          break;
+  case 5: echo &quot;viernes&quot;;
+          break;
+  case 6: echo &quot;s&aacute;bado&quot;;
+          break;
+}
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Los caracteres son:</p>
+<b>L</b>  "1" or "0", según si el año es bisiesto o no<br>
+<b>w</b>  día de la semana, en número, de "0" (domingo) a "6" (sábado)<br>
+
+
+
+<br>
+<br>
+
+<h2>Problema resuelto.</h2>
+<p>Copiar el contenido de este cuadro de texto al NotePad++ y grabarlo en la carpeta c:\wamp\www con un nombre con extensión php (si hay varios cuadros
+de texto grabar cada uno en un archivo distinto).<br>
+  luego abrir el navegador (Chrome, FireFox, IExplorer etc.) y en la barra de direcciones tipear: http://localhost/pagina1.php (o el nombre del
+archivo que le dió)  </p>
+<form name="formulario" action="#" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+    pagina1.php<br><textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off" readonly>
+<html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+<?php
+echo "La fecha de hoy es:";
+$fecha=date("d/m/Y");
+echo $fecha;
+echo "<br>";
+echo "La hora actual es:";
+$hora=date("H:i:s");
+echo $hora;
+echo "<br>";
+?>
+<a href="pagina2.html">Siguiente problema</a>
+</body>
+
+<!-- Mirrored from www.phpya.com.ar/temarios/descripcion.php?punto=42&cod=63&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:09:08 GMT -->
+</html>
+
+</textarea>
+    <br>
+	 <a href="http://www.scratchya.com.ar/problemas/phpya/resu/63/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a> 
+<!--    <a href="http://localhost:8080/problemas/phpya/resu/63/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>-->
+
+    <br>
+<table width="650px">
+<tr>
+<td align="left">	
+
+</td>
+</tr>
+</table>
+
+	
+    <br>pagina2.php<br><textarea class="programafuente" name="programa2" rows=15 cols=110 wrap="off" readonly><html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+<?php
+echo "La fecha de hoy es:";
+$fecha=date("j/n/y");
+echo $fecha;
+echo "<br>";
+?>
+<a href="pagina3.html">Siguiente problema</a>
+</body>
+</html>
+
+</textarea><br><br>pagina3.php<br><textarea class="programafuente" name="programa3" rows=15 cols=110 wrap="off" readonly><html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+<?php
+$dato=date("L");
+if ($dato==1)
+  echo "Año bisiesto";
+else
+  echo "Año no bisiesto";
+echo "<br>";
+echo "Día de la semana:";
+$dato=date("w");
+switch ($dato) {
+  case 0: echo "domingo";
+          break;
+  case 1: echo "lunes";
+          break;
+  case 2: echo "martes";
+          break;
+  case 3: echo "miércoles";
+          break;
+  case 4: echo "jueves";
+          break;
+  case 5: echo "viernes";
+          break;
+  case 6: echo "sábado";
+          break;
+}
+?>
+</body>
+</html>
+</textarea><br>
+</form>
+
+
+
+
+
+
+	
+
+<h2>Problema propuesto.</h2>
+<p>Confeccionar un programa que permita registrar una queja en un archivo de texto.Disponer un formulario que permita almacenar el nombre del visitante (objeto HTML de tipo "text"), la descripción de la queja (objeto de tipo "textarea").<br>
+Almacenar en el archivo de texto la fecha y hora de la queja.<br>
+<br>
+El archivo "pagina1.php" debe ser el formulario de ingreso de datos.<br>
+El archivo "pagina2.php" debe registrar la información en el archivo de datos.<br>
+Por último el archivo "pagina3.php" debe imprimir el archivo con todas las quejas registradas hasta el momento. Disponer un hipervínculo en el archivo "pagina1.php" para poder ver todas las quejas registradas.<br>
+<br>
+<form name="formulario" action="#" target="ventanaForm" 
+onsubmit="abrirVentana()" method="post" >
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<div id="recuadrooculto">
+pagina1.php<br>
+<textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off" readonly>
+<html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+
+<form action="http://www.phpya.com.ar/temarios/pagina2.php" method="post">
+Ingrese su nombre:
+<input type="text" name="nombre">
+<br>
+Queja:
+<br>
+&lt;textarea name="queja" rows="10" cols="40"&gt;
+&lt;/textarea&gt;
+<br>
+<input type="submit" value="Registrar">
+</form>
+<a href="pagina3.html">Quejas registradas</a>
+</body>
+</html></textarea>
+ <br>
+<!-- <a href="http://localhost:8080/problemas/phpya/propu/63/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>-->
+
+
+  <a href="http://www.scratchya.com.ar/problemas/phpya/propu/63/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a> 
+	<br>	
+pagina2.php<br><textarea class="programafuente" name="programa2" rows=15 cols=110 wrap="off" readonly><html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+
+<?php
+$ar=fopen("datos.html","a") or
+  die("Problemas en la creacion");
+fputs($ar,$_REQUEST['nombre']);
+fputs($ar,"\n");
+fputs($ar,$_REQUEST['queja']);
+fputs($ar,"\n");
+fputs($ar,"Fecha y Hora:");
+$fecha=date("d/m/Y");
+fputs($ar,$fecha);
+fputs($ar,"  ");
+$hora=date("H:i:s");
+fputs($ar,$hora);
+fputs($ar,"\n");
+fputs($ar,"------------------------------\n");
+fclose($ar);
+echo "Los datos se cargaron correctamente.";
+
+?>
+
+</body>
+</html>
+</textarea><br>pagina3.php<br><textarea class="programafuente" name="programa3" rows=15 cols=110 wrap="off" readonly><html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+
+<?php
+$ar=fopen("datos.html","r") or
+  die("No se pudo abrir el archivo");
+while (!feof($ar))
+{
+  $linea=fgets($ar);
+  $lineasalto=nl2br($linea);
+  echo $lineasalto;
+}
+fclose($ar);
+?>
+
+</body>
+</html>
+</textarea>
+</div>
+
+</form>
+
+
+
+  
+
+<br>
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>
+
+
+<form name="form1" method="post" action="#">
+  <div>
+   <h2><a href="../index1e61.html?inicio=40">Retornar</a></h2>   
+  </div>
+
+  
+</form>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-4";
+urchinTracker();
+</script>
+
+</body>
+
+</html>

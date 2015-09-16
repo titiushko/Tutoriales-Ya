@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+
+<!-- Mirrored from www.htmlya.com.ar/html5/simulador/simulador.php?cod=177&punto=44&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+    <title>HTML5 Ya</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <link href="estiloscssya.css" rel="stylesheet">
+
+	
+    <link href='../../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css' rel='stylesheet'>     
+    <script src='../../../ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script> 
+    <script src='../../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>     
+
+	
+
+<script type="text/javascript">	
+
+$(document).ready(function(){
+  var opciones = {
+                   select:tabSeleccionado
+                 };                 
+  $("#pesta").tabs(opciones);
+ 
+});
+
+function tabSeleccionado(event,tab) {
+  if (tab.index==2) {
+    var d = parent.documentodinamico.document; 	
+    d.open();
+	d.write(String.fromCharCode(60)+"script ");
+	d.write(' src="debug.js">');
+	d.write(String.fromCharCode(60)+"/script"+String.fromCharCode(62));
+	
+	d.write(String.fromCharCode(60)+'style'+String.fromCharCode(62));
+	d.write($('#editor2').val());
+	d.write(String.fromCharCode(60)+'/style'+String.fromCharCode(62));
+	
+	
+	d.write($('#editor').val());
+    d.close();	
+  }	
+}
+
+
+</script>
+	
+</head>
+<body>
+
+        <h1>46 - API FILE (lectura de archivo de texto local)</h1><br>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* css3 detalle arriba */
+google_ad_slot = "3101973371";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+	
+<br><br>
+<div id="problema">
+		<strong>Problema:</strong>Confeccionar un programa que nos permita seleccionar de nuestro disco duro un archivo de texto y posteriormente leer su contenido y mostrarlo en un control textarea. Mostrar además su nombre, tamaño y tipo.</div>
+
+<div id="pesta">
+	<ul>
+		<li><a href="#p2">pagina.html</a></li>
+		<li><a href="#p3" style="display:none">estilos.css</a></li>		
+		<li><a href="#p4">Ejecución de la página</a></li>
+	</ul>
+	
+	<div id="p2">
+    <textarea name="editor" id="editor" rows="28" style="width:890px;height:700px;font-family:courier;font-size:1.2em">&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Prueba&lt;/title&gt;
+&lt;script&gt;
+    window.addEventListener('load', inicio, false);
+
+    function inicio() {
+        document.getElementById('archivo').addEventListener('change', cargar, false);               
+    }
+
+    function cargar(ev) {
+        document.getElementById('datos').innerHTML='Nombre del archivo:'+ev.target.files[0].name+'&lt;br&gt;'+
+                                                   'Tamaño del archivo:'+ev.target.files[0].size+'&lt;br&gt;'+  
+                                                   'Tipo MIME:'+ev.target.files[0].type;
+        var arch=new FileReader();
+        arch.addEventListener('load',leer,false);
+        arch.readAsText(ev.target.files[0]);
+    }
+    
+    function leer(ev) {
+        document.getElementById('editor').value=ev.target.result;
+    }
+&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;input type="file" id="archivo"&gt;&lt;br&gt;
+&lt;textarea rows="10" cols="80" id="editor"&gt;&lt;/textarea&gt;
+&lt;br&gt;
+&lt;p id="datos"&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+		
+	</div>
+	<div id="p3">
+    <textarea name="editor2" id="editor2" rows="28" style="width:890px;height:700px;font-family:courier;font-size:1.2em"></textarea>
+		
+	</div>
+	
+	<div id="p4">
+<iframe width="900" height="700" id="documentodinamico" name="documentodinamico" src="vacio.html">
+No tiene disponible el navegador la capacidad de iframe
+</iframe>
+	</div>
+</div>
+<br>
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* css3 cuadrado */
+google_ad_slot = "9333811690";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+ <script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* css3 cuadrado */
+google_ad_slot = "9333811690";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>
+<br>
+   <h2><a href="../index1e61.html?inicio=40">Retornar</a></h2>   
+
+
+</body>
+
+<!-- Mirrored from www.htmlya.com.ar/html5/simulador/simulador.php?cod=177&punto=44&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:14 GMT -->
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

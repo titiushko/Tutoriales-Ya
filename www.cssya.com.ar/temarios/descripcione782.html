@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=50&cod=59&punto=55 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:08:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de CSS - Temarios</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<style>
+
+
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>55 - Pseudo-clases: only-child y only-of-type</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>La pseudo-clase <strong>only-child</strong> se aplica cuando en dicho nivel hay un solo elemento. Por ejemplo:</p>
+<pre>
+  &lt;ul id="fechainicio"&gt;
+    &lt;li&gt;10/10/2015&lt;/li&gt;
+  &lt;/ul&gt;
+</pre>
+<p>Luego si especificamos la siguiente regla:</p>
+<pre>
+#fechainicio li:only-child {
+  color:blue;
+}
+</pre>
+<p>El li se pinta de rojo ya que hay un solo elemento en ese nivel.</p>
+<p>Si tenemos por ejemplo:</p>
+<pre>
+&lt;div id="equipo1"&gt;
+    &lt;h1&gt;Participantes&lt;/h1&gt;
+    &lt;p&gt;Pablo Martinez.&lt;/p&gt;  
+&lt;/div&gt;
+</pre>
+<p>Y aplicamos el estilo:</p>
+<pre>
+#equipo1 p:only-child {
+  color:red;
+}
+</pre>
+<p>No se selecciona el párrafo ya que no es el único elemento en dicho nivel (hay un h1 y un párrafo)</p>
+<p>Ahora la pseudo-clase <strong>only-of-type</strong> se aplica cuando en dicho nivel hay un solo elemento de ese tipo (no importa cuantos otros elementos hay de otro tipo en el mismo nivel)</p>
+<p>Si tenemos ahora:</p>
+<pre>
+&lt;div id="equipo1"&gt;
+    &lt;h1&gt;Participantes&lt;/h1&gt;
+    &lt;p&gt;Pablo Martinez.&lt;/p&gt;  
+&lt;/div&gt;
+</pre>
+<p>con la regla:</p>
+<pre>
+#equipo1 p:only-of-type{
+  color:red;
+}
+</pre>
+<p>Si se pinta de rojo el párrafo ya que en ese nivel hay solo un elemento de tipo párrafo.</p>
+
+<p>Veamos una página y una hoja de estilo que prueban estas dos pseudo-clases:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;link rel="StyleSheet" href="estilos.css" type="text/css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Fecha de inicio.&lt;/h1&gt;
+  &lt;ul id="fechainicio"&gt;
+    &lt;li&gt;10/10/2015&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h1&gt;Fechas finales.&lt;/h1&gt;
+  &lt;ul id="fechafin"&gt;
+    &lt;li&gt;10/12/2015&lt;/li&gt;
+    &lt;li&gt;24/12/2015&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;div id="equipo1"&gt;
+    &lt;h1&gt;Participantes&lt;/h1&gt;
+    &lt;p&gt;Pablo Martinez.&lt;/p&gt;  
+  &lt;/div&gt;
+  &lt;div id="equipo2"&gt;
+    &lt;h1&gt;Participantes&lt;/h1&gt;
+    &lt;p&gt;Ana Luz.&lt;/p&gt;  
+    &lt;p&gt;Pedro Rodriguez.&lt;/p&gt;  
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>estilos.css</p>
+<pre class="recuadro">
+
+#fechainicio li:only-child {
+  color:blue;
+}
+
+#fechafin li:only-child {
+  color:blue;
+}
+
+#equipo1 p:only-of-type {
+  color:red;
+}
+
+#equipo2 p:only-of-type {
+  color:red;
+}
+</pre>
+<p>Como resultado tenemos en el navegador:</p>
+<img src="imagentema/imagen011.jpg" border="0" alt="only-child y only-of-type"><br>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../indexefd7.html?inicio=50">Retornar</a></h2>   
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=50&cod=59&punto=55 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:08:08 GMT -->
+</html>

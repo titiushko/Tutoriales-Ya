@@ -1,0 +1,191 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=0&cod=180&punto=22 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Descripción : Funciones matemáticas. (Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>22 - Funciones matemáticas.</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>Las funciones matemáticas realizan operaciones con expresiones numéricas y retornan un resultado, operan con tipos de datos numéricos.</p>
+<p>Las funciones numéricas aceptan parámetros de entrada de tipo numérico y retornan valores numéricos.</p>
+<p>Oracle tiene algunas funciones para trabajar con números. Aquí presentamos algunas.</p>
+
+<p>- abs(x): retorna el valor absoluto del argumento "x". Ejemplo:</p>
+<pre>
+ select abs(-20) from dual;--retorna 20.
+</pre>
+<p>La tabla dual es una tabla virtual que existe en todas las Bases de datos Oracle.</p>
+<p>- ceil(x): redondea a entero, hacia arriba, el argumento "x". Ejemplo:</p>
+<pre>
+ select ceil(12.34) from dual;--retorna 13.
+</pre>
+<p>- floor(x): redondea a entero, hacia abajo, el argumento "x". Ejemplo:</p>
+<pre>
+ select floor(12.34) from dual; --12
+</pre>
+<p>- mod(x,y): devuelve el resto de la división x/y. Ejemplos:</p>
+<pre>
+ select mod(10,3) from dual;--retorna 1.
+ select mod(10,2) from dual;--retorna 0.
+</pre>
+<p>- power(x,y): retorna el valor de "x" elevado a la "y" potencia. Ejemplo:</p>
+<pre>
+ select power(2,3) from dual;--retorna 8.
+</pre>
+<p>- round(n,d): retorna "n" redondeado a "d" decimales; si se omite el segundo argumento, redondea todos los decimales. Si el segundo argumento es positivo, el número de decimales es redondeado según "d"; si es negativo, el número es redondeado desde la parte entera según el valor de "d". Ejemplos:</p>
+<pre>
+ select round(123.456,2) from dual;-- retorna "123.46", es decir, redondea desde el segundo decimal.
+ select round(123.456,1) from dual;-- 123.5, es decir, redondea desde el primer decimal.
+ select round(123.456,-1) from dual;-- 120, redondea desde el primer valor entero (hacia la izquierda).
+ select round(123.456,-2) from dual;-- 100, redondea desde el segundo valor entero (hacia la izquierda).
+ select round(123.456) from dual;-- 123.
+</pre> 
+<p>- sign(x): si el argumento es un valor positivo, retorna 1, si es negativo, devuelve -1 y 0 si es 0. Ejemplo:</p>
+<pre>
+ select sign(-120) from dual;--retorna -1
+ select sign(120) from dual;--retorna 1
+</pre>
+<p>- trunc(n,d): trunca un número a la cantidad de decimales especificada por el segundo argumento. Si se omite el segundo argumento, se truncan todos los decimales. Si "d" es negativo, el número es truncado desde la parte entera. Ejemplo:</p>
+<pre>
+ select trunc(1234.5678,2) from dual;--retorna 1234.56
+ select trunc(1234.5678,-2) from dual;--retorna 1200
+ select trunc(1234.5678,-1) from dual;--retorna 1230
+ select trunc(1234.5678) from dual;--retorna 1234
+</pre>
+<p>- sqrt(x): devuelve la raiz cuadrada del valor enviado como argumento. Ejemplo:</p>
+<pre>
+ select sqrt(9) from dual;--retorna 3
+</pre>
+<p>Oracle dispone de funciones trigonométricas que retornan radianes, calculan seno, coseno, inversas, etc.: acos, asin, atan, atan2, cos, cosh, exp,  ln, log, sin, sinh, tan, tanh. No las veremos en detalle.</p>
+
+<p>Se pueden emplear las funciones matemáticas enviando como argumento el nombre de un campo de tipo numérico.</p>
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=0&cod=180&punto=22 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:25 GMT -->
+</html>

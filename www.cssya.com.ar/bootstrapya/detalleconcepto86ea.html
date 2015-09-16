@@ -1,0 +1,189 @@
+
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/detalleconcepto.php?punto=19&codigo=134&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:04:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>form : formulario horizontal</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="bootstrap,css, html, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de bootstrap.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>19 - form : formulario horizontal</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Otra variante de formulario que nos permite Bootstrap son los formularios horizontales. En este estilo de formularios se dispone la descripción del dato a ingresar en el lado izquierdo y el control del formulario a derecha.</p>
+<h3>Problema</h3>
+<p>Construir un formulario de login que muestre a la izquierda "Nombre de usuario:" y a la derecha el control donde se ingresa el nombre. Hacer lo mismo para el campo de ingreso de la clave, mostrar "Ingrese clave" y del lado de la derecha el control HTML password. Mostrar finalmente un botón a la altura de los controles de entrada de datos. La interfaz debe ser similar a esta:</p>
+
+<img src="imagentema/foto027.jpg" border="0" alt="bootstrap form form-horizontal"><br> 
+
+<p>El código de la página para implementar el formulario es:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+  &lt;head&gt; 
+    &lt;title&gt;Prueba de Bootstrap&lt;/title&gt; 
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt; 
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+  &lt;div class="container"&gt;
+
+  &lt;form class="form-horizontal" role="form"&gt;
+    &lt;div class="form-group"&gt;
+      &lt;label for="usuario" class="col-sm-3 control-label"&gt;Nombre de usuario:&lt;/label&gt;
+      &lt;div class="col-sm-9"&gt;
+        &lt;input type="text" class="form-control" id="usuario"&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group"&gt;
+      &lt;label for="clave" class="col-sm-3 control-label"&gt;Ingrese clave:&lt;/label&gt;
+      &lt;div class="col-sm-9"&gt;
+        &lt;input type="password" class="form-control" id="clave"&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="form-group"&gt;
+      &lt;div class="col-sm-offset-3 col-sm-9"&gt;
+        &lt;button type="submit" class="btn btn-default"&gt;Entrar&lt;/button&gt;
+      &lt;/div&gt; 
+    &lt;/div&gt;
+  &lt;/form&gt;
+
+  &lt;/div&gt; 
+&lt;/body&gt; 
+&lt;/html&gt; 
+</pre>
+
+<p>Lo primero que debemos especificar en la marca form es la clase "form-horizontal":</p>
+<pre>
+  &lt;form class="form-horizontal" role="form"&gt;
+</pre>
+<p>Pero ahora debemos indicar cuanto espacio asignar a la columna de descripción y cuanto al control HTML propiamente dicho:</p>
+<pre>
+    &lt;div class="form-group"&gt;
+      &lt;label for="usuario" class="col-sm-3 control-label"&gt;Nombre de usuario:&lt;/label&gt;
+      &lt;div class="col-sm-9"&gt;
+        &lt;input type="text" class="form-control" id="usuario"&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+</pre>
+<p>Como podemos ver en la etiqueta label inicializamos con la clase col-sm-3 indicando que tres columnas le corresponden al mensaje "Nombre de usuario:" y luego al control input lo encerramos en un div con la asignación de la clase col-sm-9 completando las doce columnas.</p>
+
+<p>Para el botón lo encerramos con las clases col-sm-9 y además con col-sm-offset-3 para que deje vacía las tres primeras columnas:</p>
+
+<pre>
+      &lt;div class="col-sm-offset-3 col-sm-9"&gt;
+        &lt;button type="submit" class="btn btn-default"&gt;Entrar&lt;/button&gt;
+      &lt;/div&gt; 
+</pre>
+<h2><a target="_blank" href="ejecutar8c78.html?cod=134">Ejecutar Ejemplo</a></h2><h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-32', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/detalleconcepto.php?punto=19&codigo=134&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:04:40 GMT -->
+</html>

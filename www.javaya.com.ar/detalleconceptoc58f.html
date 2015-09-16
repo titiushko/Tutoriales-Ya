@@ -1,0 +1,318 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=90&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:52:31 GMT -->
+<head>
+<title>Vector (Tamaño de un vector)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Vector (Tamaño de un vector)</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>Como hemos visto cuando se crea un vector indicamos entre corchetes su tamaño:</p>
+<pre>
+  sueldos=new int[5];
+</pre>
+<p>Luego cuando tenemos que recorrer dicho vector disponemos una estructura repetitiva for:</p>
+<pre>
+    for(int f=0;f&lt;5;f++) {
+        System.out.print("Ingrese valor de la componente:");
+        sueldos[f]=teclado.nextInt();
+    }	
+</pre>
+<p>Como vemos el for se repite mientras el contador f vale menos de 5. Este estructura repetitiva es idéntica cada vez que recorremos el vector.<br>
+Que pasa ahora si cambiamos el tamaño del vector cuando lo creamos:</p>
+<pre>
+  sueldos=new int[7];
+</pre>
+<p>Con esto tenemos que cambiar todos los for que recorren dicho vector. Ahora veremos que un vector al ser un objeto tiene un atributo llamado length que almacena su tamaño. Luego podemos modificar todos los for con la siguiente sintaxis:</p>
+<pre>
+    for(int f=0;f&lt;sueldos.length;f++) {
+        System.out.print("Ingrese valor de la componente:");
+        sueldos[f]=teclado.nextInt();
+    }	
+</pre>
+<p>También podemos pedir al usuario que indique el tamaño del vector en tiempo de ejecución, en estos casos se hace imprescindible el empleo del atributo length.</p>
+
+<h3>Problema 1:</h3>
+<p>Se desea almacenar los sueldos de operarios. Cuando se ejecuta el programa se debe pedir la cantidad de sueldos a ingresar. Luego crear un vector con dicho tamaño.<br>
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.util.Scanner;
+public class PruebaVector8 {
+    private Scanner teclado;
+    private int[] sueldos;
+	
+    public void cargar()
+    {
+        teclado=new Scanner(System.in);
+        System.out.print("Cuantos sueldos cargará:");
+        int cant;
+        cant=teclado.nextInt();
+        sueldos=new int[cant];
+        for(int f=0;f&lt;sueldos.length;f++) {
+            System.out.print("Ingrese sueldo:");
+            sueldos[f]=teclado.nextInt();
+        }	
+    }
+	
+    public void imprimir() {
+        for(int f=0;f&lt;sueldos.length;f++) {
+            System.out.println(sueldos[f]);
+        }
+    }
+	
+    public static void main(String[] ar) {
+        PruebaVector8 pv=new PruebaVector8();
+        pv.cargar();
+        pv.imprimir();
+    }
+}
+</pre>
+<p>La definición del vector no varía:</p>
+<pre>
+    private int[] sueldos;
+</pre>
+<p>Luego para la creación del mismo ingresamos una variable entera y la utilizamos como subíndice en el momento de la creación del vector:</p>
+<pre>
+        System.out.print("Cuantos sueldos cargará:");
+        int cant;
+        cant=teclado.nextInt();
+        sueldos=new int[cant];
+</pre>
+<p>Luego las estructuras repetitivas las acotamos accediendo al atributo length del vector:</p>
+<pre>
+        for(int f=0;f&lt;sueldos.length;f++) {
+            System.out.print("Ingrese sueldo:");
+            sueldos[f]=teclado.nextInt();
+        }	
+</pre>
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Desarrollar un programa que permita ingresar un vector de n elementos, ingresar n por teclado. Luego imprimir la suma de todos sus elementos
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+import java.util.Scanner;
+public class PruebaVector9 {
+    private Scanner teclado;
+    private int[] vec;
+    
+    public void cargar() {
+        teclado=new Scanner(System.in);
+        System.out.print("Cuantos elementos tiene el vector:");
+        int n;
+        n=teclado.nextInt();
+        vec=new int[n];        
+        for(int f=0;f&lt;vec.length;f++) {
+            System.out.print("Ingrese elemento:");
+            vec[f]=teclado.nextInt();
+        }
+    }
+    
+    public void acumularElementos() {
+        int suma=0;
+        for(int f=0;f&lt;vec.length;f++) {
+            suma=suma+vec[f];
+        }
+        System.out.println("La suma de los elementos es:"+suma);
+    }
+    
+    public static void main(String[] ar) {
+        PruebaVector9 pv=new PruebaVector9();
+        pv.cargar();
+        pv.acumularElementos();
+    }
+}
+</pre></div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index2904.html?inicio=0">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=90&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:52:31 GMT -->
+</html>

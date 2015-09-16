@@ -1,0 +1,171 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=100&cod=266&punto=108 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Descripción : Disparador de actualizacion a nivel de sentencia (update trigger) (Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>108 - Disparador de actualizacion a nivel de sentencia (update trigger)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>Dijimos que un disparador está asociado a una tabla y a una operación específica (inserción, actualización o borrado).</p>
+<p>A continuación veremos la creación de un disparador para el evento de actualización: "update triger".</p>
+
+<p>La siguiente es la sintaxis para crear un trigger de actualización a nivel de sentencia, que se dispare cada vez que se ejecute una sentencia "update" sobre la tabla especificada, es decir, cada vez que se intenten modificar datos en la tabla:</p>
+<pre>
+ create or replace trigger NOMBREDISPARADOR
+  MOMENTO update
+  on NOMBRETABLA
+  statement
+  begin
+   CUERPO DEL TRIGGER;
+  end NOMBREDISPARADOR;
+</pre>
+<p>Luego de la instrucción "create trigger" se coloca el nombre del disparador. Si agregamos "or replace" al momento de crearlo y ya existe un trigger con el mismo nombre, tal disparador será borrado y vuelto a crear.</p>
+<p>"MOMENTO" indica cuando se disparará el trigger en relación al evento, puede ser BEFORE (antes) o AFTER (después). Se especifica el evento que causa que el trigger se dispare, en este caso "update", ya que el trigger se activará cada vez que se ejecute la sentencia "update" sobre la tabla especificada luego de "on".</p>
+<p>"statement" significa que es un trigger a nivel de sentencia, es decir, se dispara una sola vez por cada sentencia "update", aunque la sentencia modifique varios registros; como en cualquier trigger, es el valor por defecto si no se especifica.</p>
+<p>Finalmente se coloca el cuerpo del tigger dentro del bloque "begin.. end".</p>
+
+<p>Las siguientes sentencias disparan un trigger de inserción:</p>
+<pre>
+ update TABLA set CAMPO=NUEVOVALOR;
+ update TABLA set CAMPO=NUEVOVALOR where CONDICION;
+ </pre>
+<p>Ejemplo: Creamos un desencadenador que se dispara cada vez que se ejecuta un "update" sobre la tabla "libros":</p>
+<pre>
+ create or replace trigger tr_actualizar_libros
+  before update
+  on libros
+ begin
+  insert into control values(user,sysdate);
+ end tr_actualizar_libros;
+</pre>
+<p>Al ocurrir el evento de actualización sobre "libros", se ingresa en la tabla "control" el nombre del usuario que alteró la tabla "libros" (obtenida mediante la función "user") y la fecha en que lo hizo (mediante la función "sysdate").</p>
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../indexf6ce.html?inicio=100">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=100&cod=266&punto=108 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=39&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 17:10:25 GMT -->
+<head>
+<title>Evento touch: dibujar un círculo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>39 - Evento touch: dibujar un círculo</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+ <div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+<p>Una actividad fundamental es poder detectar cuando el usuario selecciona o toca la pantalla táctil.</p>
+
+
+<h3>Problema:</h3>
+<p>Desarrollar un programa que dibuje un círculo en la coordenada 100,100. Cuando se presione otra parte de la pantalla táctil proceder a trasladar el círculo a dicha coordenada.</p>
+
+<p>1 - Creamos un proyecto llamado: Proyecto044<br>
+<p>Borramos el TextView que agrega automáticamente el Android Studio y definimos el id del RelativeLayout con el valor: layout1:</p>
+
+<img src="imagentema/foto133.jpg" border="0" alt="Canvas Android"><br>
+
+<p>Ahora codificamos la clase donde se encuentra toda la lógica para capturar el evento onTouch:</p>
+<pre class="recuadro">
+package ar.com.tutorialesya.proyecto043;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.RelativeLayout;
+
+
+public class MainActivity extends ActionBarActivity  implements View.OnTouchListener {
+
+    private int corx, cory;
+    private Lienzo fondo;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        corx = 100;
+        cory = 100;
+        RelativeLayout layout1 = (RelativeLayout) findViewById(R.id.layout1);
+        fondo = new Lienzo(this);
+        fondo.setOnTouchListener(this);
+        layout1.addView(fondo);
+
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public boolean onTouch(View v, MotionEvent event) {
+        corx = (int) event.getX();
+        cory = (int) event.getY();
+        fondo.invalidate();
+        return true;
+    }
+
+    class Lienzo extends View {
+
+        public Lienzo(Context context) {
+            super(context);
+        }
+
+        protected void onDraw(Canvas canvas) {
+            canvas.drawRGB(255, 255, 0);
+            Paint pincel1 = new Paint();
+            pincel1.setARGB(255, 255, 0, 0);
+            pincel1.setStrokeWidth(4);
+            pincel1.setStyle(Paint.Style.STROKE);
+            canvas.drawCircle(corx, cory, 20, pincel1);
+        }
+    }
+}
+
+</pre>
+<p>La clase que captura el evento onTouch debe implementar la interface OnTouchListener (con esto indicamos que la clase debe implementar el método onTouch:</p>
+<pre>
+public class MainActivity extends ActionBarActivity  implements View.OnTouchListener {
+</pre>
+<p>Definimos como atributos la coordenada donde se debe dibujar el círculo y la referencia al objeto de la clase Lienzo:</p>
+<pre>
+     private int corx,cory;
+     private Lienzo fondo;
+</pre>
+<p>En el método onCreate del ActionBarActivity inicializamos los tres atributos de la clase y mediante el método setOnTouchListener indicamos que la propia clase capturará el evento onTouch del objeto fondo:</p>
+<pre>
+        corx=100;
+        cory=100;
+        fondo=new Lienzo(this); 
+        fondo.setOnTouchListener(this);
+        linearLayout.addView(fondo);        
+</pre>
+
+<p>El método onTouch es el que implementamos de la clase OnTouchListener. En este método mediante el objeto event obtenemos la coordenada x e y donde el usuario seleccionó con el dedo y procedemos a llamar al método invalidate para que vuelva a pintarse el control fondo (el método invalidate borra el contendio del objeto de la clase Lienzo y vuelve a ejecutarse el método onDraw):</p>
+<pre>
+    public boolean onTouch(View v, MotionEvent event) {
+        corx=(int)event.getX();
+        cory=(int)event.getY();
+        fondo.invalidate();
+        return true;
+    }    
+</pre>
+
+<p>El método onDraw pinta el fondo de amarillo, crea un objeto de la clase Paint y procede a dibujar un círculo en las coordenadas indicadas por los atributos corx y cory:</p>
+<pre>
+        protected void onDraw(Canvas canvas) {
+            canvas.drawRGB(255,255,0);
+            Paint pincel1=new Paint();
+            pincel1.setARGB(255,255,0,0);
+            pincel1.setStrokeWidth(4);
+            pincel1.setStyle(Paint.Style.STROKE);
+            canvas.drawCircle(corx, cory, 20, pincel1);            
+        }
+</pre>
+
+
+<p>La vista previa de la aplicación es:</p>
+<img src="imagentema/foto146.jpg" border="0" alt="Canvas Android"><br>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/Proyecto043.zip">proyecto043.zip</a>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+<br>
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-34', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=39&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 17:11:33 GMT -->
+</html>

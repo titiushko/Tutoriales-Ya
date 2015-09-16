@@ -1,0 +1,330 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=34&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:59:05 GMT -->
+<head>
+<title>Dibujar: óvalos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>34 - Dibujar: óvalos</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+ <div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+<h3>Problema:</h3>
+<p>Dibujar un óvalo que ocupe toda la pantalla y un círculo en su interior.</p>
+
+<p>1 - Creamos un proyecto llamado: proyecto038<br>
+<p>Borramos el TextView que agrega automáticamente el Android Studio y definimos el id del RelativeLayout con el valor: layout1:</p>
+
+<img src="imagentema/foto133.jpg" border="0" alt="Canvas Android"><br>
+
+<p>Ahora codificamos la clase donde se encuentra toda la lógica:</p>
+<pre class="recuadro">
+package ar.com.tutorialesya.proyecto038;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.RelativeLayout;
+
+
+public class MainActivity extends ActionBarActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        RelativeLayout layout1 = (RelativeLayout) findViewById(R.id.layout1);
+        Lienzo fondo = new Lienzo(this);
+        layout1.addView(fondo);
+        getSupportActionBar().hide();
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    class Lienzo extends View {
+
+        public Lienzo(Context context) {
+            super(context);
+        }
+
+        protected void onDraw(Canvas canvas) {
+            canvas.drawRGB(255, 255, 255);
+            int ancho = canvas.getWidth();
+            int alto = canvas.getHeight();
+
+            Paint pincel1 = new Paint();
+            pincel1.setARGB(255, 0, 0, 0);
+            pincel1.setStrokeWidth(5);
+            pincel1.setStyle(Paint.Style.STROKE);
+            RectF rectangulo1 = new RectF(0, 0, ancho, alto);
+            canvas.drawOval(rectangulo1, pincel1);
+
+            int menor;
+            if (ancho &lt; alto)
+                menor = ancho;
+            else
+                menor = alto;
+
+            pincel1.setStyle(Paint.Style.FILL);
+            pincel1.setARGB(255, 255, 255, 0);
+            canvas.drawCircle(ancho / 2, alto / 2, menor / 2, pincel1);
+        }
+    }
+}
+</pre>
+<p>Para ocultar la barra del título y la barra superior debemos hacer lo siguiente en el método onCreate:</p>
+<pre>
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                             WindowManager.LayoutParams.FLAG_FULLSCREEN);         
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        RelativeLayout layout1 = (RelativeLayout) findViewById(R.id.layout1);
+        Lienzo fondo = new Lienzo(this);
+        layout1.addView(fondo);
+        getSupportActionBar().hide();
+    }
+</pre>
+<p>
+
+<p>En el método onDraw pintamos el fondo de blanco y obtenemos el ancho y alto de la pantalla:</p>
+<pre>
+        protected void onDraw(Canvas canvas) {
+            canvas.drawRGB(255,255,255);
+            int ancho=canvas.getWidth();
+            int alto=canvas.getHeight();
+     
+</pre>
+<p>Seguidamente creamos el objeto de la clase Paint y configuramos el color, grosor de línea y estilo:</p>
+<pre>         
+            Paint pincel1=new Paint();
+            pincel1.setARGB(255,0,0,0);
+            pincel1.setStrokeWidth(5);
+            pincel1.setStyle(Style.STROKE);
+</pre>
+<p>Creamos un objeto de la clase RectT pasando como dato la coordenada superior izquierda del óvalo y la coordenada inferior derecha del mismo (teniendo en cuenta que el óvalo se dibujará en ese rectángulo imaginario que indicamos con dichas coordenadas):</p>
+<pre>
+            RectF rectangulo1=new RectF(0,0,ancho,alto);
+            canvas.drawOval(rectangulo1, pincel1);
+</pre>
+<p>Obtenemos el valor menor del ancho y alto del dispositivo:</p>
+<pre>            
+            int menor;
+            if (ancho&lt;alto)
+                menor=ancho;
+            else
+                menor=alto;
+</pre>
+<p>Configuramos ahora el pincel para dibujar el círculo y lo dibujamos:</p>
+<pre>           
+            pincel1.setStyle(Style.FILL);
+            pincel1.setARGB(255, 255, 255, 0);
+            canvas.drawCircle(ancho/2, alto/2, menor/2, pincel1);                                    
+        }
+</pre>
+
+
+<p>La vista previa de la aplicación es:</p>
+<img src="imagentema/foto139.jpg" border="0" alt="Canvas Android"><br>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/Proyecto038.zip">proyecto038.zip</a>
+
+
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+<br>
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-34', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=34&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 17:03:32 GMT -->
+</html>

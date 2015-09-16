@@ -1,0 +1,305 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.phpya.com.ar/poo/temarios/descripcion.php?cod=45&punto=11&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:08:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<title>Conceptos de PHP Orientado a Objetos</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="PHP,POO, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de POO.">
+<meta name="author" content="Diego Moisset">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" type="text/JavaScript">
+
+</script>
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>11 - Herencia.</h1></td>
+<td align="right">
+<!--<a href="http://www.phpya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+	  
+<div style="font-size:1.3em;font-family:arial;">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+ 
+</div> 
+<p>Otra requisito que tiene que tener un lenguaje para considerarse orientado a objetos es la HERENCIA.</p>
+<p>La herencia significa que se pueden crear nuevas clases partiendo de clases existentes, que tendrá todas los atributos y los métodos de su 'superclase' o 'clase padre' y además se le podrán añadir otros atributos y métodos propios.</p>
+<p>En PHP, a diferencia de otros lenguajes orientados a objetos (C++), una clase sólo puede derivar de una única clase, es decir, PHP no permite herencia múltiple.</p>
+<h4>Superclase o clase padre</h4>
+<p>Clase de la que desciende o deriva una clase. Las clases hijas (descendientes) heredan (incorporan) automáticamente los atributos y métodos de la la clase padre.</p>
+<h4>Subclase</h4>
+<p>Clase desciendiente de otra. Hereda automáticamente los atributos y métodos de su superclase. Es una especialización de otra clase. Admiten la definición de nuevos atributos y métodos para aumentar la especialización de la clase.</p>
+<p>Veamos algunos ejemplos teóricos de herencia:</p>
+<p>1) Imaginemos la clase Vehículo. Qué clases podrían derivar de ella?</p>
+<pre>
+                            Vehiculo
+
+   Colectivo                Moto                    Auto
+                             
+                                             FordK        Renault 9
+</pre>
+<p>Siempre hacia abajo en la jerarquía hay una especialización (las subclases añaden nuevos atributos y métodos.</p>
+<p>2) Imaginemos la clase Software. Qué clases podrían derivar de ella?</p>
+<pre>
+                                           Software
+
+             DeAplicacion                                        DeBase
+
+ProcesadorTexto       PlanillaDeCalculo                          SistemaOperativo
+
+Word   WordPerfect    Excel     Lotus123                         Linux    Windows       
+</pre>
+<p>El primer tipo de relación que habíamos visto entre dos clases, es la de colaboración. Recordemos que es cuando una clase contiene un objeto de otra clase como atributo.<br>
+Cuando la relación entre dos clases es del tipo "...tiene un..." o "...es parte de...", no debemos implementar herencia. Estamos frente a una relación de colaboración de clases no de herencia.</p>
+<p>Si tenemos una ClaseA y otra ClaseB y notamos que entre ellas existe una relacion de tipo "... tiene un...", no debe implementarse herencia sino declarar en la clase ClaseA un atributo de la clase ClaseB.<br>
+Por ejemplo: tenemos una clase Auto, una clase Rueda y una clase Volante. Vemos que la relación entre ellas es: Auto "...tiene 4..." Rueda, Volante "...es parte de..." Auto; pero la clase Auto no debe derivar de Rueda ni Volante de Auto porque la relación no es de tipo-subtipo sino de colaboración. Debemos declarar en la clase Auto 4 atributos de tipo Rueda y 1 de tipo Volante.</p>
+<p>Luego si vemos que dos clase responden a la pregunta  ClaseA "..es un.." ClaseB es posible que haya una relación de herencia.<br>
+Por ejemplo:<br> 
+Auto "es un" Vehiculo<br>
+Circulo "es una" Figura<br>
+Mouse "es un" DispositivoEntrada<br>
+Suma "es una" Operacion<br>
+<p>Ahora plantearemos el primer problema utilizando herencia en PHP. Supongamos que necesitamos implementar dos clases que llamaremos Suma y Resta. Cada clase tiene como atributo $valor1, $valor2 y $resultado. Los métodos a definir son cargar1 (que inicializa el atributo $valor1), carga2 (que inicializa el atributo $valor2), operar (que en el caso de la clase "Suma" suma los dos atributos y en el caso de la clase "Resta" hace la diferencia entre $valor1 y $valor2, y otro método mostrarResultado.<br>
+Si analizamos ambas clases encontramos que muchos atributos y métodos son idénticos. En estos casos es bueno definir una clase padre que agrupe dichos atributos y responsabilidades comunes.</p>
+<p>La relación de herencia que podemos disponer para este problema es:</p>
+<pre>
+                                        Operacion
+
+                        Suma                              Resta
+</pre>
+<p>Solamente el método operar es distinto para las clases Suma y Resta (esto hace que no lo podamos disponer en la clase Operacion), luego los métodos cargar1, cargar2 y mostrarResultado son idénticos a las dos clases, esto hace que podamos disponerlos en la clase Operacion. Lo mismo los atributos $valor1, $valor2 y $resultado se definirán en la clase padre Operacion.</p>
+<p>En PHP la codificación de estas tres clases es la siguiente:</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Pruebas&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+
+class Operacion {
+  protected $valor1;
+  protected $valor2;
+  protected $resultado;
+  public function cargar1($v)
+  {
+    $this-&gt;valor1=$v;
+  }
+  public function cargar2($v)
+  {
+    $this-&gt;valor2=$v;
+  }
+  public function imprimirResultado()
+  {
+    echo $this-&gt;resultado.'&lt;br&gt;';
+  }
+}
+
+class Suma extends Operacion{
+  public function operar()
+  {
+    $this-&gt;resultado=$this-&gt;valor1+$this-&gt;valor2; 
+  }
+}
+
+class Resta extends Operacion{
+  public function operar()
+  {
+    $this-&gt;resultado=$this-&gt;valor1-$this-&gt;valor2;
+  }
+}
+
+$suma=new Suma();
+$suma-&gt;cargar1(10);
+$suma-&gt;cargar2(10);
+$suma-&gt;operar();
+echo 'El resultado de la suma de 10+10 es:';
+$suma-&gt;imprimirResultado();
+
+$resta=new Resta();
+$resta-&gt;cargar1(10);
+$resta-&gt;cargar2(5);
+$resta-&gt;operar();
+echo 'El resultado de la diferencia de 10-5 es:';
+$resta-&gt;imprimirResultado();
+
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt; 
+</pre>
+<p>La clase Operación define los tres atributos:</p>
+<pre>
+class Operacion {
+  protected $valor1;
+  protected $valor2;
+  protected $resultado;
+</pre>
+<p>Ya veremos que definimos los atributos con este nuevo modificador de acceso (protected) para que la subclase tenga acceso a dichos atributos. Si los definimos private las subclases no pueden acceder a dichos atributos.</p>
+<p>Los métodos de la clase Operacion son:</p>
+<pre>
+  public function cargar1($v)
+  {
+    $this-&gt;valor1=$v;
+  }
+  public function cargar2($v)
+  {
+    $this-&gt;valor2=$v;
+  }
+  public function imprimirResultado()
+  {
+    echo $this-&gt;resultado.'&lt;br&gt;';
+  }
+</pre>
+<p>Ahora veamos como es la sintaxis para indicar que una clase hereda de otra en PHP:</p>
+<pre>
+class Suma extends Operacion{
+</pre>
+<p>Utilizamos la palabra clave extends y seguidamente el nombre de la clase padre (con esto estamos indicando que todos los métodos y atributos de la clase Operación son también métodos de la clase Suma.</p>
+<p>Luego la característica que añade la clase Suma es el siguiente método:</p>
+<pre>
+  public function operar()
+  {
+    $this-&gt;resultado=$this-&gt;valor1+$this-&gt;valor2; 
+  }
+</pre>
+<p>El método operar puede acceder a los atributos heredados (siempre y cuando los mismos se declaren protected, en caso que sean private si bien lo hereda de la clase padre solo los pueden modificar métodos de dicha clase padre.</p>
+<p>Ahora podemos decir que la clase Suma tiene cuatro métodos (tres heredados y uno propio) y 3 atributos (todos heredados)</p>
+<p>Si creamos un objeto de la clase Suma tenemos:</p>
+<pre>
+$suma=new Suma();
+$suma-&gt;cargar1(10);
+$suma-&gt;cargar2(10);
+$suma-&gt;operar();
+echo 'El resultado de la suma de 10+10 es:';
+$suma-&gt;imprimirResultado();
+</pre>
+<p>Podemos llamar tanto al método propio de la clase Suma "operar()" como a los métodos heredados. Quien utilice la clase Suma solo debe conocer que métodos públicos tiene (independientemente que pertenezcan a la clase Suma o a una clase superior)</p>
+<p>La lógica es similar para declarar la clase Resta:</p>
+<pre>
+class Resta extends Operacion{
+  public function operar()
+  {
+    $this-&gt;resultado=$this-&gt;valor1-$this-&gt;valor2;
+  }
+}
+</pre>
+<p>y la definición de un objeto de dicha clase:</p>
+<pre>
+$resta=new Resta();
+$resta-&gt;cargar1(10);
+$resta-&gt;cargar2(5);
+$resta-&gt;operar();
+echo 'El resultado de la diferencia de 10-5 es:';
+$resta-&gt;imprimirResultado();
+</pre>
+<p>La clase Operación agrupa en este caso un conjunto de atributos y métodos comunes a un conjunto de subclases (Suma, Resta). No tiene sentido definir objetos de la clase Operacion.</p>
+<p>El planteo de jerarquías de clases es una tarea compleja que requiere un perfecto entendimiento de todas las clases que intervienen en un problema, cuales son sus atributos y responsabilidades.</p>
+</div>
+</p>
+
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* rec-gra */
+google_ad_slot = "4229715475";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+  <div>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+  </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+try {
+_uacct = "UA-628756-13";
+urchinTracker();
+} catch(err) {}</script>
+
+</body>
+
+
+<!-- Mirrored from www.phpya.com.ar/poo/temarios/descripcion.php?cod=45&punto=11&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:08:20 GMT -->
+</html>

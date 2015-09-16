@@ -1,0 +1,220 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.phpya.com.ar/poo/temarios/descripcion.php?cod=37&punto=3&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:08:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<title>Conceptos de PHP Orientado a Objetos</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="PHP,POO, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de POO.">
+<meta name="author" content="Diego Moisset">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" type="text/JavaScript">
+
+</script>
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>3 - Atributos de una clase.</h1></td>
+<td align="right">
+<!--<a href="http://www.phpya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+	  
+<div style="font-size:1.3em;font-family:arial;">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+ 
+</div> 
+<p>Ahora trataremos de concentrarnos en los atributos de una clase. Los atributos son las características, cualidades, propiedades distintivas de cada clase. Contienen información sobre el objeto. Determinan la apariencia, estado y demás particularidades de la clase.
+Varios objetos de una misma clase tendrán los mismos atributos pero con valores diferentes.</p>
+<p>Cuando creamos un objeto de una clase determinada, los atributos declarados por la clase son localizadas en memoria y pueden ser modificados mediante los métodos.</p>
+<p>Lo más conveniente es que los atributos sean privados para que solo los métodos de la clase puedan modificarlos.</p>
+<p>Plantearemos un nuevo problema para analizar detenidamente la definición, sintaxis y acceso a los atributos.</p>
+<p><strong>Problema:</strong> Implementar una clase que muestre una lista de hipervínculos en forma horizontal (básicamente un menú de opciones)</p>
+<p>Lo primero que debemos pensar es que valores almacenará la clase, en este caso debemos cargar una lista de direcciones web y los títulos de los enlaces. Podemos definir dos vectores paralelos que almacenen las direcciones y los títulos respectivamente.</p>
+<p>Definiremos dos métodos: cargarOpcion y mostrar.</p>
+<p>pagina1.php</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Pruebas&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+class Menu {
+  private $enlaces=array();
+  private $titulos=array();
+  public function cargarOpcion($en,$tit)
+  {
+    $this-&gt;enlaces[]=$en;
+    $this-&gt;titulos[]=$tit;
+  }
+  public function mostrar()
+  {
+    for($f=0;$f&lt;count($this-&gt;enlaces);$f++)
+    {
+      echo '&lt;a href=&quot;'.$this-&gt;enlaces[$f].'&quot;&gt;'.$this-&gt;titulos[$f].'&lt;/a&gt;';
+      echo &quot;-&quot;;
+    }
+  }
+}
+
+$menu1=new Menu();
+$menu1-&gt;cargarOpcion('http://www.google.com','Google');
+$menu1-&gt;cargarOpcion('http://www.yahoo.com','Yhahoo');
+$menu1-&gt;cargarOpcion('http://www.msn.com','MSN');
+$menu1-&gt;mostrar();
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Analicemos ahora la solución al problema planteado, como podemos ver normalmente los atributos de la clase se definen inmediatamente después que declaramos la clase:</p>
+<pre>
+class Menu {
+  private $enlaces=array();
+  private $titulos=array();
+</pre>
+<p>Si queremos podemos hacer un comentario indicando el objetivo de cada atributo.</p>
+<p>Luego tenemos el primer método que añade a los vectores los datos que llegan como parámetro:</p>
+<pre>
+  public function cargarOpcion($en,$tit)
+  {
+    $this-&gt;enlaces[]=$en;
+    $this-&gt;titulos[]=$tit;
+  }
+</pre>
+<p>Conviene darle distinto nombre a los parámetros y los atributos (por lo menos inicialmente para no confundirlos).</p>
+<p>Utilizamos la característica de PHP que un vector puede ir creciendo solo con asignarle el nuevo valor. El dato después de esta asignación $this-&gt;enlaces[]=$en; se almacena al final del vector.</p>
+<p>Este método será llamado tantas veces como opciones tenga el menú.</p>
+<p>El siguiente método tiene por objetivo mostrar el menú propiamente dicho:</p>
+<pre>
+  public function mostrar()
+  {
+    for($f=0;$f&lt;count($this-&gt;enlaces);$f++)
+    {
+      echo '&lt;a href=&quot;'.$this-&gt;enlaces[$f].'&quot;&gt;'.$this-&gt;titulos[$f].'&lt;/a&gt;';
+      echo &quot;-&quot;;
+    }
+  }
+</pre>
+<p>Disponemos un for y hacemos que se repita tantas veces como elementos tenga el vector $enlaces (es lo mismo preguntar a uno u otro cuantos elementos tienen ya que siempre tendrán la misma cantidad). Para obtener la cantidad de elementos del vector utilizamos la función count.</p>
+<p>Dentro del for imprimimos en la página el hipervínculo:</p>
+<pre>
+      echo '&lt;a href=&quot;'.$this-&gt;enlaces[$f].'&quot;&gt;'.$this-&gt;titulos[$f].'&lt;/a&gt;';
+</pre>
+<p>Hay que acostumbrarse que cuando accedemos a los atributos de la clase se le antecede el operador  $this-&gt; y seguidamente el nombre del atributo propiamente dicho. Si no hacemos esto estaremos creando una variable local y el algoritmo fallará.</p>
+<p>Por último para hacer uso de esta clase Menu debemos crear un objeto de dicha clase (lo que en programación estructurada es definir una variable):</p>
+<pre>
+$menu1=new Menu();
+$menu1-&gt;cargarOpcion('http://www.google.com','Google');
+$menu1-&gt;cargarOpcion('http://www.yahoo.com','Yhahoo');
+$menu1-&gt;cargarOpcion('http://www.msn.com','MSN');
+$menu1-&gt;mostrar();
+</pre>
+<p>Creamos un objeto mediante el operador new y seguido del nombre de la clase. Luego llamamos al método cargarOpcion tantas veces como opciones necesitemos para nuestro menú (recordar que SOLO podemos llamar a los métodos de la clase si definimos un objeto de la misma)</p>
+<p>Finalmente llamamos al método mostrar que imprime en la página nuestro menú.</p></div>
+</p>
+
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* rec-gra */
+google_ad_slot = "4229715475";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+  <div>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+  </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+try {
+_uacct = "UA-628756-13";
+urchinTracker();
+} catch(err) {}</script>
+
+</body>
+
+
+<!-- Mirrored from www.phpya.com.ar/poo/temarios/descripcion.php?cod=37&punto=3&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:08:20 GMT -->
+</html>

@@ -1,0 +1,238 @@
+﻿<html>
+
+
+<!-- Mirrored from www.phpya.com.ar/poo/problemas/resolverproblema.php?cod=43&punto=9&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:08:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+  <title>Problemas propuestos</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="PHP,POO, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de POO.">
+<meta name="author" content="Diego Moisset">
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+
+</style>
+
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;		
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=yes,status=yes,toolbar=yes,location=yes');  	
+}
+
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+</head>
+
+<body bgcolor="#CCFFCC">
+        
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>9 - Parámetros de tipo objeto.</h1></td>
+<td align="right">
+<!--<a href="http://www.phpya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+	  <table width="650px">
+<tr>
+
+<table>
+<tr>
+<td align="left">
+
+<!--publi-->
+
+</td>
+</tr>
+</table>		  
+	  
+	  
+                
+		
+		<br><br><h3>Problema:</h3>
+<pre class="recuadrooculto">&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Pruebas&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+class Celda {
+  private $texto;
+  private $colorFuente;
+  private $colorFondo;
+  function __construct($tex,$cfue,$cfon)
+  {
+    $this-&gt;texto=$tex;
+    $this-&gt;colorFuente=$cfue;
+    $this-&gt;colorFondo=$cfon;
+  }
+  public function graficar()
+  {
+   echo '&lt;td style=&quot;color:'.$this-&gt;colorFuente.';background-color:'.$this-&gt;colorFondo.'&quot;&gt;'.$this-&gt;texto.'&lt;/td&gt;';
+  }
+}
+
+class Tabla {
+  private $celdas=array();
+  private $cantFilas;
+  private $cantColumnas;
+
+  public function __construct($fi,$co)
+  {
+    $this-&gt;cantFilas=$fi;
+    $this-&gt;cantColumnas=$co;
+  }
+
+  public function insertar($cel,$fila,$columna)
+  {
+    $this-&gt;celdas[$fila][$columna]=$cel;
+  }
+
+  private function inicioTabla()
+  {
+    echo '&lt;table border=&quot;1&quot;&gt;';
+  }
+
+  private function inicioFila()
+  {
+    echo '&lt;tr&gt;';
+  }
+
+  private function mostrar($fi,$co)
+  {
+     $this-&gt;celdas[$fi][$co]-&gt;graficar(); 
+  }
+
+  private function finFila()
+  {
+    echo '&lt;/tr&gt;';
+  }
+
+  private function finTabla()
+  {
+    echo '&lt;/table&gt;';
+  }
+
+  public function graficar()
+  {
+    $this-&gt;inicioTabla();
+    for($f=1;$f&lt;=$this-&gt;cantFilas;$f++)
+    {
+      $this-&gt;inicioFila();
+      for($c=1;$c&lt;=$this-&gt;cantColumnas;$c++)
+      {
+         $this-&gt;mostrar($f,$c);
+      }
+      $this-&gt;finFila();
+    }
+    $this-&gt;finTabla();
+  }
+}
+
+$tabla1=new Tabla(10,2);
+$celda=new Celda('titulo 1','#356AA0','#FFFF88');
+$tabla1-&gt;insertar($celda,1,1);
+$celda=new Celda('titulo 2','#356AA0','#FFFF88');
+$tabla1-&gt;insertar($celda,1,2);
+for($f=2;$f&lt;=10;$f++)
+{
+  $celda=new Celda('x','#0000ff','#eeeeee');
+  $tabla1-&gt;insertar($celda,$f,1);
+  $celda=new Celda('y','#0000ff','#eeeeee');
+  $tabla1-&gt;insertar($celda,$f,2);
+}
+$tabla1-&gt;graficar();
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre><pre class="recuadrooculto">
+  <a href="http://www.scratchya.com.ar/problemas/phpyapoo/propu/43/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>	
+</pre>
+<form name="formulario" action="#" target="ventanaForm" method="post" onsubmit=  "abrirVentana()">
+<div style="font-size:1.3em;font-family:arial;"><p>Confeccionar la clase Tabla vista en conceptos anteriores. Plantear una clase Celda que colabore con la clase Tabla. La clase Tabla debe definir una matriz de objetos de la clase Celda.</p>
+<p>En la clase Tabla definir un método insertar que llegue un objeto de la clase Celda y además dos enteros que indiquen que posición debe tomar dicha celda en la tabla.<br>La clase Celda debe definir los atributos: $texto, $colorFuente y $colorFondo.</p></div><br><a href="javascript:cambiar()" id="solucion">Ver solución</a><br><br><b>pagina1.php</b><input type="hidden" name="archivo1" value="pagina1.html"><br><textarea rows="15" cols="110" name="programa1" wrap="off"></textarea><br><br><br><TABLE>
+  <TBODY>
+  <TR>
+    <TD align=left>
+
+	<!--publi-->
+	
+    </TD>
+	</TR></TBODY></TABLE>	
+
+
+
+</form>
+  <div>
+
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+
+  </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+
+<!-- Mirrored from www.phpya.com.ar/poo/problemas/resolverproblema.php?cod=43&punto=9&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:08:20 GMT -->
+</html>
+

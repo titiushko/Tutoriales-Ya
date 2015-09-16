@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=3&codigo=130&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Codificación del diagrama de flujo en C++</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>3 - Codificación del diagrama de flujo en C++</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Ahora debemos codificar el diagrama de flujo utilizando las instrucciones del lenguaje C++.<br>
+A medida que avancemos en el curso veremos que significa la palabra clave include, el using namespace etc. por el momento nos centraremos donde codificaremos nuestros diagramas de flujo.<br>
+La codificación del diagrama de flujo la haremos dentro de la función main (la función main es la primera que se ejecuta al iniciarse un programa)</p>
+<p>El programa completo para el calculo del sueldo de un operario conociendo la cantidad de horas trabajadas y el costo por hora es (copiemos estas líneas en el editor del Visual Studio Community dentro de la ventana archivo1.cpp que creamos en el concepto anterior):</p>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int horasTrabajadas;
+    float costoHora;
+    float sueldo;
+    cout &lt;&lt;"Ingrese Horas trabajadas por el operario:";
+    cin &gt;&gt;horasTrabajadas;
+    cout &lt;&lt;"Ingrese el pago por hora:";
+    cin &gt;&gt;costoHora;
+    sueldo = horasTrabajadas * costoHora;
+    cout &lt;&lt;"El sueldo total del operario es:";
+    cout &lt;&lt;sueldo;
+    cin.get(); 
+    cin.get();
+}</pre>
+<p>Para probar el funcionamiento del programa debemos presionar el ícono con un triángulo verde (o la tecla especial F5 o desde el menú elegir la opción "Debug"-&gt;"Start Debug" (en castellano"Depurar" -&gt; "Iniciar depuración"))</p>
+
+<p>La ejecución del programa permite ingresar la cantidad de horas trabajadas por un operario y su pago por hora, mostrando seguidamente el sueldo que se debe pagar, un ejemplo de la ejecución de este programa es:</p>
+<img src="imagentema/foto011.jpg" border="0" alt="ejecucion programa c++"><br>
+<p>Cuando lo ejecutamos se crea el programa ejecutable "Proyecto1.exe" que es el resultado de la compilación del código fuente que escribimos en el editor.</p>
+
+
+
+<p>Conceptos que deben quedar claros:</p>
+<ol>
+<li>
+<p>Por el momento haremos todo el algoritmo dentro de la función main.</p>
+</li>
+<li>
+<p>Si observamos el diagrama de flujos vemos que debemos definir tres variables: (horasTrabajadas, costoHora, sueldo), aquí es donde debemos definir que tipos de datos se almacenarán en las mismas. La cantidad de horas normalmente será un valor entero (ej. 100 - 150 - 230 etc.), pero el costo de la hora es muy común que sea un valor real (ej. 5.35 - 7.50 etc.) y como el sueldo resulta de multiplicar las horas trabajadas por el costo por hora el mismo deberá ser real.<br>
+<p>La definición de las variables la hacemos en la main:<br>
+<pre>
+    int horasTrabajadas;
+    float costoHora;
+    float sueldo;
+</pre>
+Utilizamos la palabra clave int para definir variables enteras (en C++ las palabras claves deben ir obligatoriamente en minúsculas, sino se produce un error sintáctico) Luego de la palabra clave debemos indicar el nombre de la variable, por ejemplo: horasTrabajadas. Se propone que el nombre de la variable comience con minúscula y en caso de estar constituida por dos palabras o más palabras deben ir en mayúsculas el primer caracter (un nombre de variable no puede tener espacios en blanco, empezar con un número, ni tampoco utilizar caracteres especiales)<br>
+Debemos buscar siempre nombres de variables que nos indiquen que almacenan (no es conveniente llamar a nombres de variables con letras individuales salvo en casos puntuales que veremos más adelante)</p>
+</li>
+<li>
+<p>Para mostrar mensajes en la pantalla utilizamos el objeto "cout":<br>
+<pre>
+    cout &lt;&lt;"Ingrese Horas trabajadas por el operario:";
+</pre>
+Con esta sintaxis todo lo que se encuentra contenido entre comillas aparecerá exactamente en la pantalla.<br>
+Si disponemos una variable:<br>
+<pre>
+    cout &lt;&lt;sueldo;
+</pre>
+Aparecerá el contenido de la variable. Es decir el valor almacenado en la variable sueldo y no el mensaje "sueldo".<br>
+</li>
+<li>
+<p>Para hacer la entrada de datos por teclado en C++ debemos utilizar el objeto "cin"</p>
+<pre>
+    cin &gt;&gt;horasTrabajadas;
+</pre>
+
+<p>Las operaciones que indicamos en el diagrama de flujo mediante la figura rectángulo la codificamos tal cual:<br>
+<pre>
+    sueldo = horasTrabajadas * costoHora;
+</pre>
+</p>
+</li>
+</ol> 
+
+<p>Podemos ver una relación entre las instrucciones que debemos utilizar para cada símbolo del diagrama de flujo:<br>
+<img src="imagentema/foto012.jpg" border="0" alt="programa y diagrama de flujo"><br>
+</p>
+<p>En el diagrama de flujo no indicamos la definición de variables:<br>
+<pre>
+    int horasTrabajadas;
+    float costoHora;
+    float sueldo;
+</pre>
+</p>
+</p>No representamos con símbolos los mensajes a mostrar previo a la carga de datos por teclado:<br>
+<pre>
+    cout &lt;&lt;"Ingrese Horas trabajadas por el operario:";
+</pre>
+</p>
+<p>Como hemos visto hasta ahora hay varias partes de nuestro código que no entendemos:</p>
+<pre>
+#include&lt;iostream&gt;
+
+using namespace std;
+</pre>
+<p>pero son indispensables para la implementación de nuestros programas, a medida que avancemos con el curso muchos de estos conceptos se irán aclarando (el include permite importar librerías de funciones y objeto contenidos en otros archivos)</p>
+<p>La líneas:</p>
+<pre>
+    cin.get(); 
+    cin.get();
+</pre>
+<p>nos permiten detener la ejecución del programa para ver el sueldo del operario y esperar a que se pulse una tecla (luego veremos que disponemos dos llamadas al método get ya que un captura el valor de la tecla Enter del último valor ingresado, podemos probar de borrar una de estas líneas y ejecutar el programa (F5) y veremos que cuando finaliza la carga de datos la ventana del programa se cierra inmediatamente sin poder ver el sueldo que debe cobrar el empleado).</p>
+
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace (luego de descomprimir desde el Visual Studio seleccionamos la opción File-&gt;Open-&gt;Project):
+<a href="proyectos/Proyecto1.zip">Proyecto1</a>
+</p><h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=3&codigo=130&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:34 GMT -->
+</html>

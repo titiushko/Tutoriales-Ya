@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/temarios/descripcion.php?cod=79&punto=10&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:09:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Conceptos de JQuery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="jQuery, programación, webmaster, tutorial, JavaScript">
+<meta name="description" content="El objetivo de este tutorial es presentar los conceptos de la libreria JavaScript JQUERY.">
+<meta name="author" content="Diego Moisset">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" type="text/JavaScript">
+
+</script>
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>10 - Métodos html() y html(valor)</h1></td>
+<td align="right">
+<a href="../../publicidad/index.html"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.html"></a>	
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<p>
+<div style="font-size:1.3em;font-family:arial;">
+<p>El método:</p>
+<pre>
+html([bloque html]) 
+</pre>
+<p>Nos permite agregar un bloque de html a partir de un elemento de la página. Básicamente es la propiedad innerHTML del DOM.</p>
+<p>Y el método:</p>
+<pre>
+html()
+</pre>
+<p>Nos retorna el bloque html contenido a partir del elemento html que hace referencia el objeto jQuery.</p>
+<p><strong>Problema:</strong>Disponer dos botones, al ser presionado el primero crear un formulario en forma dinámica que solicite el nombre de usuario y su clave. Si se presiona el segundo botón mostrar todos los elementos HTML del formulario previamente creado.</p>
+<p>pagina1.html</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;../jquery.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;funciones.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;input type=&quot;button&quot; id=&quot;boton1&quot; value=&quot;Mostrar formulario&quot;&gt;
+&lt;input type=&quot;button&quot; id=&quot;boton2&quot; value=&quot;Mostrar elementos 
+html del formulario&quot;&gt;&lt;br&gt;
+&lt;div id=&quot;formulario&quot;&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt; 
+</pre>
+<p>funciones.js</p>
+<pre class="recuadro">
+var x;
+x=$(document);
+x.ready(inicializarEventos);
+function inicializarEventos()
+{
+  var x;
+  x=$(&quot;#boton1&quot;);
+  x.click(presionBoton1);
+  x=$(&quot;#boton2&quot;);
+  x.click(presionBoton2);
+}
+
+function presionBoton1()
+{
+  var x;
+  x=$(&quot;#formulario&quot;);
+  x.html('&lt;form&gt;Ingrese nombre:&lt;input type=&quot;text&quot; 
+          id=&quot;nombre&quot;&gt;&lt;br&gt;Ingrese 
+          clave:&lt;input type=&quot;text&quot; id=&quot;clave&quot;&gt;&lt;br&gt;&lt;input 
+          type=&quot;submit&quot; value=&quot;confirmar&quot;&gt;&lt;/form&gt;'); 
+}
+
+function presionBoton2()
+{
+  var x;
+  x=$(&quot;#formulario&quot;);
+  alert(x.html());
+}
+</pre>
+<p>Como podemos observar cuando se presiona el primer botón creamos un objeto jQuery que toma la referencia del div y mediante el método html crea un bloque en su interior:</p>
+<pre>
+function presionBoton1()
+{
+  var x;
+  x=$(&quot;#formulario&quot;);
+  x.html('&lt;form&gt;Ingrese nombre:&lt;input type=&quot;text&quot; 
+          id=&quot;nombre&quot;&gt;&lt;br&gt;Ingrese 
+          clave:&lt;input type=&quot;text&quot; id=&quot;clave&quot;&gt;&lt;br&gt;&lt;input 
+          type=&quot;submit&quot; value=&quot;confirmar&quot;&gt;&lt;/form&gt;'); 
+}
+</pre>
+<p>El segundo botón muestra en un alert el contenido HTML actual del div:</p>
+<pre>
+function presionBoton2()
+{
+  var x;
+  x=$(&quot;#formulario&quot;);
+  alert(x.html());
+}
+</pre>
+<p>Hay que diferenciar bien los métodos html(valor) y text(valor), el segundo como habíamos visto agrega texto a un elemento HTML.</p>
+<h3>Acotaciones</h3>
+<p>Cuando desarrollamos un sitio hay que tener mucho cuidado con la creación de bloques en forma dinámica ya que puede haber usuarios que no tengan activo JavaScript y les sería imposible acceder a dichas características. En nuestro ejemplo si el usuario tiene desactivo JavaScript no podrá acceder al formulario de carga de datos.</p></div>
+</p>
+
+<table width="650px">
+<tr>
+<td align="center">	
+
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-14', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/temarios/descripcion.php?cod=79&punto=10&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:09:42 GMT -->
+</html>

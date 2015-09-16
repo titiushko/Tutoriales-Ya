@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=5&codigo=5&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:49:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Módulo http</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++, programación, tutorial, nodejs">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de NodeJS.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>5 - Módulo http</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Un módulo fundamental para implementar aplicaciones en un servidor web es el 'http'.</p>
+<p>'http' es un módulo del core de Node.js e implementado en C para una mayor eficiencia en las conexiones web.</p>
+<h2>Protocolo HTTP</h2>
+<p>Lo primero que haremos es repasar el funcionamiento de este protocolo tan importante en Internet.<br>
+HTTP (HyperText Transfer Procolol) o (Protocolo de transferencia de hipertexto)  permite la transferencia de datos entre un servidor web y normalmente un navegador.</p>
+<p>Cuando accedemos a un sitio web desde un navegador escribimos entre otras cosas:</p>
+<pre>
+http://host[:puerto][/ruta y archivo][?parámetros]
+</pre>
+<ul>
+<li>http (indica el protocolo que utilizamos para conectarnos con un servidor web)</li>
+<li>host (es el nombre del dominio por ej. google.com.ar)</li>
+<li>puerto (es un número que generalmente no lo disponemos ya que por defecto el protocolo http utiliza el nro 80, salvo que nuestro servidor escuche peticiones en otro puerto que ya en este caso si debemos indicarlo)</li>
+<li>[/ruta y archivo] (indica donde se encuentra el archivo en el servidor)</li>
+<li>?parámetros (datos que se pueden enviar desde el cliente para una mayor identificación del recurso que solicitamos)</li>
+</ul>
+
+<p>Desde el navegador parte el pedido y el servidor tiene por objetivo responder a esa petición.</p>
+
+
+<h2>Servidor web con Node.js</h2>
+<p>Cuando trabajamos con la plataforma Node.js debemos codificar nosotros el servidor web (muy distinto a como se trabaja con PHP, Asp.Net, JSP etc. donde disponemos en forma paralela un servidor web como puede ser el Apache o IIS)</p>
+<p>Veremos inicialmente la implementación de un servidor web utilizando solo el módulo 'http' pero más adelante incorpararemos otros módulos que nos facilitan el desarrollo de sitios web complejos (de todos modos siempre utilizando y extendiendo las funcionalidades del módulo 'http')</p>
+
+
+<h3>Problema</h3>
+<p>Implementar un servidor web con Node.js que retorne HTML con un mensaje indicando que el sitio esta en desarrollo. No importa que archivo pidamos del servidor retornar siempre el mismo HTML.</p>
+<p>Creamos el archivo ejercicio7.js y lo guardamos en la carpeta donde estamos haciendo nuestros prácticos para poder probarlo:</p>
+<pre class="recuadro">
+var http=require('http');
+
+var servidor=http.createServer(function(pedido,respuesta){
+    respuesta.writeHead(200, {'Content-Type': 'text/html'});
+    respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;'+
+                    '&lt;body&gt;&lt;h1&gt;Sitio en desarrollo&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;');
+    respuesta.end();
+});
+
+servidor.listen(8888);
+
+console.log('Servidor web iniciado');
+</pre>
+
+<p>Para probarlo primero ejecutamos el programa ejercicio7.js:</p>
+<p><img src="imagentema/foto015.jpg" border="0" alt="modulo http nodejs"></p>
+<p>Como vemos luego de ejecutarlo el programa muestra el mensaje 'Servidor web iniciado' y no finaliza, esto debido a que esta esperando peticiones en el puerto 8888.</p>
+<p>Podemos abrir nuesto navegador y accedir al servidor local (localhost) en el puerto 8888 y ver que ahora tenemos como resultado:</p>
+
+<p><img src="imagentema/foto016.jpg" border="0" alt="modulo http nodejs"></p>
+
+<p>Si detenemos el servidor que creamos desde la consola (Presionamos las teclas Ctrl C que aborta el programa) y solicitamos nuevamente datos al servidor podremos ver que ahora el servidor no responde:</p>
+<p><img src="imagentema/foto017.jpg" border="0" alt="modulo http nodejs"></p>
+
+<p>Es importante entonces tener en cuenta que el programa Node.js este ejecutándose para poder pedirle recursos. Otra cosa muy importante es que cada vez que hagamos combios en el código fuente de nuestra aplicación en JavaScript debemos detener y volver a lanzar el programa para que tenga en cuenta las modificaciones.</p>
+
+<p>Pasemos ahora a analizar el código de nuetro servidor. Primero requerimos el módulo 'http' y guardamos una referencia en la variable http:</p>
+<pre>
+var http=require('http');
+</pre>
+<p>El módulo 'http' tiene una función llamada createServer que tiene por objetivo crear un servidor que implementa el protocolo HTTP.</p>
+<p>La función createServer debemos enviarle una función anónima (o podemos implementar una función definida como vimos en el concepto anterior) con dos parámetros que los hemos llamado pedido y respuesta.<br>
+Los objetos pedido y respuesta los crea la misma función createServer y los pasa cuando se dispara el pedido de una página u otro recurso al servidor.</p>
+<p>Igual que cuando vimos archivos de texto estamos utilizando programación asincrónica, la función createServer se ejecuta en forma asíncrona lo que significa que no se detiene, sino que sigue con la ejecución de la siguiente función:</p>
+<pre>
+servidor.listen(8888);
+</pre>
+<p>La función listen (escucha) que también es asíncrona se queda esperando a recibir peticiones.</p>
+<p>Antes que solicitemos una página desde el navegador podemos ver en la consola el mensaje de: 'Servidor web iniciado'.</p>
+<p>El programa como podemos ver desde la consola no ha finalizado sino que esta ejecutandose un ciclo infinito en la función listen esperando peticiones de recursos.</p>
+
+<p>Dijimos que cuando hay una solicitud de recursos al servidor se dispara la función anónima llegando dos objetos como parámetro:</p>
+<pre>
+var servidor=http.createServer(function(pedido,respuesta){
+    respuesta.writeHead(200, {'Content-Type': 'text/html'});
+    respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;'+
+                    '&lt;body&gt;&lt;h1&gt;Sitio en desarrollo&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;');
+    respuesta.end();
+});
+</pre>
+<p>El primer parámetro que lo iremos viendo a medida que avance el tutorial contiene entre otros datos el nombre del archivo que solicitamos, información del navegador que hace la petición etc. En nuestro programa actual al parámetro pedido no lo utilizamos</p>
+<p>El parámetro respueta es el que tenemos que llamar a los métodos:</p>
+<ul>
+<li>writeHead: es para indicar la cabecera de la petición HTTP (en esta caso indicamos con el código 200 que la petición fue Ok y con el segundo parámetro inicializamos la propiedad Content-Type indicando que retornaremos una corriente de datos de tipo HTML</li>
+<li>write: mediante la función write indicamos todos los datos propiamente dicho del recurso a devolver al cliente (en este caso indicamos en la cabecera de la petición que se trataba de HTML) </li>
+<li>end: finalmente llamando a la función end finalizamos la corriente de datos del recurso (podemos llamar varias veces a la función write previo a llamar por ónica vez a end)</li>
+</ul>
+
+<p>Otra cosa importante de notar de nuestro servidor web elemental es que no importa que archivo pidamos a nuestro servidor web siempre nos devolverá el código HTML que indicamos en la función anónima que le pasamos a createServer (en este ejemplo solicito el archivo pagina1.html, lo mismo sucedería si pido otras páginas: pagina2.html, pagina3.php etc.):</p>
+<p><img src="imagentema/foto018.jpg" border="0" alt="modulo http nodejs"></p><h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-35', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=5&codigo=5&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:49:55 GMT -->
+</html>

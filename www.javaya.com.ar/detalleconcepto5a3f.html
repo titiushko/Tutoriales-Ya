@@ -1,0 +1,709 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=124&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:54:29 GMT -->
+<head>
+<title>Recursividad: Problemas donde conviene aplicar la recursividad</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Recursividad: Problemas donde conviene aplicar la recursividad</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>En el concepto anterior se vieron pequeños problemas para entender como funciona la recursividad, pero no se desarrollaron problemas donde conviene utilizar la recursividad.</p>
+
+<h3>Problema 1:</h3>
+<p>
+Imprimir la información de una lista simplemente encadenada de atrás para adelante.<br>
+El empleo de estructuras repetitivas para resolver este problema es bastante engorroso y lento (debemos avanzar hasta el último nodo e imprimir, luego avanzar desde el principio hasta el anteúltimo nodo y así sucesivamente)<br>
+El empleo de la recursividad para este problema hace más sencillo su solución.</p>
+</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+public class Recursividad {
+    
+    class Nodo {
+        int info;
+        Nodo sig;
+    }
+    
+    private Nodo raiz;
+    
+  
+    void insertarPrimero(int x)
+    {
+          Nodo nuevo = new Nodo ();
+        nuevo.info = x;
+        nuevo.sig=raiz;
+        raiz=nuevo;
+    }
+
+
+    public void imprimirInversa(Nodo reco) {
+        if (reco!=null) {
+            imprimirInversa(reco.sig);
+            System.out.print(reco.info+"-");
+        }
+    }
+    
+    public void imprimirInversa () {
+        imprimirInversa(raiz);
+    }
+         
+    public static void main(String[] ar) {
+        Recursividad r=new Recursividad();
+        r.insertarPrimero (10);
+        r.insertarPrimero(4);
+        r.insertarPrimero(5);
+        r.imprimirInversa();
+    }
+}
+</pre>
+
+<img src="imagentema/foto125.jpg" border="0" alt="recursividad listas"><br>
+
+<p>Cuando llamamos al método recursivo le enviamos raiz y el parámetro reco recibe esta dirección.
+Si reco es distinto a null llamamos recursivamente al método enviándole la dirección del puntero sig del nodo.<br>
+Por lo que el parámetro reco recibe la dirección del segundo nodo.</p>
+<img src="imagentema/foto126.jpg" border="0" alt="recursividad listas"><br>
+
+<p>Podemos observar como en las distintas llamadas recursivas el parámetro reco apunta a un nodo. Cuando se van desapilando las llamadas recursivas se imprime primeramente el 10 luego el 4 y por último el 5.</p>
+
+<h3>Problema 2:</h3>
+<p>
+Recorrer un árbol de directorios en forma recursiva.
+</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.io.File;
+public class Recursividad{
+  
+    public void leer(String inicio,String altura)
+    {
+        File ar=new File(inicio);
+        String[] dir=ar.list();
+        for(int f=0;f&lt;dir.length;f++){
+            File ar2=new File(inicio+dir[f]);
+            if (ar2.isFile())
+                System.out.println(altura+dir[f]);      
+            if (ar2.isDirectory()) {
+               System.out.println(altura + "Directorio:"+dir[f].toUpperCase());
+               leer(inicio+dir[f]+"\\",altura+"  ");
+            }
+        }    
+    }
+  
+    public static void main(String[] arguments)
+    {
+        Recursividad rec=new Recursividad();
+        rec.leer("d:\\windows\\","");
+    }
+}
+</pre>
+<p>Para recorrer y visitar todos los directorios y archivos de un directorio debemos implementar un algoritmo recursivo que reciba como parámetro el directorio inicial donde comenzaremos a recorrer:</p>
+<pre>
+    public void leer(String inicio,String altura)
+</pre>
+<p>Creamos un objeto de la clase File con el directorio que llega como parámetro y mediante el método list obtenemos todos los archivos y directorios de dicho directorio:</p>
+<pre>
+        File ar=new File(inicio);
+        String[] dir=ar.list();
+</pre>
+<p>Mediante un for recorremos todo el vector que contiene la lista de archivos y directorios:</p>
+<pre>
+        for(int f=0;f&lt;dir.length;f++){
+</pre>
+<p>Creamos un objeto de la clase File para cada directorio y archivo:</p>
+<pre>
+            File ar2=new File(inicio+dir[f]);
+</pre>
+<p>Luego de crear un objeto de la clase file podemos verificar si se trata de un archivo o directorio:</p>
+<pre>
+            if (ar2.isFile())
+                System.out.println(altura+dir[f]);      
+            if (ar2.isDirectory()) {
+               System.out.println(altura + "Directorio:"+dir[f].toUpperCase());
+               leer(inicio+dir[f]+"\\",altura+"  ");
+            }
+</pre>
+<p>Si es un archivo lo mostramos y si es un directorio además de mostrarlo llamamos recursivamente al método leer con el directorios nuevo a procesar.</p>
+
+
+
+
+<h3>Problema 3:</h3>
+<p>
+Desarrollar un programa que permita recorrer un laberinto e indique si tiene salida o no.<br>
+Para resolver este problema al laberinto lo representaremos con una matriz de 10 x 10 JLabel.<br>
+El valor:</p>
+<pre>
+"0"	Representa pasillo
+"1"	Representa pared
+"9"	Persona
+"s"	Salida
+</pre>
+<p>
+A la salida ubicarla en la componente de la fila 9 y columna 9 de la matriz.
+La persona comienza a recorrer el laberinto en la fila 0 y columna 0.
+Los ceros y unos disponerlos en forma aleatoria (con la función random)
+</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+class Laberinto extends JFrame implements ActionListener {
+    JLabel[][] l;
+    JButton b1;  
+    JButton b2;
+    boolean salida;
+    Laberinto()
+    {
+        setLayout(null);
+        l=new JLabel[10][10];
+        for(int f=0;f&lt;10;f++) {
+            for(int c=0;c&lt;10;c++) {
+                l[f][c]=new JLabel();
+                l[f][c].setBounds(20+c*20,50+f*20,20,20);
+                add(l[f][c]);
+            }
+        }
+        b1=new JButton("Recorrer");
+        b1.setBounds(10,300,100,25);
+        add(b1);
+        b1.addActionListener(this);
+        b2=new JButton("Crear");
+        b2.setBounds(120,300,100,25);
+        add(b2);
+        b2.addActionListener(this);    
+        crear();
+    }
+  
+    public void crear()
+    {
+        for(int f=0;f&lt;10;f++) {
+            for(int c=0;c&lt;10;c++) {
+                int a=(int)(Math.random()*4);
+                l[f][c].setForeground(Color.black);
+                if (a==0)
+                    l[f][c].setText("1");
+                else
+                    l[f][c].setText("0");  
+            }
+        }
+        l[9][9].setText("s");
+        l[0][0].setText("0");   
+    }
+  
+    public void recorrer(int fil,int col)
+    {
+        if (fil&gt;=0 && fil&lt;10 && col&gt;=0 && col&lt;10 && salida==false) {
+            if (l[fil][col].getText().equals("s")) 
+                salida=true;
+            else
+                if (l[fil][col].getText().equals("0")) {
+                    l[fil][col].setText("9");
+                    l[fil][col].setForeground(Color.red);
+                    recorrer(fil,col+1);
+                    recorrer(fil+1,col);
+                    recorrer(fil-1,col);
+                    recorrer(fil,col-1);
+                }          
+        }
+    }
+  
+    public void actionPerformed(ActionEvent e)
+    {
+        if (e.getSource()==b1) {
+            salida=false;
+            recorrer(0,0);
+            if (salida)
+                setTitle("tiene salida");
+            else
+                setTitle("no tiene salida");  
+        }
+        if (e.getSource()==b2)
+            crear();
+    }
+  
+    public static void main(String[] ar)
+    {
+        Laberinto l=new Laberinto();
+        l.setBounds(0,0,300,400);
+        l.setVisible(true);
+    }
+}
+</pre>
+<p>El método más importante es el recorrer:</p>
+<pre>
+    public void recorrer(int fil,int col)
+</pre>
+<p>Primero verificamos si la coordenada a procesar del laberinto se encuentra dentro de los límites correctos y además no hayamos encontrado la salida hasta el momento:</p>
+<pre>
+        if (fil&gt;=0 && fil&lt;10 && col&gt;=0 && col&lt;10 && salida==false)
+</pre>
+<p>Si entra al if anterior verificamos si estamos en la salida:</p>
+<pre>
+            if (l[fil][col].getText().equals("s")) 
+                salida=true;
+</pre>
+<p>En el caso que no estemos en la salida verificamos si estamos en pasillo:</p>
+<pre>
+                if (l[fil][col].getText().equals("0")) {
+</pre>
+<p>En caso de estar en el pasillo procedemos a fijar dicha JLabel con el caracter "9" e intentamos desplazarnos en las cuatro direcciones (arriba, abajo, derecha e izquierda), este desplazamiento lo logramos llamando recursivamente:</p>
+<pre>
+                    l[fil][col].setText("9");
+                    l[fil][col].setForeground(Color.red);
+                    recorrer(fil,col+1);
+                    recorrer(fil+1,col);
+                    recorrer(fil-1,col);
+                    recorrer(fil,col-1);
+</pre>
+
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Desarrollar el juego del Buscaminas. Definir una matriz de 10*10 de JButton y disponer una 'b' para las bombas (10 diez) un cero en los botones que no tienen bombas en su perímetro, un 1 si tiene una bomba en su perímetro y así sucesivamente. Cuando se presiona un botón si hay un cero proceder en forma recursiva a destapar los botones que se encuentran a sus lados. Disponer el mismo color de frente y fondo de los botones para que el jugador no pueda ver si hay bombas o no.</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+class Buscaminas extends JFrame implements ActionListener
+{
+    JButton [] [] bot;
+    JButton b1;
+    Buscaminas ()
+    {
+        setLayout (null);
+        bot = new JButton [10] [10];
+        for (int f = 0 ; f &lt; 10 ; f++)
+        {
+            for (int c = 0 ; c &lt; 10 ; c++)
+            {
+                bot [f] [c] = new JButton ("0");
+                bot [f] [c].setBounds (20 + c * 41, 50 + f * 41, 41, 41);
+                bot [f] [c].setBackground (Color.lightGray);
+                bot [f] [c].setForeground (Color.lightGray);
+                bot [f] [c].addActionListener (this);
+                add (bot [f] [c]);
+            }
+        }
+        b1 = new JButton ("Reiniciar");
+        b1.setBounds (20, 470, 100, 30);
+        add (b1);
+        b1.addActionListener (this);
+        disponerBombas ();
+        contarBombasPerimetro ();
+    }
+
+
+    void disponerBombas ()
+    {
+        int cantidad = 10;
+        do
+        {
+            int fila = (int) (Math.random () * 10);
+            int columna = (int) (Math.random () * 10);
+            if (bot [fila] [columna].getText ().equals ("b") == false)
+            {
+                bot [fila] [columna].setText ("b");
+                cantidad--;
+            }
+        }
+        while (cantidad != 0);
+    }
+
+
+    void contarBombasPerimetro ()
+    {
+        for (int f = 0 ; f &lt; 10 ; f++)
+        {
+            for (int c = 0 ; c &lt; 10 ; c++)
+            {
+                if (bot [f] [c].getText ().equals ("0") == true)
+                {
+                    int cant = contarCoordenada (f, c);
+                    bot [f] [c].setText (String.valueOf (cant));
+                }
+            }
+        }
+    }
+
+
+    int contarCoordenada (int fila, int columna)
+    {
+        int total = 0;
+        if (fila - 1 &gt;= 0 && columna - 1 &gt;= 0)
+        {
+            if (bot [fila - 1] [columna - 1].getText ().equals ("b") == true)
+            total++;
+        }
+        if (fila - 1 &gt;= 0)
+        {
+            if (bot [fila - 1] [columna].getText ().equals ("b") == true)
+            total++;
+        }
+        if (fila - 1 &gt;= 0 && columna + 1 &lt; 10)
+        {
+            if (bot [fila - 1] [columna + 1].getText ().equals ("b") == true)
+            total++;
+        }
+    
+        if (columna + 1 &lt; 10)
+        {
+            if (bot [fila] [columna + 1].getText ().equals ("b") == true)
+            total++;
+        }
+        if (fila + 1 &lt; 10 && columna + 1 &lt; 10)
+        {
+            if (bot [fila + 1] [columna + 1].getText ().equals ("b") == true)
+            total++;
+        }
+    
+        if (fila + 1 &lt; 10)
+        {
+            if (bot [fila + 1] [columna].getText ().equals ("b") == true)
+            total++;
+        }
+        if (fila + 1 &lt; 10 && columna - 1 &gt;= 0)
+        {
+            if (bot [fila + 1] [columna - 1].getText ().equals ("b") == true)
+            total++;
+        }
+        if (columna - 1 &gt;= 0)
+        {
+            if (bot [fila] [columna - 1].getText ().equals ("b") == true)
+            total++;
+        }
+        return total;
+
+    }
+
+
+    void desactivarJuego ()
+    {
+        for (int f = 0 ; f &lt; 10 ; f++)
+        {
+            for (int c = 0 ; c &lt; 10 ; c++)
+            {
+                bot [f] [c].setEnabled (false);
+            }
+        }
+    }
+
+
+    void reiniciar ()
+    {
+        setTitle ("");
+        for (int f = 0 ; f &lt; 10 ; f++)
+        {
+            for (int c = 0 ; c &lt; 10 ; c++)
+            {
+                bot [f] [c].setText ("0");
+                bot [f] [c].setEnabled (true);
+                bot [f] [c].setBackground (Color.lightGray);
+                bot [f] [c].setForeground (Color.lightGray);
+            }
+        }
+        disponerBombas ();
+        contarBombasPerimetro ();
+    }
+
+
+    public void actionPerformed (ActionEvent e)
+    {
+        if (e.getSource () == b1)
+        {
+            reiniciar ();
+        }
+        for (int f = 0 ; f &lt; 10 ; f++)
+        {
+            for (int c = 0 ; c &lt; 10 ; c++)
+            {
+            if (e.getSource () == bot [f] [c])
+            {
+                if (bot [f] [c].getText ().equals ("b") == true)
+                {
+                    setTitle ("Boooooooooooooomm");
+                    desactivarJuego ();
+                }
+                else
+                if (bot [f] [c].getText ().equals ("0") == true)
+                {
+                    recorrer (f, c);
+                }
+                else
+                    if (bot [f] [c].getText ().equals ("1") == true ||
+                        bot [f] [c].getText ().equals ("2") == true ||
+                        bot [f] [c].getText ().equals ("3") == true ||
+                        bot [f] [c].getText ().equals ("4") == true ||
+                        bot [f] [c].getText ().equals ("5") == true ||
+                        bot [f] [c].getText ().equals ("6") == true ||
+                        bot [f] [c].getText ().equals ("7") == true ||
+                        bot [f] [c].getText ().equals ("8") == true)
+                    {
+                        bot [f] [c].setBackground (Color.yellow);
+                        bot [f] [c].setForeground (Color.black);
+                    }
+            }
+            }
+        }
+        verificarTriunfo ();
+    }
+
+
+    void verificarTriunfo ()
+    {
+        int cant = 0;
+        for (int f = 0 ; f &lt; 10 ; f++)
+        {
+            for (int c = 0 ; c &lt; 10 ; c++)
+            {
+                Color col = bot [f] [c].getBackground ();
+                if (col == Color.yellow)
+                    cant++;
+            }
+        }
+        if (cant == 90)
+        {
+            setTitle ("Ganooooooooo");
+            desactivarJuego ();
+        }
+    }
+
+
+    void recorrer (int fil, int col)
+    {
+        if (fil &gt;= 0 && fil &lt; 10 && col &gt;= 0 && col &lt; 10)
+        {
+            if (bot [fil] [col].getText ().equals ("0"))
+            {
+                bot [fil] [col].setText (" ");
+                bot [fil] [col].setBackground (Color.yellow);
+                recorrer (fil, col + 1);
+                recorrer (fil, col - 1);
+                recorrer (fil + 1, col);
+                recorrer (fil - 1, col);
+                recorrer (fil - 1, col - 1);
+                recorrer (fil - 1, col + 1);
+                recorrer (fil + 1, col + 1);
+                recorrer (fil + 1, col - 1);
+            }
+            else
+                if (bot [fil] [col].getText ().equals ("1") == true ||
+                    bot [fil] [col].getText ().equals ("2") == true ||
+                    bot [fil] [col].getText ().equals ("3") == true ||
+                    bot [fil] [col].getText ().equals ("4") == true ||
+                    bot [fil] [col].getText ().equals ("5") == true ||
+                    bot [fil] [col].getText ().equals ("6") == true ||
+                    bot [fil] [col].getText ().equals ("7") == true ||
+                    bot [fil] [col].getText ().equals ("8") == true)
+                {
+                    bot [fil] [col].setBackground (Color.yellow);
+                    bot [fil] [col].setForeground (Color.black);
+                }
+        }
+    }
+
+    public static void main (String [] ar)
+    {
+        Buscaminas m = new Buscaminas ();
+        m.setBounds (0, 0, 470, 600);
+        m.setVisible(true);
+    }
+}
+
+</pre></div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index1e61.html?inicio=40">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=124&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:54:31 GMT -->
+</html>

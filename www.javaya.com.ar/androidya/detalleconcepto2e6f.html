@@ -1,0 +1,305 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=169&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:13:23 GMT -->
+<head>
+<title>Dibujar: rectángulos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+.descarga2 a {
+color:#4B4B4B;
+text-decoration:none;
+border-bottom:1px dotted #444;
+}
+.descarga2 {
+background: #F7FABE;
+text-align: left;
+padding: 5px 20px 5px 45px;
+border-top: 2px solid #DFE786;
+border-bottom: 2px solid #DFE786;
+color:#000000;
+margin-left:1.2em;
+margin-right:1.2em;
+border-radius:4px;
+font-size:1em;
+
+}  
+
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-30']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>38 - Dibujar: rectángulos</h1> <p class="descarga2">Ya se encuentra disponible el nuevo tutorial para aprender android con el nuevo entorno <a href="androidstudioya/index.html" target="_blank">Android Studio propuesto por Google y
+que remplaza a Eclipse</a>.
+</td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<h3>Problema:</h3>
+<p>Pintar el fondo de color blanco y dibujar una serie de rectángulos con distintos estilos.</p>
+
+<p>1 - Creamos un proyecto llamado: proyecto037<br>
+Lo almacenamos en el paquete: com.androidya.proyecto037</p>
+<p>Borramos el TextView que agrega automáticamente el plug-in de Eclipse y difinimos el id del RelativeLayout con el valor: @+id/layout1:</p>
+<img src="imagentema/foto133.jpg" border="0" alt="Canvas Android"><br>
+
+<p>Ahora codificamos la clase donde se encuentra toda la lógica:</p>
+<pre class="recuadro">
+package com.androidya.proyecto037;
+
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.widget.RelativeLayout;
+
+public class MainActivity extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        RelativeLayout layout1 = (RelativeLayout) findViewById(R.id.layout1);
+        Lienzo fondo = new Lienzo(this);
+        layout1.addView(fondo);        
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return true;
+    }
+
+    class Lienzo extends View {
+
+        public Lienzo(Context context) {
+            super(context);
+        }
+        
+        protected void onDraw(Canvas canvas) {
+            canvas.drawRGB(255,255,255);
+            int ancho=canvas.getWidth();
+            Paint pincel1=new Paint();
+
+            pincel1.setARGB(255,255,0,0);
+            canvas.drawRect(10,10,ancho-10,40,pincel1);
+
+            pincel1.setStyle(Style.STROKE);
+            canvas.drawRect(10,60,ancho-10,90,pincel1);
+
+            pincel1.setStrokeWidth(3);
+            canvas.drawRect(10,110,ancho-10,140,pincel1);
+                        
+        }
+    }     
+       
+}
+</pre>
+<p>En el método onDraw de la clase Lienzo procedemos a pintar el fondo de color blanco:</p>
+<pre>
+            canvas.drawRGB(255,255,255);
+</pre>
+<p>Obtenemos el ancho del dispositivo:</p>
+<pre>
+            int ancho=canvas.getWidth();
+</pre>
+<p>Creamos un objeto de la clase Paint:</p>
+<pre>
+            Paint pincel1=new Paint();
+</pre>
+
+<p>Activamos el color rojo:</p>
+<pre>
+            pincel1.setARGB(255,255,0,0);
+</pre>
+<p>Dibujamos un rectángulo desde la coordenada columna:10 y fila 10 hasta la columna que coincide con el ancho de la pantalla menos 10 píxeles y la fila 40. Además le pasamos el pincel a utilizar:</p>
+<pre>
+            canvas.drawRect(10,10,ancho-10,40,pincel1);
+</pre>
+
+<p>Para el siguiente rectángulo configuramos el pincel para que solo pinte el perímetro llamando al método setStyle y pasando la constante STROKE:</p>
+<pre>
+            pincel1.setStyle(Style.STROKE);
+            canvas.drawRect(10,60,ancho-10,90,pincel1);
+</pre>
+<p>Por último dibujamos otro rectángulo que solo se pinta el perímetro pero cambiamos el grosor del lapiz llamando al método setStrokeWidth:</p>
+<pre>
+            pincel1.setStrokeWidth(3);
+            canvas.drawRect(10,110,ancho-10,140,pincel1);
+
+</pre>
+<p>La vista previa de la aplicación es:</p>
+<img src="imagentema/foto137.jpg" border="0" alt="Canvas Android"><br>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/proyecto037.zip">proyecto037.zip</a>
+</div>
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+
+  </div>
+  
+  
+  
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=169&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:15:38 GMT -->
+</html>

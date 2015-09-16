@@ -1,0 +1,515 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/problemas/problema.php?inicio=50&cod=220&punto=62 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios propuestos : Restricciones foreign key (acciones)(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+pre {
+  text-align:left;
+  font-family:verdana,sans-serif;
+}
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+</style>
+
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;	
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=no,status=yes,toolbar=yes,location=yes');  	
+}
+
+function VentanaTeorico(codigo)
+{
+  alto=400;
+  window.open('../temarios/descripcion2ade4.html?cod='+codigo+'&origen=problema', '', 'top=0,left=0,width=800,height='+alto+',resizable=yes,scrollbars=yes,menubar=no');  	
+}
+
+function cambiar(nro)
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   if (nro==1)
+   {
+     if (lista[f].id=='solu1')
+       lista[f].style.display='block';
+   }
+   else
+     if (nro==2)
+     {
+       if (lista[f].id=='solu2')
+         lista[f].style.display='block';
+     }
+	   
+  }
+  if (nro==1)
+    document.getElementById('solucion1').style.display='none';
+  if (nro==2)
+    document.getElementById('solucion2').style.display='none';
+}
+
+</script>
+
+</head>
+
+<body>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>62 - Restricciones foreign key (acciones)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+	  <table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<b>Primer problema: </b><br><p>Una empresa tiene registrados sus clientes en una tabla llamada "clientes", también tiene una tabla "provincias" donde registra los nombres de las provincias.</p>
+<p>1- Elimine las tablas "clientes" y "provincias":</p>
+<pre>
+ drop table clientes;
+ drop table provincias;
+</pre>
+<p>2- Créelas con las siguientes estructuras:</p>
+<pre>
+ create table clientes (
+  codigo number(5),
+  nombre varchar2(30),
+  domicilio varchar2(30),
+  ciudad varchar2(20),
+  codigoprovincia number(2),
+  primary key(codigo)
+ );
+
+ create table provincias(
+  codigo number(2),
+  nombre varchar2(20),
+  primary key (codigo)
+ );
+</pre>
+<p>3- Ingrese algunos registros para ambas tablas:</p>
+<pre>
+ insert into provincias values(1,'Cordoba');
+ insert into provincias values(2,'Santa Fe');
+ insert into provincias values(3,'Misiones');
+ insert into provincias values(4,'Rio Negro');
+
+ insert into clientes values(100,'Perez Juan','San Martin 123','Carlos Paz',1);
+ insert into clientes values(101,'Moreno Marcos','Colon 234','Rosario',2);
+ insert into clientes values(102,'Acosta Ana','Avellaneda 333','Posadas',3);
+</pre>
+<p>4- Establezca una restricción "foreign key" especificando la acción "set null" para eliminaciones.</p>
+<p>5- Elimine el registro con código 3, de "provincias" y consulte "clientes" para ver qué cambios ha realizado Oracle en los registros coincidentes<br>
+Todos los registros con "codigoprovincia" 3 han sido seteados a null.</p>
+<p>6- Consulte el diccionario "user_constraints" para ver qué acción se ha establecido para las eliminaciones</p>
+<p>7- Intente modificar el registro con código 2, de "provincias"</p>
+<p>8- Elimine la restricción "foreign key" establecida sobre "clientes"</p>
+<p>9- Establezca una restricción "foreign key" sobre "codigoprovincia" de "clientes" especificando la acción "cascade" para eliminaciones</p>
+<p>10- Consulte el diccionario "user_constraints" para ver qué acción se ha establecido para las eliminaciones sobre las restricciones "foreign key" de la tabla "clientes"</p>
+<p>11- Elimine el registro con código 2, de "provincias"</p>
+<p>12- Verifique que el cambio se realizó en cascada, es decir, que se eliminó en la tabla "provincias" y todos los clientes de la provincia eliminada</p>
+<p>13- Elimine la restricción "foreign key"</p>
+<p>14- Establezca una restricción "foreign key" sin especificar acción para eliminaciones</p>
+<p>15- Intente eliminar un registro de la tabla "provincias" cuyo código exista en "clientes"</p>
+<p>16- Consulte el diccionario "user_constraints" para ver qué acción se ha establecido para las eliminaciones sobre la restricción "FK_CLIENTES_CODIGOPROVINCIA"</p>
+<p>17- Intente elimimar la tabla "provincias"</p>
+<p>18- Elimine la restricción "foreign key"</p>
+<p>19- Elimine la tabla "provincias"</p>
+<a href="javascript:cambiar(1)" id="solucion1">Ver solución</a>
+<br><br>
+<pre id="solu1" class="recuadrooculto">
+ drop table clientes;
+ drop table provincias;
+
+ create table clientes (
+  codigo number(5),
+  nombre varchar2(30),
+  domicilio varchar2(30),
+  ciudad varchar2(20),
+  codigoprovincia number(2),
+  primary key(codigo)
+ );
+
+ create table provincias(
+  codigo number(2),
+  nombre varchar2(20),
+  primary key (codigo)
+ );
+
+ insert into provincias values(1,'Cordoba');
+ insert into provincias values(2,'Santa Fe');
+ insert into provincias values(3,'Misiones');
+ insert into provincias values(4,'Rio Negro');
+
+ insert into clientes values(100,'Perez Juan','San Martin 123','Carlos Paz',1);
+ insert into clientes values(101,'Moreno Marcos','Colon 234','Rosario',2);
+ insert into clientes values(102,'Acosta Ana','Avellaneda 333','Posadas',3);
+
+ alter table clientes
+ add constraint FK_clientes_codigoprovincia
+  foreign key (codigoprovincia)
+  references provincias(codigo)
+  on delete set null;
+
+ delete from provincias where codigo=3;
+ select *from clientes;
+
+ select constraint_name, constraint_type, delete_rule
+  from user_constraints
+  where table_name='CLIENTES';
+
+ update provincias set codigo=9 where codigo=2;
+
+ alter table clientes
+  drop constraint FK_CLIENTES_CODIGOPROVINCIA;
+
+ alter table clientes
+ add constraint FK_clientes_codigoprovincia
+  foreign key (codigoprovincia)
+  references provincias(codigo)
+  on delete cascade;
+
+ select constraint_name, delete_rule
+  from user_constraints
+  where table_name='CLIENTES' and
+  constraint_type= 'R';
+
+ delete from provincias where codigo=2;
+
+ select *from provincias;
+ select *from clientes;
+
+ alter table clientes
+  drop constraint FK_CLIENTES_CODIGOPROVINCIA;
+
+ alter table clientes
+ add constraint FK_clientes_codigoprovincia
+  foreign key (codigoprovincia)
+  references provincias(codigo);
+
+ delete from provincias where codigo=1;
+
+ select constraint_type, delete_rule
+  from user_constraints
+  where table_name='CLIENTES' and
+  constraint_name='FK_CLIENTES_CODIGOPROVINCIA';
+
+ drop table provincias;
+
+ alter table clientes
+  drop constraint FK_CLIENTES_CODIGOPROVINCIA;
+
+ drop table provincias;</pre>
+        <p>&nbsp;</p>
+  
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+	
+	
+
+<b>Segundo problema: </b><br><p>Un club dicta clases de distintos deportes. En una tabla llamada "deportes" guarda la información de los distintos deportes que se enseñan; en una tabla "socios", los datos de los socios y en una tabla "inscripciones" almacena la información necesaria para las inscripciones de los distintos socios a los distintos deportes.</p>
+<p>1- Elimine las tablas:</p>
+<pre>
+ drop table inscripciones;
+ drop table deportes;
+ drop table socios;
+</pre>
+<p>2- Cree las tablas:</p>
+<pre>
+ create table deportes(
+  codigo number(2),
+  nombre varchar2(20),
+  primary key(codigo)
+ );
+
+ create table socios(
+  documento char(8),
+  nombre varchar2(30),
+  primary key(documento)
+ );
+
+ create table inscripciones(
+  documento char(8), 
+  codigodeporte number(2),
+  matricula char(1),-- 's' si está paga, 'n' si no está paga
+  primary key(documento,codigodeporte)
+ );
+</pre>
+<p>3- Establezca una restricción "foreign key" para "inscripciones" que haga referencia al campo "codigo" de "deportes" indicando la acción "cascade" para eliminaciones</p>
+<p>4- Establezca una restricción "foreign key" para "inscripciones" que haga referencia al campo "documento" de "socios" que permita la eliminación "set null" (Recuerde que se pueden establecer varias restricciones "foreign key" sobre una misma tabla)</p>
+<p>5- Ingrese algunos registros en las tablas:</p>
+<pre>
+ insert into deportes values(1,'basquet');
+ insert into deportes values(2,'futbol');
+ insert into deportes values(3,'natacion');
+ insert into deportes values(4,'tenis');
+
+ insert into socios values('30000111','Juan Lopez');
+ insert into socios values('31111222','Ana Garcia');
+ insert into socios values('32222333','Mario Molina');
+ insert into socios values('33333444','Julieta Herrero');
+
+ insert into inscripciones values ('30000111',1,'s');
+ insert into inscripciones values ('30000111',2,'s');
+ insert into inscripciones values ('31111222',1,'s');
+ insert into inscripciones values ('32222333',3,'n');
+</pre>
+<p>6- Intente ingresar una inscripción con un código de deporte inexistente:<br>
+Mensaje de error.</p>
+<p>7- Intente ingresar una inscripción con un documento inexistente en "socios"</p>
+<p>8- Elimine un registro de "deportes" que no tenga inscriptos.<br>
+Se elimina porque no hay inscriptos en dicho deporte.</p>
+<p>9- Consulte "inscripciones", "deportes" y "socios" (realizando un join)</p>
+<p>10-Elimine un deporte para los cuales haya inscriptos<br>
+Se elimina el deporte "natacion" de "deportes" y de "inscripciones", todos los registros con el valor correspondiente a "natacion" en "codigodeporte".</p>
+<p>11- Verifique que se han eliminado los registros de "inscripciones" cuyo código de deporte correspondía a "natacion"</p>
+<p>12- Intente eliminar el socio que esté inscripto en algún deporte.<br>
+Mensaje de error, porque la restricción "FK_inscripciones_documento" fue especificada "set null", pero el campo clave foránea "documento" en "inscripciones" no admite valores nulos (forma parte de la clave primaria).</p> 
+<p>13- Elimine la restricción "FK_inscripciones_documento" y créela nuevamente especificando la acción "cascade" para borrado</p>
+<p>14- Elimine un socio que esté inscripto en algún deporte</p>
+<p>15- Verifique que el socio fue eliminado de "socios" y de "inscripciones"</p>
+<p>16- Consulte el diccionario "user_constraints" especificando las tres tablas y analice la información<br>
+<p>Nos retorna la siguiente información:</p>
+<pre>
+TABLE_NAME	CONSTRAINT_NAME			CONSTRAINT_TYPE		DELETE_RULE 
+------------------------------------------------------------------------------------ 
+DEPORTES        SYS_C004914                     P 
+INSCRIPCIONES   SYS_C004916                     P
+INSCRIPCIONES   FK_INSCRIPCIONES_CODIGODEPORTE  R                       CASCADE     
+INSCRIPCIONES   FK_INSCRIPCIONES_DOCUMENTO      R                       CASCADE     
+SOCIOS          SYS_C004915                     P
+</pre>
+<p>17- Intente eliminar la tabla "deportes"</p>
+<p>16- Elimine la restricción "foreign key" establecida sobre el campo "codigodeporte" de "inscripciones" y luego la tabla "deportes"</p><br>
+<a href="javascript:cambiar(2)" id="solucion2">Ver solución</a>
+<pre id="solu2" class="recuadrooculto">
+ drop table inscripciones;
+ drop table deportes;
+ drop table socios;
+
+ create table deportes(
+  codigo number(2),
+  nombre varchar2(20),
+  primary key(codigo)
+ );
+
+ create table socios(
+  documento char(8),
+  nombre varchar2(30),
+  primary key(documento)
+ );
+
+ create table inscripciones(
+  documento char(8), 
+  codigodeporte number(2),
+  matricula char(1),-- 's' si est&aacute; paga, 'n' si no est&aacute; paga
+  primary key(documento,codigodeporte)
+ );
+
+  alter table inscripciones
+  add constraint FK_inscripciones_codigodeporte
+  foreign key (codigodeporte)
+  references deportes(codigo)
+  on delete cascade;
+
+  alter table inscripciones
+  add constraint FK_inscripciones_documento
+  foreign key (documento)
+  references socios(documento)
+  on delete set null;
+
+ insert into deportes values(1,'basquet');
+ insert into deportes values(2,'futbol');
+ insert into deportes values(3,'natacion');
+ insert into deportes values(4,'tenis');
+
+ insert into socios values('30000111','Juan Lopez');
+ insert into socios values('31111222','Ana Garcia');
+ insert into socios values('32222333','Mario Molina');
+ insert into socios values('33333444','Julieta Herrero');
+
+ insert into inscripciones values ('30000111',1,'s');
+ insert into inscripciones values ('30000111',2,'s');
+ insert into inscripciones values ('31111222',1,'s');
+ insert into inscripciones values ('32222333',3,'n');
+
+ insert into inscripciones values('30000111',6,'s');
+
+ insert into inscripciones values('40111222',1,'s');
+
+ delete from deportes where nombre='tenis';
+
+ select s.nombre, s.documento, d.nombre as deporte
+  from socios s
+  join inscripciones i
+  on s.documento=i.documento
+  join deportes d
+  on i.codigodeporte=d.codigo;
+
+  delete from deportes where nombre='natacion';
+
+ select *from inscripciones;
+El registro de &quot;inscripciones&quot; con &quot;documento&quot; 32222333, ya no existe.
+
+ delete from socios where documento='30000111'; 
+
+ alter table inscripciones
+  drop constraint FK_INSCRIPCIONES_DOCUMENTO;
+
+ alter table inscripciones
+  add constraint FK_inscripciones_documento
+  foreign key (documento)
+  references socios(documento)
+  on delete cascade;
+
+ delete from socios where documento='30000111';
+
+ select *from socios where documento='30000111';
+ select *from inscripciones where documento='30000111';
+
+ select table_name,constraint_name, constraint_type, delete_rule
+  from user_constraints
+  where table_name='DEPORTES' OR
+  table_name='SOCIOS' OR
+  table_name='INSCRIPCIONES';
+
+ drop table deportes;
+
+ alter table inscripciones
+  drop constraint FK_INSCRIPCIONES_CODIGODEPORTE;
+
+ drop table deportes;
+</pre>
+
+		
+<br>
+   <h2><a href="../indexefd7.html?inicio=50">Retornar</a></h2>   
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/problemas/problema.php?inicio=50&cod=220&punto=62 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:36 GMT -->
+</html>

@@ -1,0 +1,317 @@
+﻿<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.phpya.com.ar/temarios/descripcion.php?punto=40&cod=61&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:09:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de PHP - Temario</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="keywords" content="php, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de php.">
+<meta name="author" content="Diego Moisset">
+
+<style>
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Verdana,arial,sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.1em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;
+}
+
+#recuadrooculto {
+  display: none;
+}
+
+
+.recuadroborde {
+  //  max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+	clear:left;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  document.getElementById('recuadrooculto').style.display='block';
+}
+
+</script>
+
+</head>
+
+<body>
+
+
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em;margin-right:1em"><a href="../index7732-2.html?inicio=30">Temario del Tutorial</a></span>40 - Creación de imágenes dinámicas desde PHP.</h1></div>
+
+<br>
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+
+<p>Existe un conjunto de funciones que nos permite la creación de un archivo de imagen (jpg, png, gif, etc.) en el servidor y posterior envío al navegador que la solicitó. Es decir que, con PHP, no sólo podemos hacer páginas dinámicas sino también imágenes dinámicas.</p>
+<p>Veamos un ejemplo sencillo y útil donde aplicar la generación de una imagen dinámica. Casi todos hemos visto que los sitios nos obligan a ingresar un código verificador para registrarnos a un servicio de internet. Generalmente es un gráfico con una serie de números y letras poco legibles (esto se hace para confirmar que quien está ingresando los datos se trata de un ser humano y no un programa de computadora camuflado como persona).</p>
+<p>Este tipo de problema se adapta muy bien para emplear la creación de imágenes dinámicas. Veamos el código que nos permite resolver este problema:</p>
+<pre class="recuadro">
+&lt;?php
+$ancho=100;
+$alto=30;
+$imagen=imageCreate($ancho,$alto);
+$amarillo=ImageColorAllocate($imagen,255,255,0);
+ImageFill($imagen,0,0,$amarillo);
+$rojo=ImageColorAllocate($imagen,255,0,0);
+$valoraleatorio=rand(100000,999999);
+ImageString($imagen,5,25,5,$valoraleatorio,$rojo);
+for($c=0;$c&lt;=5;$c++)
+{
+  $x1=rand(0,$ancho);
+  $y1=rand(0,$alto);
+  $x2=rand(0,$ancho);
+  $y2=rand(0,$alto);
+  ImageLine($imagen,$x1,$y1,$x2,$y2,$rojo);
+}
+Header (&quot;Content-type: image/jpeg&quot;);
+ImageJPEG ($imagen);
+ImageDestroy($imagen);
+?&gt;
+</pre>
+<p>Lo primero que hay que tener en cuenta es que el archivo es PHP puro, es decir no tiene salidas HTML, esto debido a que es una imagen la que se genera y no un archivo HTML. Luego veremos que a esta imagen se la puede incorporar en un archivo HTML y ser parte dentro de una etiqueta IMG.</p>
+<p>Lo primero que hacemos es llamar a la función imageCreate pasando como parámetros el ancho y el alto de la imagen a crear:</p>
+<pre>
+$ancho=100;
+$alto=30;
+$imagen=imageCreate($ancho,$alto);
+</pre>
+<p>La función imageCreate retorna una referencia a la imagen; la que utilizaremos en todas las otros funciones.</p>
+<p>Seguidamente adquirimos una referencia a un color y rellenamos el fondo de la imagen con dicho color:</p>
+<pre>
+$amarillo=ImageColorAllocate($imagen,255,255,0);
+ImageFill($imagen,0,0,$amarillo);
+</pre>
+<p>La función ImageColorAllocate tiene como parámetros la referencia a la imagen creada y los tres valores que indican la cantidad de rojo, verde y azul para la mezcla.</p>
+<p>La función ImageFill rellena con color a partir de las coordenadas que le pasamos en el segundo y tercer parámetro.</p>
+<p>Hasta ahora tenemos un rectángulo de 100x30 pixeles de color amarillo.<br>
+Para dibujar el código verificador tenemos:</p>
+<pre>
+$rojo=ImageColorAllocate($imagen,255,0,0);
+$valoraleatorio=rand(100000,999999);
+ImageString($imagen,5,25,5,$valoraleatorio,$rojo);
+</pre>
+<p>Recordemos que la función rand nos retorna un valor aleatorio comprendido entre los dos valores que le pasamos como parámetro. Seguidamente, con la función ImageString imprimimos el número generado de color rojo en las coordenadas 25,5 y con un tamaño de fuente 5 (valores posibles de fuente son de 1 a 5).</p>
+<p>Tenemos dibujado el código verificador (en nuestro caso es un número verificador, ya que no hemos incorporado caracteres) ahora para hacer más dificil la lectura del número incorporaremos una serie de segmentos que tapen en forma parcial el número aleatorio:</p>
+<pre>
+for($c=0;$c&lt;=5;$c++)
+{
+  $x1=rand(0,$ancho);
+  $y1=rand(0,$alto);
+  $x2=rand(0,$ancho);
+  $y2=rand(0,$alto);
+  ImageLine($imagen,$x1,$y1,$x2,$y2,$rojo);
+}
+</pre>
+<p>Disponemos un for para que dibuje 6 líneas. Para graficar las líneas llamamos a la función ImageLine que tiene cuatro parámetros fundamentales que son las coordenadas de los dos puntos de origen y fin de la línea. Como sabemos el ancho y alto de la imagen y para que la línea se encuentre dentro de los límites del gráfico, disponemos como valor máximo los valores almacenados en $ancho y $alto.</p>
+<p>Hasta aca la imagen se encuentra en memoria, debemos además indicar qué formato tendrá y enviarla al cliente que la solicitó:</p>
+<pre>
+Header (&quot;Content-type: image/jpeg&quot;);
+ImageJPEG ($imagen);
+ImageDestroy($imagen);
+</pre>
+<p>También en este tipo de problemas requerimos la función header (recordemos que la empleamos en el redireccionamiento) Indicamos el tipo de archivo que recibirá el navegador. Llamamos en este caso a la función ImageJPEG (podríamos llamar también a ImagePNG, ImageGIF, etc.) que genera la información de la imagen propiamente dicha y por último llamamos a la función ImageDestroy para liberar los recursos ocupados en el servidor por este proceso de generación de la imagen.</p>
+<p>Para el correcto funcionamiento de las funciones gráficas debemos activar las extensiones de PHP que nos permiten esta funcionalidad, para esto debemos activar desde el WampServer la extensión php_gd2:</p>
+<img src="imagentema/foto022.jpg" border="0" alt="extensiones gd2"><br>
+
+<br>
+<br>
+
+<h2>Problema resuelto.</h2>
+<p>Copiar el contenido de este cuadro de texto al NotePad++ y grabarlo en la carpeta c:\wamp\www con un nombre con extensión php (si hay varios cuadros
+de texto grabar cada uno en un archivo distinto).<br>
+  luego abrir el navegador (Chrome, FireFox, IExplorer etc.) y en la barra de direcciones tipear: http://localhost/pagina1.php (o el nombre del
+archivo que le dió)  </p>
+<form name="formulario" action="#" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+    pagina1.php<br><textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off" readonly>
+<?php
+  $ancho=100;
+  $alto=30;
+  $imagen=imageCreate($ancho,$alto);
+  $amarillo=ImageColorAllocate($imagen,255,255,0);
+  ImageFill($imagen,0,0,$amarillo);
+  $rojo=ImageColorAllocate($imagen,255,0,0);
+  $valoraleatorio=rand(100000,999999);
+  ImageString($imagen,5,25,5,$valoraleatorio,$rojo);
+  for($c=0;$c<=5;$c++)
+  {
+    $x1=rand(0,$ancho);
+    $y1=rand(0,$alto);
+    $x2=rand(0,$ancho);
+    $y2=rand(0,$alto);
+    ImageLine($imagen,$x1,$y1,$x2,$y2,$rojo);
+  }
+  Header ("Content-type: image/jpeg");
+  ImageJPEG ($imagen);
+  ImageDestroy($imagen);
+?>
+</textarea>
+    <br>
+	 <a href="http://www.scratchya.com.ar/problemas/phpya/resu/61/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a> 
+<!--    <a href="http://localhost:8080/problemas/phpya/resu/61/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>-->
+
+    <br>
+<table width="650px">
+<tr>
+<td align="left">	
+
+</td>
+</tr>
+</table>
+
+	
+    
+</form>
+
+
+
+
+
+
+	
+
+<h2>Problema propuesto.</h2>
+<p>Confeccionar una imagen dinámica que represente un botón. Utilizar las funciones vistas para imprimir el texto del botón y para rellenar regiones del gráfico, emplear la función imageFilledRectange. ImageFilledRectangle crea un rectángulo relleno con color "col" en la imagen "imagen", comenzando con la coordenada superior izquierda (x1, y1) y finalizando en la coordenada inferior derecha (x2, y2).</p>
+imagefilledrectangle ( imagen,x1,y1,x2,y2,col)<br>
+<p>Recordar que debe ser PHP puro, por lo que deberá borrar todo el código HTML que se encuetra fuera de las marcas: </p>
+&lt;?php ?&gt;
+<form name="formulario" action="#" target="ventanaForm" 
+onsubmit="abrirVentana()" method="post" >
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<div id="recuadrooculto">
+pagina1.php<br>
+<textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off" readonly>
+<?php
+  $ancho=100;
+  $alto=30;
+  $imagen=imageCreate($ancho,$alto);
+  $grisoscuro=ImageColorAllocate($imagen,100,100,100);
+  ImageFill($imagen,0,0,$grisoscuro);  
+  $grisclaro=ImageColorAllocate($imagen,200,200,200);
+  ImageFilledRectangle($imagen,5,5,95,25,$grisclaro);
+  $rojo=ImageColorAllocate($imagen,200,0,0);  
+  ImageString($imagen,10,10,5,"Boton 1",$rojo);  
+  Header ("Content-type: image/jpeg");
+  ImageJPEG ($imagen);
+  ImageDestroy($imagen);
+?></textarea>
+ <br>
+<!-- <a href="http://localhost:8080/problemas/phpya/propu/61/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>-->
+
+
+  <a href="http://www.scratchya.com.ar/problemas/phpya/propu/61/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a> 
+	<br>	
+
+</div>
+
+</form>
+
+
+
+  
+
+<br>
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>
+
+
+<form name="form1" method="post" action="#">
+  <div>
+   <h2><a href="../index7732.html?inicio=30">Retornar</a></h2>   
+  </div>
+
+  
+</form>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-4";
+urchinTracker();
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.phpya.com.ar/temarios/descripcion.php?punto=40&cod=61&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:09:07 GMT -->
+</html>

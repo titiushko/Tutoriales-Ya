@@ -1,0 +1,442 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=28&codigo=159&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:16 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Los punteros en C++</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>28 - Los punteros en C++</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Los punteros son variables que almacenan direcciones de memoria de otra variable.</p>
+<p>El concepto de punteros es bastante complejo en un principio y puede llevar a pensar que no tienen una gran utilidad, muy lejos está la realidad.</p>
+<p>El manejo de punteros es fundamental para conceptos futuros como la creación y liberación de objetos en tiempo de ejecución de un programa.<br>
+Hemos visto las estructuras de datos tipo vector y matrices, pero hay otro tipo de estructuras llamadas estructuras dinámicas que requieren obligatoriamente el empleo de punteros y resuelven otro conjunto de problemas que las estructuras estáticas no pueden.</p>
+
+<p>Un puntero se definen de la siguiente manera:</p>
+<pre>
+    &lt;tipo de dato al que apunta&gt; * &lt;nombre del puntero&gt;;
+</pre>
+
+<h3>Punteros a tipo de dato numérico</h3>
+
+<p>Definición de un puntero que apunta a un entero:</p>
+<pre>
+    int *pe;
+</pre>
+
+<p>Asignación de contenido a un puntero:</p>
+<pre>
+    int x=9;
+    pe=&x;
+</pre>
+
+<p>Un puntero contiene una dirección, aquí le asignamos la dirección de la variable entera x, por eso debemos anteceder el símbolo &.<br>
+Podemos asignar un valor a lo apuntado por el puntero:</p>
+<pre>
+    int x=9;
+    pe=&x;
+    *pe=5;  // la variable x almacena 5
+    cout &lt;&lt;x; //5
+</pre>
+<p>Aquí le asignamos el valor 5 a la dirección a la cual apunta el puntero pe, es decir, a la variable entera x. Para indicar que el valor 5 es asignado a donde apunta el puntero pe, antecedemos al nombre del puntero el símbolo *.</p>
+<p>Impresión:</p>
+<p>No se puede imprimir el contenido de un puntero, que es una dirección de memoria, lo que imprimimos es el contenido de la variable a la cual apunta el puntero:</p>
+<pre>
+    int x=9;
+    pe=&x;
+    cout &lt;&lt;*pe;	// imprime 9
+</pre>
+
+
+<h3>Problema 1:</h3>
+<p>Confeccionar un programa que defina dos punteros a tipos de datos int y float. Acceder mediante estos punteros a otras variables de tipo int y float.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include &lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int x = 10;
+    int *pe;
+    pe = &x;
+    cout &lt;&lt; x;         // 10
+    cout &lt;&lt; "\n";
+    cout &lt;&lt; *pe;       // imprime lo apuntado por pe: 10
+    cout &lt;&lt; "\n";
+    *pe = 5;           //asignamos 5 a lo apuntado por pe
+    cout &lt;&lt; x;         // 5
+    cout &lt;&lt; "\n";
+    float valor = 10.9;
+    float *pf;
+    pf = &valor;
+    cout &lt;&lt; *pf;      //imprimime lo apuntado por pf: 10.9
+    cin.get();
+}
+
+</pre>
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/Puntero1.zip">Puntero1.zip</a></p>
+
+
+<p>Vamos a hacer el seguimiento del programa anterior suponiendo que somos el sistema operativo asignando espacios en la memoria ram para
+localizar las variables de memoria:</p>
+
+<p>Definimos la variable x (el sistema operativo le reserva espacio en la dirección de memoria 1000 y almacena en ese espacio el valor 10):</p>
+<pre>
+int x=10;             Dir. de Mem.    Contenido    Nombre de variable
+                         1000           10             x
+</pre>
+<p>Definimos otra variable pero en este caso de tipo puntero a entero y se le asigna el espacio de memoria 1004 (por el momento no guardamos nada en esta variable):</p>
+<pre>
+int *pe;             Dir. de Mem.    Contenido    Nombre de variable
+                         1000           10             x
+                         1004                          pe
+</pre>
+<p>Inicializamos el puntero pe con la dirección de la variable x:</p>
+<pre>
+pe=&x;               Dir. de Mem.    Contenido    Nombre de variable
+                         1000           10             x
+                         1004         1000             pe
+</pre>
+<p>Modificamos el espacio apuntado por la variable pe (es decir a partir de la dirección 1000 almacenamos el valor 5):</p>
+<pre>
+*pe=5;               Dir. de Mem.    Contenido    Nombre de variable
+                         1000            5             x
+                         1004         1000             pe
+</pre>
+<p>Ahora hacemos algo similar para trabajar con una variable float y un puntero a un tipo de dato float. Definimos una variable float:</p>
+<pre>
+float valor=10.9;    Dir. de Mem.    Contenido    Nombre de variable
+                        1000            5             x
+                        1004         1000             pe
+                        1008         10.9             valor
+</pre>
+<p>Definimos un puntero a tipo de dato float:</p>
+<pre>
+float *pf;           Dir. de Mem.    Contenido    Nombre de variable
+                        1000            5            x
+                        1004            1000         pe
+                        1008            10.9         valor
+                        1012                         pf
+</pre>
+<p>Recuperamos la dirección de la variable float:</p>
+<pre>
+pf=&valor;          Dir. de Mem.    Contenido    Nombre de variable
+                        1000            5            x
+                        1004            1000         pe
+                        1008            10.9         valor
+                        1012            1008         pf
+</pre>
+
+
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Hacer el gráfico de la memoria e indicar que se imprime en pantalla al ejecutar este programa:
+<pre>
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int x1 = 50;
+    int x2 = 100;
+    int *pun1, *pun2;
+    pun1 = &x1;
+    pun2 = pun1;
+    *pun1 = 2000;
+    cout &lt;&lt; x1;
+    cout &lt;&lt; "\n";
+    cout &lt;&lt; x2;
+    cout &lt;&lt; "\n";
+    cout &lt;&lt; *pun1;
+    cout &lt;&lt; "\n";
+    cout &lt;&lt; *pun2;
+    cout &lt;&lt; "\n";
+    pun2 = &x2;
+    x1 = 1;
+    x2 = 2;
+    cout &lt;&lt; *pun1;
+    cout &lt;&lt; "\n";
+    cout &lt;&lt; *pun2;
+    cout &lt;&lt; "\n";
+    *pun1 = 500;
+    *pun2 = 600;
+    cout &lt;&lt; x1;
+    cout &lt;&lt; "\n";
+    cout &lt;&lt; x2;
+    cin.get();
+}
+</pre>
+</li>
+<li>
+Definir tres variables enteras e inicializarlas con los valores 5,10 y 15. Luego definir una variable puntero a entero. Hacer que dicha variable apunte sucesivamente a las distintas variables definidas previamente e imprimir su contenido.
+</li>
+
+<li>
+Definir dos variables float y un puntero a un tipo de dato float. Hacer que el puntero guarde sucesivamente las direcciones de la primera y segunda variable y cambiar el contenido de las mismas por asignación. Imprimir las dos variables de tipo float.
+</li>
+
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+
+<pre class="recuadrooculto">
+int x1=50;             
+                      Dir. de Mem.    Contenido    Nombre de variable
+                          1000           50             x1
+int x2=100;                          
+                      Dir. de Mem.    Contenido    Nombre de variable
+                          1000           50             x1
+                          1004          100             x2
+int *pun1,*pun2;
+                      Dir. de Mem.    Contenido    Nombre de variable
+                          1000           50             x1
+                          1004          100             x2
+                          1008                          pun1
+                          1012                          pun2
+ pun1 = &x1;                          
+                      Dir. de Mem.    Contenido    Nombre de variable
+                          1000           50             x1
+                          1004          100             x2
+                          1008         1000             pun1
+                          1012                          pun2
+pun2 = pun1;
+                      Dir. de Mem.    Contenido    Nombre de variable
+                          1000           50             x1
+                          1004          100             x2
+                          1008         1000             pun1
+                          1012         1000             pun2
+*pun1 = 2000;
+                      Dir. de Mem.    Contenido    Nombre de variable
+                          1000         2000             x1
+                          1004          100             x2
+                          1008         1000             pun1
+                          1012         1000             pun2
+ pun2 = &x2;
+                      Dir. de Mem.    Contenido    Nombre de variable
+                          1000         2000             x1
+                          1004          100             x2
+                          1008         1000             pun1
+                          1012         1004             pun2
+ x1 = 1;
+                       Dir. de Mem.    Contenido    Nombre de variable
+                          1000            1             x1
+                          1004          100             x2
+                          1008         1000             pun1
+                          1012         1004             pun2
+x2 = 2;
+                       Dir. de Mem.    Contenido    Nombre de variable
+                          1000            1             x1
+                          1004            2             x2
+                          1008         1000             pun1
+                          1012         1004             pun2
+*pun1 = 500;
+                       Dir. de Mem.    Contenido    Nombre de variable
+                          1000          500             x1
+                          1004            2             x2
+                          1008         1000             pun1
+                          1012         1004             pun2
+*pun2 = 600;
+                       Dir. de Mem.    Contenido    Nombre de variable
+                          1000          500             x1
+                          1004          600             x2
+                          1008         1000             pun1
+                          1012         1004             pun2
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/Puntero2.zip">Puntero2.zip</a></p>
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int x1 = 5;
+    int x2 = 10;
+    int x3 = 15;
+    int *pe;
+    pe = &x1;
+    cout &lt;&lt; *pe;
+    cout &lt;&lt; "\n";
+    pe = &x2;
+    cout &lt;&lt; *pe;
+    cout &lt;&lt; "\n";
+    pe = &x3;
+    cout &lt;&lt; *pe;
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/Puntero3.zip">Puntero3.zip</a></p>
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    float f1, f2;
+    float *pf;
+    pf = &f1;
+    *pf = 10.5;
+    pf = &f2;
+    *pf = 20.2;
+    cout &lt;&lt; f1;
+    cout &lt;&lt; "\n";
+    cout &lt;&lt; f2;
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/Puntero4.zip">Puntero4.zip</a></p>
+
+</pre>
+
+<h2><a href="index9187.html?inicio=15">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=28&codigo=159&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:16 GMT -->
+</html>

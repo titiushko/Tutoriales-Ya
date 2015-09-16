@@ -1,0 +1,756 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=137&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:53:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - Declaración de una clase y definición de objetos.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>13 - Declaración de una clase y definición de objetos.</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p>La programación orientada a objetos se basa en la programación de clases; a diferencia de la programación estructurada, que está centrada en las funciones.</p>
+<p>Una clase es un molde del que luego se pueden crear múltiples objetos, con similares características.</p>
+<p>Una clase es una plantilla (molde), que define atributos (variables) y métodos (funciones)</p>
+
+<p>La clase define los atributos y métodos comunes a los objetos de ese tipo, pero luego, cada objeto tendrá sus propios valores y compartirán las mismas funciones.</p>
+
+<p>Debemos crear una clase antes de poder crear objetos (instancias) de esa clase. Al crear un objeto de una clase, se dice que se crea una instancia de la clase o un objeto propiamente dicho.</p>
+<p>La estructura de una clase es:</p>
+<pre>
+class [nombre de la clase] {
+  [atributos o variables de la clase]
+  [métodos o funciones de la clase]
+  [main]
+}
+</pre>
+<h3>Problema 1:</h3>
+<p>Confeccionar una clase que permita carga el nombre y la edad de una persona. Mostrar los datos cargados. Imprimir un mensaje si es mayor de edad (edad&gt;=18)</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace PruebaClase1
+{
+    class Persona 
+    { 
+        private string nombre;
+        private int edad;
+
+        public void Inicializar()
+        {
+            Console.Write("Ingrese el nombre:");
+            nombre = Console.ReadLine();
+            string linea;
+            Console.Write("Ingrese la edad:");
+            linea = Console.ReadLine();
+            edad = int.Parse(linea);
+        }
+
+        public void Imprimir()
+        {
+            Console.Write("Nombre:");
+            Console.WriteLine(nombre);
+            Console.Write("Edad:");
+            Console.WriteLine(edad);
+        }
+
+        public void EsMayorEdad()
+        {
+            if (edad >= 18)
+            {
+                Console.Write("Es mayor de edad");
+            }
+            else
+            {
+                Console.Write("No es mayor de edad");
+            }
+            Console.ReadKey();
+        }
+
+
+        static void Main(string[] args)
+        {
+            Persona per1 = new Persona();
+            per1.Inicializar();
+            per1.Imprimir();
+            per1.EsMayorEdad();
+        }
+    }
+}
+}
+</pre>
+<p>El nombre de la clase debe hacer referencia al concepto (en este caso la hemos llamado Persona):</p>
+<pre>
+class Persona 
+</pre>
+<p>Los atributos los definimos dentro de la clase pero fuera de la main:</p>
+<pre>
+        private string nombre;
+        private int edad;
+</pre>
+<p>Veremos más adelante que un atributo es normalmente definido con la cláusula private (con esto no permitimos el acceso al atributo desde otras clases)<br>
+<p>A los atributos se tiene acceso desde cualquier función o método de la clase (salvo la main)</p>
+<p>Luego de definir los atributos de la clase debemos declarar los métodos o funciones de la clase. La sintaxis es parecida a la main (sin la cláusula static):</p>
+<pre>
+        public void Inicializar()
+        {
+            Console.Write("Ingrese el nombre:");
+            nombre = Console.ReadLine();
+            string linea;
+            Console.Write("Ingrese la edad:");
+            linea = Console.ReadLine();
+            edad = int.Parse(linea);
+        }
+</pre>
+<p>En el método inicializar (que será el primero que deberemos llamar desde la main) cargamos por teclado los atributos nombre y edad. Como podemos ver el método inicializar puede hacer acceso a dos atributos de la clase Persona.<br>
+El segundo método tiene por objetivo imprimir el contenido de los atributos nombre y edad (los datos de los atributos se cargaron al ejecutarse previamente el método inicializar:</p>
+<pre>
+            Console.Write("Nombre:");
+            Console.WriteLine(nombre);
+            Console.Write("Edad:");
+            Console.WriteLine(edad);
+</pre>
+<p>El tercer método tiene por objetivo mostrar un mensaje si la persona es mayor o no de edad:</p>
+<pre>
+        public void EsMayorEdad()
+        {
+            if (edad >= 18)
+            {
+                Console.Write("Es mayor de edad");
+            }
+            else
+            {
+                Console.Write("No es mayor de edad");
+            }
+            Console.ReadKey();
+        }
+</pre>
+<p>Por último en la main declaramos un objeto de la clase Persona y llamamos a los métodos en un orden adecuado:</p>
+<pre>
+            Persona per1 = new Persona();
+            per1.Inicializar();
+            per1.Imprimir();
+            per1.EsMayorEdad();
+</pre>
+            Persona per1 = new Persona(); //Declaración y creación del objeto<br>
+            per1.Inicializar(); //Llamada de un método</p>
+
+
+<h3>Problema 2:</h3>
+<p>Desarrollar un programa que cargue los lados de un triángulo e implemente los siguientes métodos: inicializar los atributos, imprimir el valor del lado mayor y otro método que muestre si es equilátero o no.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace PruebaClase2
+{
+    class Triangulo
+    {
+        private int lado1, lado2, lado3;
+
+        public void Inicializar()
+        {
+            string linea;
+            Console.Write("Medida lado 1:");
+            linea = Console.ReadLine();
+            lado1 = int.Parse(linea);
+            Console.Write("Medida lado 2:");
+            linea = Console.ReadLine();
+            lado2 = int.Parse(linea);
+            Console.Write("Medida lado 3:");
+            linea = Console.ReadLine();
+            lado3 = int.Parse(linea);
+        }
+
+        public void LadoMayor()
+        {
+            Console.Write("Lado mayor:");
+            if (lado1 > lado2 && lado1 > lado3)
+            {
+                Console.WriteLine(lado1);
+            }
+            else
+            {
+                if (lado2 > lado3)
+                {
+                    Console.WriteLine(lado2);
+                }
+                else
+                {
+                    Console.WriteLine(lado3);
+                }
+            }
+        }
+
+        public void EsEquilatero() 
+        {
+            if (lado1==lado2 && lado1==lado3) 
+            {
+                Console.Write("Es un triángulo equilátero");
+            }
+            else 
+            {
+                Console.Write("No es un triángulo equilátero");            
+            }
+        }
+    
+        static void Main(string[] args)
+        {
+            Triangulo triangulo1 = new Triangulo();
+            triangulo1.Inicializar();
+            triangulo1.LadoMayor();
+            triangulo1.EsEquilatero();
+            Console.ReadKey();
+        }
+    }
+}
+</pre>
+<p>Este problema requiere definir tres atributos de tipo entero donde almacenamos los valores de los lados del triángulo:</p>
+<pre>
+        private int lado1, lado2, lado3;
+</pre>
+<p>El primer método que deberá llamarse desde la main es el Inicializar donde cargamos los tres atributos por teclado:</p>
+<pre>
+        public void Inicializar()
+        {
+            string linea;
+            Console.Write("Medida lado 1:");
+            linea = Console.ReadLine();
+            lado1 = int.Parse(linea);
+            Console.Write("Medida lado 2:");
+            linea = Console.ReadLine();
+            lado2 = int.Parse(linea);
+            Console.Write("Medida lado 3:");
+            linea = Console.ReadLine();
+            lado3 = int.Parse(linea);
+        }
+</pre>
+<p>El método LadoMayor muestra el valor mayor de los tres enteros ingresados:</p>
+<pre>
+        public void LadoMayor()
+        {
+            Console.Write("Lado mayor:");
+            if (lado1 > lado2 && lado1 > lado3)
+            {
+                Console.WriteLine(lado1);
+            }
+            else
+            {
+                if (lado2 > lado3)
+                {
+                    Console.WriteLine(lado2);
+                }
+                else
+                {
+                    Console.WriteLine(lado3);
+                }
+            }
+        }
+</pre>
+<p>Como podemos observar cuando un problema se vuelve más complejo es más fácil y ordenado separar los distintos algoritmos en varios métodos y no codificar todo en la main.</p>
+<p>El último método de esta clase verifica si los tres enteros ingresados son iguales:</p>
+<pre>
+    public void esEquilatero() {
+        if (lado1==lado2 && lado1==lado3) {
+            System.out.print("Es un triángulo equilátero");
+        } else {
+            System.out.print("No es un triángulo equilátero");            
+        }
+    }
+</pre>
+<p>En la main creamos un objeto de la clase Triangulo y llamamos los métodos respectivos:</p>
+<pre>
+        static void Main(string[] args)
+        {
+            Triangulo triangulo1 = new Triangulo();
+            triangulo1.Inicializar();
+            triangulo1.LadoMayor();
+            triangulo1.EsEquilatero();
+            Console.ReadKey();
+        }
+</pre>
+
+<h3>Problema 3:</h3>
+<p>Desarrollar una clase que represente un punto en el plano y tenga los siguientes métodos: cargar los valores de x e y, imprimir en que cuadrante se encuentra dicho punto (concepto matemático, primer cuadrante si x e y son positivas, si x<0 e y>0 segundo cuadrante, etc.)</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace PruebaClase3
+{
+    class Punto
+    {
+        private int x, y;
+
+        public void Inicializar() 
+        {
+            string linea;
+            Console.Write("Ingrese coordenada x :");
+            linea = Console.ReadLine();
+            x = int.Parse(linea);
+            Console.Write("Ingrese coordenada y :");
+            linea = Console.ReadLine();
+            y = int.Parse(linea);
+        }
+
+        void ImprimirCuadrante() 
+        {
+            if (x>0 && y>0) 
+            {
+                Console.Write("Se encuentra en el primer cuadrante.");
+            }
+            else 
+            {
+                if (x<0 && y>0)
+                {
+                    Console.Write("Se encuentra en el segundo cuadrante.");
+                }
+                else
+                {
+                    if (x<0 && y<0) 
+                    {
+                        Console.Write("Se encuentra en el tercer cuadrante.");
+                    }
+                    else
+                    {
+                        if (x>0 && y<0) 
+                        {
+                            Console.Write("Se encuentra en el cuarto cuadrante.");
+                        }
+                        else 
+                        {
+                            Console.Write("El punto no está en un cuadrante.");
+                        }
+                    }
+                }
+            }
+            Console.ReadKey();
+        }
+    
+        static void Main(string[] args)
+        {
+            Punto punto1 = new Punto();
+            punto1.Inicializar();
+            punto1.ImprimirCuadrante();
+        }
+    }
+}
+</pre>
+<p>Definimos dos atributos :</p>
+<pre>
+        private int x, y;
+</pre>
+<p>El método Inicializar pide cargar las coordenadas x e y:</p>
+<pre>
+        public void Inicializar() 
+        {
+            string linea;
+            Console.Write("Ingrese coordenada x :");
+            linea = Console.ReadLine();
+            x = int.Parse(linea);
+            Console.Write("Ingrese coordenada y :");
+            linea = Console.ReadLine();
+            y = int.Parse(linea);
+        }
+</pre>
+<p>El segundo método mediante un conjunto de if verificamos en que cuadrante se encuentra el punto ingresado:</p>
+<pre>
+        void ImprimirCuadrante() 
+        {
+            if (x>0 && y>0) 
+            {
+                Console.Write("Se encuentra en el primer cuadrante.");
+            }
+            else 
+            {
+                if (x<0 && y>0)
+                {
+                    Console.Write("Se encuentra en el segundo cuadrante.");
+                }
+                else
+                {
+                    if (x<0 && y<0) 
+                    {
+                        Console.Write("Se encuentra en el tercer cuadrante.");
+                    }
+                    else
+                    {
+                        if (x>0 && y<0) 
+                        {
+                            Console.Write("Se encuentra en el cuarto cuadrante.");
+                        }
+                        else 
+                        {
+                            Console.Write("El punto no está en un cuadrante.");
+                        }
+                    }
+                }
+            }
+            Console.ReadKey();
+        }
+</pre>
+<p>La Main no tiene grandes diferencias con los problemas realizados anteriormente, declaramos un objeto de la clase Punto, creamos el objeto mediante el operador new y seguidamente llamamos a los métodos Inicializar e ImprimirCuadrante en ese orden:</p>
+<pre>
+        static void Main(string[] args)
+        {
+            Punto punto1 = new Punto();
+            punto1.Inicializar();
+            punto1.ImprimirCuadrante();
+        }
+</pre>
+
+<h3>Problema 4:</h3>
+<p>Desarrollar una clase que represente un Cuadrado y tenga los siguientes métodos: cargar el valor de su lado, imprimir su perímetro y su superficie.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace PruebaClase4
+{
+    class Cuadrado
+    {
+        private int lado;
+
+        public void Inicializar()
+        {
+            Console.Write("Ingrese el valor del lado:");
+            string linea;
+            linea = Console.ReadLine();
+            lado=int.Parse(linea);
+        }
+
+        public void ImprimirPerimetro()
+        {
+            int perimetro;
+            perimetro=lado*4;
+            Console.WriteLine("El perímetro es:"+perimetro);
+        }
+
+        public void ImprimirSuperficie()
+        {
+            int superficie;
+            superficie=lado*lado;
+            Console.WriteLine("La superficie es:"+superficie);
+        }
+
+        static void Main(string[] args)
+        {
+            Cuadrado cuadrado1 = new Cuadrado();
+            cuadrado1.Inicializar();
+            cuadrado1.ImprimirPerimetro();
+            cuadrado1.ImprimirSuperficie();
+            Console.ReadKey();
+        }
+    }
+}
+</pre>
+<p>En este problema es interesante ver como no definimos dos atributos donde se almacenan la superficie y el perímetro del cuadrado, esto debido a que solo estos datos se los requiere en el método donde se imprimen:</p>
+<pre>
+        public void ImprimirPerimetro()
+        {
+            int perimetro;
+            perimetro=lado*4;
+            Console.WriteLine("El perímetro es:"+perimetro);
+        }
+</pre>
+<p>Esto significa que la variable perimetro es una variable local al método ImprimirPerimetro. Esta variable es local a dicho método y solo se la puede acceder dentro del método. La diferencia fundamental entre una variable local y un atributo de la clase es que al atributo se lo puede acceder desde cualquier método de la clase y la variable local solo existe mientras se está ejecutando el método.</p>
+
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Confeccionar una clase que represente un empleado. Definir como atributos su nombre y su sueldo. Confeccionar los métodos para la carga, otro para imprimir sus datos y por último uno que imprima un mensaje si debe pagar impuestos (si el sueldo supera a 3000)
+</li>
+
+<li>
+Implementar la clase operaciones. Se deben cargar dos valores enteros, calcular su suma, resta, multiplicación y división, cada una en un método, imprimir dichos resultados.
+</li>
+
+
+</ol>
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace PruebaClase5
+{
+    class Empleado
+    {
+        string nombre;
+        float sueldo;
+
+        public void Inicializar() 
+        {
+            string linea;
+            Console.Write("Ingrese el nombre del empleado:");
+            nombre = Console.ReadLine();
+            Console.Write("Ingrese su sueldo:");
+            linea = Console.ReadLine();
+            sueldo=float.Parse(linea);
+        }
+
+        public void PagaImpuestos() 
+        {
+            if (sueldo>3000) 
+            {
+                Console.WriteLine("Debe abonar impuestos");
+            } 
+            else
+            {
+                Console.WriteLine("No paga impuestos");
+            }
+            Console.ReadKey();
+        }
+
+        static void Main(string[] args)
+        {
+            Empleado empleado1= new Empleado();
+            empleado1.Inicializar();
+            empleado1.PagaImpuestos();
+        }
+    }
+}
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace PruebaClase5
+{
+    class Operaciones
+    {
+        private int valor1, valor2;
+
+        public void Inicializar() 
+        {
+            string linea;
+            Console.Write("Ingrese primer valor:");
+            linea=Console.ReadLine();
+            valor1=int.Parse(linea);
+            Console.Write("Ingrese segundo valor:");
+            linea = Console.ReadLine();
+            valor2=int.Parse(linea);
+        }
+
+        public void Sumar() 
+        {
+            int suma;
+            suma=valor1+valor2;
+            Console.WriteLine("La suma es:"+suma);
+        }
+
+        public void Restar() 
+        {
+            int resta;
+            resta=valor1-valor2;
+            Console.WriteLine("La resta es:"+resta);        
+        }
+
+        public void Multiplicar() 
+        {
+            int multiplicacion;
+            multiplicacion=valor1*valor2;
+            Console.WriteLine("La multiplicación es:"+multiplicacion);
+        }
+
+        public void dividir() 
+        {
+            int division;
+            division = valor1 / valor2;
+            Console.WriteLine("La división es:" + division);
+        }
+    
+
+        static void Main(string[] args)
+        {
+            Operaciones operacion1 = new Operaciones();
+            operacion1.Inicializar();
+            operacion1.Sumar();
+            operacion1.Restar();
+            operacion1.Multiplicar();
+            operacion1.dividir();
+            Console.ReadKey();
+        }
+    }
+}
+</pre></div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="index2904.html?inicio=0">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=137&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:53:55 GMT -->
+</html>

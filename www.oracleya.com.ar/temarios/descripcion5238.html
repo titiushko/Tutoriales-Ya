@@ -1,0 +1,195 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=25&cod=198&punto=41 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Descripción : Restricciones: validación y estados (validate - novalidate - enable - disable) (Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>41 - Restricciones: validación y estados (validate - novalidate - enable - disable)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>Sabemos que si agregamos una restricción a una tabla que contiene datos, Oracle los controla para asegurarse que cumplen con la condición de la restricción, si algún registro no la cumple, la restricción no se establecece.</p>
+<p>Es posible deshabilitar esta comprobación estableciendo una restricción sin comprobar los datos existentes en la tabla.</p>
+
+<p>Podemos hacerlo cuando agregamos la restricción (de cualquier tipo) a una tabla para que Oracle acepte los valores ya almacenados que infringen la restricción. Para ello  debemos incluir la opción "novalidate" en la instrucción "alter table":</p>
+<pre>
+ alter table libros
+  add constraint PK_libros_codigo
+  primary key (codigo) novalidate;
+</pre>
+<p>La restricción no se aplica en los datos existentes, pero si intentamos ingresar un nuevo valor que no cumpla la restricción (o actualizarlo), Oracle no lo permite.</p>
+
+<p>Para saber si una restricción está validada o no, podemos consultar el catálogo "user_constraints" y fijarnos lo que informa la columna "validated".</p>
+
+<p>También podemos deshabilitar las restricciones para agregar o actualizar datos sin comprobarla:</p>
+<pre>
+ alter table libros
+  add constraint PK_libros_codigo
+  primary key (codigo) disable;
+</pre>
+<p>Entonces, para evitar la comprobación de datos existentes y futuros al crear la restricción, la sintaxis básica es la siguiente:</p>
+<pre>
+ alter table TABLA
+  add constraint NOMBRERESTRICCION
+  TIPOdeRESTRICCION (CAMPO o CONDICION)--campo si es primary key o unique; condición si es check
+  disable novalidate;
+</pre>
+<p>Por defecto (si no especificamos) la opción es "validate", es decir, controla los datos existentes y "enable", es decir, controla futuros ingresos y actualizaciones.</p>
+
+<p>También es posible alterar la restricción luego de haberla creado. Sintaxis:</p>
+<pre>
+ alter table NOMBRETABLA
+  ESTADO VALIDACION
+  constraint NOMBRERESTRICCION;
+</pre>
+<p>En el ejemplo siguiente deshabilitamos la restricción "PK_libros_codigo" para poder ingresar un valor que infrija la restricción:</p>
+<pre>
+ alter table libros
+  disable validate
+  constraint PK_libros_codigo;
+</pre>
+<p>Para habilitar una restricción deshabilitada se ejecuta la misma instrucción pero con la cláusula "enable":</p>
+<pre>
+ alter table libros
+  enable validate
+  constraint PK_libros_codigo;
+</pre>
+<p>Para saber si una restricción está habilitada o no, podemos consultar el catálogo "user_constraints" y fijarnos lo que informa la columna "status".</p>
+
+<p>Los estados "validate" y "novalidate" son relativamente independientes de los estados "enabled" y "disabled".</p> 
+<p>Cuando habilitamos una restricción "primary key" o "unique" con "enable", los datos existentes DEBEN cumplir con la restricción; aunque coloquemos "novalidate" junto a "enable", Oracle no permite que se habilite la restrición y valida los datos existentes de todas maneras. No sucede lo mismo con una restricción "check"; podemos habilitar una restricción de control con "enable" y "novalidate", Oracle habilita la restricción para futuros ingresos y actualizaciones y NO valida los datos existentes.</p>
+
+<p>Entonces, "enable" o "disable" activa o desactiva la restricción para los nuevos datos ("enable" es la opción predeterminada si no se especifica); "validate" o "novalidate" es la opción para validar la restricción en los datos existentes ("validate" es la predetermidada si se omite).</p>
+<p>Una restricción puede estar en los siguientes estados:</p>
+<p>- validate y enabled: comprueba los valores existentes y los posteriores ingresos y actualizaciones;</p>
+<p>- validate y disable: comprueba los valores existentes pero no las posteriores inserciones y actualizaciones;</p>
+<p>- novalidate y enabled: no comprueba los datos existentes, pero si los posteriores ingresos y actualizaciones;</p>
+<p>- novalidate y disabled: no comprueba los valores existentes ni los posteriores ingresos y actualizaciones.</p>
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../indexfc77.html?inicio=25">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=25&cod=198&punto=41 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:36 GMT -->
+</html>

@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+
+<!-- Mirrored from www.cssya.com.ar/simulador/simulador.php?inicio=30&cod=44&punto=33 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:07:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+    <title>CSS Ya</title>
+    <link href="estiloscssya.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link href='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css' rel='stylesheet'>     
+    <script src='../../ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script> 
+    <script src='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>     
+
+	
+
+	
+	
+<script type="text/javascript">	
+
+$(document).ready(function(){
+  var opciones = {
+                   select:tabSeleccionado
+                 };                 
+  $("#pesta").tabs(opciones);
+ 
+});
+
+
+function tabSeleccionado(event,tab) {
+  if (tab.index==2) {
+    var d = parent.documentodinamico.document; 	
+    d.open();
+	d.write(String.fromCharCode(60)+"script ");
+	d.write(' src="debug.js">');
+	d.write(String.fromCharCode(60)+"/script"+String.fromCharCode(62));
+	
+	d.write(String.fromCharCode(60)+'style'+String.fromCharCode(62));
+	d.write($('#editor2').val());
+	d.write(String.fromCharCode(60)+'/style'+String.fromCharCode(62));
+	
+	
+	d.write($('#editor').val());
+    d.close();	
+  }	
+}
+
+
+</script>
+	
+
+	
+</head>
+<body>
+
+        
+<h1>33 - Definir un cursor para un elemento HTML.</h1><br>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* javascriptya-superior */
+google_ad_slot = "5739365568";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<br><br>
+<div id="problema">
+		<strong>Problema:</strong><p>Disponer tres hipervínculos y definir el cursor help para el elemento HTML de tipo ancla.</p></div>
+
+<div id="pesta">
+	<ul>
+		<li><a href="#p2">pagina.html</a></li>
+		<li><a href="#p3" >estilos.css</a></li>		
+		<li><a href="#p4">Ejecución de la página</a></li>
+	</ul>
+	
+	<div id="p2">
+    <textarea name="editor" id="editor" rows="28" style="width:890px;height:700px;font-family:courier;font-size:1.2em">&lt;!DOCTYPE html&gt;
+<html>
+<head>
+<title>Problema</title>
+<link rel="StyleSheet" href="estilos.html" type="text/css">
+</head>
+<body>
+<p>Este texto tiene por mostrar las anclas con un cursor distinto al que está definido por defecto:</p>
+<a href="http://www.google.com/">google.com</a><br>
+<a href="http://www.yahoo.com/">yahoo.com</a><br>
+<a href="http://www.bing.com/">bing.com</a>
+</body>
+
+<!-- Mirrored from www.cssya.com.ar/simulador/simulador.php?inicio=30&cod=44&punto=33 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:07:22 GMT -->
+</html>
+</textarea>
+		
+	</div>
+	<div id="p3">
+    <textarea name="editor2" id="editor2" rows="28" style="width:890px;height:700px;font-family:courier;font-size:1.2em">a {
+  cursor:help;
+}</textarea>
+		
+	</div>
+	
+	<div id="p4">
+<iframe width="900" height="700" id="documentodinamico" name="documentodinamico" src="vacio.html">
+No tiene disponible el navegador la capacidad de iframe
+</iframe>
+	</div>
+</div>
+<br>
+<table width="700px">
+<tr>
+<td align="left">	
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* javascriptya-inferior */
+google_ad_slot = "8692831966";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* javascriptya-inferior */
+google_ad_slot = "8692831966";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../index7732.html?inicio=30">Retornar</a></h2>   
+
+
+<br><br>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

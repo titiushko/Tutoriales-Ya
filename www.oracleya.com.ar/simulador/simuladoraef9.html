@@ -1,0 +1,256 @@
+        
+
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=25&cod=201&punto=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios resueltos : Restriccion check(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+<body bgcolor="#CCFFCC">
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>40 - Restriccion check</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Trabajamos con la tabla "libros" de una librería.<br>
+Eliminamos la tabla:</p>
+<pre>
+  drop table libros;
+</pre>
+<p>La creamos e ingresamos algunos registros:</p>
+<pre>
+ create table libros(
+  codigo number(5),
+  titulo varchar2(40),
+  autor varchar2(30),
+  editorial varchar2(15),
+  preciomin number(5,2),
+  preciomay number(5,2)
+ );
+
+ insert into libros values (1,'Uno','Bach','Planeta',22,20);
+ insert into libros values (2,'El quijote','Cervantes','Emece',15,13);
+ insert into libros values (3,'Aprenda PHP','Mario Molina','Siglo XXI',53,48);
+ insert into libros values (4,'Java en 10 minutos','Garcia','Siglo XXI',35,40);
+</pre>
+<p>Agregamos una restricción "primary key" para el campo "codigo":</p>
+<pre>
+ alter table libros
+ add constraint PK_libros_codigo
+ primary key (codigo);
+</pre>
+<p>Agregamos una restricción única, la clave única consta de 3 campos, "titulo", "autor" y "editorial":</pre>
+<pre>
+ alter table libros
+ add constraint UQ_libros
+ unique (titulo,codigo,editorial);
+</pre>
+<p>Agregamos una restricción "check" para asegurar que los valores de los campos correspondientes a precios no puedan ser negativos:</p>
+<pre>
+ alter table libros
+ add constraint CK_libros_precios_positivo
+ check (preciomin>=0 and preciomay>=0);
+</pre>
+<p>Intentamos ingresar un valor inválido para algún campo correspondiente al precio, que vaya en contra de la restricción (por ejemplo el valor "-15"):</p>
+<pre>
+ insert into libros values (5,'Matematica estas ahi','Paenza','Siglo XXI',-15,30);
+</pre>
+<p>aparecerá un mensaje de error indicando que hay conflicto con la restricción de control creada anteriormente y la inserción no se realiza.</p>
+
+<p>Igualmente si intentamos actualizar un precio, que vaya en contra de la restricción:</p>
+<pre>
+ update libros set preciomay=-20 where titulo='Uno';
+</pre>
+<p>Si intentamos agregar una restricción que no permita que el precio mayorista supere el precio minorista:</p>
+<pre>
+ alter table libros
+ add constraint CK_libros_preciominmay
+ check (preciomay<=preciomin);
+</pre>
+<p>aparece un mensaje de error y la sentencia no se ejecuta, porque hay un registro que no cumple con la restricción que intentamos establecer. Podemos modificar los datos que no cumplen la condición de la restricción:</p>
+<pre>
+ update libros set preciomay=30
+  where titulo='Java en 10 minutos';
+</pre>
+<p>Ahora Oracle si nos permite agregar la restricción "check" que impida que se ingresen valores para "preciomay" superiores a "preciomin":</p>
+<pre>
+ alter table libros
+ add constraint CK_libros_preciominmay
+ check (preciomay<=preciomin);
+</pre>
+<p>Veamos las restricciones de la tabla:</p>
+<pre>
+ select *from user_constraints where table_name='LIBROS';
+</pre>
+<p>Aparece la siguiente tabla (simplificada) resultado:</p>
+<pre>
+OWNER	CONSTRAINT_NAME			CONSTRAINT_TYPE		TABLE_NAME	SEARCH_CONDITION
+--------------------------------------------------------------------------------------------------
+SYSTEM	PK_LIBROS_CODIGO		P               	LIBROS
+SYSTEM	UQ_LIBROS			U			LIBROS
+SYSTEM	CK_LIBROS_PRECIOS_POSITIVO	C			LIBROS		preciomin>=0 and preciomay>=0
+SYSTEM	CK_LIBROS_PRECIOMINMAY		C			LIBROS		preciomay<=preciomin
+</pre>
+<p>Note que en el caso de las restricciones de control, en las cuales muestra "C" en el tipo de constraint, la columna "SEARCH_CONDITION" muestra la regla que debe cumplirse; en caso de ser una restricción "primary key" o unique", esa columna queda vacía.</p>
+
+<p>Intentamos ingresar un registro que infrinja la restricción "CK_libros_preciominmax":</p>
+<pre>
+ insert into libros values (6,'El gato con botas',null,'Planeta',25,30);
+</pre>
+<p>Mensaje de error.</p>
+
+<p>Consultamos "user_cons_columns":</p>
+<pre>
+ select *from user_cons_columns where table_name='LIBROS';
+</pre>
+<p>Aparece la siguiente información simplificada:</p>
+<pre>
+OWNER		CONSTRAINT_NAME			TABLE_NAME	COLUMN_NAME	POSITION
+-----------------------------------------------------------------------------------------
+SYSTEM		PK_LIBROS_CODIGO		LIBROS		CODIGO		1
+SYSTEM		UQ_LIBROS			LIBROS		EDITORIAL	3
+SYSTEM		UQ_LIBROS			LIBROS		CODIGO		2
+SYSTEM		UQ_LIBROS			LIBROS		TITULO		1
+SYSTEM		CK_LIBROS_PRECIOS_POSITIVO	LIBROS		PRECIOMAY
+SYSTEM		CK_LIBROS_PRECIOS_POSITIVO	LIBROS		PRECIOMIN
+SYSTEM		CK_LIBROS_PRECIOMINMAY		LIBROS		PRECIOMAY
+SYSTEM		CK_LIBROS_PRECIOMINMAY		LIBROS		PRECIOMIN
+</pre>
+<p>Analizamos la información: la tabla tiene 4 restricciones, 1 "primary key", 1 "unique" y 2 "check". La restricción "primarykey" ocupa una sola fila porque fue definida para 1 solo campo, por ello, en la columna "POSITION" aparece "1". La restricción única ocupa tres filas porque fue definida con 3 campos cuyo orden está indicado en la columna "POSITION". La columna "POSITION" muestra información si la restricción es "primary key" o "unique" indicando el orden de los campos. La restricción de control "CK_libros_precios_positivo" ocupa 2 filas porque en su definición se nombran 2 campos (indicados en "COLUMN_NAME"). La restricción de control "CK_libros_preciominmax" ocupa 2 filas porque en su definición se nombran 2 campos (indicados en "COLUMN_NAME").</p>
+
+        <form name="formulario" action="http://www.sqlserverya.com.ar/aspx/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+        <br>
+   <h2><a href="../indexfc77.html?inicio=25">Retornar</a></h2>   
+        
+	<br>
+   
+
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=25&cod=201&punto=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:36 GMT -->
+</html>
+

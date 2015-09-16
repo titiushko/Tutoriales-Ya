@@ -1,0 +1,240 @@
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=20&cod=22 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de JavaScript : Conceptos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+div#contentdetalle{clear:left;
+                   max-width:900px;
+				   border-top:0px solid #999;
+				   padding-top:15px;
+				   background-color: #aed7a8;
+				   text-align:left;
+				   font-size:1.3em;
+				   font-weight:normal;
+				   font-family:arial;
+				   padding:20px}
+				   
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;  
+}				   
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td>
+<h1>Clase String</h1></td>
+<td align="right">
+<!--<a href="http://www.javascriptya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div id="contentdetalle">
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 	  
+
+Un string consiste en uno o más caracteres encerrados entre simple o doble comillas.<br>
+Concatenación de cadenas (+)<br>
+JavaScript permite concatenar cadenas utilizando el operador +.<br>
+El siguiente fragmento de código concatena tres cadenas para producir su salida:
+<pre>
+var final='La entrada tiene ' + contador + ' caracteres.';
+</pre>
+Dos de las cadenas concatenadas son cadenas literales. La del medio es un entero que automáticamente se convierte a cadena y luego se concatena con las otras. <br>
+<br>
+Propiedad length<br>
+Retorna la cantidad de caracteres de un objeto String.<br>
+<pre>
+var nom='Juan';
+document.write(nom.length); //Resultado 4
+</pre>
+Métodos<br>
+charAt(pos)<br>
+Retorna el carácter del índice especificado. Comienzan a numerarse de la posición cero.
+<pre>
+var nombre='juan';
+var caracterPrimero=nombre.charAt(0);
+</pre>
+substring (posinicial, posfinal)<br>
+Retorna un String extraída de otro, desde el carácter 'posinicial' hasta el 'posfinal'-1:
+<pre>
+	cadena3=cadena1.substring(2,5);
+</pre>
+En este ejemplo, "cadena3" contendrá los caracteres 2, 3, 4 sin incluir el 5 de cadena1 (Cuidado que comienza en cero).
+<br>
+indexOf (subCadena) <br>
+Devuelve la posición de la subcadena dentro de la cadena, o -1 en caso de no estar.<br>
+Tener en cuenta que puede retornar 0 si la subcadena coincide desde el primer carácter.<br>
+<pre>
+var nombre='Rodriguez Pablo';
+var pos=nombre.indexOf('Pablo');
+if (pos!=-1)
+  document.write ('Está el nombre Pablo en la variable nombre');
+</pre>
+toUpperCase()<br>
+Convierte todos los caracteres del String que invoca el método a mayúsculas:
+<pre>
+cadena1=cadena1.toUpperCase();
+</pre>
+Luego de esto, cadena1 tiene todos los caracteres convertidos a mayúsculas.
+<br>
+toLowerCase()<br>
+Convierte todos los caracteres del String que invoca el método a minúsculas:
+<pre>
+cadena1=cadena1.toLowerCase();
+</pre>
+Luego de esto, cadena1 tiene todos los caracteres convertidos a minúsculas.
+<br>
+<br>
+Ejemplo: Cargar un string por teclado y luego llamar a los distintos métodos de la clase String y la propiedad length.
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var cadena=prompt('Ingrese una cadena:','');
+  document.write('La cadena ingresada es:'+cadena);
+  document.write('&lt;br&gt;');
+  document.write('La cantidad de caracteres son:'+cadena.length);
+  document.write('&lt;br&gt;');
+  document.write('El primer carácter es:'+cadena.charAt(0));
+  document.write('&lt;br&gt;'); 
+  document.write('Los primeros 3 caracteres son:'+cadena.substring(0,3));
+  document.write('&lt;br&gt;'); 
+  if (cadena.indexOf('hola')!=-1)
+    document.write('Se ingres&oacute; la subcadena hola');
+  else 
+    document.write('No se ingres&oacute; la subcadena hola');
+  document.write('&lt;br&gt;'); 
+  document.write('La cadena convertida a may&uacute;sculas es:'+cadena.toUpperCase());
+  document.write('&lt;br&gt;');
+  document.write('La cadena convertida a min&uacute;sculas es:'+cadena.toLowerCase());
+  document.write('&lt;br&gt;'); 
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</p>
+</pre>
+</p>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../index28fa.html?inicio=20">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=20&cod=22 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:20 GMT -->
+</html>

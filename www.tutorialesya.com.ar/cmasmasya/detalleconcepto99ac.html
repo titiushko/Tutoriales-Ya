@@ -1,0 +1,361 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=32&codigo=163&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Pila dinámica</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>32 - Pila dinámica</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Otra utilización fundamental de los punteros es para hacer uso de la pila dinámica de la memoria que administra el sistema operativo.</p>
+ 
+<p>Lo primero que veremos es que todas las variables que definimos ocupan un espacio llamado PILA ESTATICA del programa (esta pila estática es limitada)</p>
+<p>A medida que definimos variables se reduce el espacio disponible para definir otras variables.<br>
+<p>Por ejemplo si definimos un vector con 10000 componentes de tipo entero en la función main debemos tener en cuenta que 40 Kb (si cada entero ocupa 4 bytes) de la pila estática estará reservado para dicha estructura.</p>
+<p>Es común que en programas de mediano y gran tamaño la pila estática no nos alcance para almacenar los datos. En estos casos debemos recurrir a la PILA DINAMICA.</p>
+ 
+<p>La PILA DINAMICA solo se puede acceder por medio de punteros.<br>
+La pila dinámica solo esta limitada por la cantidad de memoria ram del equipo.</p>
+
+<img src="imagentema/foto051.jpg" border="0" alt="pila dinamica"><br>
+
+<p>Podemos observar que la memoria del equipo tiene cargado el sistema operativo que administra entre otras cosas los programas que se ejecutan. Todo programa que se ejecuta (Exe) tiene asignado un espacio para la pila estática (puede variar a partir, por ejemplo 64 Kb.)</p>
+<p>La pila dinámica es toda la memoria Ram que no es ocupada por el sistema operativo y otros programas que están ejecutándose actualmente</p>.
+<p>Para acceder al espacio de memoria llamada Pila Dinámica debemos solicitarla al sistema operativo.</p>
+ 
+<p>Para solicitar espacio en la pila dinámica debemos utilizar el operador new y es fundamental devolverla mediante el operador delete (la no devolución del espacio solicitado hará que nuestra computadora en algún momento se bloquee por falta de espacio en la memeoria ram)</p>
+<p>La administración de la memoria dinámica ofrece una gran libertad al programador pero trae como contrapartida una gran responsabilidad para administrarla correctamente.</p>
+
+
+<h3>Problema 1:</h3>
+<p>Definir un vector de 5 elementos y localizarlo en la pila dinámica.
+</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main ()
+{
+  int *p;
+  p=new int[5];
+  for(int f=0;f&lt;5;f++)
+  {
+    cout &lt;&lt;"Ingrese elemento:";
+    cin &gt;&gt;p[f];
+  }
+  cout &lt;&lt;"contenido del vector:";
+  for(int f=0;f&lt;5;f++)
+  {
+    cout&lt;&lt;p[f]&lt;&lt;"-";
+  }
+  delete []p;
+  cin.get();
+  cin.get();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/PilaDinamica1.zip">PilaDinamica1.zip</a></p>
+
+<p>Para crear un vector en la pila dinámica debemos utilizar el operador new:</p>
+<pre>
+  int *p;
+  p=new int[5];
+</pre>
+<p>Como vemos es distinta la sintaxis a la creación de un vector estático: int p[5]</p>
+<p>Cuando trabajamos con el vector no hay cambios con respecto a lo que hemos visto con vectores estáticos (cargarlo, imprimirlo etc.):</p>
+<pre>
+  for(int f=0;f&lt;5;f++)
+  {
+    cout &lt;&lt;"Ingrese elemento:";
+    cin &gt;&gt;p[f];
+  }
+  cout &lt;&lt;"contenido del vector:";
+  for(int f=0;f&lt;5;f++)
+  {
+    cout&lt;&lt;p[f]&lt;&lt;"-";
+  }
+</pre>
+
+<p>Y finalmente otro punto nuevo a tener en cuenta cuando trabajamos con variables localizadas en la pila dinámica es devolver el espacio utilizado:</p>
+<pre>
+  delete []p;
+</pre>
+
+
+<p>La localización de variables en la pila dinámica trae consigo dos ventajas, por una parte la pila dinámica es mucho más grande que la pila estática por lo que podemos definir muchas más variables que en la pila estática.<br>
+ Por otro lado podemos solicitar espacio para estructuras de datos en tiempo de ejecución (Por ejemplo podemos definir un vector con una cantidad de componentes que dependa de una variable)</p>
+
+<h3>Problema 2:</h3>
+<p>Plantear una clase que permita administrar un vector de enteros. En el constructor solicitar al operador que ingrese la cantidad de componentes que tendrá el vector y lo cree y localice en la pila dinámica. Hacer un método que lo imprima y finalmente en el destructor eliminar el espacio ocupado por el vector creado previamente.
+</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Vector {
+    int *p;
+    int tamano;
+public:
+    Vector();
+    void cargar();
+    void imprimir();
+    ~Vector();
+};
+
+Vector::Vector()
+{
+    cout &lt;&lt;"Cuantos elementos tendra el vector:";
+    cin &gt;&gt;tamano;
+    p=new int[tamano];
+}
+
+void Vector::cargar()
+{
+    for(int f=0;f&lt;tamano;f++)
+    {
+        cout &lt;&lt;"Ingrese elemento:";
+        cin&gt;&gt;p[f];
+    }
+}
+
+void Vector::imprimir()
+{
+    for(int f=0;f&lt;tamano;f++)
+    {
+        cout&lt;&lt;p[f];
+        cout&lt;&lt;"-";
+    }
+}
+
+Vector::~Vector()
+{
+    delete []p;
+}
+
+void main()
+{
+    Vector vector1;
+    vector1.cargar();
+    vector1.imprimir();
+    cin.get();
+    cin.get();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/PilaDinamica2.zip">PilaDinamica2.zip</a></p>
+
+<p>Definimos dos atributos, el puntero y una variable entera que indicará el tamaño del vector que quiere crear el usuario:</p>
+<pre>
+class Vector {
+    int *p;
+    int tamano;
+public:
+    Vector();
+    void cargar();
+    void imprimir();
+    ~Vector();
+};
+</pre>
+
+<p>En el constructor solicitamos que ingrese el tamaño del vector y lo creamos en la pila dinámica:</p>
+<pre>
+Vector::Vector()
+{
+    cout &lt;&lt;"Cuantos elementos tendra el vector:";
+    cin &gt;&gt;tamano;
+    p=new int[tamano];
+}
+</pre>
+
+<p>La carga y la impresión del vector:</p>
+<pre>
+void Vector::cargar()
+{
+    for(int f=0;f&lt;tamano;f++)
+    {
+        cout &lt;&lt;"Ingrese elemento:";
+        cin&gt;&gt;p[f];
+    }
+}
+
+void Vector::imprimir()
+{
+    for(int f=0;f&lt;tamano;f++)
+    {
+        cout&lt;&lt;p[f];
+        cout&lt;&lt;"-";
+    }
+}
+</pre>
+
+<p>En el destructor procedemos a liberar el espacio que había sido solicitado para crear el vector:</p>
+<pre>
+Vector::~Vector()
+{
+    delete []p;
+}
+</pre>
+
+<p>En la main creamos un objeto de la clase Vector y llamamos a los métodos de cargar e imprimir (recordemos que el constructor se llama automáticamente, lo mismo que el destructor):</p>
+<pre>
+void main()
+{
+    Vector vector1;
+    vector1.cargar();
+    vector1.imprimir();
+    cin.get();
+    cin.get();
+}
+</pre>
+
+<h2><a href="index7732.html?inicio=30">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=32&codigo=163&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:26 GMT -->
+</html>

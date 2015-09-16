@@ -1,0 +1,327 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=41&codigo=172&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:53 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Estructuras dinámicas:en C++ Listas genéricas ordenadas</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>41 - Estructuras dinámicas:en C++ Listas genéricas ordenadas</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Una lista genérica es ordenada si cuando insertamos información en la lista queda ordenada respecto al campo info (sea de menor a mayor o a la inversa)</p>
+
+<p>Ejemplo:</p>
+<pre>
+listaOrdenada->insertar(10);
+</pre>
+<img src="imagentema/foto081.jpg" border="0" alt="lista ordenada"><br>
+<pre>
+listaOrdenada->insertar(5)
+</pre>
+<img src="imagentema/foto082.jpg" border="0" alt="lista ordenada"><br>
+<pre>
+listaOrdenada->insertar(7)
+</pre>
+<img src="imagentema/foto083.jpg" border="0" alt="lista ordenada"><br>
+<pre>
+listaOrdenada->insertar(50)
+</pre>
+<img src="imagentema/foto084.jpg" border="0" alt="lista ordenada"><br>
+
+<p>Podemos observar que si recorremos la lista podemos acceder a la información de menor a mayor.<br>
+No se requiere un método para ordenar la lista, sino que siempre permanece ordenada, ya que se inserta ordenada.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include &lt;iostream&gt;
+
+using namespace std;
+
+class ListaGenericaOrdenada {
+private:
+    class Nodo {
+    public:
+        int info;
+        Nodo *sig;
+    };
+
+    Nodo *raiz;
+public:
+    ListaGenericaOrdenada();
+    ~ListaGenericaOrdenada();    
+    void insertar(int x);
+    void imprimir();
+};
+
+ListaGenericaOrdenada::ListaGenericaOrdenada()
+{
+    raiz = NULL;
+}
+
+ListaGenericaOrdenada::~ListaGenericaOrdenada()
+{
+    Nodo *reco = raiz;
+    Nodo *bor;
+    while (reco != NULL)
+    {
+        bor = reco;
+        reco = reco-&gt;sig;
+        delete bor;
+    }
+}
+
+void ListaGenericaOrdenada::insertar(int x)
+{
+    Nodo *nuevo = new Nodo();
+    nuevo-&gt;info = x;
+    if (raiz == NULL) 
+    {
+        raiz = nuevo;
+    }
+    else 
+    {
+        if (x&lt;raiz-&gt;info) 
+        {
+            nuevo-&gt;sig = raiz;
+            raiz = nuevo;
+        }
+        else 
+        {
+            Nodo *reco = raiz;
+            Nodo *atras = raiz;
+            while (x &gt;= reco-&gt;info && reco-&gt;sig != NULL) 
+            {
+                atras = reco;
+                reco = reco-&gt;sig;
+            }
+            if (x &gt;= reco-&gt;info) 
+            {
+                reco-&gt;sig = nuevo;
+            }
+            else
+            {
+                nuevo-&gt;sig = reco;
+                atras-&gt;sig = nuevo;
+            }
+        }
+    }
+}
+
+void ListaGenericaOrdenada::imprimir()
+{
+    Nodo *reco = raiz;
+    cout &lt;&lt; "Listado completo.\n";
+    while (reco != NULL)
+    {
+        cout &lt;&lt; reco-&gt;info &lt;&lt; "-";
+        reco = reco-&gt;sig;
+    }
+    cout &lt;&lt; "\n";
+}
+
+
+void main()
+{
+    ListaGenericaOrdenada *lista = new ListaGenericaOrdenada();
+    lista-&gt;insertar(10);
+    lista-&gt;insertar(5);
+    lista-&gt;insertar(7);
+    lista-&gt;insertar(50);
+    lista-&gt;imprimir();
+    delete lista;
+    cin.get();
+}
+
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/ListaGenericaOrdenada.zip">ListaGenericaOrdenada.zip</a></p>
+<p>El método insertar lo resolvemos de la siguiente forma:</p>
+<p>Creamos primeramente el nodo, ya que siempre se insertará la información en la lista:</p>
+<pre>
+    Nodo *nuevo = new Nodo();
+    nuevo-&gt;info = x;
+ </pre>
+
+<p>Se puede presentar las siguientes situaciones, si está vacía la lista, lo insertamos inmediatamente:</p>
+<pre>
+    if (raiz == NULL) 
+    {
+        raiz = nuevo;
+    }
+</pre>
+<p>Si no está vacía la lista, verificamos si lo debemos insertar en la primera posición de la lista (analizamos si la información a insertar es menor a lo apuntado por raiz en el campo info):</p>
+<pre>
+        if (x&lt;raiz-&gt;info) 
+        {
+            nuevo-&gt;sig = raiz;
+            raiz = nuevo;
+        }
+</pre>     
+
+<p>Sino analizamos si lo debemos insertar en medio o al final de la lista.<br>
+Mientras la información a insertar sea mayor o igual a la información del nodo que visitamos ( x&gt;=reco->info)  y no lleguemos al final de la lista (reco->sig!=NULL) avanzamos reco al siguiente nodo y fijamos un puntero en el nodo anterior (atras)</p>
+<pre>
+            Nodo *reco = raiz;
+            Nodo *atras = raiz;
+            while (x &gt;= reco-&gt;info && reco-&gt;sig != NULL) 
+            {
+                atras = reco;
+                reco = reco-&gt;sig;
+            }
+</pre>
+<p>Cuando salimos del while si la condición (x&gt;=reco->info) continua siendo verdadera significa que se inserta al final de la lista, en caso contrario se inserta en medio de la lista:</p>
+<pre>
+            if (x &gt;= reco-&gt;info) 
+            {
+                reco-&gt;sig = nuevo;
+            }
+            else
+            {
+                nuevo-&gt;sig = reco;
+                atras-&gt;sig = nuevo;
+            }
+</pre>
+<h2><a href="index7732.html?inicio=30">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=41&codigo=172&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:53 GMT -->
+</html>

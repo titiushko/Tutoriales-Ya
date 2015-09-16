@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=8&codigo=8&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:50:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Servidor web de archivos estáticos html, css, jpg, mp3, mp4, ico etc.</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++, programación, tutorial, nodejs">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de NodeJS.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>8 - Servidor web de archivos estáticos html, css, jpg, mp3, mp4, ico etc.</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Vimos en el concepto anterior como crear un servidor web solo de páginas HTML. Ahora extenderemos nuestro servidor web de páginas estáticas a otros formatos de archivos.</p>
+<p>Un sitio web como sabemos está constituido entre otro por archivos html, js, css, jpg, gif, mp3, mp4, ico etc.</p>
+<p>Siempre que devolvemos un recurso a un cliente (normalmente el navegador) en la cabecera de respuesta indicamos el tipo de recurso devuelto:</p>
+<pre>
+                    respuesta.writeHead(200, {'Content-Type': 'text/html'});
+                    respuesta.write(contenido);
+                    respuesta.end();
+</pre>
+<p>Debemos inicializar el valor 'Content-Type' con el tipo de recurso a devolver, como en el concepto anterior solo devolvíamos archivos html nos bastaba con indicar siempre el valor: 'text/html'</p>
+<h3>Protocolo MIME</h3>
+<p>Los MIME Types son la manera estándar de mandar contenido a través de internet. Especifican a cada archivo con su tipo de contenido.</p>
+<p>Según el tipo de archivo que retornamos indicamos un valor distinto a Content-Type. Ejemplos de valores:</p>
+<pre>
+Content-type: text/html
+Content-type: text/css
+Content-type: image/jpg
+Content-type: image/x-icon
+Content-type: audio/mpeg3
+Content-type: video/mp4
+etc.
+</pre>
+<p>Un listado bastante completo de tipos MIME lo podemos ver en este <a href="http://www.sitepoint.com/web-foundations/mime-types-complete-list/" target="_blank">sitio.</a></p>
+
+<h3>Problema</h3>
+<p>Confeccionaremos un sitio que contenga una serie de archivos html, css, jpg, mp3, mp4 e ico.</p>
+<p>Crearemos un directorio llamado ejercicio10 y dentro de este otro directorio interno llamado static donde dispondremos todos los archivos html,css, jpg, mp3, mp4 e ico.</p>
+<p>En el directorio ejercicio10 tipearemos nuestra aplicacion Node.js que tiene por objetivo servir las páginas HTML y otros recursos que pidan los navegadores web.</p>
+<p>La aplicación Node.js la llamamos ejercicio10.js</p>
+<pre>ejercicio10.js</pre>
+<pre class="recuadro">
+var http=require('http');
+var url=require('url');
+var fs=require('fs');
+
+var mime = {
+   'html' : 'text/html',
+   'css'  : 'text/css',
+   'jpg'  : 'image/jpg',
+   'ico'  : 'image/x-icon',
+   'mp3'  : 'audio/mpeg3',
+   'mp4'  : 'video/mp4'
+};
+
+var servidor=http.createServer(function(pedido,respuesta){
+    var objetourl = url.parse(pedido.url);
+    var camino='static'+objetourl.pathname;
+    if (camino=='static/')
+        camino='static/index.html';
+    fs.exists(camino,function(existe){
+        if (existe) {
+            fs.readFile(camino,function(error,contenido){
+                if (error) {
+                    respuesta.writeHead(500, {'Content-Type': 'text/plain'});
+                    respuesta.write('Error interno');
+                    respuesta.end();                    
+                } else {
+                    var vec = camino.split('.');
+                    var extension=vec[vec.length-1];
+                    var mimearchivo=mime[extension];
+                    respuesta.writeHead(200, {'Content-Type': mimearchivo});
+                    respuesta.write(contenido);
+                    respuesta.end();
+                }
+            });
+        } else {
+            respuesta.writeHead(404, {'Content-Type': 'text/html'});
+            respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;Recurso inexistente&lt;/body&gt;&lt;/html&gt;');        
+            respuesta.end();
+        }
+    });
+});
+
+servidor.listen(8888);
+
+console.log('Servidor web iniciado');
+</pre>
+
+
+<p>Este proyecto lo puede descargar en un zip con todos los archivos js, html, jpg etc. desde este enlace :
+<a href="proyectos/ejercicio10.zip">ejercicio10</a></p>
+
+<p>Veamos los cambios que debemos hacer con respecto al concepto anterior que servíamos solo archivos HTML.</p>
+<p>Primero definimos un objeto literal asociando las distintas extensiones de archivos y su valor MIME:</p>
+<pre>
+var mime = {
+   'html' : 'text/html',
+   'css'  : 'text/css',
+   'jpg'  : 'image/jpg',
+   'ico'  : 'image/x-icon',
+   'mp3'  : 'audio/mpeg3',
+   'mp4'  : 'video/mp4'
+};
+</pre>
+
+<p>Todo el resto del código es idéntico al concepto anterior salvo cuando tenemos que retornar el recurso que solicita el navegador:</p>
+<pre>
+                    var vec = camino.split('.');
+                    var extension=vec[vec.length-1];
+                    var mimearchivo=mime[extension];
+                    respuesta.writeHead(200, {'Content-Type': mimearchivo});
+                    respuesta.write(contenido);
+                    respuesta.end();
+</pre>
+<p>Descomponemos en un vector separando por el punto la variable camino:</p>
+<pre>
+                    var vec = camino.split('.');
+</pre>
+<p>Si tenemos en la variable camino el valor:</p>
+/pagina1.html
+</pre>
+<p>Luego de ejecutarse el método split pidiendo que separa por el caracter punto tenemos en la variable vec dos elementos:</p>
+<pre>
+   vec[0] tiene almacenado  /pagina1
+   vec[1] tiene almacenado  html
+</pre>
+<p>Sacamos el último elemento del vector que en definitiva almacena la extensión del archivo:</p>
+<pre>
+                    var extension=vec[vec.length-1];
+</pre>
+<p>Seguidamente rescatamos la propiedad del objeto literal mime:</p>
+<pre>
+                    var mimearchivo=mime[extension];
+</pre>
+<p>Por ejemplo si tenemos en la variable extension el valor 'html' luego en la variable mimearchivo se almacena: 'text/html' que es el
+valor para dicha propiedad definida en la variable mime.</p>
+<p>Ahora llamamos al métdodo writeHead donde retornamos el tipo MIME para dicha extensión:</p>
+<pre>
+                    respuesta.writeHead(200, {'Content-Type': mimearchivo});
+</pre>
+<p>El resto de este programa no sufre cambios con respecto a devolver siempre archivos HTML.</p>
+
+
+<p>Luego de iniciar la aplicación desde la consola:</p>
+
+<p><img src="imagentema/foto021.jpg" border="0" alt="servidor web nodejs multples archivos html, jpg, mp3, mp4, ico etc."></p>
+<p>Ya podemos solicitar páginas al servidor que acabamos de inicializar y comprobar que nos retorna los distintos recursos enumerados dentro de cada página (imágenes, audios, videos, hojas de estilo etc.):</p>
+<p><img src="imagentema/foto022.jpg" border="0" alt="servidor web nodejs múltples archivos html, jpg, mp3, mp4, ico etc."></p>
+
+<p>La organización de los archivos en el disco duro es:</p>
+<p><img src="imagentema/foto023.jpg" border="0" alt="directorio aplicacion nodejs"></p>
+<p>Como vemos en la carpeta ejercicio10 se ubica la aplicación Node.js y la carpeta static con todos los recursos:</p>
+<p><img src="imagentema/foto024.jpg" border="0" alt="servidor web nodejs múltples archivos html, jpg, mp3, mp4, ico etc."></p>
+
+<p>En nuestro ejemplo hemos limitado a servir 6 formatos de archivos distintos:</p>
+<pre>
+var mime = {
+   'html' : 'text/html',
+   'css'  : 'text/css',
+   'jpg'  : 'image/jpg',
+   'ico'  : 'image/x-icon',
+   'mp3'  : 'audio/mpeg3',
+   'mp4'  : 'video/mp4'
+};
+</pre>
+<p>Para servir otros formatos de archivos deberíamos agregar al objeto literal mime los valores respectivos que define el protocolo MIME.</p>
+
+<h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-35', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=8&codigo=8&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:50:23 GMT -->
+</html>

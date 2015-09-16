@@ -1,0 +1,416 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=60&codigo=191&inicio=45 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:31:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Parámetros por valor y por referencia de objetos</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>60 - Parámetros por valor y por referencia de objetos</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Los parámetros de un método pueden ser de tipo objeto y también los podemos hacer por valor o referencia.</p>
+<p>Cuando un parámetro de tipo objeto se hace por valor se hace una copia idéntica de dicho objeto en otra parte de memoria.</p>
+<p>Si modificáramos los atributos de dicho parámetro no se estarían modificando los atributos del objeto que le pasamos en la llamada.</p>
+
+<p>Veamos un programa que recibe un objeto como parámetro por valor y cambiemos sus atributos y veamos que sucede con el objeto original.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Reloj {
+    int hora;
+    int minuto;
+    int segundo;
+public:
+    Reloj(int hora, int minuto, int segundo) { this-&gt;hora = hora; this-&gt;minuto = minuto; this-&gt;segundo = segundo; };
+    void imprimir();
+    void intentoCambiar(Reloj r);
+};
+
+void Reloj::imprimir()
+{
+    cout &lt;&lt; hora &lt;&lt; ":" &lt;&lt; minuto &lt;&lt; ":" &lt;&lt; segundo &lt;&lt; "\n";
+}
+
+void Reloj::intentoCambiar(Reloj r)
+{
+    r.hora = 1;
+    r.minuto = 0;
+    r.segundo = 0;
+}
+
+void main()
+{
+    Reloj reloj1(10, 10, 10);
+    Reloj reloj2(20, 20, 20);
+    reloj1.intentoCambiar(reloj2);
+    reloj1.imprimir();  // imprime: 10:10:10
+    reloj2.imprimir();  // imprime: 20:20:20
+    cin.get();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/ObjetoParametroValor1.zip">ObjetoParametroValor1.zip</a></p>
+
+
+<p>En la main creamos dos objetos de la clase Reloj e inicializamos la hora, minuto y segundo actual de cada reloj.</p>
+<p>El método intentoCambiar recibe un parámetro por valor de la clase Reloj:</p>
+<pre>
+class Reloj {
+    int hora;
+    int minuto;
+    int segundo;
+public:
+    Reloj(int hora, int minuto, int segundo) { this-&gt;hora = hora; this-&gt;minuto = minuto; this-&gt;segundo = segundo; };
+    void imprimir();
+    void intentoCambiar(Reloj r);
+};
+</pre>
+
+<p>En el algoritmo del método intentoCambiar modificamos los atributos del parámetro r:</p>
+<pre>
+void Reloj::intentoCambiar(Reloj r)
+{
+    r.hora = 1;
+    r.minuto = 0;
+    r.segundo = 0;
+}
+</pre>
+
+<p>Pero como podemos comprobar cuando desde la main le enviamos el objeto reloj2 al método intentoCambiar los atributos originales de dicho objeto no se alteran (siguen teniendo los valores que le pasamos al constructor):</p>
+<pre>
+void main()
+{
+    Reloj reloj1(10, 10, 10);
+    Reloj reloj2(20, 20, 20);
+    reloj1.intentoCambiar(reloj2);
+    reloj1.imprimir();  // imprime: 10:10:10
+    reloj2.imprimir();  // imprime: 20:20:20
+    cin.get();
+}
+</pre>
+
+<p>Esto funciona así ya que dentro del método intentoCambiar se crea un parámetro r de la clase Reloj con una copia idéntica del objeto que le pasamos desde la main. Es importante hacer notar que si la clase Reloj tiene destructor el mismo se ejecutará cuando se libere el espacio del parámetro r al finalizar el método intentoCambiar.</p>
+
+<p>Modifiquemos este mismo problema y definamos el parámetro por referencia:</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Reloj {
+    int hora;
+    int minuto;
+    int segundo;
+public:
+    Reloj(int hora, int minuto, int segundo) { this-&gt;hora = hora; this-&gt;minuto = minuto; this-&gt;segundo = segundo; };
+    void imprimir();
+    void intentoCambiar(Reloj &r);
+};
+
+void Reloj::imprimir()
+{
+    cout &lt;&lt; hora &lt;&lt; ":" &lt;&lt; minuto &lt;&lt; ":" &lt;&lt; segundo &lt;&lt; "\n";
+}
+
+void Reloj::intentoCambiar(Reloj &r)
+{
+    r.hora = 1;
+    r.minuto = 0;
+    r.segundo = 0;
+}
+
+void main()
+{
+    Reloj reloj1(10, 10, 10);
+    Reloj reloj2(20, 20, 20);
+    reloj1.intentoCambiar(reloj2);
+    reloj1.imprimir();  // imprime: 10:10:10
+    reloj2.imprimir();  // imprime: 1:0:0
+    cin.get();
+}
+</pre>
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/ObjetoParametroReferencia1.zip">ObjetoParametroReferencia1.zip</a></p>
+
+
+<p>El único cambio que hemos dispuesto es que el parámetro r pasa por referencia (es decir ahora r es un alias de la variable que le pasamos desde la main):</p>
+<pre>
+void Reloj::intentoCambiar(Reloj &r)
+{
+    r.hora = 1;
+    r.minuto = 0;
+    r.segundo = 0;
+}
+</pre>
+<p>Si modificamos los atributos de r, estamos modificando los atributos del objeto reloj2 que le pasamos desde la main y es por eso que cuando imprimimos luego los atributos del objeto reloj2 vemos que los datos son distintos a los que le pasamos en el constructor:</p>
+<pre>
+void main()
+{
+    Reloj reloj1(10, 10, 10);
+    Reloj reloj2(20, 20, 20);
+    reloj1.intentoCambiar(reloj2);
+    reloj1.imprimir();  // imprime: 10:10:10
+    reloj2.imprimir();  // imprime: 1:0:0
+    cin.get();
+}
+</pre>
+<p>Otra cosa importante que hay que destacar que cuando pasamos un parámetro por referencia el destructor de dicho parámetro no se ejecuta.</p>
+
+<p>Cuando se pasan objetos grandes el tiempo de hacer la copia en el parámetro puede ser costoso para la eficiencia de nuestro programa. Es muy común en estos casos pasar por referencia aunque no tengamos que modificar el objeto que le pasamos, le agregamos el modificador const al parámetro por referencia para evitar modificarlo.</p>
+
+
+</ul>
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+<p>Plantear la clase Reloj y definir como atributo la hora, minuto y segundo. En el constructor inicializar los atributos. Definir un método que retorne si son iguales los atributos de dos objetos de tipo Reloj, el método tiene que tener la estructura:</p>
+<pre>
+  bool iguales(Reloj r);
+</pre>
+</li>
+
+<li>
+<p>Volver a codificar el problema anterior pero ahora al método iguales hacer que llegue como referencia el parámetro (agregamos el modificador const ya que no tenemos que modificar el objeto que le pasamos como referencia):</p>
+<pre>
+  bool iguales(const Reloj &r);
+</pre>
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+
+<pre class="recuadrooculto">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Reloj {
+    int hora;
+    int minuto;
+    int segundo;
+public:
+    Reloj(int hora, int minuto, int segundo) { this-&gt;hora = hora; this-&gt;minuto = minuto; this-&gt;segundo = segundo; };
+    void imprimir();
+    bool iguales(Reloj r);
+};
+
+void Reloj::imprimir()
+{
+    cout &lt;&lt; hora &lt;&lt; ":" &lt;&lt; minuto &lt;&lt; ":" &lt;&lt; segundo &lt;&lt; "\n";
+}
+
+bool Reloj::iguales(Reloj r)
+{
+    if (hora == r.hora && minuto == r.minuto && segundo == r.segundo)
+        return true;
+    else
+        return false;
+}
+
+void main()
+{
+    Reloj reloj1(10, 10, 10);
+    Reloj reloj2(10, 10, 10);
+    reloj1.imprimir();  
+    reloj2.imprimir();  
+    if (reloj1.iguales(reloj2))
+        cout &lt;&lt; "Tienen la misma hora los relojes";
+    else
+        cout &lt;&lt; "No tienen la misma hora los relojes";
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/ObjetoParametroValor2.zip">ObjetoParametroValor2.zip</a></p>
+
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Reloj {
+    int hora;
+    int minuto;
+    int segundo;
+public:
+    Reloj(int hora, int minuto, int segundo) { this-&gt;hora = hora; this-&gt;minuto = minuto; this-&gt;segundo = segundo; };
+    void imprimir();
+    bool iguales(const Reloj &r);
+};
+
+void Reloj::imprimir()
+{
+    cout &lt;&lt; hora &lt;&lt; ":" &lt;&lt; minuto &lt;&lt; ":" &lt;&lt; segundo &lt;&lt; "\n";
+}
+
+bool Reloj::iguales(const Reloj &r)
+{
+    if (hora == r.hora && minuto == r.minuto && segundo == r.segundo)
+        return true;
+    else
+        return false;
+}
+
+void main()
+{
+    Reloj reloj1(10, 10, 10);
+    Reloj reloj2(10, 10, 10);
+    reloj1.imprimir();
+    reloj2.imprimir();
+    if (reloj1.iguales(reloj2))
+        cout &lt;&lt; "Tienen la misma hora los relojes";
+    else
+        cout &lt;&lt; "No tienen la misma hora los relojes";
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/ObjetoParametroReferencia2.zip">ObjetoParametroReferencia2.zip</a></p>
+
+</pre>
+<h2><a href="indexb634.html?inicio=45">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=60&codigo=191&inicio=45 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:31:23 GMT -->
+</html>

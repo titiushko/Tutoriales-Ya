@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=22&codigo=22&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:28:00 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Framework Express - Creación y lectura de cookies</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++, programación, tutorial, nodejs">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de NodeJS.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>22 - Framework Express - Creación y lectura de cookies</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Otro recurso muy común en una web es el tratamiento de cookies. El Framework Express enlaza un módulo llamado "cookie-parser" que nos facilita su creación y consulta en nuestro programa.</p>
+<h3>Problema</h3>
+<p>Crear un formulario de login que permita ingresa el mail y la clave de un usuario. Crear luego al presionar el botón submit una cookie llamada "mail" que almacene el mail ingresado por el usuario.<br>
+<p>Cada vez que se ingrese al formulario de login si existe la cookie "mail" mostrar su contenido en el control "text" para que el visitante no tenga que ingresarla nuevamente.</p>
+
+
+<h4>Paso 1</h4>
+Como vamos a utilizar el Framework Express y en conceptos anteriores ya instalamos el 'express-generator' nos posicionamos en el directorio 'c:\ejerciciosnodejs' (o el directorio donde esta almacenando todos sus proyectos) y procederemos a crear nuestra aplicación Node.js utilizando Express y su generador de código:</p>
+<pre>
+c:\ejerciciosnodejs> express ejercicio24 --hbs
+</pre>
+<p>Estamos llamando al programa 'express' y le pasamos dos parámetros, el primero indica el nombre de nuestro proyecto y el segundo el sistema de plantillas que utilizaremos para generar nuestras páginas dinámicas (<strong>h</strong>andle<strong>b</strong>ar<strong>s</strong>)</p>
+<p>Ya tenemos creado la carpeta ejercicio24 y dentro de esta los archivos y subcarpetas básicos:</p>
+<pre>
+  ejercicio24
+    app.js
+    package.json
+    bin
+      www
+    public
+      images
+      javascripts
+      stylesheets
+    router
+      index.js
+      users.js
+    views
+      error.hbs
+      index.hbs
+      layout.hbs
+</pre>
+
+<p>Descendemos a la carpeta ejercicio24 e instalamos todas las dependencias de módulos:</p>
+<pre>
+c:\ejerciciosnodejs\ejercicio24>npm install
+</pre>
+<p>Cuando llamamos a 'npm install' sin ningún otro parámetro lo que hace es buscar el archivo 'package.json' y proceder a instalar todos los módulos especificados en la propiedad 'dependencies'.</p>
+<p>Ahora ya tenemos creado la carpeta 'node_modules' con las 7 carpetas que coinciden con las dependencias especificadas en el archivo json:</p>
+<pre>
+    body-parser
+    cookie-parser
+    debug
+    express
+    hbs
+    morgan
+    serve-favicon
+</pre>
+
+<p>Podemos ver que ya tenemos el módulo que analizaremos en este concepto: cookie-parser.</p>
+<p>Recordemos que hasta ahora hemos creado un esqueleto funcional de una aplicación Node.js utilizando el framework Express y lo podemos ejecutar:</p>
+
+<p>Podemos ejecutar nuestra aplicación mínima creada con el 'express-generador':</p>
+<pre>
+c:\ejerciciosnodejs\ejercicio24>node ./bin/www
+</pre>
+<p>Y ya podemos solicitar al servidor la página raíz del sitio:</p>
+<p><img src="imagentema/foto064.jpg" border="0" alt="express-generator express node.js"></p>
+<p>Recordemos que otra forma de iniciar a nuestro proyecto en Node.js cuando definimos el archivo package.json:</p>
+<p>En lugar de escribir:</p>
+<pre>
+c:\ejerciciosnodejs\ejercicio24>node ./bin/www
+</pre>
+<p>Escribimos:</p>
+<pre>
+c:\ejerciciosnodejs\ejercicio24>npm start
+</pre>
+<p>Recordemos que en el archivo json hay una propiedad start donde definimos el archivo que inicia nuestra aplicación:</p>
+<pre>
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+</pre>
+
+
+<h4>Paso 2</h4>
+<p>Ahora tenemos que modificar el archivo index.hbs que se encuentra en la carpeta "views" y disponemos un enlace al formulario de login:</p>
+<pre class="recuadro">
+&lt;a href="login"&gt;Login&lt;/a&gt;
+</pre>
+
+<p>También creamos otra plantilla llamada 'login.hbs' y cuyo contenido es:</p>
+<pre class="recuadro">
+&lt;form method="post" action="/login"&gt;
+Ingrese mail:
+&lt;input type="mail" name="mail" size="50" value="{{mail}}"&gt;
+&lt;br&gt;
+Ingrese clase:
+&lt;input type="password" name="clave" size="20"&gt;
+&lt;br&gt;
+&lt;input type="submit" value="Ingresar"&gt;
+&lt;/form&gt;
+</pre>
+
+<p>Como vemos en la propiedad value donde se ingresa el mail mostraremos el parámetro "mail" que lo pasaremos cuando carguemos esta plantilla desde el router respectivo.</p>
+
+
+<h4>Paso 3</h4>
+<p>En el archivo index.js de la carpeta routes procedemos a modificarlo con el siguiente código:</p>
+<pre class="recuadro">
+var express = require('express');
+var router = express.Router();
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index');
+});
+
+router.get('/login', function(req, res, next) {
+  if (req.cookies.mail)
+    res.render('login',{mail:req.cookies.mail});
+  else
+    res.render('login');      
+});
+
+
+router.post('/login', function(req, res, next) {
+    res.cookie('mail', req.body.mail,{ expires: new Date(Date.now() + (60*60*24*365*3)) });
+    var pagina='&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;'+
+               '&lt;p&gt;Se creo la cookie&lt;/p&gt;'+
+               '&lt;a href="/"&gt;Retornar&lt;/a&gt;&lt;/body&gt;&lt;/html&gt;';
+    res.send(pagina); 
+});
+
+
+module.exports = router;
+</pre>
+
+<p>Veamos como funciona este código, cuando llamamos y accedemos a la raiz del sitio web se captura la ruta:</p>
+<pre>
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index');
+});
+</pre>
+
+<p>Por lo tanto se levanta la plantilla index.hbs y tenemos en el navegador:</p>
+<p><img src="imagentema/foto075.jpg" border="0" alt="cookie-parser express node.js"></p>
+<p>Cuando seleccionamos el hipervínculo tenemos que se ejecuta:</p>
+<pre>
+router.get('/login', function(req, res, next) {
+  if (req.cookies.mail)
+    res.render('login',{mail:req.cookies.mail});
+  else
+    res.render('login');      
+});
+</pre>
+<p>Aquí controlamos si ya existe la cookie llamada mail en el atributo cookies del objeto req (la primera vez que accedemos a esta página el if se verifica falso y ejecuta el else donde se carga la plantilla login y no se le envían datos):</p>
+<p><img src="imagentema/foto076.jpg" border="0" alt="cookie-parser express node.js"></p>
+<p>Luego de cargar datos por teclado en el formulario y presionar el botón "submit" en nuestro servidor Node.js procedemos a capturar los datos enviados en:</p>
+<pre>
+router.post('/login', function(req, res, next) {
+    res.cookie('mail', req.body.mail,{ expires: new Date(Date.now() + (60*60*24*365*3)) });
+    var pagina='&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;'+
+               '&lt;p&gt;Se creo la cookie&lt;/p&gt;'+
+               '&lt;a href="/"&gt;Retornar&lt;/a&gt;&lt;/body&gt;&lt;/html&gt;';
+    res.send(pagina); 
+});
+</pre>
+<p>Como vemos mediante el método cookie del objeto res creamos una cookie llamada mail y guardamos como valor el dato ingresado en el formulario que lo recuperamos con req.body.mail.</p>
+<p>También tenemos que indicar cual es la fecha de expiración de la cookie (es decir en que fecha el navegador no la tiene que informar al servidor Node.js) en nuestro caso la definimos de 3 años.</p>
+
+<p>Ahora si volvemos a ingresar al formulario de login podremos ver que se carga automáticamente el último mail ingresado:</p>
+<p><img src="imagentema/foto077.jpg" border="0" alt="cookie-parser express node.js"></p>
+
+
+<p>Este proyecto lo puede descargar en un zip con todos los archivos desde este enlace :
+<a href="proyectos/ejercicio24.zip">ejercicio24</a></p>
+
+
+<h2><a href="index9187.html?inicio=15">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-35', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=22&codigo=22&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:28:30 GMT -->
+</html>

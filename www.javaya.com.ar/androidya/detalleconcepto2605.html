@@ -1,0 +1,362 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=153&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:00:31 GMT -->
+<head>
+<title>Reproducción, pausa, continuación y detención de un archivo de audio.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+.descarga2 a {
+color:#4B4B4B;
+text-decoration:none;
+border-bottom:1px dotted #444;
+}
+.descarga2 {
+background: #F7FABE;
+text-align: left;
+padding: 5px 20px 5px 45px;
+border-top: 2px solid #DFE786;
+border-bottom: 2px solid #DFE786;
+color:#000000;
+margin-left:1.2em;
+margin-right:1.2em;
+border-radius:4px;
+font-size:1em;
+
+}  
+
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-30']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>23 - Reproducción, pausa, continuación y detención de un archivo de audio.</h1> <p class="descarga2">Ya se encuentra disponible el nuevo tutorial para aprender android con el nuevo entorno <a href="androidstudioya/index.html" target="_blank">Android Studio propuesto por Google y
+que remplaza a Eclipse</a>.
+</td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<h3>Problema:</h3>
+<p>Confeccionar una aplicación que permita Iniciar un archivo mp3, detener, continuar, detener en forma definitiva y activación o no de la reproducción en forma circular.</p>
+<p>Crear un archivo mp3 con el programa <a href="http://audacity.sourceforge.net/?lang=es">Audacity</a> contando del 1 al 30.</p>
+<p>Primero creamos un proyecto y definimos los 5 botones y métodos a ejecutar cuando se presionen los botones respectivos:</p>
+<img src="imagentema/foto090.jpg" border="0" alt="play mp3 android"><br>
+<p>Creamos la carpeta raw y almacenamos en la misma el archivo mp3 creado previamente. Refrescamos la carpeta raw para actualizar el archivo mp3:</p>
+<img src="imagentema/foto091.jpg" border="0" alt="play mp3 android"><br>
+
+<p>El código fuente es:</p>
+<pre class="recuadro">
+package com.androidya.proyecto020;
+
+import android.app.Activity;
+import android.media.MediaPlayer;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
+
+public class MainActivity extends Activity {
+    MediaPlayer mp;
+    Button b1;
+    int posicion = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        b1 = (Button) findViewById(R.id.button5);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return true;
+    }
+
+    public void destruir() {
+        if (mp != null)
+            mp.release();
+    }
+
+    public void iniciar(View v) {
+        destruir();
+        mp = MediaPlayer.create(this, R.raw.numeros);
+        mp.start();
+        String op = b1.getText().toString();
+        if (op.equals("No reproducir en forma circular"))
+            mp.setLooping(false);
+        else
+            mp.setLooping(true);
+    }
+
+    public void pausar(View v) {
+        if (mp != null && mp.isPlaying()) {
+            posicion = mp.getCurrentPosition();
+            mp.pause();
+        }
+    }
+
+    public void continuar(View v) {
+        if (mp != null && mp.isPlaying() == false) {
+            mp.seekTo(posicion);
+            mp.start();
+        }
+    }
+
+    public void detener(View v) {
+        if (mp != null) {
+            mp.stop();
+            posicion = 0;
+        }
+    }
+
+    public void circular(View v) {
+        detener(null);
+        String op = b1.getText().toString();
+        if (op.equals("No reproducir en forma circular"))
+            b1.setText("reproducir en forma circular");
+        else
+            b1.setText("No reproducir en forma circular");
+    }
+}
+
+</pre>
+<p>Primero definimos tres atributos uno de la clase MediaPlayer para administrar el archivo mp3, un entero donde se almacena la posición actual de reproducción en milisegundos (para poder continuarla en el futuro) y la referencia de un objeto de la clase Button:</p>
+<pre>
+
+    MediaPlayer mp;
+    Button b1;
+    int  posicion=0;
+</pre>
+
+
+<p>El método destruir verifica con un if si el objeto de la clase MediaPlayer está creado procede a liberar recursos del mismo llamando al método release:</p>
+<pre>
+    public void destruir() {
+        if(mp!=null) 
+            mp.release();
+    }
+</pre>
+<p>El método iniciar que se ejecuta al presionar el botón "Iniciar" primero llama al método destruir (para el caso que el mp3 este en ejecución actualmente) seguidamente creamos un objeto de la clase MediaPlayer llamando al método create (en este hacemos referencia al archivo que copiamos a la carpeta raw) Llamamos al método start. Por último extraemos el texto del quinto botón y verificamos si la reproducción debe ejecutarse en forma circular (en forma indefinida una y otra vez):</p>
+<pre>
+    public void iniciar(View v) {
+        destruir();
+        mp = MediaPlayer.create(this,R.raw.numeros);
+        mp.start();
+        String op=b1.getText().toString();
+        if (op.equals("No reproducir en forma circular")) 
+            mp.setLooping(false);
+        else
+            mp.setLooping(true);                
+    }
+</pre>
+
+<p>El método pausar verifica que el objeto de la clase MediaPlayer este creado y en ejecución, en caso afirmativo recuperamos la posición actual de reproducción y llamamos seguidamente al método pause:</p>
+<pre>
+    public void pausar(View v) {
+        if(mp != null && mp.isPlaying()) {
+            posicion = mp.getCurrentPosition();
+            mp.pause();
+        }        
+    }
+</pre>
+
+<p>El método continuar verifica que el objeto de la clase MediaPlayer este creado y la propiedad isPlaying retorne false para proceder a posicionar en que milisegundo continuar la reproducción:</p>
+<pre>
+    public void continuar(View v) {
+        if(mp != null && mp.isPlaying()==false) {
+            mp.seekTo(posicion);
+            mp.start();
+        }        
+    }
+</pre>
+
+<p>El método detener interrumpe la ejecución del mp3 e inicializa el atributo posicion con cero:</p>
+<pre>
+    public void detener(View v) {
+        if(mp != null) {
+            mp.stop();
+            posicion = 0;
+        }        
+    }
+</pre>
+
+<p>Cuando se presiona el botón que cambia si la reproducción se efectúa en forma circular o no procedemos a extraer su texto y según dicho valor almacenamos el valor opuesto:</p>
+<pre>
+    public void circular(View v) {
+        detener(null);
+        String op=b1.getText().toString();
+        if (op.equals("No reproducir en forma circular")) 
+            b1.setText("reproducir en forma circular");
+        else
+            b1.setText("No reproducir en forma circular");        
+    }
+</pre>
+
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/proyecto020.zip">proyecto020.zip</a>
+</div>
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+
+  </div>
+  
+  
+  
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=153&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:01:22 GMT -->
+</html>

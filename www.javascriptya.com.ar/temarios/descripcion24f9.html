@@ -1,0 +1,255 @@
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=70&cod=78 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:24 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de JavaScript : Conceptos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+div#contentdetalle{clear:left;
+                   max-width:900px;
+				   border-top:0px solid #999;
+				   padding-top:15px;
+				   background-color: #aed7a8;
+				   text-align:left;
+				   font-size:1.3em;
+				   font-weight:normal;
+				   font-family:arial;
+				   padding:20px}
+				   
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;  
+}				   
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td>
+<h1>Expresiones regulares</h1></td>
+<td align="right">
+<!--<a href="http://www.javascriptya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div id="contentdetalle">
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 	  
+
+<p>Una expresión regular es una técnica que nos permite identificar si un string coincide con un patrón determinado. Un ejemplo clásico es determinar si un email está correctamente tipeado (sabemos que comienza con uno o más caracteres alfanuméricos, luego el carácter @ seguido de uno o más caracteres alfanuméricos, luego el carácter '.' y finalmente otros caracteres alfabéticos)</p>
+<p>Sin conocer las expresiones regulares se pueden resolver estos tipos de problemas mediante una serie de if que procesan partes del string para comprobar si cumplen en conjunto todas las reglas que necesitamos validar, pero con las expresiones regulares podemos resolver este tipo de problemas con una sintaxis mucho más compacta.</p>
+<p>Existe toda una serie de reglas para crear las expresiones regulares que iremos viendo.</p>
+<p>El lenguaje JavaScript administra las expresiones regulares mediante el objeto RegExp:</p>
+<strong>Problema</strong>
+<p>Validar si se ingresa un valor entero con exactamente tres dígitos.</p>
+<pre class="recuadro">
+&lt;html>
+&lt;head>
+&lt;/head>
+&lt;body>
+
+&lt;script type="text/javascript">
+  var valor=prompt('Ingrese un numero entero positivo de 3 dígitos','');
+  var patron=new RegExp('^[0-9]{3}$');
+  if (patron.test(valor))
+    alert('Se ingresó un valor entero positivo de 3 dígitos');
+  else
+    alert('No se ingresó un valor entero positivo de 3 dígitos');
+&lt;/script>
+
+&lt;/body>
+&lt;/html>
+</pre>
+
+<p>En este primer paso no nos importa la sintaxis dispuesta en el string que le pasamos al constructor del objeto RegExp, sino ver la sintaxis de JavaScript para crear un objeto de RegExp y seguidamente como llamamos al método test que retorna si el string 'valor' contrastado con la expresión regular definida en el objeto 'patron' verifica verdadero o falso:</p>
+<pre>
+  var patron=new RegExp('^[0-9]{3}$');
+  if (patron.test(valor))
+    alert('Se ingresó un valor entero positivo de 3 dígitos');
+  else
+    alert('No se ingresó un valor entero positivo de 3 dígitos');
+</pre>
+<p>Veremos luego que para definir expresiones regulares intervienen una serie de caracteres ^ $. * +? =! : | \ / () [] {} que tienen un significado especial en la definición del lenguaje de expresiones regulares, estos tipos de caracteres suelen llamarse metacaracteres.</p>
+
+<p>El mismo problema se puede expresar utilizando una sintaxis distinta para la creación de la expresión regular (esta otra sintaxis es muy utilizada, pero en el fondo el interprete de JavaScript crea un objeto de tipo RegExp):</p>
+<pre class="">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var valor=prompt('Ingrese un numero entero positivo de 3 dígitos','');
+  var patron=/^[0-9]{3}$/;
+  if (patron.test(valor))
+    alert('Se ingresó un valor entero positivo de 3 dígitos');
+  else
+    alert('No se ingresó un valor entero positivo de 3 dígitos');
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Como podemos ver al definir la variable patron le asignamos una cadena encerrada entre los caracteres '/' (recordar que estamos creando un objeto de tipo RegExp):</p>
+<pre>
+  var patron=/^[0-9]{3}$/;
+</pre>
+
+<strong>Problema</strong>
+<p>Ingresar una oración por teclado y luego imprimir un mensaje si la oración ingresada contiene la palabra 'hora'</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var oracion=prompt('Ingrese una oración','');
+  var patron=/hora/;
+  if (patron.test(oracion))
+    alert('La oración ingresada contiene la palabra \'hora\'');
+  else
+    alert('La oración no ingresada contiene la palabra \'hora\'');
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Es muy posible que este primer problema convenga utilizar el método indexOf del objeto string pero para introducir el concepto de expresiones regulares es lo más sencillo. Estamos declarando la expresión regular:</p>
+<pre>
+  var patron=/hora/;
+</pre>
+<p>Con esta definición especificamos que el patrón a comparar son los caracteres 'hora'. Luego al llamar al método test donde le pasamos el string a comparar verifica si el patrón 'hora' está contenido en alguna posición del string 'oración'.</p>
+<p>El método test se verifica verdadero si ingresamos las siguientes oraciones:</p>
+<pre>
+Es <strong>hora</strong> de partir.
+hora de comer.
+Pasó muchas <strong>hora</strong>s corriendo.
+A<strong>hora</strong> tenemos ganas de correr.
+</pre>
+<p>Se verifica falso si ingresamos la siguiente oración:</p>
+<pre>
+El niño ora.
+Hora de comer.
+</pre>
+
+
+
+</p>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../indexe193.html?inicio=70">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/temarios/descripcion.php?inicio=70&cod=78 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:24 GMT -->
+</html>

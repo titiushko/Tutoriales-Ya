@@ -1,0 +1,684 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=83&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:52:18 GMT -->
+<head>
+<title>Estructura repetitiva while</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Estructura repetitiva while</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>Hasta ahora hemos empleado estructuras SECUENCIALES y CONDICIONALES. Existe otro tipo de estructuras tan importantes como las anteriores que son las estructuras REPETITIVAS.</p>
+
+<P>Una estructura repetitiva permite ejecutar una instrucción o un conjunto de instrucciones varias veces.</p>
+
+<p>Una ejecución repetitiva de sentencias se caracteriza por:<br>
+- La o las sentencias que se repiten.<br>
+- El test o prueba de condición antes de cada repetición, que motivará que se repitan o no las sentencias.</p>
+<h2>Estructura repetitiva while.</h2>
+<p>Representación gráfica de la estructura while:<br>
+<p><img src="imagentema/foto042.jpg" border="0" alt="estructura repetitiva while"><br>
+</p>
+<p>No debemos confundir la representación gráfica de la estructura repetitiva while (Mientras) con la estructura condicional if (Si)</p>
+
+<p>Funcionamiento: En primer lugar se verifica la condición, si la misma resulta verdadera se ejecutan las operaciones que indicamos por la rama del Verdadero.<br>
+
+A la rama del verdadero la graficamos en la parte inferior de la condición. Una línea al final del bloque de repetición la conecta con la parte superior de la estructura repetitiva.<br>
+En caso que la condición sea Falsa continúa por la rama del Falso y sale de la estructura repetitiva para continuar con la ejecución del algoritmo.</p>
+
+<p>El bloque se repite MIENTRAS la condición sea Verdadera.</p>
+
+<p><strong>Importante:</strong> Si la condición siempre retorna verdadero estamos en presencia de un ciclo repetitivo infinito. Dicha situación es un error de programación, nunca finalizará el programa.</p>
+
+<h3>Problema 1:</h3>
+<p>Realizar un programa que imprima en pantalla los números del 1 al 100.</p>
+<p>Sin conocer las estructuras repetitivas podemos resolver el problema empleando una estructura secuencial. Inicializamos una variable con el valor 1, luego imprimimos la variable, incrementamos nuevamente la variable y así sucesivamente.</p>
+<h4>Diagrama de flujo:</h4>
+<p><img src="imagentema/foto043.jpg" border="0" alt="algoritmo números del 1 al 100"><br>
+<p>Si continuamos con el diagrama no nos alcanzarían las próximas 5 páginas para finalizarlo.
+Emplear una estructura secuencial para resolver este problema produce un diagrama de flujo y un programa en Java muy largo.</p>
+
+<p>Ahora veamos la solución empleando una estructura repetitiva while:</p>
+<p><img src="imagentema/foto044.jpg" border="0" alt="algoritmo números del 1 al 100 while"></p>
+
+<p>Es muy importante analizar este diagrama:<br>
+La primera operación inicializa la variable x en 1, seguidamente comienza la estructura repetitiva while y disponemos la siguiente condición ( x &lt;= 100), se lee MIENTRAS la variable x sea menor o igual a 100.</p>
+
+<p>Al ejecutarse la condición retorna VERDADERO  porque el contenido de x (1)  es menor o igual a 100.
+Al ser la condición verdadera se ejecuta el bloque de instrucciones que contiene la estructura while. El bloque de instrucciones contiene una salida y una operación.<br>
+Se imprime el contenido de x, y seguidamente se incrementa la variable x en uno.</p>
+
+<p>La operación x=x + 1 se lee como "en la variable x se guarda el contenido de x más 1". Es decir, si x contiene 1 luego de ejecutarse esta operación se almacenará en x un 2.</p>
+
+<p>Al finalizar el bloque de instrucciones que contiene la estructura repetitiva se verifica nuevamente la condición de la estructura repetitiva y se repite el proceso explicado anteriormente.</p>
+
+<p>Mientras la condición retorne verdadero se ejecuta el bloque de instrucciones; al retornar falso la verificación de la condición se sale de la estructura repetitiva y continua el algoritmo, en este caso finaliza el programa.</p>
+
+<p>Lo más difícil es la definición de la condición de la estructura while y qué bloque de instrucciones se van a repetir. Observar que si, por ejemplo, disponemos la condición  x &gt;=100 ( si x es mayor o igual a 100) no provoca ningún error sintáctico pero estamos en presencia de un error lógico porque al evaluarse por primera vez la condición retorna falso y no se ejecuta el bloque de instrucciones que queríamos repetir 100 veces.</p>
+
+<p>No existe una RECETA para definir una condición de una estructura repetitiva, sino que se logra con una práctica continua solucionando problemas.</p>
+
+<p>Una vez planteado el diagrama debemos verificar si el mismo es una solución válida al problema (en este caso se debe imprimir los números del 1 al 100 en pantalla), para ello podemos hacer un seguimiento del flujo del diagrama y los valores que toman las variables a lo largo de la ejecución:</p>
+<pre>
+	x
+	1
+	2
+	3
+	4
+	.
+	.
+        100
+        101  Cuando x vale 101 la condición de la estructura repetitiva retorna falso, 
+             en este caso finaliza el diagrama.
+</pre>
+<p><strong>Importante:</strong> Podemos observar que el bloque repetitivo puede no ejecutarse ninguna vez si la condición retorna falso la primera vez.<br>  
+La variable x debe estar inicializada con algún valor antes que se ejecute la operación x=x + 1 en caso de no estar inicializada aparece un error de compilación.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+public class EstructuraRepetitivaWhile1 {
+    public static void main(String[] ar) {
+        int x;
+        x=1;
+        while (x&lt;=100) {
+            System.out.print(x);
+            System.out.print(" - ");
+            x = x + 1;
+        }
+    }
+}
+</pre>
+<p><strong>Importante:</strong>Como podemos observar no hemos creado un objeto de la clase Scanner. Esto debido a que en este programa no hay que ingresar datos por teclado. Para las salidas utilizamos la función print, que se encuentra creada por defecto en cualquier programa que codifiquemos en Java.</p>
+<p>Recordemos que un problema no estará 100% solucionado si no hacemos el programa en Java que muestre los resultados buscados.</p>
+<p>Probemos algunas modificaciones de este programa y veamos que cambios se deberían hacer para:</p>
+<pre>
+1 - Imprimir los números del 1 al 500.
+2 - Imprimir los números del 50 al 100.
+3 - Imprimir los números del -50 al 0.
+4 - Imprimir los números del 2 al 100 pero de 2 en 2 (2,4,6,8 ....100).
+</pre>
+<p>Respuestas:</p>
+<pre>
+1 - Debemos cambiar la condición del while con x&lt;=500.
+2 - Debemos inicializar x con el valor 50.
+3 - Inicializar x con el valor -50 y fijar la condición x&lt;=0.
+4 - Inicializar a x con el valor 2 y dentro del bloque repetitivo incrementar a x en 2 
+    ( x = x + 2 ).
+</pre>
+<h3>Problema 2:</h3>
+<p>Escribir un programa que solicite la carga de un valor positivo y nos muestre desde 1 hasta el valor ingresado de uno en uno.<br>
+Ejemplo: Si ingresamos 30 se debe mostrar en pantalla los números del 1 al 30.</p>
+<p>Es de FUNDAMENTAL importancia analizar los diagramas de flujo y la posterior codificación en Java de los siguientes problemas, en varios problemas se presentan otras situaciones no vistas en el ejercicio anterior.</p>
+
+<h4>Diagrama de flujo:</h4>
+<p><img src="imagentema/foto045.jpg" border="0" alt="estructura repetitiva while"><br>
+Podemos observar que se ingresa por teclado la variable n. El operador puede cargar cualquier valor.<br> 
+Si el operador carga 10 el bloque repetitivo se ejecutará 10 veces, ya que la condición es ?Mientras x&lt;=n ?, es decir ?mientras x sea menor o igual a 10?; pues x comienza en uno y se incrementa en uno cada vez que se ejecuta el bloque repetitivo.</p>
+
+<p>A la prueba del diagrama la podemos realizar dándole valores a las variables; por ejemplo, si ingresamos 5 el seguimiento es el siguiente:</p>
+<pre>
+n	x
+5	1  (Se imprime el contenido de x)
+        2	"		"
+        3	"		"
+        4	"		"
+        5	"		"
+        6 (Sale del while porque 6 no es menor o igual a 5)
+</pre>
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.util.Scanner;
+
+public class EstructuraRepetitivaWhile2 {
+    public static void main(String[] ar) {
+        Scanner teclado=new Scanner(System.in);
+        int n,x;
+        System.out.print("Ingrese el valor final:");
+        n=teclado.nextInt();
+        x=1;
+        while (x&lt;=n) {
+            System.out.print(x);
+            System.out.print(" - ");
+            x = x + 1;
+        }
+    }
+}
+</pre>
+<p>Los nombres de las variables n y x pueden ser palabras o letras (como en este caso)</p>
+
+<p>La variable x recibe el nombre de CONTADOR. Un contador es un tipo especial de variable que se incrementa o decrementa con valores constantes durante la ejecución del programa.<br>
+El contador x nos indica en cada momento la cantidad de valores impresos en pantalla.</p>
+
+
+<h3>Problema 3:</h3>
+<p>Desarrollar un programa que permita la carga de 10 valores por teclado y nos muestre posteriormente la suma de los valores ingresados y su promedio.</p>
+<h4>Diagrama de flujo:</h4>
+<p><img src="imagentema/foto046.jpg" border="0" alt="estructura repetitiva while contador"><br>
+
+En este problema, a semejanza de los anteriores, llevamos un CONTADOR llamado x que nos sirve para contar las vueltas que debe repetir el while.<br>
+También aparece el concepto de ACUMULADOR  (un acumulador es un tipo especial de variable que se incrementa o decrementa con valores variables durante la ejecución del programa)</p>
+<p>Hemos dado el nombre de suma a nuestro acumulador. Cada ciclo que se repita la estructura repetitiva, la variable suma se incrementa con el contenido ingresado en la variable valor.</p>
+
+<p>La prueba del diagrama se realiza dándole valores a las variables:</p>
+<pre>
+valor		suma		x 	   promedio
+                 0		0
+(Antes de entrar a la estructura repetitiva estos son los valores).
+ 5		 5		1
+16		21		2
+ 7		28		3
+10		38		4
+ 2		40		5
+20		60		6
+ 5		65		7
+ 5		70		8
+10		80		9
+ 2		82	       10
+ 8		90	       11
+				              9
+
+</pre>
+<p>Este es un seguimiento del diagrama planteado. Los números que toma la variable valor dependerá de qué cifras cargue el operador durante la ejecución del programa.<br>
+El promedio se calcula al salir de la estructura repetitiva (es decir primero sumamos los 10 valores ingresados y luego los dividimos por 10)</p>
+
+<p>Hay que tener en cuenta que cuando en la variable valor se carga el primer valor (en este ejemplo 5) al cargarse el segundo valor (16) el valor anterior 5 se pierde, por ello la necesidad de ir almacenando en la variable suma los valores ingresados.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.util.Scanner;
+
+public class EstructuraRepetitivaWhile3 {
+    public static void main(String[] ar) {
+        Scanner teclado=new Scanner(System.in);
+        int x,suma,valor,promedio;
+        x=1;
+        suma=0;
+        while (x&lt;=10) {
+            System.out.print("Ingrese un valor:");
+            valor=teclado.nextInt();
+            suma=suma+valor;
+            x=x+1;
+        }
+        promedio=suma/10;
+        System.out.print("La suma de los 10 valores es:");
+        System.out.println(suma);
+        System.out.print("El promedio es:");
+        System.out.print(promedio);
+    }
+}
+</pre>
+
+<h3>Problema 4:</h3>
+<p>Una planta que fabrica perfiles de hierro posee un lote de n piezas.<br>
+Confeccionar un programa que pida ingresar por teclado la cantidad de piezas a procesar y luego ingrese la longitud de cada perfil; sabiendo que la pieza cuya longitud esté comprendida en el rango de 1,20 y 1,30 son aptas. Imprimir por pantalla la cantidad de piezas aptas que hay en el lote.
+</p>
+<h4>Diagrama de flujo:</h4>
+<p><img src="imagentema/foto047.jpg" border="0" alt="estructura repetitiva while"><br>
+Podemos observar que dentro de una estructura repetitiva puede haber estructuras condicionales (inclusive puede haber otras estructuras repetitivas que veremos más adelante)</p>
+
+<p>En este problema hay que cargar inicialmente la cantidad de piezas a ingresar ( n ), seguidamente se cargan n valores de largos de piezas.<br>
+Cada vez que ingresamos un largo de pieza (largo) verificamos si es una medida correcta (debe estar entre 1.20 y 1.30 el largo para que sea correcta), en caso de ser correcta la CONTAMOS (incrementamos la variable cantidad en 1)</p>
+
+<p>Al contador cantidad lo inicializamos en cero porque inicialmente no se ha cargado ningún largo de medida.<br>
+Cuando salimos de la estructura repetitiva porque se han cargado n largos de piezas mostramos por pantalla el contador cantidad (que representa la cantidad de piezas aptas)</p>
+
+<p>En este problema tenemos dos CONTADORES:<br>
+<pre>
+x 		(Cuenta la cantidad de piezas cargadas hasta el momento)
+cantidad	(Cuenta los perfiles de hierro aptos)
+</pre>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.util.Scanner;
+
+public class EstructuraRepetitivaWhile4 {
+    public static void main(String[] ar) {
+        Scanner teclado=new Scanner(System.in);
+        int x,cantidad,n;
+        float largo;
+        x=1;
+        cantidad=0;
+        System.out.print("Cuantas piezar procesará:");
+        n=teclado.nextInt();
+        while (x<=n) {
+            System.out.print("Ingrese la medida de la pieza:");
+            largo=teclado.nextFloat();
+            if (largo>=1.20 && largo<=1.30) {
+                cantidad = cantidad +1;
+            }
+            x=x + 1;
+        }
+        System.out.print("La cantidad de piezas aptas son:");
+        System.out.print(cantidad);
+    }
+}
+</pre>
+
+
+<h2>Problemas propuestos</h2>
+<p>
+Ha llegado la parte fundamental, que es el momento donde uno desarrolla individualmente un algoritmo para la resolución de problemas.</p>
+
+<p>El tiempo a dedicar a esta sección EJERCICIOS PROPUESTOS debe ser mucho mayor que el empleado a la sección de EJERCICIOS RESUELTOS.<br>
+La experiencia dice que debemos dedicar el 80% del tiempo a la resolución individual de problemas y el otro 20% al análisis y codificación de problemas ya resueltos por otras personas.<br>
+
+Es de vital importancia para llegar a ser un buen PROGRAMADOR  poder resolver problemas en forma individual.
+</p>
+<ol>
+<li>
+Escribir un programa que solicite ingresar 10 notas de alumnos y nos informe cuántos tienen notas mayores o iguales a 7 y cuántos menores.
+</li>
+
+<li>
+Se ingresan un conjunto de n alturas de personas por teclado. Mostrar la altura promedio de las personas.
+</li>
+
+<li>
+En una empresa trabajan n empleados cuyos sueldos oscilan entre $100 y $500, realizar un programa que lea los sueldos que cobra cada empleado e informe cuántos empleados cobran entre $100 y $300 y cuántos cobran más de $300. Además el programa deberá informar el importe que gasta la empresa en sueldos al personal.
+</li>
+
+<li>
+Realizar un programa que imprima 25 términos de la serie 11 - 22 - 33 - 44, etc. (No se ingresan valores por teclado)
+</li>
+
+<li>
+Mostrar los múltiplos de 8 hasta el valor 500.
+Debe aparecer en pantalla 8 - 16 - 24, etc.
+</li>
+
+<li>
+Realizar un programa que permita cargar dos listas de 15 valores cada una. Informar con un mensaje cual de las dos listas tiene un valor acumulado mayor (mensajes "Lista 1 mayor", "Lista 2 mayor", "Listas iguales")<br>
+Tener en cuenta que puede haber dos o más estructuras repetitivas en un algoritmo.
+</li>
+
+<li>
+Desarrollar un programa que permita cargar n números enteros y luego nos informe cuántos valores fueron pares y cuántos impares.<br>
+Emplear el operador ?%? en la condición de la estructura condicional:<br>
+<pre>
+	if (valor%2==0)         //Si el if da verdadero luego es par.
+</pre>
+</li>
+
+</ol>
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+import java.util.Scanner;
+
+public class EstructuraRepetitivaWhile5 {
+    public static void main(String[] ar) {
+        Scanner teclado=new Scanner(System.in);
+        int x,nota,conta1,conta2;
+        x=1;
+        conta1=0;
+        conta2=0;
+        while (x<=10) {
+            System.out.print("Ingrese nota:");
+            nota=teclado.nextInt();
+            if (nota>=7) {
+                conta1=conta1 + 1;
+            }else {
+                conta2=conta2 + 1;
+            }
+            x=x + 1;
+        }
+        System.out.print("Cantidad de alumnos con notas mayores o iguales a 7:");
+        System.out.println(conta1);
+        System.out.print("Cantidad de alumons con notas menores a 7:");
+        System.out.print(conta2);
+    }
+}
+
+
+
+
+import java.util.Scanner;
+
+public class EstructuraRepetitivaWhile6 {
+    public static void main(String[] ar) {
+        Scanner teclado=new Scanner(System.in);
+        int n,x;
+        float altura,suma,promedio;
+        System.out.print("Cuantas personas hay:");
+        n=teclado.nextInt();
+        x=1;
+        suma=0;
+        while (x<=n) {
+            System.out.print("Ingrese la altura:");
+            altura=teclado.nextFloat();
+            suma=suma + altura;
+            x=x + 1;
+        }
+        promedio=suma/n;
+        System.out.print("Altura promedio:");
+        System.out.print(promedio);
+    }
+}
+
+
+
+
+import java.util.Scanner;
+
+public class EstructuraRepetitivaWhile7 {
+    public static void main(String[] ar) {
+        Scanner teclado=new Scanner(System.in);
+        int n,x,conta1,conta2;
+        float sueldo,gastos;
+        System.out.print("Cuantos empleados tiene la empresa:");
+        n=teclado.nextInt();
+        x=1;
+        conta1=0;
+        conta2=0;
+        gastos=0;
+        while (x<=n) {
+            System.out.print("Ingrese el sueldo del empleado:");
+            sueldo=teclado.nextFloat();
+            if (sueldo<=300) {
+                conta1=conta1 + 1;
+            } else {
+            	conta2=conta2 + 1;
+            }
+            gastos=gastos+sueldo;
+            x=x + 1;
+        }
+        System.out.print("Cantidad de empleados con sueldos entre 100 y 300:");
+        System.out.println(conta1);
+        System.out.print("Cantidad de empleados con sueldos mayor a 300:");
+        System.out.println(conta2);
+        System.out.print("Gastos total de la empresa en sueldos:");
+        System.out.println(gastos);
+    }
+}
+
+
+
+
+public class EstructuraRepetitivaWhile8 {
+    public static void main(String[] ar) {
+        int x,termino;
+        x=1;
+        termino=11;
+        while (x<=25) {
+            System.out.print(termino);
+            System.out.print(" - ");
+            x=x + 1;
+            termino=termino +11;
+        }
+    }
+}
+
+
+
+
+public class EstructuraRepetitivaWhile9 {
+    public static void main(String[] ar) {
+        int mult8;
+        mult8=8;
+        while (mult8<=500) {
+            System.out.print(mult8);
+            System.out.print(" - ");
+            mult8=mult8 + 8;
+        }
+    }
+}
+
+
+
+
+import java.util.Scanner;
+
+public class EstructuraRepetitivaWhile10 {
+    public static void main(String[] ar) {
+        Scanner teclado=new Scanner(System.in);
+        int valor,x,suma1,suma2;
+        x=1;
+        suma1=0;
+        suma2=0;
+        System.out.println("Primer lista");
+        while (x<=15) {
+            System.out.print("Ingrese valor:");
+            valor=teclado.nextInt();
+            suma1=suma1 + valor;
+            x=x + 1;
+        }
+        System.out.println("Segunda lista");
+        x=1;
+        while (x<=15) {
+            System.out.print("Ingrese valor:");
+            valor=teclado.nextInt();
+            suma2=suma2 + valor;
+            x=x + 1;
+        }
+        if (suma1>suma2) {
+            System.out.print("Lista 1 mayor.");
+        } else {
+            if (suma2>suma1) {
+                System.out.print("Lista2 mayor.");
+            } else {
+                System.out.print("Listas iguales.");
+            }
+        }
+    }
+}
+
+
+
+
+import java.util.Scanner;
+
+public class EstructuraRepetitivaWhile11 {
+    public static void main(String[] ar) {
+        Scanner teclado=new Scanner(System.in);
+        int n,x,valor,pares,impares;
+        x=1;
+        pares=0;
+        impares=0;
+        System.out.print("Cuantos números ingresará:");
+        n=teclado.nextInt();
+        while (x<=n) {
+            System.out.print("Ingrese el valor:");
+            valor=teclado.nextInt();
+            if (valor%2==0) {
+                pares=pares + 1;
+            } else {
+                impares=impares + 1;
+            }
+            x=x + 1;
+        }
+        System.out.print("Cantadad de pares:");
+        System.out.println(pares);
+        System.out.print("Cantidad de impares:");
+        System.out.print(impares);
+    }
+}
+</pre></div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index2904.html?inicio=0">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=83&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:52:22 GMT -->
+</html>

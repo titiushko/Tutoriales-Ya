@@ -1,0 +1,407 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=6&codigo=133&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Estructuras condicionales simples y compuestas</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>6 - Estructuras condicionales simples y compuestas</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>No todos los problemas pueden resolverse empleando estructuras secuenciales. Cuando hay que tomar una decisión aparecen las estructuras condicionales.<br>
+En nuestra vida diaria se nos presentan situaciones donde debemos decidir.<br>
+¿Elijo la carrera A o la carrera B?<br>
+¿Me pongo este pantalón?<br>
+Para ir al trabajo, ¿elijo el camino A o el camino B?<br>
+Al cursar una carrera, ¿elijo el turno mañana, tarde o noche?<br>
+</p>
+<p>Por supuesto que en un problema se combinan estructuras secuenciales y condicionales.<p>
+<h3>Estructura condicional simple.</h3>
+<p>Cuando se presenta la elección tenemos la opción de realizar una actividad o no realizar ninguna.<br>
+
+Representación gráfica:<br>
+<img src="imagentema/foto016.jpg" border="0" alt="estructura condicional simple"><br>
+</p>
+<p>Podemos observar:
+El rombo representa la condición. Hay dos opciones que se pueden tomar. Si la condición da verdadera se sigue el camino del verdadero, o sea el de la derecha, si la condición da falsa se sigue el camino de la izquierda.<br>
+
+Se trata de una estructura CONDICIONAL SIMPLE porque por el camino del verdadero hay actividades y por el camino del falso no hay actividades.<br>
+
+Por el camino del verdadero pueden existir varias operaciones, entradas y salidas, inclusive ya veremos que puede haber otras estructuras condicionales.</p>
+
+<h3>Problema:</h3>
+<p>Ingresar el sueldo de una persona, si supera los 3000 pesos mostrar un mensaje en pantalla indicando que debe abonar impuestos.</p>
+<h4>Diagrama de flujo:</h4>
+<p><img src="imagentema/foto017.jpg" border="0" alt="problema estructura condicional simple"><br>
+<p>Podemos observar lo siguiente: Siempre se hace la carga del sueldo, pero si el sueldo que ingresamos supera 3000 pesos se mostrará por pantalla el mensaje "Esta persona debe abonar impuestos", en caso que la persona cobre 3000 o menos no aparece nada por pantalla.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    float sueldo;
+    cout &lt;&lt;"Ingrese el sueldo:";
+    cin &gt;&gt;sueldo;
+    if (sueldo&gt;3000) 
+    {
+        cout &lt;&lt;"Esta persona debe abonar impuestos";
+    }    
+    cin.get();
+    cin.get();
+}
+</pre>
+<p>La palabra clave "if" indica que estamos en presencia de una estructura condicional; seguidamente disponemos la condición entre paréntesis. Por último encerrada entre llaves las instrucciones de la rama del verdadero.</p> 
+<p.>Es necesario que las instrucciones a ejecutar en caso que la condición sea verdadera estén encerradas entre llaves { }, con ellas marcamos el comienzo y el fin del bloque del verdadero.</p>
+<p>Ejecutando el programa e ingresamos un sueldo superior a 3000 pesos. Podemos observar como aparece en pantalla el mensaje "Esta persona debe abonar impuestos", ya que la condición del if es verdadera.<br>
+Volvamos a ejecutar el programa y carguemos un sueldo menor o igual a 3000 pesos. No debe aparecer mensaje en pantalla.</p>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/PagaImpuestos.zip">PagaImpuestos</a></p>
+
+<h3>Estructura condicional compuesta.</h3>
+<p>Cuando se presenta la elección tenemos la opción de realizar una actividad u otra. Es decir tenemos actividades por el verdadero y por el falso de la condición. Lo más importante que hay que tener en cuenta que se realizan las actividades de la rama del verdadero o las del falso, NUNCA se realizan las actividades de las dos ramas.</p>
+<p>Representación gráfica:<br>
+<img src="imagentema/foto018.jpg" border="0" alt="estructura condicional compuesta"><br>
+</p>
+<p>En una estructura condicional compuesta tenemos entradas, salidas, operaciones, tanto por la rama del verdadero como por la rama del falso.</p>
+
+<h3>Problema:</h3>
+<p>Realizar un programa que solicite ingresar dos números distintos y muestre por pantalla el mayor de ellos.</p>
+<h4>Diagrama de flujo:</h4>
+<p><img src="imagentema/foto019.jpg" border="0" alt="problema estructura condicional compuesta"><br>
+<p>Se hace la entrada de num1 y num2 por teclado. Para saber cual variable tiene un valor mayor preguntamos si el contenido de num1 es mayor (&gt;) que el contenido de num2, si la respuesta es verdadera vamos por la rama de la derecha e imprimimos num1, en caso que la condición sea falsa vamos por la rama de la izquierda (Falsa) e imprimimos num2.<br>
+Como podemos observar nunca se imprimen num1 y num2 simultáneamente.</p>
+
+<p>Estamos en presencia de una ESTRUCTURA CONDICIONAL COMPUESTA ya que tenemos actividades por la rama del verdadero y del falso.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int num1, num2;
+    cout &lt;&lt;"Ingrese primer valor:";
+    cin &gt;&gt;num1;
+    cout &lt;&lt;"Ingrese segundo valor:";
+    cin &gt;&gt;num2;
+    if (num1 &gt; num2)
+    {
+        cout &lt;&lt;num1;
+    }
+    else
+    {
+        cout &lt;&lt;num2;
+    }    
+    cin.get();
+    cin.get();
+}
+</pre>
+<p>Cotejemos el diagrama de flujo y la codificación y observemos que el primer bloque de llaves después del if representa la rama del verdadero y el segundo bloque de llaves representa la rama del falso.<br>
+
+<p>Compilemos el programa, si hubo errores sintácticos corrijamos y carguemos dos valores, como por ejemplo:</p>
+<pre>
+Ingrese el primer valor: 10
+Ingrese el segundo valor: 4
+10
+</pre>
+<p>Si ingresamos los valores 10 y 4 la condición del if retorna verdadero y ejecuta el primer bloque.<br>
+Un programa se controla y corrige probando todos sus posibles resultados.<br>
+Ejecutemos nuevamente el programa e ingresemos:</p>
+<pre>
+Ingrese el primer valor: 10
+Ingrese el segundo valor: 54
+54
+</pre>
+<p>Cuando a un programa le corregimos todos los errores sintácticos y lógicos ha terminado nuestra tarea y podemos entregar el mismo al USUARIO que nos lo solicitó.</p>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/NumeroMayor.zip">NumeroMayor</a></p>
+
+
+<h2>Operadores</h2>
+<p>En una condición deben disponerse únicamente variables, valores constantes y operadores relacionales.</p>
+
+<h4>>Operadores Relacionales:</h4>
+<pre>
+&gt;  (mayor)	
+&lt;  (menor)
+&gt;= (mayor o igual)
+&lt;= (menor o igual)
+== (igual)
+!= (distinto)
+</pre>
+<h4>Operadores Matemáticos</h4>
+<pre>
++ (más)
+- (menos)
+* (producto)
+/ (división)
+% (resto de una división)  Ej.:  x=13%5;  {se guarda 3}
+</pre>
+
+<p>Hay que tener en cuenta que al disponer una condición debemos seleccionar que operador relacional se adapta a la pregunta.</p>
+<p>Ejemplos:</p>
+<pre>
+	Se ingresa un número multiplicarlo por 10 si es distinto a 0.   (!=)
+	Se ingresan dos números mostrar una advertencia si son iguales.  (==)
+</pre>
+<p>Los problemas que se pueden presentar son infinitos y la correcta elección del operador sólo se alcanza con la práctica intensiva en la resolución de problemas.</p>
+
+
+</ul>
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+
+Realizar un programa que solicite la carga por teclado de dos números, si el primero es mayor al segundo informar su suma y diferencia, en caso contrario informar el producto y la división del primero respecto al segundo.</li>
+<li>
+Se ingresan tres notas de un alumno, si el promedio es mayor o igual a siete mostrar un mensaje "Promocionado".
+</li>
+<li>
+Se ingresa por teclado un número positivo de uno o dos dígitos (1..99) mostrar un mensaje indicando si el número tiene uno o dos dígitos.<br> 
+(Tener en cuenta que condición debe cumplirse para tener dos dígitos un número entero)
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int num1,num2;
+    cout &lt;&lt;"Ingrese primer valor:";
+    cin &gt;&gt;num1;
+    cout &lt;&lt;"Ingrese segundo valor:";
+    cin &gt;&gt;num2;
+    if (num1 &gt; num2)
+    {
+        int suma,diferencia;
+        suma = num1 + num2;
+        diferencia = num1 - num2;
+        cout &lt;&lt;"La suma de los dos valores es:";
+        cout &lt;&lt;suma;
+	cout &lt;&lt;"\n";
+    	cout &lt;&lt;"La diferencia de los dos valores es:";
+    	cout &lt;&lt;diferencia;
+    } 
+    else 
+    {
+        int producto,division;
+    	producto = num1 * num2;
+    	division = num1 / num2;
+    	cout &lt;&lt;"El producto de los dos valores es:";
+    	cout &lt;&lt;producto;
+    	cout &lt;&lt;"\n";
+	cout &lt;&lt;"La división de los dos valores es:";
+    	cout &lt;&lt;division;    		
+    }    
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/OperacionesNumeros.zip">OperacionesNumeros</a></p>
+
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int nota1,nota2,nota3;
+    cout &lt;&lt;"Ingrese primer nota:";
+    cin &gt;&gt;nota1;
+    cout &lt;&lt;"Ingrese segunda nota:";
+    cin &gt;&gt;nota2;
+    cout &lt;&lt;"Ingrese tercer nota:";
+    cin &gt;&gt;nota3;
+    int promedio;
+    promedio = (nota1 + nota2 + nota3) / 3;
+    if (promedio &gt;= 7) 
+    {
+        cout &lt;&lt;"Promocionado";
+    }
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/NotaAlumnos.zip">NotaAlumnos</a></p>
+
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int num;
+    cout &lt;&lt;"Ingrese un valor entero de 1 o 2 dígitos:";
+    cin &gt;&gt;num;
+    if (num &lt; 10) 
+    {
+        cout &lt;&lt;"Tiene un dígito";
+    }
+    else 
+    {
+        cout &lt;&lt;"Tiene dos dígitos";
+    }    
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/CantidadDigitos.zip">CantidadDigitos</a></p>
+
+
+</pre><h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=6&codigo=133&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:35 GMT -->
+</html>

@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=33&codigo=164&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:30 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Objetos dinámicos</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>33 - Objetos dinámicos</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Hemos visto que podemos localizar vectores en la pila dinámica, lo mismo podemos hacer cuando creamos objetos de una determinada clase.</p>
+<p>Tengamos en cuenta que almacenar objetos en la pila dinámica nos provee como ventaja tener más espacio y poderlo crear y destruir según la necesidad de nuestro programa. Veremos que cambia la sintaxis cuando trabajamos con objetos dinámicos.</p>
+
+<h3>Problema 1:</h3>
+<p>Desarrollar una clase que permita cargar el nombre y la edad de una persona. Mostrar los datos cargados. Imprimir un mensaje si es mayor de edad (edad&gt;=18) o no. Crear en la main un objeto dinámico de esta clase y llamar a sus métodos.</p>
+
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include &lt;iostream&gt;
+
+using namespace std;
+
+class Persona {
+private:
+    char nombre[40];
+    int edad;
+public:
+    void inicializar();
+    void imprimir();
+    void esMayorEdad();
+};
+
+void Persona::inicializar()
+{
+    cout &lt;&lt;"Ingrese nombre:";
+    cin.getline(nombre,40);
+    cout &lt;&lt;"Ingrese edad:";
+    cin &gt;&gt;edad;
+}
+
+void Persona::imprimir()
+{
+    cout &lt;&lt;"Nombre:";
+    cout &lt;&lt;nombre;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"Edad:";
+    cout &lt;&lt;edad;
+    cout &lt;&lt;"\n";
+}
+
+void Persona::esMayorEdad()
+{
+    if (edad&gt;=18)
+    {
+        cout &lt;&lt;"Es mayor de edad.";
+    }
+    else
+    {
+        cout &lt;&lt;"No es mayor de edad.";
+    }
+    cin.get();
+    cin.get();
+}
+
+void main()
+{
+    Persona *persona1;
+    persona1 = new Persona();
+    persona1-&gt;inicializar();
+    persona1-&gt;imprimir();
+    persona1-&gt;esMayorEdad();
+    delete persona1;
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/ObjetosDinamicos1.zip">ObjetosDinamicos1</a></p>
+
+<p>Como vemos en la main estamos definiendo un puntero de la clase Persona:</p>
+<pre>
+    Persona *persona1;
+</pre>
+<p>No se ha creado hasta ahora un objeto, sino solo un puntero. Para crear un objeto debemos utilizar el operador new:</p>
+<pre>
+    persona1 = new Persona();
+</pre>
+<p>Para llamar a los métodos debemos utilizar el operador -&gt; (flecha) que son los caracteres: menos y el mayor.</p>
+<pre>
+    persona1-&gt;inicializar();
+    persona1-&gt;imprimir();
+    persona1-&gt;esMayorEdad();
+</pre>
+<p>Si bien podemos utilizar el caracter * (que significa lo apuntado) luego debemos disponer entre paréntesis el nombre del
+puntero (es una sintaxis poco utilizada): <pre> (*persona1).imprimir();</pre>
+
+<p>Finalmente debemos liberar el espacio del objeto:</p>
+<pre>
+    delete persona1;
+</pre>
+
+
+<h2><a href="index7732.html?inicio=30">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=33&codigo=164&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:30 GMT -->
+</html>

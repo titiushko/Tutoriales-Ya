@@ -1,0 +1,383 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=140&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:37:37 GMT -->
+<head>
+<title>Lanzar un segundo "Activity"</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+.descarga2 a {
+color:#4B4B4B;
+text-decoration:none;
+border-bottom:1px dotted #444;
+}
+.descarga2 {
+background: #F7FABE;
+text-align: left;
+padding: 5px 20px 5px 45px;
+border-top: 2px solid #DFE786;
+border-bottom: 2px solid #DFE786;
+color:#000000;
+margin-left:1.2em;
+margin-right:1.2em;
+border-radius:4px;
+font-size:1em;
+
+}  
+
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-30']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>9 - Lanzar un segundo "Activity"</h1> <p class="descarga2">Ya se encuentra disponible el nuevo tutorial para aprender android con el nuevo entorno <a href="androidstudioya/index.html" target="_blank">Android Studio propuesto por Google y
+que remplaza a Eclipse</a>.
+</td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>Hasta ahora todos los programas han tenido una sola ventana (Activity)</p>
+<p>Es muy común que una aplicación tenga más de una ventana. Para implementar esto en Android debemos plantear una segunda clase que también herede de la clase Activity (tengamos en cuenta que cuando utilizamos ADT automáticamente cuando creamos un proyecto nos crea el archivo XML y java de la primer Activity)</p>
+<p>Vamos a ver en este concepto los pasos que debemos dar para crear otro Activity y como activarlo desde el Activity principal.</p>
+
+<h3>Problema:</h3>
+<p>Confeccionar un programa que muestre en la ventana principal un botón que al ser presionado muestre otra ventana (Activity) mostrando un TextView con el nombre del programador de la aplicación y un botón para cerrar la ventana o actividad.</p>
+
+<p>1 - Primero creamos un nuevo proyecto que lo llamaremos proyecto008 y en la ventana principal creamos la siguiente interfaz:</p>
+<img src="imagentema/foto036.jpg" border="0" alt="lanzar segundo Activity"><br>
+<p>Es decir que nosotros queremos que cuando se presione el botón "Acerca De" nos abra otra ventana (Activity) y nos muestre el nombre del programador.</p>
+<p>2 - Ahora tenemos que crear el segundo Activity. Crearemos primero el archivo XML. Presionamos el botón derecho sobre la carpeta layout y seleccionaremos la opción New -&gt; Android XML File<br>
+<img src="imagentema/foto037.jpg" border="0" alt="lanzar segundo Activity"><br>
+<p>Aquí tenemos que definir el nombre del archivo XML (debe estar en minúsculas), lo llamaremos acercade:</p>
+<img src="imagentema/foto038.jpg" border="0" alt="lanzar segundo Activity"><br>
+<p>Implementamos ahora la interfaz visual de esta segunda ventana (Activity) disponiendo un objeto de la clase TextView donde mostramos el nombre del autor de este programa y un Button para cerrar la ventana.<p/>
+<img src="imagentema/foto039.jpg" border="0" alt="lanzar segundo Activity"><br>
+<p>3 - Tenemos ahora que crear el archivo Java donde dispondremos la funcionalidad de la segunda ventana (Activity)<br>
+<p>Creamos una nueva clase al proyecto desde el menú contextual(presionamos el botón derecho del mouse sobre el paquete com.androidya.proyecto008):</p>
+<img src="imagentema/foto040.jpg" border="0" alt="lanzar segundo Activity"><br>
+<p>Al nombre de la clase la llamamos AcercaDe y debemos especificar que hereda de la clase Activity (podemos presionar el botón Browse que está en la misma fila de SuperClass y buscamos la clase Activity para que disponga el nombre del paquete donde se encuentra):</p>
+<img src="imagentema/foto041.jpg" border="0" alt="lanzar segundo Activity"><br>
+<p>El código que nos genera es:</p>
+<pre>
+package com.javaya.proyecto008;
+
+import android.app.Activity;
+
+public class AcercaDe extends Activity {
+
+}
+
+</pre>
+<p>Debemos sobreescribir el método onCreate donde enlazamos esta clase con el archivo XML que diseñamos.</p>
+<p>Si no recordamos cual es la sintaxis exacta de este método podemos también generarlo automáticamente con la ayuda de nuestro editor, elegimos Source -> Override/Implement methods:</p> 
+<img src="imagentema/foto041b.jpg" border="0" alt="lanzar segundo Activity"><br>
+<p>Buscamos el método onCreate y presionamos el botón Ok, ahora ya tenemos la clase con el método onCreate:</p>
+<pre>
+package com.javaya.proyecto008;
+
+import android.app.Activity;
+import android.os.Bundle;
+
+public class AcercaDe extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+	}
+
+}
+</pre>
+
+<p>Ahora solo falta llamar al método setContentView para enlazar el archivo XML:</p>
+<pre class="recuadro">
+package com.javaya.proyecto008;
+
+import android.app.Activity;
+import android.os.Bundle;
+
+public class AcercaDe extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.acercade);
+	}
+
+}
+</pre>
+<p>Como podemos ver la clase AcercaDe hereda de la clase Activity e implementa el método onCreate 
+para enlazar el archivo XML que creamos anteriormente.</p>
+
+<p>4 - Otro paso fundamental es registrar el Activity en el archivo "AndroidManifest.xml" que se encuentra en la raiz principal del proyecto.</p>
+<p>Seleccionamos el archivo y activamos la pestaña : "Application", presionamos el botón "add" y seleccionamos "Activity":</p>
+<img src="imagentema/foto042.jpg" border="0" alt="lanzar segundo Activity"><br>
+<p>Por último seleccionamos en "Application Nodes" la actividad creada y definimos la propiedad Name con el nombre de la clase que la implementa (en nuestro caso se llama AcercaDe):<br>
+<img src="imagentema/foto043.jpg" border="0" alt="lanzar segundo Activity"><br>
+
+
+<p>5 - Ahora implementaremos la funcionalidad en la actividad (Activity) principal para que se active la segunda ventana.</p>
+<p>Inicializamos la propiedad OnClick del objeto de la clase Button con el valor "lanzar", este es el método que se ejecutará cuando se presione.</p>
+<p>El código fuente de la actividad principal queda:</p>
+<pre class="recuadro">
+package com.javaya.proyecto008;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+
+public class MainActivity extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return true;
+    }
+    
+    public void lanzar(View view) {
+        Intent i = new Intent(this, AcercaDe.class );
+        startActivity(i);
+  }    
+    
+}
+</pre>
+
+<p>En el método lanzar creamos un objeto de la clase Intent y le pasamos como parámetros la referencia del objeto de esta clase (this) y la referencia del otro Activity (AcercaDe.class)<br>
+Llamamos posteriormente al método startActivity pasando el objeto de la clase Intent (con esto ya tenemos en pantalla la ventana del segundo Activity:</p>
+<pre>
+    public void lanzar(View view) {
+          Intent i = new Intent(this, AcercaDe.class );
+          startActivity(i);
+    }
+</pre>
+
+<p>Si ejecutamos el programa podemos ver que cuando presionamos el botón "Acerca De" aparece la segunda ventana donde se muestra el TextView con el valor "Autor de este programa: Diego" y un botón con el texto "Finalizar" (si presionamos este botón no sucede nada, esto debido a que no hemos asociado ningún evento a dicho botón)</p>
+
+
+<p>6 - Debemos codificar el evento OnClick de la segunda actividad. Seleccionemos el botón "Finalizar" y definamos en la propiedad OnClick el nombre de método que se ejecutará al presionarse el botón (en nuestro caso lo llamaremos cerrar") :</p>
+
+
+
+<p>El código fuente de la actividad AcercaDe queda:</p>
+<pre class="recuadro">
+package com.javaya.proyecto008;
+
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+
+public class AcercaDe extends Activity {
+    /** Called when the activity is first created. */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.acercade);
+    }
+    
+    public void cerrar(View view) {
+    	finish();
+    }    
+}</pre>
+<p>Cuando se presiona el botón finalizar llamando al método finish() que tiene por objetivo liberar el espacio de memoria de esta actividad y pedir que se active la actividad anterior.</p>
+
+
+<p>Ahora nuestro programa está funcionando completamente:</p>
+<p>Primer Activity:</p>
+<img src="imagentema/foto044.jpg" border="0" alt="lanzar segundo Activity"><br>
+<p>Segundo Activity:</p>
+<img src="imagentema/foto045.jpg" border="0" alt="lanzar segundo Activity"><br>
+<p>Ahora ya tenemos el programa funcionando en forma completa.</p>
+
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/proyecto008.zip">proyecto008.zip</a>
+</p>
+
+
+<h2>Problema propuesto</h2>
+<ol>
+<li>
+Realizar un programa que contenga dos Activity. En el primero que solicite el ingreso de una clave (control Password) Si ingresa la clave "abc123" activar el segundo Activity mostrando en un TextView un mensaje de bienvenida (mostrar en un TextView si se ingrese la clave incorrecta).<br>
+Llamar al proyecto: proyecto009.<br>
+En tiempo de ejecución los dos Activity deben mostrarse algo similar a esto:<br>
+<img src="imagentema/foto046.jpg" border="0" alt="lanzar segundo Activity"><br>
+<img src="imagentema/foto047.jpg" border="0" alt="lanzar segundo Activity"><br>
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/proyecto009.zip">proyecto009.zip</a>
+</p>
+</li>
+</ol>
+</div>
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   <h2><a href="index2904.html?inicio=0">Retornar</a></h2>   
+
+  </div>
+  
+  
+  
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=140&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:39:50 GMT -->
+</html>

@@ -1,0 +1,243 @@
+        
+
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=25&cod=188&punto=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios resueltos : Funciones de grupo (count - max - min - sum - avg)(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+<body bgcolor="#CCFFCC">
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>30 - Funciones de grupo (count - max - min - sum - avg)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Trabajamos con la tabla "libros" de una librería.</p>
+<p>Eliminamos la tabla:</p>
+<pre>
+  drop table libros;
+</pre>
+<p>Creamos la tabla:</p>
+<pre>
+ create table libros(
+  codigo number(4) not null,
+  titulo varchar2(40) not null,
+  autor varchar2(30) default 'Desconocido',
+  editorial varchar2(15),
+  edicion date,
+  precio number(5,2),
+  cantidad number(3),
+  primary key(codigo)
+ );
+</pre>
+<p>Ingresamos algunos registros:</p>
+<pre>
+ insert into libros
+  values(1562,'El aleph','Borges','Planeta','10/10/1980',15,null);
+ insert into libros
+  values(1878,'Martin Fierro','Jose Hernandez','Emece',null,22.20,200);
+ insert into libros
+  values(2587,'Antologia poetica','J.L. Borges','Planeta',null,null,150);
+ insert into libros
+  values(3654,'Aprenda PHP','Mario Molina',null,'05/05/1999',18.20,null);
+ insert into libros
+  values(3921,'Cervantes y el quijote',default,'Paidos','15/02/2000',null,null);
+ insert into libros
+  values(4582,'Manual de PHP', 'J.C. Paez', 'Siglo XXI','21/04/2005',31.80,120);
+ insert into libros
+  values(5963,'Harry Potter y la piedra filosofal','J.K. Rowling',default,null,45.00,90);
+ insert into libros
+  values(6211,'Harry Potter y la camara secreta','J.K. Rowling','Emece',null,0,100);
+ insert into libros
+  values(8851,'Alicia en el pais de las maravillas','Lewis Carroll',null,null,null,220);
+ insert into libros
+  values(9920,'PHP de la A a la Z',default,default,default,null,0);
+</pre>
+<p>Para conocer la cantidad total de libros, sumamos las cantidades de cada uno:</p>
+<pre>
+ select sum(cantidad)
+  from libros;
+</pre>
+<p>Retorna 880; verifique la suma, sumando los valores de todos los registros del campo "cantidad".</p>
+
+<p>Queremos saber cuántos libros tenemos de la editorial "Emece":</p>
+<pre>
+ select sum(cantidad)
+  from libros
+  where editorial='Emece';
+</pre>
+<p>retorna 300.</p>
+
+<p>Queremos saber el precio del libro más costoso; usamos la función "max()":</p>
+<pre>
+ select max(precio)
+  from libros;
+</pre>
+<p>retorna 45.</p>
+
+<p>Para conocer el precio mínimo de los libros de "Rowling" tipeamos:</p>
+<pre>
+ select min(precio)
+  from libros
+  where autor like '%Rowling%';
+</pre>
+<p>retorna 0 (cero).</p>
+
+<p>Queremos saber el promedio del precio de los libros referentes a "PHP":</p>
+<pre>
+ select avg(precio)
+  from libros
+  where titulo like '%PHP%';
+</pre>
+<p>Devuelve 25. Note que hay 3 libros sobre "PHP", pero uno de ellos tiene precio nulo entonces Oracle no lo incluye para calcular el promedio.</p>
+
+<p>Averiguamos el mínimo valor del campo "edicion":</p>
+<pre>
+ select min(edicion)
+  from libros;
+</pre>
+<p>Retorna 10/10/80.</p>
+
+<p>Necesitamos conocer el mayor valor de "codigo":</p>
+<pre>
+ select max(codigo)
+  from libros;
+</pre>
+<p>Retorna 9920.</p>
+
+        <form name="formulario" action="http://www.sqlserverya.com.ar/aspx/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+        <br>
+   <h2><a href="../indexfc77.html?inicio=25">Retornar</a></h2>   
+        
+	<br>
+   
+
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=25&cod=188&punto=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:35 GMT -->
+</html>
+

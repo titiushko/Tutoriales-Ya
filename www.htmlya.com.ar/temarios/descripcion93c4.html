@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.htmlya.com.ar/temarios/descripcion.php?inicio=48&cod=123&punto=52 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:05:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Conceptos de HTML</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="html, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de HTML. Es objetivo prioritario respetar 
+los estándares del W3C">
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+</style>
+</head>
+
+<body>
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em"><a href="../index.html">Temario del Tutorial</a></span>->52 - iframes</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div> 
+
+<p>El HTML dispone de un elemento llamado iframe que permite disponer un frame con el flujo de la página, similar a disponer una imagen en la página.</p>
+<p>Veamos un ejemplo como disponer este tipo de frame tan particular (este tipo de iframe es el único apoyado en las versiones modernas de HTML):</p>
+<p>pagina1.html</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;prueba de iframes&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Esto es una prueba de un iframe&lt;/h1&gt;
+&lt;iframe src=&quot;pagina2.html&quot; width=&quot;400&quot; height=&quot;200&quot;&gt;
+No tiene disponible el navegador la capacidad de iframe
+&lt;/iframe&gt;
+&lt;h2&gt;Esto ya est&aacute; fuera del iframe&lt;/h2&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Como podemos ver cuando necesitamos agregar el iframe dentro de la página disponemos:</p>
+<pre>
+&lt;iframe src=&quot;pagina2.html&quot; width=&quot;400&quot; height=&quot;200&quot;&gt;
+No tiene disponible el navegador la capacidad de iframe
+&lt;/iframe&gt;
+</pre>
+<p>Le indicamos el ancho y alto que debe tomar el iframe, la ubicación continúa el flujo de la página.</p>
+<p>La página que muestra el iframe no introduce ningún concepto nuevo:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;prueba de iframes&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;h2&gt;Este texto est&aacute; dentro del iframe.&lt;/h2&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Algunas propiedades útiles aplicables a un iframe:</p>
+<ul>
+<li><strong>src</strong> Archivo a mostrar dentro del iframe.</li>
+<li><strong>width</strong> Ancho en píxeles.</li>
+<li><strong>height</strong> Alto en píxeles.</li>
+<li><strong>frameborder</strong> Podemos asignarle los valores 1 o 0. Si vale 0 el borde no se muestra.</li>
+<li><strong>scrolling</strong> Los valores posibles de esta propiedad son: "auto","yes","no". Por defecto está inicializada con el valor "auto". El valor auto significa que el navegador decide si se debe mostrar la barra de scroll. La mostrará solo si algún contenido del iframe no se ve.<br>
+Si definimos el valor "yes" estamos indicando que siempre debe estar visible la barra de navegación y por último si asignamos el valor "no" estaremos indicando que nunca debe aparecer la barra de navegación para dicho iframe.</li>
+<li><strong>name</strong> Nombre del iframe si queremos acceder desde otra página. Por ejemplo si queremos actualizar su contenido desde un enlace ubicado en otra página.</li>
+</ul>
+
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../index7c04.html?inicio=48">Retornar</a></h2>   
+
+</div>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-7";
+urchinTracker();
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.htmlya.com.ar/temarios/descripcion.php?inicio=48&cod=123&punto=52 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:05:31 GMT -->
+</html>

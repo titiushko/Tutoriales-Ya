@@ -1,0 +1,186 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=100&cod=269&punto=111 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Descripción : Disparador de múltiples eventos (Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>111 - Disparador de múltiples eventos</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>Hasta el momento hemos aprendido a crear un disparador (trigger) asociado a una única operación (inserción, actualización o borrado).</p>
+<p>Un trigger puede definirse sobre más de un evento; en tal caso se separan con "or".</p>
+
+<p>Sintaxis para crear un disparador para múltiples eventos:</p>
+<pre>
+ create or replace trigger NOMBREDISPARADOR
+ MOMENTO-- before, after o instead of
+ of CAMPO--si alguno de los eventos es update
+ EVENTOS-- insert, update y/o delete
+ on NOMBRETABLA
+ NIVEL--puede ser a nivel de sentencia (statement) o de fila (for each row)
+ begin
+  CUERPO DEL DISPARADOR--sentencias
+ end NOMBREDISPARADOR;
+</pre>
+<p>Si el trigger se define para más de un evento desencadenante, en el cuerpo del mismo se puede emplear un condicional para controlar cuál operación disparó el trigger. Esto permite ejecutar bloques de código según la clase de acción que disparó el desencadenador.</p>
+<p>Para identificar el tipo de operación que disparó el trigger empleamos "inserting", "updating" y "deleting".</p>
+
+<p>Veamos un ejemplo. El siguiente trigger está definido a nivel de sentencia, para los eventos "insert", "update" y "delete"; cuando se modifican los datos de "libros", se almacena en la tabla "control" el nombre del usuario, la fecha y el tipo de modificación que alteró la tabla:</p>
+<p>- si se realizó una inserción, se almacena "inserción";</p>
+<p>- si se realizó una actualización (update), se almacena "actualización" y</p>
+<p>- si se realizó una eliminación (delete) se almacena "borrado".</p>
+<pre>
+create or replace trigger tr_cambios_libros
+ before insert or update or delete
+ on libros
+ for each row
+begin
+ if inserting then
+   insert into control values (user, sysdate,'inserción');
+ end if;
+ if updating then
+  insert into control values (user, sysdate,'actualización');
+ end if;
+ if deleting then
+   insert into control values (user, sysdate,'borrado');
+ end if;
+end tr_cambios_libros;
+</pre>
+<p>Si ejecutamos un "insert" sobre "libros", el disparador se activa entrando por el primer "if"; si ejecutamos un "update" el trigger se dispara entrando por el segundo "if"; si ejecutamos un "delete" el desencadenador se dispara entrando por el tercer "if".</p>
+
+<p>Las siguientes sentencias disparan el trigger creado anteriormente:</p>
+<pre>
+ insert into TABLA values ...;
+ insert into TABLA select ... from...;
+ update TABLA set...;
+ delete from TABLA...;
+</pre>
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../indexf6ce.html?inicio=100">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=100&cod=269&punto=111 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+</html>

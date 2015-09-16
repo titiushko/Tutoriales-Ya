@@ -1,0 +1,562 @@
+<!DOCTYPE HTML>
+<html>
+
+<!-- Mirrored from www.htmlya.com.ar/html5/demos/paginas/sumaexacta/sumaexacta.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:32:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<script src="../../../../../ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+//objeto papel **********************************************
+var papel= {
+   retornarPapel: function(x) {
+    var canvas = document.getElementById(x);
+    if (canvas.getContext) {
+      this.lienzo = canvas.getContext("2d");
+      this.ancho=canvas.width;
+      this.alto=canvas.height;
+      return this.lienzo;
+	} else
+      return false;
+  },
+  linea: function(x1,y1,x2,y2) {
+    this.lienzo.beginPath();
+    this.lienzo.moveTo(x1,y1);
+	this.lienzo.lineTo(x2,y2);
+    this.lienzo.stroke();
+  },
+  rectangulo: function(x,y,ancho,alto) {
+    this.lienzo.beginPath(); 
+    this.lienzo.rect(x,y,ancho,alto);
+    this.lienzo.stroke();	
+  },
+    rectanguloRelleno: function(x,y,ancho,alto) {
+    this.lienzo.fillRect(x,y,ancho,alto);
+  },
+    borrar: function(x,y,ancho,alto) {
+    this.lienzo.clearRect(x,y,ancho,alto);
+  },  
+  fijarColor: function(rojo,verde,azul) {
+    this.lienzo.fillStyle="rgb("+rojo+","+verde+","+azul+")";
+  },
+  fijarColorLinea: function(rojo,verde,azul) {
+    this.lienzo.strokeStyle="rgb("+rojo+","+verde+","+azul+")";
+  },
+  fijarTexto: function(x,y,texto) {
+  	this.lienzo.font = "18pt Arial";
+    this.lienzo.fillText(texto,x,y);
+  },
+  retornarAncho: function() {
+    return this.ancho;
+  },
+  retornarAlto: function() {
+    return this.alto;
+  },
+  fijarCentrado: function(centrado) {
+    this.lienzo.textAlign=centrado;  
+  },
+  borrar: function(x,y,ancho,alto) {
+    this.lienzo.clearRect(x,y,ancho,alto);
+  },
+  dibujarImagen: function(img,x,y) {
+    this.lienzo.drawImage(img,x,y);
+  },
+  dibujarParteImagen: function(img,sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight) {
+    this.lienzo.drawImage(img,sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+  }
+  
+};
+//************************************************************
+
+
+//Clase Boton **********************************************
+function Boton(x,y,ancho,alto,lienzo,objeto,capturaClic) {
+  this.objeto=objeto;
+  this.estado=true;
+  this.capturaClic=capturaClic;
+  this.x=x;
+  this.y=y;
+  this.ancho=ancho;
+  this.alto=alto;
+  this.lienzo=lienzo;
+  this.colorTexto=new Array(3);
+  this.colorTexto[0]=0;
+  this.colorTexto[1]=0;
+  this.colorTexto[2]=0;
+  this.color=new Array(3);
+  this.color[0]=212;
+  this.color[1]=208;
+  this.color[2]=200;
+  this.texto='';
+  this.presionado=false;
+  mouse.presionado(this);
+  this.seleccionado=false;
+  this.contado=false;  
+}
+
+Boton.prototype.graficar=function() {
+  if (this.estado)
+  {
+      if (this.seleccionado)
+	    this.lienzo.fijarColor(255,255,0);
+	  else
+	    this.lienzo.fijarColor(this.color[0],this.color[1],this.color[2]);
+	  this.lienzo.rectanguloRelleno(this.x,this.y,this.ancho,this.alto);
+	  this.lienzo.fijarColor(this.colorTexto[0],this.colorTexto[1],this.colorTexto[2]);
+	  this.lienzo.fijarCentrado("center");
+	  this.lienzo.fijarTexto(this.x+this.ancho/2,this.y+this.alto/2+8,this.texto); 
+	  this.sombra();
+  } else {
+  	  this.lienzo.borrar(this.x,this.y,this.ancho,this.alto);
+  }
+  
+}
+
+Boton.prototype.sombra=function() {
+  var cr=this.color[0]+30;
+  if (cr>255) cr=255;
+  var cv=this.color[1]+30;
+  if (cv>255) cv=255;
+  var ca=this.color[2]+30;
+  if (ca>255) ca=255;
+  this.lienzo.fijarColorLinea(cr,cv,ca);
+  this.lienzo.linea(this.x,this.y+1,this.x+this.ancho,this.y+1);
+  this.lienzo.linea(this.x+1,this.y,this.x+1,this.y+this.alto);  
+  cr=this.color[0]-50;
+  if (cr<0) cr=0;
+  cv=this.color[1]-50;
+  if (cv<0) cv=0;
+  ca=this.color[2]-50;
+  if (ca<0) ca=0;
+  this.lienzo.fijarColorLinea(cr,cv,ca);
+  this.lienzo.linea(this.x,this.y+this.alto-1,this.x+this.ancho-1,this.y+this.alto-1);
+  this.lienzo.linea(this.x+this.ancho-1,this.y,this.x+this.ancho-1,this.y+this.alto-1);  
+}
+
+Boton.prototype.dentro=function(x,y) {
+   if (this.estado && x>this.x && y>this.y && x<this.x+this.ancho && y<this.y+this.alto) {
+     return true;
+   } else
+     return false;
+}
+
+Boton.prototype.fijarColor= function(rojo,verde,azul) {    
+  this.color[0]=rojo;
+  this.color[1]=verde;
+  this.color[2]=azul;
+  this.graficar();
+}
+
+Boton.prototype.fijarTexto = function(texto) {
+  this.texto=texto;
+  this.graficar();
+}
+
+Boton.prototype.fijarColorTexto = function(rojo,verde,azul) {
+  this.colorTexto[0]=rojo;
+  this.colorTexto[1]=verde;
+  this.colorTexto[2]=azul;
+  this.graficar();
+}
+
+Boton.prototype.graficarHundido = function() {
+  if (this.estado) {
+	  this.lienzo.fijarColor(150,150,150);
+	  this.lienzo.rectanguloRelleno(this.x,this.y,this.ancho-1,this.alto-1);
+	  this.lienzo.fijarColor(this.colorTexto[0],this.colorTexto[1],this.colorTexto[2]);
+	  this.lienzo.fijarCentrado("center");  
+	  this.lienzo.fijarTexto(this.x+this.ancho/2,this.y+this.alto/2+8,this.texto); 
+	}  
+}
+
+Boton.prototype.estaPresionado = function() {
+  return this.presionado;
+}
+
+Boton.prototype.soltar= function() {
+  this.presionado=false;
+  this.graficar();
+}
+
+Boton.prototype.presionar = function() {
+  this.presionado=true;
+  this.graficarHundido();
+}
+
+Boton.prototype.informar = function() {
+  this.capturaClic(this.objeto,this);
+}
+
+Boton.prototype.desactivar = function() {
+  this.estado=false;
+  this.graficar();
+}
+
+Boton.prototype.activar = function() {
+  this.estado=true;
+  this.graficar();
+}
+
+Boton.prototype.seleccionar = function() {
+  this.seleccionado=true;
+  this.graficar();
+}
+
+Boton.prototype.noSeleccionar = function() {
+  this.seleccionado=false;
+  this.graficar();
+}
+
+//********************************************************
+
+
+//Clase Etiqueta **********************************************
+function Etiqueta(x,y,ancho,alto,lienzo) {
+  this.x=x;
+  this.y=y;
+  this.ancho=ancho;
+  this.alto=alto;
+  this.lienzo=lienzo;
+  this.colorTexto=new Array(3);
+  this.colorTexto[0]=0;
+  this.colorTexto[1]=0;
+  this.colorTexto[2]=0;
+  this.color=new Array(3);
+  this.color[0]=230;
+  this.color[1]=230;
+  this.color[2]=230;
+  this.texto='';
+}
+
+Etiqueta.prototype.graficar=function() {
+  this.lienzo.fijarColor(this.color[0],this.color[1],this.color[2]);
+  this.lienzo.rectanguloRelleno(this.x,this.y,this.ancho,this.alto);
+  this.lienzo.fijarColor(this.colorTexto[0],this.colorTexto[1],this.colorTexto[2]);
+  this.lienzo.fijarCentrado("center");
+  this.lienzo.fijarTexto(this.x+this.ancho/2,this.y+this.alto/2+8,this.texto); 
+  this.sombra();
+}
+
+Etiqueta.prototype.sombra=function() {
+  var cr=this.color[0]+30;
+  if (cr>255) cr=255;
+  var cv=this.color[1]+30;
+  if (cv>255) cv=255;
+  var ca=this.color[2]+30;
+  if (ca>255) ca=255;
+  this.lienzo.fijarColorLinea(cr,cv,ca);
+  this.lienzo.linea(this.x,this.y,this.x+this.ancho,this.y);
+  this.lienzo.linea(this.x,this.y,this.x,this.y+this.alto);  
+  cr=this.color[0]-50;
+  if (cr<0) cr=0;
+  cv=this.color[1]-50;
+  if (cv<0) cv=0;
+  ca=this.color[2]-50;
+  if (ca<0) ca=0;
+  this.lienzo.fijarColorLinea(cr,cv,ca);
+  this.lienzo.linea(this.x,this.y+this.alto-1,this.x+this.ancho-1,this.y+this.alto-1);
+  this.lienzo.linea(this.x+this.ancho-1,this.y,this.x+this.ancho-1,this.y+this.alto-1);  
+}
+
+Etiqueta.prototype.fijarColor= function(rojo,verde,azul) {    
+  this.color[0]=rojo;
+  this.color[1]=verde;
+  this.color[2]=azul;
+  this.graficar();
+}
+
+Etiqueta.prototype.fijarTexto = function(texto) {
+  this.texto=texto;
+  this.graficar();
+}
+
+Etiqueta.prototype.fijarColorTexto = function(rojo,verde,azul) {
+  this.colorTexto[0]=rojo;
+  this.colorTexto[1]=verde;
+  this.colorTexto[2]=azul;
+  this.graficar();
+}
+
+
+//********************************************************
+
+
+var mouse = {
+  inicioMouse: function() {
+    this.canvasMinX = $("#lienzo1").offset().left;
+    this.canvasMaxX = this.canvasMinX + papel.retornarAncho();
+    this.canvasMinY= $("#lienzo1").position().top;
+    this.canvasMaxY = this.canvasMinY + papel.retornarAlto();
+    $("#lienzo1").mousedown(this.presionMouse);
+	$("#lienzo1").mouseup(this.soltarMouse);
+	this.botones=new Array();
+  },
+  presionMouse: function (evt) {
+  mouse.canvasMinX = $("#lienzo1").offset().left;
+  mouse.canvasMaxX = mouse.canvasMinX + papel.retornarAncho();
+  mouse.canvasMinY= $("#lienzo1").position().top;
+  mouse.canvasMaxY = mouse.canvasMinY + papel.retornarAlto();  
+  if (evt.pageX > mouse.canvasMinX && evt.pageX < mouse.canvasMaxX &&
+      evt.pageY > mouse.canvasMinY && evt.pageY < mouse.canvasMaxY) {
+     x = evt.pageX - mouse.canvasMinX;  
+     y = evt.pageY - mouse.canvasMinY;  
+	 for(var i=0;i<mouse.botones.length;i++) {
+	   if (mouse.botones[i].dentro(x,y))
+	     mouse.botones[i].presionar();
+	 }
+   }
+  },
+  soltarMouse: function(evt) {
+     mouse.canvasMinX = $("#lienzo1").offset().left;
+     mouse.canvasMaxX = mouse.canvasMinX + papel.retornarAncho();
+     mouse.canvasMinY= $("#lienzo1").position().top;
+     mouse.canvasMaxY = mouse.canvasMinY + papel.retornarAlto();  
+     x = evt.pageX - mouse.canvasMinX;  
+     y = evt.pageY - mouse.canvasMinY;  
+	 for(var i=0;i<mouse.botones.length;i++) {
+	   if (mouse.botones[i].estaPresionado()) {
+	     mouse.botones[i].soltar();
+		 mouse.botones[i].informar();
+	  }	 
+	 }
+  },
+  presionado: function(boton) {
+    this.botones.push(boton);
+  }
+};
+
+
+//Programa principal
+
+var NFILAS=10;
+var NCOLUMNAS=10;
+
+
+  function aleatorio(inferior,superior){ 
+   	numPosibilidades = superior - inferior; 
+   	aleat = Math.random() * numPosibilidades; 
+   	aleat = Math.round(aleat); 
+   	return parseInt(inferior) + aleat; 
+  }  
+
+
+function Tablero() {
+  this.activo=false;
+  this.sumaActual=0;
+  this.sumaExacta;
+  this.casillas=new Array(NFILAS);
+  var x=0;
+  var y=0;
+  var casillas;
+  for(var f=0;f<NFILAS;f++) {
+    this.casillas[f]=new Array(NFILAS);
+    for(var c=0;c<NCOLUMNAS;c++) {
+	  this.casillas[f][c]=new Boton(x,y,60,60,papel,this,this.controlPresionado);
+	  this.casillas[f][c].fijarColor(255,143,31);
+	  this.casillas[f][c].fijarTexto(aleatorio(1,9));
+	  y+=60;
+	}
+	y=0;
+	x+=60;
+  } 
+  this.tiempodisp=new Etiqueta(640,120,250,30,papel);
+  this.tiempodisp.fijarTexto("Tiempo disponible:"); 
+  this.etiqueta1=new Etiqueta(890,120,60,30,papel);
+  this.etiqueta1.fijarTexto("20"); 
+  this.etiquetase=new Etiqueta(640,200,250,30,papel);
+  this.etiquetase.fijarTexto("Suma exacta:"); 
+  this.etiqueta2=new Etiqueta(890,200,60,30,papel);
+  this.etiqueta2.fijarTexto(""); 
+
+}
+
+Tablero.prototype.controlPresionado=function(sender,boton) {
+  if (sender.activo  && !boton.seleccionado) {
+	  boton.seleccionar();
+	  sender.sumaActual+=parseInt(boton.texto);
+	  if (sender.sumaActual>sender.sumaExacta) {
+		sender.activo=false;
+		alert('perdio');
+		clearInterval(ini);
+	  } else
+		 if (sender.sumaActual==sender.sumaExacta)
+		 {
+		   sender.sumaActual=0;
+		   sender.sumaCorrecta(sender);
+		   sender.verificarGano(sender);
+		   sender.etiqueta1.fijarTexto("20"); 
+		   sender.etiqueta2.fijarTexto(sender.proximaSuma());		   
+		 }   
+  } else {
+    if (sender.activo  && boton.seleccionado) {
+	  boton.noSeleccionar();
+	  sender.sumaActual-=parseInt(boton.texto);
+	}
+  }
+}
+
+Tablero.prototype.verificarGano = function(sender) {
+  var cant=0;
+  for(var f=0;f<NFILAS;f++) {
+    for(var c=0;c<NCOLUMNAS;c++) {
+	  if (sender.casillas[f][c].estado==false) {
+	    cant++;
+      }		
+	}
+  } 
+  if (cant==NFILAS*NCOLUMNAS) {
+  	sender.activo=false;
+	clearInterval(ini);
+	alert('gano');
+  }   
+}
+
+Tablero.prototype.sumaCorrecta=function(sender) {
+  for(var f=0;f<NFILAS;f++) {
+    for(var c=0;c<NCOLUMNAS;c++) {
+	  if (sender.casillas[f][c].seleccionado) {
+	    sender.casillas[f][c].noSeleccionar();
+		sender.casillas[f][c].desactivar();
+      }		
+	}
+  } 
+}
+
+Tablero.prototype.retornarTotalPendiente = function() {
+  var suma=0;
+  for(var f=0;f<NFILAS;f++) {
+    for(var c=0;c<NCOLUMNAS;c++) {
+	  if (this.casillas[f][c].estado)
+	    suma+=parseInt(this.casillas[f][c].texto);
+	}
+  } 
+  return suma;
+}
+
+Tablero.prototype.retornarMenor = function() {
+  var menor=9;
+  for(var f=0;f<NFILAS;f++) 
+    for(var c=0;c<NCOLUMNAS;c++) 
+	  if (this.casillas[f][c].etado)
+        if (parseInt(this.casillas[f][c].texto)<menor)
+			menor=parseInt(this.casillas[f][c].texto);
+  return menor;			
+}
+
+Tablero.prototype.sacarContado = function() {
+  for(var f=0;f<NFILAS;f++) 
+    for(var c=0;c<NCOLUMNAS;c++) 
+      this.casillas[f][c].contado=false;
+}
+
+Tablero.prototype.proximaSuma = function() {
+  function aleatorio(inferior,superior){ 
+   	numPosibilidades = superior - inferior; 
+   	aleat = Math.random() * numPosibilidades; 
+   	aleat = Math.round(aleat); 
+   	return parseInt(inferior) + aleat; 
+  }  
+  this.sacarContado();
+  if (this.retornarTotalPendiente()<=20) {
+    return this.sumaExacta=this.retornarTotalPendiente();
+  } else {
+    var total=1+aleatorio(0,4);
+	var nro=0;
+	do {
+		var fila=aleatorio(0,NFILAS-1);
+		var columna=aleatorio(0,NCOLUMNAS-1);
+		if (!this.casillas[fila][columna].contado) {
+			if (this.casillas[fila][columna].estado && nro+parseInt(this.casillas[fila][columna].texto)<=20) {
+				nro+=parseInt(this.casillas[fila][columna].texto);
+				this.casillas[fila][columna].contado=true;
+				total--;
+				if (total==0 || nro+this.retornarMenor()>20) 
+					break;
+			}
+			else
+				if (nro+this.retornarMenor()>20)
+					break;
+		}			
+	}while(true);
+	return this.sumaExacta=nro;	
+  }
+}
+
+
+Tablero.prototype.inicio= function() {
+  this.activo=true;
+  this.sumaActual=0;
+  this.etiqueta1.fijarTexto(20);
+  for(var f=0;f<NFILAS;f++) {
+    for(var c=0;c<NCOLUMNAS;c++) {
+	  this.casillas[f][c].noSeleccionar();
+	  this.casillas[f][c].activar();
+	  this.casillas[f][c].fijarTexto(aleatorio(1,9));
+	}
+  }  
+  this.etiqueta2.fijarTexto(this.proximaSuma());
+
+}
+
+Tablero.prototype.reducirTiempo=function() {
+  var valor=parseInt(tablero.etiqueta1.texto);
+  if (valor==0) {
+	alert('perdio');
+	clearInterval(ini);
+   } else {
+      valor--;
+      tablero.etiqueta1.fijarTexto(valor);
+  }   
+}
+
+
+function presionInicio() {
+     tablero.inicio();
+	 
+	 if (ini!=0) clearInterval(ini);
+     ini=setInterval(tablero.reducirTiempo,1000);
+  
+}
+
+
+var tablero;
+var ini=0;
+var img;
+function inicio() {
+   var li=papel.retornarPapel("lienzo1");
+   if (li) {
+     papel.fijarColor(153,255,204);
+	 mouse.inicioMouse();
+     papel.rectanguloRelleno(0,0,1000,600); 	 
+	 tablero=new Tablero();
+     var botonInicio=new Boton(640,10,140,40,papel,this,presionInicio);
+	 botonInicio.fijarTexto("Iniciar");
+   }
+
+}
+
+
+
+
+
+
+</script>
+</head>
+<body onload="inicio()" style="background:#2c4762">
+<div style="font-size:40px;color:#fa0;text-align:center">Suma exacta.</div>
+<div style="margin:0 auto 0 auto;text-align:center">
+
+<canvas id="lienzo1" width="1000" height="600">
+Su navegador no permite utilizar canvas.
+</canvas>
+</div>
+<div style="border:2px;background:#f0f4f8;font-size:20px;color:#3c4142;padding:5px">
+<p>Cuando se presiona el botón "Iniciar" debemos seleccionar una serie de números del tablero de tal manera que su suma sea igual al valor indicado en la etiqueta: "Suma exacta".<br>
+Hay un tiempo límite para la selección.
+<br><a href="../../index-2.html" style="font-size:1.5em">Retornar</a>
+</p></div>
+
+</body>
+
+<!-- Mirrored from www.htmlya.com.ar/html5/demos/paginas/sumaexacta/sumaexacta.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:32:02 GMT -->
+</html>

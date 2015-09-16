@@ -1,0 +1,332 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=136&inicio=60 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:57:43 GMT -->
+<head>
+<title>Servlet</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Servlet</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>Un servlet es una clase que se ejecuta en el contexto de un servidor web (en nuestro caso el Apache Tomcat)<br>
+Un servlet se ejecuta en un servidor web y el resultado de ejecución viaja por internet para ser visualizado en un navegador web (normalmente un servlet genera HTML, pero puede generar otros formatos de archivos)</p>
+<p>Veremos los pasos en Eclipse para crear un servlet mínimo que nos muestre un mensaje y los números del 1 al 10000.</p>
+<p>Desde el menú de opciones seleccionamos File -> New -> Dynamic Web Project:</p>
+<img src="imagentema/foto206.jpg" border="0" alt="Servlet"><br>
+<p>En el diálogo siguiente especificamos el nombre del proyecto (en nuestro caso le llamaremos proyectoservlet1) y presionamos el botón "Finish":</p>
+<img src="imagentema/foto207.jpg" border="0" alt="Servlet"><br>
+<p>El Eclipse nos crea una serie de carpetas y archivos donde alojaremos los servlet:</p>
+<img src="imagentema/foto208.jpg" border="0" alt="Servlet"><br>
+<p>Ahora presionamos el botón derecho sobre el nombre del proyecto y seleccionamos la opción New -> Servlet:</p>
+<img src="imagentema/foto209.jpg" border="0" alt="Servlet"><br>
+<p>En el diálogo siguiente especificamos el nombre de nuestro servlet (en nuestro ejemplo le llamaremos HolaMundo), presionamos el botón "Finish" y ya tenemos el esqueleto básico de un servlet:</p>
+<img src="imagentema/foto210.jpg" border="0" alt="Servlet"><br>
+<p>El código fuente generado es el siguiente:</p>
+
+<pre class="recuadroborde">
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class HolaMundo
+ */
+@WebServlet("/HolaMundo")
+public class HolaMundo extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public HolaMundo() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+	}
+
+}
+</pre>
+<p>Todo servlet debe heredar de la clase HttpServlet que se encuentra en el paquete javax.servlet.http<br>
+<p>Esta clase debe sobreescribir el método doGet o doPost (o ambos) En el protocolo HTTP las peticiones pueden ser de tipo post (cuando llamamos a una página desde un formulario HTML) y de tipo get (páginas sin formulario)</p>
+<p>Nuestro problema es mostrar un mensaje e imprimir los números del 1 al 10000, esta actividad la haremos en el método doGet.</p>
+<p>El algoritmo a implementar en el método doGet para dicha salida es:</p>
+
+<pre class="recuadroborde">
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class HolaMundo
+ */
+@WebServlet("/HolaMundo")
+public class HolaMundo extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public HolaMundo() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+         PrintWriter out = response.getWriter();
+
+         out.println("&lt;html&gt;");
+         out.println("&lt;head&gt;&lt;/head&gt;");         
+         out.println("&lt;body&gt;");
+         out.println("&lt;h1&gt;Hola Mundo&lt;/h1&gt;");
+         for(int f=1;f&lt;=10000;f++) {
+             out.println(f);
+             out.println(" - ");
+         }
+         out.println("&lt;/body&gt;");
+         out.println("&lt;/html&gt;");        
+    }
+
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+    }
+
+}
+</pre>
+<p>Una parte importante de la declaración del servlet que nos genera automáticamente el Eclipse es la anotación @WebServlet (esta línea registra el servlet para todas las peticiones al servidor con la sintaxis http://localhost:8080/proyectoservlet1/HolaMundo):</p>
+<pre>
+@WebServlet("/HolaMundo")
+</pre>
+<p>Obtenemos una referencia de un objeto de la clase PrintWriter (debemos importar la clase PrintWriter) mediante la llamada al método getWriter del objeto response que llega como parámetro al método doGet:</p>
+<pre>
+         PrintWriter out = response.getWriter();
+</pre>
+<p>Todas las salidas son llamando al método println del objeto out de la clase PrintWriter. Como vemos generamos como salida HTML, para mostrar los números del 1 al 10000 es más conveniente utilizar una estructura repetitiva que hacer una salida secuencial.</p>
+
+<p>Para probar el servlet que acabamos de codificar debemos presionar el botón derecho del mouse sobre el nombre de la clase y seleccionar "Run on Server":</p>
+<img src="imagentema/foto211.jpg" border="0" alt="Servlet"><br>
+<p>Aparece un diálogo que debemos seleccionar el botón "Finish" ya que está seleccionado el servidor "Tomcat" para ejecutar el servlet:</p>
+<img src="imagentema/foto212.jpg" border="0" alt="Servlet"><br>
+<p>El resultado de la ejecución del servlet lo podemos ver dentro de una ventana dentro del mismo Eclipse:</p>
+<img src="imagentema/foto213.jpg" border="0" alt="Servlet"><br>
+
+<p>Si queremos que el resultado aparezca en otro navegador podemos configurar desde el menú de Eclipse el navegador que muestra el resultado que devuelve Tomcat:</p>
+
+<img src="imagentema/foto214.jpg" border="0" alt="Servlet"><br></div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="indexd6cc.html?inicio=60">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=136&inicio=60 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:58:17 GMT -->
+</html>

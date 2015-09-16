@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=50&cod=61&punto=57 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:08:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de CSS - Temarios</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<style>
+
+
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>57 - Pseudo-elementos: first-letter y first-line</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Los pseudo-elementos a diferencia de las pseudo-clases afectan a parte de un elemento HTML y no al elemento completo.</p>
+<p>Los primeros dos pseudo-elementos que veremos son first-letter y first-line.<br>
+El pseudo-elemento first-letter permite seleccionar la primer letra del contenido de un elemento HTML y aplicarle un estilo. Veamos por ejemplo si queremos que la primer letra de un párrafo aparezca con un tamaño de fuente mayor y otro color:</p>
+<pre>
+&lt;p&gt;Esto es la prueba del pseudo-elemento first-letter.&lt;/p&gt;
+</pre>
+<p>Definimos:</p>
+<pre>
+p::first-letter {
+  font-size:1.5em;
+  color:red;
+}
+</pre>
+<p>Tenemos como resultado luego:</p>
+<img src="imagentema/imagen014.jpg" border="0" alt="fist-letter"><br>
+<p>La sintaxis para definir un pseudo-elemento es distinta a las pseudo-clases ya que le antecedemos dos caracteres :: en lugar de uno.</p>
+<p>Si no tuvieramos los pseudo-elementos este problema lo debemos resolver encerrando el primer caracter de un párrafo con el elemento HTML "span" y asignarle un estilo a dicho elemento. Luego gracias a esto tenemos un contenido del archivo HTML mucho más limpio.</p>
+<h3>first-line</h3>
+<p>El pseudo-elemento first-line permite seleccionar la primer línea de texto de un elemento HTML para aplicar un estilo.</p>
+<p>Si tenemos la siguiente página:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;link rel="StyleSheet" href="estilos.css" type="text/css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;El pseudo-elemento first-line permite aplicar
+  un estilo a la primer linea del contenido de un 
+  elemento HTML. Tengamos en cuenta que la cantidad
+  de datos a mostrar en la primer línea depende del
+  ancho de la ventana del navegador.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>estilos.css</p>
+<pre class="recuadro">
+p::first-line {
+  text-decoration:underline;
+}
+</pre>
+<p>Tenemos como resultado en el navegador:</p>
+<img src="imagentema/imagen015.jpg" border="0" alt="fist-line"><br>
+<p>Tengamos en cuenta que si redimensionamos el navegador solo los caracteres de la primer línea aparecen subrayados:</p>
+<img src="imagentema/imagen016.jpg" border="0" alt="fist-line"><br>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../indexefd7.html?inicio=50">Retornar</a></h2>   
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=50&cod=61&punto=57 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:08:13 GMT -->
+</html>

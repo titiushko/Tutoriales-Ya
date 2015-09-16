@@ -1,0 +1,465 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=102&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:44 GMT -->
+<head>
+<title>Herencia</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Herencia</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>Vimos en el concepto anterior que dos clases pueden estar relacionadas por la colaboración. Ahora veremos otro tipo de relaciones entre clases que es la Herencia.</p>
+<p>La herencia significa que se pueden crear nuevas clases partiendo de clases existentes, que tendrá todas los atributos y los métodos de su 'superclase' o 'clase padre' y además se le podrán añadir otros atributos y métodos propios.</p>
+
+<h4>clase padre</h4>
+<p>Clase de la que desciende o deriva una clase. Las clases hijas (descendientes) heredan (incorporan) automáticamente los atributos y métodos de la la clase padre.</p>
+<h4>Subclase</h4>
+<p>Clase desciendiente de otra. Hereda automáticamente los atributos y métodos de su superclase. Es una especialización de otra clase. Admiten la definición de nuevos atributos y métodos para aumentar la especialización de la clase.</p>
+
+<p>Veamos algunos ejemplos teóricos de herencia:</p>
+
+<p>1) Imaginemos la clase Vehículo. Qué clases podrían derivar de ella?</p>
+<pre>
+                            Vehiculo
+
+   Colectivo                Moto                    Auto
+                             
+                                             FordK        Renault 9
+</pre>
+<p>Siempre hacia abajo en la jerarquía hay una especialización (las subclases añaden nuevos atributos y métodos.</p>
+
+<p>2) Imaginemos la clase Software. Qué clases podrían derivar de ella?</p>
+<pre>
+                                           Software
+
+             DeAplicacion                                        DeBase
+
+ProcesadorTexto       PlanillaDeCalculo                          SistemaOperativo
+
+Word   WordPerfect    Excel     Lotus123                         Linux    Windows       
+</pre>
+<p>El primer tipo de relación que habíamos visto entre dos clases, es la de colaboración. Recordemos que es cuando una clase contiene un objeto de otra clase como atributo.<br>
+Cuando la relación entre dos clases es del tipo "...tiene un..." o "...es parte de...", no debemos implementar herencia. Estamos frente a una relación de colaboración de clases no de herencia.</p>
+
+<p>Si tenemos una ClaseA y otra ClaseB y notamos que entre ellas existe una relacion de tipo "... tiene un...", no debe implementarse herencia sino declarar en la clase ClaseA un atributo de la clase ClaseB.</p>
+<p>Por ejemplo: tenemos una clase Auto, una clase Rueda y una clase Volante. Vemos que la relación entre ellas es: Auto "...tiene 4..." Rueda, Volante "...es parte de..." Auto; pero la clase Auto no debe derivar de Rueda ni Volante de Auto porque la relación no es de tipo-subtipo sino de colaboración. Debemos declarar en la clase Auto 4 atributos de tipo Rueda y 1 de tipo Volante.
+</p>
+<p>Luego si vemos que dos clase responden a la pregunta ClaseA "..es un.." ClaseB es posible que haya una relación de herencia.</p>
+<p>Por ejemplo:</p>
+<pre>
+Auto "es un" Vehiculo
+Circulo "es una" Figura
+Mouse "es un" DispositivoEntrada
+Suma "es una" Operacion
+</pre>
+<h3>Problema 1:</h3>
+<p>Ahora plantearemos el primer problema utilizando herencia. Supongamos que necesitamos implementar dos clases que llamaremos Suma y Resta. Cada clase tiene como atributo valor1, valor2 y resultado. Los métodos a definir son cargar1 (que inicializa el atributo valor1), carga2 (que inicializa el atributo valor2), operar (que en el caso de la clase "Suma" suma los dos atributos y en el caso de la clase "Resta" hace la diferencia entre valor1 y valor2, y otro método mostrarResultado.</p>
+<p>Si analizamos ambas clases encontramos que muchos atributos y métodos son idénticos. En estos casos es bueno definir una clase padre que agrupe dichos atributos y responsabilidades comunes.</p>
+
+<p>La relación de herencia que podemos disponer para este problema es:</p>
+<pre>
+                                        Operacion
+
+                        Suma                              Resta
+</pre>
+Solamente el método operar es distinto para las clases Suma y Resta (esto hace que no lo podamos disponer en la clase Operacion), luego los métodos cargar1, cargar2 y mostrarResultado son idénticos a las dos clases, esto hace que podamos disponerlos en la clase Operacion. Lo mismo los atributos valor1, valor2 y resultado se definirán en la clase padre Operacion.</p>
+<p>Crear un proyecto y luego crear cuatro clases llamadas: Operacion, Suma, Resta y Prueba</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.util.Scanner;
+public class Operacion {
+    protected Scanner teclado;
+    protected int valor1;
+    protected int valor2;
+    protected int resultado;
+    public Operacion() {
+        teclado=new Scanner(System.in);
+    }
+    
+    public void cargar1() {
+        System.out.print("Ingrese el primer valor:");
+        valor1=teclado.nextInt();        
+    }
+    
+    public void cargar2() {
+        System.out.print("Ingrese el segundo valor:");
+        valor2=teclado.nextInt();
+    }
+    
+    public void mostrarResultado() {
+        System.out.println(resultado);
+    }
+}
+
+
+
+
+public class Suma extends Operacion{
+    void operar() {
+        resultado=valor1+valor2;
+    }
+}
+
+
+
+
+public class Resta extends Operacion {
+    public void operar(){
+        resultado=valor1-valor2;
+    }
+}
+
+
+
+
+
+public class Prueba {
+    public static void main(String[] ar) {
+        Suma suma1=new Suma();
+        suma1.cargar1();
+        suma1.cargar2();
+        suma1.operar();
+        System.out.print("El resultado de la suma es:");
+        suma1.mostrarResultado();
+        Resta resta1=new Resta();
+        resta1.cargar1();
+        resta1.cargar2();
+        resta1.operar();
+        System.out.print("El resultado de la resta es:");        
+        resta1.mostrarResultado();
+    }
+}
+</pre>
+
+<p>La clase Operación define los cuatro atributos:</p>
+<pre>
+import java.util.Scanner;
+public class Operacion {
+    protected Scanner teclado;
+    protected int valor1;
+    protected int valor2;
+    protected int resultado;
+</pre>
+<p>Ya veremos que definimos los atributos con este nuevo modificador de acceso (protected) para que la subclase tenga acceso a dichos atributos. Si los definimos private las subclases no pueden acceder a dichos atributos.</p>
+
+<p>Los métodos de la clase Operacion son:</p>
+<pre>
+    public Operacion() {
+        teclado=new Scanner(System.in);
+    }
+    
+    public void cargar1() {
+        System.out.print("Ingrese el primer valor:");
+        valor1=teclado.nextInt();        
+    }
+    
+    public void cargar2() {
+        System.out.print("Ingrese el segundo valor:");
+        valor2=teclado.nextInt();
+    }
+    
+    public void mostrarResultado() {
+        System.out.println(resultado);
+    }
+</pre>
+<p>Ahora veamos como es la sintaxis para indicar que una clase hereda de otra:</p>
+<pre>
+public class Suma extends Operacion{
+</pre>
+<p>Utilizamos la palabra clave extends y seguidamente el nombre de la clase padre (con esto estamos indicando que todos los métodos y atributos de la clase Operación son también métodos de la clase Suma.</p>
+
+<p>Luego la característica que añade la clase Suma es el siguiente método:</p>
+<pre>
+    void operar() {
+        resultado=valor1+valor2;
+    }
+</pre>
+
+<p>El método operar puede acceder a los atributos heredados (siempre y cuando los mismos se declaren protected, en caso que sean private si bien lo hereda de la clase padre solo los pueden modificar métodos de dicha clase padre.</p>
+
+<p>Ahora podemos decir que la clase Suma tiene cinco métodos (cuatro heredados y uno propio) y 3 atributos (todos heredados)</p>
+
+<p>Luego en otra clase creamos un objeto de la clase Suma:</p>
+<pre>
+public class Prueba {
+    public static void main(String[] ar) {
+        Suma suma1=new Suma();
+        suma1.cargar1();
+        suma1.cargar2();
+        suma1.operar();
+        System.out.print("El resultado de la suma es:");
+        suma1.mostrarResultado();
+        Resta resta1=new Resta();
+        resta1.cargar1();
+        resta1.cargar2();
+        resta1.operar();
+        System.out.print("El resultado de la resta es:");        
+        resta1.mostrarResultado();
+    }
+}
+</pre>
+
+<p>Podemos llamar tanto al método propio de la clase Suma "operar()" como a los métodos heredados. Quien utilice la clase Suma solo debe conocer que métodos públicos tiene (independientemente que pertenezcan a la clase Suma o a una clase superior)</p>
+
+<p>La lógica es similar para declarar la clase Resta.</p>
+
+<p>La clase Operación agrupa en este caso un conjunto de atributos y métodos comunes a un conjunto de subclases (Suma, Resta). No tiene sentido definir objetos de la clase Operacion.</p>
+
+<p>El planteo de jerarquías de clases es una tarea compleja que requiere un perfecto entendimiento de todas las clases que intervienen en un problema, cuales son sus atributos y responsabilidades.</p>
+
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Confeccionar una clase Persona que tenga como atributos el nombre y la edad. Definir como responsabilidades un método que cargue los datos personales y otro que los imprima.<br>
+
+Plantear una segunda clase Empleado que herede de la clase Persona. Añadir un atributo sueldo y los métodos de cargar el sueldo e imprimir su sueldo.<br>
+
+Definir un objeto de la clase Persona y llamar a sus métodos. También crear un objeto de la clase Empleado y llamar a sus métodos.
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+import java.util.Scanner;
+public class Persona {
+    protected Scanner teclado;
+    protected String nombre;
+    protected int edad;
+    public Persona() {
+        teclado=new Scanner(System.in);
+    }
+    
+    public void cargarDatosPersonales() {
+        System.out.print("Ingrese el nombre:");
+        nombre=teclado.next();
+        System.out.print("Ingrese edad:");
+        edad=teclado.nextInt();
+    }
+    
+    public void imprimirDatosPersonales() {
+        System.out.println("Nombre:"+nombre);
+        System.out.println("Edad:"+edad);
+    }
+}
+
+
+
+
+import java.util.Scanner;
+public class Empleado extends Persona {
+	protected int sueldo;
+    public void cargarSueldo() {
+        System.out.print("Ingrese su sueldo:");
+        sueldo=teclado.nextInt();
+    }
+    
+    public void imprimirSueldo() {
+        System.out.println("El sueldo es:"+sueldo);
+    }
+}
+
+
+
+
+public class Prueba {
+    public static void main(String[] ar) {
+        Persona persona1=new Persona();
+        persona1.cargarDatosPersonales();
+        Empleado empleado1=new Empleado();
+        empleado1.cargarDatosPersonales();
+        empleado1.cargarSueldo();
+        persona1.imprimirDatosPersonales();        
+        empleado1.imprimirDatosPersonales();
+        empleado1.imprimirSueldo();
+    }
+}
+</pre></div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=102&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:44 GMT -->
+</html>

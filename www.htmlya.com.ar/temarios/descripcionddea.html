@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.htmlya.com.ar/temarios/descripcion.php?inicio=48&cod=120&punto=49 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:05:31 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Conceptos de HTML</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="html, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de HTML. Es objetivo prioritario respetar 
+los estándares del W3C">
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+</style>
+</head>
+
+<body>
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em"><a href="../index.html">Temario del Tutorial</a></span>->49 - Frames - Asignación de medidas en píxeles</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div> 
+
+<p style="background-color: #f2dede;margin-bottom:20px">Los Frames están discontinuados para las versiones actuales de HTML. Solamente téngalo en cuenta si tiene que hacer el mantenimiento de sitios que utilizan este elemento HTML. Evite desarrollar nuevos sitios utilizando Frames.</p>
+
+<p>En los ejemplos anteriores definimos las medidas de los frames en porcentajes:</p>
+<pre>
+&lt;frameset cols=&quot;20%,80%&quot;&gt;
+</pre>
+<p>Cuando lo indicamos en porcentajes al redimensionar la ventana del navegador el tamaño de los frame se redimensiona en forma proporcional.</p>
+<p>Hay situaciones donde queremos que un frame no se redimensione, por ejemplo que el frame de la izquierda donde ubicaríamos un menú de opciones siempre permanezca inalterable. Esto lo logramos indicando un valor absoluto para dicho frame.</p>
+<p>Veamos un ejemplo donde definimos 3 frames dividiendo la ventana en tres columna. Luego queremos que el frame de la izquierda y la derecha tengan medidas inalterables, para esto lo definimos de la siguiente forma:</p>
+<pre>
+&lt;frameset cols=&quot;200,*,200&quot;&gt;
+</pre>
+<p>Veamos que significa el asterisco para la segunda columna. Como sabemos una ventana puede redimensionarse y las tarjetas gráficas tienen distintas resoluciones en píxeles (640x480, 800x600, 1024x768 etc.), con esta sintaxis indicamos que la primer columna ocupe siempre 200 píxeles, lo mismo la tercer columna, pero la segunda tendrá un ancho de los píxeles que restan (es decir el ancho de ventana menos 400)</p>
+<p>Veamos la solución:</p>
+pagina1.html
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;prueba de frames&lt;/title&gt;
+&lt;/head&gt;
+&lt;frameset cols=&quot;200,*,200&quot;&gt;
+&lt;frame src=&quot;pagina2.html&quot;&gt;
+&lt;frame src=&quot;pagina3.html&quot;&gt;
+&lt;frame src=&quot;pagina4.html&quot;&gt;
+&lt;noframes&gt;
+&lt;p&gt;El navegador no soporta frames&lt;/p&gt;
+&lt;/noframes&gt;
+&lt;/frameset&gt;
+&lt;/html&gt;
+</pre>
+pagina2.html
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;prueba de frames&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;P&aacute;gina A&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+pagina3.html
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;prueba de frames&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;P&aacute;gina B&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+pagina4.html
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;prueba de frames&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;P&aacute;gina C&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Veamos algunas variantes para utilizar el asterísco:</p>
+<ul>
+<li>
+La primer columna es de 200 píxeles y los píxeles restantes se destribuyen entre el segundo y tercer frame.
+<pre>
+&lt;frameset cols=&quot;200,*,*&quot;&gt;
+</pre>
+</li>
+<li>
+Con esta sintaxis los píxeles que restan luego de aplicar los 200 píxeles del primer frame se asignan 2/3 partes al frame central y 1/3 al frame de la derecha.
+<pre>
+&lt;frameset cols=&quot;200,2*,*&quot;&gt;
+</pre>
+</li>
+<li>
+Podemos mezclar las unidades de medida. Con esta sintaxis el 50% corresponde al frame central, 200 píxeles al frame de la izquierda y los píxeles restantes se asignan al frame de la derecha.
+<pre>
+&lt;frameset cols=&quot;200,50%,*;&gt;
+</pre>
+</li>
+</ul>
+
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../index7c04.html?inicio=48">Retornar</a></h2>   
+
+</div>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-7";
+urchinTracker();
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.htmlya.com.ar/temarios/descripcion.php?inicio=48&cod=120&punto=49 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:05:31 GMT -->
+</html>

@@ -1,0 +1,615 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=14&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:40:16 GMT -->
+<head>
+<title>Almacenamiento de datos en un archivo de texto en la memoria interna</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>14 - Almacenamiento de datos en un archivo de texto en la memoria interna</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+ <div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+<p>Otra posibilidad de almacenar datos en nuestro dispositivo Android es el empleo de un archivo de texto que se guardará en el almacenamiento interno del equipo (la otro posibilidad es almacenarlo en una tarjeta SD Card)</p>
+
+
+<h3>Problema 1:</h3>
+<p>Confeccionar un programa que permita almacenar notas en un control EditText y cuando se presione un botón almacenar los datos del EditText en un archivo de texto llamado "notas.txt".<br>
+Cada vez que se ingrese al programa verificar si existe el archivo de textos "notas.txt", proceder a su lectura y almacenamiento de datos en el EditText.</p>
+<p>Crear un proyecto en Android Studio y definir como nombre: proyecto016.</p>
+<p>Para crear la interfaz visual primero disponemos un botón alineado en la parte inferior del celular y luego de la pestaña "Text Fields" seleccionamos un objeto de la clase EditText ("Multiline Text") y lo disponemos en la parte superior de la pantalla e inicializamos la propiedad background del EditText con el valor #ffff00 (que corresponde con el color amarillo):</p>
+<img src="imagentema/foto055.jpg" border="0" alt="Archivos de texto memoria interna"><br>
+<p>Finalmente procedemos a redimensionar el EditText por medio del mouse y configuramos la propiedad gravity tildando los valores top y left para que los datos que ingresa el operador aparezcan en la parte superior izquierda y no centrados:</p>
+<img src="imagentema/foto055b.jpg" border="0" alt="Archivos de texto memoria interna"><br>
+
+
+
+<p>El código fuente de la aplicación:</p>
+
+<pre class="recuadro">
+package ar.com.tutorialesya.proyecto016;
+
+import android.app.Activity;
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+
+public class MainActivity extends ActionBarActivity {
+    private EditText et1;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        et1=(EditText)findViewById(R.id.editText);
+        String[] archivos = fileList();
+
+        if (existe(archivos, "notas.txt"))
+            try {
+                InputStreamReader archivo = new InputStreamReader(
+                        openFileInput("notas.txt"));
+                BufferedReader br = new BufferedReader(archivo);
+                String linea = br.readLine();
+                String todo = "";
+                while (linea != null) {
+                    todo = todo + linea + "\n";
+                    linea = br.readLine();
+                }
+                br.close();
+                archivo.close();
+                et1.setText(todo);
+            } catch (IOException e) {
+            }
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private boolean existe(String[] archivos, String archbusca) {
+        for (int f = 0; f &lt; archivos.length; f++)
+            if (archbusca.equals(archivos[f]))
+                return true;
+        return false;
+    }
+
+    public void grabar(View v) {
+        try {
+            OutputStreamWriter archivo = new OutputStreamWriter(openFileOutput(
+                    "notas.txt", Activity.MODE_PRIVATE));
+            archivo.write(et1.getText().toString());
+            archivo.flush();
+            archivo.close();
+        } catch (IOException e) {
+        }
+        Toast t = Toast.makeText(this, "Los datos fueron grabados",
+                Toast.LENGTH_SHORT);
+        t.show();
+        finish();
+    }
+}
+
+</pre>
+
+
+<p>Veamos primero como grabamos datos en un archivo de texto. Esto se hace en el método grabar que se ejecuta cuando presionamos el botón "grabar" (recordemos de inicializar la propiedad "onClick" del botón con el valor "grabar"):</p>
+<pre>
+
+    public void grabar(View v) {
+        try {
+            OutputStreamWriter archivo = new OutputStreamWriter(openFileOutput("notas.txt",Activity.MODE_PRIVATE));
+</pre>
+<p>Creamos un objeto de la clase OutputStreamWriter y al constructor de dicha clase le enviamos el dato que retorna el método openFileOutput propio de la clase ActionBarActivity que le pasamos como parámetro el nombre del archivo de texto y el modo de apertura.</p>
+<p>Seguidamente si el archivo se creó correctamente procedemos a llamar al método write y le pasamos el String a grabar, en este caso extraemos los datos del EditText:</p>
+<pre>
+            archivo.write(et1.getText().toString());
+</pre>
+<p>Luego de grabar con el método write llamamos al método flush para que vuelque todos los datos que pueden haber quedado en el buffer y procedemos al cerrado del archivo:</p>
+<pre>
+            archivo.flush();
+            archivo.close();            
+</pre>
+<p>Todo esto está cerrado en un try/catch para verificar si sucede algún error en la apertura del archivo.</p>
+<p>Finalmente mostramos un mensaje temporal en pantalla utilizando la clase Toast:</p>
+<pre>
+
+        Toast t=Toast.makeText(this,"Los datos fueron grabados", Toast.LENGTH_SHORT);
+        t.show();
+        finish();
+</pre>
+<p>Para crear un objeto de la clase Toast llamamos al método makeText de la clase Toast y le pasamos  la referencia del ActionBarActivity actual, el String a mostrar y el tiempo de duración del mensaje. Con el objeto devuelto por el método makeText procedemos a llamar seguidamente al método show para que se muestre el mensaje.</p>
+<p>Es común llamar al método show de la clase Toast en una sola línea como esta:</p>
+<pre>
+        Toast.makeText(this,"Los datos fueron grabados", Toast.LENGTH_SHORT).show();
+</pre>
+
+<p>El método onCreate tiene por objetivo verificar si existe el archivo de texto, proceder a su lectura y mostrar su contenido en el EditText.</p>
+
+<p>Primero obtenemos la lista de todos los archivos creados por la Activity. En nuestro ejemplo puede ser cero o uno:</p>
+<pre>
+        String []archivos=fileList();
+</pre>
+
+<p>Llamamos a un método que verifica si en el vector de tipo String existe el archivo "notas.txt":</p>
+<pre>
+        if (existe(archivos,"notas.txt")) 
+</pre>
+<p>En el caso que me retorne true procedemos a crear un objeto de la clase InputStreamReader y al constructor de dicha clase le pasamos el dato devuelto por el método openFileInput:</p>
+<pre>
+                InputStreamReader archivo=new InputStreamReader(openFileInput("notas.txt"));
+</pre>
+<p>Creamos un objeto de la clase BufferedReader y le pasamos al constructor la referencia del objeto de la clase InputStreamReader:</p>
+<pre>
+                BufferedReader br=new BufferedReader(archivo);
+</pre>
+<p>Leemos la primer línea del archivo de texto:</p>
+<pre>
+                String linea=br.readLine();
+</pre>
+<p>Inicializamos un String vacío:</p>
+<pre>
+                String todo="";
+</pre>
+<p>Mientras el método readLine de la clase BufferedReader devuelva un String:</p>
+<pre>
+                while (linea!=null)
+                {
+</pre>
+<p>Lo concatenamos al String junto a un salto de línea:</p>
+<pre>
+                    todo=todo+linea+"\n";
+</pre>
+<p>Leemos la próxima línea:</p>
+<pre>
+                    linea=br.readLine();
+                }
+</pre>
+<p>Llamamos al método close de la clase BufferedReader y al del InputStreamReader:</p>
+<pre>
+                br.close();
+                archivo.close();
+</pre>
+<p>Cargamos el EditText con el contenido del String que contiene todos los datos del archivo de texto:</p>
+<pre>
+                et1.setText(todo);
+</pre>
+
+
+<p>El método existe llega un vector de tipo String y otro String a buscar. Dentro de un for verificamos el String a buscar con cada uno de los String del vector, si lo encontramos retornamos true. Si recorre todo el for sin encontrarlo fuera del for retornamos false:</p>
+<pre>
+    private boolean existe(String[] archivos,String archbusca)
+    {
+        for(int f=0;f&lt;archivos.length;f++)
+            if (archbusca.equals(archivos[f]))
+                return true;
+        return false;
+    }
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/Proyecto016.zip">proyecto016.zip</a>
+
+<p>Luego de ejecutar el programa podemos entrar al "Android Device Monitor" (podemos ejecutarlo desde el menú del Android Studio: Tools->Android->Android Device Monitor) y localizar en el dispositivo donde se guarda el archivo de texto creado:</p>
+
+<img src="imagentema/foto055c.jpg" border="0" alt="Archivos de texto memoria interna Android Device Monitor"><br>
+<p>Como vemos se crea una carpeta llamada "files" que contiene el archivo creado (si creamos más archivos de texto se almacenarán en esta carpeta)</p>
+
+
+<h3>Problema 2:</h3>
+<p>Confeccionar un programa para administrar un calendario de actividades diarias. Los nombres de archivos corresponderán a las fechas que ingresamos. Luego cuando consultamos una fecha verificamos si hay un archivo de texto que coincida con dicha fecha.</p>
+<p>La interfaz visual a crear será la siguiente:</p>
+<img src="imagentema/foto055d.jpg" border="0" alt="Archivos de texto memoria interna"><br>
+<p>Es decir disponemos un "Medium Text" donde dice fecha. Un EditText de tipo "Date" donde se carga la fecha. Luego otro EditText de tipo "Multiline Text" y finalmente un botón.</p>
+
+
+<p>El código fuente de la aplicación:</p>
+
+<pre class="recuadro">
+package ar.com.tutorialesya.proyecto017;
+
+import android.app.Activity;
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+
+public class MainActivity extends ActionBarActivity {
+
+    private EditText et1,et2;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        et1=(EditText)findViewById(R.id.editText);
+        et2=(EditText)findViewById(R.id.editText2);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+     public void grabar(View v) {
+            String nomarchivo=et1.getText().toString();
+            nomarchivo=nomarchivo.replace('/','-');
+            try {
+                OutputStreamWriter archivo = new OutputStreamWriter(openFileOutput(
+                        nomarchivo, Activity.MODE_PRIVATE));
+                archivo.write(et2.getText().toString());
+                archivo.flush();
+                archivo.close();
+            } catch (IOException e) {
+            }
+            Toast t = Toast.makeText(this, "Los datos fueron grabados",
+                    Toast.LENGTH_SHORT);
+            t.show();
+            et1.setText("");
+            et2.setText("");
+    }
+
+    public void recuperar(View v) {
+        String nomarchivo=et1.getText().toString();
+        nomarchivo=nomarchivo.replace('/','-');
+        boolean enco=false;
+        String[] archivos = fileList();
+        for (int f = 0; f &lt; archivos.length; f++)
+            if (nomarchivo.equals(archivos[f]))
+                enco= true;
+        if (enco==true) {
+            try {
+                InputStreamReader archivo = new InputStreamReader(
+                        openFileInput(nomarchivo));
+                BufferedReader br = new BufferedReader(archivo);
+                String linea = br.readLine();
+                String todo = "";
+                while (linea != null) {
+                    todo = todo + linea + "\n";
+                    linea = br.readLine();
+                }
+                br.close();
+                archivo.close();
+                et2.setText(todo);
+            } catch (IOException e) {
+            }
+        } else
+        {
+            Toast.makeText(this,"No hay datos grabados para dicha fecha",Toast.LENGTH_LONG).show();
+            et2.setText("");
+        }
+    }
+
+}
+</pre>
+<p>Definimos dos variables que hacen referencia a los EditText donde se cargan la fecha en uno y las actividades de dicho día en el otro:</p>
+<pre>
+    private EditText et1,et2;
+</pre>
+<p>En el método onCreate obtenemos las referencias de los dos EditText:</p>
+<pre>
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        et1=(EditText)findViewById(R.id.editText);
+        et2=(EditText)findViewById(R.id.editText2);
+    }
+</pre>
+
+<p>El método grabar que se ejecuta cuando presionamos el botón grabar (no olvidar de inicializar la propiedad onClick de cada botón con el nombre del método respectivo) tenemos primero que extraer la fecha ingresada en el primer EditText y remplazar las barras de la fecha por guiones ya que no se puede utilizar este caracter dentro de un nombre de archivo en Android:</p>
+<pre>
+            String nomarchivo=et1.getText().toString();
+            nomarchivo=nomarchivo.replace('/','-');
+</pre>
+<p>Creamos un objeto de la clase OutputStreamWriter y al constructor de dicha clase le enviamos el dato que retorna el método openFileOutput propio de la clase ActionBarActivity que le pasamos como parámetro el nombre del archivo de texto y el modo de apertura.</p>
+<pre>
+            try {
+                OutputStreamWriter archivo = new OutputStreamWriter(openFileOutput(
+                        nomarchivo, Activity.MODE_PRIVATE));
+</pre>
+<p>Seguidamente si el archivo se creó correctamente procedemos a llamar al método write y le pasamos el String a grabar, en este caso extraemos los datos del EditText:</p>
+<pre>
+                archivo.write(et2.getText().toString());
+</pre>
+<p>Luego de grabar con el método write llamamos al método flush para que vuelque todos los datos que pueden haber quedado en el buffer y procedemos al cerrado del archivo:</p>
+<pre>
+            archivo.flush();
+            archivo.close();            
+</pre>
+<p>Cada vez que se graba un dato se genera un archivo de texto para dicha fecha, si ya había un archivo con el mismo nombre (es decir la misma fecha) se pisa el anterior.</p>
+
+<p>Desde el "Android Device Monitor" podemos observar todos los archivos de texto que se van creando a medida que registramos actividades en la aplicación que desarrollamos:</p>
+<img src="imagentema/foto055e.jpg" border="0" alt="Archivos de texto memoria interna"><br>
+
+<p>Para recuperar los datos de una determinada fecha se ejecuta el método "recuperar":</p>
+<pre>
+  public void recuperar(View v) {
+        String nomarchivo=et1.getText().toString();
+        nomarchivo=nomarchivo.replace('/','-');
+        boolean enco=false;
+        String[] archivos = fileList();
+        for (int f = 0; f &lt; archivos.length; f++)
+            if (nomarchivo.equals(archivos[f]))
+                enco= true;
+        if (enco==true) {
+            try {
+                InputStreamReader archivo = new InputStreamReader(
+                        openFileInput(nomarchivo));
+                BufferedReader br = new BufferedReader(archivo);
+                String linea = br.readLine();
+                String todo = "";
+                while (linea != null) {
+                    todo = todo + linea + "\n";
+                    linea = br.readLine();
+                }
+                br.close();
+                archivo.close();
+                et2.setText(todo);
+            } catch (IOException e) {
+            }
+        } else
+        {
+            Toast.makeText(this,"No hay datos grabados para dicha fecha",Toast.LENGTH_LONG).show();
+            et2.setText("");
+        }
+    }
+</pre>
+<p>Lo primero que hacemos es recuperar del EditText la fecha que ingresó el operador para buscar:</p>
+<pre>
+        String nomarchivo=et1.getText().toString();
+</pre>
+<p>Remplazamos las barras por guiones (recordemos que grabamos guiones en la carga ya que la barra de una fecha no es un caracter válido en un archivo en Android):</p>
+<pre>
+        nomarchivo=nomarchivo.replace('/','-');
+</pre>
+<p>Obtenemos la lista de todos los archivos que almacena la aplicación mediante la llamada al método fileList():</p>
+<pre>
+        String[] archivos = fileList();
+</pre>
+<p>Mediante un for recorremos el vector con los nombres de archivos y los comparamos con la fecha ingresada, en el caso de encontrarlo procedemos a cambiar el estado de una bandera:</p>
+<pre>
+        for (int f = 0; f &lt; archivos.length; f++)
+            if (nomarchivo.equals(archivos[f]))
+                enco= true;
+</pre>
+<p>Si la bandera está en true significa que existe el archivo por lo que procedemos a abrirlo, leerlo y cargar el et2 con los datos del archivo:</p>
+<pre>
+
+        if (enco==true) {
+            try {
+                InputStreamReader archivo = new InputStreamReader(
+                        openFileInput(nomarchivo));
+                BufferedReader br = new BufferedReader(archivo);
+                String linea = br.readLine();
+                String todo = "";
+                while (linea != null) {
+                    todo = todo + linea + "\n";
+                    linea = br.readLine();
+                }
+                br.close();
+                archivo.close();
+                et2.setText(todo);
+            } catch (IOException e) {
+            }
+</pre>
+
+<p>La interfaz visual en tiempo de ejecución debe ser similar a esta:</p>
+<img src="imagentema/foto055f.jpg" border="0" alt="Archivos de texto memoria interna"><br>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/Proyecto017.zip">proyecto017.zip</a>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+<br>
+   <h2><a href="index2904.html?inicio=0">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-34', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=14&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:43:24 GMT -->
+</html>

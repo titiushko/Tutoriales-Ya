@@ -1,0 +1,288 @@
+        
+
+<html>
+
+
+<!-- Mirrored from www.mysqlya.com.ar/simulador/simulador.php?inicio=63&cod=68&punto=73 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Problemas resueltos:Crear tabla a partir de otra (create - insert)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;		
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=no,status=yes,toolbar=yes,location=yes');  	
+}
+</script>  
+</head>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>73 - Crear tabla a partir de otra (create - insert)</h1></td>
+<td align="right">
+<!--<a href="http://www.mysqlya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<body bgcolor="#CCFFCC">
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Tenemos la tabla "libros" de una librería y queremos crear una tabla llamada "editoriales" que contenga los nombres de las editoriales.</p>
+<p>Eliminamos las tablas "libros" y "editoriales", si existen:</p>
+<pre>
+ drop table if exists libros, editoriales;
+</pre>
+<p>Creamos la tabla "libros" con la siguiente estructura:</p>
+<pre>
+ create table libros(
+  codigo int unsigned auto_increment,
+  titulo varchar(40) not null,
+  autor varchar(30) not null default 'Desconocido',
+  editorial varchar(20) not null,
+  precio decimal(5,2) unsigned,
+  primary key (codigo)
+ );
+</pre>
+<p>La tabla "editoriales" debe tener la siguiente estructura:</p>
+<pre>
+ -nombre: nombre de la editorial.
+</pre>
+<p>No la creamos aún.</p>
+
+<p>Ingresamos algunos registros para "libros":</p>
+<pre>
+ insert into libros values (1,'El aleph','Borges','Emece',23.5);
+ insert into libros values (2,'Alicia en el pais de las maravillas',
+                              'Lewis Carroll','Planeta',15);
+ insert into libros values (3,'Matematica estas ahi','Paenza','Emece',34.6);
+ insert into libros values (4,'Martin Fierro','Jose Hernandez','Paidos',43.5);
+ insert into libros values (5,'Martin Fierro','Jose Hernandez','Planeta',12);
+ insert into libros values (6,'Aprenda PHP','Mario Molina','Paidos',21.8);
+ insert into libros values (7,'Aprenda Java','Mario Molina','Paidos',55.4);
+ insert into libros values (8,'Alicia a traves del espejo','Lewis Carroll','Emece',18);
+ insert into libros values (9,'Antologia poetica','Borges','Paidos',47.9);
+</pre>
+<p>Podemos lograrlo en 3 pasos: 1º) crear la tabla "editoriales", 2º) realizar la consulta en la tabla "libros" para obtener los nombres de las distintas editoriales y 3º) insertar los registros necesarios en la tabla "editoriales".</p>
+<p>Pero lo haremos de la manera simplificada. Crearemos la tabla "editoriales" con el campo necesario consultando la tabla "libros" y en el mismo momento insertaremos la información:</p>
+<pre>
+ create table editoriales
+  select distinct editorial as nombre
+  from libros;
+</pre>
+<p>La tabla "editoriales" se ha creado con el campo llamado "nombre" seleccionado del campo "editorial" de "libros".</p>
+
+<p>Seleccionamos todos los registros de la tabla "editoriales":</p>
+<pre>
+ select * from editoriales;
+</pre>
+<p>Visualicemos la estructura de "editoriales":</p>
+<pre>
+ describe editoriales;
+</pre>
+<p>vemos que el campo "nombre" se creó con el mismo tipo y longitud del campo "editorial" de "libros".</p>
+
+<p>También podemos crear una tabla a partir de una consulta cargando los campos con los valores de otra tabla y una columna calculada.</p>
+
+<p>Queremos crear una tabla llamada "cantidadporeditorial" que contenga la cantidad de libros de cada editorial.</p>
+<p>Eliminamos la tabla "cantidadporeditorial" si existe:</p>
+<pre>
+ drop table if exists cantidadporeditorial;
+</pre>
+<p>La tabla "cantidadporeditorial" debe tener la siguiente estructura:</p>
+<pre>
+ -nombre: nombre de la editorial,
+ -cantidad: cantidad de libros.
+</pre>
+<p>No la creamos aún.</p>
+
+<p>Podemos lograrlo en 3 pasos: 1º) crear la tabla "cantidadporeditorial", 2º) realizar la consulta en la tabla "libros" para obtener la cantidad de libros de cada editorial agrupando por "editorial" y calculando la cantidad con "count()", 3º) insertar los registros necesarios en la tabla "cantidadporeditorial" con "insert into".</p>
+
+<p>Pero lo haremos de la manera simplificada.</p>
+<p>Crearemos la tabla "cantidadporeditorial" con los campos necesarios consultando la tabla "libros" y en el mismo momento insertaremos los registros:</p>
+<pre>
+ create table cantidadporeditorial
+  select editorial as nombre,count(*) as cantidad
+  from libros
+  group by editorial;
+</pre>
+<p>La tabla "cantidadporeditorial" se ha creado con el campo llamado "nombre" seleccionado del campo "editorial" de "libros" y con el campo "cantidad" con el valor calculado con count() de la tabla "libros".</p>
+
+<p>Seleccionamos los registros de la tabla "cantidadporeditorial":</p>
+<pre>
+ select * from cantidadporeditorial;
+</pre>
+<p>Visualizamos la estructura de "cantidadporeditorial":</p>
+<pre>
+ describe cantidadporeditorial;
+</pre>
+        <form name="formulario" action="http://www.mysqlya.com.ar/simulador/ejecuta.php" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+          <textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off">
+drop table if exists libros, editoriales;
+
+create table libros(
+  codigo int unsigned auto_increment,
+  titulo varchar(40) not null,
+  autor varchar(30) not null default 'Desconocido',
+  editorial varchar(20) not null,
+  precio decimal(5,2) unsigned,
+  primary key (codigo)
+ );
+
+insert into libros values (1,'El aleph','Borges','Emece',23.5);
+insert into libros values (2,'Alicia en el pais de las maravillas',
+                              'Lewis Carroll','Planeta',15);
+insert into libros values (3,'Matematica estas ahi','Paenza','Emece',34.6);
+insert into libros values (4,'Martin Fierro','Jose Hernandez','Paidos',43.5);
+insert into libros values (5,'Martin Fierro','Jose Hernandez','Planeta',12);
+insert into libros values (6,'Aprenda PHP','Mario Molina','Paidos',21.8);
+insert into libros values (7,'Aprenda Java','Mario Molina','Paidos',55.4);
+insert into libros values (8,'Alicia a traves del espejo','Lewis Carroll','Emece',18);
+insert into libros values (9,'Antologia poetica','Borges','Paidos',47.9);
+
+create table editoriales
+  select distinct editorial as nombre
+  from libros;
+
+select * from editoriales;
+
+describe editoriales;
+
+drop table if exists cantidadporeditorial;
+
+create table cantidadporeditorial
+  select editorial as nombre,count(*) as cantidad
+  from libros
+  group by editorial;
+
+select * from cantidadporeditorial;
+
+describe cantidadporeditorial;
+</textarea>
+    <br>
+    <input type="submit"  value="Ejecutar  los comandos SQL">
+    <input type="button" onClick="javascript:formulario.programa.value=''" value="Borrar comando.">
+        <br>
+	<br>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   
+<input type="hidden" name="extension1" value="problema1.php">
+
+</form>
+
+   <h2><a href="../indexda3e.html?inicio=63">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-5";
+urchinTracker();
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from www.mysqlya.com.ar/simulador/simulador.php?inicio=63&cod=68&punto=73 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:29 GMT -->
+</html>
+

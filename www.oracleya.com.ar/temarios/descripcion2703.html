@@ -1,0 +1,180 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=100&cod=261&punto=103 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Descripción : Disparador (trigger) (Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>103 - Disparador (trigger)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>Un "trigger" (disparador o desencadenador) es un bloque de código que se ejecuta automáticamente cuando ocurre algún evento (como inserción, actualización o borrado) sobre una determinada tabla (o vista); es decir, cuando se intenta modificar los datos de una tabla (o vista) asociada al disparador.</p>
+<p>Se crean para conservar la integridad referencial y la coherencia entre los datos entre distintas tablas; para registrar los cambios que se efectúan sobre las tablas y la identidad de quien los realizó; para realizar cualquier acción cuando una tabla es modificada; etc.</p>
+<p>Si se intenta modificar (agregar, actualizar o eliminar) datos de una tabla asociada a un disparador, el disparador se ejecuta (se dispara) en forma automática.</p>
+
+<p>La diferencia con los procedimientos almacenados del sistema es que los triggers:</p>
+<p>- no pueden ser invocados directamente; al intentar modificar los datos de una tabla asociada a un disparador, el disparador se ejecuta automáticamente.</p>
+<p>- no reciben y retornan parámetros.</p>
+<p>- son apropiados para mantener la integridad de los datos, no para obtener resultados de consultas.</p>
+
+<p>Sintaxis general para crear un disparador:</p>
+<pre>
+ create or replace trigger NOMBREDISPARADOR
+ MOMENTO-- before, after o instead of
+ EVENTO-- insert, update o delete
+ of CAMPOS-- solo para update
+ on NOMBRETABLA
+ NIVEL--puede ser a nivel de sentencia (statement) o de fila (for each row)
+ when CONDICION--opcional
+ begin
+  CUERPO DEL DISPARADOR--sentencias
+ end NOMBREDISPARADOR;
+</pre>
+<p>Los triggers se crean con la instrucción "create trigger" seguido del nombre del disparador. Si se agrega "or replace" al momento de crearlo y ya existe un trigger con el mismo nombre, tal disparador será borrado y vuelto a crear.</p>
+<p>"MOMENTO" indica cuando se disparará el trigger en relación al evento, puede ser BEFORE (antes), AFTER (después) o INSTEAD OF (en lugar de). "before" significa que el disparador se activará antes que se ejecute la operación (insert, update o delete) sobre la tabla, que causó el disparo del mismo. "after" significa que el trigger se activará después que se ejecute la operación que causó el disparo. "instead of" sólo puede definirse sobre vistas, anula la sentencia disparadora, se ejecuta en lugar de tal sentencia (ni antes ni después).</p>
+<p>"EVENTO" especifica la operación (acción, tipo de modificación) que causa que el trigger se dispare (se active), puede ser "insert", "update" o "delete"; DEBE colocarse al menos una acción, puede ser más de una, en tal caso se separan con "or". Si "update" lleva una lista de atributos, el trigger sólo se ejecuta si se actualiza algún atributo de la lista.</p>
+<p>"on NOMBRETABLA" indica la tabla (o vista) asociada al disparador;</p>
+<p>"NIVEL" puede ser a nivel de sentencia o de fila. "for each row" indica que el trigger es a nivel de fila, es decir, se activa una vez por cada registro afectado por la operación sobre la tabla, cuando una sola operación afecta a varios registros. Los triggers a nivel de sentencia, se activan una sola vez (antes o después de ejecutar la operación sobre la tabla). Si no se especifica, o se especifica "statement", es a nivel de sentencia.</p>
+<p>"CUERPO DEL DISPARADOR" son las acciones que se ejecutan al dispararse el trigger, las condiciones que determinan cuando un intento de inserción, actualización o borrado provoca las acciones que el trigger realizará. El bloque se delimita con "begin... end".</p>
+
+<p>Entonces, un disparador es un bloque de código asociado a una tabla que se dispara automáticamente antes o después de una sentencia "insert", "update" o "delete" sobre la tabla.</p>
+<p>Se crean con la instrucción "create trigger" especificando el momento en que se disparará, qué evento lo desencadenará (inserción, actualización o borrado), sobre qué tabla (o vista) y las instrucciones que se ejecutarán.</p>
+
+<p>Los disparadores pueden clasificarse según tres parámetros:</p>
+<p>- el momento en que se dispara: si se ejecutan antes (before) o después (after) de la sentencia.</p>
+<p>- el evento que los dispara: insert, update o delete, según se ejecute una de estas sentencias sobre la tabla.</p>
+<p>- nivel: dependiendo si se ejecuta para cada fila afectada en la sentencia (por cada fila) o bien una única vez por sentencia independientemente de la filas afectadas (nivel de sentencia).</p>
+
+<p>Consideraciones generales:</p>
+<p>- Las siguientes instrucciones no están permitidas en un desencadenador: create database, alter database, drop database, load database, restore database, load log, reconfigure, restore log, disk init, disk resize.</p>
+<p>- Se pueden crear varios triggers para cada evento, es decir, para cada tipo de modificación (inserción, actualización o borrado) para una misma tabla. Por ejemplo, se puede crear un "insert trigger" para una tabla que ya tiene otro "insert trigger".</p>
+ 
+<p>A continuación veremos la creación de disparadores para los distintos sucesos (inserción, borrado, actualización) y todas las cláusulas adicionales.</p>
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../indexf6ce.html?inicio=100">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=100&cod=261&punto=103 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+</html>

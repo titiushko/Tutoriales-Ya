@@ -1,0 +1,253 @@
+        
+
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=75&cod=257&punto=99 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios resueltos : Control de flujo (case)(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+<body bgcolor="#CCFFCC">
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>99 - Control de flujo (case)</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Trabajamos con la tabla "empleados". Eliminamos la tabla y luego la creamos con la siguiente estructura:</p>
+<pre>
+ drop table empleados;
+
+ create table empleados (
+  documento char(8),
+  nombre varchar(30),
+  fechanacimiento date  
+ );
+</pre>
+<p>Ingresamos algunos registros:</p>
+<pre>
+ insert into empleados values('20111111','Acosta Ana','10/05/1968');
+ insert into empleados values('22222222','Bustos Bernardo','09/07/1970');
+ insert into empleados values('22333333','Caseros Carlos','15/10/1971');
+ insert into empleados values('23444444','Fuentes Fabiana','25/01/1972');
+ insert into empleados values('23555555','Gomez Gaston','28/03/1979');
+ insert into empleados values('24666666','Juarez Julieta','18/02/1981');
+ insert into empleados values('25777777','Lopez Luis','17/09/1978');
+ insert into empleados values('26888888','Morales Marta','22/12/1975');
+</pre>
+<p>Nos interesa el nombre del mes en el cual cada empleado cumple años. Podemos utilizar la estructura condicional "case". Para ello crearemos una función que reciba una fecha y retorne una cadena de caracteres indicando el nombre del mes de la fecha enviada como argumento:</p>
+<pre>
+ create or replace function f_mes(afecha date)
+   return varchar2
+ is
+  mes varchar2(20);
+ begin
+   mes:='enero';
+   case extract(month from afecha)
+     when 1 then mes:='enero';
+     when 2 then mes:='febrero';
+     when 3 then mes:='marzo';
+     when 4 then mes:='abril';
+     when 5 then mes:='mayo';
+     when 6 then mes:='junio';
+     when 7 then mes:='julio';
+     when 8 then mes:='agosto';
+     when 9 then mes:='setiembre';
+     when 10 then mes:='octubre';
+     when 11 then mes:='noviembre';
+     else mes:='diciembre';
+   end case;
+   return mes;
+ end;
+</pre>
+<p>Recuperamos el nombre del empleado y el mes de su cumpleaños realizando un "select":</p>
+<pre>
+ select nombre, f_mes(fechanacimiento) as cumpleaños from empleados;
+</pre>
+<p>Podemos probar la función creada anteriormente enviándole la siguiente fecha:</p>
+<pre>
+ select f_mes('10/10/2008') from dual;
+</pre>
+<p>obtenemos como resultado "octubre".</p>
+
+<p>Realizamos una función que reciba una fecha y retorne si se encuentra en el 1º, 2º, 3º ó 4º trimestre del año:</p>
+<pre>
+create or replace function f_trimestre(afecha date)
+   return varchar2
+ is
+  mes varchar2(20);
+  trimestre number;
+ begin
+   mes:=extract(month from afecha);
+   trimestre:=4;
+   case mes
+     when 1 then trimestre:=1;
+     when 2 then trimestre:=1;
+     when 3 then trimestre:=1;
+     when 4 then trimestre:=2;
+     when 5 then trimestre:=2;
+     when 6 then trimestre:=2;
+     when 7 then trimestre:=3;
+     when 8 then trimestre:=3;
+     when 9 then trimestre:=3;
+     else trimestre:=4;
+   end case;
+   return trimestre;
+ end;
+</pre>
+<p>Recuperamos el nombre del empleado y el trimestre de su cumpleaños empleando la función creada anteriormente:</p>
+<pre>
+ select nombre, f_trimestre(fechanacimiento) from empleados;
+</pre>
+<p>Vamos a emplear "case" dentro de un "select". Veamos un ejemplo similar a la función anterior:</p>
+<pre>
+ select nombre,fechanacimiento,
+  case extract(month from fechanacimiento)
+   when 1 then 1
+   when 2 then 1
+   when 3 then 1
+   when 4 then 2
+   when 5 then 2
+   when 6 then 2
+   when 7 then 3
+   when 8 then 3
+   when 9 then 3
+  else  4
+  end as trimestre
+  from empleados
+  order by trimestre;
+</pre>
+        <form name="formulario" action="http://www.sqlserverya.com.ar/aspx/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+        <br>
+   <h2><a href="../indexa021.html?inicio=75">Retornar</a></h2>   
+        
+	<br>
+   
+
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=75&cod=257&punto=99 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+</html>
+

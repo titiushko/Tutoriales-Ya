@@ -1,0 +1,219 @@
+
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/detalleconcepto.php?punto=21&codigo=136&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>button : estilos</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="bootstrap,css, html, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de bootstrap.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>21 - button : estilos</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Para crear botones Bootstrap propone utilizar la marca "button" y define una serie de clases:</p>
+<pre>
+btn 
+btn-default
+btn-primary
+btn-success
+btn-info
+btn-warning
+btn-danger
+btn-link
+</pre>
+<p>Siempre debemos asignar la clase btn y alguna de las otras clases con un significado propio.</p>
+<p>Cada una de estas clases define un estilo particular para un botón y tiene un significado que nos ayudan a definir en que caso los debemos utilizar:</p>
+<ul>
+<li>
+btn-default : Botón estándar o por defecto.
+</li>
+<li>
+btn-primary : Es un botón que se destaca entre un conjunto de botones.
+</li>
+<li>
+btn-success : Se utiliza para indicar una acción exitosa (por ejemplo luego de registrarse a un servicio donde se muestra un botón para ir a la página principal del sitio)
+</li>
+<li>
+btn-info : Es un botón para información.
+</li>
+<li>
+btn-warning : Es un botón que nos informa que debemos tener cuidado con la acción que tiene asociado el botón.
+</li>
+<li>
+btn-danger : Indica que la acción que tiene asociado el botón es peligrosa.
+</li>
+<li>
+btn-link : Convierte al botón como un hipervínculo, haciendo que disminuya su importancia.
+</li>
+</ul>
+
+<h3>Problema</h3>
+<p>Mostrar una lista de button asociando a cada uno una clase distinta propuesta por Bootstrap y mostrando como leyenda su significado.</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+  &lt;head&gt; 
+    &lt;title&gt;Prueba de Bootstrap&lt;/title&gt; 
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt; 
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+  &lt;div class="container"&gt;
+
+    &lt;form role="form"&gt;
+      &lt;div class="form-group"&gt;
+        &lt;button type="submit" class="btn btn-default"&gt;
+btn-default : Botón estándar o por defecto.&lt;/button&gt;       
+      &lt;/div&gt; 
+      &lt;div class="form-group"&gt;
+        &lt;button type="submit" class="btn btn-primary"&gt;
+btn-primary : Es un botón que se destaca entre un conjunto de botones.&lt;/button&gt;       
+      &lt;/div&gt; 
+      &lt;div class="form-group"&gt;
+        &lt;button type="submit" class="btn btn-success"&gt;
+btn-success : Se utiliza para indicar una acción exitosa.&lt;/button&gt;       
+      &lt;/div&gt; 
+      &lt;div class="form-group"&gt;
+        &lt;button type="submit" class="btn btn-info"&gt;
+btn-info : Es un botón para información.&lt;/button&gt;       
+      &lt;/div&gt; 
+      &lt;div class="form-group"&gt;
+        &lt;button type="submit" class="btn btn-warning"&gt;
+btn-warning : Es un botón que nos informa que debemos tener 
+cuidado con la acción que tiene asociado el botón.&lt;/button&gt;       
+      &lt;/div&gt; 
+      &lt;div class="form-group"&gt;
+        &lt;button type="submit" class="btn btn-danger"&gt;
+btn-danger : Indica que la acción que tiene asociado el botón 
+es peligrosa.&lt;/button&gt;       
+      &lt;/div&gt; 
+      &lt;div class="form-group"&gt;
+        &lt;button type="submit" class="btn btn-link"&gt;
+btn-link : Convierte al botón como un hipervínculo, haciendo
+ que disminuya su importancia.&lt;/button&gt;       
+      &lt;/div&gt; 
+
+    &lt;/form&gt;
+
+  &lt;/div&gt; 
+&lt;/body&gt; 
+&lt;/html&gt; 
+</pre>
+<p>El resultado de ejecutar este página es:</p>
+<img src="imagentema/foto029.jpg" border="0" alt="button tipos en bootstrap"><br> 
+
+<p>Utilizar este estándar ayuda que nuestros visitantes se sientan muy cómodos navegando nuestro sitio ya que seguramente ha visitado otros sitios que lo utilizan.</p>
+<p>Ya asociarán el color azul en un botón con un botón importante del sitio, el amarillo con acciones que debemos tener cuidado, el rojo con acciones peligrosas (por ejemplo borrar una cuenta) etc.</p>
+
+<h2><a target="_blank" href="ejecutar537d.html?cod=136">Ejecutar Ejemplo</a></h2><h2><a href="index28fa.html?inicio=20">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-32', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/detalleconcepto.php?punto=21&codigo=136&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:26 GMT -->
+</html>

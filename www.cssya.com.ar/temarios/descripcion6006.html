@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=0&cod=12&punto=8 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:56:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de CSS - Temarios</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<style>
+
+
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>8 - Más propiedades relacionadas al texto (letter-spacing, word-spacing, text-indent, text-transform)</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Vimos en el concepto anterior las propiedades:</p>
+<pre>
+color
+text-align
+text-decoration
+</pre>
+<p>Ahora veremos el objetivo de las siguientes propiedades que nos faltan:</p>
+<pre>
+letter-spacing
+word-spacing
+text-indent
+text-transform
+</pre>
+<p>La propiedad letter-spacing y word-spacing permiten indicar el espacio que debe haber entre los caracteres y entre las palabras.</p>
+<p>La propiedad text-indent, indenta la primera linea de un texto. A partir de la segunda línea, el texto aparece sin indentación. Podemos indicar un valor negativo con lo que la indentación es hacia la izquierda.</p>
+<p>Por último, la propiedad text-transform puede inicializarse con alguno de los siguientes valores:</p>
+<pre>none - capitalize - lowercase - uppercase </pre>
+<p>Cada uno de estos valores transforman el texto como sigue:</p>
+<ul>
+<li>capitalize: Dispone en mayúsculas el primer caracter de cada palabra.</li>
+<li>lowercase: Convierte a minúsculas todas las letras del texto.</li>
+<li>uppercase: Convierte a mayúsculas todas las letras del texto.</li>
+<li>none: No provoca cambios en el texto.</li>
+</ul>
+<p>El siguiente ejemplo define reglas para los elementos h1 y p:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;style&gt;
+h1 {
+  letter-spacing:10px;
+  word-spacing:30px;
+  text-transform:capitalize;
+}
+p {
+  text-indent:20px;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Este es un t&iacute;tulo de nivel 1&lt;/h1&gt;
+&lt;p&gt;Todo el texto siguiente se encuentra encerrado en el elemento de p&aacute;rrafo 
+y con el objetivo de ver el efecto de la propiedad text-indent.
+La propiedad text-indent podemos inicializarla con un valor positivo, 
+como es el caso actual o podemos inicializarla con un valor negativo lo que 
+provocar&aacute; que el texto de la primera l&iacute;nea del p&aacute;rrafo 
+comience en una columna inferior al de todo el bloque. &lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>La cabecera de nivel uno, tiene la siguiente regla:</p>
+<pre>
+h1 {
+  letter-spacing:10px;
+  word-spacing:30px;
+  text-transform:capitalize;
+}
+</pre>
+<p>Es decir que las letras deben tener una separación de 10 pixeles, las palabras deben estar separadas por 30 pixeles y por último deben disponerse en mayúsculas la primera letra de cada palabra.</p>
+<p>Para el elemento p tenemos la siguiente regla:</p>
+<pre>
+p {
+  text-indent:20px;
+}
+</pre>
+<p>Es decir, la primera línea del párrafo deberá imprimirse 20 píxeles a la derecha donde normalmente debería aparecer.</p> 
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=0&cod=12&punto=8 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:56:26 GMT -->
+</html>

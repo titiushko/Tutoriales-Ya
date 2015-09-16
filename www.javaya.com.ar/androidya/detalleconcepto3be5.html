@@ -1,0 +1,347 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=137&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:27:54 GMT -->
+<head>
+<title>Control Spinner</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+.descarga2 a {
+color:#4B4B4B;
+text-decoration:none;
+border-bottom:1px dotted #444;
+}
+.descarga2 {
+background: #F7FABE;
+text-align: left;
+padding: 5px 20px 5px 45px;
+border-top: 2px solid #DFE786;
+border-bottom: 2px solid #DFE786;
+color:#000000;
+margin-left:1.2em;
+margin-right:1.2em;
+border-radius:4px;
+font-size:1em;
+
+}  
+
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-30']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>6 - Control Spinner</h1> <p class="descarga2">Ya se encuentra disponible el nuevo tutorial para aprender android con el nuevo entorno <a href="androidstudioya/index.html" target="_blank">Android Studio propuesto por Google y
+que remplaza a Eclipse</a>.
+</td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>El objetivo de este concepto es practicar lo visto hasta ahora e incorporar el control visual Spinner</p>
+<p>El control Spinner muestra una lista de String y nos permite seleccionar uno de ellos. Cuando se lo selecciona se abre y muestra todos sus elementos para permitir seleccionar uno de ellos.</p>
+<h3>Problema:</h3>
+<p>Realizar la carga de dos números en controles de tipo EditText. Mostrar un mensaje que solicite la carga de los valores. Disponer un control de tipo Spinner que permita seleccionar si queremos sumar, restar, multiplicar o dividir dichos valores. Finalmente mediante un control de tipo Button efectuamos la operación respectiva. Mostramos el resultado en un TextView.</p>
+<p>Lo nuevo en este problema es la inserción de un control de tipo Spinner que se encuentra en la pestaña "Form Widgets":</p>
+<img src="imagentema/foto029.jpg" border="0" alt="control spinner"><br>
+<p>Definimos la propiedad id con el valor spinner1 (valor por defecto).</p>
+<p>En la siguiente imagen en la ventana "Outline" de Eclipse podemos observar los objetos dispuestos en el formulario, sus Id, sus textos y de que clase son cada uno:</p>
+<img src="imagentema/foto030.jpg" border="0" alt="control spinner"><br> 
+
+<p>No olvidemos inicializar la propiedad OnClick del objeto button1 con el valor "operar" (dicho nombre es el método que debemos implementar)</p>
+
+<h4>Código fuente:</h4>
+<pre class="recuadro">
+package com.javaya.proyecto005;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+public class MainActivity extends Activity {
+    private Spinner spinner1;
+    private EditText et1,et2;
+    private TextView tv3;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        et1=(EditText)findViewById(R.id.et1);
+        et2=(EditText)findViewById(R.id.et2);
+        tv3=(TextView)findViewById(R.id.tv3);
+        
+        spinner1 = (Spinner) findViewById(R.id.spinner1);
+        String []opciones={"sumar","restar","multiplicar","dividir"};        
+        ArrayAdapter&lt;String&gt; adapter = new ArrayAdapter&lt;String&gt;(this,android.R.layout.simple_spinner_item, opciones);
+        spinner1.setAdapter(adapter);    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return true;
+    }
+    
+    //Este método se ejecutará cuando se presione el botón
+    public void operar(View view) {
+        String valor1=et1.getText().toString();
+        String valor2=et2.getText().toString();
+        int nro1=Integer.parseInt(valor1);
+        int nro2=Integer.parseInt(valor2);
+        String selec=spinner1.getSelectedItem().toString();
+        if (selec.equals("sumar")) {
+            int suma=nro1+nro2;
+            String resu=String.valueOf(suma);
+            tv3.setText(resu);
+        } else
+            if (selec.equals("restar")) {
+                int resta=nro1-nro2;
+                String resu=String.valueOf(resta);
+                tv3.setText(resu);                
+            }
+            else
+                if (selec.equals("multiplicar")) {
+                    int multi=nro1*nro2;
+                    String resu=String.valueOf(multi);
+                    tv3.setText(resu);
+
+                }
+                else
+                    if (selec.equals("dividir")) {
+                        int divi=nro1/nro2;
+                        String resu=String.valueOf(divi);
+                        tv3.setText(resu);
+                    }
+    }          
+    
+}
+</pre>
+
+
+<p>Definimos un objeto de la clase Spinner:</p>
+<pre>
+    private Spinner spinner1;
+</pre>
+
+<p>En el método onCreate obtenemos la referencia al control visual declarado en el archivo XML:</p>
+<pre>
+        spinner1=(Spinner)findViewById(R.id.spinner1);
+</pre>
+<p>Definimos un vector con la lista de String que mostrará el Spinner:</p>
+<pre>
+        String []opciones={"sumar","restar","multiplicar","dividir"};
+</pre>
+<p>Definimos y creamos un objeto de la clase ArrayAdapter:</p>
+<pre>
+        ArrayAdapter&lt;String&gt; adapter = new ArrayAdapter&lt;String&gt;(this,android.R.layout.simple_spinner_item, opciones);
+</pre>
+<p>Al constructor le pasamos como primer parámetro la referencia de nuestro Activity (this), el segundo parámetro indica el tipo de Spinner, pudiendo ser las constantes:</p>
+<pre>
+android.R.layout.simple_spinner_item
+android.R.layout.simple_spinner_dropdown_item
+</pre>
+<p>El tercer parámetro es la referencia del vector que se mostrará:</p>
+<p>Luego llamamos al método setAdapter de la clase Spinner pasando la referencia del objeto de la clase ArrayAdapter que acabamos de crear:</p>
+<pre>
+        spinner1.setAdapter(adapter);
+</pre>
+<p>En el método operar que se ejecuta cuando presionamos el botón procedemos a extraer el contenido seleccionado del control Spinner:</p>
+<pre>
+        String selec=spinner1.getSelectedItem().toString();
+</pre>
+<p>Luego mediante una serie de if anidados verificamos si debemos sumar, restar, multiplicar o dividir:</p>
+<pre>
+        if (selec.equals("sumar")) {
+            int suma=nro1+nro2;
+            String resu=String.valueOf(suma);
+            tv3.setText(resu);
+        } else
+            if (selec.equals("restar")) {
+                int resta=nro1-nro2;
+                String resu=String.valueOf(resta);
+                tv3.setText(resu);                
+            }
+            else
+                if (selec.equals("multiplicar")) {
+                    int multi=nro1*nro2;
+                    String resu=String.valueOf(multi);
+                    tv3.setText(resu);
+
+                }
+                else
+                    if (selec.equals("dividir")) {
+                        int divi=nro1/nro2;
+                        String resu=String.valueOf(divi);
+                        tv3.setText(resu);
+                    }
+</pre>
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/proyecto005.zip">proyecto005.zip</a>
+</p></div>
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   <h2><a href="index2904.html?inicio=0">Retornar</a></h2>   
+
+  </div>
+  
+  
+  
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=137&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:30:55 GMT -->
+</html>

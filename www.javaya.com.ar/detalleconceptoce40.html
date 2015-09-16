@@ -1,0 +1,407 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=107&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:49 GMT -->
+<head>
+<title>Swing - JTextField</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Swing - JTextField</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>Así como podríamos decir que el control JLabel remplaza a la salida estándar System.out.print, el control JTextField cumple la función de la clase Scanner para la entrada de datos.</p>
+<p>El control JTextField permite al operador del programa ingresar una cadena de caracteres por teclado.</p>
+
+<h3>Problema 1:</h3>
+<p>Confeccionar un programa que permita ingresar el nombre de usuario y cuando se presione un botón mostrar el valor ingresado en la barra de títulos del JFrame.</p>
+<img src="imagentema/foto071.jpg" border="0" alt="JTextField">
+<h4>Programa:</h4>
+<pre class="recuadro">
+import javax.swing.*;
+import java.awt.event.*;
+public class Formulario extends JFrame implements ActionListener{
+    private JTextField textfield1;
+    private JLabel label1;
+    private JButton boton1;
+    public Formulario() {
+        setLayout(null);
+        label1=new JLabel("Usuario:");
+        label1.setBounds(10,10,100,30);
+        add(label1);
+        textfield1=new JTextField();
+        textfield1.setBounds(120,10,150,20);
+        add(textfield1);
+        boton1=new JButton("Aceptar");
+        boton1.setBounds(10,80,100,30);
+        add(boton1);
+        boton1.addActionListener(this);
+    }
+    
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==boton1) {
+            String cad=textfield1.getText();
+            setTitle(cad);
+        }
+    }
+    
+    public static void main(String[] ar) {
+        Formulario formulario1=new Formulario();
+        formulario1.setBounds(0,0,300,150);
+        formulario1.setVisible(true);
+    }
+}
+</pre>
+<p>Definimos los tres objetos que colaboran con nuestra aplicación:</p>
+<pre>
+public class Formulario extends JFrame implements ActionListener{
+    private JTextField textfield1;
+    private JLabel label1;
+    private JButton boton1;
+</pre>
+<p>En el constructor creamos los tres objetos y los ubicamos:</p>
+<pre>
+    public Formulario() {
+        setLayout(null);
+        label1=new JLabel("Usuario:");
+        label1.setBounds(10,10,100,30);
+        add(label1);
+        textfield1=new JTextField();
+        textfield1.setBounds(120,10,150,20);
+        add(textfield1);
+        boton1=new JButton("Aceptar");
+        boton1.setBounds(10,80,100,30);
+        add(boton1);
+        boton1.addActionListener(this);
+    }
+</pre>
+<p>En el método actionPerformed se verifica si se presionó el objeto JButton, en caso afirmativo extraemos el contenido del control JTextField mediante el método getText:</p>
+<pre>
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==boton1) {
+            String cad=textfield1.getText();
+            setTitle(cad);
+        }
+    }
+</pre>
+<p>En la variable auxiliar cad almacenamos temporalmente el contenido del JTextField y seguidamente actualizamos el título del control JFrame.</p>
+
+<h3>Problema 2:</h3>
+<p>Confeccionar un programa que permita ingresar dos números en controles de tipo JTextField, luego sumar los dos valores ingresados y mostrar la suma en la barra del título del control JFrame.</p>
+<img src="imagentema/foto072.jpg" border="0" alt="JTextField">
+<h4>Programa:</h4>
+<pre class="recuadro">
+import javax.swing.*;
+import java.awt.event.*;
+public class Formulario extends JFrame implements ActionListener{
+    private JTextField textfield1,textfield2;
+    private JButton boton1;
+    public Formulario() {
+        setLayout(null);
+        textfield1=new JTextField();
+        textfield1.setBounds(10,10,100,30);
+        add(textfield1);
+        textfield2=new JTextField();
+        textfield2.setBounds(10,50,100,30);
+        add(textfield2);
+        boton1=new JButton("Sumar");
+        boton1.setBounds(10,90,100,30);
+        add(boton1);
+        boton1.addActionListener(this);
+    }
+    
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==boton1) {
+            String cad1=textfield1.getText();
+            String cad2=textfield2.getText();
+            int x1=Integer.parseInt(cad1);
+            int x2=Integer.parseInt(cad2);
+            int suma=x1+x2;
+            String total=String.valueOf(suma);
+            setTitle(total);
+        }
+    }
+    
+    public static void main(String[] ar) {
+        Formulario formulario1=new Formulario();
+        formulario1.setBounds(0,0,140,150);
+        formulario1.setVisible(true);
+    }
+}
+</pre>
+<p>Definimos los tres objetos:</p>
+<pre>
+public class Formulario extends JFrame implements ActionListener{
+    private JTextField textfield1,textfield2;
+    private JButton boton1;
+</pre>
+<p>En el método actionPerformed es donde debemos sumar los valores ingresados en los controles de tipo JTextField. Para extraer el contenido de los controles debemos extraerlos con el método getText:</p>
+<pre>
+            String cad1=textfield1.getText();
+            String cad2=textfield2.getText();
+</pre>
+<p>Como debemos sumar numéricamente los valores ingresados debemos convertir el contenido de las variables cad2 y cad2 a tipo de dato int:</p>
+<pre>
+            int x1=Integer.parseInt(cad1);
+            int x2=Integer.parseInt(cad2);
+</pre>
+<p>El método parseInt de la clase Integer retorna el contenido de cad1 convertido a int (provoca un error si ingresamos caracteres en el control JTextField en lugar de números)</p>
+<p>Una vez que tenemos los dos valores en formato numérico procedemos a sumarlos y almacenar el resultado en otra variable auxiliar:</p>
+<pre>
+            int suma=x1+x2;
+</pre>
+<p>Ahora tenemos que mostrar el valor almacenado en suma en la barra de títulos del control JFrame, pero como el método setTitle requiere un String como parámetro debemos convertirlo a tipo String:</p>
+<pre>
+            String total=String.valueOf(suma);
+            setTitle(total);
+</pre>
+<p>Como veremos de acá en adelante es muy común la necesidad de convertir String a enteros y enteros a String:</p>
+<p>De String a int:</p>
+<pre>
+            int x1=Integer.parseInt(cad1);
+</pre>
+<p>De int a String:</p>
+<pre>
+            String total=String.valueOf(suma);
+</pre>
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Ingresar el nombre de usuario y clave en controles de tipo JTextField. Si se ingresa las cadena (usuario: juan, clave=abc123) luego mostrar en el título del JFrame el mensaje "Correcto" en caso contrario mostrar el mensaje "Incorrecto".
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+import javax.swing.*;
+import java.awt.event.*;
+public class Formulario extends JFrame implements ActionListener {
+    private JLabel label1,label2;
+    private JTextField textfield1,textfield2;
+    private JButton boton1;
+    public Formulario() {
+        setLayout(null);
+        label1=new JLabel("Nombre:");
+        label1.setBounds(10,10,100,30);
+        add(label1);
+        label2=new JLabel("Clave:");
+        label2.setBounds(10,50,100,30);
+        add(label2);
+        textfield1=new JTextField();
+        textfield1.setBounds(130,10,100,30);
+        add(textfield1);
+        textfield2=new JTextField();
+        textfield2.setBounds(130,50,100,30);
+        add(textfield2);
+        boton1=new JButton("Confirmar");
+        boton1.setBounds(10,100,100,30);
+        add(boton1);
+        boton1.addActionListener(this);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==boton1) {
+            String cad1=textfield1.getText();
+            String cad2=textfield2.getText();
+            if (cad1.equals("juan")==true && cad2.equals("abc123")==true) {
+                setTitle("Correcto");
+            } else {
+                setTitle("Incorrecto");
+            }
+        }
+    }
+    
+    public static void main(String[] ar) {
+        Formulario formulario1=new Formulario();
+        formulario1.setBounds(0,0,240,200);
+        formulario1.setVisible(true);
+    }    
+}
+</pre></div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index28fa.html?inicio=20">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=107&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:52 GMT -->
+</html>

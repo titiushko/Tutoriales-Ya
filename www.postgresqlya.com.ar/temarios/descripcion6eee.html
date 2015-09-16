@@ -1,0 +1,172 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.postgresqlya.com.ar/temarios/descripcion.php?inicio=50&cod=230&punto=72 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de PostgreSQL - Funciones SQL </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+	  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>72 - Funciones SQL</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+	  	  
+
+<p>
+<p>La forma más fácil de implementar funciones es utilizar el lenguaje SQL. Una función SQL nos permite dar un nombre a uno o varios comandos sql.</p>
+<p>Luego la sintaxis para implementar una función SQL:</p>
+<pre>
+create or replace function [nombre de la función]([parámetros]) returns [tipo de dato que retorna]
+as
+ [comandos sql]
+language sql
+</pre>
+<p>Como primer problema implementaremos una función que reciba dos enteros y retorne la suma de los mismos:</p>
+<pre>
+create or replace function sumar(integer,integer) returns integer 
+AS 
+  'select $1+$2;'
+language sql;
+</pre>
+<p>Cada parámetro se lo accede luego mediante la posición que ocupa y se le antecede el caracter $. El o los comandos SQL deben ir entre simples comillas (si tenemos que utilizar las simples comillas en el comando SQL debemos disponer dos simples comillas seguidas) y separados por punto y coma. Luego indicamos al final que se trata de una función SQL.</p>
+<p>Para llamar luego a esta función lo hacemos por ejemplo en un select:</p>
+<pre>
+select sumar(3,4);
+</pre>
+<p>Podemos acceder perfectamente a una o más tablas en la función. Confeccionaremos una función que acceda a la tabla usuarios:</p>
+<pre>
+ create table usuarios (
+   nombre varchar(30),
+   clave varchar(10)
+ );
+</pre>
+<p>y rescate la clave de un usuario que le pasamos como parámetro:</p>
+<pre>
+ create or replace function retornarclave(varchar) returns varchar
+ as
+   'select clave from usuarios where nombre=$1;'
+ language sql;
+</pre>
+<p>Luego para probar la función retornarclave debemos llamarla por ejemplo desde un select:</p>
+<pre>
+ select retornarclave('Susana');
+</pre></p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../indexefd7.html?inicio=50">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-24");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+
+
+<!-- Mirrored from www.postgresqlya.com.ar/temarios/descripcion.php?inicio=50&cod=230&punto=72 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:41 GMT -->
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=206&inicio=80 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:03:10 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - SqlCommand (delete): Borrar registro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>82 - SqlCommand (delete): Borrar registro</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p>Otra de las actividades comunes con los datos es la eliminación. Para eliminar registros de una tabla debemos emplear el comando SQL delete.</p>
+<h3>Problema</h3>
+<p>Implementar una aplicación que permita consultar un artículo por su código. Luego de mostrarlo activar un botón para poder eliminarlo.</p>
+<p>Crear un proyecto llamado: PruebaBaseDatos5 y definir la siguiente interfaz visual:</p>
+<pre>
+5 objeto de la clase Label.
+2 objeto de la clase Button (disponer la propiedad Enabled del 
+                             botón de borrado en false para que empiece desactivo)
+1 objeto de la clase TextBox. 
+</pre>
+
+<img src="imagentema/foto181.jpg" border="0" alt="comando delete SqlCommand SQL Server"><br>
+<p>El código fuente para resolver la consulta y borrado es:</p>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+using System.Data.SqlClient;
+
+namespace PruebaBaseDatos5
+{
+    public partial class Form1 : Form
+    {
+        private SqlConnection conexion = new SqlConnection("server=DIEGO-PC\\SQLEXPRESS ; database=base1 ; integrated security = true");
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            conexion.Open();
+            string cod = textBox1.Text;
+            string cadena = "select descripcion, precio from articulos where codigo=" + cod;
+            SqlCommand comando = new SqlCommand(cadena, conexion);
+            SqlDataReader registro = comando.ExecuteReader();
+            if (registro.Read())
+            {
+                label4.Text = registro["descripcion"].ToString();
+                label5.Text = registro["precio"].ToString();
+                button2.Enabled = true;
+            }
+            else
+                MessageBox.Show("No existe un artículo con el código ingresado");
+            conexion.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            conexion.Open();
+            string cod = textBox1.Text;
+            string cadena = "delete from articulos where codigo=" + cod;
+            SqlCommand comando = new SqlCommand(cadena, conexion);
+            int cant;
+            cant = comando.ExecuteNonQuery();
+            if (cant==1)
+            {
+                label4.Text = "";
+                label5.Text = "";
+                MessageBox.Show("Se borró el artículo");
+            }
+            else
+                MessageBox.Show("No existe un artículo con el código ingresado");
+            conexion.Close();
+            button2.Enabled = false;
+        }
+    }
+}
+</pre>
+
+<p>Primero indicamos el espacio de nombres relacionado a la comunicación con SQL Server:</p>
+<pre>
+using System.Data.SqlClient;
+</pre>
+
+<p>Como en los dos métodos utilizamos el objeto SqlConnection lo definimos como un atributo de la clase Form1:</p>
+<pre>
+    public partial class Form1 : Form
+    {
+        private SqlConnection conexion = new SqlConnection("server=DIEGO-PC\\SQLEXPRESS ; database=base1 ; integrated security = true");
+</pre>
+<p>El algoritmo de consulta es idéntico al concepto que vimos anteriormente (solo modificamos la propiedad Enabled del button2):</p>
+<pre>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            conexion.Open();
+            string cod = textBox1.Text;
+            string cadena = "select descripcion, precio from articulos where codigo=" + cod;
+            SqlCommand comando = new SqlCommand(cadena, conexion);
+            SqlDataReader registro = comando.ExecuteReader();
+            if (registro.Read())
+            {
+                label4.Text = registro["descripcion"].ToString();
+                label5.Text = registro["precio"].ToString();
+                button2.Enabled = true;
+            }
+            else
+                MessageBox.Show("No existe un artículo con el código ingresado");
+            conexion.Close();
+        }
+</pre>
+
+<p>Lo nuevo aparece en el borrado del artículo que acabamos de consultar, primer confeccionamos un string con el comando delete:</p>
+<pre>
+            string cod = textBox1.Text;
+            string cadena = "delete from articulos where codigo=" + cod;
+</pre>
+<p>Luego procedemos a crear un objeto de la clase SqlCommand pasando el comando SQL de borrado con la referencia de la conexión:</p>
+<pre>
+            SqlCommand comando = new SqlCommand(cadena, conexion);
+</pre>
+<p>Llamamos seguidamente al método ExecuteNonQuery que se comunica con el SQL Server para que ejecute el comando configurado previamente y retorna la cantidad de registros afectados (en este caso retorna la cantidad de registros borrados):</p>
+<pre>
+            int cant;
+            cant = comando.ExecuteNonQuery();
+</pre>
+<p>Si retorna un uno significa que se borró el artículo con el código ingresado:</p>
+<pre>
+            if (cant==1)
+            {
+                label4.Text = "";
+                label5.Text = "";
+                MessageBox.Show("Se borró el artículo");
+            }
+</pre>
+
+<p>En pantalla tenemos la siguiente interfaz luego de borrar un artículo existente:</p>
+<img src="imagentema/foto182.jpg" border="0" alt="comando delete SqlCommand SQL Server"><br></div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="index20ff.html?inicio=80">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=206&inicio=80 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:03:12 GMT -->
+</html>

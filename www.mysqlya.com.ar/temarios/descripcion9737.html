@@ -1,0 +1,343 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.mysqlya.com.ar/temarios/descripcion.php?inicio=21&cod=75&punto=25 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:28 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Temario:Funciones para el manejo de cadenas.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>25 - Funciones para el manejo de cadenas.</h1></td>
+<td align="right">
+<!--<a href="http://www.mysqlya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<p>
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 		  
+
+<p>RECUERDE que NO debe haber espacios entre un nombre de función y los paréntesis porque MySQL puede confundir una llamada a una función con una referencia a una tabla o campo que tenga el mismo nombre de una función.</p>
+
+<p>MySQL tiene algunas funciones para trabajar con cadenas de caracteres. Estas son algunas:</p>
+
+<p>-ord(caracter): Retorna el código ASCII para el caracter enviado como argumento. Ejemplo:</p>
+<pre>
+ select ord('A');
+</pre>
+<p>retorna 65.</p>
+
+<p>-char(x,..): retorna una cadena con los caracteres en código ASCII de los enteros enviados como argumentos. Ejemplo:</p>
+<pre> 
+ select char(65,66,67);
+</pre>
+<p>retorna "ABC".</p>
+
+<p>-concat(cadena1,cadena2,...): devuelve la cadena resultado de concatenar los argumentos. Ejemplo:</p>
+<pre>
+select concat('Hola,',' ','como esta?');
+</pre>
+<p>retorna "Hola, como esta?".</p>
+
+<p>-concat_ws(separador,cadena1,cadena2,...): "ws" son las iniciales de "with separator". El primer argumento especifica el separador que utiliza para los demás argumentos; el separador se agrega entre las cadenas a concatenar. Ejemplo:</p>
+<pre>
+ select concat_ws('-','Juan','Pedro','Luis');
+</pre>
+<p>retorna "Juan-Pedro-Luis".</p>
+
+<p>-find_in_set(cadena,lista de cadenas): devuelve un valor entre de 0 a n (correspondiente a la posición), si la cadena envidada como primer argumento está presente en la lista de cadenas enviadas como segundo argumento. La lista de cadenas enviada como segundo argumento es una cadena formada por subcadenas separadas por comas. Devuelve 0 si no encuentra "cadena" en la "lista de cadenas". Ejemplo:</p>
+<pre>
+ select find_in_set('hola','como esta,hola,buen dia');
+</pre>
+<p>retorna 2, porque la cadena "hola" se encuentra en la lista de cadenas, en la posición 2.</p>
+
+<p>-length(cadena): retorna la longitud de la cadena enviada como argumento. Ejemplo:</p>
+<pre>
+ select length('Hola');
+</pre>
+<p>devuelve 4.</p>
+
+<p>- locate(subcadena,cadena): retorna la posición de la primera ocurrencia de la subcadena en la cadena enviadas como argumentos. Devuelve "0" si la subcadena no se encuentra en la cadena. Ejemplo:</p>
+<pre>
+ select locale('o','como le va');
+</pre>
+<p>retorna 2.</p>
+
+<p>- position(subcadena in cadena): funciona como "locate()". Devuelve "0" si la subcadena no se encuentra en la cadena. Ejemplo:</p>
+<pre>
+ select position('o' in 'como le va');
+</pre>
+<p>retorna 2.</p>
+
+<p>- locate(subcadena,cadena,posicioninicial): retorna la posición de la primera ocurrencia de la subcadena enviada como primer argumentos en la cadena enviada como segundo argumento, empezando en la posición enviada como tercer argumento. Devuelve "0" si la subcadena no se encuentra en la cadena. Ejemplos:</p>
+<pre>
+ select locate('ar','Margarita',1);
+</pre>
+<p>retorna 1.</p>
+<pre>
+ select locate('ar','Margarita',3);
+</pre>
+<p>retorna 5.</p>
+
+<p>- instr(cadena,subcadena): retorna la posición de la primera ocurrencia de la subcadena enviada como segundo argumento en la cadena enviada como primer argumento. Ejemplo:</p>
+<pre>
+ select instr('como le va','om');
+</pre>
+<p>devuelve 2.</p>
+
+<p>- lpad(cadena,longitud,cadenarelleno): retorna la cadena enviada como primer argumento, rellenada por la izquierda con la cadena enviada como tercer argumento hasta que la cadena retornada tenga la longitud especificada como segundo argumento. Si la cadena es más larga, la corta. Ejemplo:</p>
+<pre>
+ select lpad('hola',10,'0');
+</pre>
+<p>retorna "000000hola".</p>
+
+<p>- rpad(cadena,longitud,cadenarelleno): igual que "lpad" excepto que rellena por la derecha.</p>
+
+<p>- left(cadena,longitud): retorna la cantidad (longitud) de caracteres de la cadena comenzando desde la inquierda, primer caracter. Ejemplo:</p>
+<pre>
+ select left('buenos dias',8);
+</pre>
+<p>retorna "buenos d".</p>
+
+<p>- right(cadena,longitud): retorna la cantidad (longitud) de caracteres de la cadena comenzando desde la derecha, último caracter. Ejemplo:</p>
+<pre>
+ select right('buenos dias',8);
+</pre>
+<p>retorna "nos dias".</p>
+
+<p>- substring(cadena,posicion,longitud): retorna una subcadena de tantos caracteres de longitud como especifica en tercer argumento, de la cadena enviada como primer argumento, empezando desde la
+posición especificada en el segundo argumento. Ejemplo:</p>
+<pre>
+ select substring('Buenas tardes',3,5);
+</pre>
+<p>retorna "enas".</p>
+
+<p>- substring(cadena from posicion for longitud): variante de "substring(cadena,posicion,longitud)". Ejemplo:</p>
+<pre>
+ select substring('Buenas tardes' from 3 for 5);
+</pre>
+<p>- mid(cadena,posicion,longitud): igual que "substring(cadena,posicion,longitud)". Ejemplo:</p>
+<pre>
+ select mid('Buenas tardes' from 3 for 5);
+</pre>
+<p>retorna "enas".</p>
+<p>- substring(cadena,posicion): retorna la subcadena de la cadena enviada como argumento, empezando desde la posición indicada por el segundo argumento. Ejemplo:</p>
+<pre>
+ select substring('Margarita',4);
+</pre>
+<p>retorna "garita".</p>
+
+<p>-substring(cadena from posicion): variante de "substring(cadena,posicion)". Ejemplo:</p>
+<pre>
+ select substring('Margarita' from 4);
+</pre>
+<p>retorna "garita".</p>
+
+<p>-substring_index(cadena,delimitador,ocurrencia): retorna la subcadena de la cadena enviada como argumento antes  o después de la "ocurrencia" de la cadena enviada como delimitador. Si "ocurrencia" es positiva, retorna la subcadena anterior al delimitador (comienza desde la izquierda); si "ocurrencia" es negativa, retorna la subcadena posterior al delimitador (comienza desde la derecha). Ejemplo:</p>
+<pre>
+ select substring_index( 'margarita','ar',2);
+</pre>
+<p>retorna "marg", todo lo anterior a la segunda ocurrencia de "ar".</p>
+<pre>
+ select substring_index( 'margarita','ar',-2);
+</pre>
+<p>retorna "garita", todo lo posterior a la segunda ocurrencia de "ar".</p>
+
+<p>-ltrim(cadena): retorna la cadena con los espacios de la izquierda eliminados. Ejemplo:</p>
+<pre>
+ select ltrim('     Hola     ');
+</pre>
+<p>retorna <pre>"Hola     "</pre>.</p>
+
+<p>- rtrim(cadena): retorna la cadena con los espacios de la derecha eliminados. Ejemplo:</p>
+<pre>
+ select rtrim('   Hola   ');
+</pre>
+<p>retorna <pre>"   Hola"</pre>.</p>
+
+<p>-trim([[both|leading|trailing] [subcadena] from] cadena): retorna una cadena igual a la enviada pero eliminando la subcadena prefijo y/o sufijo. Si no se indica ningún especificador (both, leading o trailing) se asume "both" (ambos). Si no se especifica prefijos o sufijos elimina los espacios. Ejemplos:</p>
+<pre>
+ select trim('  Hola  ');
+</pre>
+<p>retorna 'Hola'.</p>
+<pre>
+ select trim (leading '0' from '00hola00');
+</pre>
+<p>retorna "hola00".</p>
+<pre>
+ select trim (trailing '0' from '00hola00');
+</pre>
+<p>retorna "00hola".</p>
+<pre>
+ select trim (both '0' from '00hola00');
+</pre>
+<p>retorna "hola".</p>
+<pre>
+ select trim ('0' from '00hola00');
+</pre>
+<p>retorna "hola".</p>
+<pre>
+ select trim ('  hola  ');
+</pre>
+<p>retorna "hola".</p>
+
+<p>-replace(cadena,cadenareemplazo,cadenareemplazar): retorna la cadena con todas las ocurrencias de la subcadena reemplazo por la subcadena a reemplazar. Ejemplo:</p>
+<pre>
+ select replace('xxx.mysql.com','x','w');
+</pre>
+<p>retorna "www.mysql.com'.</p>
+
+<p>-repeat(cadena,cantidad): devuelve una cadena consistente en la cadena repetida la cantidad de veces especificada. Si "cantidad" es menor o igual a cero, retorna una cadena vacía. Ejemplo:</p>
+<pre>
+ select repeat('hola',3);
+</pre>
+<p>retorna "holaholahola".</p>
+
+<p>-reverse(cadena): devuelve la cadena invirtiendo el order de los caracteres. Ejemplo:</p>
+<pre>
+ select reverse('Hola');
+</pre>
+<p>retorna "aloH".</p>
+
+<p>-insert(cadena,posicion,longitud,nuevacadena): retorna la cadena con la nueva cadena colocándola en la posición indicada por "posicion" y elimina la cantidad de caracteres indicados por "longitud". Ejemplo:</p>
+<pre>
+ select insert('buenas tardes',2,6,'xx');
+</pre>
+<p>retorna ""bxxtardes".</p>
+
+<p>-lcase(cadena) y lower(cadena): retornan la cadena con todos los caracteres en minúsculas. Ejemplo:</p>
+<pre>
+ select lower('HOLA ESTUDIAnte');
+</pre>
+<p>retorna "hola estudiante".</p>
+<pre>
+ select lcase('HOLA ESTUDIAnte');
+</pre>
+<p>retorna "hola estudiante".</p>
+
+<p>-ucase(cadena) y upper(cadena): retornan la cadena con todos los caracteres en mayúsculas. Ejemplo:</p>
+<pre>
+ select upper('HOLA ESTUDIAnte');
+</pre>
+<p>retorna "HOLA ESTUDIANTE".</p>
+<pre>
+ select ucase('HOLA ESTUDIAnte');
+</pre>
+<p>retorna "HOLA ESTUDIANTE".</p>
+
+<p>-strcmp(cadena1,cadena2): retorna 0 si las cadenas son iguales, -1 si la primera es menor que la segunda y 1 si la primera es mayor que la segunda. Ejemplo:</p>
+<pre>
+ select strcmp('Hola','Chau');
+</pre>
+<p>retorna 1.</p>
+
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   <h2><a href="../index10fd.html?inicio=21">Retornar</a></h2>   
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-5";
+urchinTracker();
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from www.mysqlya.com.ar/temarios/descripcion.php?inicio=21&cod=75&punto=25 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:28 GMT -->
+</html>

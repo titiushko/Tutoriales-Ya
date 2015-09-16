@@ -1,0 +1,291 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=9&codigo=9&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:50:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Servidor web de archivos y creación de una cache.</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++, programación, tutorial, nodejs">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de NodeJS.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>9 - Servidor web de archivos y creación de una cache.</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Hemos visto en los dos conceptos anteriores como crear un servidor web con Nodo.js que nos retorna distintos formatos de archivos del servidor (html, js, jpg, gif, png, css, etc.)</p>
+<p>La mecánica que empleamos es que en casa solicitud del cliente (navegador) analizamos primero si dicho recurso se encuentra en el servidor y en caso afirmativo procedemos a leerlo mediante las funciones que provee el módulo 'fs'. Finalmente lo retornamos al navegador que solicito el recurso indicando del tipo de archivo que se trata para que el navegador pueda proceder a mostrarlo si es una imagen, renderizar si es un HTML etc.</p>
+<p>Vamos a hacer una modificación al programa que hemos planteado hasta el momento para reducir drásticamente los tiempos requeridos de acceso al disco duro del servidor donde se almacenan los archivos. Tengamos en cuenta que el acceso a disco por operaciones de I/O son muy costosas en tiempo.</p>
+<p>Lo que vamos a implementar es un sistema de cache en el servidor para almacenar el contenido de los archivos estáticos (es decir aquellos que no cambian) y tenerlos almacenados en la memoria RAM.</p>
+<h3>Problema</h3>
+<p>Desarrollar un sitio en Node.js que permita servir archivos estáticos y haga más eficiente su trabajo implementando un sistema de cache de los archivos servidor.</p>
+<p>Crearemos una nueva carpeta para este proyecto con el nombre de ejercicio11 y en la misma crearemos una subcarpeta llamada static que contendrá todos los archivos html, css, jpg, mp3, mp4 etc.</p>
+<p>En la carpeta ejercicio11 procederemos a codificar el programa en Node.js que arranca un servidor web de páginas estáticas y almacena las páginas pedidas en una cache para no tener que leerlas nuevamente del disco.</p>
+
+<pre>ejercicio11.js</pre>
+<pre class="recuadro">
+var http=require('http');
+var url=require('url');
+var fs=require('fs');
+
+var mime = {
+   'html' : 'text/html',
+   'css'  : 'text/css',
+   'jpg'  : 'image/jpg',
+   'ico'  : 'image/x-icon',
+   'mp3'  :    'audio/mpeg3',
+   'mp4'  : 'video/mp4'
+};
+
+var cache={};
+
+var servidor=http.createServer(function(pedido,respuesta){
+    var objetourl = url.parse(pedido.url);
+    var camino='static'+objetourl.pathname;
+    if (camino=='static/')
+        camino='static/index.html';
+    if (cache[camino]) {
+        var vec = camino.split('.');
+        var extension=vec[vec.length-1];
+        var mimearchivo=mime[extension];
+        respuesta.writeHead(200, {'Content-Type': mimearchivo});
+        respuesta.write(cache[camino]);
+        respuesta.end();
+        console.log('Recurso recuperado del cache:'+camino);               
+    } else {
+        fs.exists(camino,function(existe){
+            if (existe) {
+                fs.readFile(camino,function(error,contenido){
+                    if (error) {
+                        respuesta.writeHead(500, {'Content-Type': 'text/plain'});
+                        respuesta.write('Error interno');
+                        respuesta.end();                    
+                    } else {
+                        cache[camino]=contenido;
+                        var vec = camino.split('.');
+                        var extension=vec[vec.length-1];
+                        var mimearchivo=mime[extension];
+                        respuesta.writeHead(200, {'Content-Type': mimearchivo});
+                        respuesta.write(contenido);
+                        respuesta.end();
+                        console.log('Recurso leido del disco:'+camino);
+                    }
+                });
+            } else {
+                respuesta.writeHead(404, {'Content-Type': 'text/html'});
+                respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;Recurso inexistente&lt;/body&gt;&lt;/html&gt;');        
+                respuesta.end();
+            }
+        });
+    }
+});
+
+servidor.listen(8888);
+
+console.log('Servidor web iniciado');
+</pre>
+
+<p>Veamos lo nuevo que le agregamos a nuestro programa para poder almacenar los contenidos estáticos de los recursos de nuestro sitio web mediante una cache en memoria.</p>
+<p>Primero definimos un objeto vacío donde almacenaremos los nombres de los recursos y los contenidos de los mismos:</p>
+<pre>
+var cache={};
+</pre>
+
+<p>Cuando se dispara un pedido de recurso y se ejecuta la función anónima que le pasamos al método createServer procedemos mediante un if a verificar si el objeto cache almacena una propiedad que coincide con el camino del recurso:</p>
+<pre>
+    if (cache[camino]) {
+        var vec = camino.split('.');
+        var extension=vec[vec.length-1];
+        var mimearchivo=mime[extension];
+        respuesta.writeHead(200, {'Content-Type': mimearchivo});
+        respuesta.write(cache[camino]);
+        respuesta.end();
+        console.log('Recurso recuperado del cache:'+camino);               
+    } else {
+</pre>
+<p>Como vemos si el contenido está almacenado en la cache cuando escribimos dentro de la respuesta el dato a devolver procedemos a extraerlo del objeto 'cache' y accedemos a la propiedad que coincide con el recurso pedido:</p>
+<pre>
+        respuesta.write(cache[camino]);
+</pre>
+<p>En un principio debemos tener en cuenta que la cache está vacía por lo que el if analizado anteriormente se verifica falso por lo que se ejecuta el otro bloque donde verificamos que el recurso exista y procedemos a su lectura del disco:</p>
+<pre>
+                fs.readFile(camino,function(error,contenido){
+                    if (error) {
+                        respuesta.writeHead(500, {'Content-Type': 'text/plain'});
+                        respuesta.write('Error interno');
+                        respuesta.end();                    
+                    } else {
+                        cache[camino]=contenido;
+                        var vec = camino.split('.');
+                        var extension=vec[vec.length-1];
+                        var mimearchivo=mime[extension];
+                        respuesta.writeHead(200, {'Content-Type': mimearchivo});
+                        respuesta.write(contenido);
+                        respuesta.end();
+                        console.log('Recurso leido del disco:'+camino);
+                    }
+                });
+</pre>
+<p>Luego de leido procedemos a almacenar el contenido del recurso en la variable 'cache' y como valor de propiedad indicamos el camino del recurso (esto hace que quede en la cache para cualquier otra petición que surja en el servidor del mismo archivo):</p>
+<pre>
+                        cache[camino]=contenido;
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip con todos los archivos js, html, jpg etc. desde este enlace :
+<a href="proyectos/ejercicio11.zip">ejercicio11</a></p>
+
+<p>En el código hemos dispuesto la impresión de dos mensajes uno cuando se lee el recurso desde el disco:</p>
+<pre>
+                        console.log('Recurso leido del disco:'+camino);
+</pre>
+<p>Y otro cuando se recupera el recurso desde la cache:</p>
+<pre>
+        console.log('Recurso recuperado del cache:'+camino);               
+</pre>
+<p>Procedamos a iniciar nuestro servidor desde la consola y solicitemos la página index.html, veamos que mensaje aparece en la consola:</p>
+
+<p><img src="imagentema/foto025.jpg" border="0" alt="cache con Node.js de archivos html, jpg, mp3, mp4, ico etc."></p>
+<p>Como podemos observar los seis archivos han sido leedios del disco.</p>
+<p>Refresquemos la página para solicitar nuevamente los recursos y tenemos como salida en la consola:</p>
+<p><img src="imagentema/foto026.jpg" border="0" alt="cache con Node.js de archivos html, jpg, mp3, mp4, ico etc."></p>
+<p>Ahora vemos que los recursos se recuperan de la cache. Por último presionemos el enlace a la página 1:</p>
+<p><img src="imagentema/foto027.jpg" border="0" alt="cache con Node.js de archivos html, jpg, mp3, mp4, ico etc."></p>
+<p>La pagina1.html como todavía no se había leido no se encontraba en la cache por lo que en ese momento pasa a estar en la cache para futuros pedidos.</p>
+<p>Tener en cuenta que estamos hablando de una cache en el servidor y no la cache del navegador. Es decir que cuando un cliente1 accede al sitio web y solicita el archivo: index.html a partir de este momento dicho archivo queda almacenado en la cache y cuando un cliente2 acceda al sitio y solicite el archivo: index.html su contenido lo recuperará de la cache y no del disco (esto hace mucho mas eficiente a nuestro programa)</p>
+
+<p>Cuando detenemos nuestro programa Node.js la cache es una variable de memoria por lo que su contenido se pierde. Al arrancar nuevamente el servidor a medida que pidamos recursos la cache si irá cargando.</p><h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-35', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=9&codigo=9&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:51:17 GMT -->
+</html>

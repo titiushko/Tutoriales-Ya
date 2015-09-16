@@ -1,0 +1,346 @@
+﻿<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.phpya.com.ar/temarios/descripcion.php?punto=8&cod=28&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:58:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de PHP - Temario</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="keywords" content="php, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de php.">
+<meta name="author" content="Diego Moisset">
+
+<style>
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Verdana,arial,sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.1em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;
+}
+
+#recuadrooculto {
+  display: none;
+}
+
+
+.recuadroborde {
+  //  max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+	clear:left;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  document.getElementById('recuadrooculto').style.display='block';
+}
+
+</script>
+
+</head>
+
+<body>
+
+
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em;margin-right:1em"><a href="../index2904.html?inicio=0">Temario del Tutorial</a></span>8 - Estructuras repetitivas (for - while - do/while)</h1></div>
+
+<br>
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+
+<p>Las estructuras repetitivas son similares al lenguaje C, JavaScript, Java etc.</p>
+<p>Estructura for:</p>
+<pre>
+for([Inicialización de la variable];[Condición];[Incremento o decremento de la variable])
+{
+  [Instrucciones];
+}
+</pre>
+<p>El primer ejemplo que haremos es mostrar en la página los números del 1 al 100:</p>
+<pre class="recuadroborde">
+html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+for($f=1;$f&lt;=100;$f++)
+{
+  echo $f;
+  echo &quot;&lt;br&gt;&quot;;
+}
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Quien no ha visto la estructura for en otro lenguaje pasamos a explicarla:</p>
+<pre>
+for($f=1;$f&lt;=100;$f++)
+{
+  echo $f;
+  echo &quot;&lt;br&gt;&quot;;
+}
+</pre>
+<p>El primer argumento del for es la inicialización de una variable, en este caso se inicializa la variable $f con el valor 1. Este primer argumento del for se ejecuta solo una vez. Luego se ejecuta el segundo argumento que es la condición. Si la misma se verifica como verdadera se ejecuta todo el bloque comprendido entre las llaves de apertura y cerrado. Luego de haberse ejecutado el bloque repetitivo se ejecuta el tercer argumento del for que es el incremento de la variable, en este caso $f++ incrementa el contenido de la variable $f en 1 (también podemos poner en lugar de $f++ la asignación $f=$f+1)</p>
+<p>Luego del incremento de la variable se ejecuta nuevamente la condición del for (segundo argumento), de validarse nuevamente verdadero pasa a ejecutar el bloque repetitivo.<br>
+Este ciclo se repite hasta que la condición del for se verifica falsa.</p>
+
+<p>La segunda estructura repetitiva es:</p>
+<pre>
+while (condición)
+{
+  [Instrucciones];
+}
+</pre>
+<p>Esta estructura está en casi todos los lenguajes. El bloque se repite mientras la condición del while sea verdadera.</p>
+<p>La condición del while se verifica antes de ingresar al bloque a repetir. Si la misma se verifica falsa la primera vez no se ejecutará el bloque.</p>
+<p>Veamos un ejemplo: Generar un valor aleatorio entre 1 y 100, luego imprimir en la página desde 1 hasta el valor generado (de uno en uno):</p>
+<pre class="recuadroborde">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+$valor=rand(1,100);
+$inicio=1;
+while($inicio&lt;=$valor)
+{
+  echo $inicio;
+  echo &quot;&lt;br&gt;&quot;;
+  $inicio++;
+}
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>La variable $inicio tiene el valor 1 antes de ingresar al while. Cada vez que se ejecuta una vez el bloque del while se incrementa $inicio en uno. Cuando $inicio supere la variable $valor finalizará la estructura repetitiva y pasará a ejecutarse la instrucción inmediatamente siguiente a la llave de cerrado del while.</p>
+<p>Es importante notar que luego de la condición del while NO disponemos PUNTO y COMA.</p>
+
+<p>Por último tenemos en el lenguaje una estructura repetitiva similar al while llamada do/while, donde la condición se verifica luego de ejecutarse el bloque repetitivo.</p>
+<pre>
+do 
+{
+  [Instrucciones];
+} while (condición);
+</pre>
+<p>Queda como tarea intentar hacer una página empleando esta estructura. Tener en cuenta que al final de la línea del do/while SI LLEVA punto y coma.</p>
+<br>
+<br>
+
+<h2>Problema resuelto.</h2>
+<p>Copiar el contenido de este cuadro de texto al NotePad++ y grabarlo en la carpeta c:\wamp\www con un nombre con extensión php (si hay varios cuadros
+de texto grabar cada uno en un archivo distinto).<br>
+  luego abrir el navegador (Chrome, FireFox, IExplorer etc.) y en la barra de direcciones tipear: http://localhost/pagina1.php (o el nombre del
+archivo que le dió)  </p>
+<form name="formulario" action="#" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+    pagina1.php<br><textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off" readonly>
+<html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+
+<?php
+//Mostramos los números de los días del 1 a la fecha actual;
+$dia=date("d");
+$inicio=1;
+while($inicio<=$dia)
+{
+  echo $inicio."<br>";
+  $inicio++;
+}
+?>
+
+</body>
+
+<!-- Mirrored from www.phpya.com.ar/temarios/descripcion.php?punto=8&cod=28&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:58:14 GMT -->
+</html>
+</textarea>
+    <br>
+	 <a href="http://www.scratchya.com.ar/problemas/phpya/resu/28/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a> 
+<!--    <a href="http://localhost:8080/problemas/phpya/resu/28/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>-->
+
+    <br>
+<table width="650px">
+<tr>
+<td align="left">	
+
+</td>
+</tr>
+</table>
+
+	
+    
+</form>
+
+
+
+
+
+
+	
+
+<h2>Problema propuesto.</h2>
+<p>Mostrar la tabla de multiplicar del 2. Emplear el for, luego el while y por último el do/while.<br>
+La estructura for permite incrementar una variable de 2 en 2:</p>
+<pre>
+for($f=2;$f<=20;$f=$f+2)
+</pre><form name="formulario" action="#" target="ventanaForm" 
+onsubmit="abrirVentana()" method="post" >
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<div id="recuadrooculto">
+pagina1.php<br>
+<textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off" readonly>
+<html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+
+<?php
+
+  echo "Tabla del 2 con el for";
+  echo "<br>";
+  for($f=2;$f<=20;$f=$f+2)
+  {
+    echo $f;
+    echo "-";
+  }
+  echo "<br>";
+  echo "Tabla del 2 con el while";
+  echo "<br>";
+  $f=2;
+  while ($f<=20)
+  {
+    echo $f;
+    echo "-";
+	$f=$f+2;
+  }
+  echo "<br>";
+  echo "Tabla del 2 con el do/while";
+  echo "<br>";
+  $f=2;
+  do {
+    echo $f;
+    echo "-";
+	$f=$f+2;	
+  } while ($f<=20);
+
+?>
+
+</body>
+</html></textarea>
+ <br>
+<!-- <a href="http://localhost:8080/problemas/phpya/propu/28/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>-->
+
+
+  <a href="http://www.scratchya.com.ar/problemas/phpya/propu/28/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a> 
+	<br>	
+
+</div>
+
+</form>
+
+
+
+  
+
+<br>
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>
+
+
+<form name="form1" method="post" action="#">
+  <div>
+   <h2><a href="../index2904-2.html?inicio=0">Retornar</a></h2>   
+  </div>
+
+  
+</form>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-4";
+urchinTracker();
+</script>
+
+</body>
+
+</html>

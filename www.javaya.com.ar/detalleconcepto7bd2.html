@@ -1,0 +1,508 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=128&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:54:39 GMT -->
+<head>
+<title>Plug-in WindowBuilder para crear interfaces visuales.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Plug-in WindowBuilder para crear interfaces visuales.</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>El objetivo de este concepto es conocer el empleo del plug-in WindowBuilder para el desarrollo de interfaces visuales arrastrando componentes.<br>
+A partir de la versión 3.7 de Eclipse (Indigo) se incorpora por defecto el plug-in WindowBuilder para la implementación de interfaces visuales.<br>
+A medida que uno arrastra componentes visuales sobre un formulario se genera en forma automática el código Java, esto nos permite ser más productivos en el desarrollo de la interfaz de nuestra aplicación y nos ayuda a concentrarnos en la lógica de nuestro problema.</p>
+
+<h4>Pasos para crear un JFrame con el WindowBuilder</h4>
+
+<p>1 - Creación de un proyecto.</p>
+
+<img src="imagentema/foto141.jpg" border="0" alt="WindowBuilder"><br>
+
+<p>2 - Seleccionamos el nombre de nuestro proyecto (lo llamaremos PruebaWindowBuilder):</p>
+
+
+<img src="imagentema/foto142.jpg" border="0" alt="WindowBuilder"><br>
+
+<p>3 - Ahora seleccionamos la opción del menú File -> New -> Other ...</p>
+
+<img src="imagentema/foto143.jpg" border="0" alt="WindowBuilder"><br>
+
+<p>4 - Seleccionamos la opción la opción JFrame:</p>
+
+<img src="imagentema/foto144.jpg" border="0" alt="WindowBuilder"><br>
+
+<p>5 - Seguidamente presionamos el botón Next > y definimos el nombre de la clase a crear (Ventana1):</p>
+
+<img src="imagentema/foto145.jpg" border="0" alt="WindowBuilder"><br>
+
+<p>Tenemos en este momento nuestra aplicación mínima generada por el WindowBuilder. Podemos observar que en la parte inferior de la ventana central aparecen dos pestañas (Source y Design) estas dos pestañas nos permiten ver el código fuente de nuestro JFrame en vista de diseño o en vista de código Java:</p>
+
+<img src="imagentema/foto146.jpg" border="0" alt="WindowBuilder"><br>
+
+<p>Luego en vista de "Design":</p>
+
+<img src="imagentema/foto147.jpg" border="0" alt="WindowBuilder"><br>
+
+<p>6 - Configuramos el Layout de JFrame presionando el botón derecho del mouse sobre el formulario generado y seleccionamos la opción SetLayout > Absolute layout (esto nos permite luego disponer controles visuales como JButton, JLabel etc. en posiciones fijas dentro del JFrame):</p>
+
+<img src="imagentema/foto148.jpg" border="0" alt="WindowBuilder"><br>
+
+<p>7 - De la ventana Palette seleccionamos con el mouse un objeto de la clase JButton (presionamos con el mouse dicha componente, deberá aparecer seleccionada) y luego nos desplazamos con el mouse sobre el JFrame y presionamos el botón del mouse nuevamente ( en este momento aparece el botón dentro del JFrame):</p>
+
+<img src="imagentema/foto149.jpg" border="0" alt="WindowBuilder"><br>
+
+
+<p>En todo momento podemos cambiar la pestaña de "Source" y "Design" para ver el código generado. Por ejemplo cuando agregamos el botón podemos ver que se agregó un objeto de la clase JButton al constructor:</p>
+
+
+<pre class="recuadro">
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+
+
+public class Ventana1 extends JFrame {
+
+    private JPanel contentPane;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Ventana1 frame = new Ventana1();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the frame.
+     */
+    public Ventana1() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 450, 300);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+        
+        JButton btnNewButton = new JButton("New button");
+        btnNewButton.setBounds(335, 228, 89, 23);
+        contentPane.add(btnNewButton);
+    }
+}
+</pre>
+
+
+<h4>Inicializar propiedades de los objetos.</h4>
+
+
+<p>Crear un proyecto y luego un JFrame con las siguientes componentes visuales :<br>
+Dos controles de tipo JLabel, dos JTextField y dos JButton (previamente definir el layout para el panel contenido en el JFrame de tipo Absolute Layout)</p>
+
+<img src="imagentema/foto150.jpg" border="0" alt="WindowBuilder"><br>
+
+<p>Si hacemos doble clic con el mouse en la pestaña Ventana1.java podemos maximizar el espacio de nuestro editor visual (haciendo nuevamente doble clic vuelve al tamaño anterior)<br>
+
+Seleccionemos el primer JLabel de nuestro formulario y observemos las distintas partes que componen el plug-in WindowBuilder. En la parte superior izquierda se encuentra la sección "Structure" donde se muestran las componentes visuales agregadas al formulario. Aparece resaltada la que se encuentra actualmente seleccionada.<br>
+En la parte inferior aparece la ventana de "Properties" o propiedades del control visual </p>
+
+<img src="imagentema/foto151.jpg" border="0" alt="WindowBuilder"><br>
+
+
+
+<p>Veamos algunas propiedades que podemos modificar desde esta ventana y los cambios que se producen en el código fuente en java.<br> 
+La propiedad text cambia el texto que muestra el objeto JLabel. Probemos de disponer el texto "Ingrese nombre de usuario:". De forma similar hagamos los cambios en la propiedad text de los otros controles visuales de nuestro JFrame:</p>
+
+
+<img src="imagentema/foto152.jpg" border="0" alt="WindowBuilder"><br>
+
+<p>Si ahora seleccionamos la pestaña inferior para ver la vista de código java: "Source" podemos ver que el WindowBuilder nos generó automáticamente el código para inicializar los textos de los controles JLabel y JButton:</p>
+
+<pre class="recuadro">
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+
+
+public class Ventana1 extends JFrame {
+
+    private JPanel contentPane;
+    private JTextField textField;
+    private JTextField textField_1;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Ventana1 frame = new Ventana1();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the frame.
+     */
+    public Ventana1() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 450, 203);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+        
+        JLabel lblNewLabel = new JLabel("Ingrese nombre de usuario:");
+        lblNewLabel.setBounds(20, 21, 149, 14);
+        contentPane.add(lblNewLabel);
+        
+        JLabel lblNewLabel_1 = new JLabel("Ingrese clave:");
+        lblNewLabel_1.setBounds(20, 61, 125, 14);
+        contentPane.add(lblNewLabel_1);
+        
+        textField = new JTextField();
+        textField.setBounds(179, 18, 225, 20);
+        contentPane.add(textField);
+        textField.setColumns(10);
+        
+        textField_1 = new JTextField();
+        textField_1.setBounds(179, 58, 225, 20);
+        contentPane.add(textField_1);
+        textField_1.setColumns(10);
+        
+        JButton btnNewButton = new JButton("Aceptar");
+        btnNewButton.setBounds(178, 89, 89, 23);
+        contentPane.add(btnNewButton);
+        
+        JButton btnNewButton_1 = new JButton("Cancelar");
+        btnNewButton_1.setBounds(315, 89, 89, 23);
+        contentPane.add(btnNewButton_1);
+    }
+}
+
+</pre>
+
+
+<p>Como podemos observar ahora cuando se crean los objetos de la clase JLabel en el constructor se inicializan con los valores cargados en la propiedad text:</p>
+<pre>
+    JLabel lblNewLabel = new JLabel("Ingrese nombre de usuario:");
+    .....
+    JLabel lblNewLabel_1 = new JLabel("Ingrese clave:");
+    .....	
+    JButton btnNewButton = new JButton("Aceptar");
+    .....
+    JButton btnNewButton_1 = new JButton("Cancelar");
+    .....
+</pre>
+
+<h3>Problema propuesto 1</h3>
+
+<p>Crear la interfaz visual que aparece abajo. Inicializar las propiedades que corresponde.</p>
+
+<img src="imagentema/foto153.jpg" border="0" alt="WindowBuilder"><br>
+
+<h4>Eventos</h4>
+
+<p>Para asociar eventos el plug-in WindowBuilder nos proporciona una mecánica para automatizar la generación de las interfaces que capturan los eventos de los objetos JButton, JMenuItem, JList etc.<br>
+Crearemos una interfaz visual similar a esta (tres controles de tipo JLabel, dos JTextField y un JButton):</p>
+
+<img src="imagentema/foto154.jpg" border="0" alt="WindowBuilder"><br>
+
+<p>Ahora seleccionamos el control JButton y en la ventana de propiedades presionamos el icono de la parte superior:</p>
+
+<img src="imagentema/foto155.jpg" border="0" alt="WindowBuilder"><br>
+
+
+
+<p>Hacemos doble clic sobre la palabra performed y vemos que se abre el editor de texto y aparece el siguiente código generado automáticamente:</p>
+<pre>
+        btnSumar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+</pre>
+<p>En el parámetro del método addActionListener del botón que suma se le pasa la referencia a una interface que se crea de tipo ActionListener e implementa el método actionPerformed donde agregaremos el código necesario para responder el evento.</p>
+
+<p>Para este problema debemos rescatar los valores almacenados en los controles de tipo JTextField, convertirlos a entero, sumarlos y enviar dicho resultado a una JLabel.</p>
+<pre>
+    btnSumar.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            int v1=Integer.parseInt(textField.getText());
+            int v2=Integer.parseInt(textField_1.getText());
+            int suma=v1+v2;
+            lblResultado.setText(String.valueOf(suma));
+        }
+    });
+</pre>
+<p>Cuando compilamos vemos que no tenemos acceso al objeto lblResultado ya que está definido como una variable local al constructor. Si queremos que se definan como atributos de la clase debemos seleccionar la JLabel y presionar "convert Local to Field" (convertir de variable local a atributo de la clase):</p>
+
+
+<img src="imagentema/foto156.jpg" border="0" alt="WindowBuilder"><br>
+
+<p>Después de esto podemos acceder desde el método actionPerformed a la label.</p>
+
+
+<h3>Problema </h3>
+
+<p>Crear un menú de opciones que permita cambiar el color de fondo. Disponer un JMenuBar, un JMenu y 3 objetos de la clase JMenuItem. Asociar los eventos respectivos para cada control de tipo JMenuItem.<br>
+La interfaz visual debe quedar similar a la siguiente:</p>
+
+<img src="imagentema/foto157.jpg" border="0" alt="WindowBuilder"><br>
+
+
+<p>Para crear esta interface debemos primero seleccionar la pestaña "Menu" donde se encuentran las componentes relacionadas a la creación de menúes.<br>
+Debemos agregar (en este orden las siguientes componentes):<br>
+1 - Un JMenuBar en la parte superior.<br>
+2 - Un objeto de la clase JMenu en la barra del JMenuBar (podemos disponer el texto que queremos que se muestre)<br>
+3 - Agregamos un objeto de la clase JMenuItem en el sector donde aparece el texto: "Add items here". Los mismos pasos hacemos para agregar los otros dos JMenuItem.</p>
+
+<p>Ahora debemos asociar el evento clic para cado JMenuItem. Seleccionamos primero el control de tipo JMenuItem y en la ventana de "Properties" presionamos el botón "Show events" y generamos el actionPerformed para el JMenuItem seleccionado.</p>
+
+<p>Luego codificamos:</p>
+
+<pre>
+        mntmRojo.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                contentPane.setBackground(Color.red);
+            }
+        });
+</pre>
+
+<p>Para cambiar el color del JFrame en realidad debemos modificar el color del JPanel que cubre el JFrame. El objeto de la clase JPanel llamado contentPane tiene un método llamado setBackground que nos permite fijar el color de fondo.</p>
+
+<p>De forma similar asociamos los eventos para los otros dos objetos de la clase JMenuItem:</p>
+<pre>
+        JMenuItem mntmVerde = new JMenuItem("Verde");
+        mntmVerde.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                contentPane.setBackground(Color.green);
+            }
+        });
+        mnNewMenu.add(mntmVerde);
+        
+        JMenuItem mntmAzul = new JMenuItem("Azul");
+        mntmAzul.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                contentPane.setBackground(Color.blue);
+            }
+        });
+
+</pre>
+
+
+
+
+
+
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index1e61.html?inicio=40">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=128&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:55:38 GMT -->
+</html>

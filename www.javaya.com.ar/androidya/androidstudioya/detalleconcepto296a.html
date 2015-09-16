@@ -1,0 +1,403 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=45&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 17:22:25 GMT -->
+<head>
+<title>Componente ActionBar (Botones de acción)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>45 - Componente ActionBar (Botones de acción)</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+ <div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+<p>Ahora veremos otra característica que podemos agregarle a la barra de acción (ActionBar). Como habíamos visto la barra de acción muestra a la izquierda  un título y del lado derecho un botón que muestra un menú desplegable. Podemos disponer opciones de dicho menú que se muestren directamente en la barra de acción para que tengamos acceso a dichas opciones en forma directo sin tener que abrir el menú desplegable.</p>
+
+
+
+<h3>Problema:</h3>
+<p>Confeccionar una aplicación (Proyecto049) que muestre como título "ActionBar" y luego dos botones de acción y tres opciones en el menú desplegable del ActionBar.</p>
+<p>La interfaz del ActionBar, el título, los botones de acción y el menú desplegable debe ser similar a:</p>
+<img src="imagentema/foto173.jpg" border="0" alt="ActionBar"><br>
+
+
+<p>Como podemos observar hay dos botones de acción siempre visibles (podemos mostrar normalmente su ícono, pero si disponemos de dispositivos más grandes podemos mostrar un texto inclusive)</p>
+
+
+
+<p>Veamos los pasos que debemos dar para obtener este resultado:<p>
+<ol>
+
+<li>
+<p>Lo primero es disponer dos imágenes de 32x32 píxeles en la carpeta drawable-mdpi, una que represente un teléfono y otra una cámara fotográfica (recordemos que los nombres de archivos deben estar en minúsculas, sin espacios, no empezar con un número y no contener caracteres especiales, salvo el guión bajo), podemos llamar a los archivos telefono.png y camara.png<br>
+Dispondremos solo estas dos imágenes en en la carpeta drawable-mdpi.</p>
+<p>Lo más fácil para insertar estos archivos a dicha carpeta es disponer la ventana de "Project" en vista de "Project File"</p>
+<img src="imagentema/foto171.jpg" border="0" alt="ActionBar"><br>
+<p>Y ahora ubicar la carpeta drawable-mdpi y copiar las dos imágenes:</p>
+<img src="imagentema/foto172.jpg" border="0" alt="ActionBar"><br>
+</li>
+
+
+<li>
+El título del ActionBar lo debemos modificar abriendo el archivo strings que se encuentra en la carpeta res/values y su contenido debe ser:</p>
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;resources&gt;
+
+    &lt;string name="app_name"&gt;ActionBar&lt;/string&gt;
+
+&lt;/resources&gt;
+</pre>
+
+<p>Este archivo de recursos se utiliza para agrupar todos los mensajes que aparecen en pantalla y facilitar la implementación de aplicaciones para varios idiomas independiente de los algoritmos de la misma.</p>
+<p>En este archivo hemos creado un string llamado "app_name" con el valor "ActionBar".<br>
+Luego este string se asocia con el título de la aplicación mediante el archivo AndroidManifest.xml:</p>
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ar.com.tutorialesya.proyecto049" &gt;
+
+    &lt;application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" &gt;
+        &lt;activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" &gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name="android.intent.action.MAIN" /&gt;
+
+                &lt;category android:name="android.intent.category.LAUNCHER" /&gt;
+            &lt;/intent-filter&gt;
+        &lt;/activity&gt;
+    &lt;/application&gt;
+
+&lt;/manifest&gt;
+</pre>
+
+
+<p>En este archivo XML ya está inicializada la propiedad label de la marca application con el valor definido en el archivo xml (como vemos acá hacemos referencia al string app_name):</p>
+<pre>
+        android:label="@string/app_name"
+</pre>
+</li>
+
+
+
+<li>Ahora tenemos que definir las opciones de nuestro menú desplegable y los dos botones de acción, para esto abrimos el archivo menu_main.xml de la carpeta res/menu y definimos las cinco opciones que contendrá nuestro menú y botones de acción:
+<pre>
+&lt;menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity"&gt;
+
+    &lt;item
+        android:id="@+id/telefono"
+        app:showAsAction="always"
+        android:icon="@drawable/telefono"
+        android:title="telefono"/&gt;
+    &lt;item
+        android:id="@+id/camara"
+        app:showAsAction="always"
+        android:icon="@drawable/camara"
+        android:title="camara"/&gt;
+    &lt;item
+        android:id="@+id/opcion1"
+        app:showAsAction="never"
+        android:title="Opción 1"/&gt;
+    &lt;item
+        android:id="@+id/opcion2"
+        app:showAsAction="never"
+        android:title="Opción 2"/&gt;
+    &lt;item
+        android:id="@+id/opcion3"
+        app:showAsAction="never"
+        android:title="Opción 3"/&gt;
+&lt;/menu&gt;
+</pre>
+<p>
+Lo nuevo con respecto al concepto anterior es la definición de dos item que inicializamos la propiedad showAsAction con el valor "always" con lo que indicamos que queremos que siempre se muestre visible esta opción en la barra de acción, y además definimos la propiedad icon con el nombre de la imagen que agregamos a la carpeta drawable-mdpi:</p>
+<pre>
+    &lt;item
+        android:id="@+id/telefono"       
+        android:showAsAction="always"
+        android:icon="@drawable/telefono"
+        android:title="telefono"/&gt;          
+</pre>
+
+</p>
+</li>
+
+
+<li>
+<p>La funcionalidad de nuestro programa será mostrar un Toast cuando se seleccione alguno de las opciones del menú o un botón de acción. El código java de la clase MainActivity debe ser:</p>
+<pre class="recuadro">
+package ar.com.tutorialesya.proyecto049;
+
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+
+
+public class MainActivity extends ActionBarActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (id == R.id.telefono) {
+            Toast.makeText(this, "Se presionó el ícono del teléfono", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        if (id == R.id.camara) {
+            Toast.makeText(this, "Se presionó el ícono de la cámara", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        if (id == R.id.opcion1) {
+            Toast.makeText(this, "Se presionó la opción 1 del menú", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        if (id == R.id.opcion2) {
+            Toast.makeText(this, "Se presionó la opción 2 del menú", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        if (id == R.id.opcion3) {
+            Toast.makeText(this, "Se presionó la opción 3 del menú", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+}
+
+</pre>
+
+<p>Como podemos observar la captura del clic de los botones de acción es idéntico a las opciones del menú desplegable:</p>
+<pre>
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (id == R.id.telefono) {
+            Toast.makeText(this, "Se presionó el ícono del teléfono", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        if (id == R.id.camara) {
+            Toast.makeText(this, "Se presionó el ícono de la cámara", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        if (id == R.id.opcion1) {
+            Toast.makeText(this, "Se presionó la opción 1 del menú", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        if (id == R.id.opcion2) {
+            Toast.makeText(this, "Se presionó la opción 2 del menú", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        if (id == R.id.opcion3) {
+            Toast.makeText(this, "Se presionó la opción 3 del menú", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+</pre>
+
+
+</li>
+
+
+</ol>
+
+
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/Proyecto049.zip">proyecto049.zip</a>
+
+
+<h3>Problema Propuesto</h3>
+<p>Volver a codificar el problema anterior para mostrar dos botones y tres opciones en el menú del ActionBar localizando todos los mensajes en el archivo strings.xml</p>
+
+<p>La solución a este problema lo puede descargar en un zip desde este enlace:
+<a href="proyectos/Proyecto050.zip">proyecto050.zip</a>
+
+
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+<br>
+   <h2><a href="index1e61.html?inicio=40">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-34', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=45&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 17:24:24 GMT -->
+</html>

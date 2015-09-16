@@ -1,0 +1,316 @@
+<!doctype html>
+<html>
+
+<!-- Mirrored from www.cssya.com.ar/css3ya/detalleconcepto.php?cod=89 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:05:50 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+    <title>CSS3 Ya</title>
+    <link href="estilos.css" rel="stylesheet">
+    <link href='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css' rel='stylesheet'>     
+    <script src='../../ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script> 
+    <script src='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>     
+    <script src="funciones.js"></script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-31']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>	
+</head>
+<body>
+
+
+
+
+
+
+<div id="pesta">
+	<ul>
+		<li><a href="#p1">Concepto</a></li>    
+		<li><a href="#p2">Ejemplo</a></li>
+		<li><a href="#p3">Vista Previa</a></li>
+	</ul>
+	<div id="p1" style="background:#fafafa;padding:20px; max-height: 700px;overflow: auto;font-size:13pt">
+	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* css3 detalle arriba */
+google_ad_slot = "3101973371";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+	
+	
+    <h2>Transformaciones 2D: punto de origen  (transform-origin)</h2><p>Como vimos en el punto anterior cuando rotamos un elemento HTML siempre hay un punto fijo (por defecto es el punto central del recuadro)</p>
+<p>Podemos variar dicho punto y ubicar por ejemplo en cualquiera de los cuatro vértices del recuadro con la siguiente sintaxis:</p>
+<pre>
+Elemento { 
+     transform-origin: left top; 
+}
+
+Elemento { 
+     transform-origin: right top; 
+}
+
+Elemento { 
+     transform-origin: left bottom; 
+}
+
+Elemento { 
+     transform-origin: right bottom; 
+}
+
+</pre>
+
+<p>Por ejemplo si queremos dejar fijo el vértice superior izquierdo y seguidamente rotar 10 grados en sentido horario luego debemos codificar:</p>
+<pre>
+#recuadro1{
+  -ms-transform: rotate(10deg);
+  -webkit-transform: rotate(10deg);
+  -moz-transform: rotate(10deg);
+  -o-transform: rotate(10deg);
+  transform: rotate(10deg);
+
+  -ms-transform-origin: left top;
+  -webkit-transform-origin: left top;
+  -moz-transform-origin: left top;
+  -o-transform-origin: left top;
+  transform-origin: left top;
+
+  border-radius: 20px;  
+  background-color:#ddd;
+  width:200px;
+  padding:10px;
+}
+</pre>
+<p>Como podemos ver es como disponer un alfiler en el vértice superior izquierdo y seguidamente rotar en el sentido de las agujas de un reloj 10 grados:</p>
+<img src="imagentema/foto011.jpg" border="0" alt="transform-origin"><br>
+<p>Con lo visto podemos disponer el punto de origen en cinco lugares (el centro y los cuatro vértices), pero podemos trasladar a cualquier punto dentro del recuadro el punto del origen con las siguientes sintaxis:</p>
+<pre>
+  transform-origin: 0% 50%;
+</pre>
+<p>El primer valor representa las "x" y el segundo valor representa las "y".</p>
+<p>Si queremos disponer el punto de origen en el vértice superior derecho podemos hacerlo como ya conocemos:</p>
+<pre>
+Elemento { 
+     transform-origin: right top; 
+}
+</pre>
+<p>O mediante porcentajes:</p>
+<pre>
+Elemento { 
+     transform-origin: 100% 0%; 
+}
+</pre>
+<p>Luego podemos mediante porcentajes en x e y desplazar el punto de origen a cualquier parte dentro del elemento HTML (div en este caso)</p>
+<p>Por ejemplo si queremos disponer el punto de origen en la mitad del lado izquierdo:</p>
+<pre>
+#recuadro2{
+  -ms-transform: rotate(10deg);
+  -webkit-transform: rotate(10deg);
+  -moz-transform: rotate(10deg);
+  -o-transform: rotate(10deg);
+  transform: rotate(10deg);
+
+  -ms-transform-origin: 0% 50%;
+  -webkit-transform-origin: 0% 50%;
+  -moz-transform-origin: 0% 50%;
+  -o-transform-origin: 0% 50%;
+  transform-origin: 0% 50%;
+
+  border-radius: 20px;  
+  background-color:#ddd;
+  width:200px;
+  padding:10px;
+  margin-top:50px;
+}
+</pre>
+<p>El punto rojo indica el "punto de origen":</p>
+<img src="imagentema/foto012.jpg" border="0" alt="transform-origin"><br>
+<p>Otra posibilidad es indicar el punto con alguna medida permitida en CSS (px, em etc.), por ejemplo podemos indicar que el punto de origen este 20 píxeles en x y 40 en y:</p>
+<pre>
+#recuadro3{
+  -ms-transform: rotate(10deg);
+  -webkit-transform: rotate(10deg);
+  -moz-transform: rotate(10deg);
+  -o-transform: rotate(10deg);
+  transform: rotate(10deg);
+
+  -ms-transform-origin: 20px 40px;
+  -webkit-transform-origin: 20px 40px;
+  -moz-transform-origin: 20px 40px;
+  -o-transform-origin: 20px 40px;
+  transform-origin: 20px 40px;
+
+  border-radius: 20px;  
+  background-color:#ddd;
+  width:200px;
+  padding:10px;
+  margin-top:50px;
+}
+</pre>	
+<table border="0">
+<tr>
+<td>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* css3 cuadrado */
+google_ad_slot = "9333811690";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+ <td>
+ <script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* css3 cuadrado */
+google_ad_slot = "9333811690";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ </td>
+</tr></table> 	
+	
+	</div>    
+	<div id="p2">
+    <textarea name="editor" id="editor" rows="28" style="width:890px;height:700px;font-size:16px;font-family:courier"><!DOCTYPE html> 
+<html> 
+<head> 
+<title>Prueba</title> 
+
+<style type="text/css"> 
+
+#recuadro1{
+  -ms-transform: rotate(10deg);
+  -webkit-transform: rotate(10deg);
+  -moz-transform: rotate(10deg);
+  -o-transform: rotate(10deg);
+  transform: rotate(10deg);
+
+  -ms-transform-origin: left top;
+  -webkit-transform-origin: left top;
+  -moz-transform-origin: left top;
+  -o-transform-origin: left top;
+  transform-origin: left top;
+
+  border-radius: 20px;  
+  background-color:#ddd;
+  width:200px;
+  padding:10px;
+}
+
+
+#recuadro2{
+  -ms-transform: rotate(10deg);
+  -webkit-transform: rotate(10deg);
+  -moz-transform: rotate(10deg);
+  -o-transform: rotate(10deg);
+  transform: rotate(10deg);
+
+  -ms-transform-origin: 0% 50%;
+  -webkit-transform-origin: 0% 50%;
+  -moz-transform-origin: 0% 50%;
+  -o-transform-origin: 0% 50%;
+  transform-origin: 0% 50%;
+
+  border-radius: 20px;  
+  background-color:#ddd;
+  width:200px;
+  padding:10px;
+  margin-top:50px;
+}
+
+
+
+
+#recuadro3{
+  -ms-transform: rotate(10deg);
+  -webkit-transform: rotate(10deg);
+  -moz-transform: rotate(10deg);
+  -o-transform: rotate(10deg);
+  transform: rotate(10deg);
+
+  -ms-transform-origin: 20px 40px;
+  -webkit-transform-origin: 20px 40px;
+  -moz-transform-origin: 20px 40px;
+  -o-transform-origin: 20px 40px;
+  transform-origin: 20px 40px;
+
+  border-radius: 20px;  
+  background-color:#ddd;
+  width:200px;
+  padding:10px;
+  margin-top:50px;
+}
+
+
+body {
+  background:white;
+  margin:50px;
+}
+
+</style> 
+
+</head> 
+<body> 
+
+<div id="recuadro1"> 
+<h3>Recuadro 1</h3>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, </p>
+</div> 
+
+<div id="recuadro2"> 
+<h3>Recuadro 2</h3>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, </p>
+</div> 
+
+<div id="recuadro3"> 
+<h3>Recuadro 3</h3>
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, </p>
+</div> 
+
+</body> 
+
+<!-- Mirrored from www.cssya.com.ar/css3ya/detalleconcepto.php?cod=89 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:05:53 GMT -->
+</html> </textarea>
+	</div>
+	<div id="p3">
+<iframe width="900" height="700" id="documentodinamico" name="documentodinamico" src="vacio.html">
+No tiene disponible el navegador la capacidad de iframe
+</iframe>
+	</div>
+</div>
+<br>
+   <h2><a href="index-2.html">Retornar</a></h2>   
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-31', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

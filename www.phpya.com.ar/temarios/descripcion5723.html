@@ -1,0 +1,419 @@
+﻿<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.phpya.com.ar/temarios/descripcion.php?punto=32&cod=53&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:09:02 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de PHP - Temario</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="keywords" content="php, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de php.">
+<meta name="author" content="Diego Moisset">
+
+<style>
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Verdana,arial,sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.1em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;
+}
+
+#recuadrooculto {
+  display: none;
+}
+
+
+.recuadroborde {
+  //  max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+	clear:left;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  document.getElementById('recuadrooculto').style.display='block';
+}
+
+</script>
+
+</head>
+
+<body>
+
+
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em;margin-right:1em"><a href="../index7732-2.html?inicio=30">Temario del Tutorial</a></span>32 - Paginación de registros.</h1></div>
+
+<br>
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+
+<p>En situaciones en las cuales una consulta retorna muy muchos datos, en vez de enviarlos todos al navegador, se puede enviar un conjunto limitado de registros. Luego, mediante hipervínculos, ver el resto de datos. Por ejemplo, cuando hacemos búsquedas con el servidor google, generalmente no nos retorna todas las direcciones donde se encuentran los resultados buscados, nos retorna páginas con 10 enlaces por página (pensemos el tiempo de transferencia si nos retornara 1.000.000 de enlaces).</p>
+<p>Bueno, ahora resolvamos con el lenguaje PHP este problema de paginación, mostraremos dos alumnos por página:</p>
+<pre class="recuadroborde">
+&lt;?php
+if (isset($_REQUEST['pos']))
+  $inicio=$_REQUEST['pos'];
+else
+  $inicio=0;
+?&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;?php
+$conexion=mysqli_connect("localhost","root","","base1") or
+    die("Problemas con la conexión");
+
+$registros=mysqli_query($conexion,"select alu.codigo as  
+                                      codigo,
+  				      nombre,
+				      mail,
+				      codigocurso, 
+                                      nombrecurso 
+		                    from alumnos as alu
+                                    inner join cursos as cur on cur.codigo=alu.codigocurso
+                                    limit $inicio,2") or
+  die("Problemas en el select:".mysqli_error($conexion));
+$impresos=0;
+while ($reg=mysqli_fetch_array($registros))
+{
+  $impresos++;
+  echo "Codigo:".$reg['codigo']."&lt;br&gt;";
+  echo "Nombre:".$reg['nombre']."&lt;br&gt;";
+  echo "Mail:".$reg['mail']."&lt;br&gt;";
+  echo "Curso:".$reg['nombrecurso']."&lt;br&gt;";
+  echo "&lt;hr&gt;";
+}
+if ($inicio==0)
+  echo "anteriores ";
+else
+{
+  $anterior=$inicio-2;
+  echo "&lt;a href=\"pagina1.php?pos=$anterior\"&gt;Anteriores &lt;/a&gt;";
+}
+if ($impresos==2)
+{
+  $proximo=$inicio+2;
+  echo "&lt;a href=\"pagina1.php?pos=$proximo\"&gt;Siguientes&lt;/a&gt;";
+}
+else
+  echo "siguientes";
+mysqli_close($conexion);
+?&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>La función isset retorna verdadero si existe la variable que le pasamos como parámetro, en este caso le estamos pasando la componente pos del vector asociativo $_REQUEST. Cuando llamamos por primera vez a esta página, lo hacemos : pagina1.php sin parámetros, por lo que el if se verifica como falso. Es decir la variable $inicio se carga con el valor 0.</p>
+
+<p>Otro concepto importante es la cláusula limit que es propia del gestor MySQL. Mediante esta cláusula limitamos la cantidad de registros que retorna el select. El primer valor del limit indica a partir de cual registro y el segundo la cantidad de registros. Es decir si un select sin limit retorna 100 registro, luego utilizando por ejemplo la sintaxis limit 50,25 nos retornará, de esa lista de 100 registros, a partir del registro de la posición 50, 25 registros.</p>
+<p>En nuestro problema indicamos que retorne desde valor que tenga la variable $inicio y como cantidad 2 (páginas con 2 registros):</p>
+<pre>
+$registros=mysqli_query($conexion,"select alu.codigo as  
+                                      codigo,
+  				      nombre,
+				      mail,
+				      codigocurso, 
+                                      nombrecurso 
+		                    from alumnos as alu
+                                    inner join cursos as cur on cur.codigo=alu.codigocurso
+                                    limit $inicio,2") or
+  die("Problemas en el select:".mysqli_error($conexion));
+</pre>
+<p>Seguidamente mostramos todos los registros retornados y además los contamos:</p>
+<pre>
+$impresos=0;
+while ($reg=mysqli_fetch_array($registros))
+{
+  $impresos++;
+  echo &quot;Codigo:&quot;.$reg['codigo'].&quot;&lt;br&gt;&quot;;
+  echo &quot;Nombre:&quot;.$reg['nombre'].&quot;&lt;br&gt;&quot;;
+  echo &quot;Mail:&quot;.$reg['mail'].&quot;&lt;br&gt;&quot;;
+  echo &quot;Curso:&quot;.$reg['nombrecurso'].&quot;&lt;br&gt;&quot;;
+  echo &quot;&lt;hr&gt;&quot;;
+}
+</pre>
+<p>Ahora vemos dónde dispondremos los hipervínculos, hacia adelante o atrás:</p>
+<pre>
+if ($inicio==0)
+  echo &quot;anteriores &quot;;
+else
+{
+  $anterior=$inicio-2;
+  echo &quot;&lt;a href=\&quot;pagina1.php?pos=$anterior\&quot;&gt;Anteriores &lt;/a&gt;&quot;;
+}
+</pre>
+<p>Si la variable $inicio vale 0 significa que no hay registros antes de éste, por lo que sólo mostramos un texto "anteriores". En caso que la variable $inicio sea distinta de 0, se ejecuta el else, donde disponemos un hipervínculo con la misma página e inicializando el parámetro pos con el valor de $inicio menos 2.</p>
+<p>Si el contador $impresos tiene el valor 2 significa que posiblemente hay más registros por mostrar y debemos disponer un hipervínculo con la misma página pero inicializando el parámetro pos con el valor de $inicio más 2:</p>
+<pre>
+if ($impresos==2)
+{
+  $proximo=$inicio+2;
+  echo &quot;&lt;a href=\&quot;pagina1.php?pos=$proximo\&quot;&gt;Siguientes&lt;/a&gt;&quot;;
+}
+else
+  echo &quot;siguientes&quot;;
+</pre>
+
+<br>
+<br>
+
+<h2>Problema resuelto.</h2>
+<p>Copiar el contenido de este cuadro de texto al NotePad++ y grabarlo en la carpeta c:\wamp\www con un nombre con extensión php (si hay varios cuadros
+de texto grabar cada uno en un archivo distinto).<br>
+  luego abrir el navegador (Chrome, FireFox, IExplorer etc.) y en la barra de direcciones tipear: http://localhost/pagina1.php (o el nombre del
+archivo que le dió)  </p>
+<form name="formulario" action="#" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+    pagina1.php<br><textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off" readonly>
+<?php
+if (isset($_REQUEST['pos']))
+  $inicio=$_REQUEST['pos'];
+else
+  $inicio=0;
+?>
+<html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+
+<?php
+$conexion=mysqli_connect("localhost","root","","base1") or
+    die("Problemas con la conexión");
+
+$registros=mysqli_query($conexion,"select alu.codigo as  
+                                      codigo,
+				      nombre,
+				      mail,
+				      codigocurso, 
+                                      nombrecurso 
+		                    from alumnos as alu
+                                    inner join cursos as cur on cur.codigo=alu.codigocurso
+                                    limit $inicio,2") or
+  die("Problemas en el select:".mysqli_error($conexion));
+$impresos=0;
+while ($reg=mysqli_fetch_array($registros))
+{
+  $impresos++;
+  echo "Codigo:".$reg['codigo']."<br>";
+  echo "Nombre:".$reg['nombre']."<br>";
+  echo "Mail:".$reg['mail']."<br>";
+  echo "Curso:".$reg['nombrecurso']."<br>";
+  echo "<hr>";
+}
+if ($inicio==0)
+  echo "anteriores ";
+else
+{
+  $anterior=$inicio-2;
+  echo "<a href=../_pagina1f215.html?pos=$anterior\%22>Anteriores </a>";
+}
+if ($impresos==2)
+{
+  $proximo=$inicio+2;
+  echo "<a href=../_pagina1dc2b.html?pos=$proximo\%22>Siguientes</a>";
+}
+else
+  echo "siguientes";
+mysqli_close($conexion);
+?>
+
+</body>
+
+<!-- Mirrored from www.phpya.com.ar/temarios/descripcion.php?punto=32&cod=53&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:09:04 GMT -->
+</html>
+</textarea>
+    <br>
+	 <a href="http://www.scratchya.com.ar/problemas/phpya/resu/53/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a> 
+<!--    <a href="http://localhost:8080/problemas/phpya/resu/53/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>-->
+
+    <br>
+<table width="650px">
+<tr>
+<td align="left">	
+
+</td>
+</tr>
+</table>
+
+	
+    
+</form>
+
+
+
+
+
+
+	
+
+<h2>Problema propuesto.</h2>
+<p>Confeccionar un programa que muestre los registros de la tabla "cursos" con páginas de 3 registros.</p><form name="formulario" action="#" target="ventanaForm" 
+onsubmit="abrirVentana()" method="post" >
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<div id="recuadrooculto">
+pagina1.php<br>
+<textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off" readonly>
+<?php
+if (isset($_REQUEST['pos']))
+  $inicio=$_REQUEST['pos'];
+else
+  $inicio=0;
+?>
+<html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+
+<?php
+$conexion=mysqli_connect("localhost","root","","base1") or
+    die("Problemas con la conexión");
+
+$registros=mysqli_query($conexion,"select codigo,
+                                          nombrecurso from cursos
+                                          limit $inicio,3") or
+  die("Problemas en el select:".mysqli_error($conexion));
+$impresos=0;
+while ($reg=mysqli_fetch_array($registros))
+{
+  $impresos++;
+  echo "Codigo:".$reg['codigo']."<br>";
+  echo "Nombre:".$reg['nombrecurso']."<br>";
+  echo "<hr>";
+}
+mysqli_close($conexion);
+if ($inicio==0)
+  echo "anteriores ";
+else
+{
+  $anterior=$inicio-3;
+  echo "<a href=../_pagina1f215.html?pos=$anterior\%22>Anteriores </a>";
+}
+if ($impresos==3)
+{
+  $proximo=$inicio+3;
+  echo "<a href=../_pagina1dc2b.html?pos=$proximo\%22>Siguientes</a>";
+}
+else
+  echo "siguientes";
+?>
+
+</body>
+</html></textarea>
+ <br>
+<!-- <a href="http://localhost:8080/problemas/phpya/propu/53/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>-->
+
+
+  <a href="http://www.scratchya.com.ar/problemas/phpya/propu/53/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a> 
+	<br>	
+
+</div>
+
+</form>
+
+
+
+  
+
+<br>
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>
+
+
+<form name="form1" method="post" action="#">
+  <div>
+   <h2><a href="../index7732.html?inicio=30">Retornar</a></h2>   
+  </div>
+
+  
+</form>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-4";
+urchinTracker();
+</script>
+
+</body>
+
+</html>

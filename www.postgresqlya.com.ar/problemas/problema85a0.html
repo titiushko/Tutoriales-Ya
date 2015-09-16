@@ -1,0 +1,399 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- Mirrored from www.postgresqlya.com.ar/problemas/problema.php?inicio=50&cod=226&punto=68 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de PostgreSQL: Problemas Resueltos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+pre {
+  text-align:left;
+  font-family:verdana,sans-serif;
+}
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+</style>
+
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;	
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=no,status=yes,toolbar=yes,location=yes');  	
+}
+
+function VentanaTeorico(codigo)
+{
+  alto=400;
+  window.open('../temarios/descripcion2ade4.html?cod='+codigo+'&origen=problema', '', 'top=0,left=0,width=800,height='+alto+',resizable=yes,scrollbars=yes,menubar=no');  	
+}
+
+function cambiar(nro)
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   if (nro==1)
+   {
+     if (lista[f].id=='solu1')
+       lista[f].style.display='block';
+   }
+   else
+     if (nro==2)
+     {
+       if (lista[f].id=='solu2')
+         lista[f].style.display='block';
+     }
+	   
+  }
+  if (nro==1)
+    document.getElementById('solucion1').style.display='none';
+  if (nro==2)
+    document.getElementById('solucion2').style.display='none';
+}
+
+</script>
+
+</head>
+
+<body>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>68 - Vistas</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<b>Primer problema: </b><br><pre>
+Un club dicta cursos de distintos deportes. Almacena la información en varias tablas.
+El director no quiere que los empleados de administración conozcan la estructura de las tablas ni 
+algunos datos de los profesores y socios, por ello se crean vistas a las cuales tendrán acceso.
+1- Crear las tablas:
+ create table socios(
+  documento char(8) not null,
+  nombre varchar(40),
+  domicilio varchar(30),
+   primary key (documento)
+ );
+
+ create table profesores(
+  documento char(8) not null,
+  nombre varchar(40),
+  domicilio varchar(30),
+   primary key (documento)
+ );
+
+ create table cursos(
+  numero serial,
+  deporte varchar(20),
+  dia varchar(15),
+  documentoprofesor char(8),
+   primary key (numero)
+ );
+
+ create table inscriptos(
+  documentosocio char(8) not null,
+  numero smallint not null,
+  matricula char(1),
+   primary key (documentosocio,numero)
+ );
+
+2- Ingrese algunos registros para todas las tablas:
+ insert into socios values('30000000','Fabian Fuentes','Caseros 987');
+ insert into socios values('31111111','Gaston Garcia','Guemes 65');
+ insert into socios values('32222222','Hector Huerta','Sucre 534');
+ insert into socios values('33333333','Ines Irala','Bulnes 345');
+
+ insert into profesores values('22222222','Ana Acosta','Avellaneda 231');
+ insert into profesores values('23333333','Carlos Caseres','Colon 245');
+ insert into profesores values('24444444','Daniel Duarte','Sarmiento 987');
+ insert into profesores values('25555555','Esteban Lopez','Sucre 1204');
+
+ insert into cursos(deporte,dia,documentoprofesor) values('tenis','lunes','22222222');
+ insert into cursos(deporte,dia,documentoprofesor) values('tenis','martes','22222222');
+ insert into cursos(deporte,dia,documentoprofesor) values('natacion','miercoles','22222222');
+ insert into cursos(deporte,dia,documentoprofesor) values('natacion','jueves','23333333');
+ insert into cursos(deporte,dia,documentoprofesor) values('natacion','viernes','23333333');
+ insert into cursos(deporte,dia,documentoprofesor) values('futbol','sabado','24444444');
+ insert into cursos(deporte,dia,documentoprofesor) values('futbol','lunes','24444444');
+ insert into cursos(deporte,dia,documentoprofesor) values('basquet','martes','24444444');
+
+ insert into inscriptos values('30000000',1,'s');
+ insert into inscriptos values('30000000',3,'n');
+ insert into inscriptos values('30000000',6,null);
+ insert into inscriptos values('31111111',1,'s');
+ insert into inscriptos values('31111111',4,'s');
+ insert into inscriptos values('32222222',8,'s');
+
+3- Cree una vista en la que aparezca el nombre y documento del socio, el deporte, el día y el nombre del profesor.
+
+4- Muestre la información contenida en la vista.
+
+5- Realice una consulta a la vista donde muestre la cantidad de socios inscriptos en cada deporte 
+ordenados por cantidad.
+
+6- Muestre (consultando la vista) los cursos (deporte y día) para los cuales no hay inscriptos.
+
+7- Muestre los nombres de los socios que no se han inscripto en ningún curso (consultando la vista)
+
+8- Muestre (consultando la vista) los profesores que no tienen asignado ningún deporte aún.
+
+9- Muestre (consultando la vista) el nombre y documento de los socios que deben matrículas.
+
+10- Consulte la vista y muestre los nombres de los profesores y los días en que asisten al club para 
+dictar sus clases.
+
+11- Muestre la misma información anterior pero ordenada por día.
+
+12- Muestre todos los socios que son compañeros en tenis los lunes.
+</pre>
+<a href="javascript:cambiar(1)" id="solucion1">Ver solución</a>
+<br><br>
+<pre id="solu1" class="recuadrooculto">
+ create table socios(
+  documento char(8) not null,
+  nombre varchar(40),
+  domicilio varchar(30),
+   primary key (documento)
+ );
+
+ create table profesores(
+  documento char(8) not null,
+  nombre varchar(40),
+  domicilio varchar(30),
+   primary key (documento)
+ );
+
+ create table cursos(
+  numero serial,
+  deporte varchar(20),
+  dia varchar(15),
+  documentoprofesor char(8),
+   primary key (numero)
+ );
+
+ create table inscriptos(
+  documentosocio char(8) not null,
+  numero smallint not null,
+  matricula char(1),
+   primary key (documentosocio,numero)
+ );
+
+ insert into socios values('30000000','Fabian Fuentes','Caseros 987');
+ insert into socios values('31111111','Gaston Garcia','Guemes 65');
+ insert into socios values('32222222','Hector Huerta','Sucre 534');
+ insert into socios values('33333333','Ines Irala','Bulnes 345');
+
+ insert into profesores values('22222222','Ana Acosta','Avellaneda 231');
+ insert into profesores values('23333333','Carlos Caseres','Colon 245');
+ insert into profesores values('24444444','Daniel Duarte','Sarmiento 987');
+ insert into profesores values('25555555','Esteban Lopez','Sucre 1204');
+
+ insert into cursos(deporte,dia,documentoprofesor) values('tenis','lunes','22222222');
+ insert into cursos(deporte,dia,documentoprofesor) values('tenis','martes','22222222');
+ insert into cursos(deporte,dia,documentoprofesor) values('natacion','miercoles','22222222');
+ insert into cursos(deporte,dia,documentoprofesor) values('natacion','jueves','23333333');
+ insert into cursos(deporte,dia,documentoprofesor) values('natacion','viernes','23333333');
+ insert into cursos(deporte,dia,documentoprofesor) values('futbol','sabado','24444444');
+ insert into cursos(deporte,dia,documentoprofesor) values('futbol','lunes','24444444');
+ insert into cursos(deporte,dia,documentoprofesor) values('basquet','martes','24444444');
+
+ insert into inscriptos values('30000000',1,'s');
+ insert into inscriptos values('30000000',3,'n');
+ insert into inscriptos values('30000000',6,null);
+ insert into inscriptos values('31111111',1,'s');
+ insert into inscriptos values('31111111',4,'s');
+ insert into inscriptos values('32222222',8,'s');
+
+
+ create view vista_club as
+  select s.nombre as socio,s.documento as docsocio,s.domicilio as domsocio,c.deporte,dia,
+   p.nombre as profesor, matricula
+   from socios as s
+   full join inscriptos as i
+   on s.documento=i.documentosocio
+   full join cursos as c
+   on i.numero=c.numero
+   full join profesores as p
+   on c.documentoprofesor=p.documento;
+
+ select *from vista_club;
+
+ select deporte,dia,count(socio) as cantidad
+  from vista_club
+  where deporte is not null
+  group by deporte,dia
+  order by cantidad;
+
+ select deporte,dia from vista_club
+  where socio is null and deporte is not null;
+
+ select socio from vista_club
+  where deporte is null and socio is not null;
+
+ select profesor from vista_club where deporte is null and profesor is not null;
+
+ select socio, docsocio from vista_club where deporte is not null and matricula &lt;&gt; 's';
+
+ select distinct profesor,dia
+  from vista_club where profesor is not null;
+
+ select distinct profesor,dia
+  from vista_club where profesor is not null
+  order by dia;
+
+ select socio from vista_club
+  where deporte='tenis' and dia='lunes';
+</pre>
+   
+	<br>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>	
+
+
+</form>
+        <p>&nbsp;</p>
+  
+<table width="650px">
+<tr>
+<td align="center">	
+
+
+
+</td>
+</tr>
+</table>		
+	
+	
+
+
+<br>
+   <h2><a href="../indexefd7.html?inicio=50">Retornar</a></h2>   
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-24");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+</body>
+
+<!-- Mirrored from www.postgresqlya.com.ar/problemas/problema.php?inicio=50&cod=226&punto=68 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:41 GMT -->
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=120&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:54:19 GMT -->
+<head>
+<title>Estructuras dinámicas: Listas genéricas ordenadas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Estructuras dinámicas: Listas genéricas ordenadas</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>Una lista genérica es ordenada si cuando insertamos información en la lista queda ordenada respecto al campo info (sea de menor a mayor o a la inversa)</p>
+
+<p>Ejemplo:</p>
+<pre>
+listaOrdenada.insertar(10)
+</pre>
+<img src="imagentema/foto109.jpg" border="0" alt="lista ordenada"><br>
+<pre>
+listaOrdenada.insertar(5)
+</pre>
+<img src="imagentema/foto110.jpg" border="0" alt="lista ordenada"><br>
+<pre>
+listaOrdenada.insertar(7)
+</pre>
+<img src="imagentema/foto111.jpg" border="0" alt="lista ordenada"><br>
+<pre>
+listaOrdenada.insertar(50)
+</pre>
+<img src="imagentema/foto112.jpg" border="0" alt="lista ordenada"><br>
+
+<p>Podemos observar que si recorremos la lista podemos acceder a la información de menor a mayor.<br>
+No se requiere un método para ordenar la lista, sino que siempre permanece ordenada, ya que se inserta ordenada.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+public class ListaOrdenada {
+    
+    class Nodo {
+        int info;
+        Nodo sig;
+    }
+    
+    private Nodo raiz;
+    
+    public ListaOrdenada() {
+        raiz=null;
+    }
+      
+    void insertar(int x)
+    {
+        Nodo nuevo = new Nodo ();
+        nuevo.info = x;
+        if (raiz==null) {
+            raiz=nuevo;
+        } else {
+            if (x&lt;raiz.info) {
+                nuevo.sig=raiz;
+                raiz=nuevo;
+            } else {
+                Nodo reco=raiz;
+                Nodo atras=raiz;
+                while (x&gt;=reco.info && reco.sig!=null) {
+                    atras=reco;
+                    reco=reco.sig;
+                }
+                if (x&gt;=reco.info) {
+                    reco.sig=nuevo;
+                } else {
+                    nuevo.sig=reco;
+                    atras.sig=nuevo;
+                }
+            }
+        }
+    }
+
+    public void imprimir () {
+        Nodo reco = raiz;
+        while (reco != null) {
+            System.out.print (reco.info + "-");
+            reco = reco.sig;
+        }
+        System.out.println();
+    }
+        
+    
+    public static void main(String[] ar) {
+        ListaOrdenada lo=new ListaOrdenada();
+        lo.insertar(10);
+        lo.insertar(5);
+        lo.insertar(7);
+        lo.insertar(50);
+        lo.imprimir();
+    }
+}
+</pre>
+<p>El método insertar lo resolvemos de la siguiente forma:</p>
+<p>Creamos primeramente el nodo, ya que siempre se insertará la información en la lista:</p>
+<pre>
+        Nodo nuevo = new Nodo ();
+        nuevo.info = x;
+</pre>
+
+<p>Se puede presentar las siguientes situaciones, si está vacía, lo insertamos inmediatamente:</p>
+<pre>
+        if (raiz==null) {
+            raiz=nuevo;
+        } else {
+</pre>
+<p>Si no está vacía la lista, verificamos si lo debemos insertar en la primera posición de la lista (analizamos si la información a insertar es menor a lo apuntado por raiz en el campo info):</p>
+<pre>
+            if (x&lt;raiz.info) {
+                nuevo.sig=raiz;
+                raiz=nuevo;
+            } else {
+</pre>     
+
+<p>Sino analizamos si lo debemos insertar en medio o al final de la lista.<br>
+Mientras la información a insertar sea mayor o igual a la información del nodo que visitamos ( x&gt;=reco.info)  y no lleguemos al final de la lista (reco.sig!=null) avanzamos reco al siguiente nodo y fijamos un puntero en el nodo anterior (atras)</p>
+<pre>
+                Nodo reco=raiz;
+                Nodo atras=raiz;
+                while (x&gt;=reco.info && reco.sig!=null) {
+                    atras=reco;
+                    reco=reco.sig;
+                }
+</pre>
+<p>Cuando salimos del while si la condición (x&gt;=reco.info) continua siendo verdadera significa que se inserta al final de la lista, en caso contrario se inserta en medio de la lista:</p>
+<pre>
+                if (x&gt;=reco.info) {
+                    reco.sig=nuevo;
+                } else {
+                    nuevo.sig=reco;
+                    atras.sig=nuevo;
+                }
+</pre>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index1e61.html?inicio=40">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=120&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:54:21 GMT -->
+</html>

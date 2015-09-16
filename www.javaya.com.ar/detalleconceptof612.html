@@ -1,0 +1,686 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=89&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:52:31 GMT -->
+<head>
+<title>Estructura de datos tipo vector.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Estructura de datos tipo vector.</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>Hemos empleado variables de distinto tipo para el almacenamiento de datos (variables int, float, String) En esta sección veremos otros tipos de variables que permiten almacenar un conjunto de datos en una única variable.</p>
+
+<p>Un vector es una estructura de datos que permite almacenar un CONJUNTO de datos del MISMO tipo.<br>
+Con un único nombre se define un vector y por medio de un subíndice hacemos referencia a cada elemento del mismo (componente)</p>
+<h3>Problema 1:</h3>
+<p>Se desea guardar los sueldos de 5 operarios.<br>
+Según lo conocido deberíamos definir 5 variables si queremos tener en un cierto momento los 5 sueldos almacenados en memoria.<br>
+Empleando un vector solo se requiere definir un único nombre y accedemos a cada elemento por medio del subíndice.</p>
+<img src="imagentema/foto059.jpg" border="0" alt="vector"><br>
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.util.Scanner;
+public class PruebaVector1 {
+    private Scanner teclado;
+    private int[] sueldos;
+	
+    public void cargar()
+    {
+        teclado=new Scanner(System.in);
+        sueldos=new int[5];
+        for(int f=0;f<5;f++) {
+            System.out.print("Ingrese valor de la componente:");
+            sueldos[f]=teclado.nextInt();
+        }	
+    }
+	
+    public void imprimir() {
+        for(int f=0;f<5;f++) {
+            System.out.println(sueldos[f]);
+        }
+    }
+	
+    public static void main(String[] ar) {
+        PruebaVector1 pv=new PruebaVector1();
+        pv.cargar();
+        pv.imprimir();
+    }
+}
+</pre>
+<p>Para la declaración de un vector le antecedemos al nombre los corchetes abiertos y cerrados:</p>
+<pre>
+    private int[] sueldos;
+</pre>
+<p>Lo definimos como atributo de la clase ya que lo utilizaremos en los dos métodos.</p>
+<p>En el método de cargar lo primero que hacemos es crear el vector (en java los vectores son objetos por lo que es necesario proceder a su creación mediante el operador new):</p>
+<pre>
+        sueldos=new int[5];
+</pre>
+<p>Cuando creamos el vector indicamos entre corchetes la cantidad de elementos que se pueden almacenar posteriormente en el mismo.</p>
+<p>Para cargar cada componente debemos indicar entre corchetes que elemento del vector estamos accediendo:</p>
+<pre>
+        for(int f=0;f<5;f++) {
+            System.out.print("Ingrese valor de la componente:");
+            sueldos[f]=teclado.nextInt();
+        }	
+</pre>
+<p>La estructura de programación que más se adapta para cargar en forma completa las componentes de un vector es un for, ya que sabemos de antemano la cantidad de valores a cargar.</p>
+<p>Cuando f vale cero estamos accediendo a la primer componente del vector (en nuestro caso sería):</p>
+<pre>
+            sueldos[0]=teclado.nextInt();
+</pre>
+<p>Lo mas común es utilizar una estructura repetitiva for para recorrer cada componente del vector.</p>
+<p>Utilizar el for nos reduce la cantidad de código, si no utilizo un for debería en forma secuencial implementar el siguiente código:</p>
+<pre>
+            System.out.print("Ingrese valor de la componente:");
+            sueldos[0]=teclado.nextInt();
+            System.out.print("Ingrese valor de la componente:");
+            sueldos[1]=teclado.nextInt();
+            System.out.print("Ingrese valor de la componente:");
+            sueldos[2]=teclado.nextInt();
+            System.out.print("Ingrese valor de la componente:");
+            sueldos[3]=teclado.nextInt();
+            System.out.print("Ingrese valor de la componente:");
+            sueldos[4]=teclado.nextInt();
+</pre>
+<p>La impresión de las componentes del vector lo hacemos en el otro método:</p>
+<pre>
+    public void imprimir() {
+        for(int f=0;f<5;f++) {
+            System.out.println(sueldos[f]);
+        }
+    }
+</pre>
+<p>Siempre que queremos acceder a una componente del vector debemos indicar entre corchetes la componente, dicho valor comienza a numerarse en cero y continua hasta un número menos del tamaño del vector, en nuestro caso creamos el vector con 5 elementos:</p>
+<pre>
+        sueldos=new int[5];
+</pre>
+<p>Por último en este programa creamos un objeto en la main y llamamos a lo métodos de cargar e imprimir el vector:</p>
+<pre>
+    public static void main(String[] ar) {
+        PruebaVector1 pv=new PruebaVector1();
+        pv.cargar();
+        pv.imprimir();
+    }
+</pre>
+<h3>Problema 2:</h3>
+<p>Definir un vector de 5 componentes de tipo float que representen las alturas de 5 personas.<br> Obtener el promedio de las mismas. Contar cuántas personas son más altas que el promedio y cuántas más bajas.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.util.Scanner;
+public class PruebaVector2 {
+    private Scanner teclado;
+    private float[] alturas;
+    private float promedio;
+
+    public void cargar() {
+        teclado=new Scanner(System.in);
+        alturas=new float[5];
+        for(int f=0;f<5;f++) {
+            System.out.print("Ingrese la altura de la persona:");
+            alturas[f]=teclado.nextFloat();
+        }
+    }
+	
+    public void calcularPromedio() {
+        float suma;
+        suma=0;
+        for(int f=0;f<5;f++) {
+            suma=suma+alturas[f];
+        }
+        promedio=suma/5;
+        System.out.println("Promedio de alturas:"+promedio);
+    }
+	
+    public void mayoresMenores() {
+        int may,men;
+        may=0;
+        men=0;
+        for(int f=0;f<5;f++) {
+            if (alturas[f]&gt;promedio) {
+	        may++;
+            } else {
+                if (alturas[f]&lt;promedio) {
+                    men++;
+                }
+        }
+    }
+    System.out.println("Cantidad de personas mayores al promedio:"+may);
+    System.out.println("Cantidad de personas menores al promedio:"+men);
+}
+	
+    public static void main(String[] ar) {
+        PruebaVector2 pv2=new PruebaVector2();
+        pv2.cargar();
+        pv2.calcularPromedio();
+        pv2.mayoresMenores();
+    }
+}
+</pre>
+<p>Definimos como atributo un vector donde almacenaremos las alturas:</p>
+<pre>
+    private float[] alturas;
+</pre>
+<p>En la carga creamos el vector indicando que reserve espacio para 5 componentes:</p>
+<pre>
+        alturas=new float[5];
+</pre>
+<p>Procedemos seguidamente a cargar todos sus elementos:</p>
+<pre>
+        for(int f=0;f<5;f++) {
+            System.out.print("Ingrese la altura de la persona:");
+            alturas[f]=teclado.nextFloat();
+        }
+</pre>
+<p>En otro método procedemos a sumar todas sus componentes y obtener el promedio. El promedio lo almacenamos en un atributo de la clase ya que lo necesitamos en otro método:</p>
+<pre>
+    public void calcularPromedio() {
+        float suma;
+        suma=0;
+        for(int f=0;f<5;f++) {
+            suma=suma+alturas[f];
+        }
+        promedio=suma/5;
+        System.out.println("Promedio de alturas:"+promedio);
+    }
+</pre>
+<p>Por último en un tercer método comparamos cada componente del vector con el atributo promedio, si el valor almacenado supera al promedio incrementamos un contador en caso que sea menor al promedio incrementamos otro contador:</p>
+<pre>
+    public void mayoresMenores() {
+        int may,men;
+        may=0;
+        men=0;
+        for(int f=0;f<5;f++) {
+            if (alturas[f]&gt;promedio) {
+	        may++;
+            } else {
+                if (alturas[f]&lt;promedio) {
+                    men++;
+                }
+        }
+    }
+    System.out.println("Cantidad de personas mayores al promedio:"+may);
+    System.out.println("Cantidad de personas menores al promedio:"+men);
+}
+</pre>
+<h4>Importante:</h4>
+<p>En este problema podemos observar una ventaja de tener almacenadas todas las alturas de las personas. Si no conociéramos los vectores tenemos que  cargar otra vez las alturas por teclado para compararlas con el promedio.<br>
+Mientras el programa está en ejecución tenemos el vector alturas a nuestra disposición. Es importante tener en cuenta que cuando finaliza la ejecución del programa se pierde el contenido de todas las variables (simples y vectores)</p>
+<h3>Problema 3:</h3>
+<p>Una empresa tiene dos turnos (mañana y tarde) en los que trabajan 8 empleados (4 por la mañana y 4 por la tarde)<br>
+Confeccionar un programa que permita almacenar los sueldos de los empleados agrupados por turno.<br>
+Imprimir los gastos en sueldos de cada turno.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.util.Scanner;
+public class PruebaVector3 {
+    private Scanner teclado;
+    private float[] turnoMan;
+    private float[] turnoTar;
+	
+    public void cargar() {
+        teclado=new Scanner(System.in);
+        turnoMan=new float[4];
+        turnoTar=new float[4];
+        System.out.println("Sueldos de empleados del turno de la mañana.");
+        for(int f=0;f<4;f++) {
+            System.out.print("Ingrese sueldo:");
+            turnoMan[f]=teclado.nextFloat();
+        }
+        System.out.println("Sueldos de empleados del turno de la tarde.");
+        for(int f=0;f<4;f++) {
+            System.out.print("Ingrese sueldo:");
+            turnoTar[f]=teclado.nextFloat();
+        }
+    }
+	
+    public void calcularGastos() {
+        float man=0;
+        float tar=0;
+        for(int f=0;f<4;f++){
+            man=man+turnoMan[f];
+            tar=tar+turnoTar[f];
+        }
+        System.out.println("Total de gastos del turno de la mañana:"+man);
+        System.out.println("Total de gastos del turno de la tarde:"+tar);
+    }
+	
+    public static void main(String[] ar){
+        PruebaVector3 pv=new PruebaVector3();
+        pv.cargar();
+        pv.calcularGastos();
+    }
+}
+</pre>
+<p>Definimos dos atributos de tipo vector donde almacenaremos los sueldos de los empleados de cada turno:</p>
+<pre>
+    private float[] turnoMan;
+    private float[] turnoTar;
+</pre>
+<p>Creamos los vectores con cuatro elementos cada uno:</p>
+<pre>
+        turnoMan=new float[4];
+        turnoTar=new float[4];
+</pre>
+<p>Mediante dos estructuras repetitivas procedemos a cargar cada vector:</p>
+<pre>
+        System.out.println("Sueldos de empleados del turno de la mañana.");
+        for(int f=0;f<4;f++) {
+            System.out.print("Ingrese sueldo:");
+            turnoMan[f]=teclado.nextFloat();
+        }
+        System.out.println("Sueldos de empleados del turno de la tarde.");
+        for(int f=0;f<4;f++) {
+            System.out.print("Ingrese sueldo:");
+            turnoTar[f]=teclado.nextFloat();
+        }
+</pre>
+<p>En otro método procedemos a sumar las componentes de cada vector y mostrar dichos acumuladores:</p>
+<pre>
+        float man=0;
+        float tar=0;
+        for(int f=0;f<4;f++){
+            man=man+turnoMan[f];
+            tar=tar+turnoTar[f];
+        }
+        System.out.println("Total de gastos del turno de la mañana:"+man);
+        System.out.println("Total de gastos del turno de la tarde:"+tar);
+</pre>
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Desarrollar un programa que permita ingresar un vector de 8 elementos, e informe:<br>
+El valor acumulado de todos los elementos del vector.<br>
+El valor acumulado de los elementos del vector que sean mayores a 36.<br>
+Cantidad de valores mayores a 50.<br>
+</li>
+<li>
+Realizar un programa que pida la carga de dos vectores numéricos enteros de 4 elementos. Obtener la suma de los dos vectores, dicho resultado guardarlo en un tercer vector del mismo tamaño. Sumar componente a componente.
+</li>
+<li>
+Se tienen las notas del primer parcial de los alumnos de dos cursos, el curso A y el curso B, cada curso cuenta con 5 alumnos.<br>
+Realizar un programa que muestre el curso que obtuvo el mayor promedio general.
+</li>
+<li>
+Cargar un vector de 10 elementos y verificar posteriormente si el mismo está ordenado de menor a mayor.
+</li>
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+import java.util.Scanner;
+public class PruebaVector4 {
+    private Scanner teclado;
+    private int[] vec;
+    
+    public void cargar() {
+        teclado=new Scanner(System.in);
+        vec=new int[8];
+        for(int f=0;f&lt;8;f++) {
+            System.out.print("Ingrese elemento:");
+            vec[f]=teclado.nextInt();
+        }
+    }
+    
+    public void acumularElementos() {
+        int suma=0;
+        for(int f=0;f&lt;8;f++) {
+            suma=suma+vec[f];
+        }
+        System.out.println("La suma de los 8 elementos es:"+suma);
+    }
+    
+    public void acumularMayores36() {
+        int suma=0;
+        for(int f=0;f&lt;8;f++) {
+            if (vec[f]&gt;36) {
+                suma=suma+vec[f];
+            }
+        }
+        System.out.println("La suma de los elementos mayores a 36 es:"+suma);
+    }
+    
+    public void cantidadMayores50() {
+        int cant=0;
+        for(int f=0;f&lt;8;f++) {
+            if (vec[f]&gt;50) {
+                cant++;
+            }    
+        }
+        System.out.println("La cantidad de valores mayores a 50 es:"+cant);
+    }
+    
+    public static void main(String[] ar) {
+        PruebaVector4 pv=new PruebaVector4();
+        pv.cargar();
+        pv.acumularElementos();
+        pv.acumularMayores36();
+        pv.cantidadMayores50();
+    }
+}
+
+
+
+
+
+import java.util.Scanner;
+public class PruebaVector5 {
+    private Scanner teclado;
+    private int[] vec1;
+    private int[] vec2;
+    private int[] vecSuma;
+    
+    public void cargar() {
+        teclado=new Scanner(System.in);
+        vec1=new int[4];
+        vec2=new int[4];
+        System.out.println("Carga del primer vector.");
+        for(int f=0;f&lt;4;f++) {
+            System.out.print("Ingrese elemento:");
+            vec1[f]=teclado.nextInt();
+        }
+        System.out.println("Carga del segundo vector.");
+        for(int f=0;f&lt;4;f++) {
+            System.out.print("Ingrese elemento:");
+            vec2[f]=teclado.nextInt();
+        }        
+    }    
+    
+    public void sumarizarVectores() {
+    	vecSuma=new int[4];
+        for(int f=0;f&lt;4;f++) {
+            vecSuma[f]=vec1[f]+vec2[f];
+        }
+        System.out.println("Vector resultante.");
+        for(int f=0;f&lt;4;f++) {
+            System.out.println(vecSuma[f]);
+        }
+    }
+    
+    public static void main(String[] ar) {
+        PruebaVector5 pv=new PruebaVector5();
+        pv.cargar();
+        pv.sumarizarVectores();
+    }    
+}
+
+
+
+
+
+import java.util.Scanner;
+public class PruebaVector6 {
+    private Scanner teclado;
+    private int[] cursoa;
+    private int[] cursob;
+    private int[] vecSuma;
+    
+    public void cargar() {
+        teclado=new Scanner(System.in);
+        cursoa=new int[5];
+        cursob=new int[5];
+        System.out.println("Carga de notas del curso A");
+        for(int f=0;f&lt;5;f++) {
+            System.out.print("Ingrese nota:");
+            cursoa[f]=teclado.nextInt();
+        }
+        System.out.println("Carga del notas del curso B");
+        for(int f=0;f&lt;5;f++) {
+            System.out.print("Ingrese nota:");
+            cursob[f]=teclado.nextInt();
+        }        
+    }    
+    
+    public void calcularPromedios() {
+        int suma1=0;
+        int suma2=0;
+        for(int f=0;f&lt;5;f++) {
+            suma1=suma1+cursoa[f];
+            suma2=suma2+cursob[f];            
+        }
+        int promedioa=suma1/5;
+        int promediob=suma2/5;
+        if (promedioa&gt;promediob) {
+            System.out.println("El curso A tiene un promedio mayor.");
+        } else {
+            System.out.println("El curso B tiene un promedio mayor.");
+        }
+    }
+    
+    public static void main(String[] ar) {
+        PruebaVector6 pv=new PruebaVector6();
+        pv.cargar();
+        pv.calcularPromedios();
+    }    
+}
+
+
+
+
+
+import java.util.Scanner;
+public class PruebaVector7 {
+    private Scanner teclado;
+    private int[] vec;
+    
+    public void cargar() {
+        teclado=new Scanner(System.in);
+        vec=new int[10];
+        for(int f=0;f&lt;10;f++) {
+            System.out.print("Ingrese elemento:");
+            vec[f]=teclado.nextInt();
+        }
+    }
+    
+    public void verificarOrdenado() {
+        int orden=1;
+        for(int f=0;f&lt;9;f++) {
+            if (vec[f+1]&lt;vec[f]) {
+                orden=0;
+            }
+        }
+        if (orden==1) {
+            System.out.println("Esta ordenado de menor a mayor");
+        } else {
+            System.out.println("No esta ordenado de menor a mayor");
+        }
+    }
+    
+    public static void main(String[] ar) {
+        PruebaVector7 pv=new PruebaVector7();
+        pv.cargar();
+        pv.verificarOrdenado();
+    }
+}
+
+</pre></div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index2904.html?inicio=0">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=89&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:52:31 GMT -->
+</html>

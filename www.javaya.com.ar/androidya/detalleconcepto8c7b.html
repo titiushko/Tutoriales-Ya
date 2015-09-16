@@ -1,0 +1,319 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=135&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:23:56 GMT -->
+<head>
+<title>Controles RadioGroup y RadioButton</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+.descarga2 a {
+color:#4B4B4B;
+text-decoration:none;
+border-bottom:1px dotted #444;
+}
+.descarga2 {
+background: #F7FABE;
+text-align: left;
+padding: 5px 20px 5px 45px;
+border-top: 2px solid #DFE786;
+border-bottom: 2px solid #DFE786;
+color:#000000;
+margin-left:1.2em;
+margin-right:1.2em;
+border-radius:4px;
+font-size:1em;
+
+}  
+
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-30']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>4 - Controles RadioGroup y RadioButton</h1> <p class="descarga2">Ya se encuentra disponible el nuevo tutorial para aprender android con el nuevo entorno <a href="androidstudioya/index.html" target="_blank">Android Studio propuesto por Google y
+que remplaza a Eclipse</a>.
+</td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>El objetivo de este concepto es practicar la implementación de un programa que requiera controles de tipo RadioButton para seleccionar una actividad. Aprenderemos como agrupar un conjunto de RadioButton y verificar cual está seleccionado.</p>
+
+<h3>Problema:</h3>
+<p>Realizar la carga de dos números en controles de tipo EditText. Mostrar un mensaje que solicite la carga de los valores. Disponer dos controles de tipo RadioButton para seleccionar si queremos sumar o restar dichos valores. Finalmente mediante un control de tipo Button efectuamos la operación respectiva. Mostramos el resultado en un TextView.</p>
+
+<p>El problema es similar al anterior. Para disponer los controles de tipo RadioButton debemos en realidad primero insertar un control de tipo RadioGroup (este control se encuentra en la paleta de componentes en la pestaña Form Widgets):</p>
+
+<img src="imagentema/foto024.jpg" border="0" alt="controles android radiogroup y radiobutton"><br>
+<p>Cuando arrastramos el control RadioGroup al formulario se generan automáticamente 3 objetos de la clase RadioButton contenidos dentro del RadioGroup, podemos fácilmente identificar que los controles RadioButton pertenecen a dicho RadioGroup viendo la ventana de "Outline" del Eclipse (donde nos muestra todos los controles insertados hasta el momento):</p>
+<img src="imagentema/foto025.jpg" border="0" alt="controles android radiogroup y radiobutton"><br>
+
+<p>Nuestro problema solo requiere dos controles de tipo RadioButton. Para borrarlo lo podemos hacer directamente del formulario seleccionándolo y presionando la tecla delete o seleccionándolo desde la ventana "Outline" y luego presionando la tecla delete</p>.
+<p>Ahora a los dos controles de tipo RadioButton definimos sus id (los llamaremos r1 y r2 respectivamente)<br>
+Cambiamos sus propiedades text por los textos "sumar" y "restar".</p>
+<p>No olvidemos también cambiar los id de los controles EditText por et1 y et2 (igual que en el problema anterior)</p>
+<p>Por último agreguemos un botón y un TextView para mostrar el resultado<br>
+Inicializamos las propiedades del botón con los valores:<br>
+<pre>
+  id : button1
+  text : operar
+</pre>
+Y el tercer TextView con los valores:<br>
+<pre>
+  id : tv3
+  text : resultado
+</pre>
+<p>Podemos controlar en la ventana "Outline" el id definido para cada control (tv1, et1, tv2, et2, radioGroup1, r1, r2, button1, tv3)<br>
+También podemos observar de que clase es cada control visual y el texto de la propiedad text para aquellos controles que tienen sentido su inicialización.<br>
+<img src="imagentema/foto026.jpg" border="0" alt="controles android radiogroup y radiobutton"><br>
+<p>Si nuestro problema requería más de 3 RadioButton deberíamos arrastrar dentro del RadioGroup otros controles de tipo RadioButton que se encuentran también en la pestaña de "Form Widgets"</p>
+
+<h3>Captura del evento clic del button e identifiación del RadioButton seleccionado.</h3>
+<p>El código fuente de la clase MaintActivity es:</p>
+<pre class="recuadro">
+package com.javaya.proyecto003;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.TextView;
+
+public class MainActivity extends Activity {
+
+	private EditText et1,et2;
+    private TextView tv3;
+    private RadioButton r1,r2;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        
+        et1=(EditText)findViewById(R.id.et1);
+        et2=(EditText)findViewById(R.id.et2);
+        tv3=(TextView)findViewById(R.id.tv3);
+        r1=(RadioButton)findViewById(R.id.r1);
+        r2=(RadioButton)findViewById(R.id.r2);        
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return true;
+    }
+    
+    //Este método se ejecutará cuando se presione el botón
+    public void operar(View view) {
+        String valor1=et1.getText().toString();
+        String valor2=et2.getText().toString();
+        int nro1=Integer.parseInt(valor1);
+        int nro2=Integer.parseInt(valor2);
+        if (r1.isChecked()==true) {
+            int suma=nro1+nro2;
+            String resu=String.valueOf(suma);
+            tv3.setText(resu);
+        } else
+            if (r2.isChecked()==true) {
+                int resta=nro1-nro2;
+                String resu=String.valueOf(resta);
+                tv3.setText(resu);                
+            }
+    }    
+    
+    
+}</pre>
+<p>Primero debemos enlazar el objeto button1 con el método operar. Para esto similar al problema anterior seleccionamos el control button1 y cambiamos la propiedad OnClick por el valor operar (si no hacemos esto nunca se ejecutará el método operar de la clase MainActivity)</p>
+<p>Como podemos ver el código fuente es igual al problema anterior. Tenemos dos objetos más que debemos inicializar en el método onCreate:</p>
+<pre>
+
+        r1=(RadioButton)findViewById(R.id.r1);
+        r2=(RadioButton)findViewById(R.id.r2);
+</pre>
+<p>Las variables r1 y r2 son de la clase RadioButton y son necesarios en el método operar para verificar cual de los dos RadioButton están seleccionados. La clase RadioButton tiene un método llamado isChecked que retorna true si dicho elemento está seleccionado:</p>
+<pre>
+
+    public void operar(View view) {
+        String valor1=et1.getText().toString();
+        String valor2=et2.getText().toString();
+        int nro1=Integer.parseInt(valor1);
+        int nro2=Integer.parseInt(valor2);
+        if (r1.isChecked()==true) {
+            int suma=nro1+nro2;
+            String resu=String.valueOf(suma);
+            tv3.setText(resu);
+        } else
+            if (r2.isChecked()==true) {
+                int resta=nro1-nro2;
+                String resu=String.valueOf(resta);
+                tv3.setText(resu);                
+            }
+    }    
+</pre>
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/proyecto003.zip">proyecto003.zip</a>
+</p></div>
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   <h2><a href="index2904.html?inicio=0">Retornar</a></h2>   
+
+  </div>
+  
+  
+  
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=135&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:26:25 GMT -->
+</html>

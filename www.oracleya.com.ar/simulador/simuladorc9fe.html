@@ -1,0 +1,211 @@
+        
+
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=0&cod=181&punto=23 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios resueltos : Funciones de fechas y horas(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+<body bgcolor="#CCFFCC">
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>23 - Funciones de fechas y horas</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Trabajamos con la tabla "libros" de una librería.</p>
+<p>Eliminamos la tabla:</p>
+<pre>
+  drop table libros;
+</pre>
+<p>Creamos la tabla:</p>
+<pre>
+ create table libros(
+  titulo varchar2(40) not null,
+  autor varchar2(20) default 'Desconocido',
+  editorial varchar2(20),
+  edicion date,
+  precio number(6,2)
+ );
+</pre>
+<p>Ingresamos algunos registros:</p>
+<pre>
+ insert into libros values('El aleph','Borges','Emece','10/10/1980',25.33);
+ insert into libros values('Java en 10 minutos','Mario Molina','Siglo XXI','05/05/2000',50.65);
+ insert into libros
+  values('Alicia en el pais de las maravillas','Lewis Carroll','Emece','08/09/2000',19.95);
+ insert into libros values('Aprenda PHP','Mario Molina','Siglo XXI','02/04/2000',45);
+</pre>
+<p>Mostramos el título del libro y el año de edición:</p>
+<pre>
+ select titulo, extract (year from edicion) from libros;
+</pre>
+<p>Mostramos el título del libro y el mes de edición:</p>
+<pre>
+ select titulo, extract (month from edicion) from libros;
+</pre>
+<p>Mostramos el título del libro y los años que tienen de editados:</p>
+<pre>
+ select titulo, extract(year from sysdate)-extract(year from edicion) as "años de editado"
+  from libros;
+</pre>
+<p>Mostramos los títulos de los libros que se editaron en el año 2000:</p>
+<pre>
+ select titulo from libros
+  where extract(year from edicion)=2000;
+</pre>
+<p>Calcule 3 meses luego de la fecha actual empleando ""add_months":</p>
+<pre>
+ select add_months(sysdate,3) from dual;
+</pre>
+<p>Muestre la fecha del primer martes desde la fecha actual:</p>
+<pre>
+ select next_day(sysdate,'martes') from dual;
+</pre>
+<p>Muestre la fecha que será 15 días después de "24/08/2007" empleando el operador "+":</p>
+<pre>
+  select to_date('24/08/2007')+15 from dual;
+</pre>
+<p>Retorna 08/09/07.</p>
+
+<p>Muestre la fecha que 20 días antes del "12/08/2007" empleando el operador "-":</p>
+<pre>
+  select to_date('12/08/2007')-20 from dual;
+</pre>
+<p>Retorna 23/07/07.</p>
+
+        <form name="formulario" action="http://www.sqlserverya.com.ar/aspx/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+        <br>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+        
+	<br>
+   
+
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=0&cod=181&punto=23 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:25 GMT -->
+</html>
+

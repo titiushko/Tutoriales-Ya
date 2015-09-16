@@ -1,0 +1,425 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=196&inicio=60 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:43 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>C #Ya - Enumeraciones</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c#,c sharp, tutorial, programación">
+<meta name="description" content="Tutorial de C#">
+<link href="css/estilos4.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>72 - Enumeraciones</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div>  
+ 
+<p>Una enumeración es un conjunto de constantes enteras que tienen asociado un nombre para cada valor.</p>
+<p>El objetivo fundamental de implementar una enumeración es facilitar la legibilidad de un programa.<br>
+Supongamos que necesitamos almacenar en un juego de cartas el tipo de carta actual (oro, basto, copa o espada), podemos definir una variable entera y almacenar un 1 si es oro, un 2 si es basto y así sucesivamente.<br>
+<p>Luego mediante if podemos analizar el valor de esa variable y proceder de acuerdo al valor existente.</p>
+
+<h3>Problema 1:</h3>
+<p>Definir un tipo de dato enumerado para cada tipo de carta de una baraja española.</p>
+
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Enumeracion1
+{
+    class JuegoDeCartas
+    {
+        public enum TipoCarta { oro, basto, copa, espada };
+
+        private TipoCarta cartaActual;
+
+        public void Imprimir()
+        {
+            cartaActual = TipoCarta.oro;
+            Console.WriteLine("El valor actual es:" + cartaActual);
+            cartaActual = TipoCarta.espada;
+            Console.WriteLine("El valor actual es:" + cartaActual);
+            Console.ReadKey();
+        }
+
+        static void Main(string[] args)
+        {
+            JuegoDeCartas jc = new JuegoDeCartas();
+            jc.Imprimir();
+        }
+    }
+}
+</pre>
+<p>Para definir un tipo de dato enumerado utilizamos la palabra clave enum y entre paréntesis escribimos todos los valores que puede almacenar una variable de dicho tipo:</p>
+<pre>
+        public enum TipoCarta { oro, basto, copa, espada };
+</pre>
+<p>Internamente el primer valor esta asociado con el número cero (oro), el segundo se asocia con el 1 y así sucesivamente.</p>
+<p>Para definir una variable lo hacemos como cuando definimos cualquier tipo de variable, le antecedemos el nuevo tipo de dato creado (en nuestro caso hemos creado el TipoCarta):</p>
+<pre>
+        private TipoCarta cartaActual;
+</pre>
+<p>El atributo cartaActual puede almacenar cualquiera de los cuatro valores y para inicializar utilizamos la sintaxis:</p>
+<pre>
+            cartaActual = TipoCarta.oro;
+</pre>
+<p>No es posible asignarle un valor entero a una variable tipo enumerada:</p>
+<pre>
+            cartaActual = 2; // error
+</pre>
+<h3>Asignación de valores a las constantes de una enumeración.</h3>
+<p>Podemos especificar los valores para cada constante de la enumeración:</p>
+<pre>
+        public enum TipoProcesador { bits16 = 16, bits32 = 32, bits64 = 64 };
+</pre>
+<p>Tengamos en cuenta que si no le asignamos un valor a la constante comienzan a asignarse un valor a partir de cero en forma correlativa:</p>
+<pre>
+        public enum TipoProcesador { bits16, bits32, bits64 };
+</pre>
+<p>Con esto bits16 tiene asociado el entero 0, bits32 tiene asociado el valor 1 y bits54 tiene asociado el valor 2.</p>
+<p>Podemos asignarle valores a algunas constantes y otras no:</p>
+
+<pre>
+        public enum TipoProcesador { bits16=16, bits32, bits64 };
+</pre>
+<p>Con esto bits16 tiene asociado el entero 16, bits32 tiene asociado el valor 17 y bits54 tiene asociado el valor 18.</p>
+
+<p>Si necesitamos el valor entero de una variable de tipo enumeración debemos utilizar el operador cast (es decir anteceder entre paréntesis el tipo de dato que necesitamos que la convierta):</p>
+<pre>
+            Console.Write((int)cartaActual);
+</pre>
+<h3>Especificación del tipo de dato en la enumeración.</h3>
+<p>Por defecto cuando definimos una enumeración se trabaja con tipos int, pero podemos especificar otro tipo de enteros con otros tamaños:</p>
+<pre>
+        public enum TipoCarta: byte { oro=1, basto, copa, espada };
+</pre>
+
+<h2>Problema propuesto</h2>
+<ol>
+<li>
+Elaborar una calculadora para trabajar con valores enteros(utilizar objetos de la clase Button y un objeto de la clase Label donde se muestra el valor ingresado) definir un tipo de dato enumerado para las cuatro operaciones básicas. Cuando se presione algunos de los botones de operaciones almacenar en una memoria el valor ingresado y el tipo de operación pendiente en una variable del tipo de dato enumerado creado. Cuando se presione el botón igual verificar el tipo de operación pendiente y proceder a obtener el resultado y mostrarlo en la Label.
+</li>
+</ol>
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+
+<pre class="recuadrooculto">
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace CalculadoraEnumeracion
+{
+    public partial class Form1 : Form
+    {
+        public enum TipoOperacion { ninguna ,suma, resta, multiplicacion, division };
+
+        private TipoOperacion operacion=TipoOperacion.ninguna;
+        private int memoria;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void buttonborrar_Click(object sender, EventArgs e)
+        {
+            label1.Text = "";
+            operacion = TipoOperacion.ninguna;
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            if (label1.Text.Length < 12)
+            {
+                label1.Text = label1.Text + button0.Text;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (label1.Text.Length < 12)
+            {
+                label1.Text = label1.Text + button1.Text;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (label1.Text.Length < 12)
+            {
+                label1.Text = label1.Text + button2.Text;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (label1.Text.Length < 12)
+            {
+                label1.Text = label1.Text + button3.Text;
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (label1.Text.Length < 12)
+            {
+                label1.Text = label1.Text + button4.Text;
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (label1.Text.Length < 12)
+            {
+                label1.Text = label1.Text + button5.Text;
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (label1.Text.Length < 12)
+            {
+                label1.Text = label1.Text + button6.Text;
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (label1.Text.Length < 12)
+            {
+                label1.Text = label1.Text + button7.Text;
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (label1.Text.Length < 12)
+            {
+                label1.Text = label1.Text + button8.Text;
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (label1.Text.Length < 12)
+            {
+                label1.Text = label1.Text + button9.Text;
+            }
+        }
+
+        private void buttonmas_Click(object sender, EventArgs e)
+        {
+            memoria = int.Parse(label1.Text);
+            operacion = TipoOperacion.suma;
+            label1.Text = "";
+        }
+
+        private void buttonmenos_Click(object sender, EventArgs e)
+        {
+            memoria = int.Parse(label1.Text);
+            operacion = TipoOperacion.resta;
+            label1.Text = "";
+        }
+
+        private void buttonpor_Click(object sender, EventArgs e)
+        {
+            memoria = int.Parse(label1.Text);
+            operacion = TipoOperacion.multiplicacion;
+            label1.Text = "";
+        }
+
+        private void buttondiv_Click(object sender, EventArgs e)
+        {
+            memoria = int.Parse(label1.Text);
+            operacion = TipoOperacion.division;
+            label1.Text = "";
+        }
+
+        private void buttonigual_Click(object sender, EventArgs e)
+        {
+            int valor = int.Parse(label1.Text);
+            switch (operacion)
+            {
+                case TipoOperacion.suma: 
+                    int suma = valor + memoria;
+                    label1.Text = suma.ToString();
+                    break;
+                case TipoOperacion.resta:
+                    int resta = memoria - valor;
+                    label1.Text = resta.ToString();
+                    break;
+                case TipoOperacion.multiplicacion:
+                    int multi = memoria * valor;
+                    label1.Text = multi.ToString();
+                    break;
+                case TipoOperacion.division:
+                    int divi = memoria / valor;
+                    label1.Text = divi.ToString();
+                    break;
+            }
+            operacion = TipoOperacion.ninguna;
+        }
+    }
+}
+</pre></div>
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="indexd6cc.html?inicio=60">Retornar</a></h2>   
+
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.csharpya.com.ar/detalleconcepto.php?codigo=196&inicio=60 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:00:43 GMT -->
+</html>

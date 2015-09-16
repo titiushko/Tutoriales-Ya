@@ -1,0 +1,529 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=8&codigo=135&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Condiciones compuestas con operadores lógicos</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>8 - Condiciones compuestas con operadores lógicos</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Hasta ahora hemos visto los operadores:</p>
+<pre>
+relacionales (&gt;, &lt;, &gt;=, &lt;= , ==, !=)
+matemáticos (+, -, *, /, %)
+</pre>
+<p>pero nos están faltando otros operadores imprescindibles:</p>
+<pre>
+lógicos (&&, ||).
+</pre>
+<p>Estos dos operadores se emplean fundamentalmente en las estructuras condicionales para agrupar varias condiciones simples.</p>
+<h3>Operador &&</h3>
+<p><img src="imagentema/foto023.jpg" border="0" alt="condiciones compuestas"><br>
+Traducido se lo lee como “Y”. Si la Condición 1 es verdadera Y la condición 2 es verdadera luego ejecutar la rama del verdadero.<br>
+Cuando vinculamos dos condiciones con el operador “&&”, las dos condiciones deben ser verdaderas para que el resultado de la condición compuesta de Verdadero y continúe por la rama del verdadero de la estructura condicional.<br>
+<p>La utilización de operadores lógicos permiten en muchos casos plantear algoritmos más cortos y comprensibles.</p>
+
+<h3>Problema:</h3>
+<p>Confeccionar un programa que lea por teclado  tres números distintos y nos muestre el mayor.</p>
+<h4>Diagrama de flujo:</h4>
+<p><img src="imagentema/foto024.jpg" border="0" alt="condiciones compuestas"><br>
+Este ejercicio está resuelto sin emplear operadores lógicos en un concepto anterior del tutorial.
+La primera estructura condicional  es una ESTRUCTURA CONDICIONAL COMPUESTA con una CONDICION COMPUESTA.<br>
+Podemos leerla de la siguiente forma:<br>
+Si el contenido de la variable num1 es mayor al contenido de la variable num2  Y  si el contenido de la variable num1 es mayor al contenido de la variable num3 entonces la CONDICION COMPUESTA resulta Verdadera.<br>
+Si una de las condiciones simples da falso la CONDICION COMPUESTA da Falso y continua por la rama del falso.<br>
+Es decir que se mostrará el contenido de num1 si y sólo si num1 > num2 y num1 > num3.<br>
+En caso de ser Falsa la condición, analizamos el contenido de num2 y num3 para ver cual tiene un valor mayor.<br>
+En esta segunda estructura condicional no se requieren operadores lógicos al haber una condición simple.
+</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int num1,num2,num3;
+    cout &lt;&lt;"Ingrese primer valor:";
+    cin &gt;&gt;num1;
+    cout &lt;&lt;"Ingrese segundo valor:";
+    cin &gt;&gt;num2;
+    cout &lt;&lt;"Ingrese tercer valor:";
+    cin &gt;&gt;num3;
+    if (num1 &gt; num2 && num1 &gt; num3) 
+    {
+        cout &lt;&lt;num1;
+    }
+    else 
+    {
+        if (num2 &gt; num3) 
+        {
+            cout &lt;&lt;num2;
+        }
+        else
+        {
+            cout &lt;&lt;num3;
+        }
+    }    
+    cin.get();
+    cin.get();
+}
+</pre>
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/MayorTresEnteros.zip">MayorTresEnteros</a></p>
+
+<h3>Operador ||</h3>
+<p><img src="imagentema/foto025.jpg" border="0" alt="operador or"><br>
+<p>Traducido se lo lee como “O”. Si la condición 1 es Verdadera O la condición 2 es Verdadera, luego ejecutar la rama del Verdadero.<br>
+Cuando vinculamos dos o más condiciones con el operador “Or", con que una de las dos condiciones sea Verdadera alcanza para que el resultado de la condición compuesta sea Verdadero.</p>
+
+<h3>Problema:</h3>
+<p>Se carga una fecha (día, mes y año) por teclado. Mostrar un mensaje si corresponde al primer trimestre del año (enero, febrero o marzo) Cargar por teclado el valor numérico del día, mes y año. <br>Ejemplo: dia:10  mes:1  año:2015.
+</p>
+<h4>Diagrama de flujo:</h4>
+<p><img src="imagentema/foto026.jpg" border="0" alt="operador logico or"><br>
+<p>La carga de una fecha se hace por partes, ingresamos las variables dia, mes y año.<br>
+Mostramos el mensaje "Corresponde al primer trimestre" en caso que el mes ingresado por teclado sea igual a 1,  2 ó  3.<br> 
+En la condición no participan las variables dia y año.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int dia,mes,año;
+    cout &lt;&lt;"Ingrese nro de día:";
+    cin &gt;&gt;dia;
+    cout &lt;&lt;"Ingrese nro de mes:";
+    cin &gt;&gt;mes;
+    cout &lt;&lt;"Ingrese nro de año:";
+    cin &gt;&gt;año;
+    if (mes==1 || mes==2 || mes==3) 
+    {
+        cout &lt;&lt;"Corresponde al primer trimestre";
+    }
+    cin.get();
+    cin.get();
+}</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/PrimerTrimestre.zip">PrimerTrimestre</a></p>
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Realizar un programa que pida cargar una fecha cualquiera, luego verificar si dicha fecha corresponde a Navidad.
+</li>
+<li>
+Se ingresan tres valores por teclado, si todos son iguales se imprime la suma del primero con el segundo y a este resultado se lo multiplica por el tercero.
+</li>
+<li>
+Se ingresan por teclado tres números, si todos los valores ingresados son menores a 10, imprimir en pantalla la leyenda "Todos los números son menores a diez".
+</li>
+<li>
+Se ingresan por teclado tres números, si al menos uno de los  valores ingresados es menor a 10, imprimir en pantalla la leyenda "Alguno de los números es menor a diez".
+</li>
+<li>
+Escribir un programa que pida ingresar la coordenada de un punto en el plano, es decir dos valores enteros x e y (distintos a cero).<br>
+Posteriormente imprimir en pantalla en que cuadrante se ubica dicho punto. (1º Cuadrante si  x &gt; 0  Y  y &gt; 0 , 2º Cuadrante: x &lt; 0  Y  y &gt; 0, etc.)
+</li>
+<li>
+De un operario se conoce su sueldo y los años de antigüedad. Se pide confeccionar un programa que lea los datos de entrada e informe:<br>
+a) Si el sueldo es inferior a 500 y su antigüedad es igual o superior a 10 años, otorgarle un aumento del 20 %, mostrar el sueldo a pagar.<br>
+b)Si el sueldo es inferior a 500 pero su antigüedad es menor a 10 años, otorgarle un aumento de 5 %.<br>
+c) Si el sueldo es mayor o igual a 500 mostrar el sueldo en pantalla sin cambios.
+</li>
+<li>
+Escribir un programa en el cual: dada una lista de tres valores numéricos distintos se calcule e informe su rango de variación (debe mostrar el mayor y el menor de ellos)
+</li>
+</ol>
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int dia,mes,año;
+    cout &lt;&lt;"Ingrese nro de día:";
+    cin &gt;&gt;dia;
+    cout &lt;&lt;"Ingrese nro de mes:";
+    cin &gt;&gt;mes;
+    cout &lt;&lt;"Ingrese nro de año:";
+    cin &gt;&gt;año;
+    if (mes == 12 && dia == 25) 
+    {
+        cout &lt;&lt;"La fecha ingresada corresponde a navidad.";
+    }    
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/FechaNavidad.zip">FechaNavidad</a></p>
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int num1,num2,num3;
+    cout &lt;&lt;"Ingrese primer valor:";
+    cin &gt;&gt;num1;
+    cout &lt;&lt;"Ingrese segundo valor:";
+    cin &gt;&gt;num2;
+    cout &lt;&lt;"Ingrese tercer valor:";
+    cin &gt;&gt;num3;
+    if (num1 == num2 && num1 == num3) 
+    {
+        int suma = num1 + num2;
+        cout &lt;&lt;"La suma del primero y segundo:";
+        cout &lt;&lt;suma;
+        cout &lt;&lt;"\n";
+        int producto = suma * num3;
+        cout &lt;&lt;"La suma del primero y segundo multiplicado por el tercero:";
+        cout &lt;&lt;producto;
+    }
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/TresValoresIguales.zip">TresValoresIguales</a></p>
+
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int num1,num2,num3;
+    cout &lt;&lt;"Ingrese primer valor:";
+    cin &gt;&gt;num1;
+    cout &lt;&lt;"Ingrese segundo valor:";
+    cin &gt;&gt;num2;
+    cout &lt;&lt;"Ingrese tercer valor:";
+    cin &gt;&gt;num3;
+    if (num1 &lt; 10 && num2 &lt; 10 && num3 &lt; 10) 
+    {
+        cout &lt;&lt;"Todos los números son menores a diez";
+    }
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/TodosMenoresDiez.zip">TodosMenoresDiez</a></p>
+
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int num1,num2,num3;
+    cout &lt;&lt;"Ingrese primer valor:";
+    cin &gt;&gt;num1;
+    cout &lt;&lt;"Ingrese segundo valor:";
+    cin &gt;&gt;num2;
+    cout &lt;&lt;"Ingrese tercer valor:";
+    cin &gt;&gt;num3;
+    if (num1 &lt; 10 || num2 &lt; 10 || num3 &lt; 10) 
+    {
+        cout &lt;&lt;"Alguno de los números es menor a diez";
+    }
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/AlgunoMenorDiez.zip">AlgunoMenorDiez</a></p>
+
+
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int x, y;
+    cout &lt;&lt;"Ingrese coordenada x:";
+    cin &gt;&gt;x;
+    cout &lt;&lt;"Ingrese coordenada y:";
+    cin &gt;&gt;y;
+    if (x &gt; 0 && y &gt; 0)
+    {
+        cout &lt;&lt;"Se encuentra en el primer cuadrante";
+    }
+    else
+    {
+        if (x &lt; 0 && y &gt; 0)
+        {
+            cout &lt;&lt;"Se encuentra en el segundo cuadrante";
+        }
+        else
+        {
+            if (x &lt; 0 && y &lt; 0)
+            {
+                cout &lt;&lt;"Se encuentra en el tercer cuadrante";
+            }
+            else
+            {
+                cout &lt;&lt;"Se encuentra en el cuarto cuadrante";
+            }
+        }
+    }
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/IdentificarCuadrante.zip">IdentificarCuadrante</a></p>
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    float sueldo;
+    int antiguedad;
+    cout &lt;&lt;"Ingrese sueldo del empleado:";
+    cin &gt;&gt;sueldo;
+    cout &lt;&lt;"Ingrese su antiguedad en años:";
+    cin &gt;&gt;antiguedad;
+    if (sueldo &lt; 500 && antiguedad &gt; 10) 
+    {
+        float aumento=sueldo * 0.20f;
+        float sueldoTotal=sueldo+aumento;
+        cout &lt;&lt;"Sueldo a pagar:";
+        cout &lt;&lt;sueldoTotal;
+    } 
+    else 
+    {
+        if (sueldo &lt; 500) 
+        {
+            float aumento=sueldo * 0.05f;
+            float sueldoTotal=sueldo+aumento;
+            cout &lt;&lt;"Sueldo a pagar:";
+            cout &lt;&lt;sueldoTotal;            
+        } 
+        else 
+        {
+            cout &lt;&lt;"Sueldo a pagar:";
+            cout &lt;&lt;sueldo;
+        }
+    }
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/CalcularSueldoAntiguedad.zip">CalcularSueldoAntiguedad</a></p>
+
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int num1,num2,num3;
+    cout &lt;&lt;"Ingrese primer valor:";
+    cin &gt;&gt;num1;
+    cout &lt;&lt;"Ingrese segundo valor:";
+    cin &gt;&gt;num2;
+    cout &lt;&lt;"Ingrese tercer valor:";
+    cin &gt;&gt;num3;
+    cout &lt;&lt;"Rango de valores:";
+    if (num1 &lt; num2 && num1 &lt; num3) 
+    {
+        cout &lt;&lt;num1;
+    } 
+    else 
+    {
+        if (num2 &lt; num3) 
+        {
+            cout &lt;&lt;num2;
+        }
+        else
+        {
+            cout &lt;&lt;num3;
+        }
+    }
+    cout &lt;&lt;"-";
+    if (num1 &gt; num2 && num1 &gt; num3) 
+    {
+        cout &lt;&lt;num1;
+    }
+    else
+    {
+        if (num2 &gt; num3)
+        {
+            cout &lt;&lt;num2;
+        }
+        else
+        {
+            cout &lt;&lt;num3;
+        }
+    }
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/RangoNumeros.zip">RangoNumeros</a></p>
+
+</pre>
+<h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=8&codigo=135&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:36 GMT -->
+</html>

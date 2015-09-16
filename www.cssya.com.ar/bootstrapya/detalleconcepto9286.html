@@ -1,0 +1,168 @@
+
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/detalleconcepto.php?punto=23&codigo=138&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:27 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>button : desactivo</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="bootstrap,css, html, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de bootstrap.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>23 - button : desactivo</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Si queremos que un elemento HTML button se muestre y actúe como desactivo debemos inicializar la propiedad disabled con el valor disabled.</p>
+<h3>Problema</h3>
+<p>Mostrar cuatro botones grandes. El primero activo y los tres siguientes desactivados.</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt; 
+&lt;html&gt; 
+  &lt;head&gt; 
+    &lt;title&gt;Prueba de Bootstrap&lt;/title&gt; 
+    &lt;link href="css/bootstrap.min.css" rel="stylesheet"&gt; 
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+&lt;/head&gt; 
+&lt;body&gt; 
+  &lt;div class="container"&gt;
+
+    &lt;form role="form"&gt;
+      &lt;div class="form-group"&gt;
+       &lt;button type="submit" class="btn btn-primary btn-lg"&gt;
+         Botón activo&lt;/button&gt;       
+      &lt;/div&gt; 
+      &lt;div class="form-group"&gt;
+       &lt;button type="submit" class="btn btn-primary btn-lg" disabled="disabled"&gt;
+         Botón 1 desactivo&lt;/button&gt;       
+      &lt;/div&gt; 
+      &lt;div class="form-group"&gt;
+       &lt;button type="submit" class="btn btn-primary btn-lg" disabled="disabled"&gt;
+         Botón 2 desactivo&lt;/button&gt;       
+      &lt;/div&gt; 
+      &lt;div class="form-group"&gt;
+       &lt;button type="submit" class="btn btn-primary btn-lg" disabled="disabled"&gt;
+         Botón 3 desactivo&lt;/button&gt;       
+      &lt;/div&gt; 
+    &lt;/form&gt;
+
+  &lt;/div&gt; 
+&lt;/body&gt; 
+&lt;/html&gt; 
+</pre>
+
+<p>Como vemos para desactivar un botón debemos inicializar la propiedad disabled:</p>
+<pre>
+       &lt;button type="submit" class="btn btn-primary btn-lg" disabled="disabled"&gt;
+         Botón 1 desactivo&lt;/button&gt;       
+</pre>
+<p>El resultado visual y operativo en el navegador de un botón normal y tres desactivados es:</p>
+<img src="imagentema/foto031.jpg" border="0" alt="button disabled bootstrap"><br> <h2><a target="_blank" href="ejecutar71f2.html?cod=138">Ejecutar Ejemplo</a></h2><h2><a href="index28fa.html?inicio=20">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-32', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/bootstrapya/detalleconcepto.php?punto=23&codigo=138&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:33:28 GMT -->
+</html>

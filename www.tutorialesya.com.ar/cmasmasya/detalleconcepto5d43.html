@@ -1,0 +1,401 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=7&codigo=134&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:35 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Estructuras condicionales anidadas</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>7 - Estructuras condicionales anidadas</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Decimos que una estructura condicional es anidada cuando por la rama del verdadero o el falso de una estructura condicional hay otra estructura condicional.</p>
+<p><img src="imagentema/foto020.jpg" border="0" alt="diagrama flujo estructura condicional anidada"></p>
+<p>El diagrama de flujo que se presenta contiene dos estructuras condicionales. La principal se trata de una estructura condicional compuesta y la segunda es una estructura condicional simple y está contenida por la rama del falso de la primer estructura.<br>
+Es común que se presenten estructuras condicionales anidadas aún más complejas.</p>
+
+<h3>Problema:</h3>
+<p>Confeccionar un programa que pida por teclado tres notas de un alumno, calcule el promedio e imprima alguno de estos mensajes:<br>
+Si el promedio es &gt;=7 mostrar "Promocionado".<br>
+Si el promedio es &gt;=4 y &lt;7 mostrar "Regular".<br>
+Si el promedio es &lt;4 mostrar "Reprobado".
+</p>
+<h4>Diagrama de flujo:</h4>
+<p><img src="imagentema/foto021.jpg" border="0" alt="problema estructuras condicionales anidades"><br>
+<p>
+Analicemos el siguiente diagrama. Se ingresan tres valores por teclado que representan las notas de un alumno, se obtiene el promedio sumando los tres valores y dividiendo por 3 dicho resultado (Tener en cuenta que si el resultado es un valor real solo se almacena la parte entera).<br>
+Primeramente preguntamos si el promedio es superior o igual a 7, en caso afirmativo va por la rama del verdadero de la estructura condicional mostramos un mensaje que indica "Promocionado" (con comillas indicamos un texto que debe imprimirse en pantalla).<br>
+En caso que la condición nos de falso, por la rama del falso aparece otra estructura condicional, porque todavía debemos averiguar si el promedio del alumno es superior o igual a cuatro o inferior a cuatro.<br>
+Estamos en presencia de dos estructuras condicionales compuestas.</p>
+</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int nota1,nota2,nota3;
+    cout &lt;&lt;"Ingrese primer nota:";
+    cin &gt;&gt;nota1;
+    cout &lt;&lt;"Ingrese segunda nota:";
+    cin &gt;&gt;nota2;
+    cout &lt;&lt;"Ingrese tercer nota:";
+    cin &gt;&gt;nota3;
+    int promedio=(nota1 + nota2 + nota3) / 3;
+    if (promedio &gt;= 7) 
+    {
+        cout &lt;&lt;"Promocionado";    
+    } 
+    else 
+    {
+        if (promedio &gt;= 4) 
+        {
+            cout &lt;&lt;"Regular";
+        }
+        else 
+        {
+            cout &lt;&lt;"Reprobado";
+        }
+    }
+    cin.get();
+    cin.get();
+}</pre>
+
+<p>Codifiquemos y ejecutemos este programa. Al correr el programa deberá solicitar por teclado la carga de tres notas y mostrarnos un mensaje según el promedio de las mismas.<br>
+Podemos definir un conjunto de variables del mismo tipo en una misma línea:<br>
+<pre>
+    int nota1,nota2,nota3;
+</pre>
+<p>Esto no es obligatorio pero a veces, por estar relacionadas, conviene.<br>
+A la codificación del if anidado podemos observarla por el else del primer if.<br>
+Para no tener problemas (olvidarnos) con las llaves de apertura y cerrado podemos ver la siguiente regla:<br>
+Cada vértice representa una llave de apertura  y una de cierre:</p>
+<p><img src="imagentema/foto022.jpg" border="0" alt="llaves en los if en C++"><br>
+</p>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/EstadoAlumno.zip">EstadoAlumno</a></p>
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Se cargan por teclado tres números distintos. Mostrar por pantalla el mayor de ellos.
+</li>
+<li>
+Se ingresa por teclado un valor entero, mostrar una leyenda que indique si el número es positivo, negativo o nulo (es decir cero)
+</li>
+<li>
+Confeccionar un programa que permita cargar un número entero positivo de hasta tres cifras y muestre un mensaje indicando si tiene 1, 2, o 3 cifras. Mostrar un mensaje de error si el número de cifras es mayor.
+</li>
+<li>
+Un postulante a un empleo, realiza un test de capacitación, se obtuvo la siguiente información: cantidad total de preguntas que se le realizaron y la cantidad de preguntas que contestó correctamente. Se pide confeccionar un programa que ingrese los dos datos por teclado e informe el nivel del mismo según el porcentaje de respuestas correctas que ha obtenido, y sabiendo que:<br>
+<pre>
+	Nivel máximo:	Porcentaje&gt;=90%.
+	Nivel medio:	Porcentaje&gt;=75% y &lt;90%.
+	Nivel regular:	Porcentaje&gt;=50% y &lt;75%.
+	Fuera de nivel:	Porcentaje&lt;50%.
+</pre>
+</li>
+</ol>
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int num1,num2,num3;
+    cout &lt;&lt;"Ingrese primer valor:";
+    cin &gt;&gt;num1;
+    cout &lt;&lt;"Ingrese segunda valor:";
+    cin &gt;&gt;num2;
+    cout &lt;&lt;"Ingrese tercer valor:";
+    cin &gt;&gt;num3;
+    if (num1 &gt; num2) 
+    {
+        if (num1 &gt; num3) 
+        {
+            cout &lt;&lt;num1;
+        } 
+        else 
+        {
+            cout &lt;&lt;num3;
+        }
+    } 
+    else 
+    {
+        if (num2 &gt; num3) 
+        {
+            cout &lt;&lt;num2;
+        }
+        else 
+        {
+            cout &lt;&lt;num3;
+        }
+    }
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/MayorTresNumeros.zip">MayorTresNumeros</a></p>
+
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int num;
+    cout &lt;&lt;"Ingrese un valor:";
+    cin &gt;&gt;num;
+    if (num == 0) 
+    {
+        cout &lt;&lt;"Se ingresó el cero";
+    } 
+    else 
+    {
+        if (num &gt; 0) 
+        {
+            cout &lt;&lt;"Se ingresó un valor positivo";
+        } 
+        else 
+        {
+            cout &lt;&lt;"Se ingresó un valor negativo";
+        }
+    }
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/PositivoNegativoNulo.zip">PositivoNegativoNulo.zip</a></p>
+
+
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int num;
+    cout &lt;&lt;"Ingrese un valor de hasta tres dígitos positivo:";
+    cin &gt;&gt;num;
+    if (num &lt; 10) 
+    {
+        cout &lt;&lt;"Tiene un dígito";
+    }
+    else 
+    {
+        if (num &lt; 100) 
+        {
+            cout &lt;&lt;"Tiene dos dígitos";
+        }
+        else 
+        {
+            if (num &lt; 1000) 
+            {
+                cout &lt;&lt;"Tiene tres dígitos";
+            }
+            else 
+            {
+                cout &lt;&lt;"Error en la entrada de datos.";
+            }
+        }
+    }
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/CantidadCifras.zip">CantidadCifras</a></p>
+
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    int totalPreguntas,totalCorrectas;
+    cout &lt;&lt;"Ingrese la cantidad total de preguntas del examen:";
+    cin &gt;&gt;totalPreguntas;
+    cout &lt;&lt;"Ingrese la cantidad total de preguntas contestadas correctamente:";
+    cin &gt;&gt;totalCorrectas;
+    int porcentaje=totalCorrectas * 100 / totalPreguntas;
+    if (porcentaje &gt;= 90) 
+    {
+        cout &lt;&lt;"Nivel máximo";
+    } 
+    else 
+    {
+        if (porcentaje &gt;= 75) 
+        {
+            cout &lt;&lt;"Nivel medio";
+        }
+        else
+        {
+            if (porcentaje &gt;= 50) 
+            {
+                cout &lt;&lt;"Nivel regular";
+            }
+            else 
+            {
+                cout &lt;&lt;"Fuera de nivel";
+            }
+        }
+    }
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/PostulanteEmpleo.zip">PostulanteEmpleo</a></p>
+
+</pre><h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=7&codigo=134&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:35 GMT -->
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=88&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:52:31 GMT -->
+<head>
+<title>Declaración de métodos.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Declaración de métodos.</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>Cuando uno plantea una clase en lugar de especificar todo el algoritmo en un único método (lo que hicimos en los primeros pasos de este tutorial) es dividir todas las responsabilidades de las clase en un conjunto de métodos.</p>
+<p>Un método hemos visto que tiene la siguiente sintaxis:</p>
+<pre>
+public void [nombre del método]() {
+  [algoritmo]
+}
+</pre>
+<p>Veremos que hay varios tipos de métodos:</p>
+<h3>Métodos con parámetros.</h3>
+<p>Un método puede tener parámetros:</p>
+<pre>
+public void [nombre del método]([parámetros]) {
+  [algoritmo]
+}
+</pre>
+<p>Los parámetros los podemos imaginar como variables locales al método, pero su valor se inicializa con datos que llegan cuando lo llamamos.</p>
+<h3>Problema 1:</h3>
+<p>Confeccionar una clase que permita ingresar valores enteros por teclado y nos muestre la tabla de multiplicar de dicho valor. Finalizar el programa al ingresar el -1.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.util.Scanner;
+public class TablaMultiplicar {
+    public void cargarValor() {
+        Scanner teclado=new Scanner(System.in);
+        int valor;
+        do {
+            System.out.print("Ingrese valor:");
+            valor=teclado.nextInt();
+            if (valor!=-1) {
+                calcular(valor);
+            }
+        } while (valor!=-1);
+    }
+    
+    public void calcular(int v) {
+        for(int f=v;f<=v*10;f=f+v) {
+            System.out.print(f+"-");
+        }
+    }
+    
+    public static void main(String[] ar) {
+        TablaMultiplicar tabla;
+        tabla=new TablaMultiplicar();
+        tabla.cargarValor();
+    }
+}
+</pre>
+<p>En esta clase no hemos definido ningún atributo, ya que el objeto de la clase Scanner lo requerimos en un solo método, por ello lo definimos como una variable local.</p>
+<p>El método calcular recibe un parámetro de tipo entero, luego lo utilizamos dentro del método para mostrar la tabla de multiplicar de dicho valor, para esto inicializamos la variable f con el valor que llega en el parámetro. Luego de cada ejecución del for incrementamos el contador f con el valor de v.</p>
+<pre>
+    public void calcular(int v) {
+        for(int f=v;f<=v*10;f=f+v) {
+            System.out.print(f+"-");
+        }
+    }
+</pre>
+<p>Un método puede no tener parámetros como hemos visto en problemas anteriores o puede tener uno o más parámetros (en caso de tener más de un parámetro los mismos se separan por coma)</p>
+<p>El método cargarValores no tiene parámetros y tiene por objetivo cargar un valor entero por teclado y llamar al método calcular para que muestre la tabla de multiplicar del valor que le pasamos por teclado:</p>
+<pre>
+    public void cargarValor() {
+        Scanner teclado=new Scanner(System.in);
+        int valor;
+        do {
+            System.out.print("Ingrese valor:");
+            valor=teclado.nextInt();
+            if (valor!=-1) {
+                calcular(valor);
+            }
+        } while (valor!=-1);
+    }
+</pre>
+<p>Como vemos al método calcular lo llamamos por su nombre y entre paréntesis le pasamos el dato a enviar (debe ser un valor o variable entera)</p>
+<p>En este problema en la main solo llamamos al método cargarValor, ya que el método calcular luego es llamado por el método cargarValor:</p>
+<pre>
+    public static void main(String[] ar) {
+        TablaMultiplicar tabla;
+        tabla=new TablaMultiplicar();
+        tabla.cargarValor();
+    }
+</pre>
+
+<h3>Métodos que retornan un dato.</h3>
+<p>Un método puede retornar un dato:</p>
+<pre>
+public [tipo de dato] [nombre del método]([parámetros]) {
+  [algoritmo]
+  return [tipo de dato]
+}
+</pre>
+<p>Cuando un método retorna un dato en vez de indicar la palabra clave void previo al nombre del método indicamos el tipo de dato que retorna. Luego dentro del algoritmo en el momento que queremos que finalice el mismo y retorne el dato empleamos la palabra clave return con el valor respectivo.
+</p>
+<h3>Problema 2:</h3>
+<p>Confeccionar una clase que permita ingresar tres valores por teclado. Luego mostrar el mayor y el menor.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+import java.util.Scanner;
+public class MayorMenor {
+    public void cargarValores() {
+    	Scanner teclado=new Scanner(System.in);
+        System.out.print("Ingrese primer valor:");
+        int valor1=teclado.nextInt();
+        System.out.print("Ingrese segundo valor:");
+        int valor2=teclado.nextInt();
+        System.out.print("Ingrese tercer valor:");
+        int valor3=teclado.nextInt();
+        int mayor,menor;
+        mayor=calcularMayor(valor1,valor2,valor3);
+        menor=calcularMenor(valor1,valor2,valor3);
+        System.out.println("El valor mayor de los tres es:"+mayor);
+        System.out.println("El valor menor de los tres es:"+menor);
+    }
+    
+    public int calcularMayor(int v1,int v2,int v3) {
+        int m;
+        if(v1&gt;>v2 && v1&gt;v3) {
+          m=v1;
+        } else {
+            if(v2&gt;v3) {
+                m=v2;
+            } else {
+            	m=v3;
+            }
+        }
+        return m;
+    }
+    
+    public int calcularMenor(int v1,int v2,int v3) {
+        int m;
+        if(v1&lt;v2 && v1&lt;v3) {
+          m=v1;
+        } else {
+            if(v2&lt;v3) {
+                m=v2;
+            } else {
+            	m=v3;
+            }
+        }
+        return m;
+    }
+    
+    public static void main(String[] ar) {
+        MayorMenor maymen=new MayorMenor();
+        maymen.cargarValores();
+    }
+}
+</pre>
+<p>Si vemos la sintaxis que calcula el mayor de tres valores enteros es similar al algoritmo visto en conceptos anteriores:</p>
+<pre>
+    public int calcularMayor(int v1,int v2,int v3) {
+        int m;
+        if(v1&gt;v2 && v1&gt;v3) {
+          m=v1;
+        } else {
+            if(v2&gt;v3) {
+                m=v2;
+            } else {
+            	m=v3;
+            }
+        }
+        return m;
+    }
+</pre>
+<p>Lo primero que podemos observar que el método retorna un entero y recibe tres parámetros:</p>
+<pre>
+    public int calcularMayor(int v1,int v2,int v3) {
+</pre>
+<p>Dentro del método verificamos cual de los tres parámetros almacena un valor mayor, a este valor lo almacenamos en una variable local llamada "m", al valor almacenado en esta variable lo retornamos al final con un return.</p>
+<p>La llamada al método calcularMayor lo hacemos desde dentro del método cargarCalores:</p>
+<pre>
+        mayor=calcularMayor(valor1,valor2,valor3);
+</pre>
+<p>Debemos asignar a una variable el valor devuelto por el método calcularMayor. Luego el contenido de la variable mayor lo mostramos:</p>
+<pre>
+        System.out.println("El valor mayor de los tres es:"+mayor);
+</pre>
+<p>La lógica es similar para el cálculo del menor.</p></div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index2904.html?inicio=0">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=88&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:52:31 GMT -->
+</html>

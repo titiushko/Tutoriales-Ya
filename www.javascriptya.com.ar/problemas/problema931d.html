@@ -1,0 +1,348 @@
+<!doctype html>
+<html>
+
+<!-- Mirrored from www.javascriptya.com.ar/problemas/problema.php?cod=13&inicio=10 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:20 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+    <title>JavaScript Ya</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="estilos.css" rel="stylesheet">
+    <link href='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css' rel='stylesheet'>     
+    <script src='../../ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script> 
+    <script src='../../ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'></script>     
+    
+<script type="text/javascript">	
+$(document).ready(function(){
+  var opciones = {
+                   select:tabSeleccionado
+                 };                 
+  $("#pesta").tabs(opciones);
+});
+
+function tabSeleccionado(event,tab) {
+  if (tab.index==2) {
+    var d = parent.documentodinamico.document; 	
+    d.open();
+	d.write(String.fromCharCode(60)+"script ");
+	d.write(' src="debug.js">');
+	d.write(String.fromCharCode(60)+"/script"+String.fromCharCode(62));
+	d.write($('#editor').val());
+    d.close();	
+  }	
+}
+
+
+</script>
+	
+<style type="text/css">	
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>	
+	
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>	
+	
+</head>
+<body>
+
+
+
+
+<h1>Estructura repetitiva (do/while)</h1>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* javascriptya-superior */
+google_ad_slot = "5739365568";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+
+<div id="pesta">
+	<ul>
+		<li><a href="#p1">Problemas</a></li>    	
+		<li><a href="#p2">Codificar problema</a></li>
+		<li><a href="#p3">Ejecución problema</a></li>
+	</ul>
+	<div id="p1" style="background:#fafafa;padding:30px; max-height: 700px; min-height: 700px;;overflow: auto;font-size:13pt">
+		
+	<B>PROBLEMAS</B><BR><BR>
+<ol>
+<li>
+Realizar un programa que acumule (sume) valores ingresados por teclado hasta ingresa el 9999 (no sumar dicho valor, solamente indica que ha finalizado la carga). Imprimir el valor acumulado e informar si dicho valor es cero, mayor a cero o menor a cero.
+</li>
+<li>
+En un banco se procesan datos de las cuentas corrientes de sus clientes. De cada cuenta corriente se conoce: número de cuenta, nombre del cliente y saldo actual. El ingreso de datos debe finalizar al ingresar un valor negativo en el número de cuenta.<br>
+Se pide confeccionar un programa que lea los datos de las cuentas corrientes e informe:<br>
+a) De cada cuenta: número de cuenta, nombre del cliente y estado de la cuenta según su saldo, sabiendo que:
+<pre>
+Estado de la cuenta	'Acreedor' si el saldo es >0.
+			'Deudor' si el saldo es <0.
+			'Nulo' si el saldo es =0.
+</pre>
+b) La suma total de los saldos acreedores.
+</li>
+<li>
+Se realizó un censo provincial y se desea procesar la información obtenida en dicho censo.
+De cada una de las personas censadas se tiene la siguiente información: número de documento, edad y sexo ('femenino' o 'masculino')<br>
+Se pide confeccionar un programa que lea los datos de cada persona censada (para finalizar ingresar el valor cero en el número de documento) e informar:
+<pre> 
+a)	Cantidad total de personas censadas.
+b)	Cantidad de varones.
+c)	Cantidad de mujeres.
+d)	Cantidad de varones cuya edad varía entre 16 y 65 años.
+</pre>
+</li>
+</ul>
+
+<div style="margin-top:20px">
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+</div>
+<pre class="recuadrooculto">
+Problema 1.
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var valor;
+  var suma=0;
+  do {
+    valor=prompt('Ingrese un valor (9999 para finalizar)','');
+    valor=parseInt(valor);
+    if (valor!=9999)
+    {
+      suma=suma+valor;
+    }
+  } while(valor!=9999);
+  document.write('Valor acumulado total:'+suma);
+  document.write('&lt;br&gt;');
+  if (suma&gt;0)
+  {
+    document.write('El valor acumulado es mayor a cero');
+  }
+  else
+  {
+    if (suma==0)
+    {
+      document.write('El valor acumulado es cero');
+    }
+    else
+    {
+      document.write('El valor acumulado es menor a cero');
+    }
+  }
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+     
+
+
+Problema 2.
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var nrocuenta;
+  var nombre;
+  var saldo=0;
+  var acumula=0;
+  var saldoacre=0;
+  do {
+    nrocuenta=prompt('Ingrese nro de cuenta:','');    
+    nrocuenta=parseInt(nrocuenta);
+    if (nrocuenta&gt;=0)
+    {
+      nombre=prompt('Nombre del cliente:');
+      saldo=prompt('Saldo actual:','');
+      saldo=parseInt(saldo);
+      if (saldo&gt;0)
+      {
+        saldoacre=saldoacre+saldo;
+        document.write(nombre+' tiene saldo acreedor&lt;br&gt;');
+      }
+      else
+      {
+        if (saldo&lt;0)
+        {
+          document.write(nombre+' tiene saldo deudor&lt;br&gt;');
+        }
+        else
+        {
+          document.write(nombre+' tiene saldo nulo&lt;br&gt;');
+        }
+      }
+      acumula=acumula+saldo;
+      
+    }
+  }while(nrocuenta&gt;0);
+  document.write('Suma total de saldos acreedores:'+saldoacre);
+  
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+Problema 2.
+
+
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+  var documento;
+  var edad;
+  var totalpersonas=0;
+  var cantvarones=0;
+  var cantmujeres=0;
+  var cantvaronesgrandes=0;
+  do {
+    documento=prompt('Ingrese nro de documento:','');
+    documento=parseInt(documento);
+    if (documento&gt;0)
+    {
+      edad=prompt('Ingrese la edad:','');
+      edad=parseInt(edad);
+      sexo=prompt('Ingrese el sexo (masculino/femenino):','');
+      if (sexo=='masculino')
+      { 
+        cantvarones=cantvarones+1;
+        if (edad&gt;=16 && edad&lt;=65)
+        {
+          cantvaronesgrandes=cantvaronesgrandes+1;
+        }
+      } 
+      if (sexo=='femenino')
+      { 
+        cantmujeres=cantmujeres+1;
+      } 
+      totalpersonas=totalpersonas+1;
+    }
+  }while(documento!=0);
+  document.write('Total de personas censadas: '+totalpersonas+'&lt;br&gt;');
+  document.write('Cantidad de varones: '+cantvarones+'&lt;br&gt;'); 
+  document.write('Cantidad de mujeres: '+cantmujeres+'&lt;br&gt;');   
+  document.write('Cantidad de varones entre 16 y 65 años: '+cantvaronesgrandes+'&lt;br&gt;');   
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>	</div>    	
+	<div id="p2">
+    <textarea name="editor" id="editor" rows="28" style="width:890px;height:700px;font-size:16px;font-family:courier">
+&lt;html&gt;
+&lt;head&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;script type="text/javascript"&gt;
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+     
+</textarea>
+	</div>
+	<div id="p3">
+<iframe width="900" height="700" id="documentodinamico" name="documentodinamico" src="vacio.html">
+No tiene disponible el navegador la capacidad de iframe
+</iframe>
+	</div>
+</div>
+<br>
+<table width="700px">
+<tr>
+<td align="left">	
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* javascriptya-inferior */
+google_ad_slot = "8692831966";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* javascriptya-inferior */
+google_ad_slot = "8692831966";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../index4231.html?inicio=10">Retornar al menu</a></h2>   
+<br>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+
+<!-- Mirrored from www.javascriptya.com.ar/problemas/problema.php?cod=13&inicio=10 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:20 GMT -->
+</html>

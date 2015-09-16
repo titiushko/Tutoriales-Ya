@@ -1,0 +1,543 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=37&codigo=168&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Estructuras dinámicas en C++: Listas tipo Pila - Problema de aplicación</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>37 - Estructuras dinámicas en C++: Listas tipo Pila - Problema de aplicación</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Hasta ahora hemos visto como desarrollar los algoritmos para administrar una lista tipo Pila, hemos visto que hay bastante complejidad en el manejo de punteros pero todo esto acarrea ventajas en la solución de problemas que requieren una estructura de tipo Pila.</p>
+
+<p><strong>Planteo del problema:</strong></p>
+
+<p>Este práctico tiene por objetivo mostrar la importancia de las pilas en las Ciencias de la Computación y más precisamente en la programación de software de bajo nivel.</p>
+
+<p>Todo compilador o intérprete de un lenguaje tiene un módulo dedicado a analizar si una expresión está correctamente codificada, es decir que los paréntesis estén abiertos y cerrados en un orden lógico y bien balanceados.</p>
+
+<p>Se debe desarrollar una clase que tenga las siguientes responsabilidades (clase Formula):<p>  
+<pre>
+- Ingresar una fórmula que contenga paréntesis, corchetes y llaves.
+- Validar que los ( ) [] y {} estén correctamente balanceados. 
+</pre>
+
+<p>Para la solución de este problema la clase formula tendrá un atributo de la clase Pila.</p>
+
+<p>Veamos como nos puede ayudar el empleo de una pila para solucionar este problema.<br>
+Primero cargaremos la fórmula por teclado.</p>
+
+<p>Ejemplo de fórmula:  (2+[3-12]*{8/3})</p>
+
+<p>El algoritmo de validación es el siguiente:</p>
+
+<p>Analizamos caracter a caracter la presencia de los paréntesis, corchetes y llaves.<br>
+Si vienen símbolos de apertura los almacenamos en la pila.<br>
+Si vienen símbolos de cerrado extraemos de la pila y verificamos si está el mismo símbolo pero de apertura: en caso negativo podemos inferir que la fórmula no está correctamente balanceada.<br>
+Si al finalizar el análisis del último caracter de la fórmula la pila está vacía podemos concluir que está correctamente balanceada.</p>
+
+<p>Ejemplos de fórmulas no balanceadas:</p>
+<pre>
+}(2+[3-12]*{8/3})
+Incorrecta: llega una } de cerrado y la pila está vacía.
+{[2+4}]
+Incorrecta: llega una llave } y en el tope de la pila hay un corchete [.
+{[2+4]
+Incorrecta: al finalizar el análisis del último caracter en la pila queda pendiente una llave {.
+</pre>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include &lt;iostream&gt;
+
+using namespace std;
+
+class Pila {
+private:
+    class Nodo {
+    public:
+        char simbolo;
+        Nodo *sig;
+    };
+
+    Nodo *raiz;
+public:
+    Pila();
+    ~Pila();
+    void insertar(char x);
+    char extraer();
+    bool vacia();
+};
+
+Pila::Pila()
+{
+    raiz = NULL;
+}
+
+void Pila::insertar(char x)
+{
+    Nodo *nuevo;
+    nuevo = new Nodo();
+    nuevo-&gt;simbolo = x;
+    if (raiz == NULL)
+    {
+        raiz = nuevo;
+        nuevo-&gt;sig = NULL;
+    }
+    else
+    {
+        nuevo-&gt;sig = raiz;
+        raiz = nuevo;
+    }
+}
+
+char Pila::extraer()
+{
+    if (raiz != NULL)
+    {
+        char informacion = raiz-&gt;simbolo;
+        Nodo *bor = raiz;
+        raiz = raiz-&gt;sig;
+        delete bor;
+        return informacion;
+    }
+    else
+    {
+        return ' ';
+    }
+}
+
+bool Pila::vacia()
+{
+    if (raiz == NULL)
+        return true;
+    else
+        return false;
+}
+
+Pila::~Pila()
+{
+    Nodo *reco = raiz;
+    Nodo *bor;
+    while (reco != NULL)
+    {
+        bor = reco;
+        reco = reco-&gt;sig;
+        delete bor;
+    }
+}
+
+
+
+class Formula {
+    char cadena[100];
+public:
+    Formula();
+    bool balanceada();
+};
+
+Formula::Formula()
+{
+    cout &lt;&lt; "Ingrese una formula con parentesis, corchetes y llaves:";
+    cin.getline(cadena, 100);
+}
+
+bool Formula::balanceada()
+{
+    Pila *pila1;
+    pila1 = new Pila();
+    for (int f = 0; f &lt; strlen(cadena); f++)
+    {
+        if (cadena[f] == '(' || cadena[f] == '[' || cadena[f] == '{') 
+        {
+            pila1-&gt;insertar(cadena[f]);
+        }
+        else 
+        {
+            if (cadena[f] == ')') 
+            {
+                if (pila1-&gt;extraer() != '(') 
+                {
+                    return false;
+                }
+            }
+            else 
+            {
+                if (cadena[f] == ']') 
+                {
+                    if (pila1-&gt;extraer() != '[') 
+                    {
+                        return false;
+                    }
+                }
+                else 
+                {
+                    if (cadena[f] == '}') 
+                    {
+                        if (pila1-&gt;extraer() != '{') 
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if (pila1-&gt;vacia()) 
+    {
+        return true;
+    }
+    else 
+    {
+        return false;
+    }
+}
+
+
+void main()
+{
+    Formula *formula1;
+    formula1 = new Formula();
+    if (formula1-&gt;balanceada() == true)
+    {
+        cout &lt;&lt; "La formula esta correctamente balanceada";
+    }
+    else
+    {
+        cout &lt;&lt; "La formula no esta correctamente balanceada";
+    }
+    delete formula1;
+    cin.get();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/PilaFormula.zip">PilaFormula.zip</a></p>
+
+
+
+<p>Primero declaramos y definimos la clase Pila. Almacenamos en cada nodo un caracter y llamamos al campo de información símbolo.</p>
+<p>No es necesario implementar los métodos imprimir, cantidad, etc. Porque no se requieren para  este problema.</p>
+<p>La clase Formula tiene como atributos:</p>
+<pre>
+class Pila {
+private:
+    class Nodo {
+    public:
+        char simbolo;
+        Nodo *sig;
+    };
+
+    Nodo *raiz;
+public:
+    Pila();
+    ~Pila();
+    void insertar(char x);
+    char extraer();
+    bool vacia();
+};
+
+Pila::Pila()
+{
+    raiz = NULL;
+}
+
+void Pila::insertar(char x)
+{
+    Nodo *nuevo;
+    nuevo = new Nodo();
+    nuevo-&gt;simbolo = x;
+    if (raiz == NULL)
+    {
+        raiz = nuevo;
+        nuevo-&gt;sig = NULL;
+    }
+    else
+    {
+        nuevo-&gt;sig = raiz;
+        raiz = nuevo;
+    }
+}
+
+
+char Pila::extraer()
+{
+    if (raiz != NULL)
+    {
+        char informacion = raiz-&gt;simbolo;
+        Nodo *bor = raiz;
+        raiz = raiz-&gt;sig;
+        delete bor;
+        return informacion;
+    }
+    else
+    {
+        return ' ';
+    }
+}
+
+
+bool Pila::vacia()
+{
+    if (raiz == NULL)
+        return true;
+    else
+        return false;
+}
+
+Pila::~Pila()
+{
+    Nodo *reco = raiz;
+    Nodo *bor;
+    while (reco != NULL)
+    {
+        bor = reco;
+        reco = reco-&gt;sig;
+        delete bor;
+    }
+}
+
+
+</pre>
+
+
+
+<p>El segundo paso es declarar la clase Formula que tendrá como objetivo la carga de una cadena de caracteres que almacenará la formula, en el constructor cargamos por teclado la cadena:</p>
+<pre>
+class Formula {
+    char cadena[100];
+public:
+    Formula();
+    bool balanceada();
+};
+
+Formula::Formula()
+{
+    cout &lt;&lt; "Ingrese una formula con parentesis, corchetes y llaves:";
+    cin.getline(cadena, 100);
+}
+</pre>
+
+
+
+<p>El método más importante es el balanceada.<br>
+En este analizamos la fórmula para verificar si está correctamente balanceada.<br>
+En este método es donde está gran parte del algoritmo de este problema. Retorna true en caso de ser 
+correcta y false en caso contrario.</p>
+<p>Creamos una pila que nos servirá para solucionar este problema:</p>
+<pre>
+    Pila *pila1;
+    pila1 = new Pila();
+</pre>
+
+<p>El for se repite tantas veces como caracteres tenga la cadena de caracteres (la función strlen nos retorna la cantidad de caracteres de información ingresados por el usuario en la fórmula):</p>
+
+<pre>
+    for (int f = 0; f &lt; strlen(cadena); f++)
+</pre>
+
+
+<p>Se deben procesar sólo los símbolos ( [ {  y  ) ] }.</p>
+
+<p>Si el símbolo es un  ( [ { de apertura procedemos a cargarlo en la pila:</p>
+<pre>
+        if (cadena[f] == '(' || cadena[f] == '[' || cadena[f] == '{') 
+        {
+            pila1-&gt;insertar(cadena[f]);
+        }
+</pre>
+
+<p>En caso de ser un ) cerrado debemos extraer un carácter de la pila y verificar si no coincide con el paréntesis de apertura ( la fórmula está incorrecta:</p>
+<pre>
+            if (cadena[f] == ')') 
+            {
+                if (pila1-&gt;extraer() != '(') 
+                {
+                    return false;
+                }
+            }
+</pre>
+
+<p>El mismo proceso es para  los símbolos ]  }.</p>
+
+<p>Al finalizar el análisis de toda la cadena si la pila está vacía podemos afirmar que la fórmula está correctamente balanceada, en caso contrario quiere decir que faltan símbolos de cerrado y es incorrecta:</p>
+<pre>
+    if (pila1-&gt;vacia()) 
+    {
+        return true;
+    }
+    else 
+    {
+        return false;
+    }
+</pre>
+
+<p>Es importante entender que la clase Formula utiliza un objeto de la clase Pila para resolver el algoritmo de verificar el balanceo de la fórmula, pero no accede directamente a los nodos de la lista.</p>
+
+
+<p>En la main creamos un objeto de la clase Formula y procedemos a llamar al balanceada y según el dato devuelto mostramos el mensaje respectivo:</p>
+<pre>
+void main()
+{
+    Formula *formula1;
+    formula1 = new Formula();
+    if (formula1-&gt;balanceada() == true)
+    {
+        cout &lt;&lt; "La formula esta correctamente balanceada";
+    }
+    else
+    {
+        cout &lt;&lt; "La formula no esta correctamente balanceada";
+    }
+    delete formula1;
+    cin.get();
+}
+</pre>
+
+
+
+
+
+<h2><a href="index7732.html?inicio=30">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=37&codigo=168&inicio=30 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:44 GMT -->
+</html>

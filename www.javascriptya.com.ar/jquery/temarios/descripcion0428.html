@@ -1,0 +1,303 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/temarios/descripcion.php?cod=84&punto=19&inicio=18 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Conceptos de JQuery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="jQuery, programación, webmaster, tutorial, JavaScript">
+<meta name="description" content="El objetivo de este tutorial es presentar los conceptos de la libreria JavaScript JQUERY.">
+<meta name="author" content="Diego Moisset">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" type="text/JavaScript">
+
+</script>
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>19 - Manipulación de los elementos del DOM.</h1></td>
+<td align="right">
+<a href="../../publicidad/index.html"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.html"></a>	
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<p>
+<div style="font-size:1.3em;font-family:arial;">
+<p>jQuery dispone de una serie de métodos que nos facilitan el tratamiento de los elementos del Dom.</p>
+<p>Confeccionaremos un problema que haga uso de estos métodos.</p>
+<p><strong>Problema:</strong>Implementar una página que contenga una lista con cuatro items. Probar distintos métodos para manipular la lista (borrar, insertar)</p>
+<p>pagina1.html</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;../jquery.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;funciones.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;M&eacute;todos para manipular nodos del DOM con jQuery.&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Primer item.&lt;/li&gt;
+&lt;li&gt;Segundo item.&lt;/li&gt;
+&lt;li&gt;Tercer item.&lt;/li&gt;
+&lt;li&gt;Cuarto item.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;input type=&quot;button&quot; id=&quot;boton1&quot; value=&quot;Eliminar la lista completa.&quot;&gt;&lt;br&gt;
+&lt;input type=&quot;button&quot; id=&quot;boton2&quot; value=&quot;Restaurar Lista&quot;&gt;&lt;br&gt;
+&lt;input type=&quot;button&quot; id=&quot;boton3&quot; value=&quot;A&ntilde;adir un elemento al final de la lista&quot;&gt;&lt;br&gt;
+&lt;input type=&quot;button&quot; id=&quot;boton4&quot; value=&quot;A&ntilde;adir un elemento al principio de la lista&quot;&gt;&lt;br&gt;
+&lt;input type=&quot;button&quot; id=&quot;boton5&quot; value=&quot;Eliminar el &uacute;ltimo elemento.&quot;&gt;&lt;br&gt;
+&lt;input type=&quot;button&quot; id=&quot;boton6&quot; value=&quot;Eliminar el primer elemento.&quot;&gt;&lt;br&gt;
+&lt;input type=&quot;button&quot; id=&quot;boton7&quot; value=&quot;Eliminar el primero y segundo elemento.&quot;&gt;&lt;br&gt;
+&lt;input type=&quot;button&quot; id=&quot;boton8&quot; value=&quot;Eliminar los dos &uacute;ltimos.&quot;&gt;&lt;br&gt;
+&lt;/body&gt;
+&lt;/html&gt; 
+</pre>
+<p>funciones.js</p>
+<pre class="recuadro">
+var x;
+x=$(document);
+x.ready(inicializarEventos);
+
+function inicializarEventos()
+{
+  var x;
+  x=$(&quot;#boton1&quot;);
+  x.click(eliminarElementos)
+  x=$(&quot;#boton2&quot;);
+  x.click(restaurarLista)
+  x=$(&quot;#boton3&quot;);
+  x.click(anadirElementoFinal)
+  x=$(&quot;#boton4&quot;);
+  x.click(anadirElementoPrincipio)
+  x=$(&quot;#boton5&quot;);
+  x.click(eliminarElementoFinal)
+  x=$(&quot;#boton6&quot;);
+  x.click(eliminarElementoPrincipio)
+  x=$(&quot;#boton7&quot;);
+  x.click(eliminarPrimeroSegundo)
+  x=$(&quot;#boton8&quot;);
+  x.click(eliminarDosUltimos)
+}
+
+function eliminarElementos()
+{
+  var x;
+  x=$(&quot;ul&quot;);
+  x.empty();
+}
+
+function restaurarLista()
+{
+  $(&quot;ul&quot;).html('&lt;li&gt;Primer item.&lt;/li&gt;&lt;li&gt;
+     Segundo item.&lt;/li&gt;&lt;li&gt;Tercer item.&lt;/li&gt;&lt;li&gt;Cuarto item.&lt;/li&gt;');
+}
+
+function anadirElementoFinal()
+{
+  var x;
+  x=$(&quot;ul&quot;);
+  x.append(&quot;&lt;li&gt;otro item al final&lt;/li&gt;&quot;);
+}
+
+function anadirElementoPrincipio()
+{
+  var x;
+  x=$(&quot;ul&quot;);
+  x.prepend(&quot;&lt;li&gt;otro item al principio&lt;/li&gt;&quot;);
+}
+
+function eliminarElementoFinal()
+{
+  var x;
+  x=$(&quot;li&quot;);
+  var cantidad=x.length;
+  x=x.eq(cantidad-1);
+  x.remove();
+}
+
+function eliminarElementoPrincipio()
+{
+  var x;
+  x=$(&quot;li&quot;);
+  x=x.eq(0);
+  x.remove();
+}
+
+function eliminarPrimeroSegundo()
+{
+  var x;
+  x=$(&quot;li&quot;);
+  x=x.lt(2);
+  x.remove();
+}
+
+function eliminarDosUltimos()
+{
+  var x;
+  x=$(&quot;li&quot;);
+  x=x.gt(x.length-3);
+  x.remove();
+}
+</pre>
+<p>Para borrar todos los elementos contenidos en una lista obtenemos la referencia de la lista mediante la función $ y seguidamente llamamos al método empty:</p>
+<pre>
+function eliminarElementos()
+{
+  var x;
+  x=$(&quot;ul&quot;);
+  x.empty();
+}
+</pre>
+<p>Para restaurar la lista utilizamos el método html insertando directamente los item a partir del elemento ul:</p>
+<pre>
+function restaurarLista()
+{
+  $(&quot;ul&quot;).html('&lt;li&gt;Primer item.&lt;/li&gt;&lt;li&gt;
+     Segundo item.&lt;/li&gt;&lt;li&gt;Tercer item.&lt;/li&gt;&lt;li&gt;Cuarto item.&lt;/li&gt;');
+}
+</pre>
+<p>Para añadir un elemento al final de la colección de elementos del objeto jQuery disponemos del método append:</p>
+<pre>
+function anadirElementoFinal()
+{
+  var x;
+  x=$(&quot;ul&quot;);
+  x.append(&quot;&lt;li&gt;otro item al final&lt;/li&gt;&quot;);
+}
+</pre>
+<p>Para añadir un elemento al principio disponemos de un método llamado prepend:</p>
+<pre>
+function anadirElementoPrincipio()
+{
+  var x;
+  x=$(&quot;ul&quot;);
+  x.prepend(&quot;&lt;li&gt;otro item al principio&lt;/li&gt;&quot;);
+}
+</pre>
+<p>Para eliminar un elemento del final de la lista, primero obtenemos la cantidad de elementos que almacena el objeto jQuery por medio de la propiedad length y luego mediante el método eq (equal) indicamos la posición del elemento que necesitamos (el método eq retorna otro objeto de tipo jQuery) y por último llamamos al método remove:</p>
+<pre>
+function eliminarElementoFinal()
+{
+  var x;
+  x=$(&quot;li&quot;);
+  var cantidad=x.length;
+  x=x.eq(cantidad-1);
+  x.remove();
+}
+</pre>
+<p>Para eliminar un elemento del principio es similar a borrar el último, pero aquí no necesitamos saber la cantidad de elementos que almacena el objeto jQuery ya que debemos acceder al primero (el primero se almacena en la posición cero):</p>
+<pre>
+function eliminarElementoPrincipio()
+{
+  var x;
+  x=$(&quot;li&quot;);
+  x=x.eq(0);
+  x.remove();
+}
+</pre>
+<p>Para eliminar el primero y segundo elemento que almacena el objeto jQuery disponemos de un método lt (low than) que retorna todos los elementos menores a la posición que le pasamos como parámetro (en nuestro ejemplo nos retorna los elementos de la posición 0 y 1:</p>
+<pre>
+function eliminarPrimeroSegundo()
+{
+  var x;
+  x=$(&quot;li&quot;);
+  x=x.lt(2);
+  x.remove();
+}
+</pre>
+<p>Para eliminar los dos elementos finales podemos rescatarlos mediante el método gt (great than) que retorna un objeto jQuery con todos los elementos que superan la posición que le indicamos en el parámetro:</p>
+<pre>
+function eliminarDosUltimos()
+{
+  var x;
+  x=$(&quot;li&quot;);
+  x=x.gt(x.length-3);
+  x.remove();
+}
+</pre></div>
+</p>
+
+<table width="650px">
+<tr>
+<td align="center">	
+
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../index111c.html?inicio=18">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-14', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/temarios/descripcion.php?cod=84&punto=19&inicio=18 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:22 GMT -->
+</html>

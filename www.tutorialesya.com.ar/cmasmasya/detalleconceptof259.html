@@ -1,0 +1,349 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=29&codigo=160&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:18 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Parámetros de métodos de tipo puntero</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>29 - Parámetros de métodos de tipo puntero</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>Hemos visto que cuando un método debe retornar un dato disponemos al principio del método el tipo de dato que retornará (int, float etc.) y dentro del método especificamos con la palabra return el valor que devuelve.<br>
+¿Qué sucede si queremos retornar dos valores o más en un solo método? Una forma de solucionar este problema es pasar la dirección de dos variables y que las reciban dos parámetros de tipo puntero, luego por medio de estos punteros modificamos las variables que les pasamos por ejemplo desde la main.</p>
+
+<h3>Problema 1:</h3>
+<p>Confeccionar una clase que permita administrar un vector de 5 enteros. Definir dos métodos: uno que permita cargar el vector y otro que retorne el mayor y el menor valor del vector. Emplear dos punteros para poder retornar dos datos en un único método.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Vector {
+    int vec[5];
+public:
+    void cargar();
+    void retornarMayorMenor(int *pmay, int *pmen);
+};
+
+void Vector::cargar()
+{
+    for (int f = 0; f &lt; 5; f++)
+    {
+        cout &lt;&lt; "Ingrese componente:";
+        cin &gt;&gt; vec[f];
+    }
+}
+
+void Vector::retornarMayorMenor(int *pmay, int *pmen)
+{
+    *pmay = vec[0];
+    *pmen = vec[0];
+    for (int f = 1; f &lt; 5; f++)
+    {
+        if (vec[f]&gt;*pmay)
+        {
+            *pmay = vec[f];
+        }
+        else
+        {
+            if (vec[f]&lt;*pmen)
+            {
+                *pmen = vec[f];
+            }
+        }
+    }
+}
+
+
+void main()
+{
+    Vector vector1;
+    vector1.cargar();
+    int ma, me;
+    vector1.retornarMayorMenor(&ma, &me);
+    cout &lt;&lt; "El elemento mayor del vector es:" &lt;&lt; ma &lt;&lt; "\n";
+    cout &lt;&lt; "El elemento menor del vector es:" &lt;&lt; me &lt;&lt; "\n";
+    cin.get();
+    cin.get();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/ParametrosPuntero1.zip">ParametrosPuntero1.zip</a></p>
+
+<p>Es muy importante entender como funciona el método retornarMayorMenor. En la main definimos dos variables de tipo entera:</p>
+<pre>
+    int ma, me;
+</pre>
+<p>Y llamamos al método rotornarMayorMenor enviándole la dirección de estas dos variables (recordemos que mediante el operador & se accede a la dirección de una variable):</p>
+<pre>
+    vector1.retornarMayorMenor(&ma, &me);
+</pre>
+<p>Como estamos enviando direcciones de variables el método debe tener parámetros de tipo puntero como lo son *pmay y *pmen:</p>
+<pre>
+void Vector::retornarMayorMenor(int *pmay, int *pmen)
+</pre>
+<p>Mediante estos dos punteros estamos accediendo a las variables definidas en la main llamadas: ma y me.</p>
+<p>Cargamos en las dos variables definidas en la main (accediendo a las mismas por los punteros) la primer componente del vector:</p>
+<pre>
+    *pmay = vec[0];
+    *pmen = vec[0];
+</pre>
+<p>Luego mediante un for recorremos el resto del vector para ver si hay alguna componente más grande a la que hemos considerado hasta ahora la mayor (lo mismo hacemos para la menor componente):</p>
+<pre>
+    for (int f = 1; f &lt; 5; f++)
+    {
+        if (vec[f]&gt;*pmay)
+        {
+            *pmay = vec[f];
+        }
+        else
+        {
+            if (vec[f]&lt;*pmen)
+            {
+                *pmen = vec[f];
+            }
+        }
+    }
+</pre>
+
+<p>Como podemos observar luego en la main cuando imprimimos los contenidos de las variables ma y me aparecen en pantalla el valor mayor y menor del vector:</p>
+<pre>
+    cout &lt;&lt; "El elemento mayor del vector es:" &lt;&lt; ma &lt;&lt; "\n";
+    cout &lt;&lt; "El elemento menor del vector es:" &lt;&lt; me &lt;&lt; "\n";
+</pre>
+<p>Como vemos en ningún momento asignamos valores directamente a las variables ma y me, sino que lo hicimos con los parámetros que apuntan a dichas variables.</p>
+
+
+
+
+<h2>Problema propuesto</h2>
+<ol>
+<li>
+Crear una matriz de 3 filas por 3 columnas. Implementar un método que permita cargar todas sus componentes, otro que la imprima y otra método que retorne la fila y columna (retorna dos datos el método) donde se encuentra el mayor elemento del vector (si está repetido retorne la posición de cualquiera de ellos)
+</li>
+
+
+</ol>
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+
+<pre class="recuadrooculto">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Matriz {
+private:
+    int mat[3][3];
+public:
+    void cargar();
+    void imprimir();
+    void retornarFilaColumna(int *pf, int *pc);
+};
+
+void Matriz::cargar()
+{
+    for (int f = 0; f &lt; 3; f++)
+    {
+        for (int c = 0; c &lt; 3; c++)
+        {
+            cout &lt;&lt; "Ingrese componente:";
+            cin &gt;&gt; mat[f][c];
+        }
+    }
+}
+
+void Matriz::imprimir()
+{
+    for (int f = 0; f &lt; 3; f++)
+    {
+        for (int c = 0; c &lt; 3; c++)
+        {
+            cout &lt;&lt; mat[f][c] &lt;&lt; " ";
+        }
+        cout &lt;&lt; "\n";;
+    }
+}
+
+void Matriz::retornarFilaColumna(int *pf, int *pc)
+{
+    int mayor = mat[0][0];
+    *pf = 0;
+    *pc = 0;
+    for (int f = 0; f &lt; 3; f++)
+    {
+        for (int c = 0; c &lt; 3; c++)
+        {
+            if (mat[f][c] &gt; mayor)
+            {
+                mayor = mat[f][c];
+                *pf = f;
+                *pc = c;
+            }
+        }
+    }
+}
+
+
+void main()
+{
+    Matriz matriz1;
+    matriz1.cargar();
+    matriz1.imprimir();
+    int fila,  columna;
+    matriz1.retornarFilaColumna(&fila, &columna);
+    int fi, co;
+    cout &lt;&lt; "Fila donde se encuentra el mayor:" &lt;&lt; fila &lt;&lt;"\n";
+    cout &lt;&lt; "Columna donde se encuentra el mayor:" &lt;&lt; columna&lt;&lt; "\n";
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/ParametrosPuntero2.zip">ParametrosPuntero2.zip</a></p>
+
+
+</pre>
+<h2><a href="index9187.html?inicio=15">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=29&codigo=160&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:30:18 GMT -->
+</html>

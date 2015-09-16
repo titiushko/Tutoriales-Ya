@@ -1,0 +1,396 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=11&codigo=11&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:51:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Implementación de un libro de visitas mediante un archivo de texto</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++, programación, tutorial, nodejs">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de NodeJS.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>11 - Implementación de un libro de visitas mediante un archivo de texto</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>En el concepto anterior vimos como podemos capturar los datos de un formulario HTML para su procesamiento en el servidor.</p>
+<h3>Problema</h3>
+<p>Implementar un sitio web que permita mediante un formulario HTML ingresar el nombre y comentarios del visitante del sitio. Por otro lado imprimir todos los comentarios que dejan los visitantes del sitio. Almacenar los comentarios de los visitantes en un archivo de texto.</p>
+<p>Crear una carpeta llamada ejercicio13 y en su interior crearemos el archivo ejercicio13.js (con el programa en Node.js propiamente dicho) y una carpeta llamada public. En la carpeta public crear dos archivos html con un menú y un formulario.</p>
+
+<p><img src="imagentema/foto031.jpg" border="0" alt="archivos proyecto con Node.js"></p>
+<p>El contenido del archivo:</p>
+<pre>index.html</pre>
+<pre class="recuadro">
+&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Prueba&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;a href="cargarcomentario.html"&gt;Cargar comentarios en el libro de visitas.&lt;/a&gt;&lt;/p&gt;
+   &lt;a href="leercomentarios"&gt;Ver comentarios del libro de visitas.&lt;/a&gt;&lt;/p&gt;  
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>En este primer archivo HTML podemos hacer notar que el segundo enlace tiene referencia a una URL que será capturada por nuestro programa en Node.js y procederemos a generar dinámicamente una página con el contenido del archivo de texto con todos los comentarios cargados hasta ese momento.</p>
+<pre>cargarcomentario.html</pre>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Libro de visitas&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;form action="cargar" method="post"&gt;
+  Ingrese su nombre:
+  &lt;input type="text" name="nombre" size="30"&gt;&lt;br&gt;
+  Comentarios:&lt;br&gt;
+  &lt;textarea name="comentarios" rows="5" cols="60"&gt;&lt;/textarea&gt; 
+  &lt;br&gt;
+  &lt;input type="submit" value="Enviar"&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Como vimos en el concepto anterior la propiedad action del formulario tiene el valor que capturaremos en nuestro programa en Node.js</p>
+
+<p>Ahora pasaremos a codificar el archivo que contiene el programa en Node.js:</p>
+<pre>ejercicio13.js</pre>
+
+<pre class="recuadro">
+var http=require('http');
+var url=require('url');
+var fs=require('fs');
+var querystring = require('querystring');
+
+var mime = {
+   'html' : 'text/html',
+   'css'  : 'text/css',
+   'jpg'  : 'image/jpg',
+   'ico'  : 'image/x-icon',
+   'mp3'  : 'audio/mpeg3',
+   'mp4'  : 'video/mp4'
+};
+
+var servidor=http.createServer(function(pedido,respuesta){
+    var objetourl = url.parse(pedido.url);
+    var camino='public'+objetourl.pathname;
+    if (camino=='public/')
+        camino='public/index.html';
+    encaminar(pedido,respuesta,camino);
+});
+
+servidor.listen(8888);
+
+
+function encaminar (pedido,respuesta,camino) {
+    switch (camino) {
+        case 'public/cargar': {
+            grabarComentarios(pedido,respuesta);
+            break;
+        }    
+        case 'public/leercomentarios': {
+            leerComentarios(respuesta);
+            break;
+        }            
+        default : {  
+            fs.exists(camino,function(existe){
+                if (existe) {
+                    fs.readFile(camino,function(error,contenido){
+                        if (error) {
+                            respuesta.writeHead(500, {'Content-Type': 'text/plain'});
+                            respuesta.write('Error interno');
+                            respuesta.end();                    
+                        } else {
+                            var vec = camino.split('.');
+                            var extension=vec[vec.length-1];
+                            var mimearchivo=mime[extension];
+                            respuesta.writeHead(200, {'Content-Type': mimearchivo});
+                            respuesta.write(contenido);
+                            respuesta.end();
+                        }
+                    });
+                } else {
+                    respuesta.writeHead(404, {'Content-Type': 'text/html'});
+                    respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;Recurso inexistente&lt;/body&gt;&lt;/html&gt;');        
+                    respuesta.end();
+                }
+            });    
+        }
+    }    
+}
+
+
+function grabarComentarios(pedido,respuesta) {
+    var info = '';
+    pedido.on('data', function(datosparciales){
+         info += datosparciales;
+    });
+    pedido.on('end', function(){
+        var formulario = querystring.parse(info);
+        respuesta.writeHead(200, {'Content-Type': 'text/html'});
+        var pagina='&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;'+
+                   'Nombre:'+formulario['nombre']+'&lt;br&gt;'+
+                   'Comentarios:'+formulario['comentarios']+'&lt;br&gt;'+
+                   '&lt;a href="index.html"&gt;Retornar&lt;/a&gt;'+
+                   '&lt;/body&gt;&lt;/html&gt;';
+        respuesta.end(pagina);
+        grabarEnArchivo(formulario); 
+    });    
+}
+
+function grabarEnArchivo(formulario) {
+    var datos='nombre:'+formulario['nombre']+'&lt;br&gt;'+
+              'comentarios:'+formulario['comentarios']+'&lt;hr&gt;';
+    fs.appendFile('public/visitas.txt',datos,function(error){
+        if (error)
+            console.log(error);
+    });
+}
+
+function leerComentarios(respuesta) {
+    fs.readFile('public/visitas.txt',function (error,datos) {
+        respuesta.writeHead(200, {'Content-Type': 'text/html'});
+        respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;');
+        respuesta.write(datos);
+        respuesta.write('&lt;/body&gt;&lt;/html&gt;');
+        respuesta.end();          
+    });
+}
+
+console.log('Servidor web iniciado');
+</pre>
+
+<p>Todo la primera parte de nuestro programa es idéntica. Lo primero que cambia es cuando tenemos que enrutar los pedidos según la url:</p>
+<pre>
+function encaminar (pedido,respuesta,camino) {
+    switch (camino) {
+        case 'public/cargar': {
+            grabarComentarios(pedido,respuesta);
+            break;
+        }    
+        case 'public/leercomentarios': {
+            leerComentarios(respuesta);
+            break;
+        }            
+        default : {  
+           // ser sirve la página estática.
+        }
+    }    
+}
+</pre>
+
+<p>Si presionamos el botón submit del formulario HTML procede a verificarse verdadero el primer case del switch. Llamamos al método grabarComentarios</p>
+
+<p>La función grabarComentarios rescata primeramente todos los datos del formulario los parsea, los muestra en una página HTML (esto es todo lo visto en el concepto anterior) y procedemos a llamar a la función grabarEnArchivo:</p>
+<pre>
+function grabarComentarios(pedido,respuesta) {
+    var info = '';
+    pedido.on('data', function(datosparciales){
+         info += datosparciales;
+    });
+    pedido.on('end', function(){
+        var formulario = querystring.parse(info);
+        respuesta.writeHead(200, {'Content-Type': 'text/html'});
+        var pagina='&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;'+
+                   'Nombre:'+formulario['nombre']+'&lt;br&gt;'+
+                   'Comentarios:'+formulario['comentarios']+'&lt;br&gt;'+
+                   '&lt;a href="index.html"&gt;Retornar&lt;/a&gt;'+
+                   '&lt;/body&gt;&lt;/html&gt;';
+        respuesta.end(pagina);
+        grabarEnArchivo(formulario); 
+    });    
+}
+</pre>
+
+<p>La función grabarEnArchivo concatenamos los datos a grabar y llamamos al método appendFile que crea el archivo de texto 'visitas.txt' o lo abre para agregar en el caso que ya exista. El segundo parámetro recibe el string a grabar en el archivo de texto:</p>
+<pre>
+function grabarEnArchivo(formulario) {
+    var datos='nombre:'+formulario['nombre']+'&lt;br&gt;'+
+              'comentarios:'+formulario['comentarios']+'&lt;hr&gt;';
+    fs.appendFile('public/visitas.txt',datos,function(error){
+        if (error)
+            console.log(error);
+    });
+}
+</pre>
+
+<p>Recordemos que primero debemos iniciar el servidor desde la consola del sistema operativo tipeando:</p>
+<pre>
+c:\ejerciciosnodejs\ejercicio13>node ejercicio13.js
+</pre>
+<p>Luego en el navegador seleccionamos la primer opción:</p>
+<p><img src="imagentema/foto032.jpg" border="0" alt="menu html"></p>
+<p>Cargamos algunos datos en el formulario HTML (recordemos que es un archivo HTML estático):</p>
+<p><img src="imagentema/foto033.jpg" border="0" alt="formulario html"></p>
+<p>Finalmente cuando se suben los datos al servidor quedan registrados en el archivo de texto (que es lo nuevo que estamos viendo en este concepto) y se devuelve al navegador los datos ingresados:</p>
+<p><img src="imagentema/foto034.jpg" border="0" alt="formulario html"></p>
+
+<p>Para la impresión de datos desde la página index.html tenemos el siguiente enlace:</p>
+<pre>
+   &lt;a href="leercomentarios"&gt;Ver comentarios del libro de visitas.&lt;/a&gt;&lt;/p&gt;  
+</pre>
+<p>Esto hace que en el case de la función encaminar procedemos a llamar a la función leerComentarios:</p>
+<pre>
+        case 'public/leercomentarios': {
+            leerComentarios(respuesta);
+            break;
+        }            
+</pre>
+
+<p>La función leerComentarios utiliza el objeto 'fs' para leer el archivo de texto y generar una página dinámica con dichos datos:</p>
+<pre>
+function leerComentarios(respuesta) {
+    fs.readFile('public/visitas.txt',function (error,datos) {
+        respuesta.writeHead(200, {'Content-Type': 'text/html'});
+        respuesta.write('&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;');
+        respuesta.write(datos);
+        respuesta.write('&lt;/body&gt;&lt;/html&gt;');
+        respuesta.end();          
+    });
+}
+</pre>
+<p>El resultado en pantalla cuando pedimos dicho recurso desde el navegador es:</p>
+<p><img src="imagentema/foto035.jpg" border="0" alt="listado archivo de texto desde Node.js"></p>
+
+
+<p>Este proyecto lo puede descargar en un zip con todos los archivos desde este enlace :
+<a href="proyectos/ejercicio13.zip">ejercicio13</a></p>
+<h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-35', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=11&codigo=11&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:51:37 GMT -->
+</html>

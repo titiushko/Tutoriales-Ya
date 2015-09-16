@@ -1,0 +1,329 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=18&codigo=18&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:25:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Framework Express - recuperar datos de formulario (POST) y parámetros url (GET)</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++, programación, tutorial, nodejs">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de NodeJS.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>18 - Framework Express - recuperar datos de formulario (POST) y parámetros url (GET)</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Express lo definen sus autores como un framework minimalista, esto hace que muchas de las actividades de nuestra aplicación debemos codificarlas o utilizar otros módulos de terceros.</p>
+<p>Para recuperar los datos de un formulario HTML o los parámetros de una url debemos agregar además del framework Express una módulo para parsear los datos que llegan del navegador. Hay muchos módulos que hacen esta actividad el más común es el módulo 'body-parser'.</p>
+<h3>Problema</h3>
+<p>Confeccionar una aplicación que permita ingresar dos enteros por teclado. Luego al presionar el botón submit generar una página dinámica mostrando todos los números comprendidos entre el primer valor y el segundo de uno en uno. Los números mostrarlos como hipervínculos que al ser presionados generen una página dinámica con la tabla de multiplicar del valor seleccionado.</p>
+<p>Primero crearemos la carpeta donde alojaremos nuestro proyecto: ejercicio20.</p>
+<p>Ya tenemos la carpeta ejercicio20 creada ahora nos posicionamos en dicha carpeta y procedemos a instalar el framework 'express' y el módulo 'body-parser':</p>
+<pre>
+c:>ejerciciosnodejs\ejercicio20\npm install express
+</pre>
+<p>Y luego:</p>
+<pre>
+c:>ejerciciosnodejs\ejercicio20\npm install body-parser
+</pre>
+<p>En realidad el orden en que instalamos los módulos es indistinto pero luego de esto si vemos el contenido de la carpeta node_modules veremos que tiene las dos carpetas con los respectivos módulos:</p>
+<p><img src="imagentema/foto059.jpg" border="0" alt="carpetas body-parser express node.js"></p>
+<p>Ahora procedemos a crear la carpeta public dentro de la carpeta ejercicio20 donde dispondremos la página estática HTML donde hay un formulario que pide el ingreso de dos números:</p>
+<p><img src="imagentema/foto060.jpg" border="0" alt="carpetas public archivo estatico express node.js"></p>
+<p>Su contenido es:</p>
+<pre>index.html</pre>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Formulario&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;p&gt;Mostrar todos los numeros comprendidos entre los dos valores ingresados de uno en uno.&lt;/p&gt;
+  &lt;form action="mostrarnumeros" method="post"&gt;
+  Ingrese numero inferior:
+  &lt;input type="text" name="numero1" size="10"&gt;&lt;br&gt;
+  Ingrese numero superior:
+  &lt;input type="text" name="numero2" size="10"&gt;&lt;br&gt;
+  &lt;input type="submit" value="Mostrar"&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+
+<p>Creamos finalmente la aplicación de Node.js para servir páginas estáticas, recuperar datos del formulario HTML y finalmente recuperar datos de parámetros de hipervínculos.</p>
+<p>La aplicación la creamos en la carpeta 'ejercicio12' y le damos como nombre app.js:</p>
+<pre class="recuadro">
+var express = require('express');
+var app=express();
+var bodyParser = require('body-parser');
+
+//especificamos el subdirectorio donde se encuentran las páginas estáticas
+app.use(express.static(__dirname + '/public'));
+
+//extended: false significa que parsea solo string (no archivos de imagenes por ejemplo)
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.post('/mostrarnumeros', function (req, res) {
+    var num1=req.body.numero1;
+    var num2=req.body.numero2;
+    num1=parseInt(num1);
+    num2=parseInt(num2);
+    var pagina='&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;';
+    for(var x=num1;x&lt;=num2;x++)
+        pagina += '&lt;a href="/mostrartabla?valor='+x+'"&gt;'+x+'&lt;/a&gt;'+' - ';
+    pagina += '&lt;/body&gt;&lt;/html&gt;';
+    res.send(pagina);    
+})
+
+app.get('/mostrartabla', function (req, res) {
+    var num=req.query.valor;
+    num=parseInt(num);
+    var pagina='&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;';
+    for(var x=1;x&lt;=10;x++) {
+        var tabla=num * x;
+        pagina += num + ' * ' + x + ' = ' + tabla + '&lt;br&gt;';
+    }    
+    pagina += '&lt;a href="index.html"&gt;Retornar&lt;/a&gt;';
+    pagina += '&lt;/body&gt;&lt;/html&gt;';
+    res.send(pagina);    
+})
+
+
+var server=app.listen(8888,function(){
+    console.log('Servidor web iniciado');
+});
+</pre>
+
+<p>Lo nuevo que aparece es que requerimos el módulo 'body-parser':</p>
+<pre>
+var bodyParser = require('body-parser');
+</pre>
+
+<p>Lo enlazamos con Express llamando al método use y pasando lo que devuelve la función urlencoded:</p>
+<pre>
+app.use(bodyParser.urlencoded({ extended: false }));
+</pre>
+
+<p>La página estática la retorna Express ya que registramos el directorio que debe servir páginas estáticas:</p>
+<pre>
+app.use(express.static(__dirname + '/public'));
+</pre>
+
+<p>Cuando presionamos el botón 'submit' de nuestro formulario la propiedad action tiene el valor action="mostrarnumeros", esto hace que nuestro programa capture dicha ruta con el siguiente código:</p>
+<pre>
+app.post('/mostrarnumeros', function (req, res) {
+    var num1=req.body.numero1;
+    var num2=req.body.numero2;
+    num1=parseInt(num1);
+    num2=parseInt(num2);
+    var pagina='&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;';
+    for(var x=num1;x&lt;=num2;x++)
+        pagina += '&lt;a href="/mostrartabla?valor='+x+'"&gt;'+x+'&lt;/a&gt;'+' - ';
+    pagina += '&lt;/body&gt;&lt;/html&gt;';
+    res.send(pagina);    
+})
+</pre>
+<p>Es aquí donde recuperamos los dos controles del formulario mediante el objeto 'req' que tiene una propiedad 'body' y dentro de esta podemos acceder a todos los 'name' que definimos en el formulario HTML (si no utilizamos el módulo 'body-parser' luego la propiedad req.body tiene el valor undefined):</p>
+<pre>
+    var num1=req.body.numero1;
+    var num2=req.body.numero2;
+</pre>
+<p>Los convertimos a entero los valores recuperados:</p>
+<pre>
+    num1=parseInt(num1);
+    num2=parseInt(num2);
+</pre>
+<p>Y finalmente generamos la página en forma dinámica con todos los enlaces con cada número comprendido entre los valores ingresados de uno en uno:</p>
+<pre>
+    var pagina='&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;';
+    for(var x=num1;x&lt;=num2;x++)
+        pagina += '&lt;a href="/mostrartabla?valor='+x+'"&gt;'+x+'&lt;/a&gt;'+' - ';
+    pagina += '&lt;/body&gt;&lt;/html&gt;';
+</pre>
+<p>Enviamos al navegador la página generada dinamicamente:</p>
+<pre>
+    res.send(pagina);    
+</pre>
+
+<p>Si iniciamos el programa de node y solicitamos la página estática al navegador tenemos:</p>
+<p><img src="imagentema/foto061.jpg" border="0" alt="post body-parser express node.js"></p>
+<p>Y cuando presionamos el botón 'submit' podemos observar todos los valores comprendidos entre el primer y segundo valor ingresado:</p>
+<p><img src="imagentema/foto062.jpg" border="0" alt="post body-parser express node.js"></p>
+
+<p>Cada número que se muestra es un hipervínculo que tiene un parámetro llamado valor junto con el número propiamente dicho. Cuando el operador presiona el hipervínculo se captura el path del mismo con el siguiente codigo Node.js:</p>
+<pre>
+app.get('/mostrartabla', function (req, res) {
+    var num=req.query.valor;
+    num=parseInt(num);
+    var pagina='&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;';
+    for(var x=1;x&lt;=10;x++) {
+        var tabla=num * x;
+        pagina += num + ' * ' + x + ' = ' + tabla + '&lt;br&gt;';
+    }    
+    pagina += '&lt;a href="index.html"&gt;Retornar&lt;/a&gt;';
+    pagina += '&lt;/body&gt;&lt;/html&gt;';
+    res.send(pagina);    
+})
+</pre>
+<p>Acá de forma similar recuperamos el dato que viene en el hipervínculo mediante la propiedad 'query' del objeto 'req':</p>
+<pre>
+    var num=req.query.valor;
+</pre>
+<p>Luego de convertirlo a entero pasamos a generar la página HTML dinámica con la tabla de multiplicar de dicho valor:</p>
+<pre>
+    num=parseInt(num);
+    var pagina='&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;';
+    for(var x=1;x&lt;=10;x++) {
+        var tabla=num * x;
+        pagina += num + ' * ' + x + ' = ' + tabla + '&lt;br&gt;';
+    }    
+    pagina += '&lt;a href="index.html"&gt;Retornar&lt;/a&gt;';
+    pagina += '&lt;/body&gt;&lt;/html&gt;';
+</pre>
+<p>Enviamos al navegador la página:</p>
+<pre>
+    res.send(pagina);    
+</pre>
+<p>En pantalla tenemos como resultado:</p>
+<p><img src="imagentema/foto063.jpg" border="0" alt="get body-parser express node.js"></p>
+
+<p>Este proyecto con Express y body-parser lo puede descargar en un zip con todos los archivos desde este enlace :
+<a href="proyectos/ejercicio20.zip">ejercicio20</a></p>
+<h2><a href="index9187.html?inicio=15">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-35', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=18&codigo=18&inicio=15 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:25:30 GMT -->
+</html>

@@ -1,0 +1,185 @@
+
+<!DOCTYPE html> 
+<html lang="es"> 
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=135&punto=3&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:03:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>CANVAS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="html5, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de HTML 5. Es objetivo prioritario respetar 
+los estándares del W3C">
+<meta name="author" content="Diego Moisset">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+</style>
+
+</head>
+
+<body>
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em"><a href="../../html5.html">Temario del Tutorial</a></span>->3 - CANVAS</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>CANVAS es una nueva marca del HTML 5, permite dibujar en dicha área mediante JavaScript. El objetivo de este elemento es hacer gráficos en el cliente (navegador), juegos etc.  Para hacer un uso efectivo de este nuevo elemento de HTML tenemos que manejar el JavaScript.</p>
+<p>La estructura de un programa que accede al canvas es:</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;!DOCTYPE HTML&gt;
+&lt;head&gt;
+&lt;script type="text/javascript"&gt;
+
+function retornarLienzo(x)
+{
+   var canvas = document.getElementById(x);
+   if (canvas.getContext) 
+   {
+     var lienzo = canvas.getContext("2d");   
+     return lienzo;
+   }
+   else
+     return false;
+}
+
+function dibujar()
+{
+   var lienzo=retornarLienzo("lienzo1");
+   if (lienzo)
+   { 
+     lienzo.fillStyle = "rgb(200,0,0)";
+     lienzo.fillRect (10, 10, 100, 100);
+   }
+}
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body onLoad="dibujar()"&gt;
+&lt;canvas id="lienzo1" width="300" height="200"&gt;
+Su navegador no permite utilizar canvas.
+&lt;/canvas&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>La primer función que implementaremos y será de uso común en todos los problemas es la que retorna la referencia al objeto que nos permite dibujar en el canvas:</p>
+<pre>
+function retornarLienzo(x)
+{
+   var canvas = document.getElementById(x);
+   if (canvas.getContext) 
+   {
+     var lienzo = canvas.getContext("2d");   
+     return lienzo;
+   }
+   else
+     return false;
+}
+</pre>
+<p>La función recibe el "id" que hemos especificado en el elemento canvas dispuesto en la página (en este ejemplo le llamamos lienzo1):</p>
+<pre>
+&lt;canvas id="lienzo1" width="300" height="200"&gt;
+Su navegador no permite utilizar canvas.
+&lt;/canvas&gt;
+</pre>
+<p>En caso que el navegador no implemente la especificación del elemento canvas produce un falso el if (lo que estamos haciendo en este if es comprobar si existe la función getContext, en caso afirmativo el navegador soporta canvas):</p>
+<pre>
+   if (canvas.getContext) 
+</pre>
+<p>En caso de implementar el canvas obtenemos una referencia del mismo llamando a la función getContext y pasando como parámetro un string con el valor "2d" (a futuro es probable la implementación de un canvas que permita "3d"):</p>
+<pre>
+     var lienzo = canvas.getContext("2d");   
+</pre>
+<p>La función dibujar es la que se ejecuta luego que se carga la página en el navegador:</p>
+<pre>
+function dibujar()
+{
+   var lienzo=retornarLienzo("lienzo1");
+   if (lienzo)
+   { 
+     lienzo.fillStyle = "rgb(200,0,0)";
+     lienzo.fillRect (10, 10, 100, 100);
+   }
+}
+</pre>
+<p>En esta función llamamos a la anterior "retornarLienzo("lienzo1") pasando como parámetro el id del canvas respectivo. En caso que la función retorne la referencia al lienzo el if se verificará como verdadero y estaremos en condiciones de comenzar a dibujar en el mismo:</p>
+<pre>
+   var lienzo=retornarLienzo("lienzo1");
+   if (lienzo)
+</pre>
+<p>Mediante la variable lienzo podemos acceder a un conjunto de funciones y propiedades disponibles para dibujar. En nuestro ejemplo:</p>
+<pre>
+     lienzo.fillStyle = "rgb(200,0,0)";
+     lienzo.fillRect (10, 10, 100, 100);
+</pre>
+<p>Activamos como color de relleno de figura el rojo (200,0,0) y seguidamente llamamos a la función fillRect que dibuja un rectángulo desde la posición (10,10) con ancho de 100 píxeles y un alto de 100 píxeles. La coordenada (0,0) se encuentra en la parte superior izquierda.</p>
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+
+</div>
+
+</body>
+
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=135&punto=3&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:03:23 GMT -->
+</html>

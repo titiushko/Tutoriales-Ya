@@ -1,0 +1,156 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=0&cod=174&punto=16 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:25 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Descripción : Tipos de datos numéricos (Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>16 - Tipos de datos numéricos</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>Ya explicamos que al crear una tabla debemos elegir la estructura adecuada, esto es, definir los campos y sus tipos más precisos, según el caso.</p>
+
+<p>Los valores numéricos no se ingresan entre comillas. Se utiliza el punto como separador de decimales.</p>
+
+<p>Para almacenar valores NUMERICOS Oracle dispone de dos tipos de datos:</p>
+<p> 1) number(t,d): para almacenar valores enteros o decimales, positivos o negativos. Su rango va de 1.0 x 10-130 hasta 9.999...(38 nueves). Definimos campos de este tipo cuando queremos almacenar valores numéricos con los cuales luego realizaremos operaciones matemáticas, por ejemplo, cantidades, precios, etc.</p>
+<p>El parámetro "t" indica el número total de dígitos (contando los decimales) que contendrá el número como máximo (es la precisión). Su rango va de 1 a 38. El parámetro "d" indica el máximo de dígitos decimales (escala). La escala puede ir de -84 a 127. Para definir número enteros, se puede omitir el parámetro "d" o colocar un 0.</p>
+<p>Un campo definido "number(5,2)" puede contener cualquier número entre -999.99 y 999.99.</p>
+
+<p>Para especificar número enteros, podemos omitir el parámetro "d" o colocar el valor 0.<br>
+Si intentamos almacenar un valor mayor fuera del rango permitido al definirlo, tal valor no se carga, aparece un mensaje indicando tal situación y la sentencia no se ejecuta.<br>
+Por ejemplo, si definimos un campo de tipo "number(4,2)" e intentamos guardar el valor 123.45, aparece un mensaje indicando que el valor es demasiado grande para la columna. Si ingresamos un valor con más decimales que los definidos, el valor se carga pero con la cantidad de decimales permitidos, los dígitos sobrantes se omiten.</p>
+<p> 2) float (x): almacena un número en punto decimal. El parámetro indica la precisión binaria máxima; con un rango de 1 a 126. Si se omite, por defecto es 126.</p>
+<p>Para ambos tipos numéricos:</p>
+<p>- si ingresamos un valor con más decimales que los permitidos, redondea al más cercano; por ejemplo, si definimos "float(4,2)" e ingresamos el valor "12.686", guardará "12.69", redondeando hacia arriba; si ingresamos el valor "12.682", guardará "12.67", redondeando hacia abajo.</p>
+<p>- si intentamos ingresar un valor fuera de rango, no lo acepta.</p>
+<p>- si ingresamos una cadena, Oracle intenta convertirla a valor numérico, si dicha cadena consta solamente de dígitos, la conversión se realiza, luego verifica si está dentro del rango, si es así, la ingresa, sino, muestra un mensaje de error y no ejecuta la sentencia. Si la cadena contiene caracteres que Oracle no puede convertir a valor numérico, muestra un mensaje de error y la sentencia no se ejecuta.<br>
+Por ejemplo, definimos un campo de tipo "numberl(5,2)", si ingresamos la cadena '12.22', la convierte al valor numérico 12.22 y la ingresa; si intentamos ingresar la cadena '1234.56', la convierte al valor numérico 1234.56, pero como el máximo valor permitido es 999.99, muestra un mensaje indicando que está fuera de rango. Si intentamos ingresar el valor '12y.25', Oracle no puede realizar la conversión y muestra un mensaje de error.</p>
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../index2904.html?inicio=0">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=0&cod=174&punto=16 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:14:25 GMT -->
+</html>

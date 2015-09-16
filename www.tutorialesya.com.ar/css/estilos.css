@@ -1,0 +1,28 @@
+
+
+.presentacion {
+    margin-top: 10px;
+    background-color:#ffb;
+    box-shadow: 0px 0px 15px #aa0;
+    border-radius:14px;    
+}
+
+.lenguaje {
+    margin-bottom: 30px;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+.thumbnail {
+  background-color:#ddf;
+  border-radius:14px;
+  min-height:20em;
+  box-shadow: 0px 0px 15px #ddf;  
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: #ccc;
+  font-size:1.5em;
+}

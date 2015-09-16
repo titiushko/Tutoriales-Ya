@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=50&cod=58&punto=54 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:08:07 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de CSS - Temarios</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<style>
+
+
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>54 - Pseudo-clases: nth-of-type, nth-last-of-type, first-of-type y last-of-type</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>La pseudo-clase nth-of-type selecciona el elemento HTML que es el enésimo elemento hermano del mismo nivel de su TIPO.</p>
+<p>En cambio nth-child selecciona el elemento HTML que es el enésimo elemento hermano (teniendo en cuenta la posición de elementos de distinto tipo)</p>
+<p>Veamos un ejemplo para entender la mecánica de funcionamiento de la pseudo-clase nth-of-type, si tenemos la siguiente página:</p>
+<pre class="recuadro">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;link rel="StyleSheet" href="estilos.css" type="text/css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id="contenido"&gt;
+    &lt;h1&gt;Título&lt;/h1&gt;
+    &lt;p&gt;Párrafo 1&lt;/p&gt;
+    &lt;p&gt;Párrafo 2&lt;/p&gt;
+    &lt;p&gt;Párrafo 3&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Si queremos pintar de rojo el primer párrafo utilizando la pseudo-clase nth-child debemos especificar el siguiente selector:</p>
+<pre>
+#contenido p:nth-child(2) {
+  color:red;
+}
+</pre>
+<p>Es importante entender que en ese nivel hay cuatro elemento (un h1 y tres párrafos) y mediante nth-child debemos indicar el segundo elemento si queremos acceder al primer párrafo.</p>
+<p>Entonces para este tipo de problemas donde los elementos HTML de un nivel sean de distintos tipos y queremos acceder solo a los de un determinado tipo debemos emplear este nuevo conjunto de pseudo-clases que solo tienen en cuenta los elementos del mismo tipo.</p>
+<p>Para pintar de color rojo el primer párrafo contenido en el div debemos utilizar la sintaxis más adecuada:</p>
+<pre>
+#contenido p:nth-of-type(1) {
+  color:red;
+}
+</pre>
+
+
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../indexefd7.html?inicio=50">Retornar</a></h2>   
+
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.cssya.com.ar/temarios/descripcion.php?inicio=50&cod=58&punto=54 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:08:07 GMT -->
+</html>

@@ -1,0 +1,140 @@
+HTTrack3.48-21+htsswf+htsjava launched on Tue, 15 Sep 2015 07:46:43 at http://www.tutorialesya.com.ar/ +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qYC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" -%l "en, *" -Y http://www.tutorialesya.com.ar/ -O1 "C:\My Web Sites\Tutoriales Ya" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+07:47:02	Error: 	"Error when decompressing" (-1) at link www.tutorialesya.com.ar/cmasmasya (from www.tutorialesya.com.ar/)
+07:47:02	Error: 	Unable to save file C:/My Web Sites/Tutoriales Ya/www.tutorialesya.com.ar/cmasmasya: Permission denied
+08:51:12	Warning: 	file not stored in cache due to bogus state (broken size, expected 2855289 got 451200): www.javascriptya.com.ar/nodejsya/proyectos/ejercicio10.zip
+08:51:43	Warning: 	file not stored in cache due to bogus state (broken size, expected 2855373 got 526460): www.javascriptya.com.ar/nodejsya/proyectos/ejercicio11.zip
+08:52:43	Warning: 	file not stored in cache due to bogus state (broken size, expected 2869644 got 992931): www.javascriptya.com.ar/nodejsya/proyectos/ejercicio15.zip
+08:53:55	Warning: 	file not stored in cache due to bogus state (incomplete type with OK (200), size 3773): www.javaya.com.ar/imagentema/foto075.jpg
+09:00:42	Warning: 	Retry after error -4 (No data (connection closed)) at link www.csharpya.com.ar/detalleconcepto.php?codigo=183&inicio=40 (from www.csharpya.com.ar/index.php?inicio=40)
+09:04:50	Warning: 	Retry after error -4 (No data (connection closed)) at link www.htmlya.com.ar/index.php?inicio=0 (from www.htmlya.com.ar/temarios/descripcion.php?inicio=0&cod=68&punto=1)
+09:04:50	Warning: 	Retry after error -4 (No data (connection closed)) at link www.htmlya.com.ar/simulador/problema.php?inicio=0&cod=69 (from www.htmlya.com.ar/simulador/simulador.php?inicio=0&cod=69&punto=2)
+09:04:53	Error: 	"Not Found" (404) at link www.htmlya.com.ar/simulador/pagina2.html (from www.htmlya.com.ar/simulador/simulador2.php?inicio=0&cod=74&punto=7)
+09:04:53	Error: 	"Not Found" (404) at link www.htmlya.com.ar/simulador/pagina1.html (from www.htmlya.com.ar/simulador/simulador2.php?inicio=0&cod=74&punto=7)
+09:04:54	Error: 	"Not Found" (404) at link www.htmlya.com.ar/foto1.jpg (from www.htmlya.com.ar/simulador/simulador2.php?inicio=0&cod=77&punto=10)
+09:04:54	Error: 	"Not Found" (404) at link www.htmlya.com.ar/simulador/pagina3.html (from www.htmlya.com.ar/simulador/simulador2.php?inicio=0&cod=77&punto=10)
+09:04:54	Error: 	"Not Found" (404) at link www.htmlya.com.ar/foto2.jpg (from www.htmlya.com.ar/simulador/simulador2.php?inicio=0&cod=77&punto=10)
+09:05:31	Warning: 	Retry after error -4 (No data (connection closed)) at link www.htmlya.com.ar/simulador/simulador.php?inicio=48&cod=124&punto=56 (from www.htmlya.com.ar/index.php?inicio=48)
+09:05:40	Warning: 	file not stored in cache due to bogus state (incomplete type with OK (200), size 0): www.cssya.com.ar/css3ya/vacio.html
+09:07:20	Error: 	"Not Found" (404) at link www.cssya.com.ar/problemas/debug.js (from www.cssya.com.ar/problemas/problema.php?inicio=0&cod=2&punto=2)
+09:07:20	Warning: 	Retry after error -4 (No data (connection closed)) at link www.cssya.com.ar/temarios/descripcion.php?inicio=10&cod=20&punto=16 (from www.cssya.com.ar/index.php?inicio=10)
+09:07:23	Warning: 	Retry after error -4 (No data (connection closed)) at link www.cssya.com.ar/temarios/descripcion.php?inicio=40&cod=41&punto=44 (from www.cssya.com.ar/index.php?inicio=40)
+09:09:21	Warning: 	Retry after error -2 (Receive Time Out) at link www.javascriptya.com.ar/print.css (from www.javascriptya.com.ar/index3.php)
+09:09:23	Warning: 	Retry after error -2 (Receive Time Out) at link www.javascriptya.com.ar/jquery/imagenes/ejecucion.gif (from www.javascriptya.com.ar/jquery/)
+09:09:28	Warning: 	Retry after error -2 (Receive Time Out) at link www.javascriptya.com.ar/jquery/problemas/resolverproblema.php?inicio=0&cod=58&punto=2&inicio=0 (from www.javascriptya.com.ar/jquery/)
+09:09:28	Warning: 	Retry after error -4 (No data (connection closed)) at link www.javascriptya.com.ar/jquery/temarios/descripcion.php?cod=59&punto=3&inicio=0 (from www.javascriptya.com.ar/jquery/)
+09:09:34	Warning: 	Retry after error -4 (No data (connection closed)) at link www.javascriptya.com.ar/jquery/simulador/simulador.php?inicio=0&cod=62&punto=6&inicio=0 (from www.javascriptya.com.ar/jquery/)
+09:10:28	Error: 	"Not Found" (404) at link www.mysqlya.com.ar/temarios/descripcion2.php?cod= (from www.mysqlya.com.ar/problemas/problema.php?inicio=0&cod=3&punto=3)
+09:10:28	Warning: 	Retry after error -4 (No data (connection closed)) at link www.mysqlya.com.ar/problemas/problema.php?inicio=21&cod=40&punto=41 (from www.mysqlya.com.ar/index.php?inicio=21)
+09:10:32	Warning: 	Retry after error -4 (No data (connection closed)) at link www.sqlserverya.com.ar/simulador/simulador.php?inicio=50&cod=75&punto=69 (from www.sqlserverya.com.ar/index.php?inicio=50)
+09:10:35	Error: 	"Not Found" (404) at link www.oracleya.com.ar/temarios/descripcion2.php?cod= (from www.oracleya.com.ar/problemas/problema.php?inicio=0&cod=160&punto=2)
+09:10:36	Warning: 	Retry after error -4 (No data (connection closed)) at link www.oracleya.com.ar/problemas/problema.php?inicio=50&cod=214&punto=56 (from www.oracleya.com.ar/index.php?inicio=50)
+09:10:36	Warning: 	Retry after error -4 (No data (connection closed)) at link www.oracleya.com.ar/simulador/simulador.php?inicio=50&cod=233&punto=75 (from www.oracleya.com.ar/index.php?inicio=50)
+09:10:40	Error: 	"Not Found" (404) at link www.postgresqlya.com.ar/temarios/descripcion2.php?cod= (from www.postgresqlya.com.ar/problemas/problema.php?inicio=0&cod=160&punto=2)
+09:10:40	Warning: 	Retry after error -4 (No data (connection closed)) at link www.postgresqlya.com.ar/simulador/simulador.php?inicio=25&cod=184&punto=26 (from www.postgresqlya.com.ar/index.php?inicio=25)
+09:10:40	Warning: 	Retry after error -4 (No data (connection closed)) at link www.postgresqlya.com.ar/simulador/simulador.php?inicio=25&cod=186&punto=28 (from www.postgresqlya.com.ar/index.php?inicio=25)
+09:10:40	Warning: 	Retry after error -4 (No data (connection closed)) at link www.postgresqlya.com.ar/simulador/simulador.php?inicio=25&cod=189&punto=31 (from www.postgresqlya.com.ar/index.php?inicio=25)
+09:10:40	Error: 	"Service Unavailable" (503) at link www.postgresqlya.com.ar/problemas/problema.php?inicio=25&cod=189&punto=31 (from www.postgresqlya.com.ar/index.php?inicio=25)
+09:55:51	Warning: 	Retry after error -4 (Incorrect length (177854 Bytes, 954082 expected)) at link www.javaya.com.ar/androidya/proyectos/proyecto002.zip (from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=134&inicio=0)
+09:57:44	Warning: 	Retry after error -4 (Incorrect length (20179 Bytes, 151726 expected)) at link www.javaya.com.ar/androidya/imagentema/foto028.jpg (from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=136&inicio=0)
+09:58:12	Warning: 	Retry after error -4 (Incorrect length (75659 Bytes, 166896 expected)) at link www.javaya.com.ar/androidya/imagentema/foto030.jpg (from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=137&inicio=0)
+10:22:20	Warning: 	Retry after error -4 (Incorrect length (451200 Bytes, 2855289 expected)) at link www.javascriptya.com.ar/nodejsya/proyectos/ejercicio10.zip (from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=8&codigo=8&inicio=0)
+10:22:23	Warning: 	Retry after error -4 (Incorrect length (526460 Bytes, 2855373 expected)) at link www.javascriptya.com.ar/nodejsya/proyectos/ejercicio11.zip (from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=9&codigo=9&inicio=0)
+10:22:26	Warning: 	Retry after error -4 (Incorrect length (992931 Bytes, 2869644 expected)) at link www.javascriptya.com.ar/nodejsya/proyectos/ejercicio15.zip (from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=13&codigo=13&inicio=0)
+10:24:52	Warning: 	file not stored in cache due to bogus state (broken size, expected 2869644 got 1891348): www.javascriptya.com.ar/nodejsya/proyectos/ejercicio15.zip
+10:25:01	Warning: 	file not stored in cache due to bogus state (broken size, expected 2855373 got 1504116): www.javascriptya.com.ar/nodejsya/proyectos/ejercicio11.zip
+10:25:07	Warning: 	file not stored in cache due to bogus state (broken size, expected 2855289 got 1495905): www.javascriptya.com.ar/nodejsya/proyectos/ejercicio10.zip
+10:27:41	Warning: 	file not stored in cache due to bogus state (broken size, expected 3227624 got 983491): www.javascriptya.com.ar/nodejsya/proyectos/ejercicio19.zip
+10:28:30	Warning: 	file not stored in cache due to bogus state (broken size, expected 1357366 got 1099171): www.javascriptya.com.ar/nodejsya/proyectos/ejercicio21.zip
+10:29:07	Warning: 	file not stored in cache due to bogus state (broken size, expected 1358167 got 1072691): www.javascriptya.com.ar/nodejsya/proyectos/ejercicio22.zip
+10:29:59	Warning: 	file not stored in cache due to bogus state (broken size, expected 1584474 got 776664): www.javascriptya.com.ar/nodejsya/proyectos/ejercicio23.zip
+10:30:38	Warning: 	file not stored in cache due to bogus state (broken size, expected 1358324 got 949232): www.javascriptya.com.ar/nodejsya/proyectos/ejercicio24.zip
+10:30:58	Warning: 	file not stored in cache due to bogus state (broken size, expected 1434746 got 924728): www.javascriptya.com.ar/nodejsya/proyectos/ejercicio25.zip
+10:31:10	Warning: 	file not stored in cache due to bogus state (broken size, expected 1823616 got 959784): www.javascriptya.com.ar/nodejsya/proyectos/ejercicio26.zip
+10:32:02	Error: 	"Error when decompressing" (-1) at link www.htmlya.com.ar/html5 (from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=132&punto=1&inicio=0)
+10:33:25	Warning: 	file not stored in cache due to bogus state (incomplete type with OK (200), size 0): www.cssya.com.ar/bootstrapya/vacio.html
+10:33:25	Warning: 	Retry after error -4 (No data (connection closed)) at link www.cssya.com.ar/bootstrapya/imagentema/foto008.jpg (from www.cssya.com.ar/bootstrapya/detalleconcepto.php?punto=3&codigo=118&inicio=0)
+10:33:25	Warning: 	Retry after error -4 (No data (connection closed)) at link www.cssya.com.ar/bootstrapya/ejecutar.php?cod=119 (from www.cssya.com.ar/bootstrapya/detalleconcepto.php?punto=4&codigo=119&inicio=0)
+10:33:54	Warning: 	Retry after error -4 (No data (connection closed)) at link www.cssya.com.ar/bootstrapya/detalleconcepto.php?punto=35&codigo=150&inicio=20 (from www.cssya.com.ar/bootstrapya/index.php?inicio=20)
+10:34:16	Warning: 	Retry after error -4 (No data (connection closed)) at link www.htmlya.com.ar/simulador/editor.php?cod=103 (from www.htmlya.com.ar/simulador/simulador.php?inicio=32&cod=103&punto=40)
+10:34:18	Error: 	"Not Found" (404) at link www.htmlya.com.ar/simulador/pagina4.html (from www.htmlya.com.ar/simulador/simulador2.php?inicio=32&cod=119&punto=48)
+10:34:18	Warning: 	Found for www.htmlya.com.ar/simulador/simulador.php?inicio=48&cod=124&punto=56
+10:34:18	Warning: 	File has moved from www.htmlya.com.ar/simulador/simulador.php?inicio=48&cod=124&punto=56 to simulador2.php?inicio=48&cod=124&punto=56
+10:34:19	Warning: 	Retry after error -4 (No data (connection closed)) at link www.cssya.com.ar/css3ya/foto1.jpg (from www.cssya.com.ar/css3ya/detalleconcepto.php?cod=95)
+10:34:19	Warning: 	Retry after error -4 (No data (connection closed)) at link www.cssya.com.ar/css3ya/imagentema/foto031.jpg (from www.cssya.com.ar/css3ya/detalleconcepto.php?cod=98)
+10:34:19	Error: 	"Not Found" (404) at link www.cssya.com.ar/simulador/estilos.css (from www.cssya.com.ar/simulador/simulador.php?inicio=10&cod=15&punto=11)
+10:34:19	Warning: 	Retry after error -4 (No data (connection closed)) at link www.cssya.com.ar/simulador/imagen1.png (from www.cssya.com.ar/simulador/simulador.php?inicio=40&cod=40&punto=41)
+10:34:21	Error: 	"Not Found" (404) at link www.phpya.com.ar/poo/simulador/pagina1.php (from www.phpya.com.ar/poo/simulador/simulador.php?cod=36&punto=2&inicio=0)
+10:34:21	Error: 	"Not Found" (404) at link www.phpya.com.ar/poo/problemas/pagina1.php (from www.phpya.com.ar/poo/problemas/resolverproblema.php?cod=36&punto=2&inicio=0)
+10:34:21	Error: 	"Not Found" (404) at link www.phpya.com.ar/temarios/datos.txt (from www.phpya.com.ar/temarios/descripcion.php?punto=15&cod=36&inicio=10)
+10:34:21	Error: 	"Not Found" (404) at link www.phpya.com.ar/temarios/pedidos.txt (from www.phpya.com.ar/temarios/descripcion.php?punto=16&cod=37&inicio=10)
+10:34:21	Error: 	"Not Found" (404) at link www.phpya.com.ar/temarios/pagina2.php?tabla=2 (from www.phpya.com.ar/temarios/descripcion.php?punto=31&cod=52&inicio=30)
+10:34:21	Error: 	"Not Found" (404) at link www.phpya.com.ar/temarios/pagina2.php?tabla=3 (from www.phpya.com.ar/temarios/descripcion.php?punto=31&cod=52&inicio=30)
+10:34:21	Error: 	"Not Found" (404) at link www.phpya.com.ar/temarios/pagina2.php?tabla=5 (from www.phpya.com.ar/temarios/descripcion.php?punto=31&cod=52&inicio=30)
+10:34:21	Error: 	"Not Found" (404) at link www.phpya.com.ar/temarios/pagina1.php (from www.phpya.com.ar/temarios/descripcion.php?punto=31&cod=52&inicio=30)
+10:34:21	Error: 	"Not Found" (404) at link www.phpya.com.ar/"pagina2.php?codigo=$reg[codigo]\%22 (from www.phpya.com.ar/temarios/descripcion.php?punto=31&cod=52&inicio=30)
+10:34:21	Error: 	"Not Found" (404) at link www.phpya.com.ar/"pagina1.php?pos=$anterior\%22 (from www.phpya.com.ar/temarios/descripcion.php?punto=32&cod=53&inicio=30)
+10:34:21	Error: 	"Not Found" (404) at link www.phpya.com.ar/"pagina1.php?pos=$proximo\%22 (from www.phpya.com.ar/temarios/descripcion.php?punto=32&cod=53&inicio=30)
+10:34:21	Error: 	"Not Found" (404) at link www.phpya.com.ar/"$nom/" (from www.phpya.com.ar/temarios/descripcion.php?punto=33&cod=54&inicio=30)
+10:34:21	Error: 	"Not Found" (404) at link www.phpya.com.ar/temarios/pagina3.php (from www.phpya.com.ar/temarios/descripcion.php?punto=35&cod=56&inicio=30)
+10:34:21	Error: 	"Not Found" (404) at link www.phpya.com.ar/temarios/pagina2.php (from www.phpya.com.ar/temarios/descripcion.php?punto=36&cod=57&inicio=30)
+10:34:21	Error: 	"Not Found" (404) at link www.phpya.com.ar/temarios/pagina3.php?puntos=<?php%20echo%20$_REQUEST['puntos'];?> (from www.phpya.com.ar/temarios/descripcion.php?punto=41&cod=62&inicio=40)
+10:34:22	Error: 	"Not Found" (404) at link www.javascriptya.com.ar/publicidad/ (from www.javascriptya.com.ar/jquery/temarios/descripcion.php?cod=57&punto=1&inicio=0)
+10:34:22	Error: 	"Not Found" (404) at link www.javascriptya.com.ar/jquery/imagenes/publicidad.png (from www.javascriptya.com.ar/jquery/temarios/descripcion.php?cod=57&punto=1&inicio=0)
+10:34:22	Error: 	"Not Found" (404) at link www.javascriptya.com.ar/jquery/simulador/pagina1.html (from www.javascriptya.com.ar/jquery/simulador/simulador.php?inicio=0&cod=58&punto=2&inicio=0)
+10:34:22	Error: 	"Not Found" (404) at link www.javascriptya.com.ar/jquery/simulador/pagina2.html (from www.javascriptya.com.ar/jquery/simulador/simulador.php?inicio=0&cod=58&punto=2&inicio=0)
+10:34:22	Error: 	"Not Found" (404) at link www.javascriptya.com.ar/jquery/simulador/funciones1.js (from www.javascriptya.com.ar/jquery/simulador/simulador.php?inicio=0&cod=58&punto=2&inicio=0)
+10:34:22	Error: 	"Not Found" (404) at link www.javascriptya.com.ar/jquery/simulador/pagina3.html (from www.javascriptya.com.ar/jquery/simulador/simulador.php?inicio=0&cod=58&punto=2&inicio=0)
+10:34:22	Error: 	"Not Found" (404) at link www.javascriptya.com.ar/jquery/simulador/funciones2.js (from www.javascriptya.com.ar/jquery/simulador/simulador.php?inicio=0&cod=58&punto=2&inicio=0)
+10:34:22	Error: 	"Not Found" (404) at link www.javascriptya.com.ar/jquery/simulador/funciones.js (from www.javascriptya.com.ar/jquery/simulador/simulador.php?inicio=0&cod=59&punto=3&inicio=0)
+10:34:22	Error: 	"Not Found" (404) at link www.javascriptya.com.ar/jquery/problemas/pagina1.html (from www.javascriptya.com.ar/jquery/problemas/resolverproblema.php?inicio=0&cod=59&punto=3&inicio=0)
+10:34:22	Error: 	"Not Found" (404) at link www.javascriptya.com.ar/jquery/problemas/funciones.js (from www.javascriptya.com.ar/jquery/problemas/resolverproblema.php?inicio=0&cod=59&punto=3&inicio=0)
+10:34:22	Error: 	"Not Found" (404) at link www.javascriptya.com.ar/jquery/problemas/estilos.css (from www.javascriptya.com.ar/jquery/problemas/resolverproblema.php?inicio=0&cod=62&punto=6&inicio=0)
+10:34:22	Error: 	"Not Found" (404) at link www.javascriptya.com.ar/jquery/simulador/estilos.css (from www.javascriptya.com.ar/jquery/simulador/simulador.php?inicio=0&cod=69&punto=9&inicio=0)
+10:34:23	Error: 	"Not Found" (404) at link www.javascriptya.com.ar/simulador/pagina1.html (from www.javascriptya.com.ar/simulador/simulador.php?cod=31&inicio=30)
+10:34:23	Error: 	"Not Found" (404) at link www.javaya.com.ar/androidya/androidstudioya/imagentema/foto058e.jpg (from www.javaya.com.ar/androidya/androidstudioya/detalleconcepto.php?codigo=16&inicio=0)
+11:26:39	Warning: 	Retry after error -4 (Incorrect length (1495905 Bytes, 2855289 expected)) at link www.javascriptya.com.ar/nodejsya/proyectos/ejercicio10.zip (from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=8&codigo=8&inicio=0)
+11:29:14	Warning: 	file not stored in cache due to bogus state (broken size, expected 2855289 got 2448929): www.javascriptya.com.ar/nodejsya/proyectos/ejercicio10.zip
+11:29:14	Warning: 	Retry after error -4 (Incorrect length (1504116 Bytes, 2855373 expected)) at link www.javascriptya.com.ar/nodejsya/proyectos/ejercicio11.zip (from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=9&codigo=9&inicio=0)
+11:29:43	Warning: 	Retry after error -4 (Incorrect length (1891348 Bytes, 2869644 expected)) at link www.javascriptya.com.ar/nodejsya/proyectos/ejercicio15.zip (from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=13&codigo=13&inicio=0)
+11:30:12	Warning: 	Retry after error -4 (Incorrect length (983491 Bytes, 3227624 expected)) at link www.javascriptya.com.ar/nodejsya/proyectos/ejercicio19.zip (from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=17&codigo=17&inicio=15)
+11:31:22	Warning: 	Retry after error -4 (Incorrect length (1099171 Bytes, 1357366 expected)) at link www.javascriptya.com.ar/nodejsya/proyectos/ejercicio21.zip (from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=19&codigo=19&inicio=15)
+11:31:43	Warning: 	file not stored in cache due to bogus state (broken size, expected 2855373 got 2426892): www.javascriptya.com.ar/nodejsya/proyectos/ejercicio11.zip
+11:31:43	Warning: 	Retry after error -4 (Incorrect length (1072691 Bytes, 1358167 expected)) at link www.javascriptya.com.ar/nodejsya/proyectos/ejercicio22.zip (from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=20&codigo=20&inicio=15)
+11:32:04	Warning: 	Retry after error -4 (Incorrect length (776664 Bytes, 1584474 expected)) at link www.javascriptya.com.ar/nodejsya/proyectos/ejercicio23.zip (from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=21&codigo=21&inicio=15)
+11:32:13	Warning: 	file not stored in cache due to bogus state (broken size, expected 2869644 got 2821260): www.javascriptya.com.ar/nodejsya/proyectos/ejercicio15.zip
+11:32:13	Warning: 	Retry after error -4 (Incorrect length (949232 Bytes, 1358324 expected)) at link www.javascriptya.com.ar/nodejsya/proyectos/ejercicio24.zip (from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=22&codigo=22&inicio=15)
+11:32:24	Warning: 	file not stored in cache due to bogus state (broken size, expected 3227624 got 1803004): www.javascriptya.com.ar/nodejsya/proyectos/ejercicio19.zip
+11:32:24	Warning: 	Retry after error -4 (Incorrect length (924728 Bytes, 1434746 expected)) at link www.javascriptya.com.ar/nodejsya/proyectos/ejercicio25.zip (from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=23&codigo=23&inicio=15)
+11:32:29	Warning: 	Retry after error -4 (Incorrect length (959784 Bytes, 1823616 expected)) at link www.javascriptya.com.ar/nodejsya/proyectos/ejercicio26.zip (from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=24&codigo=24&inicio=15)
+11:33:20	Error: 	"Not Found" (404) at link www.htmlya.com.ar/html5/demos/imagenes/upperleft.png (from www.htmlya.com.ar/html5/demos/css/estilos.css)
+11:33:20	Error: 	"Not Found" (404) at link www.htmlya.com.ar/html5/demos/imagenes/upperright.png (from www.htmlya.com.ar/html5/demos/css/estilos.css)
+11:33:20	Error: 	"Not Found" (404) at link www.htmlya.com.ar/html5/demos/imagenes/lowerleft.png (from www.htmlya.com.ar/html5/demos/css/estilos.css)
+11:33:20	Error: 	"Not Found" (404) at link www.htmlya.com.ar/html5/demos/imagenes/lowerright.png (from www.htmlya.com.ar/html5/demos/css/estilos.css)
+11:33:21	Warning: 	Retry after error -4 (No data (connection closed)) at link www.htmlya.com.ar/html5/problemas/editor.php?cod=142 (from www.htmlya.com.ar/html5/problemas/versolucion.php?cod=142)
+11:33:22	Warning: 	Retry after error -4 (No data (connection closed)) at link www.htmlya.com.ar/html5/problemas/editor.php?cod=148 (from www.htmlya.com.ar/html5/problemas/versolucion.php?cod=148)
+11:33:23	Warning: 	Retry after error -4 (No data (connection closed)) at link www.htmlya.com.ar/html5/problemas/versolucion.php?cod=155 (from www.htmlya.com.ar/html5/problemas/resolverproblema.php?cod=155&punto=23&inicio=20)
+11:33:49	Warning: 	file not stored in cache due to bogus state (broken size, expected 1584474 got 1428530): www.javascriptya.com.ar/nodejsya/proyectos/ejercicio23.zip
+11:34:11	Error: 	"Not Found" (404) at link www.htmlya.com.ar/simulador/enviar.gif (from www.htmlya.com.ar/simulador/editor.php?cod=104)
+11:34:11	Error: 	"Not Found" (404) at link www.htmlya.com.ar/simulador/borrar.gif (from www.htmlya.com.ar/simulador/editor.php?cod=104)
+11:34:17	Warning: 	Retry after error -4 (No data (connection closed)) at link www.cssya.com.ar/css3ya/foto1.jpg (from www.cssya.com.ar/css3ya/detalleconcepto.php?cod=95)
+11:34:17	Warning: 	Retry after error -4 (No data (connection closed)) at link www.cssya.com.ar/css3ya/imagentema/foto031.jpg (from www.cssya.com.ar/css3ya/detalleconcepto.php?cod=98)
+11:34:17	Warning: 	Retry after error -4 (No data (connection closed)) at link www.cssya.com.ar/simulador/imagen1.png (from www.cssya.com.ar/simulador/simulador.php?inicio=40&cod=40&punto=41)
+11:34:17	Error: 	"Not Found" (404) at link www.javascriptya.com.ar/jquery/simulador/pagina1.php (from www.javascriptya.com.ar/jquery/simulador/simulador.php?inicio=18&cod=80&punto=25&inicio=18)
+11:34:17	Error: 	"Not Found" (404) at link www.javascriptya.com.ar/jquery/problemas/pagina1.php (from www.javascriptya.com.ar/jquery/problemas/resolverproblema.php?inicio=18&cod=82&punto=26&inicio=18)
+11:34:17	Error: 	"Incorrect length (2448929 Bytes, 2855289 expected)" (-4) after 2 retries at link www.javascriptya.com.ar/nodejsya/proyectos/ejercicio10.zip (from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=8&codigo=8&inicio=0)
+11:34:17	Error: 	"Incorrect length (2426892 Bytes, 2855373 expected)" (-4) after 2 retries at link www.javascriptya.com.ar/nodejsya/proyectos/ejercicio11.zip (from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=9&codigo=9&inicio=0)
+11:34:17	Error: 	"Incorrect length (2821260 Bytes, 2869644 expected)" (-4) after 2 retries at link www.javascriptya.com.ar/nodejsya/proyectos/ejercicio15.zip (from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=13&codigo=13&inicio=0)
+11:34:17	Warning: 	Retry after error -4 (Incorrect length (1803004 Bytes, 3227624 expected)) at link www.javascriptya.com.ar/nodejsya/proyectos/ejercicio19.zip (from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=17&codigo=17&inicio=15)
+11:34:22	Warning: 	Retry after error -4 (Incorrect length (1428530 Bytes, 1584474 expected)) at link www.javascriptya.com.ar/nodejsya/proyectos/ejercicio23.zip (from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=21&codigo=21&inicio=15)
+11:35:12	Warning: 	file not stored in cache due to bogus state (broken size, expected 3227624 got 2821540): www.javascriptya.com.ar/nodejsya/proyectos/ejercicio19.zip
+11:35:12	Error: 	"Incorrect length (2821540 Bytes, 3227624 expected)" (-4) after 2 retries at link www.javascriptya.com.ar/nodejsya/proyectos/ejercicio19.zip (from www.javascriptya.com.ar/nodejsya/detalleconcepto.php?punto=17&codigo=17&inicio=15)
+
+HTTrack Website Copier/3.48-21 mirror complete in 3 hours 48 minutes 29 seconds : 4630 links scanned, 4514 files written (271105321 bytes overall), 4229 files updated [266765071 bytes received at 19459 bytes/sec], 18617910 bytes transferred using HTTP compression in 2952 files, ratio 34%, 7.3 requests per connection
+(56 errors, 73 warnings, 0 messages)

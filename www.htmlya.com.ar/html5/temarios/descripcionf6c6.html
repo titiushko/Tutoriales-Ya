@@ -1,0 +1,192 @@
+
+<!DOCTYPE html> 
+<html lang="es"> 
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=164&punto=31&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:32:57 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>FORM (pattern)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="html5, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de HTML 5. Es objetivo prioritario respetar 
+los estándares del W3C">
+<meta name="author" content="Diego Moisset">
+<link rel="stylesheet" type="text/css" href="../principal2.css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+</style>
+
+</head>
+
+<body>
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em"><a href="../../html5.html">Temario del Tutorial</a></span>->31 - FORM (pattern)</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+<p>Una expresión regular es una técnica que nos permite identificar si un string coincide con un patrón determinado. Un ejemplo clásico es determinar si un email está correctamente estructurado (sabemos que comienza con uno o más caracteres alfanuméricos, luego el carácter @ seguido de uno o más caracteres alfanuméricos, luego el carácter "." y finalmente otros caracteres alfabéticos)</p>
+<p>Hay muchas situaciones donde el operador debe cargar datos que tienen que tener una determinada estructura.</p>
+<p>Hasta hace poco solo esto podía resolverse empleando Javascript, pero ahora el HTML5 añade a los controles de formulario la propiedad pattern donde definimos el patrón que debe seguir la cadena que cargue el operador y en caso que no cumpla dicho patrón informar un mensaje de error.</p>
+<p>Veremos que para definir expresiones regulares intervienen una serie de caracteres . * +? =! : | \ / () [] {} que tienen un significado especial en la definición del lenguaje de expresiones regulares, estos tipos de caracteres suelen llamarse metacaracteres.</p>
+<p>El tema de expresión regular es bastante amplio y complejo en un principio. Lo más adecuado es iniciar con pequeños ejemplos que nos muestren el funcionamiento y la sintaxis.</p>
+
+<h3>Problema</h3>
+<p>Confeccionar un formulario que nos solicite la carga obligatoria de un número binario de ocho dígitos.</p>
+<pre class="recuadro">
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Prueba&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;form action="#"&gt;
+      Ingrese un número binario de ocho dígitos:
+      &lt;input type="text" id="numero" required pattern="[01]{8}"&gt;
+      &lt;br&gt;
+      &lt;input type="submit"&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Entre corchetes encerramos los caracteres permitidos, en este caso [01] indicamos que los dos únicos caracteres posibles de ingresar dentro del control son el cero y el uno. Seguidamente indicamos entre llaves la cantidad de caracteres que se deben ingresar, en nuestro ejemplo indicamos {8}</p>
+<p>Otra cosa que hay que tener muy en cuenta es que debemos agregar la propiedad required. Si no agregamos esta propiedad y el operador dejar vacío el control no valida la expresión regular que hemos dispuesto. Es decir si dejamos vacío el control no se analiza si se ingresó un número binario de ocho dígitos.</p>
+
+<h3>Problema</h3>
+<p>Confeccionar un formulario que nos solicite la carga de un número entero decimal que contenga 5 dígitos.</p>
+<pre class="recuadro">
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Prueba&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;form action="#"&gt;
+      Ingrese un número entero que contenga 5 dígitos:
+      &lt;input type="text" id="numero" required pattern="[0-9]{5}"&gt;
+      &lt;br&gt;
+      &lt;input type="submit"&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<p>Si bien podíamos enumerar del cero al nueve los caracteres posibles, es mas cómodo indicar un rango de caracteres [0-9] utilizando el guión.</p>
+<p>Como vemos la expresión regular queda:</p>
+<pre>
+      &lt;input type="text" id="numero" required pattern="[0-9]{5}"&gt;
+</pre>
+
+<h3>Problema</h3>
+<p>Confeccionar un formulario que nos solicite la carga de un número entero decimal que contenga entre 1 y 5 dígitos.</p>
+<pre class="recuadro">
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Prueba&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;form action="#"&gt;
+      Ingrese un número entero decimal que contenga entre 1 y 5 dígitos:
+      &lt;input type="text" id="numero" required pattern="[0-9]{1,5}"&gt;
+      &lt;br&gt;
+      &lt;input type="submit"&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+<p>En este problema vemos que cuando queremos cargar una cantidad no exacta de valores indicamos entre llaves primero el valor mínimo y luego de una coma el valor máximo:</p>
+<pre>
+      &lt;input type="text" id="numero" required pattern="[0-9]{1,5}"&gt;
+</pre>
+
+<h3>Problema</h3>
+<p>Confeccionar un formulario que nos solicite la carga de una patente de un auto. Toda patente cuenta con tres caracteres seguido de tres números</p>
+<pre class="recuadro">
+&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Prueba&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;form action="#"&gt;
+      Ingrese su patente:
+      &lt;input type="text" id="patente" required pattern="[A-Za-z]{3}[0-9]{3}"&gt;
+      &lt;br&gt;  
+      &lt;input type="submit" value="confirmar"&gt;
+  &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Como vemos primero indicamos entre corchetes que podemos ingresar cualquier caracter alfabético en mayúsculas o minúsculas, luego entre llaves indicamos que solo se pueden cargar 3 de dichos caracteres. Seguimos nuevamente entre corchetes indicando que se puede cargar números entre 0 y 9, indicando entre llaves que deben ser exactamente 3.</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+   <h2><a href="../index28fa.html?inicio=20">Retornar</a></h2>   
+
+</div>
+
+</body>
+
+
+<!-- Mirrored from www.htmlya.com.ar/html5/temarios/descripcion.php?cod=164&punto=31&inicio=20 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:32:57 GMT -->
+</html>

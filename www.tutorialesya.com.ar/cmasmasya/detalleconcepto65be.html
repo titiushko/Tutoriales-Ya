@@ -1,0 +1,952 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=13&codigo=140&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Declaración de una clase y definición de objetos</title>
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="c++,tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+    es presentar los conceptos básicos de c++.">
+
+<meta name="author" content="Diego Moisset">
+
+<link rel="stylesheet" type="text/css" href="principal.css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: sans-serif,arial;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+  border: 1px dotted #ffaa00;
+  overflow:scroll;
+  float:both;
+  width:940px;
+  overflow-y:hidden;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ li {
+    padding:10px;
+ }
+</style>
+
+</head>
+
+<body>
+
+
+<div style="background-color: #AED7A8;width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1>13 - Declaración de una clase y definición de objetos</h1></div>
+
+<br>
+
+<div style="background-color: #AED7A8;width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 
+<p>La programación orientada a objetos se basa en la programación de clases; a diferencia de la programación estructurada, que está centrada en las funciones.</p>
+<p>Una clase es un molde del que luego se pueden crear múltiples objetos, con similares características.</p>
+<p>Una clase es una plantilla (molde), que define atributos (variables) y métodos (funciones)</p>
+
+<p>La clase define los atributos y métodos comunes a los objetos de ese tipo, pero luego, cada objeto tendrá sus propios valores y compartirán las mismas funciones.</p>
+
+<p>Debemos crear una clase antes de poder crear objetos (instancias) de esa clase. Al crear un objeto de una clase, se dice que se crea una instancia de la clase o un objeto propiamente dicho.</p>
+<p>La estructura de una clase la veremos mediante un ejemplo.</p>
+<h3>Problema 1:</h3>
+<p>Confeccionar una clase que permita cargar el nombre y la edad de una persona. Mostrar los datos cargados. Imprimir un mensaje si es mayor de edad (edad&gt;=18) o no</p>
+<h4>Empleando la metodología de resolver todo en la main (es decir lo que hemos vista hasta ahora)</h4>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include &lt;iostream&gt;
+
+using namespace std;
+
+void main()
+{
+    char nombre[40];
+    int edad;
+    cout &lt;&lt;"Ingrese nombre:";
+    cin.getline(nombre,40);
+    cout &lt;&lt;"Ingrese edad:";
+    cin &gt;&gt;edad;
+    cout &lt;&lt;"Nombre:";
+    cout &lt;&lt;nombre;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"Edad:";
+    cout &lt;&lt;edad;
+    cout &lt;&lt;"\n";
+    if (edad&gt;=18)
+    {
+        cout &lt;&lt;"Es mayor de edad.";
+    }
+    else
+    {
+        cout &lt;&lt;"No es mayor de edad.";
+    }
+    cin.get();
+    cin.get();
+}
+</pre>
+
+<h4>Empleando la definición de una clase y creación de un objeto.</h4>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include &lt;iostream&gt;
+
+using namespace std;
+
+class Persona {
+private:
+    char nombre[40];
+    int edad;
+public:
+    void inicializar();
+    void imprimir();
+    void esMayorEdad();
+};
+
+void Persona::inicializar()
+{
+    cout &lt;&lt;"Ingrese nombre:";
+    cin.getline(nombre,40);
+    cout &lt;&lt;"Ingrese edad:";
+    cin &gt;&gt;edad;
+}
+
+void Persona::imprimir()
+{
+    cout &lt;&lt;"Nombre:";
+    cout &lt;&lt;nombre;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"Edad:";
+    cout &lt;&lt;edad;
+    cout &lt;&lt;"\n";
+}
+
+void Persona::esMayorEdad()
+{
+    if (edad&gt;=18)
+    {
+        cout &lt;&lt;"Es mayor de edad.";
+    }
+    else
+    {
+        cout &lt;&lt;"No es mayor de edad.";
+    }
+    cin.get();
+    cin.get();
+}
+
+void main()
+{
+    Persona persona1;
+    persona1.inicializar();
+    persona1.imprimir();
+    persona1.esMayorEdad();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/ClasePersona.zip">ClasePersona</a></p>
+
+<p>Como podemos ver en un principio nos puede asustar la metodología de resolver los problemas empleando clases. Hay que tener en cuenta que la programación orientada a objetos es conveniente cuando tenemos que resolver problemas de mediana o gran complejidad (podemos hablar de miles o cientos de miles de líneas)</p>
+
+<p>Lo primero que hacemos es la declaración de la clase con la siguiente sintaxis:</p>
+<pre>
+class Persona {
+private:
+    char nombre[40];
+    int edad;
+public:
+    void inicializar();
+    void imprimir();
+    void esMayorEdad();
+};
+</pre>
+<p>Luego de la palabra clave class indicamos el nombre de la clase.<br>
+Normalmente una clase tiene un nombre relacionada a lo que representa en si (si hacemos una calculadora es muy posible que una clase se llame "Calculadora")</p>
+<p>Un nombre de clase debe empezar con un caracter (normalmente en mayúsculas) y seguido de otros caracteres o números (no puede tener espacios en blanco)</p>
+<p>La declaración de una clase tiene dos secciones donde definimos atributos (que son las variables) y los métodos (especificamos los nombres de las funciones que implementará la clase)</p>
+<p>Como podemos ver hay una sección que se le antecede la palabra private: y otra que se le anteceder la palabra clave public:</p>
+<p>Desde la main solo tendremos acceso a lo que definamos en la sección public.</p>
+<p>Es importante el punto y coma que lleva la llave de cerrado de la clase para que no haya un error sintáctico.</p>
+<p>Seguidamente se implementan las funciones o métodos de la clase:</p>
+<pre>
+void Persona::inicializar()
+{
+    cout &lt;&lt;"Ingrese nombre:";
+    cin.getline(nombre,40);
+    cout &lt;&lt;"Ingrese edad:";
+    cin &gt;&gt;edad;
+}
+
+void Persona::imprimir()
+{
+    cout &lt;&lt;"Nombre:";
+    cout &lt;&lt;nombre;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"Edad:";
+    cout &lt;&lt;edad;
+    cout &lt;&lt;"\n";
+}
+
+void Persona::esMayorEdad()
+{
+    if (edad&gt;=18)
+    {
+        cout &lt;&lt;"Es mayor de edad.";
+    }
+    else
+    {
+        cout &lt;&lt;"No es mayor de edad.";
+    }
+    cin.get();
+    cin.get();
+}
+</pre>
+<p>Cada método o función resuelve una parte de nuestro problema, por ejemplo para la carga del nombre de la persona y su edad hemos planteado la función inicializar:</p>
+<pre>
+void Persona::inicializar()
+{
+    cout &lt;&lt;"Ingrese nombre:";
+    cin.getline(nombre,40);
+    cout &lt;&lt;"Ingrese edad:";
+    cin &gt;&gt;edad;
+}
+</pre>
+<p>Para definir un método a semejanza de la main comenzamos con la palabra clave void, seguida del nombre de la clase, luego dos puntos y el nombre del método.</p>
+<p>Dentro del método o función tenemos acceso a los atributos definidos en la zona private de la clase (es decir las variables nombre y edad)</p>
+
+<p>El método imprimir muestra el contenido de los atributos nombre y edad que cargamos en el método inicializar:</p>
+<pre>
+void Persona::imprimir()
+{
+    cout &lt;&lt;"Nombre:";
+    cout &lt;&lt;nombre;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"Edad:";
+    cout &lt;&lt;edad;
+    cout &lt;&lt;"\n";
+}
+</pre>
+
+<p>Los tres métodos tienen todo el algoritmo que anteriormente implementabamos todo en la main (esto veremos que nos permite desarrollar programas mucho más fáciles de entender)</p>
+<p>Veamos ahora que hacemos en la main:</p>
+<pre>
+void main()
+{
+    Persona persona1;
+    persona1.inicializar();
+    persona1.imprimir();
+    persona1.esMayorEdad();
+}
+</pre>
+<p>Primero definimos un objeto llamado persona1 de la clase Persona:</p>
+<pre>
+    Persona persona1;
+</pre>
+<p>La definición de un objeto es similar a la definición de una variable (por ejemplo para definir una variable entera hacemos : int valor)</p>
+<p>La variable persona1 reserva espacio para almacenar el nombre y la edad.</p>
+<p>Para llamar a los métodos o funciones debemos anteceder el nombre del objeto:</p>
+<pre>
+    persona1.inicializar();
+    persona1.imprimir();
+    persona1.esMayorEdad();
+</pre>
+
+
+
+<h3>Problema 2:</h3>
+<p>Modificar el problema anterios para realizar la carga del nombre y la edad de dos personas. Mostrar los datos cargados. Imprimir un mensaje si son mayor de edad o no.</p>
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include &lt;iostream&gt;
+
+using namespace std;
+
+class Persona {
+private:
+    char nombre[40];
+    int edad;
+public:
+    void inicializar();
+    void imprimir();
+    void esMayorEdad();
+};
+
+void Persona::inicializar()
+{
+    cout &lt;&lt;"Ingrese nombre:";
+    cin.getline(nombre,40);
+    cout &lt;&lt;"Ingrese edad:";
+    cin &gt;&gt;edad;
+}
+
+void Persona::imprimir()
+{
+    cout &lt;&lt;"Nombre:";
+    cout &lt;&lt;nombre;
+    cout &lt;&lt;"\n";
+    cout &lt;&lt;"Edad:";
+    cout &lt;&lt;edad;
+    cout &lt;&lt;"\n";
+}
+
+void Persona::esMayorEdad()
+{
+    if (edad&gt;=18)
+    {
+        cout &lt;&lt;"Es mayor de edad.";
+    }
+    else
+    {
+        cout &lt;&lt;"No es mayor de edad.";
+    }
+    cout &lt;&lt;"\n";
+}
+
+void main()
+{
+    Persona persona1;
+    Persona persona2;
+    persona1.inicializar();
+    cin.get();
+    persona2.inicializar();
+    persona1.imprimir();
+    persona1.esMayorEdad();
+    persona2.imprimir();
+    persona2.esMayorEdad();
+    cin.get();
+    cin.get();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/ClasePersona2.zip">ClasePersona2</a></p>
+
+<p>Lo más importante es notar que básicamente lo único que cambia es la definición de dos objetos de la clase Persona en la main:</p>
+<pre>
+    Persona persona1;
+    Persona persona2;
+</pre>
+<p>Un cambio que hemos tenido que hacer es la llamada al método get del objeto cin luego de inicializar los datos de la primera persona (esto es necesario porque cuando cargamos la edad por teclado queda en el buffer un "enter" que será tomado en la carga del nombre de la segunda persona(para evitar esto hacemos esta llamada a get)<br>
+Luego hemos sacado al final de la main las llamadas a get.</p>
+<p>La clase no varía solo la definición de dos objetos y las llamadas a los métodos respectivos de cada objeto (recordemos que una clase es un molde del cual podemos luego definir tantos objetos como sean necesarios)</p>
+
+
+<h3>Problema 3:</h3>
+<p>Desarrollar un programa que cargue los lados de un triángulo e implemente los siguientes métodos: inicializar los atributos, imprimir el valor del lado mayor y otro método que muestre si es equilátero o no.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Triangulo {
+private:
+    int lado1,lado2,lado3;
+public:
+    void inicializar();
+    void ladoMayor();
+    void esEquilatero();
+};
+
+void Triangulo::inicializar()
+{
+    cout &lt;&lt;"Ingrese primer lado:";
+    cin &gt;&gt;lado1;
+    cout &lt;&lt;"Ingrese segundo lado:";
+    cin &gt;&gt;lado2;
+    cout &lt;&lt;"Ingrese tercer lado:";
+    cin &gt;&gt;lado3;
+}
+
+void Triangulo::ladoMayor()
+{
+    cout &lt;&lt;"Lado mayor:";
+    if (lado1 &gt; lado2 && lado1 &gt; lado3)
+    {
+        cout &lt;&lt;lado1;
+    }
+    else
+    {
+        if (lado2 &gt; lado3)
+        {
+            cout &lt;&lt;lado2;
+        }
+        else
+        {
+            cout &lt;&lt;lado3;
+        }
+    }
+    cout &lt;&lt;"\n";
+}
+
+void Triangulo::esEquilatero()
+{
+    if (lado1==lado2 && lado1==lado3) 
+    {
+        cout &lt;&lt;"Es un triangulo equilatero";
+    }
+    else 
+    {
+        cout &lt;&lt;"No es un triangulo equilatero";            
+    }
+    cin.get();
+    cin.get();
+}
+
+void main()
+{
+    Triangulo triangulo1;
+    triangulo1.inicializar();
+    triangulo1.ladoMayor();
+    triangulo1.esEquilatero();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/ClaseTriangulo.zip">ClaseTriangulo</a></p>
+
+
+<p>El nombre de la clase es Triangulo y requiere definir tres atributos de tipo entero donde almacenamos los valores de los lados del triángulo:</p>
+<pre>
+    int lado1,lado2,lado3;
+</pre>
+<p>Declaramos la cabecera de los tres métodos requeridos para resolver el problema. Los declaramos en la sección public para poder llamarlos desde la main:</p>
+<pre>
+    void inicializar();
+    void ladoMayor();
+    void esEquilatero();
+</pre>
+<p>No debemos olvidar el punto y como que requiera el cerrado de la declaración de la clase:</p>
+<pre>
+};
+</pre>
+
+<p>El primer método que deberá llamarse desde la main es el inicializar donde cargamos los tres atributos por teclado:</p>
+<pre>
+void Triangulo::inicializar()
+{
+    cout &lt;&lt;"Ingrese primer lado:";
+    cin &gt;&gt;lado1;
+    cout &lt;&lt;"Ingrese segundo lado:";
+    cin &gt;&gt;lado2;
+    cout &lt;&lt;"Ingrese tercer lado:";
+    cin &gt;&gt;lado3;
+}
+</pre>
+<p>El método ladoMayor muestra el valor mayor de los tres enteros ingresados:</p>
+<pre>
+void Triangulo::ladoMayor()
+{
+    cout &lt;&lt;"Lado mayor:";
+    if (lado1 &gt; lado2 && lado1 &gt; lado3)
+    {
+        cout &lt;&lt;lado1;
+    }
+    else
+    {
+        if (lado2 &gt; lado3)
+        {
+            cout &lt;&lt;lado2;
+        }
+        else
+        {
+            cout &lt;&lt;lado3;
+        }
+    }
+    cout &lt;&lt;"\n";
+}
+</pre>
+<p>Como podemos observar cuando un problema se vuelve más complejo es más fácil y ordenado separar los distintos algoritmos en varios métodos y no codificar todo en la main.</p>
+<p>El último método de esta clase verifica si los tres enteros ingresados son iguales:</p>
+<pre>
+void Triangulo::esEquilatero()
+{
+    if (lado1==lado2 && lado1==lado3) 
+    {
+        cout &lt;&lt;"Es un triangulo equilatero";
+    }
+    else 
+    {
+        cout &lt;&lt;"No es un triangulo equilatero";            
+    }
+    cin.get();
+    cin.get();
+}
+</pre>
+<p>En la main creamos un objeto de la clase Triangulo y llamamos los métodos respectivos (podemos llamarlos ya que los declaramos en la sección public de la clase):</p>
+<pre>
+void main()
+{
+    Triangulo triangulo1;
+    triangulo1.inicializar();
+    triangulo1.ladoMayor();
+    triangulo1.esEquilatero();
+}
+</pre>
+
+<h3>Problema 4:</h3>
+<p>Desarrollar una clase que represente un punto en el plano y tenga los siguientes métodos: cargar los valores de x e y, imprimir en que cuadrante se encuentra dicho punto (concepto matemático, primer cuadrante si x e y son positivas, si x&lt;0 e y&gt;0 segundo cuadrante, etc.)</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Punto {
+private:
+    int x,y;
+public:
+    void inicializar();
+    void imprimirCuadrante();
+};
+
+void Punto::inicializar()
+{
+    cout &lt;&lt;"Ingrese coordenada x :";
+    cin &gt;&gt;x;
+    cout &lt;&lt;"Ingrese coordenada y :";
+    cin &gt;&gt;y;
+}
+
+void Punto::imprimirCuadrante()
+{
+    if (x&gt;0 && y&gt;0) 
+    {
+        cout &lt;&lt;"Se encuentra en el primer cuadrante.";
+    }
+    else 
+    {
+        if (x&lt;0 && y&gt;0)
+        {
+            cout &lt;&lt;"Se encuentra en el segundo cuadrante.";
+        }
+        else
+        {
+            if (x&lt;0 && y&lt;0) 
+            {
+                cout &lt;&lt;"Se encuentra en el tercer cuadrante.";
+            }
+            else
+            {
+                if (x&gt;0 && y&lt;0) 
+                {
+                    cout &lt;&lt;"Se encuentra en el cuarto cuadrante.";
+                }
+                else 
+                {
+                    cout &lt;&lt;"El punto no está en un cuadrante.";
+                }
+            }
+        }
+    }
+    cin.get();
+    cin.get();
+}
+
+void main()
+{
+    Punto punto1;
+    punto1.inicializar();
+    punto1.imprimirCuadrante();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/ClasePunto.zip">ClasePunto</a></p>
+
+
+<p>La clase la llamamos Punto y en la declaración definimos dos atributos y dos métodos:</p>
+<pre>
+class Punto {
+private:
+    int x,y;
+public:
+    void inicializar();
+    void imprimirCuadrante();
+};
+
+</pre>
+<p>El método inicializar pide cargar por teclado las coordenadas x e y:</p>
+<pre>
+void Punto::inicializar()
+{
+    cout &lt;&lt;"Ingrese coordenada x :";
+    cin &gt;&gt;x;
+    cout &lt;&lt;"Ingrese coordenada y :";
+    cin &gt;&gt;y;
+}
+</pre>
+<p>El segundo método mediante un conjunto de if verificamos en que cuadrante se encuentra el punto ingresado:</p>
+<pre>
+void Punto::imprimirCuadrante()
+{
+    if (x&gt;0 && y&gt;0) 
+    {
+        cout &lt;&lt;"Se encuentra en el primer cuadrante.";
+    }
+    else 
+    {
+        if (x&lt;0 && y&gt;0)
+        {
+            cout &lt;&lt;"Se encuentra en el segundo cuadrante.";
+        }
+        else
+        {
+            if (x&lt;0 && y&lt;0) 
+            {
+                cout &lt;&lt;"Se encuentra en el tercer cuadrante.";
+            }
+            else
+            {
+                if (x&gt;0 && y&lt;0) 
+                {
+                    cout &lt;&lt;"Se encuentra en el cuarto cuadrante.";
+                }
+                else 
+                {
+                    cout &lt;&lt;"El punto no está en un cuadrante.";
+                }
+            }
+        }
+    }
+    cin.get();
+    cin.get();
+}
+</pre>
+<p>La main no tiene grandes diferencias con los problemas realizados anteriormente, definimos un objeto de la clase Punto, y llamamos a los métodos inicializar e imprimirCuadrante:</p>
+<pre>
+void main()
+{
+    Punto punto1;
+    punto1.inicializar();
+    punto1.imprimirCuadrante();
+}
+</pre>
+
+<h3>Problema 5:</h3>
+<p>Desarrollar una clase que represente un Cuadrado y tenga los siguientes métodos: cargar el valor de su lado, imprimir su perímetro y su superficie.</p>
+
+<h4>Programa:</h4>
+<pre class="recuadro">
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Cuadrado {
+private:
+    int lado;
+public:
+    void inicializar();
+    void imprimirPerimetro();
+    void imprimirSuperficie();
+};
+
+void Cuadrado::inicializar()
+{
+    cout &lt;&lt;"Ingrese el valor del lado:";
+    cin &gt;&gt;lado;
+}
+
+void Cuadrado::imprimirPerimetro()
+{
+    int perimetro;
+    perimetro=lado*4;
+    cout &lt;&lt;"El perimetro es ";
+    cout &lt;&lt;perimetro;
+    cout &lt;&lt;"\n";
+}
+
+void Cuadrado::imprimirSuperficie()
+{
+    int superficie;
+    superficie=lado*lado;
+    cout &lt;&lt;"La superficie es ";
+    cout &lt;&lt;superficie;
+}
+
+void main()
+{
+    Cuadrado cuadrado1;
+    cuadrado1.inicializar();
+    cuadrado1.imprimirPerimetro();
+    cuadrado1.imprimirSuperficie();
+    cin.get();
+    cin.get();
+}
+</pre>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace :
+<a href="proyectos/ClaseCuadrado.zip">ClaseCuadrado</a></p>
+
+
+<p>En este problema es interesante ver como no definimos dos atributos donde se almacenan la superficie y el perímetro del cuadrado, esto debido a que solo estos datos se los requiere en el método donde se imprimen (se definen variables locales a dichos métodos):</p>
+<pre>
+void Cuadrado::imprimirPerimetro()
+{
+    int perimetro;
+    perimetro=lado*4;
+    cout &lt;&lt;"El perimetro es ";
+    cout &lt;&lt;perimetro;
+    cout &lt;&lt;"\n";
+}
+
+void Cuadrado::imprimirSuperficie()
+{
+    int superficie;
+    superficie=lado*lado;
+    cout &lt;&lt;"La superficie es ";
+    cout &lt;&lt;superficie;
+}
+
+</pre>
+<p>Esto significa que la variable perimetro es una variable local al método imprimirPerimetro. Esta variable es local a dicho método y solo se la puede acceder dentro del método. La diferencia fundamental entre una variable local y un atributo de la clase es que al atributo se lo puede acceder desde cualquier método de la clase y la variable local solo existe mientras se está ejecutando el método.</p>
+
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+Confeccionar una clase que represente un empleado. Definir como atributos su nombre y su sueldo. Confeccionar los métodos para la carga, otro para imprimir sus datos y por último uno que imprima un mensaje si debe pagar impuestos (si el sueldo supera a 3000)
+</li>
+
+<li>
+Implementar la clase operaciones. Se deben cargar dos valores enteros, calcular su suma, resta, multiplicación y división, cada una en un método, imprimir dichos resultados.
+</li>
+
+
+</ol>
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<pre class="recuadrooculto">
+#include &lt;iostream&gt;
+
+using namespace std;
+
+class Empleado {
+private:
+    char nombre[40];
+    float sueldo;
+    int edad;
+public:
+    void inicializar();
+    void pagaImpuestos();
+};
+
+void Empleado::inicializar()
+{
+    cout &lt;&lt;"Ingrese nombre:";
+    cin.getline(nombre,40);
+    cout &lt;&lt;"Ingrese sueldo:";
+    cin &gt;&gt;sueldo;
+}
+
+void Empleado::pagaImpuestos()
+{
+    if (sueldo&gt;=3000)
+    {
+        cout &lt;&lt;"Debe abonar impuestos";
+    }
+    else
+    {
+        cout &lt;&lt;"No paga impuestos";
+    }
+    cin.get();
+    cin.get();
+}
+
+void main()
+{
+    Empleado empleado1;
+    empleado1.inicializar();
+    empleado1.pagaImpuestos();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/ClaseEmpleado.zip">ClaseEmpleado</a></p>
+
+
+
+#include&lt;iostream&gt;
+
+using namespace std;
+
+class Operaciones {
+private:
+    int valor1,valor2;
+public:
+    void inicializar();
+    void sumar();
+    void restar();
+    void multiplicar();
+    void dividir();
+};
+
+void Operaciones::inicializar()
+{
+    cout &lt;&lt;"Ingrese primer valor:";
+    cin &gt;&gt;valor1;
+    cout &lt;&lt;"Ingrese segundo valor:";
+    cin &gt;&gt;valor2;
+}
+
+void Operaciones::sumar()
+{
+    int suma;
+    suma=valor1+valor2;
+    cout &lt;&lt;"La suma es:";
+    cout &lt;&lt;suma;
+    cout &lt;&lt;"\n";
+}
+
+void Operaciones::restar()
+{
+    int resta;
+    resta=valor1-valor2;
+    cout &lt;&lt;"La resta es:";
+    cout &lt;&lt;resta;  
+    cout &lt;&lt;"\n";
+}
+
+void Operaciones::multiplicar()
+{
+    int multiplicacion;
+    multiplicacion=valor1*valor2;
+    cout &lt;&lt;"La multiplicacion es:";
+    cout &lt;&lt;multiplicacion;
+    cout &lt;&lt;"\n";
+}
+
+void Operaciones::dividir()
+{
+    int division;
+    division = valor1 / valor2;
+    cout &lt;&lt;"La division es:";
+    cout &lt;&lt;division;
+    cout &lt;&lt;"\n";
+}
+
+void main()
+{
+    Operaciones operacion1;
+    operacion1.inicializar();
+    operacion1.sumar();
+    operacion1.restar();
+    operacion1.multiplicar();
+    operacion1.dividir();
+    cin.get();
+    cin.get();
+}
+
+<p style="font-family:arial">Este proyecto lo puede descargar en un zip desde este enlace :<a href="proyectos/ClaseOperacion.zip">ClaseOperacion</a></p>
+
+</pre><h2><a href="index2904.html?inicio=0">Retornar</a></h2> 
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+
+
+
+<!-- Mirrored from www.tutorialesya.com.ar/cmasmasya/detalleconcepto.php?punto=13&codigo=140&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:53:37 GMT -->
+</html>

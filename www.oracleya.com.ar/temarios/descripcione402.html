@@ -1,0 +1,243 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=75&cod=255&punto=97 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Descripción : Funciones (Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>97 - Funciones</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+ 
+</div> 	  
+<p>
+<p>Oracle ofrece varios tipos de funciones para realizar distintas operaciones. Hemos empleado varias de ellas.</p>
+<p>Se pueden emplear las funciones del sistema en cualquier lugar en el que se permita una expresión en una sentencia "select".</p> 
+
+<p>Ahora aprenderemos a crear nuestras propias funciones.</p>
+
+<p>Las funciones, como los procedimientos almacenados son bloques de código que permiten agrupar y organizar sentencias SQL que se ejecutan al invocar la función.</p>
+
+<p>Las funciones tienen una estructura similar a la de los procedimientos. Como los procedimientos, las funciones tienen una cabecera, una sección de declaración de variables y el bloque "begin...end" que encierra las acciones. Una función, además contiene la cláusula "return".</p>
+<p>Una función acepta parámetros, se invoca con su nombre y retorna un valor. </p>
+
+<p>Para crear una función empleamos la instrucción "create function" o "create or replace function". Si empleamos "or replace", se sobreescribe (se reemplaza) una función existente; si se omite y existe una función con el nombre que le asignamos, Oracle mostrará un mensaje de error indicando tal situación. </p>
+<p>La sintaxis básica parcial es:</p>
+<pre>
+create o replace function NOMBREFUNCION(PARAMETRO1 TIPODATO, PARAMETRON TIPODATO)
+ return TIPODEDATO is
+  DECLARACION DE VARIABLES
+ begin
+  ACCIONES;
+  return VALOR;
+ end;
+</pre>
+<p>La siguiente funcion recibe 1 parámetro, un valor a incrementar y retorna el valor ingresado como argumento con el incremento del 10%:</p>
+<pre>
+create or replace function f_incremento10 (avalor number)
+  return number
+ is
+ begin 
+   return avalor+(avalor*0.1);
+ end;
+</pre>
+<p>Podemos emplear las funciones en cualquier lugar en el que se permita una expresión en una sentencia "select", por ejemplo:</p>
+<pre>
+ select titulo,precio,f_incremento10(precio) from libros;
+</pre>
+<p>El resultado mostrará el título de cada libro, el precio y el precio incrementado en un 10% devuelto por la función.</p>
+
+<p>La siguiente funcion recibe 2 parámetros, un valor a incrementar y el incremento y retorna el valor ingresado como primer argumento con el incremento especificado por el segundo argumento:</p>
+<pre>
+create or replace function f_incremento (avalor number, aincremento number)
+  return number
+ is
+  begin 
+   return avalor+(avalor*aincremento/100);
+  end;
+</pre>
+<p>Realizamos un "select" y llamamos a la función creada anteriormente, enviando como primer argumento el campo "precio" y como segundo argumento el valor "20", es decir, incrementará en un 20" los precios de los libros:</p>
+<pre>
+ select titulo,precio,f_incremento(precio,20) from libros;
+</pre>
+<p>El resultado nos mostrará el título de cada libro, el precio y el precio incrementado en un 20% devuelto por la función.</p>
+<p>Podemos realizar otros "select" llamando a la función con otro valor como segundo argumento, por ejemplo:</p>
+<pre>
+ select titulo,precio,f_incremento(precio,50) from libros;
+</pre>
+<p>La siguiente función recibe un parámetro de tipo numérico y retorna una cadena de caracteres. Se define una variable en la zona de definición de variables denominada "valorretornado" de tipo varchar. En el cuerpo de la función empleamos una estructura condicional (if) para averiguar si el valor enviado como argumento es menor o igual a 20, si lo es, almacenamos en la variable "valorretornado" la cadena "economico", en caso contrario guardamos en tal variable la cadena "costoso"; al finalizar la estructura condicional retornamos la variable "valorretornado":</p>
+<pre>
+create or replace function f_costoso (avalor number)
+  return varchar
+ is
+  valorretornado varchar(20);
+ begin
+   valorretornado:='';
+   if avalor<=20 then
+    valorretornado:='economico';
+   else valorretornado:='costoso';
+   end if;
+   return valorretornado;
+ end;
+</pre>
+<p>Realizamos un "select" y llamamos a la función creada anteriormente, enviando como argumento el campo "precio":</p>
+<pre>
+ select titulo,precio,f_costoso(precio) from libros;
+</pre>
+<p>El resultado mostrará el título de cada libro, el precio y el resultado devuelto por la función (si el precio es menor o mayor a $20, la cadena "economico" o "costoso" respectivamente).</p>
+
+<p>Entonces, una función es un bloque de código que implementa acciones y que es referenciado por un nombre. Puede recibir argumentos. La diferencia con los procedimientos es que retornan un valor siempre.</p>
+<p>Para asignar un valor a una variable, dentro de una función DEBE usarse ":=" (dos puntos e igual).</p>
+<p>Si no se le definen parámetros a una función, no deben colocarse los paréntesis.</p>
+
+<p>Podemos emplear una función sin incluir campos de una tabla. Por ejemplo:</p>
+<pre>
+ select f_costoso (10) from dual;
+</pre>
+
+<p>Para almacenar los valores de un "select" debemos tipear:</p>
+<pre>
+ select ...into VARIABLE from...
+</pre>
+<p>Por ejemplo:</p>
+<pre>
+ select sum(precio) into variable from libros where autor='';
+</pre>
+<p>La siguiente función recibe dos valores numéricos como parámetros y retorna el promedio:</p>
+<pre>
+create or replace function f_promedio (avalor1 number, avalor2 number)
+ return number
+ is
+ begin 
+   return (avalor1+avalor2)/2;
+ end;
+</pre>
+<p>Llamamos a la función "f_promedio":</p>
+<pre>
+ exec f_promedio (10,20);
+</pre>
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+
+<br>
+   <h2><a href="../indexa021.html?inicio=75">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/temarios/descripcion.php?inicio=75&cod=255&punto=97 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:37 GMT -->
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=133&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:20:35 GMT -->
+<head>
+<title>Pasos para crear el primer proyecto Android.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial android">
+<meta name="description" content="Tutorial de Android">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+.descarga2 a {
+color:#4B4B4B;
+text-decoration:none;
+border-bottom:1px dotted #444;
+}
+.descarga2 {
+background: #F7FABE;
+text-align: left;
+padding: 5px 20px 5px 45px;
+border-top: 2px solid #DFE786;
+border-bottom: 2px solid #DFE786;
+color:#000000;
+margin-left:1.2em;
+margin-right:1.2em;
+border-radius:4px;
+font-size:1em;
+
+}  
+
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-30']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>2 - Pasos para crear el primer proyecto Android.</h1> <p class="descarga2">Ya se encuentra disponible el nuevo tutorial para aprender android con el nuevo entorno <a href="androidstudioya/index.html" target="_blank">Android Studio propuesto por Google y
+que remplaza a Eclipse</a>.
+</td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>Ya tenemos todo lo necesario instalado para implementar el primer proyecto. Desde el menú de opciones: File -> New -> Android Application Project</p>
+
+<img src="imagentema/foto008.jpg" border="0" alt="creacion proyecto android"><br>
+<p>En este diálogo especificamos el nombre de la aplicación y proyecto (pueden ser iguales) y el nombre del paquete java donde se almacenarán los archivos java que creemos (normalmente la url de su empresa al revés).</p>
+<p>Ahora empezaremos a presionar el botón next para pasar a otras configuraciones de nuestra aplicación, por el momento dejaremos todos los valores por defecto en cada una de los diálogos que aparece (son 5 diálogos actualmente), en el último diálogo debe aparecer el botón "Finish" el cual presionamos.</p>
+<p>El ADT nos genera todos los directorios y archivos básicos para iniciar nuestro proyecto:</p>
+<img src="imagentema/foto009.jpg" border="0" alt="archivos y directorios de un proyecto android"><br>
+<p>No haremos en este momento un análisis del significado y objetivo de cada uno de estos directorios y archivos generados, sino a medida que avancemos con este curso iremos viendo en forma puntual y profunda.</p>
+<p>La interfaz visual de nuestro programa para Android se almacena en un archivo XML en la carpeta res, subcarpeta layout y el archivo se llama activity_main.xml. En esta carpeta tenemos creada nuestra primer pantalla.</p>
+<p>Al seleccionar este archivo el ADT nos permite visualizar el contenido en "vista de diseño (Graphical Layout)":</p>
+<img src="imagentema/foto010.jpg" border="0" alt="archivo xml graphical layout"><br>
+<p>Si seleccionamos la otra pestaña podemos visualizar el archivo activity_main.xml en formato de texto:</p>
+<img src="imagentema/foto011.jpg" border="0" alt="archivo xml en modo texto"><br>
+
+<p>El ADT ya insertó un control de tipo RelativeLayout que permite ingresar controles visuales alineados a los bordes y a otros controles que haya en la ventana (más adelante analizaremos este layout)</p>
+<p>Ya veremos que podemos modificar todo este archivo para que se adapte a la aplicación que queremos desarrollar.</p>
+<p>Luego contenido en el control RelativeLayout hay otro control de tipo TextView que es básicamente una etiqueta o label que mostrará en pantalla el valor almacenado en la propiedad text.</p>
+<p>Podemos modificar directamente el archivo xml o en "vista de diseño" modificar los valores de las propiedades. Elegimos nuevamente la pestaña "Graphical Layout" y seleccionamos el TextView con el mouse y vemos que en la parte derecha de la pantalla aparece una ventana llamada "properties":</p>
+<img src="imagentema/foto011a.jpg" border="0" alt="properties"><br>
+<p>Y estando seleccionado el TextView buscamos la propiedad Text y cargamos: "Mi primer programa para Android" y presionamos enter, podemos ver que se actualiza la vista:</p>
+<img src="imagentema/foto011b.jpg" border="0" alt="properties"><br>
+
+<p>Con esto ya podemos probar nuestra primer aplicación para un dispositivo Android. SELECCIONAMOS con el mouse en la ventana de la izquierda (Package Explorer) el proyecto001 y presionamos el ícono de Run (triángulo verde) o desde el menú. Seleccionamos que se ejecute como aplicación "Android Application". Ahora se abrirá el AVD(Android Virtual Device) esto tarda bastante tiempo, es muy importante recordar que luego de ver ejecutándose el programa NO debemos cerrar el AVD para que la próxima ejecución se inicie más rápido (podemos minimizar el AVD)</p>
+<p>Ahora podemos ver nuestra primer aplicación corriendo en el emulador de Android:</p>
+<img src="imagentema/foto013.jpg" border="0" alt="AVD con programa Android en ejecucion"><br>
+
+
+<p>Como hemos visto el ADT nos genera en forma automática todas las carpetas y archivos básicos que necesitamos en un principio. En el siguiente concepto podremos empezar a programar verdaderamente. El único objetivo de este ejercicio es recordar los pasos para crear un proyecto.</p>
+
+<p>Este proyecto lo puede descargar en un zip desde este enlace:
+<a href="proyectos/proyecto001.zip">proyecto001.zip</a>
+</p>
+
+<h2 style="background-color:#fa0">Problemas con la última versión del entorno de desarrollo de Android ADT</h2>
+<p>Si cuando crea un proyecto para Android se encuentra que en la carpeta layout se crean dos archivos XML en lugar de uno, es que tiene la último versión y este tutorial todavía no está adaptado:</p>
+<img src="imagentema/mensaje1.jpg" border="0" alt="ADT actual"><br>
+<p>Con esta versión del ADT Google propone utilizar Fragment aunque realicemos un programa "Hola Mundo", hasta que se actualice este tutorial podemos realizar estos pasos para trabajar sin Fragment en los ejercicios iniciales.</p>
+<p>Veamos entonces que pasos debemos dar para dejar el proyecto que se adapte a todos los ejercicios propuestos en esta web y demás libros que se hayan publicado hasta marzo de 2014:</p>
+<h3>Pasos</h3>
+<ol>
+<li>
+<p>Borrar el archivo activty_main.xml de la carpeta layout de nuestro proyecto (presionamos el botón derecho del mouse sobre el archivo y seleccionamos Delete:</p>
+<img src="imagentema/mensaje2.jpg" border="0" alt="ADT actual"><br>
+</li>
+<li>
+<p>Renombramos el archivo fragment_main.xml por el el nombre activity_main.xml presionando el botón derecho del mouse y seleccionando la opción Refactor - > Rename y cargamos en dicho dialogo activity_main.xml (por más que nos muestre un mensaje de warning lo ejecutamos al cambio):</p>
+<img src="imagentema/mensaje3.jpg" border="0" alt="ADT actual"><br>
+</li>
+
+<li>
+<p>Ahora nos dirigimos a la carpeta src y entramos al paquete donde se encuentra el archivo MainActivity.java (en este momento nos está mostrando un mensaje de error que lo solucionaremos)<br>
+<img src="imagentema/mensaje4.jpg" border="0" alt="ADT actual"><br>
+</li>
+<li>
+<p>Ahora borramos la clase PlaceholderFragment:</p>
+<img src="imagentema/mensaje5.jpg" border="0" alt="ADT actual"><br>
+<p>Y las cinco líneas que crean el objeto de la clase PlaceholderFragment:</p>
+<img src="imagentema/mensaje6.jpg" border="0" alt="ADT actual"><br>
+<p>Es decir que nuestro archivo MainActivity queda con la siguiente estructura(como vemos cuando lo grabamos ahora desaparecen los errores y podemos ejecutar nuestro programa):</p>
+<img src="imagentema/mensaje7.jpg" border="0" alt="ADT actual"><br>
+</li>
+</ol>
+
+</div>
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   <h2><a href="index2904.html?inicio=0">Retornar</a></h2>   
+
+  </div>
+  
+  
+  
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/androidya/detalleconcepto.php?codigo=133&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:22:29 GMT -->
+</html>

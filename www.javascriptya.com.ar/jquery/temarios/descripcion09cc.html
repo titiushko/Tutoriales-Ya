@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/temarios/descripcion.php?cod=88&punto=32&inicio=18 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:23 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Conceptos de JQuery</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="jQuery, programación, webmaster, tutorial, JavaScript">
+<meta name="description" content="El objetivo de este tutorial es presentar los conceptos de la libreria JavaScript JQUERY.">
+<meta name="author" content="Diego Moisset">
+
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<script language="JavaScript" type="text/JavaScript">
+
+</script>
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>32 - Mostrar un tooltip con datos recuperados del servidor en forma asincrónica</h1></td>
+<td align="right">
+<a href="../../publicidad/index.html"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.html"></a>	
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<p>
+<div style="font-size:1.3em;font-family:arial;">
+<p>Implementaremos un problema utilizando todos los conceptos aprendidos hasta ahora.</p>
+<p><strong>Problema</strong>Implementar un Tooltip con jQuery recuperando la información a mostrar del servidor en forma asincrónica.<br>
+Agregar una imagen al tooltip. En el servidor ya hay cuatro imágenes llamadas imagen1.jpg, imagen2.jpg etc. y se encuentran en el directorio inmediatamente superior a donde se almacenan las páginas. ( &lt;img src=&quot;../imagen1.jpg&quot;&gt; )</p>
+<p>pagina1.html</p>
+<pre class="recuadro">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;link rel=&quot;StyleSheet&quot; href=&quot;estilos.css&quot; type=&quot;text/css&quot;&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;../jquery.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;funciones.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;Entre con el mouse al recuadro.&lt;/p&gt;
+&lt;div class=&quot;cuadradito&quot; id=&quot;c1&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;cuadradito&quot; id=&quot;c2&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;cuadradito&quot; id=&quot;c3&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;cuadradito&quot; id=&quot;c4&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>estilos.css</p>
+<pre class="recuadro">
+.cuadradito{
+  background-color: #f00;
+  height: 50px; 
+  width: 50px;
+  margin:3px;
+  z-index: -1;
+}
+
+#divmensaje {
+  background-color: yellow;
+   position: absolute; 
+   padding: 5px;
+   width:250px;
+   left:120px;
+   top:100px;
+  z-index: 100;
+}
+</pre>
+<p>funciones.js</p>
+<pre class="recuadro">
+$(document).ready(function () {
+  $(&quot;body&quot;).append('&lt;div id=&quot;divmensaje&quot;&gt;hhhh&lt;/div&gt;');
+  $("#divmensaje").hide();
+  $(".cuadradito").hover(function (e) {
+    $("#divmensaje").show();
+    $("#divmensaje").css("left",e.clientX+document.body.scrollLeft+5);
+    $("#divmensaje").css("top",e.clientY+document.body.scrollTop+5);
+    $("#divmensaje").load("pagina1.php?cod="+$(this).attr('id'));
+  },
+  function () {
+    $("#divmensaje").hide();
+  })
+  $(".cuadradito").mousemove(function (e){
+    $("#divmensaje").css("left",e.clientX+document.body.scrollLeft+5);
+    $("#divmensaje").css("top",e.clientY+document.body.scrollTop+5); 
+  })
+})
+</pre>
+<p>pagina1.php</p>
+<pre class="recuadro">
+&lt;?php
+if ($_REQUEST['cod']=='c1')
+{
+  echo &quot;&lt;img src=\&quot;../imagen1.jpg\&quot;&gt;&quot;;
+  echo &quot;&lt;p&gt;Primer tooltip.&lt;/p&gt;&quot;;
+  echo &quot;&lt;p&gt;aaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaa aaaaaa aaaaaaaaaa&quot;;
+  echo &quot;aaaaaaaaaaaaaaaaaaa aaaaaaaaa aaaaaaaaaaaaa aaaaaaaaaaaaaaaa&quot;;
+  echo &quot;aaaaaaaaaaaaaaaaaaa aaaaaaaa aaaaaaaaaaaaaa aaaaaaaaa aaaaaaa&quot;;
+  echo &quot;aaaaaaaaaaaaaa aaaaa aaaaaaaaaaaaaaaaaaaaaa aaaaaa aaaaaaaaaa&quot;;
+  echo &quot;aaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaa aaaaaaa aaaaaaaaaaaaaaaa&lt;/p&gt;&quot;;
+}
+if ($_REQUEST['cod']=='c2')
+{ 
+  echo &quot;&lt;img src=\&quot;../imagen2.jpg\&quot;&gt;&quot;;
+  echo &quot;&lt;p&gt;Segundo tooltip.&lt;/p&gt;&quot;;
+  echo &quot;&lt;p&gt;bbbbbbbb bbbbbbbbbbb bbbbbbbb bbbbbbbbbbbbbb bbbbbbbbbbb bb&quot;;
+  echo &quot;bbbbbbbb bbbbbbbbbb bbbbbbbbbbbb bbbbbbbbbb bbbbbbbbbbb bbb&lt;/p&gt;&quot;;
+}
+if ($_REQUEST['cod']=='c3')
+{
+  echo &quot;&lt;img src=\&quot;../imagen3.jpg\&quot;&gt;&quot;;
+  echo &quot;&lt;p&gt;Tercer tooltip.&lt;/p&gt;&quot;;
+}
+if ($_REQUEST['cod']=='c4')
+{
+  echo &quot;&lt;img src=\&quot;../imagen4.jpg\&quot;&gt;&quot;;
+  echo &quot;&lt;p&gt;Cuarto tooltip.&lt;/p&gt;&quot;;
+}
+?&gt;
+</pre>
+<p>Como podemos ver el código JavaScript utilizando la librería jQuery queda muy compacto y reducido:</p>
+<pre>
+$(document).ready(function () {
+  $(&quot;body&quot;).append('&lt;div id=&quot;divmensaje&quot;&gt;hhhh&lt;/div&gt;');
+  $("#divmensaje").hide();
+  $(".cuadradito").hover(function (e) {
+    $("#divmensaje").show();
+    $("#divmensaje").css("left",e.clientX+document.body.scrollLeft+5);
+    $("#divmensaje").css("top",e.clientY+document.body.scrollTop+5);
+    $("#divmensaje").load("pagina1.php?cod="+$(this).attr('id'));
+  },
+  function () {
+    $("#divmensaje").hide();
+  })
+  $(".cuadradito").mousemove(function (e){
+    $("#divmensaje").css("left",e.clientX+document.body.scrollLeft+5);
+    $("#divmensaje").css("top",e.clientY+document.body.scrollTop+5); 
+  })
+})
+</pre></div>
+</p>
+
+<table width="650px">
+<tr>
+<td align="center">	
+
+
+</td>
+</tr>
+</table>
+
+<br>
+   <h2><a href="../index111c.html?inicio=18">Retornar</a></h2>   
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-628756-14', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+
+
+<!-- Mirrored from www.javascriptya.com.ar/jquery/temarios/descripcion.php?cod=88&punto=32&inicio=18 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:23 GMT -->
+</html>

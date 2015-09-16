@@ -1,0 +1,159 @@
+﻿<html>
+
+
+<!-- Mirrored from www.phpya.com.ar/poo/simulador/simulador.php?cod=53&punto=19&inicio=12 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:21 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+  <title>Ejercicios resueltos</title>
+  <meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">  
+<meta name="keywords" content="ajax, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de PHP orientado a objetos. Es objetivo prioritario respetar 
+los estándares del W3C">
+<meta name="author" content="Diego Moisset">
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+.editor {
+ /* background-image:url("numeros.png");
+ background-repeat: no-repeat;
+       background-position: 0px 0px;
+       background-attachment: scroll;*/}
+</style>
+
+<script language="JavaScript">
+function abrirVentana()
+{
+  alto=(screen.availHeight/2)+100;
+  ancho=screen.availWidth-10;		
+  window.open('', 'ventanaForm', 'top=0,left=0,width='+ancho+',height='+alto+',resizable=yes,scrollbars=yes,menubar=yes,status=yes,toolbar=yes,location=yes');  	
+}
+</script>
+</head>
+
+<body bgcolor="#CCFFCC">
+        
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>19 - función __clone()</h1></td>
+<td align="right">
+<!--<a href="http://www.ajaxya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+	  
+<table>
+<tr>
+<td align="left">
+
+
+</td>
+</tr>
+</table>		  
+	  
+                
+<form name="formulario" action="#" target="ventanaForm" method="post" onsubmit=  "abrirVentana()">
+
+<div style="font-size:1.3em;font-family:arial;"><br><p>Crear una clase Persona que tenga como atributos su nombre y edad, definir los métodos para cargar y retornar los valores de sus atributos. Hacer que cuando clonemos un objeto de dicha clase la edad de la persona se fije con cero.</p>
+</div><br><b>pagina1.php</b><input type="hidden" name="archivo1" value="pagina1.html"><br><textarea class="editor" wrap="off" rows="15" cols="110" name="programa1">&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Pruebas&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+
+class Persona {
+  private $nombre;
+  private $edad;
+  public function fijarNombreEdad($nom,$ed)
+  {
+    $this-&gt;nombre=$nom;
+    $this-&gt;edad=$ed;
+  }
+  public function retornarNombre()
+  {
+    return $this-&gt;nombre;
+  }
+  public function retornarEdad()
+  {
+    return $this-&gt;edad;
+  }
+  public function __clone()
+  {
+    $this-&gt;edad=0;
+  }
+}
+
+$persona1=new Persona();
+$persona1-&gt;fijarNombreEdad('Juan',20);
+echo 'Datos de $persona1:';
+echo $persona1-&gt;retornarNombre().' - '.$persona1-&gt;retornarEdad().'&lt;br&gt;';
+$persona2=clone($persona1);
+echo 'Datos de $persona2:';
+echo $persona2-&gt;retornarNombre().' - '.$persona2-&gt;retornarEdad().'&lt;br&gt;';
+
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea><br><br>    <a href="http://www.scratchya.com.ar/problemas/phpyapoo/resu/53/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>	
+<br><TABLE>
+  <TBODY>
+  <TR>
+    <TD align=left>
+
+    </TD>
+	</TR></TBODY></TABLE>
+
+</form>
+  <div>
+   <h2><a href="../index754a.html?inicio=12">Retornar</a></h2>   
+  </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+try {
+_uacct = "UA-628756-13";
+urchinTracker();
+} catch(err) {}</script>
+
+</body>
+
+
+<!-- Mirrored from www.phpya.com.ar/poo/simulador/simulador.php?cod=53&punto=19&inicio=12 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 16:34:21 GMT -->
+</html>
+

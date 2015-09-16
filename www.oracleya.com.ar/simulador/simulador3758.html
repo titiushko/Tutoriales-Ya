@@ -1,0 +1,269 @@
+        
+
+<html>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=100&cod=278&punto=120 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:38 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Ejercicios resueltos : Permiso de conexión(Oracle)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="oracle, programación, sql, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de Oracle.">
+<meta name="author" content="Diego Moisset">
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+
+
+  <link href="../css/estilos.css" rel="stylesheet" type="text/css">
+
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+background-color:#ffffcc;
+  text-align:left;
+  font-family:verdana;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+</style>
+</head>
+<body bgcolor="#CCFFCC">
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1>120 - Permiso de conexión</h1></td>
+<td align="right">
+<!--<a href="http://www.sqlserverya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright"> 
+<table>
+<tr>
+<td align="left">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 728x90, creado 1/09/10 - largo */
+google_ad_slot = "4269167522";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>		  
+
+<strong>Problema: </strong><p>Creamos un usuario denominado "ana", con contraseña "anita", le asignamos espacio en "system" (100M). Antes lo eliminamos por si existe:</p>
+<pre>
+ drop user ana cascade;
+
+ create user ana identified by anita
+ default tablespace system
+ quota 100M on system;
+</pre>
+<p>Creamos un usuario denominado "juan", con contraseña "juancito", le asignamos espacio en "system" (100M). Antes lo eliminamos por si existe:</p>
+<pre>
+ drop user juan cascade;
+
+ create user juan identified by juancito
+ default tablespace system
+ quota 100M on system;
+</pre>
+<p>Consultamos el diccionario "dba_users" y analizamos la información que nos muestra:</p>
+<pre>
+ select username, password, default_tablespace, created from dba_users;
+</pre>
+<p>Verificamos que los usuarios "ana" y "juan" existen.</p>
+
+<p>Consultamos el diccionario "dba_sys_privs" para encontrar los privilegios concedidos a nuestros usuarios. Nos mostrará el nombre del usuario (grantee) y el permiso (si lo tiene):</p>
+<pre>
+select grantee, privilege from dba_sys_privs where GRANTEE='ANA' or grantee='JUAN';
+</pre>
+<p>Nos muestra que estos usuarios no tienen ningún privilegio concedido.</p>
+
+<p>Concedemos a "juan" permiso para conectarse:</p>
+<pre>
+ grant create session
+  to juan;
+</pre>
+<p>Consultamos el diccionario "dba_sys_privs" para encontrar los privilegios concedidos a "juan":</p>
+<pre>
+ select grantee,privilege from dba_sys_privs 
+  where grantee='JUAN';
+</pre>
+<p>Tiene permiso "create session".</p>
+
+<p>Abrimos una nueva conexión para "juan":</p>
+<p>Presionamos el ícono "new connection" en la solapa "connections"; se abre una ventana en la cual colocamos:</p>
+<p>- "connection name" (nombre de la conexión): juan;</p>
+<p>- "username" (nombre del usuario): juan y</p>
+<p>- "password" (contraseña): juancito.</p>
+<p>Luego presionamos "connect"; se abre una nueva solapa (nueva conexión) con el nombre del usuario (juan).</p>
+
+<p>En la conexión de "juan" podemos consultar sus privilegios:</p>
+<pre>
+ select username, privilege from user_sys_privs;
+</pre>
+<p>Note que únicamente aparecen los permisos del usuario actual.</p>
+
+<p>Para obtener el nombre del usuario conectado, empleamos la siguiente sentencia:</p>
+<pre>
+ select user from dual;
+</pre>
+<p>Aparece Juan.</p>
+
+<p>Volvemos a la conexión "system" (la otra solapa).</p>
+<p>Comprobamos el usuario actual:</p>
+<pre>
+ select user from dual;
+</pre>
+<p>Aparece System.</p>
+
+<p>Ya sabemos abrir una nueva sessión de usuario. Aprendimos que existen 3 razones por las cuales una nueva sesión no se pueda iniciar; una de ellas es que el usuario no exista. Intentemos abrir una nueva conexión para un usuario inexistente:</p>
+<p>Presionamos el ícono "new connection" en la solapa "connections"; se abre una ventana en la cual colocamos:</p>
+<p>- "connection name" (nombre de la conexión): pedro;</p>
+<p>- "username" (nombre del usuario): pedro y</p>
+<p>- "password" (contraseña): pedrito.</p>
+<p>Luego presionamos "connect"; la sessión no se abre, un mensaje de error indica que el nombre de usuario o la contraseña son inválidas y que la conexión se deniega.</p>
+<p>Cancelamos.</p>
+
+<p>Otra razón por la cual la apertura de una nueva sesión puede fallar es que el usuario no tenga permiso de conexión. Intentemos abrir una nueva conexión para un usuario que no tenga tal permiso, caso de "ana":</p>
+<p>Presionamos el ícono "new connection" en la solapa "connections"; se abre una ventana en la cual colocamos:</p>
+<p>- "connection name" (nombre de la conexión): ana;</p>
+<p>- "username" (nombre del usuario): ana y</p>
+<p>- "password" (contraseña): anita.</p>
+<p>Luego presionamos "connect"; la sessión no se abre, un mensaje de error indica que el usuario "ana" no tiene permiso "create session" por lo cual se deniega la conexión. Cancelamos.</p>
+
+<p>Concedemos a "ana" permiso de conexión:</p>
+<pre>
+ grant create session
+  to ana;
+</pre>
+<p>Consultamos el diccionario "dba_sys_privs" para encontrar los privilegios concedidos a "ana":</p>
+<pre>
+ select grantee,privilege from dba_sys_privs 
+  where grantee='ANA';
+</pre>
+<p>Tiene permiso "create session".</p>
+
+<p>La tercera razón por la cual puede no iniciarse una nueva sesión es que coloquemos la contraseña incorrecta. Intentemos abrir una nueva conexión para un usuario que tenga permiso, pero le demos una contraseña incorrecta:</p>
+<p>Presionamos el ícono "new connection" en la solapa "connections"; se abre una ventana en la cual colocamos:</p>
+<p>- "connection name" (nombre de la conexión): ana;</p>
+<p>- "username" (nombre del usuario): ana y</p>
+<p>- "password" (contraseña): ana.</p>
+<p>Luego presionamos "connect"; la sessión no se abre, un mensaje de error indica que el nombre de usuario o la contraseña son inválidas y que la conexión se deniega.</p>
+
+<p>Abramos una nueva conexión para "ana" colocando los datos correctos:</p>
+<p>Presionamos el ícono "new connection" en la solapa "connections"; se abre una ventana en la cual colocamos:</p>
+<p>- "connection name" (nombre de la conexión): ana;</p>
+<p>- "username" (nombre del usuario): ana y</p>
+<p>- "password" (contraseña): anita.</p>
+<p>Presionamos "connect"; se abre una nueva solapa (nueva conexión) con el nombre del usuario (ana).</p>
+
+<p>Consultamos el diccionario "user_sys_privs":</p>
+<pre>
+ select username,privilege from user_sys_privs;
+</pre>
+<p>Note que únicamente aparecen los permisos del usuario actual.</p>
+
+<p>Comprobamos que estamos en la sesión de "ana":</p>
+<pre>
+ select user from dual;
+</pre>
+
+
+        <form name="formulario" action="http://www.sqlserverya.com.ar/aspx/procesador.aspx" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+        <br>
+   <h2><a href="../indexf6ce.html?inicio=100">Retornar</a></h2>   
+        
+	<br>
+   
+
+</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-628756-18");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+<!-- Mirrored from www.oracleya.com.ar/simulador/simulador.php?inicio=100&cod=278&punto=120 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:38 GMT -->
+</html>
+

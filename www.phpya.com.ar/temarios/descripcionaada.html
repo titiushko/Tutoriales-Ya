@@ -1,0 +1,431 @@
+﻿<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.phpya.com.ar/temarios/descripcion.php?punto=7&cod=29&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:58:14 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<title>Tutorial de PHP - Temario</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="keywords" content="php, programación, webmaster, tutorial">
+<meta name="description" content="El objetivo de este tutorial 
+es presentar los conceptos básicos de php.">
+<meta name="author" content="Diego Moisset">
+
+<style>
+
+html,body {
+	background-color: #D3E9D0;
+	font-family: Verdana,arial,sans-serif;
+	font-size: 1em;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.1em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  margin-left:5px;
+}
+
+#recuadrooculto {
+  display: none;
+}
+
+
+.recuadroborde {
+  //  max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+	clear:left;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  document.getElementById('recuadrooculto').style.display='block';
+}
+
+</script>
+
+</head>
+
+<body>
+
+
+
+<div style="background-color: #AED7A8;max-width: 950px;	margin-left: auto;margin-right: auto;border-radius:7px;padding:10px">
+<h1><span style="font-size:1em;margin-right:1em"><a href="../index2904.html?inicio=0">Temario del Tutorial</a></span>7 - Estructura condicional (if)</h1></div>
+
+<br>
+<div style="background-color: #AED7A8;max-width: 950px;	border-radius:7px;padding:10px;margin-left: auto;margin-right: auto">
+
+<div style="display:block;float:left;margin: 5px;"> 
+<script type="text/javascript"><!--
+google_ad_client = "pub-4669394804436935";
+/* 300x250, creado 6/11/08 novi */
+google_ad_slot = "7481492727";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</div> 
+
+
+<p>Cuando se pretende que el programa, una vez llegado a un cierto punto, tome un camino concreto en determinados casos y otro diferente si las condiciones de ejecución difieren, se utiliza el conjunto de instrucciones:<br>
+ if,  else  y  elseif.  La estructura base de este tipo de instrucciones es la siguiente: </p>
+<pre>
+if (Condición) 
+{
+  Instrucción a1;
+  Instrucción a2;
+}
+else
+{
+  Instrucción b1;
+  Instrucción b2;
+}
+</pre>
+<p>Cuando la ejecución llega al punto donde se encuentra la instrucción if, el programa verificará el cumplimiento o no de la condición. Si la condición es verdadera se ejecutarán las instrucciones a1 y a2, de lo contrario, se ejecutarán las instrucciones b1 y b2.</p>
+<p>En los casos en que las condiciones sean varias, se pueden utilizar los if de un modo denominado anidado o anillado, como se indica de la manera siguiente:</p>
+<pre>
+if (Condicion 1) 
+{
+  Instrucción a1;
+  Instrucción a2;
+}
+else
+{
+  if (Condicion 2)
+  {               
+    Instrucción b1;
+    Instrucción b2;
+  }
+  else
+  {
+    Instrucción c1;
+    Instrucción c2;
+  }
+}
+</pre>
+<p>De este modo se pueden introducir tantas condiciones como se quiera dentro de la condición principal. Una variante de este sistema es utilizando la sentencia elseif, que permite en una sola línea introducir una condición adicional:</p>
+<pre>
+if (Condicion 1) 
+{
+  Instrucción a1;
+  Instrucción a2;
+}
+elseif (Condicion 2)
+{
+  Instrucción b1;
+  Instrucción b2;
+}
+else
+{
+  Instrucción c1;
+  Instrucción c2; 
+}
+</pre>
+
+<p>Para las condiciones tener en cuenta que disponemos de los siguientes operadores:</p>
+<pre>
+== para ver si una variable es igual a otra.
+!= distinto.
+&gt;= mayor o igual.
+&gt; mayor.
+&lt;<= menor o igual 
+&lt; menor 
+</pre>
+<p>La mejor forma de entender esta estructura condicional es por medio de ejemplos. El primero que nos plantearemos es generar un valor aleatorio (es decir lo elige la máquina al azar, como extraer una bolilla de un bolillero de lotería) comprendido entre 1 y 10. Luego mostraremos un mensaje si es menor o igual a 5 o si es mayor a 5.</p>
+<p>El programa completo es:</p>
+<pre class="recuadroborde">
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+$valor=rand(1,10);
+echo &quot;El valor sorteado es $valor&lt;br&gt;&quot;;
+if ($valor&lt;=5)
+{
+  echo &quot;Es menor o igual a 5&quot;;
+}
+else
+{
+  echo &quot;Es mayor a 5&quot;;
+} 
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Es importante recordar que siempre la condición del if debe ir entre paréntesis. Si la condición del if se verifica verdadera (es decir el número sorteado es menor o igual a 5) ejecuta el primer bloque que se encuentra entre llaves. En caso de verificarse falsa la condición del if se ejecuta el bloque entre llaves que se encuentra después del else.</p>
+<p>El valor aleatorio lo generamos llamando a la función rand pasándole el valor mínimo y máximo:</p>
+<pre>
+$valor=rand(1,10);
+</pre>
+<p>Imprimimos el valor generado a los efectos de controlar el resultado:</p>
+<pre>
+echo &quot;El valor sorteado es $valor&lt;br&gt;&quot;;
+</pre>
+<p>En el primer problema tenemos solo dos caminos posibles, el valor es menor o igual a cinco o es mayor.En un segundo ejemplo mostraremos como disponer una estructura condicional if anidada.</p>
+<p>El problema es el siguiente: Generar un valor aleatorio entre 1 y 100. Luego mostrar si tiene 1,2 o 3 dígitos.</p>
+<p>Como podemos observar estamos en presencia de un problema que tiene tres caminos posibles. El valor puede tener 1 dígito, 2 dígitos o 3 dígitos. Si pensamos un poco podremos identificar que para que tenga un dígito debe generarse un valor entre 1 y 9, para que tenga dos dígitos deberá estar comprendido entre 10 y 99, y finalmente para tener 3 dígitos deberá ser el valor 100.</p>
+<p>La página con el programa respectivo es:</p>
+<pre>
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+$valor=rand(1,100);
+echo &quot;El valor sorteado es $valor&lt;br&gt;&quot;;
+if ($valor&lt;=9)
+{
+  echo &quot;Tiene un d&iacute;gito&quot;;
+}
+else
+{
+  if ($valor&lt;100)
+  {
+    echo &quot;Tiene 2 d&iacute;gitos&quot;;
+  }
+  else
+  {
+    echo &quot;Tiene 3 d&iacute;gitos&quot;;
+  }
+}
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Es importante notar como la segunda estructura if se encuentra contenida entre las llaves del else del primer if. Es decir que si el valor aleatorio es menor o igual a 9 se ejecuta el bloque del verdadero del primer if y no se ejecuta por lo tanto el if anidado en el else. Por el contrario si la condición del primer if se verifica falsa se ejecuta el bloque del else del primer if, la misma contiene una estructura if con sus bloques del verdadero y falso.</p>
+
+<p>A modo ilustrativo el mismo ejemplo resuelto con la estructura if/elseif será:</p>
+<pre>
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;Problema&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+$valor=rand(1,100);
+echo &quot;El valor sorteado es $valor&lt;br&gt;&quot;;
+if ($valor&lt;=9)
+{
+  echo &quot;Tiene un d&iacute;gito&quot;;
+}
+elseif ($valor&lt;100)
+{
+  echo &quot;Tiene 2 d&iacute;gitos&quot;;
+}
+else
+{
+  echo &quot;Tiene 3 d&iacute;gitos&quot;;
+}
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>Si uno tiene mucha práctica con otros lenguajes de programación esta estructura de if anidados le será mas adecuada, en caso que haya empezado a programar hace poco será conveniente que elija y practique la primera forma.</p>
+<br>
+<br>
+
+<h2>Problema resuelto.</h2>
+<p>Copiar el contenido de este cuadro de texto al NotePad++ y grabarlo en la carpeta c:\wamp\www con un nombre con extensión php (si hay varios cuadros
+de texto grabar cada uno en un archivo distinto).<br>
+  luego abrir el navegador (Chrome, FireFox, IExplorer etc.) y en la barra de direcciones tipear: http://localhost/pagina1.php (o el nombre del
+archivo que le dió)  </p>
+<form name="formulario" action="#" target="ventanaForm" 
+ onsubmit=  "abrirVentana()"  method="post" >
+    pagina1.php<br><textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off" readonly>
+<html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+
+<?php
+//Generar un valor aleatorio entre 1 y 100. Luego mostrar
+//si tiene 1,2 o 3 dígitos.
+
+  $valor=rand(1,100);
+  echo "El valor sorteado es $valor<br>";
+  if ($valor<=9)
+  {
+    echo "Tiene un dígito";
+  }
+  else
+  {
+    if ($valor<100)
+    {
+      echo "Tiene 2 dígitos";
+    }
+    else
+    {
+      echo "Tiene 3 dígitos";
+    }
+  }
+?>
+
+</body>
+
+<!-- Mirrored from www.phpya.com.ar/temarios/descripcion.php?punto=7&cod=29&inicio=0 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 13:58:14 GMT -->
+</html>
+</textarea>
+    <br>
+	 <a href="http://www.scratchya.com.ar/problemas/phpya/resu/29/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a> 
+<!--    <a href="http://localhost:8080/problemas/phpya/resu/29/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>-->
+
+    <br>
+<table width="650px">
+<tr>
+<td align="left">	
+
+</td>
+</tr>
+</table>
+
+	
+    
+</form>
+
+
+
+
+
+
+	
+
+<h2>Problema propuesto.</h2>
+<p>Generar un valor aleatorio entre 1 y 3. Luego imprimir en castellano el número (Ej. si se genera el 3 luego mostrar en la página el string "tres").</p>
+<p>Para ver si una variable es igual a cierto valor debemos plantear una condición similar a:</p>
+<pre>
+if ($valor==3)
+{
+  //algoritmo
+}
+</pre><form name="formulario" action="#" target="ventanaForm" 
+onsubmit="abrirVentana()" method="post" >
+
+<a href="javascript:cambiar()" id="solucion">Solución</a>
+<div id="recuadrooculto">
+pagina1.php<br>
+<textarea class="programafuente" name="programa" rows=15 cols=110 wrap="off" readonly>
+<html>
+<head>
+<title>Problema</title>
+</head>
+<body>
+
+<?php
+
+  $num=rand(1,3);
+  if ($num==1)
+  {
+    echo "uno";
+  }
+  else
+  {
+    if($num==2)
+    {
+      echo "dos";
+    }
+    else
+    {
+      echo "tres";
+    }
+  }
+
+?>
+
+</body>
+</html></textarea>
+ <br>
+<!-- <a href="http://localhost:8080/problemas/phpya/propu/29/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a>-->
+
+
+  <a href="http://www.scratchya.com.ar/problemas/phpya/propu/29/pagina1.php" style="font-style:Arial;font-size:2em;margin-right:15px;" target="_blank">Ejecutar ejemplo</a> 
+	<br>	
+
+</div>
+
+</form>
+
+
+
+  
+
+<br>
+<table width="700px">
+<tr>
+<td align="left">	
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+</td>
+</tr>
+</table>
+
+
+<form name="form1" method="post" action="#">
+  <div>
+   <h2><a href="../index2904-2.html?inicio=0">Retornar</a></h2>   
+  </div>
+
+  
+</form>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-4";
+urchinTracker();
+</script>
+
+</body>
+
+</html>

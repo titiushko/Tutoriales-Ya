@@ -1,0 +1,204 @@
+
+
+<html>
+
+
+<!-- Mirrored from www.mysqlya.com.ar/temarios/descripcion.php?inicio=63&cod=69&punto=74 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:29 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" /><!-- /Added by HTTrack -->
+<head>
+<title>Temario:Crear tabla a partir de otras (create - insert - join)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="../css/estilos.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Trebuchet MS, Verdana, Arial, sans-serif;
+	font-size: 10pt;
+	text-align:center;
+}
+
+h1 {
+	font-size: 14pt;
+	margin: 0%;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<table width="98%">
+<tr>
+<td> 
+<h1>74 - Crear tabla a partir de otras (create - insert - join)</h1></td>
+<td align="right">
+<!--<a href="http://www.mysqlya.com.ar/publicidad/"><img border="0" style="margin:5px;padding-left:2px" src="../imagenes/publicidad.png"></a>	-->
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+
+<p>
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 		  
+
+<p>Tenemos las tablas "libros" y "editoriales" y queremos crear una tabla llamada "cantidadporeditorial" que contenga la cantidad de libros de cada editorial.</p>
+
+<p>La tabla "libros" tiene la siguiente estructura:</p>
+<pre>
+ -codigo: int unsigned auto_increment,
+ -titulo: varchar(40) not null,
+ -autor: varchar(30),
+ -codigoeditorial: tinyint unsigned,
+ -precio: decimal(5,2) unsigned,
+ -clave primaria: codigo.
+</pre>
+<p>La tabla "editoriales" tiene esta estructura:</p>
+<pre>
+ -codigo: tinyint unsigned auto_increment,
+ -nombre: varchar(20),
+ clave primaria: codigo.
+</pre>
+<p>Las tablas "libros" y "editoriales" contienen varios registros.</p>
+
+<p>La tabla "cantidadporeditorial", que no existe, debe tener la siguiente estructura:</p>
+<pre>
+ -nombre: nombre de la editorial,
+ -cantidad: cantidad de libros.
+</pre>
+<p>Podemos guardar en la tabla "cantidadporeditorial" la cantidad de libros de cada editorial en 3 pasos:</p>
+<p>1º paso: crear la tabla "cantidadporeditorial":</p>
+<pre>
+	create table cantidadporeditorial(
+	 nombre varchar(20),
+	 cantidad smallint
+        );
+</pre>
+<p>2º paso: realizar la consulta en la tabla "libros" y "editoriales", con un "join" para obtener la cantidad de libros de cada editorial agrupando por el nombre de la editorial y calculando la cantidad con "count()":</p>
+<pre>
+	 select e.nombre,count(*)
+	  from libros as l
+	  join editoriales as e
+	  on l.codigoeditorial=e.codigo    	
+	  group by e.nombre;
+</pre>
+<p>obteniendo una salida como la siguiente:</p>
+<pre>
+        nombre	cantidad
+	________________
+	Emece	3
+	Paidos	4
+	Planeta	2
+</pre>
+<p>3º paso: insertar los registros necesarios en la tabla "editoriales":</p>
+<pre>
+	insert into editoriales values('Emece',3);
+	insert into editoriales values('Paidos',4);
+	insert into editoriales values('Planeta',2);
+</pre>
+<p>Pero existe otra manera simplificando los pasos. Podemos crear la tabla "cantidadporeditorial" con los campos necesarios consultando la tabla "libros" y "editoriales" y en el mismo momento insertar la información:</p>
+<pre>
+ create table cantidadporeditorial
+  select e.nombre,count(*) as cantidad
+  from libros as l
+  join editoriales as e
+  on l.codigoeditorial=e.codigo    	
+  group by e.nombre;
+</pre>
+<p>La tabla "cantidadporeditorial" se ha creado con el campo llamado "nombre" seleccionado del campo "nombre" de "editoriales" y con el campo "cantidad" con el valor calculado con count() de la tabla "libros".</p>
+<p>Entonces, se realiza una consulta de la tabla "libros" y "editoriales" (con un "join") anteponiendo "create table ..." se ingresa el resultado de dicha consulta en la tabla "cantidadporeditorial" al momento de crearla.</p>
+
+<p>Si seleccionamos todos los registros de la tabla "cantidadporeditorial" aparece lo siguiente:</p>
+<pre>
+ nombre		cantidad
+ _______________________
+ Emece		3
+ Paidos		4
+ Planeta	2
+</pre>
+<p>Si visualizamos la estructura de "cantidadporeditorial", vemos que el campo "nombre" se creó con el mismo tipo y longitud del campo "nombre" de "editoriales" y el campo "cantidad" se creó como "bigint".</p>
+</p>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-izquierda-grande */
+google_ad_slot = "2944336362";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4669394804436935";
+/* fondo-derecha-grande */
+google_ad_slot = "7374535966";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="../../pagead2.googlesyndication.com/pagead/f.txt">
+</script>
+
+</td>
+</tr>
+</table>
+
+   <h2><a href="../indexda3e.html?inicio=63">Retornar</a></h2>   
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../../www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-628756-5";
+urchinTracker();
+</script>
+
+
+</body>
+
+
+<!-- Mirrored from www.mysqlya.com.ar/temarios/descripcion.php?inicio=63&cod=69&punto=74 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 15:10:29 GMT -->
+</html>

@@ -1,0 +1,961 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+"http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=130&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:56:08 GMT -->
+<head>
+<title>Clase Graphics y sus métodos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">    
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+<meta name="keywords" content="tutorial java">
+<meta name="description" content="Tutorial de Java">
+<link href="css/estilos.css" rel="stylesheet" type="text/css">
+<style>
+html,body {
+	background-color: #D3E9D0;
+	font-family: Arial, sans-serif;
+	font-size: 11pt;
+	text-align:center;
+}
+
+h1 {
+	margin: 0%;
+}
+
+.recuadro {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+  font-size:1.2em;
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+}
+
+.recuadroborde {
+    max-height: 400pt;
+	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color:#ffffcc;	
+    padding: 7px;
+    border: 2px ridge black;
+    border-radius: 7px;
+}
+
+pre {
+ 	overflow: auto;
+    font-family: consolas, monospace;
+    font-size: 12pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #aed7a8;
+    padding: 7px;
+    border: 0px;
+}
+
+.recuadrooculto {
+  background-color:#ffffcc;
+  text-align:left;
+  font-family:courier;
+
+  border-width:0;
+  padding:5px;
+
+  border: 1px dotted #ffaa00;
+  display: none;
+}
+
+ img {
+   padding:11px;
+ }
+ 
+ li {
+    padding:10px;
+ }
+ 
+  
+</style>
+
+<script type="text/javascript">
+function cambiar()
+{
+  var lista=document.getElementsByTagName('pre');
+  for(f=0;f<lista.length;f++)
+  {
+   lista[f].style.display='block';
+  }
+  document.getElementById('solucion').style.display='none';
+}
+
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-628756-28']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body>
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+<table width="98%">
+<tr>
+<td> 
+<h1> - Clase Graphics y sus métodos</h1></td>
+<td align="right">
+
+</td>
+</tr>
+</table>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+<div class="upperleft">
+  <div class="upperright">
+    <div class="lowerleft">
+      <div class="lowerright">
+ <div id="contentdetalle">
+
+<div style="display:block;float:left;margin: 5px;"> 
+ 
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+ 
+</div> 
+
+<p>Java proporciona la clase Graphics, que permite dibujar elipses, cuadrados, líneas, mostrar texto  y también tiene muchos otros métodos de dibujo. Para cualquier programador, es esencial el entendimiento de la clase Graphics, antes de adentrarse en el dibujo en Java.<br>
+La clase Graphics proporciona el entorno de trabajo para cualquier operación gráfica que se realice dentro del AWT.</p>
+<p>Para poder pintar, un programa necesita un contexto gráfico válido, representado por una instancia de la clase Graphics. Pero esta clase no se puede instanciar directamente; así que debemos crear un componente y pasarlo al programa como un argumento al método paint().</p>
+
+
+<p>El único argumento del método paint() es un objeto de esta clase. La clase Graphics dispone de métodos para soportar tres categorías de operaciones gráficas:<br>
+1) Dibujo de primitivas gráficas,<br>
+2) Dibujo de texto,<br>
+3) Presentación de imágenes en formatos *.gif y *.jpeg.</p>
+<p>Además, la clase Graphics mantiene un contexto gráfico: un área de dibujo actual, un color de dibujo del Background y otro del Foreground, un Font con todas sus propiedades, etc.Los ejes están situados en la esquina superior izquierda. Las coordenadas se miden siempre en pixels.</p>
+
+
+<h3>Problema 1</h3>
+<p>Crear una aplicación que utilice las primitivas gráficas principales que provee la clase Graphics:</p>
+
+<img src="imagentema/foto168.jpg" border="0" alt="Graphics"><br>
+
+<pre class="recuadro">
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Graphics;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+
+public class Grafico1 extends JFrame {
+
+    private JPanel contentPane;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Grafico1 frame = new Grafico1();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the frame.
+     */
+    public Grafico1() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 450, 300);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+        setBounds(0,0,800,600);
+    }
+    
+    public void paint (Graphics g)
+    {
+        super.paint(g);
+
+        g.setColor (Color.blue);
+        g.drawLine (0, 70, 100, 70);
+        g.drawRect (150, 70, 50, 70);
+        g.drawRoundRect (250, 70, 50, 70, 6, 6);
+        g.drawOval (350, 70, 50, 70);
+        int [] vx1 = {500, 550, 450};
+        int [] vy1 = {70, 120, 120};
+        g.drawPolygon (vx1, vy1, 3);
+
+        g.setColor (Color.red);
+        g.fillRect (150, 270, 50, 70);
+        g.fillRoundRect (250, 270, 50, 70, 6, 6);
+        g.fillOval (350, 270, 50, 70);
+        int [] vx2 = {500, 550, 450};
+        int [] vy2 = {270, 320, 320};
+        g.fillPolygon (vx2, vy2, 3);
+    }
+}
+</pre>
+
+<p>
+Sobreescribimos el método paint heredado de la clase JFrame:</p>
+<pre>
+    public void paint (Graphics g)
+    {
+</pre>
+<p>El método paint se ejecuta cada vez que el JFrame debe ser redibujado y llega como parámetro un objeto de la clase Graphics. Este objeto nos permite acceder al fondo del JFrame y utilizando las primitivas gráficas dibujar líneas, rectángulos, elipses etc.<br>
+Lo primero que hacemos dentro de este método es llamar al método paint de la clase superior para que se pinte el fondo del JFrame y otras componentes contenidas dentro (para llamar al método paint de la clase JFrame debemos anteceder la palabra clave super y pasar el parámetro respectivo):
+</p>
+<pre>
+        super.paint(g);
+</pre>
+<p>Mediante el método setColor activamos un color:</p>
+<pre>
+        g.setColor (Color.blue);
+</pre>
+<p>
+Dibuja una línea desde la coordenada (0,70) es decir columna 0 y fila 70 en píxeles, hasta la coordenada (100,70). La línea es de color azul:</p>
+<pre>
+        g.drawLine (0, 70, 100, 70);
+</pre>
+
+<p>Dibujamos un rectángulo desde la coordenada (150,70) con un ancho de 50 píxeles y un alto de 70, solo se pinta el perímetro del rectángulo de color azul):</p>
+<pre>
+        g.drawRect (150, 70, 50, 70);
+</pre>
+<p>Similar a drawRect más un valor de redondeo de los vertices que le indicamos en el quinto y sexto parámetro:</p>
+<pre>
+        g.drawRoundRect (250, 70, 50, 70, 6, 6);
+</pre>
+<p>Dibujamos un óvalo:</p>
+<pre>
+        g.drawOval (350, 70, 50, 70);
+</pre>
+
+<p>Dibujamos un triángulo (debemos indicar mediante dos vectores los vértices de cada punto del triángulo), el primer punto es el (500,70) el segundo punto es el (550,120) y por último el punto (450,120):</p>
+<pre>
+        int [] vx1 = {500, 550, 450};
+        int [] vy1 = {70, 120, 120};
+        g.drawPolygon (vx1, vy1, 3);
+</pre>
+<p>De forma similar los métodos fillRect, fillRoundRect, fillOval y fillPolygon son similares a los anteriores con la diferencia que pinta su interior con el color activo de la última llamada al método setColor:</p>
+<pre>
+        g.setColor (Color.red);
+        g.fillRect (150, 270, 50, 70);
+        g.fillRoundRect (250, 270, 50, 70, 6, 6);
+        g.fillOval (350, 270, 50, 70);
+        int [] vx2 = {500, 550, 450};
+        int [] vy2 = {270, 320, 320};
+        g.fillPolygon (vx2, vy2, 3);
+</pre>
+
+
+<h4>Dibujar texto</h4>
+<p>La clase Graphics permite ?dibujar? texto, como alternativa al texto mostrado en los componentes JLabel, JTextField y JTextArea. El método que permite graficar texto sobre el JFrame es:</p>
+<pre>
+drawString(String str, int x, int y);
+</pre>
+
+
+
+<h3>Problema 2</h3>
+<p>Crear una aplicación que utilice las primitiva drawString de Java:</p>
+
+<pre class="recuadro">
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Graphics;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+
+public class Grafico1 extends JFrame {
+
+    private JPanel contentPane;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Grafico1 frame = new Grafico1();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the frame.
+     */
+    public Grafico1() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 450, 300);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setLayout(new BorderLayout(0, 0));
+        setContentPane(contentPane);
+        setBounds(0,0,800,600);
+    }
+
+    
+    public void paint (Graphics g)
+    {
+       super.paint(g);
+        g.setColor (Color.blue);
+        g.drawString("Primer linea",10,200);
+        g.drawString("Segunda linea",10,300);
+    }
+    
+}
+</pre>
+
+<h4>Clase Color</h4>
+<p>La clase java.awt.Color encapsula colores utilizando el formato RGB (Red, Green, Blue). Las componentes de cada color primario en el color resultante se expresan con números enteros entre 0 y 255, siendo 0 la intensidad mínima de ese color y 255 la máxima. En la clase Color existen constantes para colores predeterminados de uso frecuente: black, white, green, blue, red, yellow, magenta, cyan, orange, pink, gray, darkGray, lightGray. </p>
+
+
+
+<h3>Problema 3</h3>
+<p>Crear una aplicación que dibuje 255 líneas creando un color distinto para cada una de ellas:</p>
+<img src="imagentema/foto169.jpg" border="0" alt="Graphics"><br>
+
+
+<pre class="recuadro">
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Graphics;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+
+public class Grafico1 extends JFrame {
+
+    private JPanel contentPane;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Grafico1 frame = new Grafico1();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the frame.
+     */
+    public Grafico1() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 450, 300);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setLayout(new BorderLayout(0, 0));
+        setContentPane(contentPane);
+        setBounds(0,0,800,255);
+    }
+    
+    public void paint (Graphics g)
+    {
+        super.paint(g);
+        int fila = 0;
+        for (int rojo = 0 ; rojo &lt;= 255 ; rojo++)
+        {
+            Color col = new Color (rojo, 0, 0);
+            g.setColor (col);
+            g.drawLine (0, fila, 800, fila);
+            fila++;
+        }
+    }
+
+}
+</pre>
+
+<p>Dentro de un for creamos objetos de la clase Color y fijamos el color de la línea seguidamente (con esto logramos un degradé del negro al rojo):</p>
+<pre>
+        int fila = 0;
+        for (int rojo = 0 ; rojo &lt;= 255 ; rojo++)
+        {
+            Color col = new Color (rojo, 0, 0);
+            g.setColor (col);
+            g.drawLine (0, fila, 800, fila);
+            fila++;
+        }
+</pre>
+
+<h4>Presentación de imágenes</h4>
+
+<p>Java permite incorporar imágenes de tipo GIF y JPEG definidas en ficheros. Se dispone para ello de la clase java.awt.Image. Para cargar una imagen hay que indicar la localización del archivo y cargarlo mediante el método getImage(). Este método existe en las clases java.awt.Toolkit.</p>
+<p>Entonces, para cargar una imagen hay que comenzar creando un objeto (o una referencia) Image y llamar al método getImage() (de Toolkit); 
+Una vez cargada la imagen, hay que representarla, para lo cual se redefine el método paint() para llamar al método drawImage() de la clase Graphics. Los objetos Graphics pueden mostrar imágenes a través del método: drawImage(). Dicho método admite varias formas, aunque casi siempre hay que incluir el nombre del objeto imagen creado.</p>
+
+<h4>Clase Image</h4>
+
+<p>Una imagen es un objeto gráfico rectangular compuesto por pixels coloreados. Cada pixel en una imagen describe un color de una particular localización de la imagen.<br>
+A continuación, algunos métodos de la clase Image:<br>
+
+La clase Graphics provee el método drawImage() para dibujar imagenes; este método admite varias formas:</p>
+<pre>
+- drawImage (Image i, int x, int y, ImageObserver o)
+- drawImage (Image i,int x,int y,int width,int height,ImageObserver o)
+</pre>
+
+
+<h3>Problema 4</h3>
+
+<p>Crear una aplicación que muestre un archivo jpg dentro de un JFrame.</p>
+
+<img src="imagentema/foto170.jpg" border="0" alt="Graphics"><br>
+
+<p>Luego de crear el proyecto debemos disponer un archivo en la carpeta raiz del proyecto (el archivo debe llamarse imagen1.jpg)</p>
+<pre class="recuadro">
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+
+public class Grafico1 extends JFrame {
+
+    private JPanel contentPane;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Grafico1 frame = new Grafico1();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the frame.
+     */
+    public Grafico1() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 450, 300);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setLayout(new BorderLayout(0, 0));
+        setContentPane(contentPane);
+        setBounds(0,0,800,600);
+    }
+
+    public void paint (Graphics g)
+    {
+        super.paint(g);
+        Toolkit t = Toolkit.getDefaultToolkit ();
+        Image imagen = t.getImage ("imagen1.jpg");
+        g.drawImage (imagen, 0, 0, this);
+    }
+    
+}
+</pre>
+
+<p>
+Creamos un objeto de la clase Toolkit llamando al método estático de la misma clase:</p>
+<pre>
+        Toolkit t = Toolkit.getDefaultToolkit ();
+</pre>
+<p>Creamos un objeto de la clase Image llamando al método getImage de la clase Toolkit pasando como parámetro el archivo con la imagen:</p>
+<pre>
+        Image imagen = t.getImage ("imagen1.jpg");
+</pre>
+<p>Por último llamamos al método drawImage con la referencia al objeto de tipo Image, la columna, la fila y la referencia al JFrame donde debe dibujarse:</p>
+<pre>
+        g.drawImage (imagen, 0, 0, this);
+</pre>
+
+
+<h4>Método repaint()</h4>
+
+<p>Este es el método que con más frecuencia es llamado por el programador. El método repaint() llama ?lo antes posible? al método paint() del componente.<br> 
+El método repaint() puede ser:</p>
+<pre>
+	repaint()
+	repaint(int x, int y, int w, int h)
+</pre>
+<p>Las segunda forma permiten definir una zona rectangular de la ventana a la que aplicar el método.</p>
+
+<h3>Problema 5</h3>
+<p>Crear una aplicación que muestre un círculo en medio de la pantalla y mediante dos botones permitir que se desplace a izquierda o derecha.</p>
+
+<pre class="recuadro">
+
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Graphics;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+
+public class Grafico1 extends JFrame {
+
+    private JPanel contentPane;
+
+    /**
+     * Launch the application.
+     */
+    
+    private int columna;
+    
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Grafico1 frame = new Grafico1();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the frame.
+     */
+    public Grafico1() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 450, 300);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+        
+        JButton bi = new JButton("Izquierda");
+        bi.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                columna=columna-10;
+                repaint();
+            }
+        });
+        bi.setBounds(105, 482, 89, 23);
+        contentPane.add(bi);
+        
+        JButton bd = new JButton("Derecha");
+        bd.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                columna=columna+10;
+                repaint();
+            }
+        });
+        bd.setBounds(556, 482, 89, 23);
+        contentPane.add(bd);
+        setBounds(0,0,800,600);
+        columna=400;
+    }
+    
+    public void paint (Graphics g)
+    {
+        super.paint(g);
+        g.setColor (Color.red);
+        g.fillOval (columna, 300, 100, 100);
+    }
+    
+    
+}
+
+</pre>
+
+
+<p>Definimos un atributo columna:</p>
+<pre>
+    private int columna;
+</pre>
+<p>Cuando se presiona el botón (bi) restamos 10 al atributo columna y pedimos que se ejecute el método paint (esto último llamando al método repaint()), el método repaint borra todo lo dibujado dentro del JFrame y llama al paint:</p>
+<pre>
+       bi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				columna=columna-10;
+				repaint();
+			}
+ 	});
+</pre>
+<p>El método paint dibuja un círculo utilizando como posición el valor del atributo columna:</p>
+<pre>
+    public void paint (Graphics g)
+    {
+        super.paint(g);
+        g.setColor (Color.red);
+        g.fillOval (columna, 300, 100, 100);
+    }
+</pre>
+
+
+<h3>Problema 6</h3>
+<p>Se debe desarrollar una pantalla para configurar ciertas características de un procesador de texto.<br>
+Debe aparecer y poder seleccionarse los márgenes superior e inferior de la página.<br>
+Los márgenes pueden ir en el rango de 0 a 10. Desplazar las líneas a medida que modificamos los márgenes.</p>
+
+<p>Por otro lado tenemos la orientación de página. La misma se administra a través de un JComboBox que tiene dos valores posibles (Horizontal y Vertical). Cuando está seleccionado en el JComboBox el String Horizontal dibujar un rectángulo con base mayor a la altura, y cuando está seleccionado el String Vertical dibujar un rectángulo con una base menor.<br>
+
+Cuando se presiona el botón inicializar la configuración de márgenes  se inicializan con 0 y se selecciona orientación horizontal.</p>
+</p>
+
+<img src="imagentema/foto171.jpg" border="0" alt="Graphics"><br>
+
+
+
+<p>Para implementar esta aplicación con el WindowBuilder creamos la interfaz visual, disponemos 4 objetos de la clase JLabel, dos JSpinner, un JButton y un objeto de la clase JComboBox. El dibulo de la hoja con las líneas de márgenes superior e inferior como el gráfico de orientación de la hoja se hacen en el método paint.</p>
+
+
+<p>El código fuente que resuelve esta aplicación es:</p>
+<pre class="recuadro">
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Graphics;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JSpinner;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+
+public class ProcesadorTexto extends JFrame {
+
+    private JPanel contentPane;
+    private JSpinner sp1;
+    private JSpinner sp2;
+    private JComboBox comboBox;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    ProcesadorTexto frame = new ProcesadorTexto();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the frame.
+     */
+    public ProcesadorTexto() {
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBounds(100, 100, 573, 481);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
+        
+        sp1 = new JSpinner();
+        sp1.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent arg0) {
+                repaint();
+            }
+        });
+        sp1.setModel(new SpinnerNumberModel(0, 0, 10, 1));
+        sp1.setBounds(162, 51, 55, 28);
+        contentPane.add(sp1);
+        
+        sp2 = new JSpinner();
+        sp2.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                repaint();
+            }
+        });
+        sp2.setModel(new SpinnerNumberModel(0, 0, 10, 1));
+        sp2.setBounds(162, 150, 55, 28);
+        contentPane.add(sp2);
+        
+        JLabel lblMargenInferior = new JLabel("Margen inferior");
+        lblMargenInferior.setBounds(162, 26, 109, 14);
+        contentPane.add(lblMargenInferior);
+        
+        JLabel lblMargenSuperior = new JLabel("Margen superior");
+        lblMargenSuperior.setBounds(162, 127, 109, 14);
+        contentPane.add(lblMargenSuperior);
+        
+        JLabel lblHoja = new JLabel("Hoja");
+        lblHoja.setBounds(46, 26, 46, 14);
+        contentPane.add(lblHoja);
+        
+        comboBox = new JComboBox();
+        comboBox.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent arg0) {
+                repaint();
+            }
+        });
+        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Horizontal", "Vertical"}));
+        comboBox.setBounds(321, 55, 196, 20);
+        contentPane.add(comboBox);
+        
+        JLabel lblHorientacinDePgina = new JLabel("Horientaciu00F3n de pu00E1gina.");
+        lblHorientacinDePgina.setBounds(321, 26, 203, 14);
+        contentPane.add(lblHorientacinDePgina);
+        
+        JButton btnInicializar = new JButton("Inicializar");
+        btnInicializar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                sp1.setValue(0);
+                sp2.setValue(0);
+                comboBox.setSelectedIndex(0);
+                repaint();
+            }
+        });
+        btnInicializar.setBounds(45, 247, 165, 23);
+        contentPane.add(btnInicializar);
+    }
+    
+    public void paint(Graphics g)
+    {
+        super.paint(g);
+        g.setColor(Color.blue);
+        g.drawRect(30,80,100,140);
+        int ms=Integer.parseInt(sp1.getValue().toString());
+        int mi=Integer.parseInt(sp2.getValue().toString());
+        g.setColor(Color.red);
+        g.drawLine(30,80+ms,130,80+ms);
+        g.drawLine(30,220-mi,130,220-mi);
+        String direccion=(String)comboBox.getSelectedItem();
+        if (direccion.equals("Horizontal"))
+            g.drawRect(320,120,200,100    );
+        else
+            g.drawRect(320,120,100,200    );            
+    }
+}
+
+</pre>
+
+
+
+<h4>Explicación del código.</h4>
+
+<p>Para el evento stateChanged de los controles JSpinner se debe llamar al método repaint() para que se grafique nuevamente las líneas de márgenes:</p>
+<pre>
+        sp1.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent arg0) {
+            repaint();
+        }
+        });
+
+        sp2.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+            repaint();
+        }
+        });
+
+</pre>
+
+
+<p>En el método paint dibujamos primero un rectángulo de color azul que representa la hoja:</p>
+<pre>
+        g.setColor(Color.blue);
+        g.drawRect(30,80,100,140);
+</pre>
+<p>Extraemos los valores seleccionados de cada control JSpinner y los convertimos a tipo entero:</p>
+<pre>
+        int ms=Integer.parseInt(sp1.getValue().toString());
+        int mi=Integer.parseInt(sp2.getValue().toString());
+</pre>
+<p>Activamos el color rojo y dibujamos las dos líneas, la superior coincide con el comienzo del rectángulo (sumamos tantos pixeles en la fila como lo indica el primer JSpinner):</p>
+<pre>
+
+        g.setColor(Color.red);
+        g.drawLine(30,80+ms,130,80+ms);
+</pre>
+<p>La segunda línea le restamos el valor del JSpinner:</p>
+<pre>
+        g.drawLine(30,220-mi,130,220-mi);
+</pre>
+
+
+
+<p>Para saber la orientación de la hoja debemos extraer el valor seleccionado del JComboBox y mediante un if verificar si el String seleccionado es "Horizontal":
+</p>
+<pre>
+        String direccion=(String)comboBox.getSelectedItem();
+        if (direccion.equals("Horizontal"))
+            g.drawRect(320,120,200,100	);
+        else
+            g.drawRect(320,120,100,200	);			
+</pre>
+
+<p>Por último cuando se presiona el botón inicializar procedemos a fijar nuevos valores a los JSpinner y al JComboBox (luego redibujamos):</p>
+<pre>
+        btnInicializar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                sp1.setValue(0);
+                sp2.setValue(0);
+                comboBox.setSelectedIndex(0);
+                repaint();
+        }
+        });
+
+</pre>
+
+
+
+
+
+
+
+<h2>Problemas propuestos</h2>
+<ol>
+<li>
+<p>Confeccionar un programa que permita configurar las características del mouse.<br>
+
+Por un lado debemos seleccionar la velocidad de desplazamiento de la flecha del mouse.
+Disponer un JSpinner para poder seleccionarse los valores 0,25,50,75 y 100.<br>
+
+Por otro lado debemos poder seleccionar cual de los dos botones del mouse será el principal, tenemos para esta función un JComboBox con dos opciones: izquierdo o derecho.<br>
+Cuando se selecciona el botón (cambio en el JComboBox) actualizar el gráfico mostrando el botón del mouse seleccionado (graficar en el método paint el mouse en pantalla)</p>
+
+<img src="imagentema/foto172.jpg" border="0" alt="Graphics"><br>
+</li>
+
+<li>
+<p>En una aduana hay una máquina que sortea las personas cuyo equipaje serán revisados.<br>
+La persona selecciona  si viene del Interior del país o del Exterior (a través de un JComboBox), y  por otro lado selecciona la cantidad de bultos (JSpinner).<br>
+
+Luego presiona el botón sortear y aparece al lado de este botón un círculo rojo o verde. (En caso de ser rojo se revisa su equipaje, en caso de ser verde, no se revisa)<br>
+Para el sorteo generar un valor aleatorio entre 1 y 3. Si se genera un 1 se revisa, si se genera un 2 o 3 no se revisa.<br>
+Validar que también este seleccionado un valor distinto a cero en bultos (los valores pueden ir de 0 a 10).<br>
+
+Si la cantidad de bultos supera a 5 se revisa siempre sus bultos (es decir que aparece un círculo rojo).<br>
+Luego de sortear fijar en cero cantidad de bultos.<br>
+Mostrar en el título del JFrame la cantidad de bultos revisados y no revisados hasta el momento.</p>
+
+<img src="imagentema/foto173.jpg" border="0" alt="Graphics"><br>
+</li>
+
+</ol>
+</div>
+
+<table width="700px">
+<tr>
+<td align="left">	
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/f.txt"></script>
+<!-- propuesto-javaya -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-4669394804436935"
+     data-ad-slot="1400020364"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</td>
+</tr>
+</table>
+
+ <br>
+   <h2><a href="index1e61.html?inicio=40">Retornar</a></h2>   
+ 
+  </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+
+<!-- Mirrored from www.javaya.com.ar/detalleconcepto.php?codigo=130&inicio=40 by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 15 Sep 2015 14:56:16 GMT -->
+</html>
